@@ -4,6 +4,10 @@ import logging
 
 import http.client as http_client
 
+import re2
+
+re2.set_fallback_notification(re2.FALLBACK_EXCEPTION)
+
 
 import io
 import sys
@@ -47,7 +51,14 @@ dyslang.ALLOWED_BUILTINS = [
     "str.removesuffix",
     "str.split",
     "sum",
-    "bytes.join" "bool",
+    "bytes.join",
+    "bool",
+    "findall",  # re2.findall
+    "finditer",  # re2.finditer
+    "fullmatch",  # re2.fullmatch
+    "match",  # re2.match
+    "search",  # re2.search
+    "split",  # re2.split
 ]
 
 
@@ -177,6 +188,15 @@ def get_module_dict():
             "Annotated": typing.Annotated,
         },
         "string": {"Template": string.Template},
+        "re2": {
+            "findall": re2.findall,
+            "finditer": re2.finditer,
+            "fullmatch": re2.fullmatch,
+            "match": re2.match,
+            "search": re2.search,
+            "split": re2.split,
+            "UNICODE": re2.UNICODE,
+        },
     }
 
 
@@ -213,9 +233,9 @@ def eval_script(
                 method = "".join((filter(str.isalnum, method))).capitalize()
 
                 def snake(name):
-                    return re.sub(r'(?<!^)(?=[A-Z])', '_', name).lower()
+                    return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
 
-                params = {snake(k):v for k,v in params.items()}
+                params = {snake(k): v for k, v in params.items()}
                 payload = {
                     "method": f"RpcService.{method}",
                     "params": [params],
