@@ -38,7 +38,6 @@ pyparsing==2.4.7
 pyrsistent==0.18.0
 pytest==6.2.5
 python-forge==18.6.0
-pytojsonschema @ git+https://github.com/readevalprint/pytojsonschema.git@9ec4cdf0fbf6f0a820b020a99c832f0acfa15de9
 pytz==2021.3
 regex==2021.9.30
 requests==2.26.0

@@ -14,6 +14,9 @@ import simplejson as json
 from functools import partial
 
 import dyslang
+import re2
+
+re2.set_fallback_notification(re2.FALLBACK_EXCEPTION)
 
 MAX_CUM_SIZE = dyslang.MAX_SCOPE_SIZE * dyslang.MAX_NODE_CALLS
 
@@ -177,6 +180,14 @@ def get_module_dict():
             "Annotated": typing.Annotated,
         },
         "string": {"Template": string.Template},
+        "re2": {
+            "findall": re2.findall,
+            "finditer": re2.finditer,
+            "fullmatch": re2.fullmatch,
+            "match": re2.match,
+            "search": re2.search,
+            "split": re2.split,
+        },
     }
 
 
