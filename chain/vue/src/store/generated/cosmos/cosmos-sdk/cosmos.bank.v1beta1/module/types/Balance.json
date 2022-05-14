@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Balance",
+    "definitions": {
+        "Balance": {
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "description": "address is the address of the balance holder."
+                },
+                "coins": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+                    },
+                    "type": "array",
+                    "description": "coins defines the different coins this balance holds."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Balance",
+            "description": "Balance defines an account address and balance pair used in the bank module's genesis state."
+        },
+        "cosmos.base.v1beta1.Coin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Coin",
+            "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+        }
+    }
+}

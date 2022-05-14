@@ -1,0 +1,234 @@
+{
+	"Name": "v1beta1",
+	"Pkg": {
+		"Name": "cosmos.slashing.v1beta1",
+		"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/genesis.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos/slashing/v1beta1/slashing.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/query.proto",
+				"Dependencies": [
+					"cosmos/base/query/v1beta1/pagination.proto",
+					"gogoproto/gogo.proto",
+					"google/api/annotations.proto",
+					"cosmos/slashing/v1beta1/slashing.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/slashing.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"google/protobuf/duration.proto",
+					"google/protobuf/timestamp.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/tx.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/cosmos-sdk/x/slashing/types",
+		"Messages": [
+			{
+				"Name": "GenesisState",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/genesis.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "SigningInfo",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/genesis.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "ValidatorMissedBlocks",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/genesis.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "MissedBlock",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/genesis.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryParamsRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryParamsResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QuerySigningInfoRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QuerySigningInfoResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QuerySigningInfosRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QuerySigningInfosResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "ValidatorSigningInfo",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/slashing.proto",
+				"HighestFieldNumber": 6
+			},
+			{
+				"Name": "Params",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/slashing.proto",
+				"HighestFieldNumber": 5
+			},
+			{
+				"Name": "MsgUnjail",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/tx.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgUnjailResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "Params",
+						"RequestType": "QueryParamsRequest",
+						"ReturnsType": "QueryParamsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "SigningInfo",
+						"RequestType": "QuerySigningInfoRequest",
+						"ReturnsType": "QuerySigningInfoResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"cons_address"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "SigningInfos",
+						"RequestType": "QuerySigningInfosRequest",
+						"ReturnsType": "QuerySigningInfosResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Msg",
+				"RPCFuncs": [
+					{
+						"Name": "Unjail",
+						"RequestType": "MsgUnjail",
+						"ReturnsType": "MsgUnjailResponse",
+						"HTTPRules": null
+					}
+				]
+			}
+		]
+	},
+	"Msgs": [
+		{
+			"Name": "MsgUnjail",
+			"URI": "cosmos.slashing.v1beta1.MsgUnjail",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/tx.proto"
+		}
+	],
+	"HTTPQueries": [
+		{
+			"Name": "Params",
+			"FullName": "QueryParams",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "SigningInfo",
+			"FullName": "QuerySigningInfo",
+			"Rules": [
+				{
+					"Params": [
+						"cons_address"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "SigningInfos",
+			"FullName": "QuerySigningInfos",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "SigningInfo",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/genesis.proto"
+		},
+		{
+			"Name": "ValidatorMissedBlocks",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/genesis.proto"
+		},
+		{
+			"Name": "MissedBlock",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/genesis.proto"
+		},
+		{
+			"Name": "ValidatorSigningInfo",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/slashing.proto"
+		},
+		{
+			"Name": "Params",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/slashing/v1beta1/slashing.proto"
+		}
+	]
+}

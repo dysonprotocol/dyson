@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgDeleteStorageResponse",
+    "definitions": {
+        "MsgDeleteStorageResponse": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Delete Storage Response"
+        }
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GenesisState",
+    "definitions": {
+        "GenesisState": {
+            "properties": {
+                "constant_fee": {
+                    "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+                    "additionalProperties": true,
+                    "description": "constant_fee is the fee used to verify the invariant in the crisis module."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Genesis State",
+            "description": "GenesisState defines the crisis module's genesis state."
+        },
+        "cosmos.base.v1beta1.Coin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Coin",
+            "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+        }
+    }
+}

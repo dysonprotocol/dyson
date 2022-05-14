@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/EventGrant",
+    "definitions": {
+        "EventGrant": {
+            "properties": {
+                "msg_type_url": {
+                    "type": "string",
+                    "description": "Msg type URL for which an autorization is granted"
+                },
+                "granter": {
+                    "type": "string",
+                    "description": "Granter account address"
+                },
+                "grantee": {
+                    "type": "string",
+                    "description": "Grantee account address"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Event Grant",
+            "description": "EventGrant is emitted on Msg/Grant"
+        }
+    }
+}

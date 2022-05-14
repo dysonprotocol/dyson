@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryTallyResultResponse",
+    "definitions": {
+        "QueryTallyResultResponse": {
+            "properties": {
+                "tally": {
+                    "$ref": "#/definitions/cosmos.gov.v1beta1.TallyResult",
+                    "additionalProperties": true,
+                    "description": "tally defines the requested tally."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Tally Result Response",
+            "description": "QueryTallyResultResponse is the response type for the Query/Tally RPC method."
+        },
+        "cosmos.gov.v1beta1.TallyResult": {
+            "properties": {
+                "yes": {
+                    "type": "string"
+                },
+                "abstain": {
+                    "type": "string"
+                },
+                "no": {
+                    "type": "string"
+                },
+                "no_with_veto": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Tally Result",
+            "description": "TallyResult defines a standard tally for a governance proposal."
+        }
+    }
+}

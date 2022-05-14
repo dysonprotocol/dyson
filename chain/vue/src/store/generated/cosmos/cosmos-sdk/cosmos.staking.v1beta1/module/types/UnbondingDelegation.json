@@ -1,0 +1,54 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/UnbondingDelegation",
+    "definitions": {
+        "UnbondingDelegation": {
+            "properties": {
+                "delegator_address": {
+                    "type": "string",
+                    "description": "delegator_address is the bech32-encoded address of the delegator."
+                },
+                "validator_address": {
+                    "type": "string",
+                    "description": "validator_address is the bech32-encoded address of the validator."
+                },
+                "entries": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.staking.v1beta1.UnbondingDelegationEntry"
+                    },
+                    "type": "array",
+                    "description": "entries are the unbonding delegation entries.  unbonding delegation entries"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Unbonding Delegation",
+            "description": "UnbondingDelegation stores all of a single delegator's unbonding bonds for a single validator in an time-ordered list."
+        },
+        "cosmos.staking.v1beta1.UnbondingDelegationEntry": {
+            "properties": {
+                "creation_height": {
+                    "type": "string",
+                    "description": "creation_height is the height which the unbonding took place."
+                },
+                "completion_time": {
+                    "type": "string",
+                    "description": "completion_time is the unix time for unbonding completion.",
+                    "format": "date-time"
+                },
+                "initial_balance": {
+                    "type": "string",
+                    "description": "initial_balance defines the tokens initially scheduled to receive at completion."
+                },
+                "balance": {
+                    "type": "string",
+                    "description": "balance defines the tokens to receive at completion."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Unbonding Delegation Entry",
+            "description": "UnbondingDelegationEntry defines an unbonding object with relevant metadata."
+        }
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ValidatorMissedBlocks",
+    "definitions": {
+        "ValidatorMissedBlocks": {
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "description": "address is the validator address."
+                },
+                "missed_blocks": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.slashing.v1beta1.MissedBlock"
+                    },
+                    "type": "array",
+                    "description": "missed_blocks is an array of missed blocks by the validator."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Missed Blocks",
+            "description": "ValidatorMissedBlocks contains array of missed blocks of corresponding address."
+        },
+        "cosmos.slashing.v1beta1.MissedBlock": {
+            "properties": {
+                "index": {
+                    "type": "string",
+                    "description": "index is the height at which the block was missed."
+                },
+                "missed": {
+                    "type": "boolean",
+                    "description": "missed is the missed status."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Missed Block",
+            "description": "MissedBlock contains height and missed status as boolean."
+        }
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ValidatorSlashEventRecord",
+    "definitions": {
+        "ValidatorSlashEventRecord": {
+            "properties": {
+                "validator_address": {
+                    "type": "string",
+                    "description": "validator_address is the address of the validator."
+                },
+                "height": {
+                    "type": "string",
+                    "description": "height defines the block height at which the slash event occured."
+                },
+                "period": {
+                    "type": "string",
+                    "description": "period is the period of the slash event."
+                },
+                "validator_slash_event": {
+                    "$ref": "#/definitions/cosmos.distribution.v1beta1.ValidatorSlashEvent",
+                    "additionalProperties": true,
+                    "description": "validator_slash_event describes the slash event."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Slash Event Record",
+            "description": "ValidatorSlashEventRecord is used for import / export via genesis json."
+        },
+        "cosmos.distribution.v1beta1.ValidatorSlashEvent": {
+            "properties": {
+                "validator_period": {
+                    "type": "string"
+                },
+                "fraction": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Slash Event",
+            "description": "ValidatorSlashEvent represents a validator slash event. Height is implicit within the store key. This is needed to calculate appropriate amount of staking tokens for delegations which are withdrawn after a slash has occurred."
+        }
+    }
+}

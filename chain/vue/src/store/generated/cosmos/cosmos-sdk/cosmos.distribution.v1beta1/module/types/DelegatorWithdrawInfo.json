@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/DelegatorWithdrawInfo",
+    "definitions": {
+        "DelegatorWithdrawInfo": {
+            "properties": {
+                "delegator_address": {
+                    "type": "string",
+                    "description": "delegator_address is the address of the delegator."
+                },
+                "withdraw_address": {
+                    "type": "string",
+                    "description": "withdraw_address is the address to withdraw the delegation rewards to."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Delegator Withdraw Info",
+            "description": "DelegatorWithdrawInfo is the address for where distributions rewards are withdrawn to by default this struct is only used at genesis to feed in default withdraw addresses."
+        }
+    }
+}

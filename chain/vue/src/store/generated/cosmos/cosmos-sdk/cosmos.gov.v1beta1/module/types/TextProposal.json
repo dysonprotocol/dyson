@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/TextProposal",
+    "definitions": {
+        "TextProposal": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Text Proposal",
+            "description": "TextProposal defines a standard text proposal whose changes need to be manually updated in case of approval."
+        }
+    }
+}

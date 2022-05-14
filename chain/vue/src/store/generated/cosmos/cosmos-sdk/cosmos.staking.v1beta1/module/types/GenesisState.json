@@ -1,0 +1,381 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GenesisState",
+    "definitions": {
+        "GenesisState": {
+            "properties": {
+                "params": {
+                    "$ref": "#/definitions/cosmos.staking.v1beta1.Params",
+                    "additionalProperties": true,
+                    "description": "params defines all the paramaters of related to deposit."
+                },
+                "last_total_power": {
+                    "type": "string",
+                    "description": "last_total_power tracks the total amounts of bonded tokens recorded during the previous end block.",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "last_validator_powers": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.staking.v1beta1.LastValidatorPower"
+                    },
+                    "type": "array",
+                    "description": "last_validator_powers is a special index that provides a historical list of the last-block's bonded validators."
+                },
+                "validators": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.staking.v1beta1.Validator"
+                    },
+                    "type": "array",
+                    "description": "delegations defines the validator set at genesis."
+                },
+                "delegations": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.staking.v1beta1.Delegation"
+                    },
+                    "type": "array",
+                    "description": "delegations defines the delegations active at genesis."
+                },
+                "unbonding_delegations": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.staking.v1beta1.UnbondingDelegation"
+                    },
+                    "type": "array",
+                    "description": "unbonding_delegations defines the unbonding delegations active at genesis."
+                },
+                "redelegations": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.staking.v1beta1.Redelegation"
+                    },
+                    "type": "array",
+                    "description": "redelegations defines the redelegations active at genesis."
+                },
+                "exported": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Genesis State",
+            "description": "GenesisState defines the staking module's genesis state."
+        },
+        "cosmos.staking.v1beta1.Commission": {
+            "properties": {
+                "commission_rates": {
+                    "$ref": "#/definitions/cosmos.staking.v1beta1.CommissionRates",
+                    "additionalProperties": true,
+                    "description": "commission_rates defines the initial commission rates to be used for creating a validator."
+                },
+                "update_time": {
+                    "type": "string",
+                    "description": "update_time is the last time the commission rate was changed.",
+                    "format": "date-time"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Commission",
+            "description": "Commission defines commission parameters for a given validator."
+        },
+        "cosmos.staking.v1beta1.CommissionRates": {
+            "properties": {
+                "rate": {
+                    "type": "string",
+                    "description": "rate is the commission rate charged to delegators, as a fraction."
+                },
+                "max_rate": {
+                    "type": "string",
+                    "description": "max_rate defines the maximum commission rate which validator can ever charge, as a fraction."
+                },
+                "max_change_rate": {
+                    "type": "string",
+                    "description": "max_change_rate defines the maximum daily increase of the validator commission, as a fraction."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Commission Rates",
+            "description": "CommissionRates defines the initial commission rates to be used for creating a validator."
+        },
+        "cosmos.staking.v1beta1.Delegation": {
+            "properties": {
+                "delegator_address": {
+                    "type": "string",
+                    "description": "delegator_address is the bech32-encoded address of the delegator."
+                },
+                "validator_address": {
+                    "type": "string",
+                    "description": "validator_address is the bech32-encoded address of the validator."
+                },
+                "shares": {
+                    "type": "string",
+                    "description": "shares define the delegation shares received."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Delegation",
+            "description": "Delegation represents the bond with tokens held by an account. It is owned by one delegator, and is associated with the voting power of one validator."
+        },
+        "cosmos.staking.v1beta1.Description": {
+            "properties": {
+                "moniker": {
+                    "type": "string",
+                    "description": "moniker defines a human-readable name for the validator."
+                },
+                "identity": {
+                    "type": "string",
+                    "description": "identity defines an optional identity signature (ex. UPort or Keybase)."
+                },
+                "website": {
+                    "type": "string",
+                    "description": "website defines an optional website link."
+                },
+                "security_contact": {
+                    "type": "string",
+                    "description": "security_contact defines an optional email for security contact."
+                },
+                "details": {
+                    "type": "string",
+                    "description": "details define other optional details."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Description",
+            "description": "Description defines a validator description."
+        },
+        "cosmos.staking.v1beta1.LastValidatorPower": {
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "description": "address is the address of the validator."
+                },
+                "power": {
+                    "type": "string",
+                    "description": "power defines the power of the validator."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Last Validator Power",
+            "description": "LastValidatorPower required for validator set update logic."
+        },
+        "cosmos.staking.v1beta1.Params": {
+            "properties": {
+                "unbonding_time": {
+                    "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+                    "type": "string",
+                    "description": "unbonding_time is the time duration of unbonding.",
+                    "format": "regex"
+                },
+                "max_validators": {
+                    "type": "integer",
+                    "description": "max_validators is the maximum number of validators."
+                },
+                "max_entries": {
+                    "type": "integer",
+                    "description": "max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio)."
+                },
+                "historical_entries": {
+                    "type": "integer",
+                    "description": "historical_entries is the number of historical entries to persist."
+                },
+                "bond_denom": {
+                    "type": "string",
+                    "description": "bond_denom defines the bondable coin denomination."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "Params defines the parameters for the staking module."
+        },
+        "cosmos.staking.v1beta1.Redelegation": {
+            "properties": {
+                "delegator_address": {
+                    "type": "string",
+                    "description": "delegator_address is the bech32-encoded address of the delegator."
+                },
+                "validator_src_address": {
+                    "type": "string",
+                    "description": "validator_src_address is the validator redelegation source operator address."
+                },
+                "validator_dst_address": {
+                    "type": "string",
+                    "description": "validator_dst_address is the validator redelegation destination operator address."
+                },
+                "entries": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.staking.v1beta1.RedelegationEntry"
+                    },
+                    "type": "array",
+                    "description": "entries are the redelegation entries.  redelegation entries"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Redelegation",
+            "description": "Redelegation contains the list of a particular delegator's redelegating bonds from a particular source validator to a particular destination validator."
+        },
+        "cosmos.staking.v1beta1.RedelegationEntry": {
+            "properties": {
+                "creation_height": {
+                    "type": "string",
+                    "description": "creation_height  defines the height which the redelegation took place."
+                },
+                "completion_time": {
+                    "type": "string",
+                    "description": "completion_time defines the unix time for redelegation completion.",
+                    "format": "date-time"
+                },
+                "initial_balance": {
+                    "type": "string",
+                    "description": "initial_balance defines the initial balance when redelegation started."
+                },
+                "shares_dst": {
+                    "type": "string",
+                    "description": "shares_dst is the amount of destination-validator shares created by redelegation."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Redelegation Entry",
+            "description": "RedelegationEntry defines a redelegation object with relevant metadata."
+        },
+        "cosmos.staking.v1beta1.UnbondingDelegation": {
+            "properties": {
+                "delegator_address": {
+                    "type": "string",
+                    "description": "delegator_address is the bech32-encoded address of the delegator."
+                },
+                "validator_address": {
+                    "type": "string",
+                    "description": "validator_address is the bech32-encoded address of the validator."
+                },
+                "entries": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.staking.v1beta1.UnbondingDelegationEntry"
+                    },
+                    "type": "array",
+                    "description": "entries are the unbonding delegation entries.  unbonding delegation entries"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Unbonding Delegation",
+            "description": "UnbondingDelegation stores all of a single delegator's unbonding bonds for a single validator in an time-ordered list."
+        },
+        "cosmos.staking.v1beta1.UnbondingDelegationEntry": {
+            "properties": {
+                "creation_height": {
+                    "type": "string",
+                    "description": "creation_height is the height which the unbonding took place."
+                },
+                "completion_time": {
+                    "type": "string",
+                    "description": "completion_time is the unix time for unbonding completion.",
+                    "format": "date-time"
+                },
+                "initial_balance": {
+                    "type": "string",
+                    "description": "initial_balance defines the tokens initially scheduled to receive at completion."
+                },
+                "balance": {
+                    "type": "string",
+                    "description": "balance defines the tokens to receive at completion."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Unbonding Delegation Entry",
+            "description": "UnbondingDelegationEntry defines an unbonding object with relevant metadata."
+        },
+        "cosmos.staking.v1beta1.Validator": {
+            "properties": {
+                "operator_address": {
+                    "type": "string",
+                    "description": "operator_address defines the address of the validator's operator; bech encoded in JSON."
+                },
+                "consensus_pubkey": {
+                    "properties": {
+                        "type_url": {
+                            "type": "string",
+                            "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+                        },
+                        "value": {
+                            "type": "string",
+                            "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                            "format": "binary",
+                            "binaryEncoding": "base64"
+                        }
+                    },
+                    "additionalProperties": true,
+                    "type": "object",
+                    "description": "consensus_pubkey is the consensus public key of the validator, as a Protobuf Any."
+                },
+                "jailed": {
+                    "type": "boolean",
+                    "description": "jailed defined whether the validator has been jailed from bonded status or not."
+                },
+                "status": {
+                    "enum": [
+                        "BOND_STATUS_UNSPECIFIED",
+                        0,
+                        "BOND_STATUS_UNBONDED",
+                        1,
+                        "BOND_STATUS_UNBONDING",
+                        2,
+                        "BOND_STATUS_BONDED",
+                        3
+                    ],
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
+                    "title": "Bond Status",
+                    "description": "BondStatus is the status of a validator."
+                },
+                "tokens": {
+                    "type": "string",
+                    "description": "tokens define the delegated tokens (incl. self-delegation)."
+                },
+                "delegator_shares": {
+                    "type": "string",
+                    "description": "delegator_shares defines total shares issued to a validator's delegators."
+                },
+                "description": {
+                    "$ref": "#/definitions/cosmos.staking.v1beta1.Description",
+                    "additionalProperties": true,
+                    "description": "description defines the description terms for the validator."
+                },
+                "unbonding_height": {
+                    "type": "string",
+                    "description": "unbonding_height defines, if unbonding, the height at which this validator has begun unbonding."
+                },
+                "unbonding_time": {
+                    "type": "string",
+                    "description": "unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.",
+                    "format": "date-time"
+                },
+                "commission": {
+                    "$ref": "#/definitions/cosmos.staking.v1beta1.Commission",
+                    "additionalProperties": true,
+                    "description": "commission defines the commission parameters."
+                },
+                "min_self_delegation": {
+                    "type": "string",
+                    "description": "min_self_delegation is the validator's self declared minimum self delegation."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator",
+            "description": "Validator defines a validator, together with the total amount of the Validator's bond shares and their exchange rate to coins. Slashing results in a decrease in the exchange rate, allowing correct calculation of future undelegations without iterating over delegators. When coins are delegated to this validator, the validator is credited with a delegation whose number of bond shares is based on the amount of coins delegated divided by the current exchange rate. Voting power can be calculated as total bonded shares multiplied by exchange rate."
+        }
+    }
+}

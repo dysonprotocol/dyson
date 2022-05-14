@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgDeleteSchedualedRun",
+    "definitions": {
+        "MsgDeleteSchedualedRun": {
+            "properties": {
+                "creator": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Delete Schedualed Run"
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgWithdrawValidatorCommissionResponse",
+    "definitions": {
+        "MsgWithdrawValidatorCommissionResponse": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Withdraw Validator Commission Response",
+            "description": "MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type."
+        }
+    }
+}

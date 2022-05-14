@@ -1,0 +1,114 @@
+{
+	"Name": "v1beta1",
+	"Pkg": {
+		"Name": "cosmos.vesting.v1beta1",
+		"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/tx.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos/base/v1beta1/coin.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos/base/v1beta1/coin.proto",
+					"cosmos/auth/v1beta1/auth.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/cosmos-sdk/x/auth/vesting/types",
+		"Messages": [
+			{
+				"Name": "MsgCreateVestingAccount",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/tx.proto",
+				"HighestFieldNumber": 5
+			},
+			{
+				"Name": "MsgCreateVestingAccountResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "BaseVestingAccount",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"HighestFieldNumber": 5
+			},
+			{
+				"Name": "ContinuousVestingAccount",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "DelayedVestingAccount",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "Period",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "PeriodicVestingAccount",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "PermanentLockedAccount",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"HighestFieldNumber": 1
+			}
+		],
+		"Services": [
+			{
+				"Name": "Msg",
+				"RPCFuncs": [
+					{
+						"Name": "CreateVestingAccount",
+						"RequestType": "MsgCreateVestingAccount",
+						"ReturnsType": "MsgCreateVestingAccountResponse",
+						"HTTPRules": null
+					}
+				]
+			}
+		]
+	},
+	"Msgs": [
+		{
+			"Name": "MsgCreateVestingAccount",
+			"URI": "cosmos.vesting.v1beta1.MsgCreateVestingAccount",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/tx.proto"
+		}
+	],
+	"HTTPQueries": null,
+	"Types": [
+		{
+			"Name": "BaseVestingAccount",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto"
+		},
+		{
+			"Name": "ContinuousVestingAccount",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto"
+		},
+		{
+			"Name": "DelayedVestingAccount",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto"
+		},
+		{
+			"Name": "Period",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto"
+		},
+		{
+			"Name": "PeriodicVestingAccount",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto"
+		},
+		{
+			"Name": "PermanentLockedAccount",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/vesting/v1beta1/vesting.proto"
+		}
+	]
+}

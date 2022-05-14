@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ValAddresses",
+    "definitions": {
+        "ValAddresses": {
+            "properties": {
+                "addresses": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Val Addresses",
+            "description": "ValAddresses defines a repeated set of validator addresses."
+        }
+    }
+}

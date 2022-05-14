@@ -1,0 +1,79 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/StakeAuthorization",
+    "definitions": {
+        "StakeAuthorization": {
+            "properties": {
+                "max_tokens": {
+                    "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+                    "additionalProperties": true,
+                    "description": "max_tokens specifies the maximum amount of tokens can be delegate to a validator. If it is empty, there is no spend limit and any amount of coins can be delegated."
+                },
+                "allow_list": {
+                    "$ref": "#/definitions/cosmos.staking.v1beta1.StakeAuthorization.Validators",
+                    "additionalProperties": true,
+                    "description": "allow_list specifies list of validator addresses to whom grantee can delegate tokens on behalf of granter's account."
+                },
+                "deny_list": {
+                    "$ref": "#/definitions/cosmos.staking.v1beta1.StakeAuthorization.Validators",
+                    "additionalProperties": true,
+                    "description": "deny_list specifies list of validator addresses to whom grantee can not delegate tokens."
+                },
+                "authorization_type": {
+                    "enum": [
+                        "AUTHORIZATION_TYPE_UNSPECIFIED",
+                        0,
+                        "AUTHORIZATION_TYPE_DELEGATE",
+                        1,
+                        "AUTHORIZATION_TYPE_UNDELEGATE",
+                        2,
+                        "AUTHORIZATION_TYPE_REDELEGATE",
+                        3
+                    ],
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
+                    "title": "Authorization Type",
+                    "description": "AuthorizationType defines the type of staking module authorization type"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Stake Authorization",
+            "description": "StakeAuthorization defines authorization for delegate/undelegate/redelegate."
+        },
+        "cosmos.base.v1beta1.Coin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Coin",
+            "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+        },
+        "cosmos.staking.v1beta1.StakeAuthorization.Validators": {
+            "properties": {
+                "address": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validators",
+            "description": "Validators defines list of validator addresses."
+        }
+    }
+}

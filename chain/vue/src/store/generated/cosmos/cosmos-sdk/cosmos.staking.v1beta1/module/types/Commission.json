@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Commission",
+    "definitions": {
+        "Commission": {
+            "properties": {
+                "commission_rates": {
+                    "$ref": "#/definitions/cosmos.staking.v1beta1.CommissionRates",
+                    "additionalProperties": true,
+                    "description": "commission_rates defines the initial commission rates to be used for creating a validator."
+                },
+                "update_time": {
+                    "type": "string",
+                    "description": "update_time is the last time the commission rate was changed.",
+                    "format": "date-time"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Commission",
+            "description": "Commission defines commission parameters for a given validator."
+        },
+        "cosmos.staking.v1beta1.CommissionRates": {
+            "properties": {
+                "rate": {
+                    "type": "string",
+                    "description": "rate is the commission rate charged to delegators, as a fraction."
+                },
+                "max_rate": {
+                    "type": "string",
+                    "description": "max_rate defines the maximum commission rate which validator can ever charge, as a fraction."
+                },
+                "max_change_rate": {
+                    "type": "string",
+                    "description": "max_change_rate defines the maximum daily increase of the validator commission, as a fraction."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Commission Rates",
+            "description": "CommissionRates defines the initial commission rates to be used for creating a validator."
+        }
+    }
+}

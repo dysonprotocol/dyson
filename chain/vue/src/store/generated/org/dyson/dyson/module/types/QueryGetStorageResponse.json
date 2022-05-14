@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryGetStorageResponse",
+    "definitions": {
+        "QueryGetStorageResponse": {
+            "properties": {
+                "storage": {
+                    "$ref": "#/definitions/dyson.Storage",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Get Storage Response"
+        },
+        "dyson.Storage": {
+            "properties": {
+                "creator": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Storage"
+        }
+    }
+}

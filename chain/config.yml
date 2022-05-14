@@ -1,0 +1,37 @@
+accounts:
+  - name: carol
+    mnemonic: wall surround income depart flock fox banana cram meat section talent torch employ coast boat include file whale pulse junior mad when about pave
+    coins: ["10000token", "3000000000000dys"]
+  - name: alice
+    coins: ["20000token", "2000000000000dys"]
+    mnemonic: general cliff hard outer private tag vibrant state short honey custom decade
+  - name: bob
+    coins: ["10000token", "10000000000000dys"]
+    mnemonic: heavy shed march coast smoke garden atom disagree struggle usage frown sniff
+  - name: alice2
+    coins: ["10000token", "30000000000000dys"]
+    mnemonic: where device mixture army forward today sand penalty kidney dress equip famous main earn chapter ramp core question act transfer coin pride clip angry
+validator:
+  name: alice2
+  staked: "10000000dys"
+client:
+  vuex:
+    path: "vue/src/store"
+  openapi:
+    path: "docs/static/openapi.yml"
+faucet:
+  name: bob
+  coins: ["5token", "100000000000dys"]
+
+init:
+  app:
+    minimum-gas-prices: "0.01dys"
+genesis:
+  app_state:
+    staking:
+      params:
+        bond_denom: "dys"
+
+build:
+  main: "cmd/dysond"
+

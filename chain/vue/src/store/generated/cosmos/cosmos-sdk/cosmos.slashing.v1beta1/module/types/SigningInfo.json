@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/SigningInfo",
+    "definitions": {
+        "SigningInfo": {
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "description": "address is the validator address."
+                },
+                "validator_signing_info": {
+                    "$ref": "#/definitions/cosmos.slashing.v1beta1.ValidatorSigningInfo",
+                    "additionalProperties": true,
+                    "description": "validator_signing_info represents the signing info of this validator."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Signing Info",
+            "description": "SigningInfo stores validator signing info of corresponding address."
+        },
+        "cosmos.slashing.v1beta1.ValidatorSigningInfo": {
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "start_height": {
+                    "type": "string",
+                    "description": "Height at which validator was first a candidate OR was unjailed"
+                },
+                "index_offset": {
+                    "type": "string",
+                    "description": "Index which is incremented each time the validator was a bonded in a block and may have signed a precommit or not. This in conjunction with the `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`."
+                },
+                "jailed_until": {
+                    "type": "string",
+                    "description": "Timestamp until which the validator is jailed due to liveness downtime.",
+                    "format": "date-time"
+                },
+                "tombstoned": {
+                    "type": "boolean",
+                    "description": "Whether or not a validator has been tombstoned (killed out of validator set). It is set once the validator commits an equivocation or for any other configured misbehiavor."
+                },
+                "missed_blocks_counter": {
+                    "type": "string",
+                    "description": "A counter kept to avoid unnecessary array reads. Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Signing Info",
+            "description": "ValidatorSigningInfo defines a validator's signing info for monitoring their liveness activity."
+        }
+    }
+}

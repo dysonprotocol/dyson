@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/CommissionRates",
+    "definitions": {
+        "CommissionRates": {
+            "properties": {
+                "rate": {
+                    "type": "string",
+                    "description": "rate is the commission rate charged to delegators, as a fraction."
+                },
+                "max_rate": {
+                    "type": "string",
+                    "description": "max_rate defines the maximum commission rate which validator can ever charge, as a fraction."
+                },
+                "max_change_rate": {
+                    "type": "string",
+                    "description": "max_change_rate defines the maximum daily increase of the validator commission, as a fraction."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Commission Rates",
+            "description": "CommissionRates defines the initial commission rates to be used for creating a validator."
+        }
+    }
+}

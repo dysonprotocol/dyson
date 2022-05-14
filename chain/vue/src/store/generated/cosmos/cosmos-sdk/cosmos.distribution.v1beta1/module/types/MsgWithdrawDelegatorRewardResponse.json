@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgWithdrawDelegatorRewardResponse",
+    "definitions": {
+        "MsgWithdrawDelegatorRewardResponse": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Withdraw Delegator Reward Response",
+            "description": "MsgWithdrawDelegatorRewardResponse defines the Msg/WithdrawDelegatorReward response type."
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/TallyResult",
+    "definitions": {
+        "TallyResult": {
+            "properties": {
+                "yes": {
+                    "type": "string"
+                },
+                "abstain": {
+                    "type": "string"
+                },
+                "no": {
+                    "type": "string"
+                },
+                "no_with_veto": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Tally Result",
+            "description": "TallyResult defines a standard tally for a governance proposal."
+        }
+    }
+}

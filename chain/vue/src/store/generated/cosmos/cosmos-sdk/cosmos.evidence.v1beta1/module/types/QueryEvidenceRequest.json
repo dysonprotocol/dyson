@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryEvidenceRequest",
+    "definitions": {
+        "QueryEvidenceRequest": {
+            "properties": {
+                "evidence_hash": {
+                    "type": "string",
+                    "description": "evidence_hash defines the hash of the requested evidence.",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Evidence Request",
+            "description": "QueryEvidenceRequest is the request type for the Query/Evidence RPC method."
+        }
+    }
+}

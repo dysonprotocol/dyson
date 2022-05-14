@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Description",
+    "definitions": {
+        "Description": {
+            "properties": {
+                "moniker": {
+                    "type": "string",
+                    "description": "moniker defines a human-readable name for the validator."
+                },
+                "identity": {
+                    "type": "string",
+                    "description": "identity defines an optional identity signature (ex. UPort or Keybase)."
+                },
+                "website": {
+                    "type": "string",
+                    "description": "website defines an optional website link."
+                },
+                "security_contact": {
+                    "type": "string",
+                    "description": "security_contact defines an optional email for security contact."
+                },
+                "details": {
+                    "type": "string",
+                    "description": "details define other optional details."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Description",
+            "description": "Description defines a validator description."
+        }
+    }
+}

@@ -1,0 +1,104 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/SchedualedRun",
+    "definitions": {
+        "SchedualedRun": {
+            "properties": {
+                "index": {
+                    "type": "string"
+                },
+                "creator": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "string"
+                },
+                "gas": {
+                    "type": "string"
+                },
+                "msg": {
+                    "$ref": "#/definitions/dyson.MsgRun",
+                    "additionalProperties": true
+                },
+                "resp": {
+                    "$ref": "#/definitions/dyson.MsgRunResponse",
+                    "additionalProperties": true
+                },
+                "error": {
+                    "type": "string"
+                },
+                "gasprice": {
+                    "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+                    "additionalProperties": true
+                },
+                "fee": {
+                    "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Schedualed Run"
+        },
+        "cosmos.base.v1beta1.Coin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Coin",
+            "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+        },
+        "dyson.MsgRun": {
+            "properties": {
+                "creator": {
+                    "type": "string",
+                    "description": "The account sending the transaction"
+                },
+                "address": {
+                    "type": "string",
+                    "description": "dys address of the scrit to call"
+                },
+                "extra_lines": {
+                    "type": "string",
+                    "description": "optional extra source code to append to the end of the script before running"
+                },
+                "function_name": {
+                    "type": "string",
+                    "description": "optional function to call"
+                },
+                "args": {
+                    "type": "string",
+                    "description": "optional args to call the function with"
+                },
+                "kwargs": {
+                    "type": "string",
+                    "description": "optional kwargs to run"
+                },
+                "coins": {
+                    "type": "string",
+                    "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Run",
+            "description": "MsgRun runs a script at a specific address"
+        },
+        "dyson.MsgRunResponse": {
+            "properties": {
+                "response": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Run Response"
+        }
+    }
+}

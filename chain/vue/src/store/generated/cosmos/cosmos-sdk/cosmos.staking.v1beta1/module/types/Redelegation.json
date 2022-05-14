@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Redelegation",
+    "definitions": {
+        "Redelegation": {
+            "properties": {
+                "delegator_address": {
+                    "type": "string",
+                    "description": "delegator_address is the bech32-encoded address of the delegator."
+                },
+                "validator_src_address": {
+                    "type": "string",
+                    "description": "validator_src_address is the validator redelegation source operator address."
+                },
+                "validator_dst_address": {
+                    "type": "string",
+                    "description": "validator_dst_address is the validator redelegation destination operator address."
+                },
+                "entries": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.staking.v1beta1.RedelegationEntry"
+                    },
+                    "type": "array",
+                    "description": "entries are the redelegation entries.  redelegation entries"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Redelegation",
+            "description": "Redelegation contains the list of a particular delegator's redelegating bonds from a particular source validator to a particular destination validator."
+        },
+        "cosmos.staking.v1beta1.RedelegationEntry": {
+            "properties": {
+                "creation_height": {
+                    "type": "string",
+                    "description": "creation_height  defines the height which the redelegation took place."
+                },
+                "completion_time": {
+                    "type": "string",
+                    "description": "completion_time defines the unix time for redelegation completion.",
+                    "format": "date-time"
+                },
+                "initial_balance": {
+                    "type": "string",
+                    "description": "initial_balance defines the initial balance when redelegation started."
+                },
+                "shares_dst": {
+                    "type": "string",
+                    "description": "shares_dst is the amount of destination-validator shares created by redelegation."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Redelegation Entry",
+            "description": "RedelegationEntry defines a redelegation object with relevant metadata."
+        }
+    }
+}

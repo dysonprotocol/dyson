@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MissedBlock",
+    "definitions": {
+        "MissedBlock": {
+            "properties": {
+                "index": {
+                    "type": "string",
+                    "description": "index is the height at which the block was missed."
+                },
+                "missed": {
+                    "type": "boolean",
+                    "description": "missed is the missed status."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Missed Block",
+            "description": "MissedBlock contains height and missed status as boolean."
+        }
+    }
+}

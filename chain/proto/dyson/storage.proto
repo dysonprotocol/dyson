@@ -1,0 +1,11 @@
+syntax = "proto3";
+package dyson;
+
+option go_package = "github.com/org/dyson/x/dyson/types";
+
+message Storage {
+  string creator = 1;
+  string index = 2;
+  string data = 3; 
+}
+

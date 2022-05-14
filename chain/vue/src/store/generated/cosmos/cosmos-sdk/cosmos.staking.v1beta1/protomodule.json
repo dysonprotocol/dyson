@@ -1,0 +1,906 @@
+{
+	"Name": "v1beta1",
+	"Pkg": {
+		"Name": "cosmos.staking.v1beta1",
+		"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/authz.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos_proto/cosmos.proto",
+					"cosmos/base/v1beta1/coin.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/genesis.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos/staking/v1beta1/staking.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"Dependencies": [
+					"cosmos/base/query/v1beta1/pagination.proto",
+					"gogoproto/gogo.proto",
+					"google/api/annotations.proto",
+					"cosmos/staking/v1beta1/staking.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"google/protobuf/any.proto",
+					"google/protobuf/duration.proto",
+					"google/protobuf/timestamp.proto",
+					"cosmos_proto/cosmos.proto",
+					"cosmos/base/v1beta1/coin.proto",
+					"tendermint/types/types.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto",
+				"Dependencies": [
+					"google/protobuf/any.proto",
+					"google/protobuf/timestamp.proto",
+					"gogoproto/gogo.proto",
+					"cosmos_proto/cosmos.proto",
+					"cosmos/base/v1beta1/coin.proto",
+					"cosmos/staking/v1beta1/staking.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/cosmos-sdk/x/staking/types",
+		"Messages": [
+			{
+				"Name": "StakeAuthorization",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/authz.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "StakeAuthorization_Validators",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/authz.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "GenesisState",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/genesis.proto",
+				"HighestFieldNumber": 8
+			},
+			{
+				"Name": "LastValidatorPower",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/genesis.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryValidatorsRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryValidatorsResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryValidatorRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryValidatorResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryValidatorDelegationsRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryValidatorDelegationsResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryValidatorUnbondingDelegationsRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryValidatorUnbondingDelegationsResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDelegationRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDelegationResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryUnbondingDelegationRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryUnbondingDelegationResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryDelegatorDelegationsRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDelegatorDelegationsResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDelegatorUnbondingDelegationsRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDelegatorUnbondingDelegationsResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryRedelegationsRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "QueryRedelegationsResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDelegatorValidatorsRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDelegatorValidatorsResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDelegatorValidatorRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDelegatorValidatorResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryHistoricalInfoRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryHistoricalInfoResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryPoolRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryPoolResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryParamsRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryParamsResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "HistoricalInfo",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "CommissionRates",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "Commission",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "Description",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 5
+			},
+			{
+				"Name": "Validator",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 11
+			},
+			{
+				"Name": "ValAddresses",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "DVPair",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "DVPairs",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "DVVTriplet",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "DVVTriplets",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "Delegation",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "UnbondingDelegation",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "UnbondingDelegationEntry",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "RedelegationEntry",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "Redelegation",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "Params",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 5
+			},
+			{
+				"Name": "DelegationResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "RedelegationEntryResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "RedelegationResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "Pool",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "MsgCreateValidator",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto",
+				"HighestFieldNumber": 7
+			},
+			{
+				"Name": "MsgCreateValidatorResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgEditValidator",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "MsgEditValidatorResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgDelegate",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgDelegateResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgBeginRedelegate",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "MsgBeginRedelegateResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgUndelegate",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgUndelegateResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto",
+				"HighestFieldNumber": 1
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "Validators",
+						"RequestType": "QueryValidatorsRequest",
+						"ReturnsType": "QueryValidatorsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Validator",
+						"RequestType": "QueryValidatorRequest",
+						"ReturnsType": "QueryValidatorResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"validator_addr"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "ValidatorDelegations",
+						"RequestType": "QueryValidatorDelegationsRequest",
+						"ReturnsType": "QueryValidatorDelegationsResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"validator_addr"
+								],
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "ValidatorUnbondingDelegations",
+						"RequestType": "QueryValidatorUnbondingDelegationsRequest",
+						"ReturnsType": "QueryValidatorUnbondingDelegationsResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"validator_addr"
+								],
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Delegation",
+						"RequestType": "QueryDelegationRequest",
+						"ReturnsType": "QueryDelegationResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"validator_addr",
+									"delegator_addr"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "UnbondingDelegation",
+						"RequestType": "QueryUnbondingDelegationRequest",
+						"ReturnsType": "QueryUnbondingDelegationResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"validator_addr",
+									"delegator_addr"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "DelegatorDelegations",
+						"RequestType": "QueryDelegatorDelegationsRequest",
+						"ReturnsType": "QueryDelegatorDelegationsResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"delegator_addr"
+								],
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "DelegatorUnbondingDelegations",
+						"RequestType": "QueryDelegatorUnbondingDelegationsRequest",
+						"ReturnsType": "QueryDelegatorUnbondingDelegationsResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"delegator_addr"
+								],
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Redelegations",
+						"RequestType": "QueryRedelegationsRequest",
+						"ReturnsType": "QueryRedelegationsResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"delegator_addr"
+								],
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "DelegatorValidators",
+						"RequestType": "QueryDelegatorValidatorsRequest",
+						"ReturnsType": "QueryDelegatorValidatorsResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"delegator_addr"
+								],
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "DelegatorValidator",
+						"RequestType": "QueryDelegatorValidatorRequest",
+						"ReturnsType": "QueryDelegatorValidatorResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"delegator_addr",
+									"validator_addr"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "HistoricalInfo",
+						"RequestType": "QueryHistoricalInfoRequest",
+						"ReturnsType": "QueryHistoricalInfoResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"height"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Pool",
+						"RequestType": "QueryPoolRequest",
+						"ReturnsType": "QueryPoolResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Params",
+						"RequestType": "QueryParamsRequest",
+						"ReturnsType": "QueryParamsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Msg",
+				"RPCFuncs": [
+					{
+						"Name": "CreateValidator",
+						"RequestType": "MsgCreateValidator",
+						"ReturnsType": "MsgCreateValidatorResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "EditValidator",
+						"RequestType": "MsgEditValidator",
+						"ReturnsType": "MsgEditValidatorResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "Delegate",
+						"RequestType": "MsgDelegate",
+						"ReturnsType": "MsgDelegateResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "BeginRedelegate",
+						"RequestType": "MsgBeginRedelegate",
+						"ReturnsType": "MsgBeginRedelegateResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "Undelegate",
+						"RequestType": "MsgUndelegate",
+						"ReturnsType": "MsgUndelegateResponse",
+						"HTTPRules": null
+					}
+				]
+			}
+		]
+	},
+	"Msgs": [
+		{
+			"Name": "MsgBeginRedelegate",
+			"URI": "cosmos.staking.v1beta1.MsgBeginRedelegate",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgDelegate",
+			"URI": "cosmos.staking.v1beta1.MsgDelegate",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgUndelegate",
+			"URI": "cosmos.staking.v1beta1.MsgUndelegate",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgCreateValidator",
+			"URI": "cosmos.staking.v1beta1.MsgCreateValidator",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgEditValidator",
+			"URI": "cosmos.staking.v1beta1.MsgEditValidator",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
+		}
+	],
+	"HTTPQueries": [
+		{
+			"Name": "Validators",
+			"FullName": "QueryValidators",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Validator",
+			"FullName": "QueryValidator",
+			"Rules": [
+				{
+					"Params": [
+						"validator_addr"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "ValidatorDelegations",
+			"FullName": "QueryValidatorDelegations",
+			"Rules": [
+				{
+					"Params": [
+						"validator_addr"
+					],
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "ValidatorUnbondingDelegations",
+			"FullName": "QueryValidatorUnbondingDelegations",
+			"Rules": [
+				{
+					"Params": [
+						"validator_addr"
+					],
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Delegation",
+			"FullName": "QueryDelegation",
+			"Rules": [
+				{
+					"Params": [
+						"validator_addr",
+						"delegator_addr"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "UnbondingDelegation",
+			"FullName": "QueryUnbondingDelegation",
+			"Rules": [
+				{
+					"Params": [
+						"validator_addr",
+						"delegator_addr"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "DelegatorDelegations",
+			"FullName": "QueryDelegatorDelegations",
+			"Rules": [
+				{
+					"Params": [
+						"delegator_addr"
+					],
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "DelegatorUnbondingDelegations",
+			"FullName": "QueryDelegatorUnbondingDelegations",
+			"Rules": [
+				{
+					"Params": [
+						"delegator_addr"
+					],
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Redelegations",
+			"FullName": "QueryRedelegations",
+			"Rules": [
+				{
+					"Params": [
+						"delegator_addr"
+					],
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "DelegatorValidators",
+			"FullName": "QueryDelegatorValidators",
+			"Rules": [
+				{
+					"Params": [
+						"delegator_addr"
+					],
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "DelegatorValidator",
+			"FullName": "QueryDelegatorValidator",
+			"Rules": [
+				{
+					"Params": [
+						"delegator_addr",
+						"validator_addr"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "HistoricalInfo",
+			"FullName": "QueryHistoricalInfo",
+			"Rules": [
+				{
+					"Params": [
+						"height"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Pool",
+			"FullName": "QueryPool",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Params",
+			"FullName": "QueryParams",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "StakeAuthorization",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/authz.proto"
+		},
+		{
+			"Name": "StakeAuthorization_Validators",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/authz.proto"
+		},
+		{
+			"Name": "LastValidatorPower",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/genesis.proto"
+		},
+		{
+			"Name": "HistoricalInfo",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "CommissionRates",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "Commission",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "Description",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "Validator",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "ValAddresses",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "DVPair",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "DVPairs",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "DVVTriplet",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "DVVTriplets",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "Delegation",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "UnbondingDelegation",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "UnbondingDelegationEntry",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "RedelegationEntry",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "Redelegation",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "Params",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "DelegationResponse",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "RedelegationEntryResponse",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "RedelegationResponse",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		},
+		{
+			"Name": "Pool",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/staking.proto"
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgUpdateScriptResponse",
+    "definitions": {
+        "MsgUpdateScriptResponse": {
+            "properties": {
+                "address": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Update Script Response"
+        }
+    }
+}

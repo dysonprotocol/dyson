@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GenericAuthorization",
+    "definitions": {
+        "GenericAuthorization": {
+            "properties": {
+                "msg": {
+                    "type": "string",
+                    "description": "Msg, identified by it's type URL, to grant unrestricted permissions to execute"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Generic Authorization",
+            "description": "GenericAuthorization gives the grantee unrestricted permissions to execute the provided method on behalf of the granter's account."
+        }
+    }
+}

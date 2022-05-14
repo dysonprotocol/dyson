@@ -1,0 +1,147 @@
+syntax = "proto3";
+package dyson;
+
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "dyson/script.proto";
+import "dyson/tx.proto";
+import "dyson/storage.proto";
+import "dyson/schedualed_run.proto";
+import "dyson/msgrun.proto";
+// this line is used by starport scaffolding # 1
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/org/dyson/x/dyson/types";
+
+
+// Query defines the gRPC querier service.
+service Query {
+
+		// Queries a schedualedRun by index.
+		rpc SchedualedRun(QueryGetSchedualedRunRequest) returns (QueryGetSchedualedRunResponse) {
+				option (google.api.http).get = "/org/dyson/dyson/schedualedRun/{index}";
+		}
+
+		// Queries a list of schedualedRun items.
+		rpc SchedualedRunAll(QueryAllSchedualedRunRequest) returns (QueryAllSchedualedRunResponse) {
+				option (google.api.http).get = "/org/dyson/dyson/schedualedRun";
+		}
+
+		// Queries a storage by index.
+		rpc Storage(QueryGetStorageRequest) returns (QueryGetStorageResponse) {
+				option (google.api.http).get = "/dyson/storage/{index}";
+		}
+
+		// Queries a list of storage items.
+		rpc StorageAll(QueryAllStorageRequest) returns (QueryAllStorageResponse) {
+				option (google.api.http).get = "/dyson/storage";
+		}
+
+
+		// Queries a script by index.
+		rpc Script(QueryGetScriptRequest) returns (QueryGetScriptResponse) {
+				option (google.api.http).get = "/dyson/script/{index}";
+		}
+		// Queries a script schema by index.
+		rpc Schema(QueryGetSchemaRequest) returns (QueryGetSchemaResponse) {
+				option (google.api.http).get = "/dyson/schema/{index}";
+		}
+
+		// Queries a script wsgi app by index.
+		rpc Wsgi(QueryWsgiRequest) returns (QueryWsgiResponse) {
+				option (google.api.http).get = "/dyson/wsgi/{index}";
+		}
+
+		// Queries a script by index.
+		rpc QueryScript(MsgRun) returns (MsgRunResponse) {
+				option (google.api.http).get = "/dyson/query";
+		}
+
+		// Queries a list of script items.
+		rpc ScriptAll(QueryAllScriptRequest) returns (QueryAllScriptResponse) {
+				option (google.api.http).get = "/dyson/script";
+		}
+
+		rpc PrefixStorage(QueryPrefixStorageRequest) returns (QueryPrefixStorageResponse) {
+				option (google.api.http).get = "/dyson/storageprefix";
+		}
+
+}
+
+message QueryGetSchedualedRunRequest {
+		// inxex is the script address
+		string index = 1;
+}
+
+message QueryGetSchedualedRunResponse {
+		SchedualedRun schedualed_run = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllSchedualedRunRequest {
+		cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllSchedualedRunResponse {
+		repeated SchedualedRun schedualed_run = 1 [(gogoproto.nullable) = false];
+		cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetStorageRequest {
+		string index = 1;
+}
+
+message QueryGetStorageResponse {
+		Storage storage = 1;
+}
+
+message QueryAllStorageRequest {
+		cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllStorageResponse {
+		repeated Storage storage = 1;
+		cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+message QueryGetScriptRequest {
+		string index = 1;
+}
+
+message QueryGetScriptResponse {
+		Script script = 1;
+}
+
+message QueryGetSchemaRequest {
+		string index = 1;
+}
+
+message QueryGetSchemaResponse {
+		string schema = 1;
+}
+
+message QueryWsgiRequest {
+		string index = 1;
+		string httprequest = 2;
+}
+
+message QueryWsgiResponse {
+		string httpresponse = 1;
+}
+
+message QueryAllScriptRequest {
+		cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllScriptResponse {
+		repeated Script Script = 1;
+		cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryPrefixStorageRequest {
+		string prefix = 1;
+		cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryPrefixStorageResponse {
+		repeated Storage storage = 1;
+		cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}

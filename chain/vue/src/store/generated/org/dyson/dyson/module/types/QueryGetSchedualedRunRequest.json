@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryGetSchedualedRunRequest",
+    "definitions": {
+        "QueryGetSchedualedRunRequest": {
+            "properties": {
+                "index": {
+                    "type": "string",
+                    "description": "inxex is the script address"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Get Schedualed Run Request"
+        }
+    }
+}

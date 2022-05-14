@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryGetScriptResponse",
+    "definitions": {
+        "QueryGetScriptResponse": {
+            "properties": {
+                "script": {
+                    "$ref": "#/definitions/dyson.Script",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Get Script Response"
+        },
+        "dyson.Script": {
+            "properties": {
+                "creator": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Script"
+        }
+    }
+}

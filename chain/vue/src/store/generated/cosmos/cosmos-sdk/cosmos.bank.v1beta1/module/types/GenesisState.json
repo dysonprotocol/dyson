@@ -1,0 +1,161 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GenesisState",
+    "definitions": {
+        "GenesisState": {
+            "properties": {
+                "params": {
+                    "$ref": "#/definitions/cosmos.bank.v1beta1.Params",
+                    "additionalProperties": true,
+                    "description": "params defines all the paramaters of the module."
+                },
+                "balances": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.bank.v1beta1.Balance"
+                    },
+                    "type": "array",
+                    "description": "balances is an array containing the balances of all the accounts."
+                },
+                "supply": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+                    },
+                    "type": "array",
+                    "description": "supply represents the total supply. If it is left empty, then supply will be calculated based on the provided balances. Otherwise, it will be used to validate that the sum of the balances equals this amount."
+                },
+                "denom_metadata": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.bank.v1beta1.Metadata"
+                    },
+                    "type": "array",
+                    "description": "denom_metadata defines the metadata of the differents coins."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Genesis State",
+            "description": "GenesisState defines the bank module's genesis state."
+        },
+        "cosmos.bank.v1beta1.Balance": {
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "description": "address is the address of the balance holder."
+                },
+                "coins": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+                    },
+                    "type": "array",
+                    "description": "coins defines the different coins this balance holds."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Balance",
+            "description": "Balance defines an account address and balance pair used in the bank module's genesis state."
+        },
+        "cosmos.bank.v1beta1.DenomUnit": {
+            "properties": {
+                "denom": {
+                    "type": "string",
+                    "description": "denom represents the string name of the given denom unit (e.g uatom)."
+                },
+                "exponent": {
+                    "type": "integer",
+                    "description": "exponent represents power of 10 exponent that one must raise the base_denom to in order to equal the given DenomUnit's denom 1 denom = 1^exponent base_denom (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with exponent = 6, thus: 1 atom = 10^6 uatom)."
+                },
+                "aliases": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "aliases is a list of string aliases for the given denom"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Denom Unit",
+            "description": "DenomUnit represents a struct that describes a given denomination unit of the basic token."
+        },
+        "cosmos.bank.v1beta1.Metadata": {
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "denom_units": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.bank.v1beta1.DenomUnit"
+                    },
+                    "type": "array",
+                    "description": "denom_units represents the list of DenomUnit's for a given coin"
+                },
+                "base": {
+                    "type": "string",
+                    "description": "base represents the base denom (should be the DenomUnit with exponent = 0)."
+                },
+                "display": {
+                    "type": "string",
+                    "description": "display indicates the suggested denom that should be displayed in clients."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name defines the name of the token (eg: Cosmos Atom)"
+                },
+                "symbol": {
+                    "type": "string",
+                    "description": "symbol is the token symbol usually shown on exchanges (eg: ATOM). This can be the same as the display."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata",
+            "description": "Metadata represents a struct that describes a basic token."
+        },
+        "cosmos.bank.v1beta1.Params": {
+            "properties": {
+                "send_enabled": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.bank.v1beta1.SendEnabled"
+                    },
+                    "type": "array"
+                },
+                "default_send_enabled": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "Params defines the parameters for the bank module."
+        },
+        "cosmos.bank.v1beta1.SendEnabled": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Send Enabled",
+            "description": "SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable)."
+        },
+        "cosmos.base.v1beta1.Coin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Coin",
+            "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+        }
+    }
+}

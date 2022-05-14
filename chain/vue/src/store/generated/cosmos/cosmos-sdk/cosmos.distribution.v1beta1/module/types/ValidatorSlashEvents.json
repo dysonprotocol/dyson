@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ValidatorSlashEvents",
+    "definitions": {
+        "ValidatorSlashEvents": {
+            "properties": {
+                "validator_slash_events": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.distribution.v1beta1.ValidatorSlashEvent"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Slash Events",
+            "description": "ValidatorSlashEvents is a collection of ValidatorSlashEvent messages."
+        },
+        "cosmos.distribution.v1beta1.ValidatorSlashEvent": {
+            "properties": {
+                "validator_period": {
+                    "type": "string"
+                },
+                "fraction": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Slash Event",
+            "description": "ValidatorSlashEvent represents a validator slash event. Height is implicit within the store key. This is needed to calculate appropriate amount of staking tokens for delegations which are withdrawn after a slash has occurred."
+        }
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ValidatorHistoricalRewards",
+    "definitions": {
+        "ValidatorHistoricalRewards": {
+            "properties": {
+                "cumulative_reward_ratio": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.v1beta1.DecCoin"
+                    },
+                    "type": "array"
+                },
+                "reference_count": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Historical Rewards",
+            "description": "ValidatorHistoricalRewards represents historical rewards for a validator. Height is implicit within the store key. Cumulative reward ratio is the sum from the zeroeth period until this period of rewards / tokens, per the spec. The reference count indicates the number of objects which might need to reference this historical entry at any point. ReferenceCount =    number of outstanding delegations which ended the associated period (and    might need to read that record)  + number of slashes which ended the associated period (and might need to  read that record)  + one per validator for the zeroeth period, set on initialization"
+        },
+        "cosmos.base.v1beta1.DecCoin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Dec Coin",
+            "description": "DecCoin defines a token with a denomination and a decimal amount. NOTE: The amount field is an Dec which implements the custom method signatures required by gogoproto."
+        }
+    }
+}

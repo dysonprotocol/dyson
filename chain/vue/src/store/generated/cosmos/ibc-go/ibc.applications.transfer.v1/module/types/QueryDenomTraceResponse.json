@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryDenomTraceResponse",
+    "definitions": {
+        "QueryDenomTraceResponse": {
+            "properties": {
+                "denom_trace": {
+                    "$ref": "#/definitions/ibc.applications.transfer.v1.DenomTrace",
+                    "additionalProperties": true,
+                    "description": "denom_trace returns the requested denomination trace information."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Denom Trace Response",
+            "description": "QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC method."
+        },
+        "ibc.applications.transfer.v1.DenomTrace": {
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "path defines the chain of port/channel identifiers used for tracing the source of the fungible token."
+                },
+                "base_denom": {
+                    "type": "string",
+                    "description": "base denomination of the relayed fungible token."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Denom Trace",
+            "description": "DenomTrace contains the base denomination for ICS20 fungible tokens and the source tracing information path."
+        }
+    }
+}

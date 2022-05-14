@@ -1,0 +1,217 @@
+{
+	"Name": "v1beta1",
+	"Pkg": {
+		"Name": "cosmos.authz.v1beta1",
+		"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/authz.proto",
+				"Dependencies": [
+					"cosmos_proto/cosmos.proto",
+					"google/protobuf/timestamp.proto",
+					"gogoproto/gogo.proto",
+					"google/protobuf/any.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/event.proto",
+				"Dependencies": null
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/genesis.proto",
+				"Dependencies": [
+					"google/protobuf/timestamp.proto",
+					"google/protobuf/any.proto",
+					"gogoproto/gogo.proto",
+					"cosmos_proto/cosmos.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/query.proto",
+				"Dependencies": [
+					"google/api/annotations.proto",
+					"cosmos/base/query/v1beta1/pagination.proto",
+					"cosmos/authz/v1beta1/authz.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto",
+				"Dependencies": [
+					"cosmos_proto/cosmos.proto",
+					"gogoproto/gogo.proto",
+					"google/protobuf/timestamp.proto",
+					"google/protobuf/any.proto",
+					"cosmos/base/abci/v1beta1/abci.proto",
+					"cosmos/authz/v1beta1/authz.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/cosmos-sdk/x/authz",
+		"Messages": [
+			{
+				"Name": "GenericAuthorization",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/authz.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "Grant",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/authz.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "EventGrant",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/event.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "EventRevoke",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/event.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "GenesisState",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/genesis.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "GrantAuthorization",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/genesis.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "QueryGrantsRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/query.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "QueryGrantsResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "MsgGrant",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgExecResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgExec",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "MsgGrantResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgRevoke",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgRevokeResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "Grants",
+						"RequestType": "QueryGrantsRequest",
+						"ReturnsType": "QueryGrantsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Msg",
+				"RPCFuncs": [
+					{
+						"Name": "Grant",
+						"RequestType": "MsgGrant",
+						"ReturnsType": "MsgGrantResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "Exec",
+						"RequestType": "MsgExec",
+						"ReturnsType": "MsgExecResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "Revoke",
+						"RequestType": "MsgRevoke",
+						"ReturnsType": "MsgRevokeResponse",
+						"HTTPRules": null
+					}
+				]
+			}
+		]
+	},
+	"Msgs": [
+		{
+			"Name": "MsgGrant",
+			"URI": "cosmos.authz.v1beta1.MsgGrant",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgRevoke",
+			"URI": "cosmos.authz.v1beta1.MsgRevoke",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgExec",
+			"URI": "cosmos.authz.v1beta1.MsgExec",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto"
+		}
+	],
+	"HTTPQueries": [
+		{
+			"Name": "Grants",
+			"FullName": "QueryGrants",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "GenericAuthorization",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/authz.proto"
+		},
+		{
+			"Name": "Grant",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/authz.proto"
+		},
+		{
+			"Name": "EventGrant",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/event.proto"
+		},
+		{
+			"Name": "EventRevoke",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/event.proto"
+		},
+		{
+			"Name": "GrantAuthorization",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/genesis.proto"
+		}
+	]
+}

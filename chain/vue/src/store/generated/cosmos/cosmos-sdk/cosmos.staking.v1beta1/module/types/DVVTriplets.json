@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/DVVTriplets",
+    "definitions": {
+        "DVVTriplets": {
+            "properties": {
+                "triplets": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.staking.v1beta1.DVVTriplet"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "DVV Triplets",
+            "description": "DVVTriplets defines an array of DVVTriplet objects."
+        },
+        "cosmos.staking.v1beta1.DVVTriplet": {
+            "properties": {
+                "delegator_address": {
+                    "type": "string"
+                },
+                "validator_src_address": {
+                    "type": "string"
+                },
+                "validator_dst_address": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "DVV Triplet",
+            "description": "DVVTriplet is struct that just has a delegator-validator-validator triplet with no other data. It is intended to be used as a marshalable pointer. For example, a DVVTriplet can be used to construct the key to getting a Redelegation from state."
+        }
+    }
+}

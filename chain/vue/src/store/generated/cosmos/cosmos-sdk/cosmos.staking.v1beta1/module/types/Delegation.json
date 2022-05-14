@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Delegation",
+    "definitions": {
+        "Delegation": {
+            "properties": {
+                "delegator_address": {
+                    "type": "string",
+                    "description": "delegator_address is the bech32-encoded address of the delegator."
+                },
+                "validator_address": {
+                    "type": "string",
+                    "description": "validator_address is the bech32-encoded address of the validator."
+                },
+                "shares": {
+                    "type": "string",
+                    "description": "shares define the delegation shares received."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Delegation",
+            "description": "Delegation represents the bond with tokens held by an account. It is owned by one delegator, and is associated with the voting power of one validator."
+        }
+    }
+}

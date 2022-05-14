@@ -1,0 +1,340 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GenesisState",
+    "definitions": {
+        "GenesisState": {
+            "properties": {
+                "params": {
+                    "$ref": "#/definitions/cosmos.distribution.v1beta1.Params",
+                    "additionalProperties": true,
+                    "description": "params defines all the paramaters of the module."
+                },
+                "fee_pool": {
+                    "$ref": "#/definitions/cosmos.distribution.v1beta1.FeePool",
+                    "additionalProperties": true,
+                    "description": "fee_pool defines the fee pool at genesis."
+                },
+                "delegator_withdraw_infos": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.distribution.v1beta1.DelegatorWithdrawInfo"
+                    },
+                    "type": "array",
+                    "description": "fee_pool defines the delegator withdraw infos at genesis."
+                },
+                "previous_proposer": {
+                    "type": "string",
+                    "description": "fee_pool defines the previous proposer at genesis."
+                },
+                "outstanding_rewards": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.distribution.v1beta1.ValidatorOutstandingRewardsRecord"
+                    },
+                    "type": "array",
+                    "description": "fee_pool defines the outstanding rewards of all validators at genesis."
+                },
+                "validator_accumulated_commissions": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionRecord"
+                    },
+                    "type": "array",
+                    "description": "fee_pool defines the accumulated commisions of all validators at genesis."
+                },
+                "validator_historical_rewards": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.distribution.v1beta1.ValidatorHistoricalRewardsRecord"
+                    },
+                    "type": "array",
+                    "description": "fee_pool defines the historical rewards of all validators at genesis."
+                },
+                "validator_current_rewards": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.distribution.v1beta1.ValidatorCurrentRewardsRecord"
+                    },
+                    "type": "array",
+                    "description": "fee_pool defines the current rewards of all validators at genesis."
+                },
+                "delegator_starting_infos": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.distribution.v1beta1.DelegatorStartingInfoRecord"
+                    },
+                    "type": "array",
+                    "description": "fee_pool defines the delegator starting infos at genesis."
+                },
+                "validator_slash_events": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.distribution.v1beta1.ValidatorSlashEventRecord"
+                    },
+                    "type": "array",
+                    "description": "fee_pool defines the validator slash events at genesis."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Genesis State",
+            "description": "GenesisState defines the distribution module's genesis state."
+        },
+        "cosmos.base.v1beta1.DecCoin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Dec Coin",
+            "description": "DecCoin defines a token with a denomination and a decimal amount. NOTE: The amount field is an Dec which implements the custom method signatures required by gogoproto."
+        },
+        "cosmos.distribution.v1beta1.DelegatorStartingInfo": {
+            "properties": {
+                "previous_period": {
+                    "type": "string"
+                },
+                "stake": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Delegator Starting Info",
+            "description": "DelegatorStartingInfo represents the starting info for a delegator reward period. It tracks the previous validator period, the delegation's amount of staking token, and the creation height (to check later on if any slashes have occurred). NOTE: Even though validators are slashed to whole staking tokens, the delegators within the validator may be left with less than a full token, thus sdk.Dec is used."
+        },
+        "cosmos.distribution.v1beta1.DelegatorStartingInfoRecord": {
+            "properties": {
+                "delegator_address": {
+                    "type": "string",
+                    "description": "delegator_address is the address of the delegator."
+                },
+                "validator_address": {
+                    "type": "string",
+                    "description": "validator_address is the address of the validator."
+                },
+                "starting_info": {
+                    "$ref": "#/definitions/cosmos.distribution.v1beta1.DelegatorStartingInfo",
+                    "additionalProperties": true,
+                    "description": "starting_info defines the starting info of a delegator."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Delegator Starting Info Record",
+            "description": "DelegatorStartingInfoRecord used for import / export via genesis json."
+        },
+        "cosmos.distribution.v1beta1.DelegatorWithdrawInfo": {
+            "properties": {
+                "delegator_address": {
+                    "type": "string",
+                    "description": "delegator_address is the address of the delegator."
+                },
+                "withdraw_address": {
+                    "type": "string",
+                    "description": "withdraw_address is the address to withdraw the delegation rewards to."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Delegator Withdraw Info",
+            "description": "DelegatorWithdrawInfo is the address for where distributions rewards are withdrawn to by default this struct is only used at genesis to feed in default withdraw addresses."
+        },
+        "cosmos.distribution.v1beta1.FeePool": {
+            "properties": {
+                "community_pool": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.v1beta1.DecCoin"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Fee Pool",
+            "description": "FeePool is the global fee pool for distribution."
+        },
+        "cosmos.distribution.v1beta1.Params": {
+            "properties": {
+                "community_tax": {
+                    "type": "string"
+                },
+                "base_proposer_reward": {
+                    "type": "string"
+                },
+                "bonus_proposer_reward": {
+                    "type": "string"
+                },
+                "withdraw_addr_enabled": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "Params defines the set of params for the distribution module."
+        },
+        "cosmos.distribution.v1beta1.ValidatorAccumulatedCommission": {
+            "properties": {
+                "commission": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.v1beta1.DecCoin"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Accumulated Commission",
+            "description": "ValidatorAccumulatedCommission represents accumulated commission for a validator kept as a running counter, can be withdrawn at any time."
+        },
+        "cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionRecord": {
+            "properties": {
+                "validator_address": {
+                    "type": "string",
+                    "description": "validator_address is the address of the validator."
+                },
+                "accumulated": {
+                    "$ref": "#/definitions/cosmos.distribution.v1beta1.ValidatorAccumulatedCommission",
+                    "additionalProperties": true,
+                    "description": "accumulated is the accumulated commission of a validator."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Accumulated Commission Record",
+            "description": "ValidatorAccumulatedCommissionRecord is used for import / export via genesis json."
+        },
+        "cosmos.distribution.v1beta1.ValidatorCurrentRewards": {
+            "properties": {
+                "rewards": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.v1beta1.DecCoin"
+                    },
+                    "type": "array"
+                },
+                "period": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Current Rewards",
+            "description": "ValidatorCurrentRewards represents current rewards and current period for a validator kept as a running counter and incremented each block as long as the validator's tokens remain constant."
+        },
+        "cosmos.distribution.v1beta1.ValidatorCurrentRewardsRecord": {
+            "properties": {
+                "validator_address": {
+                    "type": "string",
+                    "description": "validator_address is the address of the validator."
+                },
+                "rewards": {
+                    "$ref": "#/definitions/cosmos.distribution.v1beta1.ValidatorCurrentRewards",
+                    "additionalProperties": true,
+                    "description": "rewards defines the current rewards of a validator."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Current Rewards Record",
+            "description": "ValidatorCurrentRewardsRecord is used for import / export via genesis json."
+        },
+        "cosmos.distribution.v1beta1.ValidatorHistoricalRewards": {
+            "properties": {
+                "cumulative_reward_ratio": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.v1beta1.DecCoin"
+                    },
+                    "type": "array"
+                },
+                "reference_count": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Historical Rewards",
+            "description": "ValidatorHistoricalRewards represents historical rewards for a validator. Height is implicit within the store key. Cumulative reward ratio is the sum from the zeroeth period until this period of rewards / tokens, per the spec. The reference count indicates the number of objects which might need to reference this historical entry at any point. ReferenceCount =    number of outstanding delegations which ended the associated period (and    might need to read that record)  + number of slashes which ended the associated period (and might need to  read that record)  + one per validator for the zeroeth period, set on initialization"
+        },
+        "cosmos.distribution.v1beta1.ValidatorHistoricalRewardsRecord": {
+            "properties": {
+                "validator_address": {
+                    "type": "string",
+                    "description": "validator_address is the address of the validator."
+                },
+                "period": {
+                    "type": "string",
+                    "description": "period defines the period the historical rewards apply to."
+                },
+                "rewards": {
+                    "$ref": "#/definitions/cosmos.distribution.v1beta1.ValidatorHistoricalRewards",
+                    "additionalProperties": true,
+                    "description": "rewards defines the historical rewards of a validator."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Historical Rewards Record",
+            "description": "ValidatorHistoricalRewardsRecord is used for import / export via genesis json."
+        },
+        "cosmos.distribution.v1beta1.ValidatorOutstandingRewardsRecord": {
+            "properties": {
+                "validator_address": {
+                    "type": "string",
+                    "description": "validator_address is the address of the validator."
+                },
+                "outstanding_rewards": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.v1beta1.DecCoin"
+                    },
+                    "type": "array",
+                    "description": "outstanding_rewards represents the oustanding rewards of a validator."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Outstanding Rewards Record",
+            "description": "ValidatorOutstandingRewardsRecord is used for import/export via genesis json."
+        },
+        "cosmos.distribution.v1beta1.ValidatorSlashEvent": {
+            "properties": {
+                "validator_period": {
+                    "type": "string"
+                },
+                "fraction": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Slash Event",
+            "description": "ValidatorSlashEvent represents a validator slash event. Height is implicit within the store key. This is needed to calculate appropriate amount of staking tokens for delegations which are withdrawn after a slash has occurred."
+        },
+        "cosmos.distribution.v1beta1.ValidatorSlashEventRecord": {
+            "properties": {
+                "validator_address": {
+                    "type": "string",
+                    "description": "validator_address is the address of the validator."
+                },
+                "height": {
+                    "type": "string",
+                    "description": "height defines the block height at which the slash event occured."
+                },
+                "period": {
+                    "type": "string",
+                    "description": "period is the period of the slash event."
+                },
+                "validator_slash_event": {
+                    "$ref": "#/definitions/cosmos.distribution.v1beta1.ValidatorSlashEvent",
+                    "additionalProperties": true,
+                    "description": "validator_slash_event describes the slash event."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Validator Slash Event Record",
+            "description": "ValidatorSlashEventRecord is used for import / export via genesis json."
+        }
+    }
+}

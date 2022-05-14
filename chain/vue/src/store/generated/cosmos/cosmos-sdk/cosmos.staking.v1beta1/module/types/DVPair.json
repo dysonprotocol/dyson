@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/DVPair",
+    "definitions": {
+        "DVPair": {
+            "properties": {
+                "delegator_address": {
+                    "type": "string"
+                },
+                "validator_address": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "DV Pair",
+            "description": "DVPair is struct that just has a delegator-validator pair with no other data. It is intended to be used as a marshalable pointer. For example, a DVPair can be used to construct the key to getting an UnbondingDelegation from state."
+        }
+    }
+}

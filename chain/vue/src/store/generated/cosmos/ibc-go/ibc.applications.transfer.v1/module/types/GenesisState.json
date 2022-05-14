@@ -1,0 +1,59 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GenesisState",
+    "definitions": {
+        "GenesisState": {
+            "properties": {
+                "port_id": {
+                    "type": "string"
+                },
+                "denom_traces": {
+                    "items": {
+                        "$ref": "#/definitions/ibc.applications.transfer.v1.DenomTrace"
+                    },
+                    "type": "array"
+                },
+                "params": {
+                    "$ref": "#/definitions/ibc.applications.transfer.v1.Params",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Genesis State",
+            "description": "GenesisState defines the ibc-transfer genesis state"
+        },
+        "ibc.applications.transfer.v1.DenomTrace": {
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "path defines the chain of port/channel identifiers used for tracing the source of the fungible token."
+                },
+                "base_denom": {
+                    "type": "string",
+                    "description": "base denomination of the relayed fungible token."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Denom Trace",
+            "description": "DenomTrace contains the base denomination for ICS20 fungible tokens and the source tracing information path."
+        },
+        "ibc.applications.transfer.v1.Params": {
+            "properties": {
+                "send_enabled": {
+                    "type": "boolean",
+                    "description": "send_enabled enables or disables all cross-chain token transfers from this chain."
+                },
+                "receive_enabled": {
+                    "type": "boolean",
+                    "description": "receive_enabled enables or disables all cross-chain token transfers to this chain."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "Params defines the set of IBC transfer parameters. NOTE: To prevent a single token from being transferred, set the TransfersEnabled parameter to true and then set the bank module's SendEnabled parameter for the denomination to false."
+        }
+    }
+}

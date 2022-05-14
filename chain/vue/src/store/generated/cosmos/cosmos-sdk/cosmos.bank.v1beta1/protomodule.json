@@ -1,0 +1,449 @@
+{
+	"Name": "v1beta1",
+	"Pkg": {
+		"Name": "cosmos.bank.v1beta1",
+		"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/authz.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos_proto/cosmos.proto",
+					"cosmos/base/v1beta1/coin.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos_proto/cosmos.proto",
+					"cosmos/base/v1beta1/coin.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/genesis.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos/base/v1beta1/coin.proto",
+					"cosmos/bank/v1beta1/bank.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"Dependencies": [
+					"cosmos/base/query/v1beta1/pagination.proto",
+					"gogoproto/gogo.proto",
+					"google/api/annotations.proto",
+					"cosmos/base/v1beta1/coin.proto",
+					"cosmos/bank/v1beta1/bank.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/tx.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos/base/v1beta1/coin.proto",
+					"cosmos/bank/v1beta1/bank.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/cosmos-sdk/x/bank/types",
+		"Messages": [
+			{
+				"Name": "SendAuthorization",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/authz.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "Params",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "SendEnabled",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "Input",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "Output",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "Supply",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "DenomUnit",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "Metadata",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto",
+				"HighestFieldNumber": 6
+			},
+			{
+				"Name": "GenesisState",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/genesis.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "Balance",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/genesis.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryBalanceRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryBalanceResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAllBalancesRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryAllBalancesResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryTotalSupplyRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryTotalSupplyResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QuerySupplyOfRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QuerySupplyOfResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryParamsRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryParamsResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryDenomsMetadataRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryDenomsMetadataResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDenomMetadataRequest",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryDenomMetadataResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgSend",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgSendResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgMultiSend",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/tx.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "MsgMultiSendResponse",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "Balance",
+						"RequestType": "QueryBalanceRequest",
+						"ReturnsType": "QueryBalanceResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"address",
+									"denom"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "AllBalances",
+						"RequestType": "QueryAllBalancesRequest",
+						"ReturnsType": "QueryAllBalancesResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"address"
+								],
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "TotalSupply",
+						"RequestType": "QueryTotalSupplyRequest",
+						"ReturnsType": "QueryTotalSupplyResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "SupplyOf",
+						"RequestType": "QuerySupplyOfRequest",
+						"ReturnsType": "QuerySupplyOfResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"denom"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Params",
+						"RequestType": "QueryParamsRequest",
+						"ReturnsType": "QueryParamsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "DenomMetadata",
+						"RequestType": "QueryDenomMetadataRequest",
+						"ReturnsType": "QueryDenomMetadataResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"denom"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "DenomsMetadata",
+						"RequestType": "QueryDenomsMetadataRequest",
+						"ReturnsType": "QueryDenomsMetadataResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Msg",
+				"RPCFuncs": [
+					{
+						"Name": "Send",
+						"RequestType": "MsgSend",
+						"ReturnsType": "MsgSendResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "MultiSend",
+						"RequestType": "MsgMultiSend",
+						"ReturnsType": "MsgMultiSendResponse",
+						"HTTPRules": null
+					}
+				]
+			}
+		]
+	},
+	"Msgs": [
+		{
+			"Name": "MsgSend",
+			"URI": "cosmos.bank.v1beta1.MsgSend",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgMultiSend",
+			"URI": "cosmos.bank.v1beta1.MsgMultiSend",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/tx.proto"
+		}
+	],
+	"HTTPQueries": [
+		{
+			"Name": "Balance",
+			"FullName": "QueryBalance",
+			"Rules": [
+				{
+					"Params": [
+						"address",
+						"denom"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "AllBalances",
+			"FullName": "QueryAllBalances",
+			"Rules": [
+				{
+					"Params": [
+						"address"
+					],
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "TotalSupply",
+			"FullName": "QueryTotalSupply",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "SupplyOf",
+			"FullName": "QuerySupplyOf",
+			"Rules": [
+				{
+					"Params": [
+						"denom"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Params",
+			"FullName": "QueryParams",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "DenomMetadata",
+			"FullName": "QueryDenomMetadata",
+			"Rules": [
+				{
+					"Params": [
+						"denom"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "DenomsMetadata",
+			"FullName": "QueryDenomsMetadata",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "SendAuthorization",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/authz.proto"
+		},
+		{
+			"Name": "Params",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto"
+		},
+		{
+			"Name": "SendEnabled",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto"
+		},
+		{
+			"Name": "Input",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto"
+		},
+		{
+			"Name": "Output",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto"
+		},
+		{
+			"Name": "Supply",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto"
+		},
+		{
+			"Name": "DenomUnit",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto"
+		},
+		{
+			"Name": "Metadata",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/bank.proto"
+		},
+		{
+			"Name": "Balance",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/genesis.proto"
+		}
+	]
+}

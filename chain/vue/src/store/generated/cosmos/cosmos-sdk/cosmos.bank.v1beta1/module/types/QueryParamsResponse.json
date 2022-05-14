@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryParamsResponse",
+    "definitions": {
+        "QueryParamsResponse": {
+            "properties": {
+                "params": {
+                    "$ref": "#/definitions/cosmos.bank.v1beta1.Params",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Params Response",
+            "description": "QueryParamsResponse defines the response type for querying x/bank parameters."
+        },
+        "cosmos.bank.v1beta1.Params": {
+            "properties": {
+                "send_enabled": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.bank.v1beta1.SendEnabled"
+                    },
+                    "type": "array"
+                },
+                "default_send_enabled": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "Params defines the parameters for the bank module."
+        },
+        "cosmos.bank.v1beta1.SendEnabled": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Send Enabled",
+            "description": "SendEnabled maps coin denom to a send_enabled status (whether a denom is sendable)."
+        }
+    }
+}
