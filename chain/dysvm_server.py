@@ -1,4 +1,6 @@
 import ast
+from freezegun import freeze_time
+
 import re
 import logging
 
@@ -18,9 +20,6 @@ import simplejson as json
 from functools import partial
 
 import dyslang
-import re2
-
-re2.set_fallback_notification(re2.FALLBACK_EXCEPTION)
 
 MAX_CUM_SIZE = dyslang.MAX_SCOPE_SIZE * dyslang.MAX_NODE_CALLS
 
@@ -148,7 +147,7 @@ def main():
 
 
 def get_module_dict():
-    import pathlib, uuid, mimetypes, urllib, base64, decimal, jsonschema, html, hashlib, typing, string
+    import pathlib, uuid, mimetypes, urllib, base64, decimal, jsonschema, html, hashlib, typing, string, datetime
 
     def safe_json_dumps(j, indent=None, default=None):
         if indent:
@@ -156,6 +155,14 @@ def get_module_dict():
         return json.dumps(j, indent, default)
 
     return {
+        "datetime": {
+            "timedelta": datetime.timedelta,
+            "date": datetime.date,
+            "time": datetime.time,
+            "datetime": datetime.datetime,
+            "tzinfo": datetime.tzinfo,
+            "timezone": datetime.timezone,
+        },
         "pathlib": {"PurePath": pathlib.PurePath},
         "uuid": {"uuid4": uuid.uuid4},
         "mimetypes": {"guess_type": mimetypes.guess_type},
@@ -221,88 +228,89 @@ def eval_script(
     nodes_called = 0
     cumsize = 0
     block_info = json.loads(block_info)
-    with io.StringIO() as buf, redirect_stdout(buf):
-        try:
-            url = f"http://localhost:{port}/rpc"
+    with freeze_time(block_info['time']):
+        with io.StringIO() as buf, redirect_stdout(buf):
+            try:
+                url = f"http://localhost:{port}/rpc"
 
-            result = None
-            exception = None
-            scope = {
-                "print": lambda *x: print(*x),
-            }
-
-            def rpc(method, **params):
-                # Example echo method
-                method = "".join((filter(str.isalnum, method))).capitalize()
-
-                def snake(name):
-                    return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
-
-                params = {snake(k): v for k, v in params.items()}
-                payload = {
-                    "method": f"RpcService.{method}",
-                    "params": [params],
-                    "jsonrpc": "2.0",
-                    "id": 0,
+                result = None
+                exception = None
+                scope = {
+                    "print": lambda *x: print(*x),
                 }
-                res = requests.post(url, json=payload)
-                # print(f"rpc {method}: {res.status_code} response from golang: {res.text}")
-                try:
-                    ret_json = res.json()
-                    return ret_json
-                except json.JSONDecodeError:
-                    return {"exception": res.text}
 
-            sandbox = DysonEval(
-                scope=scope,
-            )
+                def rpc(method, **params):
+                    # Example echo method
+                    method = "".join((filter(str.isalnum, method))).capitalize()
 
-            sandbox.consume_gas_func = lambda amount: rpc("ConsumeGas", amount=amount)
+                    def snake(name):
+                        return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
 
-            def get_gas_consumed():
-                return sandbox.gas_consumed
+                    params = {snake(k): v for k, v in params.items()}
+                    payload = {
+                        "method": f"RpcService.{method}",
+                        "params": [params],
+                        "jsonrpc": "2.0",
+                        "id": 0,
+                    }
+                    res = requests.post(url, json=payload)
+                    # print(f"rpc {method}: {res.status_code} response from golang: {res.text}")
+                    try:
+                        ret_json = res.json()
+                        return ret_json
+                    except json.JSONDecodeError:
+                        return {"exception": res.text}
 
-            def get_gas_limit():
-                return sandbox.gas_limit
-
-            module_dict = get_module_dict()
-            module_dict["dys"] = {
-                "rpc": rpc,
-                "SCRIPT_ADDRESS": address,
-                "CALLER": creator,
-                "AMOUNT": amount,
-                "BLOCK_INFO": block_info,
-                "get_gas_consumed": get_gas_consumed,
-                "get_gas_limit": get_gas_limit,
-            }
-
-            sandbox.modules = dyslang.make_modules(module_dict)
-            result = (
-                sandbox.eval(
-                    code + "\n" + extra_line,
+                sandbox = DysonEval(
+                    scope=scope,
                 )
-                or [None]
-            )[-1]
-            if funcname:
-                if funcname in scope:
-                    args = json.loads(json_args or "[]")
-                    # print("args", args)
-                    kwargs = json.loads(json_kwargs or "{}")
-                    # print("kwargs", kwargs)
-                    result = scope[funcname](*args, **kwargs)
-                else:
-                    raise Exception(f"function not defined: {funcname}")
-        except dyslang.DysRuntimeError as e:
-            exception = e
-            print("ERR:", repr(e.__context__))
-        except Exception as e:
-            exception = e
-            print("ERROR: ", e)
-        finally:
-            if sandbox is not None:
-                nodes_called = sandbox.nodes_called
-                cumsize = sandbox.cumsize
-            stdout = buf.getvalue()[-1000:]
+
+                sandbox.consume_gas_func = lambda amount: rpc("ConsumeGas", amount=amount)
+
+                def get_gas_consumed():
+                    return sandbox.gas_consumed
+
+                def get_gas_limit():
+                    return sandbox.gas_limit
+
+                module_dict = get_module_dict()
+                module_dict["dys"] = {
+                    "rpc": rpc,
+                    "SCRIPT_ADDRESS": address,
+                    "CALLER": creator,
+                    "AMOUNT": amount,
+                    "BLOCK_INFO": block_info,
+                    "get_gas_consumed": get_gas_consumed,
+                    "get_gas_limit": get_gas_limit,
+                }
+
+                sandbox.modules = dyslang.make_modules(module_dict)
+                result = (
+                    sandbox.eval(
+                        code + "\n" + extra_line,
+                    )
+                    or [None]
+                )[-1]
+                if funcname:
+                    if funcname in scope:
+                        args = json.loads(json_args or "[]")
+                        # print("args", args)
+                        kwargs = json.loads(json_kwargs or "{}")
+                        # print("kwargs", kwargs)
+                        result = scope[funcname](*args, **kwargs)
+                    else:
+                        raise Exception(f"function not defined: {funcname}")
+            except dyslang.DysRuntimeError as e:
+                exception = e
+                print("ERR:", repr(e.__context__))
+            except Exception as e:
+                exception = e
+                print("ERROR: ", e)
+            finally:
+                if sandbox is not None:
+                    nodes_called = sandbox.nodes_called
+                    cumsize = sandbox.cumsize
+                stdout = buf.getvalue()[-1000:]
 
     if exception is not None:
         exception = {
