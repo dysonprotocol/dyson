@@ -61,6 +61,7 @@ dyslang.ALLOWED_BUILTINS = [
     "match",  # re2.match
     "search",  # re2.search
     "split",  # re2.split
+    "FakeDatetime.isoformat",
 ]
 
 
