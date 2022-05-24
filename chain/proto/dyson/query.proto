@@ -19,7 +19,7 @@ service Query {
 
 		// Queries a schedualedRun by index.
 		rpc SchedualedRun(QueryGetSchedualedRunRequest) returns (QueryGetSchedualedRunResponse) {
-				option (google.api.http).get = "/org/dyson/dyson/schedualedRun/{index}";
+				option (google.api.http).get = "/org/dyson/dyson/schedualedRun";
 		}
 
 		// Queries a list of schedualedRun items.
@@ -29,7 +29,7 @@ service Query {
 
 		// Queries a storage by index.
 		rpc Storage(QueryGetStorageRequest) returns (QueryGetStorageResponse) {
-				option (google.api.http).get = "/dyson/storage/{index}";
+				option (google.api.http).get = "/dyson/storage";
 		}
 
 		// Queries a list of storage items.
@@ -40,16 +40,16 @@ service Query {
 
 		// Queries a script by index.
 		rpc Script(QueryGetScriptRequest) returns (QueryGetScriptResponse) {
-				option (google.api.http).get = "/dyson/script/{index}";
+				option (google.api.http).get = "/dyson/script";
 		}
 		// Queries a script schema by index.
 		rpc Schema(QueryGetSchemaRequest) returns (QueryGetSchemaResponse) {
-				option (google.api.http).get = "/dyson/schema/{index}";
+				option (google.api.http).get = "/dyson/schema";
 		}
 
 		// Queries a script wsgi app by index.
 		rpc Wsgi(QueryWsgiRequest) returns (QueryWsgiResponse) {
-				option (google.api.http).get = "/dyson/wsgi/{index}";
+				option (google.api.http).get = "/dyson/wsgi";
 		}
 
 		// Queries a script by index.
