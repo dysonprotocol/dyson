@@ -157,24 +157,10 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QuerySchema
          * @summary Queries a script schema by index.
-         * @request GET:/dyson/schema/{index}
+         * @request GET:/dyson/schema
          */
-        this.querySchema = (index, params = {}) => this.request({
-            path: `/dyson/schema/${index}`,
-            method: "GET",
-            format: "json",
-            ...params,
-        });
-        /**
-         * No description
-         *
-         * @tags Query
-         * @name QueryScriptAll
-         * @summary Queries a list of script items.
-         * @request GET:/dyson/script
-         */
-        this.queryScriptAll = (query, params = {}) => this.request({
-            path: `/dyson/script`,
+        this.querySchema = (query, params = {}) => this.request({
+            path: `/dyson/schema`,
             method: "GET",
             query: query,
             format: "json",
@@ -186,11 +172,12 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QueryScript
          * @summary Queries a script by index.
-         * @request GET:/dyson/script/{index}
+         * @request GET:/dyson/script
          */
-        this.queryScript = (index, params = {}) => this.request({
-            path: `/dyson/script/${index}`,
+        this.queryScript = (query, params = {}) => this.request({
+            path: `/dyson/script`,
             method: "GET",
+            query: query,
             format: "json",
             ...params,
         });
@@ -198,12 +185,12 @@ export class Api extends HttpClient {
          * No description
          *
          * @tags Query
-         * @name QueryStorageAll
-         * @summary Queries a list of storage items.
-         * @request GET:/dyson/storage
+         * @name QueryScriptAll
+         * @summary Queries a list of script items.
+         * @request GET:/dyson/scriptiAll
          */
-        this.queryStorageAll = (query, params = {}) => this.request({
-            path: `/dyson/storage`,
+        this.queryScriptAll = (query, params = {}) => this.request({
+            path: `/dyson/scriptiAll`,
             method: "GET",
             query: query,
             format: "json",
@@ -215,11 +202,27 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QueryStorage
          * @summary Queries a storage by index.
-         * @request GET:/dyson/storage/{index}
+         * @request GET:/dyson/storage
          */
-        this.queryStorage = (index, params = {}) => this.request({
-            path: `/dyson/storage/${index}`,
+        this.queryStorage = (query, params = {}) => this.request({
+            path: `/dyson/storage`,
             method: "GET",
+            query: query,
+            format: "json",
+            ...params,
+        });
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QueryStorageAll
+         * @summary Queries a list of storage items.
+         * @request GET:/dyson/storageAll
+         */
+        this.queryStorageAll = (query, params = {}) => this.request({
+            path: `/dyson/storageAll`,
+            method: "GET",
+            query: query,
             format: "json",
             ...params,
         });
@@ -243,25 +246,10 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QueryWsgi
          * @summary Queries a script wsgi app by index.
-         * @request GET:/dyson/wsgi/{index}
+         * @request GET:/dyson/wsgi
          */
-        this.queryWsgi = (index, query, params = {}) => this.request({
-            path: `/dyson/wsgi/${index}`,
-            method: "GET",
-            query: query,
-            format: "json",
-            ...params,
-        });
-        /**
-         * No description
-         *
-         * @tags Query
-         * @name QuerySchedualedRunAll
-         * @summary Queries a list of schedualedRun items.
-         * @request GET:/org/dyson/dyson/schedualedRun
-         */
-        this.querySchedualedRunAll = (query, params = {}) => this.request({
-            path: `/org/dyson/dyson/schedualedRun`,
+        this.queryWsgi = (query, params = {}) => this.request({
+            path: `/dyson/wsgi`,
             method: "GET",
             query: query,
             format: "json",
@@ -273,11 +261,27 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QuerySchedualedRun
          * @summary Queries a schedualedRun by index.
-         * @request GET:/org/dyson/dyson/schedualedRun/{index}
+         * @request GET:/org/dyson/dyson/schedualedRun
          */
-        this.querySchedualedRun = (index, params = {}) => this.request({
-            path: `/org/dyson/dyson/schedualedRun/${index}`,
+        this.querySchedualedRun = (query, params = {}) => this.request({
+            path: `/org/dyson/dyson/schedualedRun`,
             method: "GET",
+            query: query,
+            format: "json",
+            ...params,
+        });
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QuerySchedualedRunAll
+         * @summary Queries a list of schedualedRun items.
+         * @request GET:/org/dyson/dyson/schedualedRunAll
+         */
+        this.querySchedualedRunAll = (query, params = {}) => this.request({
+            path: `/org/dyson/dyson/schedualedRunAll`,
+            method: "GET",
+            query: query,
             format: "json",
             ...params,
         });

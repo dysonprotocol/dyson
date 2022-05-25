@@ -284,10 +284,8 @@
 						"ReturnsType": "QueryGetSchedualedRunResponse",
 						"HTTPRules": [
 							{
-								"Params": [
-									"index"
-								],
-								"HasQuery": false,
+								"Params": null,
+								"HasQuery": true,
 								"HasBody": false
 							}
 						]
@@ -310,10 +308,8 @@
 						"ReturnsType": "QueryGetStorageResponse",
 						"HTTPRules": [
 							{
-								"Params": [
-									"index"
-								],
-								"HasQuery": false,
+								"Params": null,
+								"HasQuery": true,
 								"HasBody": false
 							}
 						]
@@ -336,10 +332,8 @@
 						"ReturnsType": "QueryGetScriptResponse",
 						"HTTPRules": [
 							{
-								"Params": [
-									"index"
-								],
-								"HasQuery": false,
+								"Params": null,
+								"HasQuery": true,
 								"HasBody": false
 							}
 						]
@@ -350,10 +344,8 @@
 						"ReturnsType": "QueryGetSchemaResponse",
 						"HTTPRules": [
 							{
-								"Params": [
-									"index"
-								],
-								"HasQuery": false,
+								"Params": null,
+								"HasQuery": true,
 								"HasBody": false
 							}
 						]
@@ -364,9 +356,7 @@
 						"ReturnsType": "QueryWsgiResponse",
 						"HTTPRules": [
 							{
-								"Params": [
-									"index"
-								],
+								"Params": null,
 								"HasQuery": true,
 								"HasBody": false
 							}
@@ -467,23 +457,13 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgDeleteStorage",
-			"URI": "dyson.MsgDeleteStorage",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
 			"Name": "MsgRun",
 			"URI": "dyson.MsgRun",
 			"FilePath": "/go/src/app/proto/dyson/msgrun.proto"
 		},
 		{
-			"Name": "MsgDeleteScript",
-			"URI": "dyson.MsgDeleteScript",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateScript",
-			"URI": "dyson.MsgUpdateScript",
+			"Name": "MsgCreateStorage",
+			"URI": "dyson.MsgCreateStorage",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
@@ -492,8 +472,18 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
+			"Name": "MsgCreateSchedualedRun",
+			"URI": "dyson.MsgCreateSchedualedRun",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
 			"Name": "MsgUpdateStorage",
 			"URI": "dyson.MsgUpdateStorage",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgDeleteStorage",
+			"URI": "dyson.MsgDeleteStorage",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
@@ -507,13 +497,13 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgCreateSchedualedRun",
-			"URI": "dyson.MsgCreateSchedualedRun",
+			"Name": "MsgUpdateScript",
+			"URI": "dyson.MsgUpdateScript",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgCreateStorage",
-			"URI": "dyson.MsgCreateStorage",
+			"Name": "MsgDeleteScript",
+			"URI": "dyson.MsgDeleteScript",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		}
 	],
@@ -523,10 +513,8 @@
 			"FullName": "QuerySchedualedRun",
 			"Rules": [
 				{
-					"Params": [
-						"index"
-					],
-					"HasQuery": false,
+					"Params": null,
+					"HasQuery": true,
 					"HasBody": false
 				}
 			]
@@ -547,10 +535,8 @@
 			"FullName": "QueryStorage",
 			"Rules": [
 				{
-					"Params": [
-						"index"
-					],
-					"HasQuery": false,
+					"Params": null,
+					"HasQuery": true,
 					"HasBody": false
 				}
 			]
@@ -571,10 +557,8 @@
 			"FullName": "QueryScript",
 			"Rules": [
 				{
-					"Params": [
-						"index"
-					],
-					"HasQuery": false,
+					"Params": null,
+					"HasQuery": true,
 					"HasBody": false
 				}
 			]
@@ -584,10 +568,8 @@
 			"FullName": "QuerySchema",
 			"Rules": [
 				{
-					"Params": [
-						"index"
-					],
-					"HasQuery": false,
+					"Params": null,
+					"HasQuery": true,
 					"HasBody": false
 				}
 			]
@@ -597,9 +579,7 @@
 			"FullName": "QueryWsgi",
 			"Rules": [
 				{
-					"Params": [
-						"index"
-					],
+					"Params": null,
 					"HasQuery": true,
 					"HasBody": false
 				}

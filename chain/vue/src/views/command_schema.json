@@ -15,7 +15,7 @@
             "grantee": {
               "type": "string"
             },
-            "msgTypeUrl": {
+            "msg_type_url": {
               "type": "string",
               "description": "Optional, msg_type_url, when set, will query only grants matching given msg type."
             },
@@ -46,7 +46,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -90,7 +90,7 @@
           "properties": {
             "authorization": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -116,7 +116,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -172,7 +172,7 @@
           "properties": {
             "authorization": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -228,7 +228,7 @@
             "msgs": {
               "items": {
                 "properties": {
-                  "typeUrl": {
+                  "type_url": {
                     "type": "string",
                     "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                   },
@@ -295,7 +295,7 @@
             "grantee": {
               "type": "string"
             },
-            "msgTypeUrl": {
+            "msg_type_url": {
               "type": "string"
             }
           },
@@ -431,7 +431,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -473,7 +473,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -552,7 +552,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -594,7 +594,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -733,13 +733,13 @@
         },
         "cosmos.bank.v1beta1.Params": {
           "properties": {
-            "sendEnabled": {
+            "send_enabled": {
               "items": {
                 "$ref": "#/definitions/cosmos.bank.v1beta1.SendEnabled"
               },
               "type": "array"
             },
-            "defaultSendEnabled": {
+            "default_send_enabled": {
               "type": "boolean"
             }
           },
@@ -839,7 +839,7 @@
             "description": {
               "type": "string"
             },
-            "denomUnits": {
+            "denom_units": {
               "items": {
                 "$ref": "#/definitions/cosmos.bank.v1beta1.DenomUnit"
               },
@@ -917,7 +917,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -985,7 +985,7 @@
             "description": {
               "type": "string"
             },
-            "denomUnits": {
+            "denom_units": {
               "items": {
                 "$ref": "#/definitions/cosmos.bank.v1beta1.DenomUnit"
               },
@@ -1016,7 +1016,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -1052,10 +1052,10 @@
       "definitions": {
         "MsgSend": {
           "properties": {
-            "fromAddress": {
+            "from_address": {
               "type": "string"
             },
-            "toAddress": {
+            "to_address": {
               "type": "string"
             },
             "amount": {
@@ -1227,16 +1227,16 @@
         },
         "cosmos.distribution.v1beta1.Params": {
           "properties": {
-            "communityTax": {
+            "community_tax": {
               "type": "string"
             },
-            "baseProposerReward": {
+            "base_proposer_reward": {
               "type": "string"
             },
-            "bonusProposerReward": {
+            "bonus_proposer_reward": {
               "type": "string"
             },
-            "withdrawAddrEnabled": {
+            "withdraw_addr_enabled": {
               "type": "boolean"
             }
           },
@@ -1265,7 +1265,7 @@
       "definitions": {
         "QueryValidatorOutstandingRewardsRequest": {
           "properties": {
-            "validatorAddress": {
+            "validator_address": {
               "type": "string",
               "description": "validator_address defines the validator address to query for."
             }
@@ -1343,7 +1343,7 @@
       "definitions": {
         "QueryValidatorCommissionRequest": {
           "properties": {
-            "validatorAddress": {
+            "validator_address": {
               "type": "string",
               "description": "validator_address defines the validator address to query for."
             }
@@ -1422,15 +1422,15 @@
       "definitions": {
         "QueryValidatorSlashesRequest": {
           "properties": {
-            "validatorAddress": {
+            "validator_address": {
               "type": "string",
               "description": "validator_address defines the validator address to query for."
             },
-            "startingHeight": {
+            "starting_height": {
               "type": "string",
               "description": "starting_height defines the optional starting height to query the slashes."
             },
-            "endingHeight": {
+            "ending_height": {
               "type": "string",
               "description": "starting_height defines the optional ending height to query the slashes."
             },
@@ -1461,7 +1461,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -1503,7 +1503,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -1521,7 +1521,7 @@
         },
         "cosmos.distribution.v1beta1.ValidatorSlashEvent": {
           "properties": {
-            "validatorPeriod": {
+            "validator_period": {
               "type": "string"
             },
             "fraction": {
@@ -1555,11 +1555,11 @@
       "definitions": {
         "QueryDelegationRewardsRequest": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string",
               "description": "delegator_address defines the delegator address to query for."
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string",
               "description": "validator_address defines the validator address to query for."
             }
@@ -1627,7 +1627,7 @@
       "definitions": {
         "QueryDelegationTotalRewardsRequest": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string",
               "description": "delegator_address defines the delegator address to query for."
             }
@@ -1681,7 +1681,7 @@
         },
         "cosmos.distribution.v1beta1.DelegationDelegatorReward": {
           "properties": {
-            "validatorAddress": {
+            "validator_address": {
               "type": "string"
             },
             "reward": {
@@ -1718,7 +1718,7 @@
       "definitions": {
         "QueryDelegatorValidatorsRequest": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string",
               "description": "delegator_address defines the delegator address to query for."
             }
@@ -1771,7 +1771,7 @@
       "definitions": {
         "QueryDelegatorWithdrawAddressRequest": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string",
               "description": "delegator_address defines the delegator address to query for."
             }
@@ -1789,7 +1789,7 @@
       "definitions": {
         "QueryDelegatorWithdrawAddressResponse": {
           "properties": {
-            "withdrawAddress": {
+            "withdraw_address": {
               "type": "string",
               "description": "withdraw_address defines the delegator address to query for."
             }
@@ -1880,10 +1880,10 @@
       "definitions": {
         "MsgSetWithdrawAddress": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string"
             },
-            "withdrawAddress": {
+            "withdraw_address": {
               "type": "string"
             }
           },
@@ -1918,10 +1918,10 @@
       "definitions": {
         "MsgWithdrawDelegatorReward": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string"
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string"
             }
           },
@@ -1956,7 +1956,7 @@
       "definitions": {
         "MsgWithdrawValidatorCommission": {
           "properties": {
-            "validatorAddress": {
+            "validator_address": {
               "type": "string"
             }
           },
@@ -2046,7 +2046,7 @@
       "definitions": {
         "QueryEvidenceRequest": {
           "properties": {
-            "evidenceHash": {
+            "evidence_hash": {
               "type": "string",
               "description": "evidence_hash defines the hash of the requested evidence.",
               "format": "binary",
@@ -2068,7 +2068,7 @@
           "properties": {
             "evidence": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -2138,7 +2138,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -2163,7 +2163,7 @@
             "evidence": {
               "items": {
                 "properties": {
-                  "typeUrl": {
+                  "type_url": {
                     "type": "string",
                     "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                   },
@@ -2195,7 +2195,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -2236,7 +2236,7 @@
             },
             "evidence": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -2335,7 +2335,7 @@
             },
             "allowance": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -2409,7 +2409,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -2451,7 +2451,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -2479,7 +2479,7 @@
             },
             "allowance": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -2532,7 +2532,7 @@
             },
             "allowance": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -2619,7 +2619,7 @@
       "definitions": {
         "QueryProposalRequest": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string",
               "description": "proposal_id defines the unique id of the proposal."
             }
@@ -2663,12 +2663,12 @@
         },
         "cosmos.gov.v1beta1.Proposal": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string"
             },
             "content": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -2708,29 +2708,29 @@
               "title": "Proposal Status",
               "description": "ProposalStatus enumerates the valid statuses of a proposal."
             },
-            "finalTallyResult": {
+            "final_tally_result": {
               "$ref": "#/definitions/cosmos.gov.v1beta1.TallyResult",
               "additionalProperties": true
             },
-            "submitTime": {
+            "submit_time": {
               "type": "string",
               "format": "date-time"
             },
-            "depositEndTime": {
+            "deposit_end_time": {
               "type": "string",
               "format": "date-time"
             },
-            "totalDeposit": {
+            "total_deposit": {
               "items": {
                 "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
               },
               "type": "array"
             },
-            "votingStartTime": {
+            "voting_start_time": {
               "type": "string",
               "format": "date-time"
             },
-            "votingEndTime": {
+            "voting_end_time": {
               "type": "string",
               "format": "date-time"
             }
@@ -2751,7 +2751,7 @@
             "no": {
               "type": "string"
             },
-            "noWithVeto": {
+            "no_with_veto": {
               "type": "string"
             }
           },
@@ -2782,7 +2782,7 @@
       "definitions": {
         "QueryProposalsRequest": {
           "properties": {
-            "proposalStatus": {
+            "proposal_status": {
               "enum": [
                 "PROPOSAL_STATUS_UNSPECIFIED",
                 0,
@@ -2843,7 +2843,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -2884,7 +2884,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -2916,12 +2916,12 @@
         },
         "cosmos.gov.v1beta1.Proposal": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string"
             },
             "content": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -2961,29 +2961,29 @@
               "title": "Proposal Status",
               "description": "ProposalStatus enumerates the valid statuses of a proposal."
             },
-            "finalTallyResult": {
+            "final_tally_result": {
               "$ref": "#/definitions/cosmos.gov.v1beta1.TallyResult",
               "additionalProperties": true
             },
-            "submitTime": {
+            "submit_time": {
               "type": "string",
               "format": "date-time"
             },
-            "depositEndTime": {
+            "deposit_end_time": {
               "type": "string",
               "format": "date-time"
             },
-            "totalDeposit": {
+            "total_deposit": {
               "items": {
                 "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
               },
               "type": "array"
             },
-            "votingStartTime": {
+            "voting_start_time": {
               "type": "string",
               "format": "date-time"
             },
-            "votingEndTime": {
+            "voting_end_time": {
               "type": "string",
               "format": "date-time"
             }
@@ -3004,7 +3004,7 @@
             "no": {
               "type": "string"
             },
-            "noWithVeto": {
+            "no_with_veto": {
               "type": "string"
             }
           },
@@ -3033,7 +3033,7 @@
       "definitions": {
         "QueryVoteRequest": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string",
               "description": "proposal_id defines the unique id of the proposal."
             },
@@ -3068,7 +3068,7 @@
         },
         "cosmos.gov.v1beta1.Vote": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string"
             },
             "voter": {
@@ -3168,7 +3168,7 @@
       "definitions": {
         "QueryVotesRequest": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string",
               "description": "proposal_id defines the unique id of the proposal."
             },
@@ -3199,7 +3199,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -3241,7 +3241,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -3259,7 +3259,7 @@
         },
         "cosmos.gov.v1beta1.Vote": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string"
             },
             "voter": {
@@ -3358,7 +3358,7 @@
       "definitions": {
         "QueryParamsRequest": {
           "properties": {
-            "paramsType": {
+            "params_type": {
               "type": "string",
               "description": "params_type defines which parameters to query for, can be one of \"voting\", \"tallying\" or \"deposit\"."
             }
@@ -3376,17 +3376,17 @@
       "definitions": {
         "QueryParamsResponse": {
           "properties": {
-            "votingParams": {
+            "voting_params": {
               "$ref": "#/definitions/cosmos.gov.v1beta1.VotingParams",
               "additionalProperties": true,
               "description": "voting_params defines the parameters related to voting."
             },
-            "depositParams": {
+            "deposit_params": {
               "$ref": "#/definitions/cosmos.gov.v1beta1.DepositParams",
               "additionalProperties": true,
               "description": "deposit_params defines the parameters related to deposit."
             },
-            "tallyParams": {
+            "tally_params": {
               "$ref": "#/definitions/cosmos.gov.v1beta1.TallyParams",
               "additionalProperties": true,
               "description": "tally_params defines the parameters related to tally."
@@ -3413,14 +3413,14 @@
         },
         "cosmos.gov.v1beta1.DepositParams": {
           "properties": {
-            "minDeposit": {
+            "min_deposit": {
               "items": {
                 "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
               },
               "type": "array",
               "description": "Minimum deposit for a proposal to enter voting period."
             },
-            "maxDepositPeriod": {
+            "max_deposit_period": {
               "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
               "type": "string",
               "description": "Maximum period for Atom holders to deposit on a proposal. Initial value: 2  months.",
@@ -3446,7 +3446,7 @@
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "vetoThreshold": {
+            "veto_threshold": {
               "type": "string",
               "description": "Minimum value of Veto votes to Total votes ratio for proposal to be  vetoed. Default value: 1/3.",
               "format": "binary",
@@ -3460,7 +3460,7 @@
         },
         "cosmos.gov.v1beta1.VotingParams": {
           "properties": {
-            "votingPeriod": {
+            "voting_period": {
               "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
               "type": "string",
               "description": "Length of the voting period.",
@@ -3494,7 +3494,7 @@
       "definitions": {
         "QueryDepositRequest": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string",
               "description": "proposal_id defines the unique id of the proposal."
             },
@@ -3543,7 +3543,7 @@
         },
         "cosmos.gov.v1beta1.Deposit": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string"
             },
             "depositor": {
@@ -3584,7 +3584,7 @@
       "definitions": {
         "QueryDepositsRequest": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string",
               "description": "proposal_id defines the unique id of the proposal."
             },
@@ -3615,7 +3615,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -3656,7 +3656,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -3688,7 +3688,7 @@
         },
         "cosmos.gov.v1beta1.Deposit": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string"
             },
             "depositor": {
@@ -3728,7 +3728,7 @@
       "definitions": {
         "QueryTallyResultRequest": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string",
               "description": "proposal_id defines the unique id of the proposal."
             }
@@ -3768,7 +3768,7 @@
             "no": {
               "type": "string"
             },
-            "noWithVeto": {
+            "no_with_veto": {
               "type": "string"
             }
           },
@@ -3801,7 +3801,7 @@
           "properties": {
             "content": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -3815,7 +3815,7 @@
               "additionalProperties": true,
               "type": "object"
             },
-            "initialDeposit": {
+            "initial_deposit": {
               "items": {
                 "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
               },
@@ -3852,7 +3852,7 @@
       "definitions": {
         "MsgSubmitProposalResponse": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string"
             }
           },
@@ -3875,7 +3875,7 @@
       "definitions": {
         "MsgVote": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string"
             },
             "voter": {
@@ -3937,7 +3937,7 @@
       "definitions": {
         "MsgVoteWeighted": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string"
             },
             "voter": {
@@ -4016,7 +4016,7 @@
       "definitions": {
         "MsgDeposit": {
           "properties": {
-            "proposalId": {
+            "proposal_id": {
               "type": "string"
             },
             "depositor": {
@@ -4098,25 +4098,25 @@
         },
         "cosmos.slashing.v1beta1.Params": {
           "properties": {
-            "signedBlocksWindow": {
+            "signed_blocks_window": {
               "type": "string"
             },
-            "minSignedPerWindow": {
+            "min_signed_per_window": {
               "type": "string",
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "downtimeJailDuration": {
+            "downtime_jail_duration": {
               "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
               "type": "string",
               "format": "regex"
             },
-            "slashFractionDoubleSign": {
+            "slash_fraction_double_sign": {
               "type": "string",
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "slashFractionDowntime": {
+            "slash_fraction_downtime": {
               "type": "string",
               "format": "binary",
               "binaryEncoding": "base64"
@@ -4147,7 +4147,7 @@
       "definitions": {
         "QuerySigningInfoRequest": {
           "properties": {
-            "consAddress": {
+            "cons_address": {
               "type": "string",
               "description": "cons_address is the address to query signing info of"
             }
@@ -4165,7 +4165,7 @@
       "definitions": {
         "QuerySigningInfoResponse": {
           "properties": {
-            "valSigningInfo": {
+            "val_signing_info": {
               "$ref": "#/definitions/cosmos.slashing.v1beta1.ValidatorSigningInfo",
               "additionalProperties": true,
               "description": "val_signing_info is the signing info of requested val cons address"
@@ -4181,15 +4181,15 @@
             "address": {
               "type": "string"
             },
-            "startHeight": {
+            "start_height": {
               "type": "string",
               "description": "Height at which validator was first a candidate OR was unjailed"
             },
-            "indexOffset": {
+            "index_offset": {
               "type": "string",
               "description": "Index which is incremented each time the validator was a bonded in a block and may have signed a precommit or not. This in conjunction with the `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`."
             },
-            "jailedUntil": {
+            "jailed_until": {
               "type": "string",
               "description": "Timestamp until which the validator is jailed due to liveness downtime.",
               "format": "date-time"
@@ -4198,7 +4198,7 @@
               "type": "boolean",
               "description": "Whether or not a validator has been tombstoned (killed out of validator set). It is set once the validator commits an equivocation or for any other configured misbehiavor."
             },
-            "missedBlocksCounter": {
+            "missed_blocks_counter": {
               "type": "string",
               "description": "A counter kept to avoid unnecessary array reads. Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`."
             }
@@ -4256,7 +4256,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -4297,7 +4297,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -4318,15 +4318,15 @@
             "address": {
               "type": "string"
             },
-            "startHeight": {
+            "start_height": {
               "type": "string",
               "description": "Height at which validator was first a candidate OR was unjailed"
             },
-            "indexOffset": {
+            "index_offset": {
               "type": "string",
               "description": "Index which is incremented each time the validator was a bonded in a block and may have signed a precommit or not. This in conjunction with the `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`."
             },
-            "jailedUntil": {
+            "jailed_until": {
               "type": "string",
               "description": "Timestamp until which the validator is jailed due to liveness downtime.",
               "format": "date-time"
@@ -4335,7 +4335,7 @@
               "type": "boolean",
               "description": "Whether or not a validator has been tombstoned (killed out of validator set). It is set once the validator commits an equivocation or for any other configured misbehiavor."
             },
-            "missedBlocksCounter": {
+            "missed_blocks_counter": {
               "type": "string",
               "description": "A counter kept to avoid unnecessary array reads. Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`."
             }
@@ -4365,7 +4365,7 @@
       "definitions": {
         "MsgUnjail": {
           "properties": {
-            "validatorAddr": {
+            "validator_addr": {
               "type": "string"
             }
           },
@@ -4431,7 +4431,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -4473,7 +4473,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -4491,12 +4491,12 @@
         },
         "cosmos.staking.v1beta1.Commission": {
           "properties": {
-            "commissionRates": {
+            "commission_rates": {
               "$ref": "#/definitions/cosmos.staking.v1beta1.CommissionRates",
               "additionalProperties": true,
               "description": "commission_rates defines the initial commission rates to be used for creating a validator."
             },
-            "updateTime": {
+            "update_time": {
               "type": "string",
               "description": "update_time is the last time the commission rate was changed.",
               "format": "date-time"
@@ -4513,11 +4513,11 @@
               "type": "string",
               "description": "rate is the commission rate charged to delegators, as a fraction."
             },
-            "maxRate": {
+            "max_rate": {
               "type": "string",
               "description": "max_rate defines the maximum commission rate which validator can ever charge, as a fraction."
             },
-            "maxChangeRate": {
+            "max_change_rate": {
               "type": "string",
               "description": "max_change_rate defines the maximum daily increase of the validator commission, as a fraction."
             }
@@ -4541,7 +4541,7 @@
               "type": "string",
               "description": "website defines an optional website link."
             },
-            "securityContact": {
+            "security_contact": {
               "type": "string",
               "description": "security_contact defines an optional email for security contact."
             },
@@ -4557,13 +4557,13 @@
         },
         "cosmos.staking.v1beta1.Validator": {
           "properties": {
-            "operatorAddress": {
+            "operator_address": {
               "type": "string",
               "description": "operator_address defines the address of the validator's operator; bech encoded in JSON."
             },
-            "consensusPubkey": {
+            "consensus_pubkey": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -4608,7 +4608,7 @@
               "type": "string",
               "description": "tokens define the delegated tokens (incl. self-delegation)."
             },
-            "delegatorShares": {
+            "delegator_shares": {
               "type": "string",
               "description": "delegator_shares defines total shares issued to a validator's delegators."
             },
@@ -4617,11 +4617,11 @@
               "additionalProperties": true,
               "description": "description defines the description terms for the validator."
             },
-            "unbondingHeight": {
+            "unbonding_height": {
               "type": "string",
               "description": "unbonding_height defines, if unbonding, the height at which this validator has begun unbonding."
             },
-            "unbondingTime": {
+            "unbonding_time": {
               "type": "string",
               "description": "unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.",
               "format": "date-time"
@@ -4631,7 +4631,7 @@
               "additionalProperties": true,
               "description": "commission defines the commission parameters."
             },
-            "minSelfDelegation": {
+            "min_self_delegation": {
               "type": "string",
               "description": "min_self_delegation is the validator's self declared minimum self delegation."
             }
@@ -4661,7 +4661,7 @@
       "definitions": {
         "QueryValidatorRequest": {
           "properties": {
-            "validatorAddr": {
+            "validator_addr": {
               "type": "string",
               "description": "validator_addr defines the validator address to query for."
             }
@@ -4692,12 +4692,12 @@
         },
         "cosmos.staking.v1beta1.Commission": {
           "properties": {
-            "commissionRates": {
+            "commission_rates": {
               "$ref": "#/definitions/cosmos.staking.v1beta1.CommissionRates",
               "additionalProperties": true,
               "description": "commission_rates defines the initial commission rates to be used for creating a validator."
             },
-            "updateTime": {
+            "update_time": {
               "type": "string",
               "description": "update_time is the last time the commission rate was changed.",
               "format": "date-time"
@@ -4714,11 +4714,11 @@
               "type": "string",
               "description": "rate is the commission rate charged to delegators, as a fraction."
             },
-            "maxRate": {
+            "max_rate": {
               "type": "string",
               "description": "max_rate defines the maximum commission rate which validator can ever charge, as a fraction."
             },
-            "maxChangeRate": {
+            "max_change_rate": {
               "type": "string",
               "description": "max_change_rate defines the maximum daily increase of the validator commission, as a fraction."
             }
@@ -4742,7 +4742,7 @@
               "type": "string",
               "description": "website defines an optional website link."
             },
-            "securityContact": {
+            "security_contact": {
               "type": "string",
               "description": "security_contact defines an optional email for security contact."
             },
@@ -4758,13 +4758,13 @@
         },
         "cosmos.staking.v1beta1.Validator": {
           "properties": {
-            "operatorAddress": {
+            "operator_address": {
               "type": "string",
               "description": "operator_address defines the address of the validator's operator; bech encoded in JSON."
             },
-            "consensusPubkey": {
+            "consensus_pubkey": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -4809,7 +4809,7 @@
               "type": "string",
               "description": "tokens define the delegated tokens (incl. self-delegation)."
             },
-            "delegatorShares": {
+            "delegator_shares": {
               "type": "string",
               "description": "delegator_shares defines total shares issued to a validator's delegators."
             },
@@ -4818,11 +4818,11 @@
               "additionalProperties": true,
               "description": "description defines the description terms for the validator."
             },
-            "unbondingHeight": {
+            "unbonding_height": {
               "type": "string",
               "description": "unbonding_height defines, if unbonding, the height at which this validator has begun unbonding."
             },
-            "unbondingTime": {
+            "unbonding_time": {
               "type": "string",
               "description": "unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.",
               "format": "date-time"
@@ -4832,7 +4832,7 @@
               "additionalProperties": true,
               "description": "commission defines the commission parameters."
             },
-            "minSelfDelegation": {
+            "min_self_delegation": {
               "type": "string",
               "description": "min_self_delegation is the validator's self declared minimum self delegation."
             }
@@ -4864,7 +4864,7 @@
       "definitions": {
         "QueryValidatorDelegationsRequest": {
           "properties": {
-            "validatorAddr": {
+            "validator_addr": {
               "type": "string",
               "description": "validator_addr defines the validator address to query for."
             },
@@ -4895,7 +4895,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -4917,7 +4917,7 @@
       "definitions": {
         "QueryValidatorDelegationsResponse": {
           "properties": {
-            "delegationResponses": {
+            "delegation_responses": {
               "items": {
                 "$ref": "#/definitions/cosmos.staking.v1beta1.DelegationResponse"
               },
@@ -4936,7 +4936,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -4968,11 +4968,11 @@
         },
         "cosmos.staking.v1beta1.Delegation": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string",
               "description": "delegator_address is the bech32-encoded address of the delegator."
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string",
               "description": "validator_address is the bech32-encoded address of the validator."
             },
@@ -5024,7 +5024,7 @@
       "definitions": {
         "QueryValidatorUnbondingDelegationsRequest": {
           "properties": {
-            "validatorAddr": {
+            "validator_addr": {
               "type": "string",
               "description": "validator_addr defines the validator address to query for."
             },
@@ -5055,7 +5055,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -5077,7 +5077,7 @@
       "definitions": {
         "QueryValidatorUnbondingDelegationsResponse": {
           "properties": {
-            "unbondingResponses": {
+            "unbonding_responses": {
               "items": {
                 "$ref": "#/definitions/cosmos.staking.v1beta1.UnbondingDelegation"
               },
@@ -5096,7 +5096,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -5114,11 +5114,11 @@
         },
         "cosmos.staking.v1beta1.UnbondingDelegation": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string",
               "description": "delegator_address is the bech32-encoded address of the delegator."
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string",
               "description": "validator_address is the bech32-encoded address of the validator."
             },
@@ -5137,16 +5137,16 @@
         },
         "cosmos.staking.v1beta1.UnbondingDelegationEntry": {
           "properties": {
-            "creationHeight": {
+            "creation_height": {
               "type": "string",
               "description": "creation_height is the height which the unbonding took place."
             },
-            "completionTime": {
+            "completion_time": {
               "type": "string",
               "description": "completion_time is the unix time for unbonding completion.",
               "format": "date-time"
             },
-            "initialBalance": {
+            "initial_balance": {
               "type": "string",
               "description": "initial_balance defines the tokens initially scheduled to receive at completion."
             },
@@ -5182,11 +5182,11 @@
       "definitions": {
         "QueryDelegationRequest": {
           "properties": {
-            "delegatorAddr": {
+            "delegator_addr": {
               "type": "string",
               "description": "delegator_addr defines the delegator address to query for."
             },
-            "validatorAddr": {
+            "validator_addr": {
               "type": "string",
               "description": "validator_addr defines the validator address to query for."
             }
@@ -5204,7 +5204,7 @@
       "definitions": {
         "QueryDelegationResponse": {
           "properties": {
-            "delegationResponse": {
+            "delegation_response": {
               "$ref": "#/definitions/cosmos.staking.v1beta1.DelegationResponse",
               "additionalProperties": true,
               "description": "delegation_responses defines the delegation info of a delegation."
@@ -5231,11 +5231,11 @@
         },
         "cosmos.staking.v1beta1.Delegation": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string",
               "description": "delegator_address is the bech32-encoded address of the delegator."
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string",
               "description": "validator_address is the bech32-encoded address of the validator."
             },
@@ -5288,11 +5288,11 @@
       "definitions": {
         "QueryUnbondingDelegationRequest": {
           "properties": {
-            "delegatorAddr": {
+            "delegator_addr": {
               "type": "string",
               "description": "delegator_addr defines the delegator address to query for."
             },
-            "validatorAddr": {
+            "validator_addr": {
               "type": "string",
               "description": "validator_addr defines the validator address to query for."
             }
@@ -5323,11 +5323,11 @@
         },
         "cosmos.staking.v1beta1.UnbondingDelegation": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string",
               "description": "delegator_address is the bech32-encoded address of the delegator."
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string",
               "description": "validator_address is the bech32-encoded address of the validator."
             },
@@ -5346,16 +5346,16 @@
         },
         "cosmos.staking.v1beta1.UnbondingDelegationEntry": {
           "properties": {
-            "creationHeight": {
+            "creation_height": {
               "type": "string",
               "description": "creation_height is the height which the unbonding took place."
             },
-            "completionTime": {
+            "completion_time": {
               "type": "string",
               "description": "completion_time is the unix time for unbonding completion.",
               "format": "date-time"
             },
-            "initialBalance": {
+            "initial_balance": {
               "type": "string",
               "description": "initial_balance defines the tokens initially scheduled to receive at completion."
             },
@@ -5392,7 +5392,7 @@
       "definitions": {
         "QueryDelegatorDelegationsRequest": {
           "properties": {
-            "delegatorAddr": {
+            "delegator_addr": {
               "type": "string",
               "description": "delegator_addr defines the delegator address to query for."
             },
@@ -5423,7 +5423,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -5445,7 +5445,7 @@
       "definitions": {
         "QueryDelegatorDelegationsResponse": {
           "properties": {
-            "delegationResponses": {
+            "delegation_responses": {
               "items": {
                 "$ref": "#/definitions/cosmos.staking.v1beta1.DelegationResponse"
               },
@@ -5465,7 +5465,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -5497,11 +5497,11 @@
         },
         "cosmos.staking.v1beta1.Delegation": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string",
               "description": "delegator_address is the bech32-encoded address of the delegator."
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string",
               "description": "validator_address is the bech32-encoded address of the validator."
             },
@@ -5553,7 +5553,7 @@
       "definitions": {
         "QueryDelegatorUnbondingDelegationsRequest": {
           "properties": {
-            "delegatorAddr": {
+            "delegator_addr": {
               "type": "string",
               "description": "delegator_addr defines the delegator address to query for."
             },
@@ -5584,7 +5584,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -5606,7 +5606,7 @@
       "definitions": {
         "QueryDelegatorUnbondingDelegationsResponse": {
           "properties": {
-            "unbondingResponses": {
+            "unbonding_responses": {
               "items": {
                 "$ref": "#/definitions/cosmos.staking.v1beta1.UnbondingDelegation"
               },
@@ -5625,7 +5625,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -5643,11 +5643,11 @@
         },
         "cosmos.staking.v1beta1.UnbondingDelegation": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string",
               "description": "delegator_address is the bech32-encoded address of the delegator."
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string",
               "description": "validator_address is the bech32-encoded address of the validator."
             },
@@ -5666,16 +5666,16 @@
         },
         "cosmos.staking.v1beta1.UnbondingDelegationEntry": {
           "properties": {
-            "creationHeight": {
+            "creation_height": {
               "type": "string",
               "description": "creation_height is the height which the unbonding took place."
             },
-            "completionTime": {
+            "completion_time": {
               "type": "string",
               "description": "completion_time is the unix time for unbonding completion.",
               "format": "date-time"
             },
-            "initialBalance": {
+            "initial_balance": {
               "type": "string",
               "description": "initial_balance defines the tokens initially scheduled to receive at completion."
             },
@@ -5711,15 +5711,15 @@
       "definitions": {
         "QueryRedelegationsRequest": {
           "properties": {
-            "delegatorAddr": {
+            "delegator_addr": {
               "type": "string",
               "description": "delegator_addr defines the delegator address to query for."
             },
-            "srcValidatorAddr": {
+            "src_validator_addr": {
               "type": "string",
               "description": "src_validator_addr defines the validator address to redelegate from."
             },
-            "dstValidatorAddr": {
+            "dst_validator_addr": {
               "type": "string",
               "description": "dst_validator_addr defines the validator address to redelegate to."
             },
@@ -5750,7 +5750,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -5772,7 +5772,7 @@
       "definitions": {
         "QueryRedelegationsResponse": {
           "properties": {
-            "redelegationResponses": {
+            "redelegation_responses": {
               "items": {
                 "$ref": "#/definitions/cosmos.staking.v1beta1.RedelegationResponse"
               },
@@ -5791,7 +5791,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -5809,15 +5809,15 @@
         },
         "cosmos.staking.v1beta1.Redelegation": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string",
               "description": "delegator_address is the bech32-encoded address of the delegator."
             },
-            "validatorSrcAddress": {
+            "validator_src_address": {
               "type": "string",
               "description": "validator_src_address is the validator redelegation source operator address."
             },
-            "validatorDstAddress": {
+            "validator_dst_address": {
               "type": "string",
               "description": "validator_dst_address is the validator redelegation destination operator address."
             },
@@ -5836,20 +5836,20 @@
         },
         "cosmos.staking.v1beta1.RedelegationEntry": {
           "properties": {
-            "creationHeight": {
+            "creation_height": {
               "type": "string",
               "description": "creation_height  defines the height which the redelegation took place."
             },
-            "completionTime": {
+            "completion_time": {
               "type": "string",
               "description": "completion_time defines the unix time for redelegation completion.",
               "format": "date-time"
             },
-            "initialBalance": {
+            "initial_balance": {
               "type": "string",
               "description": "initial_balance defines the initial balance when redelegation started."
             },
-            "sharesDst": {
+            "shares_dst": {
               "type": "string",
               "description": "shares_dst is the amount of destination-validator shares created by redelegation."
             }
@@ -5861,7 +5861,7 @@
         },
         "cosmos.staking.v1beta1.RedelegationEntryResponse": {
           "properties": {
-            "redelegationEntry": {
+            "redelegation_entry": {
               "$ref": "#/definitions/cosmos.staking.v1beta1.RedelegationEntry",
               "additionalProperties": true
             },
@@ -5914,7 +5914,7 @@
       "definitions": {
         "QueryDelegatorValidatorsRequest": {
           "properties": {
-            "delegatorAddr": {
+            "delegator_addr": {
               "type": "string",
               "description": "delegator_addr defines the delegator address to query for."
             },
@@ -5945,7 +5945,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -5987,7 +5987,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -6005,12 +6005,12 @@
         },
         "cosmos.staking.v1beta1.Commission": {
           "properties": {
-            "commissionRates": {
+            "commission_rates": {
               "$ref": "#/definitions/cosmos.staking.v1beta1.CommissionRates",
               "additionalProperties": true,
               "description": "commission_rates defines the initial commission rates to be used for creating a validator."
             },
-            "updateTime": {
+            "update_time": {
               "type": "string",
               "description": "update_time is the last time the commission rate was changed.",
               "format": "date-time"
@@ -6027,11 +6027,11 @@
               "type": "string",
               "description": "rate is the commission rate charged to delegators, as a fraction."
             },
-            "maxRate": {
+            "max_rate": {
               "type": "string",
               "description": "max_rate defines the maximum commission rate which validator can ever charge, as a fraction."
             },
-            "maxChangeRate": {
+            "max_change_rate": {
               "type": "string",
               "description": "max_change_rate defines the maximum daily increase of the validator commission, as a fraction."
             }
@@ -6055,7 +6055,7 @@
               "type": "string",
               "description": "website defines an optional website link."
             },
-            "securityContact": {
+            "security_contact": {
               "type": "string",
               "description": "security_contact defines an optional email for security contact."
             },
@@ -6071,13 +6071,13 @@
         },
         "cosmos.staking.v1beta1.Validator": {
           "properties": {
-            "operatorAddress": {
+            "operator_address": {
               "type": "string",
               "description": "operator_address defines the address of the validator's operator; bech encoded in JSON."
             },
-            "consensusPubkey": {
+            "consensus_pubkey": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -6122,7 +6122,7 @@
               "type": "string",
               "description": "tokens define the delegated tokens (incl. self-delegation)."
             },
-            "delegatorShares": {
+            "delegator_shares": {
               "type": "string",
               "description": "delegator_shares defines total shares issued to a validator's delegators."
             },
@@ -6131,11 +6131,11 @@
               "additionalProperties": true,
               "description": "description defines the description terms for the validator."
             },
-            "unbondingHeight": {
+            "unbonding_height": {
               "type": "string",
               "description": "unbonding_height defines, if unbonding, the height at which this validator has begun unbonding."
             },
-            "unbondingTime": {
+            "unbonding_time": {
               "type": "string",
               "description": "unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.",
               "format": "date-time"
@@ -6145,7 +6145,7 @@
               "additionalProperties": true,
               "description": "commission defines the commission parameters."
             },
-            "minSelfDelegation": {
+            "min_self_delegation": {
               "type": "string",
               "description": "min_self_delegation is the validator's self declared minimum self delegation."
             }
@@ -6177,11 +6177,11 @@
       "definitions": {
         "QueryDelegatorValidatorRequest": {
           "properties": {
-            "delegatorAddr": {
+            "delegator_addr": {
               "type": "string",
               "description": "delegator_addr defines the delegator address to query for."
             },
-            "validatorAddr": {
+            "validator_addr": {
               "type": "string",
               "description": "validator_addr defines the validator address to query for."
             }
@@ -6212,12 +6212,12 @@
         },
         "cosmos.staking.v1beta1.Commission": {
           "properties": {
-            "commissionRates": {
+            "commission_rates": {
               "$ref": "#/definitions/cosmos.staking.v1beta1.CommissionRates",
               "additionalProperties": true,
               "description": "commission_rates defines the initial commission rates to be used for creating a validator."
             },
-            "updateTime": {
+            "update_time": {
               "type": "string",
               "description": "update_time is the last time the commission rate was changed.",
               "format": "date-time"
@@ -6234,11 +6234,11 @@
               "type": "string",
               "description": "rate is the commission rate charged to delegators, as a fraction."
             },
-            "maxRate": {
+            "max_rate": {
               "type": "string",
               "description": "max_rate defines the maximum commission rate which validator can ever charge, as a fraction."
             },
-            "maxChangeRate": {
+            "max_change_rate": {
               "type": "string",
               "description": "max_change_rate defines the maximum daily increase of the validator commission, as a fraction."
             }
@@ -6262,7 +6262,7 @@
               "type": "string",
               "description": "website defines an optional website link."
             },
-            "securityContact": {
+            "security_contact": {
               "type": "string",
               "description": "security_contact defines an optional email for security contact."
             },
@@ -6278,13 +6278,13 @@
         },
         "cosmos.staking.v1beta1.Validator": {
           "properties": {
-            "operatorAddress": {
+            "operator_address": {
               "type": "string",
               "description": "operator_address defines the address of the validator's operator; bech encoded in JSON."
             },
-            "consensusPubkey": {
+            "consensus_pubkey": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -6329,7 +6329,7 @@
               "type": "string",
               "description": "tokens define the delegated tokens (incl. self-delegation)."
             },
-            "delegatorShares": {
+            "delegator_shares": {
               "type": "string",
               "description": "delegator_shares defines total shares issued to a validator's delegators."
             },
@@ -6338,11 +6338,11 @@
               "additionalProperties": true,
               "description": "description defines the description terms for the validator."
             },
-            "unbondingHeight": {
+            "unbonding_height": {
               "type": "string",
               "description": "unbonding_height defines, if unbonding, the height at which this validator has begun unbonding."
             },
-            "unbondingTime": {
+            "unbonding_time": {
               "type": "string",
               "description": "unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.",
               "format": "date-time"
@@ -6352,7 +6352,7 @@
               "additionalProperties": true,
               "description": "commission defines the commission parameters."
             },
-            "minSelfDelegation": {
+            "min_self_delegation": {
               "type": "string",
               "description": "min_self_delegation is the validator's self declared minimum self delegation."
             }
@@ -6416,12 +6416,12 @@
         },
         "cosmos.staking.v1beta1.Commission": {
           "properties": {
-            "commissionRates": {
+            "commission_rates": {
               "$ref": "#/definitions/cosmos.staking.v1beta1.CommissionRates",
               "additionalProperties": true,
               "description": "commission_rates defines the initial commission rates to be used for creating a validator."
             },
-            "updateTime": {
+            "update_time": {
               "type": "string",
               "description": "update_time is the last time the commission rate was changed.",
               "format": "date-time"
@@ -6438,11 +6438,11 @@
               "type": "string",
               "description": "rate is the commission rate charged to delegators, as a fraction."
             },
-            "maxRate": {
+            "max_rate": {
               "type": "string",
               "description": "max_rate defines the maximum commission rate which validator can ever charge, as a fraction."
             },
-            "maxChangeRate": {
+            "max_change_rate": {
               "type": "string",
               "description": "max_change_rate defines the maximum daily increase of the validator commission, as a fraction."
             }
@@ -6466,7 +6466,7 @@
               "type": "string",
               "description": "website defines an optional website link."
             },
-            "securityContact": {
+            "security_contact": {
               "type": "string",
               "description": "security_contact defines an optional email for security contact."
             },
@@ -6500,13 +6500,13 @@
         },
         "cosmos.staking.v1beta1.Validator": {
           "properties": {
-            "operatorAddress": {
+            "operator_address": {
               "type": "string",
               "description": "operator_address defines the address of the validator's operator; bech encoded in JSON."
             },
-            "consensusPubkey": {
+            "consensus_pubkey": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -6551,7 +6551,7 @@
               "type": "string",
               "description": "tokens define the delegated tokens (incl. self-delegation)."
             },
-            "delegatorShares": {
+            "delegator_shares": {
               "type": "string",
               "description": "delegator_shares defines total shares issued to a validator's delegators."
             },
@@ -6560,11 +6560,11 @@
               "additionalProperties": true,
               "description": "description defines the description terms for the validator."
             },
-            "unbondingHeight": {
+            "unbonding_height": {
               "type": "string",
               "description": "unbonding_height defines, if unbonding, the height at which this validator has begun unbonding."
             },
-            "unbondingTime": {
+            "unbonding_time": {
               "type": "string",
               "description": "unbonding_time defines, if unbonding, the min time for the validator to complete unbonding.",
               "format": "date-time"
@@ -6574,7 +6574,7 @@
               "additionalProperties": true,
               "description": "commission defines the commission parameters."
             },
-            "minSelfDelegation": {
+            "min_self_delegation": {
               "type": "string",
               "description": "min_self_delegation is the validator's self declared minimum self delegation."
             }
@@ -6591,7 +6591,7 @@
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "partSetHeader": {
+            "part_set_header": {
               "$ref": "#/definitions/tendermint.types.PartSetHeader",
               "additionalProperties": true
             }
@@ -6608,7 +6608,7 @@
               "additionalProperties": true,
               "description": "basic block info"
             },
-            "chainId": {
+            "chain_id": {
               "type": "string"
             },
             "height": {
@@ -6618,60 +6618,60 @@
               "type": "string",
               "format": "date-time"
             },
-            "lastBlockId": {
+            "last_block_id": {
               "$ref": "#/definitions/tendermint.types.BlockID",
               "additionalProperties": true,
               "description": "prev block info"
             },
-            "lastCommitHash": {
+            "last_commit_hash": {
               "type": "string",
               "description": "hashes of block data  commit from validators from the last block",
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "dataHash": {
+            "data_hash": {
               "type": "string",
               "description": "transactions",
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "validatorsHash": {
+            "validators_hash": {
               "type": "string",
               "description": "hashes from the app output from the prev block  validators for the current block",
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "nextValidatorsHash": {
+            "next_validators_hash": {
               "type": "string",
               "description": "validators for the next block",
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "consensusHash": {
+            "consensus_hash": {
               "type": "string",
               "description": "consensus params for current block",
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "appHash": {
+            "app_hash": {
               "type": "string",
               "description": "state after txs from the previous block",
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "lastResultsHash": {
+            "last_results_hash": {
               "type": "string",
               "description": "root hash of all results from the txs from the previous block",
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "evidenceHash": {
+            "evidence_hash": {
               "type": "string",
               "description": "consensus info  evidence included in the block",
               "format": "binary",
               "binaryEncoding": "base64"
             },
-            "proposerAddress": {
+            "proposer_address": {
               "type": "string",
               "description": "original proposer of the block",
               "format": "binary",
@@ -6760,10 +6760,10 @@
         },
         "cosmos.staking.v1beta1.Pool": {
           "properties": {
-            "notBondedTokens": {
+            "not_bonded_tokens": {
               "type": "string"
             },
-            "bondedTokens": {
+            "bonded_tokens": {
               "type": "string"
             }
           },
@@ -6817,25 +6817,25 @@
         },
         "cosmos.staking.v1beta1.Params": {
           "properties": {
-            "unbondingTime": {
+            "unbonding_time": {
               "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
               "type": "string",
               "description": "unbonding_time is the time duration of unbonding.",
               "format": "regex"
             },
-            "maxValidators": {
+            "max_validators": {
               "type": "integer",
               "description": "max_validators is the maximum number of validators."
             },
-            "maxEntries": {
+            "max_entries": {
               "type": "integer",
               "description": "max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio)."
             },
-            "historicalEntries": {
+            "historical_entries": {
               "type": "integer",
               "description": "historical_entries is the number of historical entries to persist."
             },
-            "bondDenom": {
+            "bond_denom": {
               "type": "string",
               "description": "bond_denom defines the bondable coin denomination."
             }
@@ -6873,18 +6873,18 @@
               "$ref": "#/definitions/cosmos.staking.v1beta1.CommissionRates",
               "additionalProperties": true
             },
-            "minSelfDelegation": {
+            "min_self_delegation": {
               "type": "string"
             },
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string"
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string"
             },
             "pubkey": {
               "properties": {
-                "typeUrl": {
+                "type_url": {
                   "type": "string",
                   "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
                 },
@@ -6928,11 +6928,11 @@
               "type": "string",
               "description": "rate is the commission rate charged to delegators, as a fraction."
             },
-            "maxRate": {
+            "max_rate": {
               "type": "string",
               "description": "max_rate defines the maximum commission rate which validator can ever charge, as a fraction."
             },
-            "maxChangeRate": {
+            "max_change_rate": {
               "type": "string",
               "description": "max_change_rate defines the maximum daily increase of the validator commission, as a fraction."
             }
@@ -6956,7 +6956,7 @@
               "type": "string",
               "description": "website defines an optional website link."
             },
-            "securityContact": {
+            "security_contact": {
               "type": "string",
               "description": "security_contact defines an optional email for security contact."
             },
@@ -7000,14 +7000,14 @@
               "$ref": "#/definitions/cosmos.staking.v1beta1.Description",
               "additionalProperties": true
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string"
             },
-            "commissionRate": {
+            "commission_rate": {
               "type": "string",
               "description": "We pass a reference to the new commission rate and min self delegation as it's not mandatory to update. If not updated, the deserialized rate will be zero with no way to distinguish if an update was intended. REF: #2373"
             },
-            "minSelfDelegation": {
+            "min_self_delegation": {
               "type": "string"
             }
           },
@@ -7030,7 +7030,7 @@
               "type": "string",
               "description": "website defines an optional website link."
             },
-            "securityContact": {
+            "security_contact": {
               "type": "string",
               "description": "security_contact defines an optional email for security contact."
             },
@@ -7070,10 +7070,10 @@
       "definitions": {
         "MsgDelegate": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string"
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string"
             },
             "amount": {
@@ -7126,13 +7126,13 @@
       "definitions": {
         "MsgBeginRedelegate": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string"
             },
-            "validatorSrcAddress": {
+            "validator_src_address": {
               "type": "string"
             },
-            "validatorDstAddress": {
+            "validator_dst_address": {
               "type": "string"
             },
             "amount": {
@@ -7167,7 +7167,7 @@
       "definitions": {
         "MsgBeginRedelegateResponse": {
           "properties": {
-            "completionTime": {
+            "completion_time": {
               "type": "string",
               "format": "date-time"
             }
@@ -7191,10 +7191,10 @@
       "definitions": {
         "MsgUndelegate": {
           "properties": {
-            "delegatorAddress": {
+            "delegator_address": {
               "type": "string"
             },
-            "validatorAddress": {
+            "validator_address": {
               "type": "string"
             },
             "amount": {
@@ -7229,7 +7229,7 @@
       "definitions": {
         "MsgUndelegateResponse": {
           "properties": {
-            "completionTime": {
+            "completion_time": {
               "type": "string",
               "format": "date-time"
             }
@@ -7253,10 +7253,10 @@
       "definitions": {
         "MsgCreateVestingAccount": {
           "properties": {
-            "fromAddress": {
+            "from_address": {
               "type": "string"
             },
-            "toAddress": {
+            "to_address": {
               "type": "string"
             },
             "amount": {
@@ -7265,7 +7265,7 @@
               },
               "type": "array"
             },
-            "endTime": {
+            "end_time": {
               "type": "string"
             },
             "delayed": {
@@ -7335,7 +7335,7 @@
       "definitions": {
         "QueryDenomTraceResponse": {
           "properties": {
-            "denomTrace": {
+            "denom_trace": {
               "$ref": "#/definitions/ibc.applications.transfer.v1.DenomTrace",
               "additionalProperties": true,
               "description": "denom_trace returns the requested denomination trace information."
@@ -7352,7 +7352,7 @@
               "type": "string",
               "description": "path defines the chain of port/channel identifiers used for tracing the source of the fungible token."
             },
-            "baseDenom": {
+            "base_denom": {
               "type": "string",
               "description": "base denomination of the relayed fungible token."
             }
@@ -7411,7 +7411,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
@@ -7429,7 +7429,7 @@
       "definitions": {
         "QueryDenomTracesResponse": {
           "properties": {
-            "denomTraces": {
+            "denom_traces": {
               "items": {
                 "$ref": "#/definitions/ibc.applications.transfer.v1.DenomTrace"
               },
@@ -7449,7 +7449,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -7471,7 +7471,7 @@
               "type": "string",
               "description": "path defines the chain of port/channel identifiers used for tracing the source of the fungible token."
             },
-            "baseDenom": {
+            "base_denom": {
               "type": "string",
               "description": "base denomination of the relayed fungible token."
             }
@@ -7526,11 +7526,11 @@
         },
         "ibc.applications.transfer.v1.Params": {
           "properties": {
-            "sendEnabled": {
+            "send_enabled": {
               "type": "boolean",
               "description": "send_enabled enables or disables all cross-chain token transfers from this chain."
             },
-            "receiveEnabled": {
+            "receive_enabled": {
               "type": "boolean",
               "description": "receive_enabled enables or disables all cross-chain token transfers to this chain."
             }
@@ -7560,11 +7560,11 @@
       "definitions": {
         "MsgTransfer": {
           "properties": {
-            "sourcePort": {
+            "source_port": {
               "type": "string",
               "description": "the port on which the packet will be sent"
             },
-            "sourceChannel": {
+            "source_channel": {
               "type": "string",
               "description": "the channel by which the packet will be sent"
             },
@@ -7581,12 +7581,12 @@
               "type": "string",
               "description": "the recipient address on the destination chain"
             },
-            "timeoutHeight": {
+            "timeout_height": {
               "$ref": "#/definitions/ibc.core.client.v1.Height",
               "additionalProperties": true,
               "description": "Timeout height relative to the current block height. The timeout is disabled when set to 0."
             },
-            "timeoutTimestamp": {
+            "timeout_timestamp": {
               "type": "string",
               "description": "Timeout timestamp (in nanoseconds) relative to the current block timestamp. The timeout is disabled when set to 0."
             }
@@ -7612,11 +7612,11 @@
         },
         "ibc.core.client.v1.Height": {
           "properties": {
-            "revisionNumber": {
+            "revision_number": {
               "type": "string",
               "description": "the revision that the client is currently on"
             },
-            "revisionHeight": {
+            "revision_height": {
               "type": "string",
               "description": "the height within the given revision"
             }
@@ -7669,7 +7669,7 @@
       "definitions": {
         "QueryGetSchedualedRunResponse": {
           "properties": {
-            "schedualedRun": {
+            "schedualed_run": {
               "$ref": "#/definitions/dyson.SchedualedRun",
               "additionalProperties": true
             }
@@ -7702,11 +7702,11 @@
               "type": "string",
               "description": "dys address of the scrit to call"
             },
-            "extraLines": {
+            "extra_lines": {
               "type": "string",
               "description": "optional extra source code to append to the end of the script before running"
             },
-            "functionName": {
+            "function_name": {
               "type": "string",
               "description": "optional function to call"
             },
@@ -7780,10 +7780,8 @@
     },
     "http_rules": [
       {
-        "Params": [
-          "index"
-        ],
-        "HasQuery": false,
+        "Params": null,
+        "HasQuery": true,
         "HasBody": false
       }
     ]
@@ -7823,7 +7821,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -7845,7 +7843,7 @@
       "definitions": {
         "QueryAllSchedualedRunResponse": {
           "properties": {
-            "schedualedRun": {
+            "schedualed_run": {
               "items": {
                 "$ref": "#/definitions/dyson.SchedualedRun"
               },
@@ -7862,7 +7860,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -7902,11 +7900,11 @@
               "type": "string",
               "description": "dys address of the scrit to call"
             },
-            "extraLines": {
+            "extra_lines": {
               "type": "string",
               "description": "optional extra source code to append to the end of the script before running"
             },
-            "functionName": {
+            "function_name": {
               "type": "string",
               "description": "optional function to call"
             },
@@ -8041,10 +8039,8 @@
     },
     "http_rules": [
       {
-        "Params": [
-          "index"
-        ],
-        "HasQuery": false,
+        "Params": null,
+        "HasQuery": true,
         "HasBody": false
       }
     ]
@@ -8084,7 +8080,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -8123,7 +8119,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -8220,10 +8216,8 @@
     },
     "http_rules": [
       {
-        "Params": [
-          "index"
-        ],
-        "HasQuery": false,
+        "Params": null,
+        "HasQuery": true,
         "HasBody": false
       }
     ]
@@ -8266,10 +8260,8 @@
     },
     "http_rules": [
       {
-        "Params": [
-          "index"
-        ],
-        "HasQuery": false,
+        "Params": null,
+        "HasQuery": true,
         "HasBody": false
       }
     ]
@@ -8315,9 +8307,7 @@
     },
     "http_rules": [
       {
-        "Params": [
-          "index"
-        ],
+        "Params": null,
         "HasQuery": true,
         "HasBody": false
       }
@@ -8341,11 +8331,11 @@
               "type": "string",
               "description": "dys address of the scrit to call"
             },
-            "extraLines": {
+            "extra_lines": {
               "type": "string",
               "description": "optional extra source code to append to the end of the script before running"
             },
-            "functionName": {
+            "function_name": {
               "type": "string",
               "description": "optional function to call"
             },
@@ -8428,7 +8418,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -8450,7 +8440,7 @@
       "definitions": {
         "QueryAllScriptResponse": {
           "properties": {
-            "script": {
+            "Script": {
               "items": {
                 "$ref": "#/definitions/dyson.Script"
               },
@@ -8467,7 +8457,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -8547,7 +8537,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "countTotal": {
+            "count_total": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             },
@@ -8586,7 +8576,7 @@
         },
         "cosmos.base.query.v1beta1.PageResponse": {
           "properties": {
-            "nextKey": {
+            "next_key": {
               "type": "string",
               "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
               "format": "binary",
@@ -8666,11 +8656,11 @@
               "type": "string",
               "description": "dys address of the scrit to call"
             },
-            "extraLines": {
+            "extra_lines": {
               "type": "string",
               "description": "optional extra source code to append to the end of the script before running"
             },
-            "functionName": {
+            "function_name": {
               "type": "string",
               "description": "optional function to call"
             },
@@ -8965,11 +8955,11 @@
               "type": "string",
               "description": "dys address of the scrit to call"
             },
-            "extraLines": {
+            "extra_lines": {
               "type": "string",
               "description": "optional extra source code to append to the end of the script before running"
             },
-            "functionName": {
+            "function_name": {
               "type": "string",
               "description": "optional function to call"
             },

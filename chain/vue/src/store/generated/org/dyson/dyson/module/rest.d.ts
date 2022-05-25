@@ -275,16 +275,29 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags Query
      * @name QuerySchema
      * @summary Queries a script schema by index.
-     * @request GET:/dyson/schema/{index}
+     * @request GET:/dyson/schema
      */
-    querySchema: (index: string, params?: RequestParams) => Promise<HttpResponse<DysonQueryGetSchemaResponse, RpcStatus>>;
+    querySchema: (query?: {
+        index?: string;
+    }, params?: RequestParams) => Promise<HttpResponse<DysonQueryGetSchemaResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryScript
+     * @summary Queries a script by index.
+     * @request GET:/dyson/script
+     */
+    queryScript: (query?: {
+        index?: string;
+    }, params?: RequestParams) => Promise<HttpResponse<DysonQueryGetScriptResponse, RpcStatus>>;
     /**
      * No description
      *
      * @tags Query
      * @name QueryScriptAll
      * @summary Queries a list of script items.
-     * @request GET:/dyson/script
+     * @request GET:/dyson/scriptiAll
      */
     queryScriptAll: (query?: {
         "pagination.key"?: string;
@@ -297,18 +310,20 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * No description
      *
      * @tags Query
-     * @name QueryScript
-     * @summary Queries a script by index.
-     * @request GET:/dyson/script/{index}
+     * @name QueryStorage
+     * @summary Queries a storage by index.
+     * @request GET:/dyson/storage
      */
-    queryScript: (index: string, params?: RequestParams) => Promise<HttpResponse<DysonQueryGetScriptResponse, RpcStatus>>;
+    queryStorage: (query?: {
+        index?: string;
+    }, params?: RequestParams) => Promise<HttpResponse<DysonQueryGetStorageResponse, RpcStatus>>;
     /**
      * No description
      *
      * @tags Query
      * @name QueryStorageAll
      * @summary Queries a list of storage items.
-     * @request GET:/dyson/storage
+     * @request GET:/dyson/storageAll
      */
     queryStorageAll: (query?: {
         "pagination.key"?: string;
@@ -317,15 +332,6 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         "pagination.countTotal"?: boolean;
         "pagination.reverse"?: boolean;
     }, params?: RequestParams) => Promise<HttpResponse<DysonQueryAllStorageResponse, RpcStatus>>;
-    /**
-     * No description
-     *
-     * @tags Query
-     * @name QueryStorage
-     * @summary Queries a storage by index.
-     * @request GET:/dyson/storage/{index}
-     */
-    queryStorage: (index: string, params?: RequestParams) => Promise<HttpResponse<DysonQueryGetStorageResponse, RpcStatus>>;
     /**
      * No description
      *
@@ -347,18 +353,30 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags Query
      * @name QueryWsgi
      * @summary Queries a script wsgi app by index.
-     * @request GET:/dyson/wsgi/{index}
+     * @request GET:/dyson/wsgi
      */
-    queryWsgi: (index: string, query?: {
+    queryWsgi: (query?: {
+        index?: string;
         httprequest?: string;
     }, params?: RequestParams) => Promise<HttpResponse<DysonQueryWsgiResponse, RpcStatus>>;
     /**
      * No description
      *
      * @tags Query
+     * @name QuerySchedualedRun
+     * @summary Queries a schedualedRun by index.
+     * @request GET:/org/dyson/dyson/schedualedRun
+     */
+    querySchedualedRun: (query?: {
+        index?: string;
+    }, params?: RequestParams) => Promise<HttpResponse<DysonQueryGetSchedualedRunResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
      * @name QuerySchedualedRunAll
      * @summary Queries a list of schedualedRun items.
-     * @request GET:/org/dyson/dyson/schedualedRun
+     * @request GET:/org/dyson/dyson/schedualedRunAll
      */
     querySchedualedRunAll: (query?: {
         "pagination.key"?: string;
@@ -367,14 +385,5 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
         "pagination.countTotal"?: boolean;
         "pagination.reverse"?: boolean;
     }, params?: RequestParams) => Promise<HttpResponse<DysonQueryAllSchedualedRunResponse, RpcStatus>>;
-    /**
-     * No description
-     *
-     * @tags Query
-     * @name QuerySchedualedRun
-     * @summary Queries a schedualedRun by index.
-     * @request GET:/org/dyson/dyson/schedualedRun/{index}
-     */
-    querySchedualedRun: (index: string, params?: RequestParams) => Promise<HttpResponse<DysonQueryGetSchedualedRunResponse, RpcStatus>>;
 }
 export {};
