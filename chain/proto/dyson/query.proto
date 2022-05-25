@@ -24,7 +24,7 @@ service Query {
 
 		// Queries a list of schedualedRun items.
 		rpc SchedualedRunAll(QueryAllSchedualedRunRequest) returns (QueryAllSchedualedRunResponse) {
-				option (google.api.http).get = "/org/dyson/dyson/schedualedRun";
+				option (google.api.http).get = "/org/dyson/dyson/schedualedRunAll";
 		}
 
 		// Queries a storage by index.
@@ -34,7 +34,7 @@ service Query {
 
 		// Queries a list of storage items.
 		rpc StorageAll(QueryAllStorageRequest) returns (QueryAllStorageResponse) {
-				option (google.api.http).get = "/dyson/storage";
+				option (google.api.http).get = "/dyson/storageAll";
 		}
 
 
@@ -59,7 +59,7 @@ service Query {
 
 		// Queries a list of script items.
 		rpc ScriptAll(QueryAllScriptRequest) returns (QueryAllScriptResponse) {
-				option (google.api.http).get = "/dyson/script";
+				option (google.api.http).get = "/dyson/scriptiAll";
 		}
 
 		rpc PrefixStorage(QueryPrefixStorageRequest) returns (QueryPrefixStorageResponse) {
