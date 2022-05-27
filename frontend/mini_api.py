@@ -113,18 +113,6 @@ class ScriptDetail(APIView):
     def get(self, request, script_address=None):
         # TODO: read from settings
         return Response(None)
-        r = requests.get(f"{settings.DYSON_RESTHOST}/dyson/schema/{script_address}")
-        raw_schema = r.json().get("schema", None)
-        schema = None
-        if raw_schema:
-            schema = json.loads(raw_schema)
-        if not schema:
-            return Response(r.content)
-
-        r = requests.get(f"{settings.DYSON_RESTHOST}/dyson/script/{script_address}")
-        script = r.json().get("Script", None)
-
-        return Response({"schema": schema, "script": script})
 
 
 class FakeSocket:
@@ -137,8 +125,8 @@ class FakeSocket:
 
 def dys_view(request, script_address=None):
     address = script_address or request.script_address
-    u = f"{settings.DYSON_RESTHOST}/dyson/wsgi/{address}"
-    params = {"httprequest": reconstruct_request(request)}
+    u = f"{settings.DYSON_RESTHOST}/dyson/wsgi"
+    params = {"httprequest": reconstruct_request(request), "index": address}
     dys_req = requests.get(u, params=params)
     if dys_req.status_code != 200:
         try:
