@@ -108,13 +108,13 @@ export default {
       return this.$store.getters['common/wallet/address']
     },
     schemas: function () {
-      const result = this.$store.getters['dyson/getSchema']({ params: { index: this.$route.params.script_address } })
+      const result = this.$store.getters['dyson/getSchema']({ query: { index: this.$route.params.script_address } })
 
       const schemas = result.schema ? JSON.parse(result.schema) : []
       return schemas.filter((s) => s.function != 'app' && !(s.function || '').startsWith('_'))
     },
     script: function () {
-      const result = this.$store.getters['dyson/getScript']({ params: { index: this.$route.params.script_address } })
+      const result = this.$store.getters['dyson/getScript']({ query: { index: this.$route.params.script_address } })
       return result ? result.script : {}
     },
   },
@@ -123,13 +123,13 @@ export default {
     this.scriptAddress = this.$route.params.script_address
     this.$store
       .dispatch('dyson/QueryScript', {
-        params: { index: this.$route.params.script_address },
+        query: { index: this.$route.params.script_address },
         options: { subscribe: true, all: false },
       })
       .then(console.log)
     this.$store
       .dispatch('dyson/QuerySchema', {
-        params: { index: this.$route.params.script_address },
+        query: { index: this.$route.params.script_address },
         options: { subscribe: true, all: false },
       })
       .then(console.log)
@@ -137,11 +137,11 @@ export default {
   beforeUnmount: async function () {
     this.$store.dispatch('dyson/unsubscribe', {
       action: 'QuerySchema',
-      payload: { options: { all: false }, params: { index: this.scriptAddress }, query: null },
+      payload: { options: { all: false }, query: { index: this.scriptAddress }, query: null },
     })
     this.$store.dispatch('dyson/unsubscribe', {
       action: 'QueryScript',
-      payload: { options: { all: false }, params: { index: this.scriptAddress }, query: null },
+      payload: { options: { all: false }, query: { index: this.scriptAddress }, query: null },
     })
   },
 }
