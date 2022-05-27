@@ -108,13 +108,13 @@ export default {
       return this.$store.getters['common/wallet/address']
     },
     schemas: function () {
-      const result = this.$store.getters['dyson/getSchema']({ query: { index: this.$route.params.script_address } })
+        const result = this.$store.getters['dyson/getSchema']({params:{}, query: { index: this.$route.params.script_address } })
 
       const schemas = result.schema ? JSON.parse(result.schema) : []
       return schemas.filter((s) => s.function != 'app' && !(s.function || '').startsWith('_'))
     },
     script: function () {
-      const result = this.$store.getters['dyson/getScript']({ query: { index: this.$route.params.script_address } })
+        const result = this.$store.getters['dyson/getScript']({params:{}, query: { index: this.$route.params.script_address } })
       return result ? result.script : {}
     },
   },
