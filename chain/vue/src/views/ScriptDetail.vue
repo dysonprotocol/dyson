@@ -137,11 +137,11 @@ export default {
   beforeUnmount: async function () {
     this.$store.dispatch('dyson/unsubscribe', {
       action: 'QuerySchema',
-      payload: { options: { all: false }, query: { index: this.scriptAddress }, query: null },
+      payload: { options: { all: false }, query: { index: this.scriptAddress }, params: null },
     })
     this.$store.dispatch('dyson/unsubscribe', {
       action: 'QueryScript',
-      payload: { options: { all: false }, query: { index: this.scriptAddress }, query: null },
+      payload: { options: { all: false }, query: { index: this.scriptAddress }, params: null },
     })
   },
 }
