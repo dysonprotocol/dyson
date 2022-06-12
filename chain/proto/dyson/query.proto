@@ -66,6 +66,8 @@ service Query {
 				option (google.api.http).get = "/dyson/storageprefix";
 		}
 
+  // this line is used by starport scaffolding # 2
+
 }
 
 message QueryGetSchedualedRunRequest {
@@ -145,3 +147,6 @@ message QueryPrefixStorageResponse {
 		repeated Storage storage = 1;
 		cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
+
+// this line is used by starport scaffolding # 3
+
