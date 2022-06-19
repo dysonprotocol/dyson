@@ -1,3 +1,4 @@
+import re
 import tldextract
 import base64
 import simplejson as json
@@ -11,7 +12,7 @@ import os
 import django
 from django.conf import settings
 from django.urls import re_path
-
+from django.shortcuts import redirect
 
 from utils import get_txt_records
 
@@ -152,15 +153,17 @@ def dys_view(request, script_address=None):
     return response
 
 
-def dys_js_tags(request):
+def dys_js_tags(request, js_asset=None):
     from html.parser import HTMLParser
+    from django_hosts.resolvers import reverse
+
+    tags = []
 
     class ScriptHTMLParser(HTMLParser):
-        tags = []
-
         def handle_starttag(self, tag, attrs):
-            if tag == "script":
-                self.tags.append(self.get_starttag_text())
+            src = dict(attrs).get("src")
+            if tag == "script" and src:
+                tags.append(src)
 
     try:
         with open("vue/dist/index.html") as f:
@@ -170,10 +173,20 @@ def dys_js_tags(request):
             """<script>alert('vue/dist/index.html not found, cannot load chain functions')</script>"""
         )
 
+    base_host = reverse('index', host='clear') 
     parser = ScriptHTMLParser()
     parser.feed(h)
+    js_asset_dict = {
+        re.match(r"/static/js/(?P<base_asset_name>[a-z-]+)", t).groupdict()[
+            "base_asset_name"
+        ] + ".js": base_host + t
+        for t in tags
+    }
 
-    return HttpResponse("\n".join(parser.tags), content_type='text/plain')
+    if js_asset in js_asset_dict:
+        return redirect(js_asset_dict[js_asset])
+
+    return JsonResponse(js_asset_dict)
 
 
 def node_info(request):
@@ -189,7 +202,7 @@ def node_info(request):
 
 # URL
 urlpatterns = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + [
-    re_path(r"^$", ScriptDetail.as_view()),
+    re_path(r"^$", ScriptDetail.as_view(), name="index"),
     re_path(r"^tx$", ScriptDetail.as_view()),
     re_path(r"^scripts$", ScriptDetail.as_view()),
     re_path(r"^scripts/(?P<script_address>\w+)$", ScriptDetail.as_view()),
