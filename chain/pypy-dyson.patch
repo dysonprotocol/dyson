@@ -1,0 +1,95 @@
+diff --git a/pypy/interpreter/baseobjspace.py b/pypy/interpreter/baseobjspace.py
+index 6f0f987f82..ef6d3229fd 100644
+--- a/pypy/interpreter/baseobjspace.py
++++ b/pypy/interpreter/baseobjspace.py
+@@ -114,7 +114,8 @@ class W_Root(object):
+         return ''.join(addrstring)
+ 
+     def getrepr(self, space, info, moreinfo=''):
+-        addrstring = self.getaddrstring(space)
++        # addrstring = self.getaddrstring(space)
++        addrstring = 234567
+         return space.newtext("<%s at 0x%s%s>" % (info, addrstring, moreinfo))
+ 
+     def getslotvalue(self, index):
+@@ -695,10 +696,10 @@ class ObjSpace(object):
+         elif self.config.objspace.usemodules._cffi_backend:
+             from pypy.module._cffi_backend import copy_includes
+             copy_includes.main()
+-        
++
+         # now we can setup _frozen_importlib, after the dll is installed
+         self.install_mixedmodule('_frozen_importlib')
+-        
++
+         self.getbuiltinmodule('sys')
+         self.getbuiltinmodule('_imp')
+         frozen_importlib = self.getbuiltinmodule('_frozen_importlib')
+diff --git a/pypy/interpreter/generator.py b/pypy/interpreter/generator.py
+index feabb32ea2..9de3800e20 100644
+--- a/pypy/interpreter/generator.py
++++ b/pypy/interpreter/generator.py
+@@ -43,7 +43,8 @@ class GeneratorOrCoroutine(W_Root):
+         return self.get_name()
+ 
+     def descr__repr__(self, space):
+-        addrstring = self.getaddrstring(space)
++        #addrstring = self.getaddrstring(space)
++        addrstring = 3456789
+         return space.newtext("<%s object %s at 0x%s>" %
+                           (self.KIND, self.get_qualname(), addrstring))
+ 
+diff --git a/pypy/interpreter/nestedscope.py b/pypy/interpreter/nestedscope.py
+index fbffb04937..2d3bb39c34 100644
+--- a/pypy/interpreter/nestedscope.py
++++ b/pypy/interpreter/nestedscope.py
+@@ -98,15 +98,18 @@ class Cell(W_Root):
+         else:
+             content = repr(self.w_value)
+         return "<%s(%s) at 0x%x>" % (self.__class__.__name__,
+-                                     content, uid(self))
++                                     content, 678901)
++                                     #content, uid(self))
+ 
+     def descr__repr__(self, space):
+         if self.w_value is None:
+             content = "empty"
+         else:
+             content = "%s object at 0x%s" % (space.type(self.w_value).name,
+-                                             self.w_value.getaddrstring(space))
+-        s = "<cell at 0x%s: %s>" % (self.getaddrstring(space), content)
++                                             567890)
++                                             #self.w_value.getaddrstring(space))
++        s = "<cell at 0x%s: %s>" % (567890, content)
++        #s = "<cell at 0x%s: %s>" % (self.getaddrstring(space), content)
+         return space.newtext(s)
+ 
+     def descr__cell_contents(self, space):
+diff --git a/pypy/interpreter/pycode.py b/pypy/interpreter/pycode.py
+index 63fec922a5..65a49c0237 100644
+--- a/pypy/interpreter/pycode.py
++++ b/pypy/interpreter/pycode.py
+@@ -488,7 +488,8 @@ class PyCode(eval.Code):
+         name = self.co_name
+         fn = space.utf8_w(self.w_filename)
+         return space.newtext(b'<code object %s at 0x%s, file "%s", line %d>' % (
+-            name, self.getaddrstring(space), fn,
++            name, 456789, fn,
++            #name, self.getaddrstring(space), fn,
+             -1 if self.co_firstlineno == 0 else self.co_firstlineno))
+ 
+ def _compute_args_as_cellvars(varnames, cellvars, argcount):
+diff --git a/pypy/module/_cppyy/interp_cppyy.py b/pypy/module/_cppyy/interp_cppyy.py
+index 275548fce6..554f27549b 100644
+--- a/pypy/module/_cppyy/interp_cppyy.py
++++ b/pypy/module/_cppyy/interp_cppyy.py
+@@ -1651,7 +1651,8 @@ class W_CPPInstance(W_Root):
+         if w_as_builtin is not None:
+             return self.space.repr(w_as_builtin)
+         return self.space.newtext("<%s object at 0x%x>" %
+-                               (self.clsdecl.name, rffi.cast(rffi.UINTPTR_T, self.get_rawobject())))
++                               (self.clsdecl.name,  123456))
++                               #(self.clsdecl.name, rffi.cast(rffi.UINTPTR_T, self.get_rawobject())))
+ 
+     def smartptr(self):
+         if self._rawobject and self.smartdecl:

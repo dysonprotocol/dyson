@@ -1,5 +1,5 @@
 start:
-	dysond start --log_level debug
+	dysond start 
 
 dev:
 	starport chain serve -r -v
