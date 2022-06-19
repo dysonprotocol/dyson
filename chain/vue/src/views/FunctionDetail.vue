@@ -1,26 +1,28 @@
 <template>
-  <form v-on:submit="submit" class="sp-box sp-shadow" :action="`#${name}`">
-    <div v-bind:id="name"></div>
-    <button name="action" type="submit" value="link" class="sp-button">link {{ name }}</button>
-    <button name="action" :disabled="this.inflight" type="submit" value="query" class="sp-button">
-      Query {{ name }}
-    </button>
-    <button
-      name="action"
-      :disabled="!address || this.inflight"
-      type="submit"
-      value="run"
-      class="sp-button sp-button-primary"
-    >
-      Run {{ name }}
-    </button>
-    <button class="sp-button" v-on:click="isHidden = !isHidden">Coins to Send</button>
-    <div class="form-group" v-show="!isHidden">
-      <label class="control-label sp-box-header">Coins</label>
-      <input class="sp-input" v-model="coins" />
-    </div>
-  </form>
-  <pre v-if="runResponse">
+  <div :class="{ modal: isModal }">
+    <form v-on:submit="submit" class="sp-box sp-shadow" :action="`#${name}`"  :class="{ 'modal-content': isModal }">
+      <div v-bind:id="name"></div>
+      <span v-if="isModal" class="close" @click="this.isModal=false"> &times; </span>
+      <button name="action" type="submit" value="link" class="sp-button">link {{ name }}</button>
+      <button name="action" :disabled="this.inflight" type="submit" value="query" class="sp-button">
+        Query {{ name }}
+      </button>
+      <button
+        name="action"
+        :disabled="!address || this.inflight"
+        type="submit"
+        value="run"
+        class="sp-button sp-button-primary"
+      >
+        Run {{ name }}
+      </button>
+      <button class="sp-button" v-on:click="isHidden = !isHidden">Coins to Send</button>
+      <div class="form-group" v-show="!isHidden">
+        <label class="control-label sp-box-header">Coins</label>
+        <input class="sp-input" v-model="coins" />
+      </div>
+    </form>
+    <pre v-if="runResponse">
 TX hash: {{ runResponse.tx }}
 Cumulative Size: {{ runResponse.cumsize }}
 Nodes Evaluated: {{ runResponse.nodes_called }}
@@ -29,9 +31,9 @@ Exception: {{ runResponse.exception }}
 Stdout:
 {{ runResponse.stdout }}
 </pre
-  >
-  <pre v-if="queryResponseErr">{{ queryResponseErr }}</pre>
-  <pre v-if="queryResponse">
+    >
+    <pre v-if="queryResponseErr">{{ queryResponseErr }}</pre>
+    <pre v-if="queryResponse">
 Cumulative Size: {{ queryResponse.cumsize }}
 Nodes Evaluated: {{ queryResponse.nodes_called }}
 Result: {{ queryResponse.result }}
@@ -39,7 +41,8 @@ Exception: {{ queryResponse.exception }}
 Stdout:
 {{ queryResponse.stdout }}
 </pre
-  >
+    >
+  </div>
 </template>
 <script>
 var qs = require('qs')
@@ -61,6 +64,7 @@ export default {
       inflight: false,
       coins: '',
       isHidden: true,
+      isModal: false,
     }
   },
   computed: {
@@ -174,7 +178,9 @@ export default {
 
       if ('#' + this.name === window.location.hash) {
         element.scrollIntoView()
-        element.parentElement.classList.add('animate__animated', 'animate__heartBeat')
+        this.isModal = true
+      } else {
+        this.isModal = false
       }
     },
   },
@@ -199,5 +205,49 @@ export default {
 }
 pre {
   white-space: pre-wrap;
+}
+
+.close {
+  display: none;
+}
+
+/* The Modal (background) */
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+.modal .close {
+  display: inline;
+}
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>
