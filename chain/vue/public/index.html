@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   </head>
   <body>
     <noscript>
@@ -15,5 +15,15 @@
     </noscript>
     <div id="app" class="app"></div>
     <!-- built files will be auto injected -->
+
+    <script>
+      /* The vue app can be loaded in "headless" mode web apps to interact wiht the chain without
+      needing to build the protobuf for every project. This shares the assets across app and 
+      the main Dyson UI.
+      */
+      document.addEventListener('DOMContentLoaded', function (event) {
+        startVueApp()
+      })
+    </script>
   </body>
 </html>
