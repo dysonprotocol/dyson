@@ -51,18 +51,20 @@ TEMPLATES = [
 ]
 
 
-DYSON_RESTHOST =  os.environ.get("DYSON_RESTHOST",'http://localhost:1317')
+DYSON_RESTHOST = os.environ.get("DYSON_RESTHOST", "http://localhost:1317")
 
 DEFAULT_HOST = os.environ.get("DEFAULT_HOST", "clear")
 ROOT_HOSTCONF = "hosts"
 STATIC_URL = "/static/"
-STATIC_ROOT = join(BASE_DIR, 'static_root')
-STATICFILES_DIRS = [join(BASE_DIR, "vue/dist/static"),]
+STATIC_ROOT = join(BASE_DIR, "static_root")
+STATICFILES_DIRS = [
+    join(BASE_DIR, "vue/dist/static"),
+]
 CLEAR_DOMAIN = os.environ.get("CLEAR_DOMAIN", "localhost:8000")
 
 SETTINGS = dict((key, val) for key, val in locals().items() if key.isupper())
 if not settings.configured:
-    print('SETTINGS', SETTINGS)
+    print("SETTINGS", SETTINGS)
     settings.configure(**SETTINGS)
 django.setup()
 
@@ -107,7 +109,7 @@ class Index(APIView):
 class ScriptDetail(APIView):
     authentication_classes = []
     permission_classes = []
-    renderer_classes = [BetterTemplateHTMLRenderer, JSONRenderer,BrowsableAPIRenderer]
+    renderer_classes = [BetterTemplateHTMLRenderer, JSONRenderer, BrowsableAPIRenderer]
     template_name = "index.html"
 
     def get(self, request, script_address=None):
@@ -130,12 +132,12 @@ def dys_view(request, script_address=None):
     dys_req = requests.get(u, params=params)
     if dys_req.status_code != 200:
         try:
-            if dys_req.json().get('code', None) == 3:
+            if dys_req.json().get("code", None) == 3:
                 # Script not found
                 return HttpResponse("Script not found", status=404)
         except:
             pass
-        return HttpResponse(dys_req.text,status=dys_req.status_code)
+        return HttpResponse(dys_req.text, status=dys_req.status_code)
     raw_rep = dys_req.content
     http_response_str = base64.b64decode(dys_req.json()["httpresponse"])
 
@@ -149,18 +151,44 @@ def dys_view(request, script_address=None):
     )
     return response
 
+
+def dys_js_tags(request):
+    from html.parser import HTMLParser
+
+    class ScriptHTMLParser(HTMLParser):
+        tags = []
+
+        def handle_starttag(self, tag, attrs):
+            if tag == "script":
+                self.tags.append(self.get_starttag_text())
+
+    try:
+        with open("vue/dist/index.html") as f:
+            h = f.read()
+    except FileNotFoundError:
+        return HttpResponse(
+            """<script>alert('vue/dist/index.html not found, cannot load chain functions')</script>"""
+        )
+
+    parser = ScriptHTMLParser()
+    parser.feed(h)
+
+    return HttpResponse("\n".join(parser.tags), content_type='text/plain')
+
+
 def node_info(request):
     info = {
-    "VUE_APP_API_COSMOS" : os.environ.get('VUE_APP_API_COSMOS'),
-    "VUE_APP_WS_TENDERMINT" : os.environ.get('VUE_APP_WS_TENDERMINT'),
-    "VUE_APP_API_TENDERMINT" : os.environ.get('VUE_APP_API_TENDERMINT'),
-    "VUE_APP_API_TENDERMINT" : os.environ.get('VUE_APP_API_TENDERMINT'),
-    "CLEAR_DOMAIN" : os.environ.get('CLEAR_DOMAIN'),
+        "VUE_APP_API_COSMOS": os.environ.get("VUE_APP_API_COSMOS"),
+        "VUE_APP_WS_TENDERMINT": os.environ.get("VUE_APP_WS_TENDERMINT"),
+        "VUE_APP_API_TENDERMINT": os.environ.get("VUE_APP_API_TENDERMINT"),
+        "VUE_APP_API_TENDERMINT": os.environ.get("VUE_APP_API_TENDERMINT"),
+        "CLEAR_DOMAIN": os.environ.get("CLEAR_DOMAIN"),
     }
     return JsonResponse(info)
 
+
 # URL
-urlpatterns = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ [
+urlpatterns = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + [
     re_path(r"^$", ScriptDetail.as_view()),
     re_path(r"^tx$", ScriptDetail.as_view()),
     re_path(r"^scripts$", ScriptDetail.as_view()),
@@ -173,7 +201,7 @@ urlpatterns = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ [
 def clear_main_callback(request):
     request.domain = settings.CLEAR_DOMAIN
     request.subdomains = []
-    print("domain",request.domain)
+    print("domain", request.domain)
     print("subdomains", request.subdomains)
 
 
@@ -184,7 +212,7 @@ def clear_dns_callback(request, domain=None, subdomains=None):
     if subdomains:
         request.subdomains = subdomains.split(".")
 
-    print("domain",request.domain)
+    print("domain", request.domain)
     request.script_address = domain
     print("subdomains", request.subdomains)
     request.domain = domain
@@ -205,12 +233,11 @@ def clear_custom_dns_callback(request, domain=None):
     request.txt = txt_dict
     request.script_address = txt_dict.get("dyson", None)
 
-    print("domain",request.domain)
-    print("host",host)
+    print("domain", request.domain)
+    print("host", host)
     print("subdomains", request.subdomains)
-    print('txt', txt_dict)
-    print('script_address', request.script_address)
-
+    print("txt", txt_dict)
+    print("script_address", request.script_address)
 
 
 # CLI
