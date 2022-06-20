@@ -9,7 +9,7 @@
 		in extra narrow spaces */
   grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
   pre {
-      white-space: pre-wrap;
+    white-space: pre-wrap;
   }
 }
 </style>
@@ -37,7 +37,7 @@
       <div id="code">
         <div v-if="script || address == this.$route.params.script_address">
           <VAceEditor v-model:value="code" lang="python" theme="chrome" min-lines="30" max-lines="200" />
-          <button @click="save" :disabled="inFlight || address != this.$route.params.script_address">save</button>
+          <button @click="save" :disabled="inFlight || address != this.$route.params.script_address" class="sp-button">save</button>
         </div>
         <pre v-if="txResult">
         TX hash: {{ txResult.tx }}
@@ -71,8 +71,8 @@ export default {
   },
   methods: {
     async save(e) {
-        this.inFlight = true
-        this.txResult  = null
+      this.inFlight = true
+      this.txResult = null
       const value = {
         creator: this.address,
         code: this.code,
@@ -88,7 +88,23 @@ export default {
         console.error(e)
       } finally {
         this.inFlight = false
+        this.update()
       }
+    },
+    async update() {
+      this.scriptAddress = this.$route.params.script_address
+      this.$store
+        .dispatch('dyson/QueryScript', {
+          query: { index: this.$route.params.script_address },
+          options: { subscribe: false, all: false },
+        })
+        .then(console.log)
+      this.$store
+        .dispatch('dyson/QuerySchema', {
+          query: { index: this.$route.params.script_address },
+          options: { subscribe: false, all: false },
+        })
+        .then(console.log)
     },
   },
   computed: {
@@ -108,42 +124,21 @@ export default {
       return this.$store.getters['common/wallet/address']
     },
     schemas: function () {
-        const result = this.$store.getters['dyson/getSchema']({params:{}, query: { index: this.$route.params.script_address } })
+      const result = this.$store.getters['dyson/getSchema']({
+        params: {},
+        query: { index: this.$route.params.script_address },
+      })
 
       const schemas = result.schema ? JSON.parse(result.schema) : []
       return schemas.filter((s) => s.function != 'app' && !(s.function || '').startsWith('_'))
     },
     script: function () {
-        const result = this.$store.getters['dyson/getScript']({params:{}, query: { index: this.$route.params.script_address } })
+      const result = this.$store.getters['dyson/getScript']({
+        params: {},
+        query: { index: this.$route.params.script_address },
+      })
       return result ? result.script : {}
     },
   },
-  created: async function () {
-    window.$store = this.$store
-    this.scriptAddress = this.$route.params.script_address
-    this.$store
-      .dispatch('dyson/QueryScript', {
-        query: { index: this.$route.params.script_address },
-        options: { subscribe: true, all: false },
-      })
-      .then(console.log)
-    this.$store
-      .dispatch('dyson/QuerySchema', {
-        query: { index: this.$route.params.script_address },
-        options: { subscribe: true, all: false },
-      })
-      .then(console.log)
-  },
-  beforeUnmount: async function () {
-    this.$store.dispatch('dyson/unsubscribe', {
-      action: 'QuerySchema',
-      payload: { options: { all: false }, query: { index: this.scriptAddress }, params: null },
-    })
-    this.$store.dispatch('dyson/unsubscribe', {
-      action: 'QueryScript',
-      payload: { options: { all: false }, query: { index: this.scriptAddress }, params: null },
-    })
-  },
 }
 </script>
-
