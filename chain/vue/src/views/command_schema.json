@@ -8333,7 +8333,8 @@
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
+              "description": "optional extra source code to append to the end of the script before running",
+              "format": "textarea"
             },
             "function_name": {
               "type": "string",
@@ -8717,7 +8718,8 @@
             },
             "data": {
               "type": "string",
-              "description": "data to stor at this index"
+              "description": "data to stor at this index",
+              "format": "textarea"
             },
             "force": {
               "type": "boolean",
@@ -8761,7 +8763,8 @@
               "type": "string"
             },
             "data": {
-              "type": "string"
+              "type": "string",
+              "format": "textarea"
             },
             "force": {
               "type": "boolean"
@@ -8836,7 +8839,8 @@
               "type": "string"
             },
             "code": {
-              "type": "string"
+              "type": "string",
+              "format": "textarea"
             }
           },
           "additionalProperties": true,
@@ -8877,7 +8881,8 @@
               "type": "string"
             },
             "code": {
-              "type": "string"
+              "type": "string",
+              "format": "textarea"
             }
           },
           "additionalProperties": true,
@@ -8957,7 +8962,8 @@
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
+              "description": "optional extra source code to append to the end of the script before running",
+              "format": "textarea"
             },
             "function_name": {
               "type": "string",
