@@ -216,13 +216,21 @@ schemas["dyson/sendMsgUpdateScript"]["request_schema"]["definitions"][
     "MsgUpdateScript"
 ]["properties"]["code"]["format"] = "textarea"
 
-schemas["dyson/QueryQueryScript"]["request_schema"]["definitions"][
-    "MsgRun"
-]["properties"]["extra_lines"]["format"] = "textarea"
+schemas["dyson/QueryQueryScript"]["request_schema"]["definitions"]["MsgRun"][
+    "properties"
+]["extra_lines"]["format"] = "textarea"
 
-schemas["dyson/sendMsgRun"]["request_schema"]["definitions"][
-    "MsgRun"
-]["properties"]["extra_lines"]["format"] = "textarea"
+schemas["dyson/QueryQueryScript"]["resp_schema"]["definitions"]["MsgRunResponse"][
+    "properties"
+]["response"]["format"] = "textarea"
+
+schemas["dyson/sendMsgRun"]["request_schema"]["definitions"]["MsgRun"]["properties"][
+    "extra_lines"
+]["format"] = "textarea"
+
+schemas["dyson/sendMsgRun"]["resp_schema"]["definitions"]["MsgRunResponse"][
+    "properties"
+]["response"]["format"] = "textarea"
 
 schemas["dyson/sendMsgUpdateStorage"]["request_schema"]["definitions"][
     "MsgUpdateStorage"
