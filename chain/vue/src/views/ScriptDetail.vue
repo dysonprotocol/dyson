@@ -140,5 +140,8 @@ export default {
       return result ? result.script : {}
     },
   },
+  created: async function () {
+    this.update() 
+  },
 }
 </script>
