@@ -1,47 +1,49 @@
 <template>
   <div :class="{ modal: isModal }">
-    <form v-on:submit="submit" class="sp-box sp-shadow" :action="`#${name}`"  :class="{ 'modal-content': isModal }">
-      <div v-bind:id="name"></div>
-      <span v-if="isModal" class="close" @click="this.isModal=false"> &times; </span>
-      <button name="action" type="submit" value="link" class="sp-button">link {{ name }}</button>
-      <button name="action" :disabled="this.inflight" type="submit" value="query" class="sp-button">
-        Query {{ name }}
-      </button>
-      <button
-        name="action"
-        :disabled="!address || this.inflight"
-        type="submit"
-        value="run"
-        class="sp-button sp-button-primary"
+    <div :class="{ 'modal-content': isModal }">
+      <form v-on:submit="submit" class="sp-box sp-shadow" :action="`#${name}`">
+        <div v-bind:id="name"></div>
+        <span v-if="isModal" class="close" @click="this.isModal=false"> &times; </span>
+        <button name="action" type="submit" value="link" class="sp-button">link {{ name }}</button>
+        <button name="action" :disabled="this.inflight" type="submit" value="query" class="sp-button">
+          Query {{ name }}
+        </button>
+        <button
+          name="action"
+          :disabled="!address || this.inflight"
+          type="submit"
+          value="run"
+          class="sp-button sp-button-primary"
+        >
+          Run {{ name }}
+        </button>
+        <button class="sp-button" v-on:click="isHidden = !isHidden">Coins to Send</button>
+        <div class="form-group" v-show="!isHidden">
+          <label class="control-label sp-box-header">Coins</label>
+          <input class="sp-input" v-model="coins" />
+        </div>
+      </form>
+      <pre v-if="runResponse">
+  TX hash: {{ runResponse.tx }}
+  Cumulative Size: {{ runResponse.cumsize }}
+  Nodes Evaluated: {{ runResponse.nodes_called }}
+  Result: {{ runResponse.result }}
+  Exception: {{ runResponse.exception }}
+  Stdout:
+  {{ runResponse.stdout }}
+  </pre
       >
-        Run {{ name }}
-      </button>
-      <button class="sp-button" v-on:click="isHidden = !isHidden">Coins to Send</button>
-      <div class="form-group" v-show="!isHidden">
-        <label class="control-label sp-box-header">Coins</label>
-        <input class="sp-input" v-model="coins" />
-      </div>
-    </form>
-    <pre v-if="runResponse">
-TX hash: {{ runResponse.tx }}
-Cumulative Size: {{ runResponse.cumsize }}
-Nodes Evaluated: {{ runResponse.nodes_called }}
-Result: {{ runResponse.result }}
-Exception: {{ runResponse.exception }}
-Stdout:
-{{ runResponse.stdout }}
-</pre
-    >
-    <pre v-if="queryResponseErr">{{ queryResponseErr }}</pre>
-    <pre v-if="queryResponse">
-Cumulative Size: {{ queryResponse.cumsize }}
-Nodes Evaluated: {{ queryResponse.nodes_called }}
-Result: {{ queryResponse.result }}
-Exception: {{ queryResponse.exception }}
-Stdout:
-{{ queryResponse.stdout }}
-</pre
-    >
+      <pre v-if="queryResponseErr">{{ queryResponseErr }}</pre>
+      <pre v-if="queryResponse">
+  Cumulative Size: {{ queryResponse.cumsize }}
+  Nodes Evaluated: {{ queryResponse.nodes_called }}
+  Result: {{ queryResponse.result }}
+  Exception: {{ queryResponse.exception }}
+  Stdout:
+  {{ queryResponse.stdout }}
+  </pre
+      >
+    </div>
   </div>
 </template>
 <script>
