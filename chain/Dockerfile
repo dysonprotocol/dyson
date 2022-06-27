@@ -18,7 +18,7 @@ ENV PATH="/usr/pypy-nightly/bin:$PATH"
 
 RUN pypy -m ensurepip
 
-RUN apt-get update && apt-get -y install jq unzip vim libre2-dev
+RUN apt-get update && apt-get -y install jq unzip vim libre2-dev black=20.8b1-4
 RUN cd .. && wget --no-verbose -O starport.zip https://gitlab.com/dysonproject/starport/-/archive/writemodual/starport-writemodual.zip && unzip -d starport starport.zip && cd "$(ls -t1 -d starport/starport*/ | head -n1)" && make && make install && cd  /go/src/app
 COPY go.mod go.sum .go-version ./
 RUN go mod download -x
