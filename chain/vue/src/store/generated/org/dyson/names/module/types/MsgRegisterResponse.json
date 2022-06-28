@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgRegisterResponse",
+    "definitions": {
+        "MsgRegisterResponse": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Register Response"
+        }
+    }
+}

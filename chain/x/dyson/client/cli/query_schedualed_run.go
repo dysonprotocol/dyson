@@ -1,12 +1,12 @@
 package cli
 
 import (
-    "context"
-	
-    "github.com/spf13/cobra"
+	"context"
+
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
-    "github.com/org/dyson/x/dyson/types"
+	"github.com/org/dyson/x/dyson/types"
+	"github.com/spf13/cobra"
 )
 
 func CmdListSchedualedRun() *cobra.Command {
@@ -14,32 +14,32 @@ func CmdListSchedualedRun() *cobra.Command {
 		Use:   "list-schedualed-run",
 		Short: "list all SchedualedRun",
 		RunE: func(cmd *cobra.Command, args []string) error {
-            clientCtx := client.GetClientContextFromCmd(cmd)
+			clientCtx := client.GetClientContextFromCmd(cmd)
 
-            pageReq, err := client.ReadPageRequest(cmd.Flags())
-            if err != nil {
-                return err
-            }
+			pageReq, err := client.ReadPageRequest(cmd.Flags())
+			if err != nil {
+				return err
+			}
 
-            queryClient := types.NewQueryClient(clientCtx)
+			queryClient := types.NewQueryClient(clientCtx)
 
-            params := &types.QueryAllSchedualedRunRequest{
-                Pagination: pageReq,
-            }
+			params := &types.QueryAllSchedualedRunRequest{
+				Pagination: pageReq,
+			}
 
-            res, err := queryClient.SchedualedRunAll(context.Background(), params)
-            if err != nil {
-                return err
-            }
+			res, err := queryClient.SchedualedRunAll(context.Background(), params)
+			if err != nil {
+				return err
+			}
 
-            return clientCtx.PrintProto(res)
+			return clientCtx.PrintProto(res)
 		},
 	}
 
 	flags.AddPaginationFlagsToCmd(cmd, cmd.Use)
 	flags.AddQueryFlagsToCmd(cmd)
 
-    return cmd
+	return cmd
 }
 
 func CmdShowSchedualedRun() *cobra.Command {
@@ -48,27 +48,26 @@ func CmdShowSchedualedRun() *cobra.Command {
 		Short: "shows a SchedualedRun",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-            clientCtx := client.GetClientContextFromCmd(cmd)
+			clientCtx := client.GetClientContextFromCmd(cmd)
 
-            queryClient := types.NewQueryClient(clientCtx)
+			queryClient := types.NewQueryClient(clientCtx)
 
-             argIndex := args[0]
-            
-            params := &types.QueryGetSchedualedRunRequest{
-                Index: argIndex,
-                
-            }
+			argIndex := args[0]
 
-            res, err := queryClient.SchedualedRun(context.Background(), params)
-            if err != nil {
-                return err
-            }
+			params := &types.QueryGetSchedualedRunRequest{
+				Index: argIndex,
+			}
 
-            return clientCtx.PrintProto(res)
+			res, err := queryClient.SchedualedRun(context.Background(), params)
+			if err != nil {
+				return err
+			}
+
+			return clientCtx.PrintProto(res)
 		},
 	}
 
 	flags.AddQueryFlagsToCmd(cmd)
 
-    return cmd
+	return cmd
 }

@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Name",
+    "definitions": {
+        "Name": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "destination": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "expires": {
+                    "type": "string"
+                },
+                "authorized": {
+                    "type": "string"
+                },
+                "precommit": {
+                    "type": "string"
+                },
+                "salt": {
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Name"
+        }
+    }
+}

@@ -9,13 +9,15 @@ from contextlib import redirect_stdout
 
 class BetterServerHandler(ServerHandler):
     def error_output(self, environ, start_response):
-        start_response(self.error_status,self.error_headers[:],sys.exc_info())
+        start_response(self.error_status, self.error_headers[:], sys.exc_info())
         _, exc, _ = sys.exc_info()
-        lineno = getattr(exc, 'lineno', None)
-        col = getattr(exc, 'col', None)
-        return [f"Error: {exc} on line: {lineno} col: {col}\n\n".encode(),
-                b'Logs:\n',
-                buf.getvalue().encode()]
+        lineno = getattr(exc, "lineno", None)
+        col = getattr(exc, "col", None)
+        return [
+            f"Error: {exc} on line: {lineno} col: {col}\n\n".encode(),
+            b"Logs:\n",
+            buf.getvalue().encode(),
+        ]
 
 
 class SimpleWSGIRequestHandler(WSGIRequestHandler):
@@ -56,7 +58,6 @@ class SimpleWSGIServer(WSGIServer):
     def setup(self):
         super().setup()
 
-
     def server_bind(self):
         """Override server_bind to store the server name."""
         host, port = self.server_address[:2]
@@ -85,7 +86,7 @@ if __name__ == "__main__":
 
     with io.StringIO() as buf, redirect_stdout(buf):
         try:
-            ret = eval_script(
+            sandbox, ret = eval_script(
                 port=port,
                 creator=None,
                 address=address,
@@ -94,23 +95,24 @@ if __name__ == "__main__":
                 funcname=None,
                 json_args=None,
                 json_kwargs=None,
-                extra_line="app",
                 code=code,
+                extra_line="",
             )
-            if ret.get('result'):
+            if sandbox and (
+                app := sandbox.scope.get("app", sandbox.scope.get("application", None))
+            ):
                 s = SimpleWSGIServer("x.x.x.x", SimpleWSGIRequestHandler)
-                s.set_app(ret["result"])
+                s.set_app(app)
                 output = BytesIO()
                 s.handle_request(http_request, output)
                 wsgiout = output.getvalue()
             else:
-                wsgiout = (f'''HTTP/1.1 500\ncontent-type: text/plain\n\n{ret['exception']}\n\n{ret['stdout']}'''.encode())
+                wsgiout = f"""HTTP/1.1 500\ncontent-type: text/plain\n\n{ret['exception']}\n\n{ret['stdout']}""".encode()
         except Exception as e:
-            wsgiout = (f'''HTTP/1.1 500\ncontent-type: text/plain\n\nExc: {e}'''.encode())
+            wsgiout = f"""HTTP/1.1 500\ncontent-type: text/plain\n\nExc: {e}""".encode()
         out = buf.getvalue()
 
     import sys
+
     sys.stderr.write(out)
     print(base64.b64encode(wsgiout).decode())
-
-

@@ -1,0 +1,60 @@
+syntax = "proto3";
+package names;
+
+import "names/name.proto";
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "github.com/org/dyson/x/names/types";
+
+// Msg defines the Msg service.
+service Msg {
+      rpc Register(MsgRegister) returns (MsgRegisterResponse);
+  rpc CreateName(MsgCreateName) returns (MsgCreateNameResponse);
+  rpc UpdateName(MsgUpdateName) returns (MsgUpdateNameResponse);
+  rpc DeleteName(MsgDeleteName) returns (MsgDeleteNameResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgRegister {
+  string owner = 1;
+  string name = 2;
+  string destination = 3;
+  string price = 4;
+}
+
+message MsgRegisterResponse {
+}
+
+message MsgCreateName {
+  string owner = 1;
+  string name = 2;
+
+  string destination = 3;
+  string price = 4;
+  string expires = 5;
+  string authorized = 6;
+  string precommit = 7;
+  string salt = 8;
+}
+message MsgCreateNameResponse {}
+
+message MsgUpdateName {
+  string owner = 1;
+  string name = 2;
+
+  string destination = 3;
+  string price = 4;
+  string expires = 5;
+  string authorized = 6;
+  string precommit = 7;
+  string salt = 8;
+}
+message MsgUpdateNameResponse {}
+
+message MsgDeleteName {
+  string owner = 1;
+  string name = 2;
+}
+message MsgDeleteNameResponse {}
+
+// this line is used by starport scaffolding # proto/tx/message

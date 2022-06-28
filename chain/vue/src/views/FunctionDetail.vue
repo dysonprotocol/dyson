@@ -24,23 +24,30 @@
         </div>
       </form>
       <pre v-if="runResponse">
-  TX hash: {{ runResponse.tx }}
-  Cumulative Size: {{ runResponse.cumsize }}
-  Nodes Evaluated: {{ runResponse.nodes_called }}
-  Result: {{ runResponse.result }}
-  Exception: {{ runResponse.exception }}
-  Stdout:
-  {{ runResponse.stdout }}
+TX hash: {{ runResponse.tx }}
+Cumulative Size: {{ runResponse.cumsize }}
+Nodes Evaluated: {{ runResponse.nodes_called }}
+Gas consumed: {{ runResponse.gas_consumed }}
+Gas Limit: {{ runResponse.gas_limit }}
+
+Result: {{ runResponse.result }}
+
+Exception: {{ runResponse.exception }}
+
+Stdout:
+{{ runResponse.stdout }}
   </pre
       >
       <pre v-if="queryResponseErr">{{ queryResponseErr }}</pre>
       <pre v-if="queryResponse">
-  Cumulative Size: {{ queryResponse.cumsize }}
-  Nodes Evaluated: {{ queryResponse.nodes_called }}
-  Result: {{ queryResponse.result }}
-  Exception: {{ queryResponse.exception }}
-  Stdout:
-  {{ queryResponse.stdout }}
+Cumulative Size: {{ queryResponse.cumsize }}
+Nodes Evaluated: {{ queryResponse.nodes_called }}
+Gas consumed: {{ queryResponse.gas_consumed }}
+Gas Limit: {{ queryResponse.gas_limit }}
+Result: {{ queryResponse.result }}
+Exception: {{ queryResponse.exception }}
+Stdout:
+{{ queryResponse.stdout }}
   </pre
       >
     </div>

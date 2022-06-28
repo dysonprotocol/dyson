@@ -4,11 +4,11 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/org/dyson/x/dyson/keeper"
-	"github.com/org/dyson/x/dyson/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	keepertest "github.com/org/dyson/testutil/keeper"
 	"github.com/org/dyson/testutil/nullify"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/org/dyson/x/dyson/keeper"
+	"github.com/org/dyson/x/dyson/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -19,7 +19,7 @@ func createNStorage(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.Stora
 	items := make([]types.Storage, n)
 	for i := range items {
 		items[i].Index = strconv.Itoa(i)
-        
+
 		keeper.SetStorage(ctx, items[i])
 	}
 	return items
@@ -30,8 +30,7 @@ func TestStorageGet(t *testing.T) {
 	items := createNStorage(keeper, ctx, 10)
 	for _, item := range items {
 		rst, found := keeper.GetStorage(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		require.True(t, found)
 		require.Equal(t,
@@ -45,12 +44,10 @@ func TestStorageRemove(t *testing.T) {
 	items := createNStorage(keeper, ctx, 10)
 	for _, item := range items {
 		keeper.RemoveStorage(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		_, found := keeper.GetStorage(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		require.False(t, found)
 	}

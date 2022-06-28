@@ -1,0 +1,303 @@
+{
+	"Name": "names",
+	"Pkg": {
+		"Name": "names",
+		"Path": "/go/src/app/proto/names",
+		"Files": [
+			{
+				"Path": "/go/src/app/proto/names/genesis.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"names/params.proto",
+					"names/name.proto"
+				]
+			},
+			{
+				"Path": "/go/src/app/proto/names/name.proto",
+				"Dependencies": null
+			},
+			{
+				"Path": "/go/src/app/proto/names/params.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto"
+				]
+			},
+			{
+				"Path": "/go/src/app/proto/names/query.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"google/api/annotations.proto",
+					"cosmos/base/query/v1beta1/pagination.proto",
+					"names/params.proto",
+					"names/name.proto"
+				]
+			},
+			{
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"Dependencies": [
+					"names/name.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/org/dyson/x/names/types",
+		"Messages": [
+			{
+				"Name": "GenesisState",
+				"Path": "/go/src/app/proto/names/genesis.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "Name",
+				"Path": "/go/src/app/proto/names/name.proto",
+				"HighestFieldNumber": 8
+			},
+			{
+				"Name": "Params",
+				"Path": "/go/src/app/proto/names/params.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryParamsRequest",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryParamsResponse",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryGetNameRequest",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryGetNameResponse",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAllNameRequest",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAllNameResponse",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryResolveRequest",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryResolveResponse",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgRegister",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "MsgRegisterResponse",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgCreateName",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 8
+			},
+			{
+				"Name": "MsgCreateNameResponse",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgUpdateName",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 8
+			},
+			{
+				"Name": "MsgUpdateNameResponse",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgDeleteName",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "MsgDeleteNameResponse",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 0
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "Params",
+						"RequestType": "QueryParamsRequest",
+						"ReturnsType": "QueryParamsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Name",
+						"RequestType": "QueryGetNameRequest",
+						"ReturnsType": "QueryGetNameResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "NameAll",
+						"RequestType": "QueryAllNameRequest",
+						"ReturnsType": "QueryAllNameResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Resolve",
+						"RequestType": "QueryResolveRequest",
+						"ReturnsType": "QueryResolveResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Msg",
+				"RPCFuncs": [
+					{
+						"Name": "Register",
+						"RequestType": "MsgRegister",
+						"ReturnsType": "MsgRegisterResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "CreateName",
+						"RequestType": "MsgCreateName",
+						"ReturnsType": "MsgCreateNameResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "UpdateName",
+						"RequestType": "MsgUpdateName",
+						"ReturnsType": "MsgUpdateNameResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "DeleteName",
+						"RequestType": "MsgDeleteName",
+						"ReturnsType": "MsgDeleteNameResponse",
+						"HTTPRules": null
+					}
+				]
+			}
+		]
+	},
+	"Msgs": [
+		{
+			"Name": "MsgDeleteName",
+			"URI": "names.MsgDeleteName",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgRegister",
+			"URI": "names.MsgRegister",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgCreateName",
+			"URI": "names.MsgCreateName",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgUpdateName",
+			"URI": "names.MsgUpdateName",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		}
+	],
+	"HTTPQueries": [
+		{
+			"Name": "Params",
+			"FullName": "QueryParams",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Name",
+			"FullName": "QueryName",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "NameAll",
+			"FullName": "QueryNameAll",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Resolve",
+			"FullName": "QueryResolve",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "Name",
+			"FilePath": "/go/src/app/proto/names/name.proto"
+		},
+		{
+			"Name": "Params",
+			"FilePath": "/go/src/app/proto/names/params.proto"
+		}
+	]
+}

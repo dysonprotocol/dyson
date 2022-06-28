@@ -15,14 +15,14 @@
             "grantee": {
               "type": "string"
             },
-            "msg_type_url": {
-              "type": "string",
-              "description": "Optional, msg_type_url, when set, will query only grants matching given msg type."
-            },
             "pagination": {
               "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
               "additionalProperties": true,
               "description": "pagination defines an pagination for the request."
+            },
+            "msgTypeUrl": {
+              "type": "string",
+              "description": "Optional, msg_type_url, when set, will query only grants matching given msg type."
             }
           },
           "additionalProperties": true,
@@ -46,13 +46,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -295,7 +295,7 @@
             "grantee": {
               "type": "string"
             },
-            "msg_type_url": {
+            "msgTypeUrl": {
               "type": "string"
             }
           },
@@ -431,13 +431,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -552,13 +552,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -917,13 +917,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -1052,17 +1052,17 @@
       "definitions": {
         "MsgSend": {
           "properties": {
-            "from_address": {
-              "type": "string"
-            },
-            "to_address": {
-              "type": "string"
-            },
             "amount": {
               "items": {
                 "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
               },
               "type": "array"
+            },
+            "fromAddress": {
+              "type": "string"
+            },
+            "toAddress": {
+              "type": "string"
             }
           },
           "additionalProperties": true,
@@ -1265,7 +1265,7 @@
       "definitions": {
         "QueryValidatorOutstandingRewardsRequest": {
           "properties": {
-            "validator_address": {
+            "validatorAddress": {
               "type": "string",
               "description": "validator_address defines the validator address to query for."
             }
@@ -1343,7 +1343,7 @@
       "definitions": {
         "QueryValidatorCommissionRequest": {
           "properties": {
-            "validator_address": {
+            "validatorAddress": {
               "type": "string",
               "description": "validator_address defines the validator address to query for."
             }
@@ -1422,22 +1422,22 @@
       "definitions": {
         "QueryValidatorSlashesRequest": {
           "properties": {
-            "validator_address": {
-              "type": "string",
-              "description": "validator_address defines the validator address to query for."
-            },
-            "starting_height": {
-              "type": "string",
-              "description": "starting_height defines the optional starting height to query the slashes."
-            },
-            "ending_height": {
-              "type": "string",
-              "description": "starting_height defines the optional ending height to query the slashes."
-            },
             "pagination": {
               "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
               "additionalProperties": true,
               "description": "pagination defines an optional pagination for the request."
+            },
+            "validatorAddress": {
+              "type": "string",
+              "description": "validator_address defines the validator address to query for."
+            },
+            "startingHeight": {
+              "type": "string",
+              "description": "starting_height defines the optional starting height to query the slashes."
+            },
+            "endingHeight": {
+              "type": "string",
+              "description": "starting_height defines the optional ending height to query the slashes."
             }
           },
           "additionalProperties": true,
@@ -1461,13 +1461,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -1555,11 +1555,11 @@
       "definitions": {
         "QueryDelegationRewardsRequest": {
           "properties": {
-            "delegator_address": {
+            "delegatorAddress": {
               "type": "string",
               "description": "delegator_address defines the delegator address to query for."
             },
-            "validator_address": {
+            "validatorAddress": {
               "type": "string",
               "description": "validator_address defines the validator address to query for."
             }
@@ -1627,7 +1627,7 @@
       "definitions": {
         "QueryDelegationTotalRewardsRequest": {
           "properties": {
-            "delegator_address": {
+            "delegatorAddress": {
               "type": "string",
               "description": "delegator_address defines the delegator address to query for."
             }
@@ -1718,7 +1718,7 @@
       "definitions": {
         "QueryDelegatorValidatorsRequest": {
           "properties": {
-            "delegator_address": {
+            "delegatorAddress": {
               "type": "string",
               "description": "delegator_address defines the delegator address to query for."
             }
@@ -1771,7 +1771,7 @@
       "definitions": {
         "QueryDelegatorWithdrawAddressRequest": {
           "properties": {
-            "delegator_address": {
+            "delegatorAddress": {
               "type": "string",
               "description": "delegator_address defines the delegator address to query for."
             }
@@ -1880,10 +1880,10 @@
       "definitions": {
         "MsgSetWithdrawAddress": {
           "properties": {
-            "delegator_address": {
+            "delegatorAddress": {
               "type": "string"
             },
-            "withdraw_address": {
+            "withdrawAddress": {
               "type": "string"
             }
           },
@@ -1918,10 +1918,10 @@
       "definitions": {
         "MsgWithdrawDelegatorReward": {
           "properties": {
-            "delegator_address": {
+            "delegatorAddress": {
               "type": "string"
             },
-            "validator_address": {
+            "validatorAddress": {
               "type": "string"
             }
           },
@@ -1956,7 +1956,7 @@
       "definitions": {
         "MsgWithdrawValidatorCommission": {
           "properties": {
-            "validator_address": {
+            "validatorAddress": {
               "type": "string"
             }
           },
@@ -2046,7 +2046,7 @@
       "definitions": {
         "QueryEvidenceRequest": {
           "properties": {
-            "evidence_hash": {
+            "evidenceHash": {
               "type": "string",
               "description": "evidence_hash defines the hash of the requested evidence.",
               "format": "binary",
@@ -2138,13 +2138,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -2409,13 +2409,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -2619,7 +2619,7 @@
       "definitions": {
         "QueryProposalRequest": {
           "properties": {
-            "proposal_id": {
+            "proposalId": {
               "type": "string",
               "description": "proposal_id defines the unique id of the proposal."
             }
@@ -2782,7 +2782,20 @@
       "definitions": {
         "QueryProposalsRequest": {
           "properties": {
-            "proposal_status": {
+            "voter": {
+              "type": "string",
+              "description": "voter defines the voter address for the proposals."
+            },
+            "depositor": {
+              "type": "string",
+              "description": "depositor defines the deposit addresses from the proposals."
+            },
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": true,
+              "description": "pagination defines an optional pagination for the request."
+            },
+            "proposalStatus": {
               "enum": [
                 "PROPOSAL_STATUS_UNSPECIFIED",
                 0,
@@ -2807,19 +2820,6 @@
               ],
               "title": "Proposal Status",
               "description": "ProposalStatus enumerates the valid statuses of a proposal."
-            },
-            "voter": {
-              "type": "string",
-              "description": "voter defines the voter address for the proposals."
-            },
-            "depositor": {
-              "type": "string",
-              "description": "depositor defines the deposit addresses from the proposals."
-            },
-            "pagination": {
-              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
-              "additionalProperties": true,
-              "description": "pagination defines an optional pagination for the request."
             }
           },
           "additionalProperties": true,
@@ -2843,13 +2843,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -3033,13 +3033,13 @@
       "definitions": {
         "QueryVoteRequest": {
           "properties": {
-            "proposal_id": {
-              "type": "string",
-              "description": "proposal_id defines the unique id of the proposal."
-            },
             "voter": {
               "type": "string",
               "description": "voter defines the oter address for the proposals."
+            },
+            "proposalId": {
+              "type": "string",
+              "description": "proposal_id defines the unique id of the proposal."
             }
           },
           "additionalProperties": true,
@@ -3168,14 +3168,14 @@
       "definitions": {
         "QueryVotesRequest": {
           "properties": {
-            "proposal_id": {
-              "type": "string",
-              "description": "proposal_id defines the unique id of the proposal."
-            },
             "pagination": {
               "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
               "additionalProperties": true,
               "description": "pagination defines an optional pagination for the request."
+            },
+            "proposalId": {
+              "type": "string",
+              "description": "proposal_id defines the unique id of the proposal."
             }
           },
           "additionalProperties": true,
@@ -3199,13 +3199,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -3358,7 +3358,7 @@
       "definitions": {
         "QueryParamsRequest": {
           "properties": {
-            "params_type": {
+            "paramsType": {
               "type": "string",
               "description": "params_type defines which parameters to query for, can be one of \"voting\", \"tallying\" or \"deposit\"."
             }
@@ -3494,13 +3494,13 @@
       "definitions": {
         "QueryDepositRequest": {
           "properties": {
-            "proposal_id": {
-              "type": "string",
-              "description": "proposal_id defines the unique id of the proposal."
-            },
             "depositor": {
               "type": "string",
               "description": "depositor defines the deposit addresses from the proposals."
+            },
+            "proposalId": {
+              "type": "string",
+              "description": "proposal_id defines the unique id of the proposal."
             }
           },
           "additionalProperties": true,
@@ -3584,14 +3584,14 @@
       "definitions": {
         "QueryDepositsRequest": {
           "properties": {
-            "proposal_id": {
-              "type": "string",
-              "description": "proposal_id defines the unique id of the proposal."
-            },
             "pagination": {
               "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
               "additionalProperties": true,
               "description": "pagination defines an optional pagination for the request."
+            },
+            "proposalId": {
+              "type": "string",
+              "description": "proposal_id defines the unique id of the proposal."
             }
           },
           "additionalProperties": true,
@@ -3615,13 +3615,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -3728,7 +3728,7 @@
       "definitions": {
         "QueryTallyResultRequest": {
           "properties": {
-            "proposal_id": {
+            "proposalId": {
               "type": "string",
               "description": "proposal_id defines the unique id of the proposal."
             }
@@ -3815,14 +3815,14 @@
               "additionalProperties": true,
               "type": "object"
             },
-            "initial_deposit": {
+            "proposer": {
+              "type": "string"
+            },
+            "initialDeposit": {
               "items": {
                 "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
               },
               "type": "array"
-            },
-            "proposer": {
-              "type": "string"
             }
           },
           "additionalProperties": true,
@@ -3875,9 +3875,6 @@
       "definitions": {
         "MsgVote": {
           "properties": {
-            "proposal_id": {
-              "type": "string"
-            },
             "voter": {
               "type": "string"
             },
@@ -3904,6 +3901,9 @@
               ],
               "title": "Vote Option",
               "description": "VoteOption enumerates the valid vote options for a given governance proposal."
+            },
+            "proposalId": {
+              "type": "string"
             }
           },
           "additionalProperties": true,
@@ -3937,9 +3937,6 @@
       "definitions": {
         "MsgVoteWeighted": {
           "properties": {
-            "proposal_id": {
-              "type": "string"
-            },
             "voter": {
               "type": "string"
             },
@@ -3948,6 +3945,9 @@
                 "$ref": "#/definitions/cosmos.gov.v1beta1.WeightedVoteOption"
               },
               "type": "array"
+            },
+            "proposalId": {
+              "type": "string"
             }
           },
           "additionalProperties": true,
@@ -4016,9 +4016,6 @@
       "definitions": {
         "MsgDeposit": {
           "properties": {
-            "proposal_id": {
-              "type": "string"
-            },
             "depositor": {
               "type": "string"
             },
@@ -4027,6 +4024,9 @@
                 "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
               },
               "type": "array"
+            },
+            "proposalId": {
+              "type": "string"
             }
           },
           "additionalProperties": true,
@@ -4147,7 +4147,7 @@
       "definitions": {
         "QuerySigningInfoRequest": {
           "properties": {
-            "cons_address": {
+            "consAddress": {
               "type": "string",
               "description": "cons_address is the address to query signing info of"
             }
@@ -4256,13 +4256,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -4365,7 +4365,7 @@
       "definitions": {
         "MsgUnjail": {
           "properties": {
-            "validator_addr": {
+            "validatorAddr": {
               "type": "string"
             }
           },
@@ -4431,13 +4431,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -4661,7 +4661,7 @@
       "definitions": {
         "QueryValidatorRequest": {
           "properties": {
-            "validator_addr": {
+            "validatorAddr": {
               "type": "string",
               "description": "validator_addr defines the validator address to query for."
             }
@@ -4864,14 +4864,14 @@
       "definitions": {
         "QueryValidatorDelegationsRequest": {
           "properties": {
-            "validator_addr": {
-              "type": "string",
-              "description": "validator_addr defines the validator address to query for."
-            },
             "pagination": {
               "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
               "additionalProperties": true,
               "description": "pagination defines an optional pagination for the request."
+            },
+            "validatorAddr": {
+              "type": "string",
+              "description": "validator_addr defines the validator address to query for."
             }
           },
           "additionalProperties": true,
@@ -4895,13 +4895,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -5024,14 +5024,14 @@
       "definitions": {
         "QueryValidatorUnbondingDelegationsRequest": {
           "properties": {
-            "validator_addr": {
-              "type": "string",
-              "description": "validator_addr defines the validator address to query for."
-            },
             "pagination": {
               "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
               "additionalProperties": true,
               "description": "pagination defines an optional pagination for the request."
+            },
+            "validatorAddr": {
+              "type": "string",
+              "description": "validator_addr defines the validator address to query for."
             }
           },
           "additionalProperties": true,
@@ -5055,13 +5055,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -5182,11 +5182,11 @@
       "definitions": {
         "QueryDelegationRequest": {
           "properties": {
-            "delegator_addr": {
+            "delegatorAddr": {
               "type": "string",
               "description": "delegator_addr defines the delegator address to query for."
             },
-            "validator_addr": {
+            "validatorAddr": {
               "type": "string",
               "description": "validator_addr defines the validator address to query for."
             }
@@ -5288,11 +5288,11 @@
       "definitions": {
         "QueryUnbondingDelegationRequest": {
           "properties": {
-            "delegator_addr": {
+            "delegatorAddr": {
               "type": "string",
               "description": "delegator_addr defines the delegator address to query for."
             },
-            "validator_addr": {
+            "validatorAddr": {
               "type": "string",
               "description": "validator_addr defines the validator address to query for."
             }
@@ -5392,14 +5392,14 @@
       "definitions": {
         "QueryDelegatorDelegationsRequest": {
           "properties": {
-            "delegator_addr": {
-              "type": "string",
-              "description": "delegator_addr defines the delegator address to query for."
-            },
             "pagination": {
               "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
               "additionalProperties": true,
               "description": "pagination defines an optional pagination for the request."
+            },
+            "delegatorAddr": {
+              "type": "string",
+              "description": "delegator_addr defines the delegator address to query for."
             }
           },
           "additionalProperties": true,
@@ -5423,13 +5423,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -5553,14 +5553,14 @@
       "definitions": {
         "QueryDelegatorUnbondingDelegationsRequest": {
           "properties": {
-            "delegator_addr": {
-              "type": "string",
-              "description": "delegator_addr defines the delegator address to query for."
-            },
             "pagination": {
               "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
               "additionalProperties": true,
               "description": "pagination defines an optional pagination for the request."
+            },
+            "delegatorAddr": {
+              "type": "string",
+              "description": "delegator_addr defines the delegator address to query for."
             }
           },
           "additionalProperties": true,
@@ -5584,13 +5584,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -5711,22 +5711,22 @@
       "definitions": {
         "QueryRedelegationsRequest": {
           "properties": {
-            "delegator_addr": {
-              "type": "string",
-              "description": "delegator_addr defines the delegator address to query for."
-            },
-            "src_validator_addr": {
-              "type": "string",
-              "description": "src_validator_addr defines the validator address to redelegate from."
-            },
-            "dst_validator_addr": {
-              "type": "string",
-              "description": "dst_validator_addr defines the validator address to redelegate to."
-            },
             "pagination": {
               "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
               "additionalProperties": true,
               "description": "pagination defines an optional pagination for the request."
+            },
+            "delegatorAddr": {
+              "type": "string",
+              "description": "delegator_addr defines the delegator address to query for."
+            },
+            "srcValidatorAddr": {
+              "type": "string",
+              "description": "src_validator_addr defines the validator address to redelegate from."
+            },
+            "dstValidatorAddr": {
+              "type": "string",
+              "description": "dst_validator_addr defines the validator address to redelegate to."
             }
           },
           "additionalProperties": true,
@@ -5750,13 +5750,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -5914,14 +5914,14 @@
       "definitions": {
         "QueryDelegatorValidatorsRequest": {
           "properties": {
-            "delegator_addr": {
-              "type": "string",
-              "description": "delegator_addr defines the delegator address to query for."
-            },
             "pagination": {
               "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
               "additionalProperties": true,
               "description": "pagination defines an optional pagination for the request."
+            },
+            "delegatorAddr": {
+              "type": "string",
+              "description": "delegator_addr defines the delegator address to query for."
             }
           },
           "additionalProperties": true,
@@ -5945,13 +5945,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -6177,11 +6177,11 @@
       "definitions": {
         "QueryDelegatorValidatorRequest": {
           "properties": {
-            "delegator_addr": {
+            "delegatorAddr": {
               "type": "string",
               "description": "delegator_addr defines the delegator address to query for."
             },
-            "validator_addr": {
+            "validatorAddr": {
               "type": "string",
               "description": "validator_addr defines the validator address to query for."
             }
@@ -6873,15 +6873,6 @@
               "$ref": "#/definitions/cosmos.staking.v1beta1.CommissionRates",
               "additionalProperties": true
             },
-            "min_self_delegation": {
-              "type": "string"
-            },
-            "delegator_address": {
-              "type": "string"
-            },
-            "validator_address": {
-              "type": "string"
-            },
             "pubkey": {
               "properties": {
                 "type_url": {
@@ -6901,6 +6892,15 @@
             "value": {
               "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
               "additionalProperties": true
+            },
+            "minSelfDelegation": {
+              "type": "string"
+            },
+            "delegatorAddress": {
+              "type": "string"
+            },
+            "validatorAddress": {
+              "type": "string"
             }
           },
           "additionalProperties": true,
@@ -6928,11 +6928,11 @@
               "type": "string",
               "description": "rate is the commission rate charged to delegators, as a fraction."
             },
-            "max_rate": {
+            "maxRate": {
               "type": "string",
               "description": "max_rate defines the maximum commission rate which validator can ever charge, as a fraction."
             },
-            "max_change_rate": {
+            "maxChangeRate": {
               "type": "string",
               "description": "max_change_rate defines the maximum daily increase of the validator commission, as a fraction."
             }
@@ -6956,13 +6956,13 @@
               "type": "string",
               "description": "website defines an optional website link."
             },
-            "security_contact": {
-              "type": "string",
-              "description": "security_contact defines an optional email for security contact."
-            },
             "details": {
               "type": "string",
               "description": "details define other optional details."
+            },
+            "securityContact": {
+              "type": "string",
+              "description": "security_contact defines an optional email for security contact."
             }
           },
           "additionalProperties": true,
@@ -7000,14 +7000,14 @@
               "$ref": "#/definitions/cosmos.staking.v1beta1.Description",
               "additionalProperties": true
             },
-            "validator_address": {
+            "validatorAddress": {
               "type": "string"
             },
-            "commission_rate": {
+            "commissionRate": {
               "type": "string",
               "description": "We pass a reference to the new commission rate and min self delegation as it's not mandatory to update. If not updated, the deserialized rate will be zero with no way to distinguish if an update was intended. REF: #2373"
             },
-            "min_self_delegation": {
+            "minSelfDelegation": {
               "type": "string"
             }
           },
@@ -7030,13 +7030,13 @@
               "type": "string",
               "description": "website defines an optional website link."
             },
-            "security_contact": {
-              "type": "string",
-              "description": "security_contact defines an optional email for security contact."
-            },
             "details": {
               "type": "string",
               "description": "details define other optional details."
+            },
+            "securityContact": {
+              "type": "string",
+              "description": "security_contact defines an optional email for security contact."
             }
           },
           "additionalProperties": true,
@@ -7070,15 +7070,15 @@
       "definitions": {
         "MsgDelegate": {
           "properties": {
-            "delegator_address": {
-              "type": "string"
-            },
-            "validator_address": {
-              "type": "string"
-            },
             "amount": {
               "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
               "additionalProperties": true
+            },
+            "delegatorAddress": {
+              "type": "string"
+            },
+            "validatorAddress": {
+              "type": "string"
             }
           },
           "additionalProperties": true,
@@ -7126,18 +7126,18 @@
       "definitions": {
         "MsgBeginRedelegate": {
           "properties": {
-            "delegator_address": {
-              "type": "string"
-            },
-            "validator_src_address": {
-              "type": "string"
-            },
-            "validator_dst_address": {
-              "type": "string"
-            },
             "amount": {
               "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
               "additionalProperties": true
+            },
+            "delegatorAddress": {
+              "type": "string"
+            },
+            "validatorSrcAddress": {
+              "type": "string"
+            },
+            "validatorDstAddress": {
+              "type": "string"
             }
           },
           "additionalProperties": true,
@@ -7191,15 +7191,15 @@
       "definitions": {
         "MsgUndelegate": {
           "properties": {
-            "delegator_address": {
-              "type": "string"
-            },
-            "validator_address": {
-              "type": "string"
-            },
             "amount": {
               "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
               "additionalProperties": true
+            },
+            "delegatorAddress": {
+              "type": "string"
+            },
+            "validatorAddress": {
+              "type": "string"
             }
           },
           "additionalProperties": true,
@@ -7253,23 +7253,23 @@
       "definitions": {
         "MsgCreateVestingAccount": {
           "properties": {
-            "from_address": {
-              "type": "string"
-            },
-            "to_address": {
-              "type": "string"
-            },
             "amount": {
               "items": {
                 "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
               },
               "type": "array"
             },
-            "end_time": {
-              "type": "string"
-            },
             "delayed": {
               "type": "boolean"
+            },
+            "fromAddress": {
+              "type": "string"
+            },
+            "toAddress": {
+              "type": "string"
+            },
+            "endTime": {
+              "type": "string"
             }
           },
           "additionalProperties": true,
@@ -7411,7 +7411,7 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
+            "countTotal": {
               "type": "boolean",
               "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
@@ -7560,14 +7560,6 @@
       "definitions": {
         "MsgTransfer": {
           "properties": {
-            "source_port": {
-              "type": "string",
-              "description": "the port on which the packet will be sent"
-            },
-            "source_channel": {
-              "type": "string",
-              "description": "the channel by which the packet will be sent"
-            },
             "token": {
               "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
               "additionalProperties": true,
@@ -7581,12 +7573,20 @@
               "type": "string",
               "description": "the recipient address on the destination chain"
             },
-            "timeout_height": {
+            "sourcePort": {
+              "type": "string",
+              "description": "the port on which the packet will be sent"
+            },
+            "sourceChannel": {
+              "type": "string",
+              "description": "the channel by which the packet will be sent"
+            },
+            "timeoutHeight": {
               "$ref": "#/definitions/ibc.core.client.v1.Height",
               "additionalProperties": true,
               "description": "Timeout height relative to the current block height. The timeout is disabled when set to 0."
             },
-            "timeout_timestamp": {
+            "timeoutTimestamp": {
               "type": "string",
               "description": "Timeout timestamp (in nanoseconds) relative to the current block timestamp. The timeout is disabled when set to 0."
             }
@@ -7612,11 +7612,11 @@
         },
         "ibc.core.client.v1.Height": {
           "properties": {
-            "revision_number": {
+            "revisionNumber": {
               "type": "string",
               "description": "the revision that the client is currently on"
             },
-            "revision_height": {
+            "revisionHeight": {
               "type": "string",
               "description": "the height within the given revision"
             }
@@ -7821,13 +7821,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -8080,13 +8080,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -8331,15 +8331,6 @@
               "type": "string",
               "description": "dys address of the scrit to call"
             },
-            "extra_lines": {
-              "type": "string",
-              "description": "optional extra source code to append to the end of the script before running",
-              "format": "textarea"
-            },
-            "function_name": {
-              "type": "string",
-              "description": "optional function to call"
-            },
             "args": {
               "type": "string",
               "description": "optional args to call the function with"
@@ -8351,6 +8342,15 @@
             "coins": {
               "type": "string",
               "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+            },
+            "extraLines": {
+              "type": "string",
+              "description": "optional extra source code to append to the end of the script before running",
+              "format": "textarea"
+            },
+            "functionName": {
+              "type": "string",
+              "description": "optional function to call"
             }
           },
           "additionalProperties": true,
@@ -8420,13 +8420,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -8539,13 +8539,13 @@
               "type": "string",
               "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
             },
-            "count_total": {
-              "type": "boolean",
-              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
-            },
             "reverse": {
               "type": "boolean",
               "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
             }
           },
           "additionalProperties": true,
@@ -8658,14 +8658,6 @@
               "type": "string",
               "description": "dys address of the scrit to call"
             },
-            "extra_lines": {
-              "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
-            },
-            "function_name": {
-              "type": "string",
-              "description": "optional function to call"
-            },
             "args": {
               "type": "string",
               "description": "optional args to call the function with"
@@ -8677,6 +8669,14 @@
             "coins": {
               "type": "string",
               "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+            },
+            "extraLines": {
+              "type": "string",
+              "description": "optional extra source code to append to the end of the script before running"
+            },
+            "functionName": {
+              "type": "string",
+              "description": "optional function to call"
             }
           },
           "additionalProperties": true,
@@ -8961,15 +8961,6 @@
               "type": "string",
               "description": "dys address of the scrit to call"
             },
-            "extra_lines": {
-              "type": "string",
-              "description": "optional extra source code to append to the end of the script before running",
-              "format": "textarea"
-            },
-            "function_name": {
-              "type": "string",
-              "description": "optional function to call"
-            },
             "args": {
               "type": "string",
               "description": "optional args to call the function with"
@@ -8981,6 +8972,15 @@
             "coins": {
               "type": "string",
               "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+            },
+            "extraLines": {
+              "type": "string",
+              "description": "optional extra source code to append to the end of the script before running",
+              "format": "textarea"
+            },
+            "functionName": {
+              "type": "string",
+              "description": "optional function to call"
             }
           },
           "additionalProperties": true,
@@ -9004,6 +9004,492 @@
           "additionalProperties": true,
           "type": "object",
           "title": "Msg Run Response"
+        }
+      }
+    },
+    "http_rules": null
+  },
+  "names/QueryParams": {
+    "module_name": "names",
+    "name": "Params",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryParamsRequest",
+      "definitions": {
+        "QueryParamsRequest": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query Params Request",
+          "description": "QueryParamsRequest is request type for the Query/Params RPC method."
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryParamsResponse",
+      "definitions": {
+        "QueryParamsResponse": {
+          "properties": {
+            "params": {
+              "$ref": "#/definitions/names.Params",
+              "additionalProperties": true,
+              "description": "params holds all the parameters of this module."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query Params Response",
+          "description": "QueryParamsResponse is response type for the Query/Params RPC method."
+        },
+        "names.Params": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Params",
+          "description": "Params defines the parameters for the module."
+        }
+      }
+    },
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "names/QueryName": {
+    "module_name": "names",
+    "name": "Name",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryGetNameRequest",
+      "definitions": {
+        "QueryGetNameRequest": {
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query Get Name Request"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryGetNameResponse",
+      "definitions": {
+        "QueryGetNameResponse": {
+          "properties": {
+            "name": {
+              "$ref": "#/definitions/names.Name",
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query Get Name Response"
+        },
+        "names.Name": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "destination": {
+              "type": "string"
+            },
+            "price": {
+              "type": "string"
+            },
+            "expires": {
+              "type": "string"
+            },
+            "authorized": {
+              "type": "string"
+            },
+            "precommit": {
+              "type": "string"
+            },
+            "salt": {
+              "type": "string"
+            },
+            "owner": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Name"
+        }
+      }
+    },
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "names/QueryNameAll": {
+    "module_name": "names",
+    "name": "NameAll",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryAllNameRequest",
+      "definitions": {
+        "QueryAllNameRequest": {
+          "properties": {
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query All Name Request"
+        },
+        "cosmos.base.query.v1beta1.PageRequest": {
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "offset": {
+              "type": "string",
+              "description": "offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set."
+            },
+            "limit": {
+              "type": "string",
+              "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "reverse is set to true if results are to be returned in the descending order."
+            },
+            "countTotal": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Page Request",
+          "description": "PageRequest is to be embedded in gRPC request messages for efficient pagination. Ex:  message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryAllNameResponse",
+      "definitions": {
+        "QueryAllNameResponse": {
+          "properties": {
+            "name": {
+              "items": {
+                "$ref": "#/definitions/names.Name"
+              },
+              "type": "array"
+            },
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageResponse",
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query All Name Response"
+        },
+        "cosmos.base.query.v1beta1.PageResponse": {
+          "properties": {
+            "next_key": {
+              "type": "string",
+              "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "total": {
+              "type": "string",
+              "description": "total is total number of results available if PageRequest.count_total was set, its value is undefined otherwise"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Page Response",
+          "description": "PageResponse is to be embedded in gRPC response messages where the corresponding request message has used PageRequest.  message SomeResponse {          repeated Bar results = 1;          PageResponse page = 2;  }"
+        },
+        "names.Name": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "destination": {
+              "type": "string"
+            },
+            "price": {
+              "type": "string"
+            },
+            "expires": {
+              "type": "string"
+            },
+            "authorized": {
+              "type": "string"
+            },
+            "precommit": {
+              "type": "string"
+            },
+            "salt": {
+              "type": "string"
+            },
+            "owner": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Name"
+        }
+      }
+    },
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "names/QueryResolve": {
+    "module_name": "names",
+    "name": "Resolve",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryResolveRequest",
+      "definitions": {
+        "QueryResolveRequest": {
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query Resolve Request"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryResolveResponse",
+      "definitions": {
+        "QueryResolveResponse": {
+          "properties": {
+            "address": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query Resolve Response"
+        }
+      }
+    },
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "names/sendMsgRegister": {
+    "module_name": "names",
+    "name": "Register",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgRegister",
+      "definitions": {
+        "MsgRegister": {
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "destination": {
+              "type": "string"
+            },
+            "price": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Register"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgRegisterResponse",
+      "definitions": {
+        "MsgRegisterResponse": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Register Response"
+        }
+      }
+    },
+    "http_rules": null
+  },
+  "names/sendMsgCreateName": {
+    "module_name": "names",
+    "name": "CreateName",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgCreateName",
+      "definitions": {
+        "MsgCreateName": {
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "destination": {
+              "type": "string"
+            },
+            "price": {
+              "type": "string"
+            },
+            "expires": {
+              "type": "string"
+            },
+            "authorized": {
+              "type": "string"
+            },
+            "precommit": {
+              "type": "string"
+            },
+            "salt": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Create Name"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgCreateNameResponse",
+      "definitions": {
+        "MsgCreateNameResponse": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Create Name Response"
+        }
+      }
+    },
+    "http_rules": null
+  },
+  "names/sendMsgUpdateName": {
+    "module_name": "names",
+    "name": "UpdateName",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgUpdateName",
+      "definitions": {
+        "MsgUpdateName": {
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "destination": {
+              "type": "string"
+            },
+            "price": {
+              "type": "string"
+            },
+            "expires": {
+              "type": "string"
+            },
+            "authorized": {
+              "type": "string"
+            },
+            "precommit": {
+              "type": "string"
+            },
+            "salt": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Update Name"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgUpdateNameResponse",
+      "definitions": {
+        "MsgUpdateNameResponse": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Update Name Response"
+        }
+      }
+    },
+    "http_rules": null
+  },
+  "names/sendMsgDeleteName": {
+    "module_name": "names",
+    "name": "DeleteName",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgDeleteName",
+      "definitions": {
+        "MsgDeleteName": {
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Delete Name"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgDeleteNameResponse",
+      "definitions": {
+        "MsgDeleteNameResponse": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Delete Name Response"
         }
       }
     },

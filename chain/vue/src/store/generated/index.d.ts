@@ -11,5 +11,6 @@ declare const _default: {
     CosmosCosmosSdkCosmosVestingV1Beta1: (store: any) => void;
     CosmosIbcGoIbcApplicationsTransferV1: (store: any) => void;
     OrgDysonDyson: (store: any) => void;
+    OrgDysonNames: (store: any) => void;
 };
 export default _default;

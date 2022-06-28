@@ -1,4 +1,6 @@
 import ast
+import forge
+
 from freezegun import freeze_time
 
 import re
@@ -22,48 +24,6 @@ from functools import partial
 import dyslang
 
 MAX_CUM_SIZE = dyslang.MAX_SCOPE_SIZE * dyslang.MAX_NODE_CALLS
-
-dyslang.ALLOWED_BUILTINS = [
-    "dict.get",
-    "dict.items",
-    "dict.keys",
-    "dict.values",
-    "isinstance",
-    "issubclass",
-    "iter",
-    "len",
-    "sorted",
-    "list.append",
-    "list.count",
-    "list.index",
-    "list.pop",
-    "list.reverse",
-    "list.sort",
-    "list.extend",
-    "print",
-    "str.count",
-    "str.startswith",
-    "str.endswith",
-    "str.encode",
-    "str.join",
-    "str.strip",
-    "str.rstrip",
-    "str.lstrip",
-    "str.removeprefix",
-    "str.removesuffix",
-    "str.split",
-    "sum",
-    "bytes.join",
-    "bool",
-    "findall",  # re2.findall
-    "finditer",  # re2.finditer
-    "fullmatch",  # re2.fullmatch
-    "match",  # re2.match
-    "search",  # re2.search
-    "split",  # re2.split
-    "FakeDatetime.isoformat",
-    "FakeDatetime.fromisoformat",
-]
 
 
 class DysonEval(dyslang.DysEval):
@@ -149,12 +109,29 @@ def main():
 
 
 def get_module_dict():
-    import pathlib, uuid, mimetypes, urllib, base64, decimal, jsonschema, html, hashlib, typing, string, datetime
+    import pathlib, uuid, mimetypes, urllib, base64, decimal, jsonschema, html, hashlib, typing, string, datetime, inspect
 
-    def safe_json_dumps(j, indent=None, default=None):
-        if indent:
-            assert indent <= 4, f"indent must be less than or equal 4, got: {indent}"
-        return json.dumps(j, indent, default)
+    @forge.copy(json.dumps)
+    def safe_json_dumps(**kwargs):
+        if kwargs.get("separators", None):
+            assert kwargs["separators"] == (
+                ",",
+                ":",
+            ), f"separators can only be (',', ': ')"
+        if check_circular := kwargs.get("check_circular", None):
+            assert check_circular is True, "check_circular must be True"
+        if indent := kwargs.get("indent", None):
+            if isinstance(indent, str):
+                assert (
+                    len(kwargs["indent"]) <= 4
+                ), f"indent must be less than or equal 4, got: {indent}"
+            if isinstance(indent, int):
+                assert (
+                    kwargs["indent"] <= 4
+                ), f"indent must be less than or equal 4, got: {indent}"
+        return json.dumps(**kwargs)
+
+    safe_json_dumps.__doc__ = json.dumps.__doc__
 
     return {
         "datetime": {
@@ -212,6 +189,81 @@ def get_module_dict():
     }
 
 
+def build_sandbox(port, creator, address, amount, block_info):
+    url = f"http://localhost:{port}/rpc"
+
+    def _chain(method, **params):
+        """
+        The main way to interact with the chain from a script.
+
+        :param method: the command to call on the chain, see TxBuilder for a list of possible commands
+        `**kwargs` will depend on the command being called
+
+        :returns: the response of the command or error
+
+        """
+        # Example echo method
+        method = "".join((filter(str.isalnum, method))).capitalize()
+
+        def snake(name):
+            return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
+
+        params = {snake(k): v for k, v in params.items()}
+        payload = {
+            "method": f"RpcService.{method}",
+            "params": [params],
+            "jsonrpc": "2.0",
+            "id": 0,
+        }
+        res = requests.post(url, json=payload)
+        # print(f"rpc {method}: {res.status_code} response from golang: {res.text}")
+        try:
+            ret_json = res.json()
+            return ret_json
+        except json.JSONDecodeError:
+            return {"exception": res.text}
+
+    def rpc(method, **params):
+        print("DeprecationWarning: dyson.rpc is deprecated, use dyson._chain")
+        return _chain(method, **params)
+
+    scope = {}
+    sandbox = DysonEval(
+        scope=scope,
+    )
+
+    def dyson_print(*x):
+        print(*x)
+
+    sandbox.scope.dicts[0]["print"] = dyson_print
+    sandbox.scope.dicts[0]["globals"] = sandbox.scope.globals
+    sandbox.scope.dicts[0]["locals"] = sandbox.scope.locals
+
+    sandbox.consume_gas_func = lambda amount: _chain("ConsumeGas", amount=amount)
+
+    def get_gas_consumed():
+        return sandbox.gas_consumed
+
+    def get_gas_limit():
+        return sandbox.gas_limit
+
+    module_dict = get_module_dict()
+
+    module_dict["dys"] = {
+        "rpc": rpc,
+        "_chain": _chain,
+        "SCRIPT_ADDRESS": address,
+        "CALLER": creator,
+        "AMOUNT": amount,
+        "BLOCK_INFO": block_info,
+        "get_gas_consumed": get_gas_consumed,
+        "get_gas_limit": get_gas_limit,
+    }
+
+    sandbox.modules = dyslang.make_modules(module_dict)
+    return sandbox
+
+
 def eval_script(
     port,
     creator,
@@ -227,79 +279,50 @@ def eval_script(
     result = None
     stdout = None
     exception = None
+    sandbox = None
     nodes_called = 0
     cumsize = 0
     block_info = json.loads(block_info)
-    with freeze_time(block_info['time']):
+    with freeze_time(block_info["time"]):
         with io.StringIO() as buf, redirect_stdout(buf):
             try:
-                url = f"http://localhost:{port}/rpc"
 
-                result = None
-                exception = None
-                scope = {
-                    "print": lambda *x: print(*x),
-                }
-
-                def rpc(method, **params):
-                    # Example echo method
-                    method = "".join((filter(str.isalnum, method))).capitalize()
-
-                    def snake(name):
-                        return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
-
-                    params = {snake(k): v for k, v in params.items()}
-                    payload = {
-                        "method": f"RpcService.{method}",
-                        "params": [params],
-                        "jsonrpc": "2.0",
-                        "id": 0,
-                    }
-                    res = requests.post(url, json=payload)
-                    # print(f"rpc {method}: {res.status_code} response from golang: {res.text}")
-                    try:
-                        ret_json = res.json()
-                        return ret_json
-                    except json.JSONDecodeError:
-                        return {"exception": res.text}
-
-                sandbox = DysonEval(
-                    scope=scope,
+                sandbox = build_sandbox(
+                    port,
+                    creator,
+                    address,
+                    amount,
+                    block_info,
                 )
-
-                sandbox.consume_gas_func = lambda amount: rpc("ConsumeGas", amount=amount)
-
-                def get_gas_consumed():
-                    return sandbox.gas_consumed
-
-                def get_gas_limit():
-                    return sandbox.gas_limit
-
-                module_dict = get_module_dict()
-                module_dict["dys"] = {
-                    "rpc": rpc,
-                    "SCRIPT_ADDRESS": address,
-                    "CALLER": creator,
-                    "AMOUNT": amount,
-                    "BLOCK_INFO": block_info,
-                    "get_gas_consumed": get_gas_consumed,
-                    "get_gas_limit": get_gas_limit,
-                }
-
-                sandbox.modules = dyslang.make_modules(module_dict)
+                sandbox.unconsumed_size = 1
+                sandbox.consume_gas()
                 result = (
                     sandbox.eval(
                         code + "\n" + extra_line,
                     )
                     or [None]
                 )[-1]
+                scope = sandbox.scope.flatten()
+                public_scope_all = scope.get(
+                    "__all__",
+                    [
+                        k
+                        for k, v in scope.items()
+                        if k != "rpc"
+                        and not k.startswith("_")
+                        and k not in ["app", "application"]
+                    ],
+                )
                 if funcname:
                     if funcname in scope:
-                        args = json.loads(json_args or "[]")
-                        # print("args", args)
-                        kwargs = json.loads(json_kwargs or "{}")
-                        # print("kwargs", kwargs)
-                        result = scope[funcname](*args, **kwargs)
+                        if funcname in public_scope_all:
+                            args = json.loads(json_args or "[]")
+                            # print("args", args)
+                            kwargs = json.loads(json_kwargs or "{}")
+                            # print("kwargs", kwargs)
+                            result = scope[funcname](*args, **kwargs)
+                        else:
+                            raise Exception(f"function not public: {funcname}")
                     else:
                         raise Exception(f"function not defined: {funcname}")
             except dyslang.DysRuntimeError as e:
@@ -322,7 +345,7 @@ def eval_script(
             "lineno": getattr(exception, "lineno", 0),
             "col": getattr(exception, "col", 0),
         }
-    return {
+    return sandbox, {
         "result": result,
         "stdout": stdout,
         "exception": exception,
@@ -330,12 +353,26 @@ def eval_script(
         # https://github.com/tendermint/vue/issues/147
         # https://github.com/tendermint/starport/blob/develop/starport/pkg/cosmosgen/templates/vuex/store/index.ts.tpl#L170
         "nodes_called": nodes_called,
+        "gas_limit": sandbox.gas_limit if sandbox else None,
+        "gas_consumed": sandbox.gas_consumed if sandbox else None,
         "cumsize": cumsize,
     }
 
 
+dyslang.WHITELIST_FUNCTIONS.update(
+    [
+        "str.*",
+        "wsgiref.handlers.BaseHandler.start_response",
+    ]
+)
+mod_dict = get_module_dict()
+for k, v in mod_dict.items():
+    for kk in v:
+        dyslang.WHITELIST_FUNCTIONS.add(k + "." + kk)
+
+
 if __name__ == "__main__":
-    response = main()
+    _, response = main()
     print(
         json.dumps(response, sort_keys=True, default=repr), end=""
     )  # "end" is important for parsing in go

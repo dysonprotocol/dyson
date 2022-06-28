@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-    "strconv"
+	"strconv"
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/org/dyson/x/dyson/types"
-	"github.com/org/dyson/testutil/nullify"
 	keepertest "github.com/org/dyson/testutil/keeper"
+	"github.com/org/dyson/testutil/nullify"
+	"github.com/org/dyson/x/dyson/types"
 )
 
 // Prevent strconv unused error
@@ -29,28 +29,25 @@ func TestStorageQuerySingle(t *testing.T) {
 		err      error
 	}{
 		{
-			desc:     "First",
-			request:  &types.QueryGetStorageRequest{
-			    Index: msgs[0].Index,
-                
+			desc: "First",
+			request: &types.QueryGetStorageRequest{
+				Index: msgs[0].Index,
 			},
 			response: &types.QueryGetStorageResponse{Storage: msgs[0]},
 		},
 		{
-			desc:     "Second",
-			request:  &types.QueryGetStorageRequest{
-			    Index: msgs[1].Index,
-                
+			desc: "Second",
+			request: &types.QueryGetStorageRequest{
+				Index: msgs[1].Index,
 			},
 			response: &types.QueryGetStorageResponse{Storage: msgs[1]},
 		},
 		{
-			desc:    "KeyNotFound",
+			desc: "KeyNotFound",
 			request: &types.QueryGetStorageRequest{
-			    Index:strconv.Itoa(100000),
-                
+				Index: strconv.Itoa(100000),
 			},
-			err:     status.Error(codes.InvalidArgument, "not found"),
+			err: status.Error(codes.InvalidArgument, "not found"),
 		},
 		{
 			desc: "InvalidRequest",
@@ -94,9 +91,9 @@ func TestStorageQueryPaginated(t *testing.T) {
 			require.NoError(t, err)
 			require.LessOrEqual(t, len(resp.Storage), step)
 			require.Subset(t,
-            	nullify.Fill(msgs),
-            	nullify.Fill(resp.Storage),
-            )
+				nullify.Fill(msgs),
+				nullify.Fill(resp.Storage),
+			)
 		}
 	})
 	t.Run("ByKey", func(t *testing.T) {
@@ -107,9 +104,9 @@ func TestStorageQueryPaginated(t *testing.T) {
 			require.NoError(t, err)
 			require.LessOrEqual(t, len(resp.Storage), step)
 			require.Subset(t,
-            	nullify.Fill(msgs),
-            	nullify.Fill(resp.Storage),
-            )
+				nullify.Fill(msgs),
+				nullify.Fill(resp.Storage),
+			)
 			next = resp.Pagination.NextKey
 		}
 	})

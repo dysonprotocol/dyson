@@ -1,0 +1,16 @@
+syntax = "proto3";
+package names;
+
+import "gogoproto/gogo.proto";
+import "names/params.proto";
+import "names/name.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/org/dyson/x/names/types";
+
+// GenesisState defines the names module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  repeated Name nameList = 2 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}

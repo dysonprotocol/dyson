@@ -31,38 +31,38 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				StorageList: []types.Storage{
-	{
-		Index: "0",
-},
-	{
-		Index: "1",
-},
-},
-StorageList: []types.Storage{
-	{
-		Index: "0",
-},
-	{
-		Index: "1",
-},
-},
-FoobarList: []types.Foobar{
-	{
-		Index: "0",
-},
-	{
-		Index: "1",
-},
-},
-SchedualedRunList: []types.SchedualedRun{
-	{
-		Index: "0",
-},
-	{
-		Index: "1",
-},
-},
-// this line is used by starport scaffolding # types/genesis/validField
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
+				StorageList: []types.Storage{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
+				FoobarList: []types.Foobar{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
+				SchedualedRunList: []types.SchedualedRun{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
+				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
 		},
@@ -81,62 +81,62 @@ SchedualedRunList: []types.SchedualedRun{
 			valid: false,
 		},
 		{
-	desc:     "duplicated storage",
-	genState: &types.GenesisState{
-		StorageList: []types.Storage{
-			{
-				Index: "0",
-},
-			{
-				Index: "0",
-},
+			desc: "duplicated storage",
+			genState: &types.GenesisState{
+				StorageList: []types.Storage{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
 		},
-	},
-	valid:    false,
-},
-{
-	desc:     "duplicated storage",
-	genState: &types.GenesisState{
-		StorageList: []types.Storage{
-			{
-				Index: "0",
-},
-			{
-				Index: "0",
-},
+		{
+			desc: "duplicated storage",
+			genState: &types.GenesisState{
+				StorageList: []types.Storage{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
 		},
-	},
-	valid:    false,
-},
-{
-	desc:     "duplicated foobar",
-	genState: &types.GenesisState{
-		FoobarList: []types.Foobar{
-			{
-				Index: "0",
-},
-			{
-				Index: "0",
-},
+		{
+			desc: "duplicated foobar",
+			genState: &types.GenesisState{
+				FoobarList: []types.Foobar{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
 		},
-	},
-	valid:    false,
-},
-{
-	desc:     "duplicated schedualedRun",
-	genState: &types.GenesisState{
-		SchedualedRunList: []types.SchedualedRun{
-			{
-				Index: "0",
-},
-			{
-				Index: "0",
-},
+		{
+			desc: "duplicated schedualedRun",
+			genState: &types.GenesisState{
+				SchedualedRunList: []types.SchedualedRun{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
 		},
-	},
-	valid:    false,
-},
-// this line is used by starport scaffolding # types/genesis/testcase
+		// this line is used by starport scaffolding # types/genesis/testcase
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
 			err := tc.genState.Validate()

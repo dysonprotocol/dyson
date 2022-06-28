@@ -1,4 +1,6 @@
 from collections import namedtuple as nt
+from collections.abc import MutableMapping
+
 import re
 import ast
 import operator as op
@@ -21,15 +23,7 @@ MAX_NODE_CALLS = 10000
 MAX_CALL_DEPTH = 32
 DISALLOW_PREFIXES = ["_"]
 DISALLOW_METHODS = [(str, "format"), (type, "mro"), (str, "format_map")]
-WHITLIST_ATTRIBUTES = [
-    "dict.get",
-    "dict.items",
-    "dict.keys",
-    "dict.values",
-    "list.sort",
-    "list.append",
-    "list.pop",
-]
+
 
 # Disallow functions:
 # This, strictly speaking, is not necessary.  These /should/ never be accessable anyway,
@@ -37,6 +31,47 @@ WHITLIST_ATTRIBUTES = [
 # people not be stupid.  Allowing these functions opens up all sorts of holes - if any of
 # their functionality is required, then please wrap them up in a safe container.  And think
 # very hard about it first.  And don't say I didn't warn you.
+
+
+########################################
+# Defaults for the evaluator:
+
+BUILTIN_EXCEPTIONS = {
+    k: v
+    for k, v in vars(builtins).items()
+    if issubclass(type(v), type) and issubclass(v, Exception)
+}
+
+DEFAULT_SCOPE = {
+    "True": True,
+    "False": False,
+    "None": None,
+    "int": int,
+    "float": float,
+    "str": str,
+    "bool": bool,
+    "list": list,
+    "tuple": tuple,
+    "dict": dict,
+    "set": set,
+    "len": len,
+    "min": min,
+    "max": max,
+    "any": any,
+    "all": all,
+    "round": round,
+    "sorted": sorted,
+    "sum": sum,
+    "isinstance": isinstance,
+    "enumerate": enumerate,
+    "isinstance": isinstance,
+    "issubclass": issubclass,
+    "iter": iter,
+    "range": range,
+    "Exception": Exception,
+    **BUILTIN_EXCEPTIONS,
+}
+
 
 DISALLOW_FUNCTIONS = {
     type,
@@ -53,26 +88,23 @@ DISALLOW_FUNCTIONS = {
     zip,
 }
 
-ALLOWED_BUILTINS = [
-    "str.join",
-    "len",
-    "print",
-    "str.count",
-    "iter",
-    "issubclass",
-    "isinstance",
-    "dict.items",
-    "dict.get",
-    "list.sort",
-    "dict.keys",
-    "dict.values",
-    "sum",
-    "list.append",
-    "list.count",
-    "list.index",
-    "list.reverse",
-    "list.pop",
-]
+
+_whitelist_functions_dict = {
+    "str": ["join"],
+    "builtins": [*list(DEFAULT_SCOPE.keys())],
+    "dict": ["get", "items", "keys", "values"],
+    "list": ["sort", "append", "pop", "count", "index", "reverse"],
+    "script": ["*"],
+    "__main__": ["*"],
+    "dyslang": ["*"],
+}
+
+
+WHITELIST_FUNCTIONS = set()
+
+for k, v in _whitelist_functions_dict.items():
+    for kk in v:
+        WHITELIST_FUNCTIONS.add(k + "." + kk)
 
 
 ########################################
@@ -137,7 +169,7 @@ def safe_power(a, b):  # pylint: disable=invalid-name
 
     if abs(a) > MAX_POWER or abs(b) > MAX_POWER:
         raise MemoryError("Sorry! I don't want to evaluate {0} ** {1}".format(a, b))
-    return a**b
+    return a ** b
 
 
 def safe_mult(a, b):  # pylint: disable=invalid-name
@@ -161,46 +193,6 @@ def safe_add(a, b):  # pylint: disable=invalid-name
     return a + b
 
 
-########################################
-# Defaults for the evaluator:
-
-BUILTIN_EXCEPTIONS = {
-    k: v
-    for k, v in vars(builtins).items()
-    if issubclass(type(v), type) and issubclass(v, Exception)
-}
-
-DEFAULT_SCOPE = {
-    "True": True,
-    "False": False,
-    "None": None,
-    "int": int,
-    "float": float,
-    "str": str,
-    "bool": bool,
-    "list": list,
-    "tuple": tuple,
-    "dict": dict,
-    "set": set,
-    "len": len,
-    "min": min,
-    "max": max,
-    "any": any,
-    "all": all,
-    "round": round,
-    "sorted": sorted,
-    "sum": sum,
-    "isinstance": isinstance,
-    "enumerate": enumerate,
-    "isinstance": isinstance,
-    "issubclass": issubclass,
-    "iter": iter,
-    "range": range,
-    "Exception": Exception,
-    **BUILTIN_EXCEPTIONS,
-}
-
-
 def make_modules(mod_dict):
     return {
         k: (v.__dict__.update(mod_dict[k]) or v)
@@ -208,11 +200,15 @@ def make_modules(mod_dict):
     }
 
 
-class Scope(dict):
+class Scope(MutableMapping):
     __slots__ = ("dicts",)
 
     def __init__(self, mapping=(), **kwargs):
         self.dicts = [kwargs]
+
+    def __len__(self):
+        return [len(d) for d in self.dicts]
+
 
     def __repr__(self):
         return repr(self.dicts[1:])
@@ -251,6 +247,12 @@ class Scope(dict):
 
     def update(self, other_dict):
         return self.dicts[-1].update(other_dict)
+
+    def locals(self):
+        return self.dicts[-1]
+
+    def globals(self):
+        return self.dicts[1]  # layer 0 is builtins
 
 
 class DysEval(object):
@@ -440,20 +442,22 @@ class DysEval(object):
         """The internal evaluator used on each node in the parsed tree."""
 
         try:
-            self.track(node)
-            lineno = getattr(node, "lineno", None)  # noqa: F841
-            col = getattr(node, "col", None)  # noqa: F841
-
             try:
-                handler = self.nodes[type(node)]
-            except KeyError:
-                raise NotImplementedError(
-                    "Sorry, {0} is not available in this "
-                    "evaluator".format(type(node).__name__)
-                )
-            node.call_stack = self.call_stack
-            self._last_eval_result = handler(node)
-            return self._last_eval_result
+                lineno = getattr(node, "lineno", None)  # noqa: F841
+                col = getattr(node, "col", None)  # noqa: F841
+
+                try:
+                    handler = self.nodes[type(node)]
+                except KeyError:
+                    raise NotImplementedError(
+                        "Sorry, {0} is not available in this "
+                        "evaluator".format(type(node).__name__)
+                    )
+                node.call_stack = self.call_stack
+                self._last_eval_result = handler(node)
+                return self._last_eval_result
+            finally:
+                self.track(node)
         except (Return, Break, Continue, DysRuntimeError):
             raise
         except Exception as e:
@@ -461,8 +465,6 @@ class DysEval(object):
             if not hasattr(exc, "_dys_node"):  # pragma: no branch
                 exc._dys_node = node
             raise DysRuntimeError(repr(exc), node=node) from exc
-        finally:
-            self.track(node)
 
     def _eval_assert(self, node):
         if not self._eval(node.test):
@@ -524,11 +526,14 @@ class DysEval(object):
                 module = self.modules[node.module]
             except KeyError:
                 raise ModuleNotFoundError(node.module)
-            try:
-                submodule = module.__dict__[alias.name]
-                self.scope[asname] = submodule
-            except KeyError:
-                raise ImportError(alias.name)
+            if alias.name == "*":
+                self.scope.update(module.__dict__)
+            else:
+                try:
+                    submodule = module.__dict__[alias.name]
+                    self.scope[asname] = submodule
+                except KeyError:
+                    raise ImportError(alias.name)
 
     def _eval_expr(self, node):
         return self._eval(node.value)
@@ -625,17 +630,15 @@ class DysEval(object):
             )
             s.scope.push(local_scope)
             s.expr = self.expr
-            try:
-                return s._eval(node.body)
-            finally:
-                self.track(s)
-
-        # prevent unwrap from detecting this nested function
-        # del _func.__wrapped__
-        _func.__name__ = "<lambda>"
-        _func.__qualname__ = "<lambda>"
+            s.track = self.track
+            return s._eval(node.body)
 
         _func = forge.sign(*sig_list, **sig_dict)(_func)
+        del _func.__wrapped__
+        _func.__name__ = "<lambda>"
+        _func.__qualname__ = "<lambda>"
+        _func.__module__ = "script"
+
         return _func
 
     def _eval_functiondef(self, node):
@@ -678,19 +681,10 @@ class DysEval(object):
         _func.__module__ = "script"
         _func.__annotations__ = _annotations
         _func.__qualname__ = node.name
-
         _func = forge.sign(*sig_list, **sig_dict)(_func)
-        _func._dys_lineno = node.lineno
-        code = "".join(
-            inspect.getblock(
-                [line + "\n" for line in self.expr.splitlines()[node.lineno - 1 :]]
-            )
-        )
-        _func._dys_code = code
-        _func._dys_file = "<script>"
 
         # prevent unwrap from detecting this nested function
-        # del _func.__wrapped__
+        del _func.__wrapped__
         _func.__doc__ = ast.get_docstring(node)
 
         decorated_func = _func
@@ -800,7 +794,11 @@ class DysEval(object):
             handler(target, value)
 
     def _eval_augassign(self, node):
-        if node.target.id not in self.scope.dicts[-1]:
+        if (
+            len(self.scope.dicts) > 2  # 0 is builtins, 1 globals, then local scope
+            and hasattr(node.target, "id")
+            and node.target.id not in self.scope.dicts[-1]
+        ):
             raise UnboundLocalError(
                 f"local variable '{node.target.id}' referenced before assignment"
             )
@@ -949,9 +947,15 @@ class DysEval(object):
                 and isinstance(exc.__context__, self._eval(node.type))
             )
         ):
+            # Surprisingly this is how python does it
+            # See: https://docs.python.org/3/reference/compound_stmts.html#the-try-statement
             if node.name:
                 self.scope[node.name] = exc
-            [self._eval(b) for b in node.body]
+            try:
+                [self._eval(b) for b in node.body]
+            finally:
+                if node.name in self.scope:
+                    del self.scope[node.name]
             return True
         return False
 
@@ -963,24 +967,23 @@ class DysEval(object):
             raise TypeError(
                 "Sorry, {} type is not callable".format(type(func).__name__)
             )
-        qualname = getattr(func, "__qualname__", None)
-        func_hash = None
-        try:
-            func_hash = hash(func)
-        except TypeError:
-            if qualname not in WHITLIST_ATTRIBUTES:
-                raise NotImplementedError(
-                    "this function is not allowed: {}".format(qualname)
-                )
-        if func_hash and func in DISALLOW_FUNCTIONS:
-            raise DangerousValue(f"This function is forbidden: {qualname}")
-        if (
-            func_hash
-            and isinstance(func, types.BuiltinFunctionType)
-            and qualname not in ALLOWED_BUILTINS
-        ):
+
+        modname = getattr(func, "__module__", None)
+        qualname = getattr(func, "__qualname__", getattr(func, "__name__", None))
+
+        if modname:
+            fullname = modname + "." + qualname
+            wildcard = modname + ".*"
+        else:
+            fullname = qualname
+            wildcard = ".".join(fullname.split(".")[:-1] + ["*"])
+
+        if func in DISALLOW_FUNCTIONS:
+            raise DangerousValue(f"This function is forbidden: {fullname}")
+
+        if fullname not in WHITELIST_FUNCTIONS and wildcard not in WHITELIST_FUNCTIONS:
             raise NotImplementedError(
-                f"This builtin function is not allowed: {qualname}"
+                "This function is not allowed: {}".format(fullname)
             )
         kwarg_kwargs = [self._eval(k) for k in node.keywords]
 
@@ -1060,17 +1063,6 @@ class DysEval(object):
         return "".join(evaluated_values)
 
     def _eval_formattedvalue(self, node):
-        val = self._eval(node.value)
-        if node.conversion != -1:
-            if chr(node.conversion) == "a":
-                val = ascii(val)
-            elif chr(node.conversion) == "s":
-                val = str(val)
-            else:
-                raise NotImplementedError(
-                    f"Unsupport conversion type: {chr(node.conversion)}"
-                )
-
         if node.format_spec:
             # from https://stackoverflow.com/a/44553570/260366
 
@@ -1092,15 +1084,23 @@ class DysEval(object):
                 if int(parsed_spec.precision or 0) > 100:
                     raise MemoryError("Sorry, this format precision is too long.")
 
-            fmt = "{:" + format_spec + "}"
-            val = fmt.format(val)
+            conversion_dict = {-1: "", 115: "!s", 114: "!r", 97: "!a"}
 
-        return val
+            fmt = "{" + conversion_dict[node.conversion] + ":" + format_spec + "}"
+            return fmt.format(self._eval(node.value))
+        return self._eval(node.value)
 
     def _eval_dict(self, node):
         if len(node.keys) > MAX_STRING_LENGTH:
             raise MemoryError("Dict in statement is too long!")
-        return {self._eval(k): self._eval(v) for (k, v) in zip(node.keys, node.values)}
+        res = {}
+        for (k, v) in zip(node.keys, node.values):
+            if k is None:
+                res.update(self._eval(v))
+            else:
+                res[self._eval(k)] = self._eval(v)
+
+        return res
 
     def _eval_tuple(self, node):
         if len(node.elts) > MAX_STRING_LENGTH:
@@ -1139,19 +1139,7 @@ class DysEval(object):
         else:  # pragma: no cover
             raise Exception("should never happen")
 
-        extra_scope = {}
-
-        previous_name_evaller = self.nodes[ast.Name]
-
-        def eval_scope_extra(node):
-            """
-            Here we hide our extra scope for within this comprehension
-            """
-            if node.id in extra_scope:
-                return extra_scope[node.id]
-            return previous_name_evaller(node)
-
-        self.nodes.update({ast.Name: eval_scope_extra})
+        self.scope.push({})
 
         def recurse_targets(target, value):
             """
@@ -1160,7 +1148,7 @@ class DysEval(object):
             """
             self.track(target)
             if isinstance(target, ast.Name):
-                extra_scope[target.id] = value
+                self.scope[target.id] = value
             else:
                 for t, v in zip(target.elts, value):
                     recurse_targets(t, v)
@@ -1185,8 +1173,7 @@ class DysEval(object):
 
         do_generator()
 
-        self.nodes.update({ast.Name: previous_name_evaller})
-
+        self.scope.dicts.pop()
         return to_return
 
 

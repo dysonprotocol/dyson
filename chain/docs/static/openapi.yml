@@ -11841,7 +11841,7 @@ paths:
           type: string
       tags:
         - Query
-  '/dyson/schema/{index}':
+  /dyson/schema:
     get:
       summary: Queries a script schema by index.
       operationId: DysonSchema
@@ -11873,12 +11873,56 @@ paths:
                   additionalProperties: {}
       parameters:
         - name: index
-          in: path
-          required: true
+          in: query
+          required: false
           type: string
       tags:
         - Query
   /dyson/script:
+    get:
+      summary: Queries a script by index.
+      operationId: DysonScript
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              script:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  index:
+                    type: string
+                  code:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: index
+          in: query
+          required: false
+          type: string
+      tags:
+        - Query
+  /dyson/scriptiAll:
     get:
       summary: Queries a list of script items.
       operationId: DysonScriptAll
@@ -12000,24 +12044,24 @@ paths:
           type: boolean
       tags:
         - Query
-  '/dyson/script/{index}':
+  /dyson/storage:
     get:
-      summary: Queries a script by index.
-      operationId: DysonScript
+      summary: Queries a storage by index.
+      operationId: DysonStorage
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              script:
+              storage:
                 type: object
                 properties:
                   creator:
                     type: string
                   index:
                     type: string
-                  code:
+                  data:
                     type: string
         default:
           description: An unexpected error response.
@@ -12039,12 +12083,12 @@ paths:
                   additionalProperties: {}
       parameters:
         - name: index
-          in: path
-          required: true
+          in: query
+          required: false
           type: string
       tags:
         - Query
-  /dyson/storage:
+  /dyson/storageAll:
     get:
       summary: Queries a list of storage items.
       operationId: DysonStorageAll
@@ -12164,50 +12208,6 @@ paths:
           in: query
           required: false
           type: boolean
-      tags:
-        - Query
-  '/dyson/storage/{index}':
-    get:
-      summary: Queries a storage by index.
-      operationId: DysonStorage
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              storage:
-                type: object
-                properties:
-                  creator:
-                    type: string
-                  index:
-                    type: string
-                  data:
-                    type: string
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: index
-          in: path
-          required: true
-          type: string
       tags:
         - Query
   /dyson/storageprefix:
@@ -12335,7 +12335,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/dyson/wsgi/{index}':
+  /dyson/wsgi:
     get:
       summary: Queries a script wsgi app by index.
       operationId: DysonWsgi
@@ -12367,8 +12367,8 @@ paths:
                   additionalProperties: {}
       parameters:
         - name: index
-          in: path
-          required: true
+          in: query
+          required: false
           type: string
         - name: httprequest
           in: query
@@ -12377,6 +12377,121 @@ paths:
       tags:
         - Query
   /org/dyson/dyson/schedualedRun:
+    get:
+      summary: Queries a schedualedRun by index.
+      operationId: DysonSchedualedRun
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              schedualedRun:
+                type: object
+                properties:
+                  index:
+                    type: string
+                  creator:
+                    type: string
+                  height:
+                    type: string
+                    format: uint64
+                  gas:
+                    type: string
+                    format: uint64
+                  msg:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                        title: The account sending the transaction
+                      address:
+                        type: string
+                        title: dys address of the scrit to call
+                      extraLines:
+                        type: string
+                        title: >-
+                          optional extra source code to append to the end of the
+                          script before running
+                      functionName:
+                        type: string
+                        title: optional function to call
+                      args:
+                        type: string
+                        title: optional args to call the function with
+                      kwargs:
+                        type: string
+                        title: optional kwargs to run
+                      coins:
+                        type: string
+                        title: >-
+                          optional comma seperated list of coins to send the
+                          script (for example "123dys,456token")
+                    title: MsgRun runs a script at a specific address
+                  resp:
+                    type: object
+                    properties:
+                      response:
+                        type: string
+                  error:
+                    type: string
+                  gasprice:
+                    type: object
+                    properties:
+                      denom:
+                        type: string
+                      amount:
+                        type: string
+                    description: >-
+                      Coin defines a token with a denomination and an amount.
+
+
+                      NOTE: The amount field is an Int which implements the
+                      custom method
+
+                      signatures required by gogoproto.
+                  fee:
+                    type: object
+                    properties:
+                      denom:
+                        type: string
+                      amount:
+                        type: string
+                    description: >-
+                      Coin defines a token with a denomination and an amount.
+
+
+                      NOTE: The amount field is an Int which implements the
+                      custom method
+
+                      signatures required by gogoproto.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: index
+          description: inxex is the script address
+          in: query
+          required: false
+          type: string
+      tags:
+        - Query
+  /org/dyson/dyson/schedualedRunAll:
     get:
       summary: Queries a list of schedualedRun items.
       operationId: DysonSchedualedRunAll
@@ -12566,121 +12681,6 @@ paths:
           in: query
           required: false
           type: boolean
-      tags:
-        - Query
-  '/org/dyson/dyson/schedualedRun/{index}':
-    get:
-      summary: Queries a schedualedRun by index.
-      operationId: DysonSchedualedRun
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              schedualedRun:
-                type: object
-                properties:
-                  index:
-                    type: string
-                  creator:
-                    type: string
-                  height:
-                    type: string
-                    format: uint64
-                  gas:
-                    type: string
-                    format: uint64
-                  msg:
-                    type: object
-                    properties:
-                      creator:
-                        type: string
-                        title: The account sending the transaction
-                      address:
-                        type: string
-                        title: dys address of the scrit to call
-                      extraLines:
-                        type: string
-                        title: >-
-                          optional extra source code to append to the end of the
-                          script before running
-                      functionName:
-                        type: string
-                        title: optional function to call
-                      args:
-                        type: string
-                        title: optional args to call the function with
-                      kwargs:
-                        type: string
-                        title: optional kwargs to run
-                      coins:
-                        type: string
-                        title: >-
-                          optional comma seperated list of coins to send the
-                          script (for example "123dys,456token")
-                    title: MsgRun runs a script at a specific address
-                  resp:
-                    type: object
-                    properties:
-                      response:
-                        type: string
-                  error:
-                    type: string
-                  gasprice:
-                    type: object
-                    properties:
-                      denom:
-                        type: string
-                      amount:
-                        type: string
-                    description: >-
-                      Coin defines a token with a denomination and an amount.
-
-
-                      NOTE: The amount field is an Int which implements the
-                      custom method
-
-                      signatures required by gogoproto.
-                  fee:
-                    type: object
-                    properties:
-                      denom:
-                        type: string
-                      amount:
-                        type: string
-                    description: >-
-                      Coin defines a token with a denomination and an amount.
-
-
-                      NOTE: The amount field is an Int which implements the
-                      custom method
-
-                      signatures required by gogoproto.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: index
-          description: inxex is the script address
-          in: path
-          required: true
-          type: string
       tags:
         - Query
   /ibc/apps/transfer/v1/denom_traces:
@@ -13413,6 +13413,265 @@ paths:
                           "@type": "type.googleapis.com/google.protobuf.Duration",
                           "value": "1.212s"
                         }
+      tags:
+        - Query
+  /org/dyson/names/name:
+    get:
+      summary: Queries a Name by index.
+      operationId: NamesName
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              name:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  destination:
+                    type: string
+                  price:
+                    type: string
+                  expires:
+                    type: string
+                  authorized:
+                    type: string
+                  precommit:
+                    type: string
+                  salt:
+                    type: string
+                  owner:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: name
+          in: query
+          required: false
+          type: string
+      tags:
+        - Query
+  /org/dyson/names/nameall:
+    get:
+      summary: Queries a list of Name items.
+      operationId: NamesNameAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              name:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    destination:
+                      type: string
+                    price:
+                      type: string
+                    expires:
+                      type: string
+                    authorized:
+                      type: string
+                    precommit:
+                      type: string
+                    salt:
+                      type: string
+                    owner:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  nextKey:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.countTotal
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  /org/dyson/names/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: NamesParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /org/dyson/names/resolve:
+    get:
+      summary: Queries a list of Resolve items.
+      operationId: NamesResolve
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              address:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: name
+          in: query
+          required: false
+          type: string
       tags:
         - Query
 definitions:
@@ -21216,3 +21475,116 @@ definitions:
       and
 
       freezing clients
+  names.MsgCreateNameResponse:
+    type: object
+  names.MsgDeleteNameResponse:
+    type: object
+  names.MsgRegisterResponse:
+    type: object
+  names.MsgUpdateNameResponse:
+    type: object
+  names.Name:
+    type: object
+    properties:
+      name:
+        type: string
+      destination:
+        type: string
+      price:
+        type: string
+      expires:
+        type: string
+      authorized:
+        type: string
+      precommit:
+        type: string
+      salt:
+        type: string
+      owner:
+        type: string
+  names.Params:
+    type: object
+    description: Params defines the parameters for the module.
+  names.QueryAllNameResponse:
+    type: object
+    properties:
+      name:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            destination:
+              type: string
+            price:
+              type: string
+            expires:
+              type: string
+            authorized:
+              type: string
+            precommit:
+              type: string
+            salt:
+              type: string
+            owner:
+              type: string
+      pagination:
+        type: object
+        properties:
+          nextKey:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  names.QueryGetNameResponse:
+    type: object
+    properties:
+      name:
+        type: object
+        properties:
+          name:
+            type: string
+          destination:
+            type: string
+          price:
+            type: string
+          expires:
+            type: string
+          authorized:
+            type: string
+          precommit:
+            type: string
+          salt:
+            type: string
+          owner:
+            type: string
+  names.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        description: params holds all the parameters of this module.
+        type: object
+    description: QueryParamsResponse is response type for the Query/Params RPC method.
+  names.QueryResolveResponse:
+    type: object
+    properties:
+      address:
+        type: string

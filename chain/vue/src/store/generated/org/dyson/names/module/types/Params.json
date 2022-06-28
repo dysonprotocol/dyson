@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Params",
+    "definitions": {
+        "Params": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "Params defines the parameters for the module."
+        }
+    }
+}

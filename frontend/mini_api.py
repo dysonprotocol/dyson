@@ -19,6 +19,7 @@ from utils import get_txt_records
 # SETTINGS
 BASE_DIR = dirname(abspath(__file__))
 DEBUG = True
+DEBUG = bool(os.environ.get("DEBUG", None))
 ROOT_URLCONF = "mini_api"  # this module
 ALLOWED_HOSTS = "*"
 DATABASES = {"default": {}}
@@ -65,8 +66,8 @@ CLEAR_DOMAIN = os.environ.get("CLEAR_DOMAIN", "localhost:8000")
 
 SETTINGS = dict((key, val) for key, val in locals().items() if key.isupper())
 if not settings.configured:
-    print("SETTINGS", SETTINGS)
     settings.configure(**SETTINGS)
+    print("SETTINGS", json.dumps(SETTINGS, indent=2))
 django.setup()
 
 # Settings must be configured before importing some things like staticfiles
@@ -126,8 +127,16 @@ class FakeSocket:
         return self._file
 
 
+def resolve_name(name_or_address):
+    u = f"{settings.DYSON_RESTHOST}/org/dyson/names/resolve"
+    params = {"name": name_or_address}
+    req = requests.get(u, params=params)
+    return req.json().get("address", None)
+
+
 def dys_view(request, script_address=None):
     address = script_address or request.script_address
+    address = resolve_name(address)
     u = f"{settings.DYSON_RESTHOST}/dyson/wsgi"
     params = {"httprequest": reconstruct_request(request), "index": address}
     dys_req = requests.get(u, params=params)
@@ -135,7 +144,7 @@ def dys_view(request, script_address=None):
         try:
             if dys_req.json().get("code", None) == 3:
                 # Script not found
-                return HttpResponse("Script not found", status=404)
+                return HttpResponse(f"Script not found: {address}", status=404)
         except:
             pass
         return HttpResponse(dys_req.text, status=dys_req.status_code)
@@ -173,13 +182,15 @@ def dys_js_tags(request, js_asset=None):
             """<script>alert('vue/dist/index.html not found, cannot load chain functions')</script>"""
         )
 
-    base_host = reverse('index', host='clear') 
+    base_host = reverse("index", host="clear")
     parser = ScriptHTMLParser()
     parser.feed(h)
     js_asset_dict = {
         re.match(r"/static/js/(?P<base_asset_name>[a-z-]+)", t).groupdict()[
             "base_asset_name"
-        ] + ".js": base_host + t
+        ]
+        + ".js": base_host
+        + t
         for t in tags
     }
 
@@ -204,7 +215,7 @@ def node_info(request):
 urlpatterns = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + [
     re_path(r"^$", ScriptDetail.as_view(), name="index"),
     re_path(r"^tx$", ScriptDetail.as_view()),
-    re_path(r"^scripts$", ScriptDetail.as_view()),
+    re_path(r"^scripts/?$", ScriptDetail.as_view()),
     re_path(r"^scripts/(?P<script_address>\w+)$", ScriptDetail.as_view()),
     re_path(r"^txbuilder$", ScriptDetail.as_view()),
     re_path(r"^web/(?P<script_address>\w+)", dys_view),
@@ -214,6 +225,7 @@ urlpatterns = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + 
 def clear_main_callback(request):
     request.domain = settings.CLEAR_DOMAIN
     request.subdomains = []
+    print("clear_main_callback")
     print("domain", request.domain)
     print("subdomains", request.subdomains)
 
@@ -225,6 +237,7 @@ def clear_dns_callback(request, domain=None, subdomains=None):
     if subdomains:
         request.subdomains = subdomains.split(".")
 
+    print("clear_dns_callback")
     print("domain", request.domain)
     request.script_address = domain
     print("subdomains", request.subdomains)

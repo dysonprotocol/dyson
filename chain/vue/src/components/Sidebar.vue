@@ -1,34 +1,34 @@
 <template>
-	<SpSidebar
-		v-on:sidebar-open="sidebarOpen = true"
-		v-on:sidebar-close="sidebarOpen = false"
-	>
-		<template v-slot:default>
-			<SpLinkIcon link="/" text="Dashboard" icon="Dashboard" />
-			<SpLinkIcon link="/scripts" text="Scripts" icon="Docs" />
-			<SpLinkIcon link="/txbuilder" text="Tx Builder" icon="Form" />
-		</template>
-		<template v-slot:footer>
-			<SpStatusAPI :showText="sidebarOpen" />
-			<SpStatusRPC :showText="sidebarOpen" />
-			<SpStatusWS :showText="sidebarOpen" />
-			<div class="sp-text">Build: v0.3.8</div>
-		</template>
-	</SpSidebar>
+  <SpSidebar v-on:sidebar-open="sidebarOpen = true" v-on:sidebar-close="sidebarOpen = false">
+    <template v-slot:default>
+      <SpLinkIcon link="/" text="Dashboard" icon="Dashboard" />
+      <SpLinkIcon link="/txbuilder" text="Tx Builder" icon="Form" />
+      <SpLinkIcon v-if="address" v-bind:link="'/scripts/' + address" text="Your Script" icon="Docs" />
+      <SpLinkIcon v-if="!address"  text="Unlock wallet for script" icon="Docs" />
+    </template>
+    <template v-slot:footer>
+      <SpStatusAPI :showText="sidebarOpen" />
+      <SpStatusRPC :showText="sidebarOpen" />
+      <SpStatusWS :showText="sidebarOpen" />
+    </template>
+  </SpSidebar>
 </template>
 
 <script>
 export default {
-	name: 'Sidebar',
-	data() {
-		return {
-			sidebarOpen: true
-		}
-	},
-	computed: {
-		hasWallet() {
-			return this.$store.hasModule(['common', 'wallet'])
-		}
-	}
+  name: 'Sidebar',
+  data() {
+    return {
+      sidebarOpen: true,
+    }
+  },
+  computed: {
+    hasWallet() {
+      return this.$store.hasModule(['common', 'wallet'])
+    },
+    address: function () {
+      return this.$store.getters['common/wallet/address']
+    },
+  },
 }
 </script>
