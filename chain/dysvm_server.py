@@ -160,11 +160,6 @@ def get_module_dict():
             "loads": json.loads,
             "JSONDecodeError": json.JSONDecodeError,
         },
-        "jsonschema": {"validate": jsonschema.validate},
-        "jsonschema.exceptions": {
-            "ValidationError": jsonschema.ValidationError,
-            "FormatError": jsonschema.FormatError,
-        },
         "html": {"escape": html.escape},
         "io": {"StringIO": io.StringIO, "BytesIO": io.BytesIO},
         "hashlib": {"sha1": hashlib.sha1, "sha256": hashlib.sha256},
