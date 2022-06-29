@@ -2,9 +2,10 @@
   <div :class="{ modal: isModal }">
     <div :class="{ 'modal-content': isModal }">
       <form v-on:submit="submit" class="sp-box sp-shadow" :action="`#${name}`">
+
+        <div v-if="isModal" class="close" @click="this.isModal=false"> &times; </div>
         <div v-bind:id="name"></div>
-        <span v-if="isModal" class="close" @click="this.isModal=false"> &times; </span>
-        <button name="action" type="submit" value="link" class="sp-button">link {{ name }}</button>
+        <button name="action"  @click="this.isModal=!this.isModal" value="link" class="sp-button">link {{ name }}</button>
         <button name="action" :disabled="this.inflight" type="submit" value="query" class="sp-button">
           Query {{ name }}
         </button>
@@ -27,8 +28,8 @@
 TX hash: {{ runResponse.tx }}
 Cumulative Size: {{ runResponse.cumsize }}
 Nodes Evaluated: {{ runResponse.nodes_called }}
-Gas consumed: {{ runResponse.gas_consumed }}
-Gas Limit: {{ runResponse.gas_limit }}
+Gas consumed: {{ runResponse.gasUsed }}
+Gas Limit: {{ runResponse.gasWanted }}
 
 Result: {{ runResponse.result }}
 
@@ -42,7 +43,7 @@ Stdout:
       <pre v-if="queryResponse">
 Cumulative Size: {{ queryResponse.cumsize }}
 Nodes Evaluated: {{ queryResponse.nodes_called }}
-Gas consumed: {{ queryResponse.gas_consumed }}
+Estimated Gas Consumed: {{ queryResponse.script_gas_consumed }}
 Gas Limit: {{ queryResponse.gas_limit }}
 Result: {{ queryResponse.result }}
 Exception: {{ queryResponse.exception }}
@@ -121,6 +122,8 @@ export default {
                   ['events'].filter((i) => i.type == 'run')[0]
                   ['attributes'].slice(-1)[0]['value'],
               )
+              runResponse.gasUsed = txResult.gasUsed
+              runResponse.gasWanted = txResult.gasWanted   
             } catch (objError) {
               console.info('objError', objError)
               if (objError instanceof SyntaxError) {
@@ -234,7 +237,7 @@ pre {
 }
 
 .modal .close {
-  display: inline;
+  display: block;
 }
 /* Modal Content/Box */
 .modal-content {
@@ -248,9 +251,9 @@ pre {
 /* The Close Button */
 .close {
   color: #aaa;
-  float: right;
   font-size: 28px;
   font-weight: bold;
+  text-align: right;
 }
 
 .close:hover,

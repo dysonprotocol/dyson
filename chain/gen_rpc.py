@@ -16,7 +16,8 @@ func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$r
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()

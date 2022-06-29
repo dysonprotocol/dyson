@@ -981,9 +981,9 @@ class DysEval(object):
         if func in DISALLOW_FUNCTIONS:
             raise DangerousValue(f"This function is forbidden: {fullname}")
 
-        if fullname not in WHITELIST_FUNCTIONS and wildcard not in WHITELIST_FUNCTIONS:
+        if wildcard not in WHITELIST_FUNCTIONS and fullname not in WHITELIST_FUNCTIONS:
             raise NotImplementedError(
-                "This function is not allowed: {}".format(fullname)
+                "This function is not allowed: {} or {}".format(fullname, wildcard)
             )
         kwarg_kwargs = [self._eval(k) for k in node.keywords]
 

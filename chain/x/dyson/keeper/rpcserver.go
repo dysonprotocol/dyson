@@ -49,7 +49,8 @@ func (rpcservice *RpcService) Cosmosauthzv1beta1sendmsggrant(_ *http.Request, ms
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -82,7 +83,8 @@ func (rpcservice *RpcService) Cosmosauthzv1beta1sendmsgexec(_ *http.Request, msg
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -115,7 +117,8 @@ func (rpcservice *RpcService) Cosmosauthzv1beta1sendmsgrevoke(_ *http.Request, m
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -232,7 +235,8 @@ func (rpcservice *RpcService) Cosmosbankv1beta1sendmsgsend(_ *http.Request, msg 
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -265,7 +269,8 @@ func (rpcservice *RpcService) Cosmosbankv1beta1sendmsgmultisend(_ *http.Request,
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -406,7 +411,8 @@ func (rpcservice *RpcService) Cosmosdistributionv1beta1sendmsgsetwithdrawaddress
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -439,7 +445,8 @@ func (rpcservice *RpcService) Cosmosdistributionv1beta1sendmsgwithdrawdelegatorr
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -472,7 +479,8 @@ func (rpcservice *RpcService) Cosmosdistributionv1beta1sendmsgwithdrawvalidatorc
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -505,7 +513,8 @@ func (rpcservice *RpcService) Cosmosdistributionv1beta1sendmsgfundcommunitypool(
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -562,7 +571,8 @@ func (rpcservice *RpcService) Cosmosevidencev1beta1sendmsgsubmitevidence(_ *http
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -619,7 +629,8 @@ func (rpcservice *RpcService) Cosmosfeegrantv1beta1sendmsggrantallowance(_ *http
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -652,7 +663,8 @@ func (rpcservice *RpcService) Cosmosfeegrantv1beta1sendmsgrevokeallowance(_ *htt
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -781,7 +793,8 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgsubmitproposal(_ *http.Requ
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -814,7 +827,8 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgvote(_ *http.Request, msg *
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -847,7 +861,8 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgvoteweighted(_ *http.Reques
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -880,7 +895,8 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgdeposit(_ *http.Request, ms
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -949,7 +965,8 @@ func (rpcservice *RpcService) Cosmosslashingv1beta1sendmsgunjail(_ *http.Request
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1150,7 +1167,8 @@ func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgcreatevalidator(_ *http
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1183,7 +1201,8 @@ func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgeditvalidator(_ *http.R
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1216,7 +1235,8 @@ func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgdelegate(_ *http.Reques
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1249,7 +1269,8 @@ func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgbeginredelegate(_ *http
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1282,7 +1303,8 @@ func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgundelegate(_ *http.Requ
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1315,7 +1337,8 @@ func (rpcservice *RpcService) Cosmosvestingv1beta1sendmsgcreatevestingaccount(_ 
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1384,7 +1407,8 @@ func (rpcservice *RpcService) Ibcapplicationstransferv1sendmsgtransfer(_ *http.R
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1537,7 +1561,8 @@ func (rpcservice *RpcService) Dysonsendmsgcreateschedualedrun(_ *http.Request, m
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1570,7 +1595,8 @@ func (rpcservice *RpcService) Dysonsendmsgcreatestorage(_ *http.Request, msg *dy
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1603,7 +1629,8 @@ func (rpcservice *RpcService) Dysonsendmsgupdatestorage(_ *http.Request, msg *dy
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1636,7 +1663,8 @@ func (rpcservice *RpcService) Dysonsendmsgdeletestorage(_ *http.Request, msg *dy
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1669,7 +1697,8 @@ func (rpcservice *RpcService) Dysonsendmsgcreatescript(_ *http.Request, msg *dys
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1702,7 +1731,8 @@ func (rpcservice *RpcService) Dysonsendmsgupdatescript(_ *http.Request, msg *dys
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1735,7 +1765,8 @@ func (rpcservice *RpcService) Dysonsendmsgdeletescript(_ *http.Request, msg *dys
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1768,7 +1799,8 @@ func (rpcservice *RpcService) Dysonsendmsgrun(_ *http.Request, msg *dysontypes.M
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1849,7 +1881,8 @@ func (rpcservice *RpcService) Namessendmsgregister(_ *http.Request, msg *namesty
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1882,7 +1915,8 @@ func (rpcservice *RpcService) Namessendmsgcreatename(_ *http.Request, msg *names
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1915,7 +1949,8 @@ func (rpcservice *RpcService) Namessendmsgupdatename(_ *http.Request, msg *names
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -1948,7 +1983,8 @@ func (rpcservice *RpcService) Namessendmsgdeletename(_ *http.Request, msg *names
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()

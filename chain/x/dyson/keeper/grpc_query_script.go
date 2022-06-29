@@ -99,7 +99,7 @@ func (k Keeper) QueryScript(goCtx context.Context, msg *types.MsgRun) (*types.Ms
 
 	ctx, _ = ctx.CacheContext()
 	if ctx.GasMeter().Limit() == 0 {
-		ctx = ctx.WithGasMeter(sdk.NewGasMeter(500000))
+		ctx = ctx.WithGasMeter(sdk.NewGasMeter(200000))
 		goCtx = sdk.WrapSDKContext(ctx)
 	}
 	_, isFound := k.GetScript(ctx, msg.Address)

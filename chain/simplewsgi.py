@@ -107,7 +107,7 @@ if __name__ == "__main__":
                 s.handle_request(http_request, output)
                 wsgiout = output.getvalue()
             else:
-                wsgiout = f"""HTTP/1.1 500\ncontent-type: text/plain\n\n{ret['exception']}\n\n{ret['stdout']}""".encode()
+                wsgiout = f"""HTTP/1.1 500\ncontent-type: text/plain\n\n{ret['exception']}\n\nstdout:\n{ret['stdout']}""".encode()
         except Exception as e:
             wsgiout = f"""HTTP/1.1 500\ncontent-type: text/plain\n\nExc: {e}""".encode()
         out = buf.getvalue()

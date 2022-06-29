@@ -219,7 +219,7 @@ def build_sandbox(port, creator, address, amount, block_info):
             return {"exception": res.text}
 
     def rpc(method, **params):
-        print("DeprecationWarning: dyson.rpc is deprecated, use dyson._chain")
+        print("DeprecationWarning: dyson.rpc is deprecated and will be removed. Use dyson._chain")
         return _chain(method, **params)
 
     scope = {}
@@ -233,8 +233,10 @@ def build_sandbox(port, creator, address, amount, block_info):
     sandbox.scope.dicts[0]["print"] = dyson_print
     sandbox.scope.dicts[0]["globals"] = sandbox.scope.globals
     sandbox.scope.dicts[0]["locals"] = sandbox.scope.locals
+    sandbox.chain = _chain
 
     sandbox.consume_gas_func = lambda amount: _chain("ConsumeGas", amount=amount)
+    sandbox.get_gass_limit_func = lambda amount: _chain("GasLimit")
 
     def get_gas_consumed():
         return sandbox.gas_consumed
@@ -340,6 +342,7 @@ def eval_script(
             "lineno": getattr(exception, "lineno", 0),
             "col": getattr(exception, "col", 0),
         }
+
     return sandbox, {
         "result": result,
         "stdout": stdout,
@@ -349,14 +352,21 @@ def eval_script(
         # https://github.com/tendermint/starport/blob/develop/starport/pkg/cosmosgen/templates/vuex/store/index.ts.tpl#L170
         "nodes_called": nodes_called,
         "gas_limit": sandbox.gas_limit if sandbox else None,
-        "gas_consumed": sandbox.gas_consumed if sandbox else None,
+        "script_gas_consumed": sandbox.gas_consumed if sandbox else None,
         "cumsize": cumsize,
     }
 
 
 dyslang.WHITELIST_FUNCTIONS.update(
     [
+        "datetime.*",
+        "simplejson.*",
+        "dict.*",
+        "dysvm_server.*",
+        "freezegun.api.*",
+        "list.*",
         "str.*",
+        "string.*",
         "wsgiref.handlers.BaseHandler.start_response",
     ]
 )
