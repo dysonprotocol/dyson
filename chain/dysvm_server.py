@@ -1,4 +1,6 @@
 import ast
+from functools import wraps
+
 import forge
 
 from freezegun import freeze_time
@@ -132,8 +134,11 @@ def get_module_dict():
         return json.dumps(**kwargs)
 
     safe_json_dumps.__doc__ = json.dumps.__doc__
+    safe_json_dumps.__module__ = 'json'
+    safe_json_dumps.__qualname__ = 'dumps'
+    allow_func(safe_json_dumps)
 
-    return {
+    mod_dict = {
         "datetime": {
             "timedelta": datetime.timedelta,
             "date": datetime.date,
@@ -145,7 +150,21 @@ def get_module_dict():
         "pathlib": {"PurePath": pathlib.PurePath},
         "uuid": {"uuid4": uuid.uuid4},
         "mimetypes": {"guess_type": mimetypes.guess_type},
-        "urllib": {"parse": urllib.parse},
+        "urllib.parse": {
+            "parse_qs": urllib.parse.parse_qs,
+            "parse_qsl": urllib.parse.parse_qsl,
+            "urlsplit": urllib.parse.urlsplit,
+            "urlunsplit": urllib.parse.urlunsplit,
+            "urljoin": urllib.parse.urljoin,
+            "urldefrag": urllib.parse.urldefrag,
+            "quote": urllib.parse.quote,
+            "quote_plus": urllib.parse.quote_plus,
+            "quote_from_bytes": urllib.parse.quote_from_bytes,
+            "unquote": urllib.parse.unquote,
+            "unquote_plus": urllib.parse.unquote_plus,
+            "unquote_to_bytes": urllib.parse.unquote_to_bytes,
+            "quote_from_bytes": urllib.parse.quote_from_bytes,
+        },
         "base64": {
             "decodebytes": base64.decodebytes,
             "encodebytes": base64.encodebytes,
@@ -181,6 +200,9 @@ def get_module_dict():
             "split": re2.split,
             "UNICODE": re2.UNICODE,
         },
+    }
+    return {
+        k: {kk: allow_func(vv) for kk, vv in v.items()} for k, v in mod_dict.items()
     }
 
 
@@ -218,43 +240,103 @@ def build_sandbox(port, creator, address, amount, block_info):
         except json.JSONDecodeError:
             return {"exception": res.text}
 
+    _chain.__qualname__ = "_chain"
+    allow_func()(_chain)
+
     def rpc(method, **params):
-        print("DeprecationWarning: dyson.rpc is deprecated and will be removed. Use dyson._chain")
+        """
+        Depricated
+        see: dyson._chain
+        """
+        print(
+            "DeprecationWarning: dyson.rpc is deprecated and will be removed. Use dyson._chain"
+        )
         return _chain(method, **params)
+
+    rpc.__qualname__ = "rpc"
+    allow_func()(rpc)
 
     scope = {}
     sandbox = DysonEval(
         scope=scope,
     )
 
-    def dyson_print(*x):
-        print(*x)
+    @forge.copy(print)
+    def dyson_print(*args, sep=" ", end="\n", file=None, flush=False):
+        assert len(sep) <= 5, AssertionError(f"sep len greater than 5")
+        assert len(end) <= 5, AssertionError(f"end len greater than 5")
+        print(*args, end=end)
+
+    dyson_print.__doc__ = print.__doc__
+    dyson_print.__module__ = 'builtins'
+    dyson_print.__qualname__ = 'print'
+    dyson_print = allow_func(dyson_print)
 
     sandbox.scope.dicts[0]["print"] = dyson_print
-    sandbox.scope.dicts[0]["globals"] = sandbox.scope.globals
-    sandbox.scope.dicts[0]["locals"] = sandbox.scope.locals
+    # sandbox.scope.dicts[0]["globals"] = sandbox.scope.globals
+    # sandbox.scope.dicts[0]["locals"] = sandbox.scope.locals
     sandbox.chain = _chain
 
     sandbox.consume_gas_func = lambda amount: _chain("ConsumeGas", amount=amount)
     sandbox.get_gass_limit_func = lambda amount: _chain("GasLimit")
 
+    @allow_func()
     def get_gas_consumed():
+        """
+        The total amount of gas consumed so far.
+        """
         return sandbox.gas_consumed
 
+    @allow_func()
     def get_gas_limit():
+        """
+        The maximum amount of gas that can be used in this query or transaction
+        """
         return sandbox.gas_limit
+
+    @allow_func()
+    def get_script_address() -> str:
+        """
+        Returns the address of this current script.
+        """
+        return address
+
+    @allow_func()
+    def get_caller() -> str:
+        """
+        Returns the address of the caller of this script.
+        """
+        return creator
+
+    @allow_func()
+    def get_block_info() -> dict:
+        """
+        Returns a dictionary of the current block info
+        """
+
+    @allow_func()
+    def get_coins_sent():
+        """
+        Returns the coins sent to this function.
+        This is not the gas or gas fees.
+        """
+        return amount
 
     module_dict = get_module_dict()
 
     module_dict["dys"] = {
         "rpc": rpc,
-        "_chain": _chain,
+        "_chain": _chain,  # remove
         "SCRIPT_ADDRESS": address,
         "CALLER": creator,
         "AMOUNT": amount,
         "BLOCK_INFO": block_info,
         "get_gas_consumed": get_gas_consumed,
         "get_gas_limit": get_gas_limit,
+        "get_script_address": get_script_address,
+        "get_caller": get_caller,
+        "get_block_info": get_block_info,
+        "get_coins_sent": get_coins_sent,
     }
 
     sandbox.modules = dyslang.make_modules(module_dict)
@@ -305,7 +387,8 @@ def eval_script(
                     [
                         k
                         for k, v in scope.items()
-                        if k != "rpc"
+                        if v is not sandbox.modules["dys"]._chain
+                        if v is not sandbox.modules["dys"].rpc
                         and not k.startswith("_")
                         and k not in ["app", "application"]
                     ],
@@ -359,17 +442,43 @@ def eval_script(
 
 dyslang.WHITELIST_FUNCTIONS.update(
     [
-        "datetime.*",
-        "simplejson.*",
-        "dict.*",
-        "dysvm_server.*",
-        "freezegun.api.*",
-        "list.*",
-        "str.*",
-        "string.*",
-        "wsgiref.handlers.BaseHandler.start_response",
+        "datetime.datetime.isoformat",
+        "freezegun.api.FakeDatetime.now",
+        "freezegun.api.FakeDatetime.timestamp",
     ]
 )
+
+
+def allow_func(argument=None):
+    if callable(argument):
+        return _allow_func(argument)
+
+    def decorator(function):
+        function.__qualname__ = argument or function.__name__
+        function.__module__ = 'dys'
+        return wraps(function)(_allow_func)(function)
+
+    return decorator
+
+
+def _allow_func(func):
+    if not callable(func):
+        return func
+
+    modname = getattr(func, "__module__", None)
+    qualname = getattr(
+        func, "__qualname__", getattr(func, "__name__", getattr(func, "_name", None))
+    )
+
+    if modname:
+        fullname = modname + "." + qualname
+    else:
+        fullname = qualname
+
+    dyslang.WHITELIST_FUNCTIONS.add(fullname)
+    return func
+
+
 mod_dict = get_module_dict()
 for k, v in mod_dict.items():
     for kk in v:

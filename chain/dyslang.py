@@ -1,6 +1,5 @@
 from collections import namedtuple as nt
 from collections.abc import MutableMapping
-
 import re
 import ast
 import operator as op
@@ -37,10 +36,32 @@ DISALLOW_METHODS = [(str, "format"), (type, "mro"), (str, "format_map")]
 # Defaults for the evaluator:
 
 BUILTIN_EXCEPTIONS = {
-    k: v
-    for k, v in vars(builtins).items()
-    if issubclass(type(v), type) and issubclass(v, Exception)
+    "ArithmeticError": ArithmeticError,
+    "AssertionError": AssertionError,
+    "AttributeError": AttributeError,
+    "Exception": Exception,
+    "FloatingPointError": FloatingPointError,
+    "ImportError": ImportError,
+    "IndexError": IndexError,
+    "KeyError": KeyError,
+    "LookupError": LookupError,
+    "ModuleNotFoundError": ModuleNotFoundError,
+    "NameError": NameError,
+    "NotImplementedError": NotImplementedError,
+    "OverflowError": OverflowError,
+    "PermissionError": PermissionError,
+    "RecursionError": RecursionError,
+    "SyntaxError": SyntaxError,
+    "TypeError": TypeError,
+    "UnboundLocalError": UnboundLocalError,
+    "UnicodeDecodeError": UnicodeDecodeError,
+    "UnicodeEncodeError": UnicodeEncodeError,
+    "UnicodeError": UnicodeError,
+    "UnicodeTranslateError": UnicodeTranslateError,
+    "ValueError": ValueError,
+    "ZeroDivisionError": ZeroDivisionError,
 }
+
 
 DEFAULT_SCOPE = {
     "True": True,
@@ -94,9 +115,6 @@ _whitelist_functions_dict = {
     "builtins": [*list(DEFAULT_SCOPE.keys())],
     "dict": ["get", "items", "keys", "values"],
     "list": ["sort", "append", "pop", "count", "index", "reverse"],
-    "script": ["*"],
-    "__main__": ["*"],
-    "dyslang": ["*"],
 }
 
 
@@ -105,6 +123,22 @@ WHITELIST_FUNCTIONS = set()
 for k, v in _whitelist_functions_dict.items():
     for kk in v:
         WHITELIST_FUNCTIONS.add(k + "." + kk)
+
+
+def assert_func_allowed(func):
+    modname = getattr(func, "__module__", None)
+    qualname = getattr(func, "__qualname__", getattr(func, "__name__", None))
+
+    if modname:
+        fullname = modname + "." + qualname
+    else:
+        fullname = qualname
+
+    if func in DISALLOW_FUNCTIONS:
+        raise DangerousValue(f"This function is forbidden: {fullname}")
+
+    if fullname not in WHITELIST_FUNCTIONS:
+        raise NotImplementedError("This function is not allowed: {}".format(fullname))
 
 
 ########################################
@@ -169,7 +203,7 @@ def safe_power(a, b):  # pylint: disable=invalid-name
 
     if abs(a) > MAX_POWER or abs(b) > MAX_POWER:
         raise MemoryError("Sorry! I don't want to evaluate {0} ** {1}".format(a, b))
-    return a ** b
+    return a**b
 
 
 def safe_mult(a, b):  # pylint: disable=invalid-name
@@ -208,7 +242,6 @@ class Scope(MutableMapping):
 
     def __len__(self):
         return [len(d) for d in self.dicts]
-
 
     def __repr__(self):
         return repr(self.dicts[1:])
@@ -455,6 +488,10 @@ class DysEval(object):
                     )
                 node.call_stack = self.call_stack
                 self._last_eval_result = handler(node)
+
+                if callable(self._last_eval_result):
+                    assert_func_allowed(self._last_eval_result)
+
                 return self._last_eval_result
             finally:
                 self.track(node)
@@ -638,6 +675,7 @@ class DysEval(object):
         _func.__name__ = "<lambda>"
         _func.__qualname__ = "<lambda>"
         _func.__module__ = "script"
+        WHITELIST_FUNCTIONS.add(f"{_func.__module__}.{_func.__qualname__}")
 
         return _func
 
@@ -682,6 +720,7 @@ class DysEval(object):
         _func.__annotations__ = _annotations
         _func.__qualname__ = node.name
         _func = forge.sign(*sig_list, **sig_dict)(_func)
+        WHITELIST_FUNCTIONS.add(f"{_func.__module__}.{_func.__qualname__}")
 
         # prevent unwrap from detecting this nested function
         del _func.__wrapped__
@@ -968,23 +1007,7 @@ class DysEval(object):
                 "Sorry, {} type is not callable".format(type(func).__name__)
             )
 
-        modname = getattr(func, "__module__", None)
-        qualname = getattr(func, "__qualname__", getattr(func, "__name__", None))
-
-        if modname:
-            fullname = modname + "." + qualname
-            wildcard = modname + ".*"
-        else:
-            fullname = qualname
-            wildcard = ".".join(fullname.split(".")[:-1] + ["*"])
-
-        if func in DISALLOW_FUNCTIONS:
-            raise DangerousValue(f"This function is forbidden: {fullname}")
-
-        if wildcard not in WHITELIST_FUNCTIONS and fullname not in WHITELIST_FUNCTIONS:
-            raise NotImplementedError(
-                "This function is not allowed: {} or {}".format(fullname, wildcard)
-            )
+        assert_func_allowed(func)
         kwarg_kwargs = [self._eval(k) for k in node.keywords]
 
         f = func

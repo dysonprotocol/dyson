@@ -17,7 +17,7 @@ func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$r
 	defer func() {
 		if r := recover(); r != nil {
 
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %T %+v", r, r)
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
@@ -266,16 +266,51 @@ schemas["dyson/sendMsgCreateStorage"]["request_schema"]["definitions"][
 with open("vue/src/views/command_schema.json", "w") as f:
     json.dump(schemas, f, indent=2)
 
-# Generate docs
-dyslang_modules = get_module_dict()
-for mod_key, mod in dyslang_modules.items():
-    for imp_key, imp in mod.items():
-        mod[imp_key] = imp.__doc__
 
-with open("vue/src/views/dyslang_modules.json", "w") as f:
-    json.dump(dyslang_modules, f, indent=2)
+from IPython.core.oinspect import Inspector
+from dyslang import WHITELIST_FUNCTIONS, dys_eval
+from dysvm_server import build_sandbox, get_module_dict
+import urllib, simplejson
+
+sandbox = build_sandbox("", "", "", "", "")
+inspector = Inspector()
+
+locals().update(sandbox.modules)
+docs = {}
 
 
-sandbox = build_sandbox("port", "creator", "address", "amount", "block_info")
-print(sandbox.scope)
-print(sandbox.modules)
+exclude_keys = [
+    "file",
+    "isalias",
+    "ismagic",
+    "length",
+    "namespace",
+    "source",
+    "found",
+    "string_form",
+    "subclasses",
+    "type_name",
+    "base_class",
+    "name",
+]
+
+for f in WHITELIST_FUNCTIONS:
+    ff = (
+        f.removeprefix("builtins.")
+        .removeprefix("script.*")
+        .replace("freezegun.api.FakeDatetime", "datetime.datetime")
+        .replace("_io", "io")
+        .replace("_hashlib", "hashlib")
+        .replace("openssl_", "")
+    )
+    if ff:
+        d = inspector._info(
+            eval(ff.removeprefix("builtins.").removeprefix("script.*")), detail_level=0
+        )
+        #docs[ff] = d
+        docs[ff] = {k: v for k, v in d.items() if k not in exclude_keys and v is not None}
+
+import json
+
+with open("vue/src/views/dyslang_docs.json", "w") as f:
+    json.dump(docs, f, indent=2)

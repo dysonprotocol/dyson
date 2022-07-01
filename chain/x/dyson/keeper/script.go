@@ -261,9 +261,9 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 		fmt.Println(fmt.Sprintf("Script at address %v not set", scriptCtx.Index))
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("Script at address %v not set", scriptCtx.Index))
 	}
-	if (scriptCtx.Sender != valFound.Creator) && (scriptCtx.ExtraLines != "") {
-		fmt.Println(fmt.Sprintf("Only if Script.Creator==Sender can use ExtraLines %v", scriptCtx))
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, fmt.Sprintf("Only if Script.Creator==Sender can use ExtraLines %v", scriptCtx))
+	if (scriptCtx.Sender != valFound.Index) && (scriptCtx.ExtraLines != "") {
+		fmt.Println(fmt.Sprintf("Only if Script.Index==Sender can use ExtraLines %v", scriptCtx))
+		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, fmt.Sprintf("Only if Script.Index==Sender can use ExtraLines %v", scriptCtx))
 	}
 	port, srv, err := k.NewRPCServer(goCtx, valFound.Index)
 	if err != nil {

@@ -1,0 +1,541 @@
+{
+  "str.join": {
+    "definition": "(self, iterable)",
+    "docstring": "S.join(iterable) -> unicode\n\nReturn a string which is the concatenation of the strings in the\niterable.  The separator between elements is S."
+  },
+  "True": {
+    "docstring": "bool(x) -> bool\n\nReturns True when the argument x is true, False otherwise.\nThe builtins True and False are the only two instances of the class bool.\nThe class bool is a subclass of the class int, and cannot be subclassed."
+  },
+  "False": {
+    "docstring": "bool(x) -> bool\n\nReturns True when the argument x is true, False otherwise.\nThe builtins True and False are the only two instances of the class bool.\nThe class bool is a subclass of the class int, and cannot be subclassed."
+  },
+  "None": {
+    "docstring": "<no docstring>"
+  },
+  "int": {
+    "docstring": "int([x]) -> integer\nint(x, base=10) -> integer\n\nConvert a number or string to an integer, or return 0 if no arguments\nare given.  If x is a number, return x.__int__().  For floating point\nnumbers, this truncates towards zero.\n\nIf x is not a number or if base is given, then x must be a string,\nbytes, or bytearray instance representing an integer literal in the\ngiven base.  The literal can be preceded by '+' or '-' and be surrounded\nby whitespace.  The base defaults to 10.  Valid bases are 0 and 2-36.\nBase 0 means to interpret the base from the string as an integer literal.\n>>> int('0b100', base=0)\n4",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
+  "float": {
+    "docstring": "float(x) -> floating point number\n\nConvert a string or number to a floating point number, if possible.",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
+  "str": {
+    "docstring": "str(object='') -> str\nstr(bytes_or_buffer[, encoding[, errors]]) -> str\n\nCreate a new string object from the given object. If encoding or\nerrors is specified, then the object must expose a data buffer\nthat will be decoded using the given encoding and error handler.\nOtherwise, returns the result of object.__str__() (if defined)\nor repr(object).\nencoding defaults to sys.getdefaultencoding().\nerrors defaults to 'strict'.",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
+  "bool": {
+    "docstring": "bool(x) -> bool\n\nReturns True when the argument x is true, False otherwise.\nThe builtins True and False are the only two instances of the class bool.\nThe class bool is a subclass of the class int, and cannot be subclassed.",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
+  "list": {
+    "docstring": "list() -> new empty list\nlist(iterable) -> new list initialized from iterable's items",
+    "init_definition": "(self, *args, **keywords)",
+    "init_docstring": "Initialize self.  See help(type(self)) for accurate signature.",
+    "isclass": true
+  },
+  "tuple": {
+    "docstring": "tuple() -> an empty tuple\ntuple(sequence) -> tuple initialized from sequence's items\n\nIf the argument is a tuple, the return value is the same object.",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
+  "dict": {
+    "docstring": "dict() -> new empty dictionary.\ndict(mapping) -> new dictionary initialized from a mapping object's\n    (key, value) pairs.\ndict(seq) -> new dictionary initialized as if via:\n    d = {}\n    for k, v in seq:\n        d[k] = v\ndict(**kwargs) -> new dictionary initialized with the name=value pairs\n    in the keyword argument list.  For example:  dict(one=1, two=2)",
+    "init_definition": "(self, *args, **keywords)",
+    "isclass": true
+  },
+  "set": {
+    "docstring": "set(iterable) --> set object\n\nBuild an unordered collection.",
+    "init_definition": "(self, *args, **keywords)",
+    "isclass": true
+  },
+  "len": {
+    "definition": "(obj)",
+    "docstring": "len(object) -> integer\n\nReturn the number of items of a sequence or mapping."
+  },
+  "min": {
+    "definition": "(*args, **keywords)",
+    "docstring": "min(iterable, *[, default=obj, key=func]) -> value\nmin(arg1, arg2, *args, *[, key=func]) -> value\n\nWith a single iterable argument, return its smallest item. The\ndefault keyword-only argument specifies an object to return if\nthe provided iterable is empty.\nWith two or more arguments, return the smallest argument.\n    "
+  },
+  "max": {
+    "definition": "(*args, **keywords)",
+    "docstring": "max(iterable, *[, default=obj, key=func]) -> value\nmax(arg1, arg2, *args, *[, key=func]) -> value\n\nWith a single iterable argument, return its biggest item. The\ndefault keyword-only argument specifies an object to return if\nthe provided iterable is empty.\nWith two or more arguments, return the largest argument.\n    "
+  },
+  "any": {
+    "definition": "(seq)",
+    "docstring": "any(iterable) -> bool\n\nReturn True if bool(x) is True for any x in the iterable."
+  },
+  "all": {
+    "definition": "(seq)",
+    "docstring": "all(iterable) -> bool\n\nReturn True if bool(x) is True for all values x in the iterable."
+  },
+  "round": {
+    "definition": "(number, ndigits=<no value>)",
+    "docstring": "round(number[, ndigits]) -> number\n\nRound a number to a given precision in decimal digits (default 0 digits).\nThis returns an int when called with one argument or if ndigits=None,\notherwise the same type as the number. ndigits may be negative."
+  },
+  "sorted": {
+    "definition": "(iterable, /, *, key=None, reverse=False)",
+    "docstring": "sorted(iterable, key=None, reverse=False) --> new sorted list"
+  },
+  "sum": {
+    "definition": "(sequence, start=0)",
+    "docstring": "sum(sequence[, start]) -> value\n\nReturns the sum of a sequence of numbers (NOT strings) plus the value\nof parameter 'start' (which defaults to 0).  When the sequence is\nempty, returns start."
+  },
+  "isinstance": {
+    "definition": "(obj, klass_or_tuple)",
+    "docstring": "Check whether an object is an instance of a class (or of a subclass\nthereof).  When using a tuple as the second argument, check whether 'obj'\nis an instance of any of the classes listed in the tuple."
+  },
+  "enumerate": {
+    "docstring": "<no docstring>",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
+  "issubclass": {
+    "definition": "(cls, klass_or_tuple)",
+    "docstring": "Check whether a class 'cls' is a subclass (i.e., a derived class) of\nanother class.  When using a tuple as the second argument, check whether\n'cls' is a subclass of any of the classes listed in the tuple."
+  },
+  "iter": {
+    "definition": "(collection_or_callable, sentinel=<no value>)",
+    "docstring": "iter(collection) -> iterator over the elements of the collection.\n\niter(callable, sentinel) -> iterator calling callable() until it returns\n                            the sentinel."
+  },
+  "range": {
+    "docstring": "<no docstring>",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
+  "Exception": {
+    "docstring": "Common base class for all non-exit exceptions.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "ArithmeticError": {
+    "docstring": "Base class for arithmetic errors.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "AssertionError": {
+    "docstring": "Assertion failed.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "AttributeError": {
+    "docstring": "Attribute not found.",
+    "init_definition": "(self, *args, obj=None, name=None)",
+    "isclass": true
+  },
+  "FloatingPointError": {
+    "docstring": "Floating point operation failed.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "ImportError": {
+    "docstring": "Import can't find module, or can't find name in module.",
+    "init_definition": "(self, *args, name=None, path=None)",
+    "isclass": true
+  },
+  "IndexError": {
+    "docstring": "Sequence index out of range.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "KeyError": {
+    "docstring": "Mapping key not found.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "LookupError": {
+    "docstring": "Base class for lookup errors.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "ModuleNotFoundError": {
+    "docstring": "Module not found.",
+    "init_definition": "(self, *args, name=None, path=None)",
+    "isclass": true
+  },
+  "NameError": {
+    "docstring": "Name not found globally.",
+    "init_definition": "(self, *args, name=None)",
+    "isclass": true
+  },
+  "NotImplementedError": {
+    "docstring": "Method or function hasn't been implemented yet.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "OverflowError": {
+    "docstring": "Result too large to be represented.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "PermissionError": {
+    "docstring": "Not enough permissions.",
+    "init_definition": "(self, *args, **keywords)",
+    "isclass": true
+  },
+  "RecursionError": {
+    "docstring": "Recursion limit exceeded.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "SyntaxError": {
+    "docstring": "Invalid syntax.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "TypeError": {
+    "docstring": "Inappropriate argument type.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "UnboundLocalError": {
+    "docstring": "Local name referenced but not bound to a value.",
+    "init_definition": "(self, *args, name=None)",
+    "isclass": true
+  },
+  "UnicodeDecodeError": {
+    "docstring": "Unicode decoding error.",
+    "init_definition": "(self, encoding, object, start, end, reason)",
+    "isclass": true
+  },
+  "UnicodeEncodeError": {
+    "docstring": "Unicode encoding error.",
+    "init_definition": "(self, encoding, object, start, end, reason)",
+    "isclass": true
+  },
+  "UnicodeError": {
+    "docstring": "Unicode related error.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "UnicodeTranslateError": {
+    "docstring": "Unicode translation error.",
+    "init_definition": "(self, object, start, end, reason)",
+    "isclass": true
+  },
+  "ValueError": {
+    "docstring": "Inappropriate argument value (of correct type).",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "ZeroDivisionError": {
+    "docstring": "Second argument to a division or modulo operation was zero.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "dict.get": {
+    "definition": "(self, key, default=None)",
+    "docstring": "D.get(k[,d]) -> D[k] if k in D, else d.  d defaults to None."
+  },
+  "dict.items": {
+    "definition": "(self)",
+    "docstring": "D.items() -> a set-like object providing a view on D's items"
+  },
+  "dict.keys": {
+    "definition": "(self)",
+    "docstring": "D.keys() -> a set-like object providing a view on D's keys"
+  },
+  "dict.values": {
+    "definition": "(self)",
+    "docstring": "D.values() -> an object providing a view on D's values"
+  },
+  "list.sort": {
+    "definition": "(self, key=<no value>, reverse=<no value>)",
+    "docstring": "L.sort(key=None, reverse=False) -> None -- stable sort *IN PLACE*"
+  },
+  "list.append": {
+    "definition": "(self, item)",
+    "docstring": "L.append(object) -> None -- append object to end"
+  },
+  "list.pop": {
+    "definition": "(self, index=-1)",
+    "docstring": "L.pop([index]) -> item -- remove and return item at index (default last).\nRaises IndexError if list is empty or index is out of range."
+  },
+  "list.count": {
+    "definition": "(self, value)",
+    "docstring": "L.count(value) -> integer -- return number of occurrences of value"
+  },
+  "list.index": {
+    "definition": "(self, value, start=0, stop=9223372036854775807)",
+    "docstring": "L.index(value, [start, [stop]]) -> integer -- return first index of value.\nRaises ValueError if the value is not present."
+  },
+  "list.reverse": {
+    "definition": "(self)",
+    "docstring": "L.reverse() -- reverse *IN PLACE*"
+  },
+  "datetime.datetime.isoformat": {
+    "definition": "(self, sep='T', timespec='auto')",
+    "docstring": "Return the time formatted according to ISO.\n\nThe full format looks like 'YYYY-MM-DD HH:MM:SS.mmmmmm'.\nBy default, the fractional part is omitted if self.microsecond == 0.\n\nIf self.tzinfo is not None, the UTC offset is also attached, giving\ngiving a full format of 'YYYY-MM-DD HH:MM:SS.mmmmmm+HH:MM'.\n\nOptional argument sep specifies the separator between date and\ntime, default 'T'.\n\nThe optional argument timespec specifies the number of additional\nterms of the time to include. Valid options are 'auto', 'hours',\n'minutes', 'seconds', 'milliseconds' and 'microseconds'."
+  },
+  "datetime.datetime.now": {
+    "definition": "(tz=None)",
+    "docstring": "Construct a datetime from time.time() and optional time zone info."
+  },
+  "datetime.datetime.timestamp": {
+    "definition": "(self)",
+    "docstring": "Return POSIX timestamp as float"
+  },
+  "json.dumps": {
+    "definition": "(\n    obj,\n    skipkeys=False,\n    ensure_ascii=True,\n    check_circular=True,\n    allow_nan=True,\n    cls=None,\n    indent=None,\n    separators=None,\n    encoding='utf-8',\n    default=None,\n    use_decimal=True,\n    namedtuple_as_object=True,\n    tuple_as_array=True,\n    bigint_as_string=False,\n    sort_keys=False,\n    item_sort_key=None,\n    for_json=False,\n    ignore_nan=False,\n    int_as_string_bitcount=None,\n    iterable_as_array=False,\n    **kw,\n)",
+    "docstring": "Serialize ``obj`` to a JSON formatted ``str``.\n\nIf ``skipkeys`` is false then ``dict`` keys that are not basic types\n(``str``, ``int``, ``long``, ``float``, ``bool``, ``None``)\nwill be skipped instead of raising a ``TypeError``.\n\nIf *ensure_ascii* is false (default: ``True``), then the output may\ncontain non-ASCII characters, so long as they do not need to be escaped\nby JSON. When it is true, all non-ASCII characters are escaped.\n\nIf ``check_circular`` is false, then the circular reference check\nfor container types will be skipped and a circular reference will\nresult in an ``OverflowError`` (or worse).\n\nIf ``allow_nan`` is false, then it will be a ``ValueError`` to\nserialize out of range ``float`` values (``nan``, ``inf``, ``-inf``) in\nstrict compliance of the JSON specification, instead of using the\nJavaScript equivalents (``NaN``, ``Infinity``, ``-Infinity``).\n\nIf ``indent`` is a string, then JSON array elements and object members\nwill be pretty-printed with a newline followed by that string repeated\nfor each level of nesting. ``None`` (the default) selects the most compact\nrepresentation without any newlines. For backwards compatibility with\nversions of simplejson earlier than 2.1.0, an integer is also accepted\nand is converted to a string with that many spaces.\n\nIf specified, ``separators`` should be an\n``(item_separator, key_separator)`` tuple.  The default is ``(', ', ': ')``\nif *indent* is ``None`` and ``(',', ': ')`` otherwise.  To get the most\ncompact JSON representation, you should specify ``(',', ':')`` to eliminate\nwhitespace.\n\n``encoding`` is the character encoding for bytes instances, default is\nUTF-8.\n\n``default(obj)`` is a function that should return a serializable version\nof obj or raise TypeError. The default simply raises TypeError.\n\nIf *use_decimal* is true (default: ``True``) then decimal.Decimal\nwill be natively serialized to JSON with full precision.\n\nIf *namedtuple_as_object* is true (default: ``True``),\n:class:`tuple` subclasses with ``_asdict()`` methods will be encoded\nas JSON objects.\n\nIf *tuple_as_array* is true (default: ``True``),\n:class:`tuple` (and subclasses) will be encoded as JSON arrays.\n\nIf *iterable_as_array* is true (default: ``False``),\nany object not in the above table that implements ``__iter__()``\nwill be encoded as a JSON array.\n\nIf *bigint_as_string* is true (not the default), ints 2**53 and higher\nor lower than -2**53 will be encoded as strings. This is to avoid the\nrounding that happens in Javascript otherwise.\n\nIf *int_as_string_bitcount* is a positive number (n), then int of size\ngreater than or equal to 2**n or lower than or equal to -2**n will be\nencoded as strings.\n\nIf specified, *item_sort_key* is a callable used to sort the items in\neach dictionary. This is useful if you want to sort items other than\nin alphabetical order by key. This option takes precedence over\n*sort_keys*.\n\nIf *sort_keys* is true (default: ``False``), the output of dictionaries\nwill be sorted by item.\n\nIf *for_json* is true (default: ``False``), objects with a ``for_json()``\nmethod will use the return value of that method for encoding as JSON\ninstead of the object.\n\nIf *ignore_nan* is true (default: ``False``), then out of range\n:class:`float` values (``nan``, ``inf``, ``-inf``) will be serialized as\n``null`` in compliance with the ECMA-262 specification. If true, this will\noverride *allow_nan*.\n\nTo use a custom ``JSONEncoder`` subclass (e.g. one that overrides the\n``.default()`` method to serialize additional types), specify it with\nthe ``cls`` kwarg. NOTE: You should use *default* instead of subclassing\nwhenever possible."
+  },
+  "datetime.timedelta": {
+    "docstring": "Represent the difference between two datetime objects.\n\nSupported operators:\n\n- add, subtract timedelta\n- unary plus, minus, abs\n- compare to timedelta\n- multiply, divide by int\n\nIn addition, datetime supports subtraction of two datetime objects\nreturning a timedelta, and addition or subtraction of a datetime\nand a timedelta giving a datetime.\n\nRepresentation: (days, seconds, microseconds).  Why?  Because I\nfelt like it.",
+    "init_definition": "(\n    days=0,\n    seconds=0,\n    microseconds=0,\n    milliseconds=0,\n    minutes=0,\n    hours=0,\n    weeks=0,\n)",
+    "isclass": true
+  },
+  "datetime.date": {
+    "docstring": "Concrete date type.\n\nConstructors:\n\n__new__()\nfromtimestamp()\ntoday()\nfromordinal()\n\nOperators:\n\n__repr__, __str__\n__eq__, __le__, __lt__, __ge__, __gt__, __hash__\n__add__, __radd__, __sub__ (add/radd only with timedelta arg)\n\nMethods:\n\ntimetuple()\ntoordinal()\nweekday()\nisoweekday(), isocalendar(), isoformat()\nctime()\nstrftime()\n\nProperties (readonly):\nyear, month, day",
+    "init_definition": "(year, month=None, day=None)",
+    "isclass": true
+  },
+  "datetime.time": {
+    "docstring": "Time with time zone.\n\nConstructors:\n\n__new__()\n\nOperators:\n\n__repr__, __str__\n__eq__, __le__, __lt__, __ge__, __gt__, __hash__\n\nMethods:\n\nstrftime()\nisoformat()\nutcoffset()\ntzname()\ndst()\n\nProperties (readonly):\nhour, minute, second, microsecond, tzinfo, fold",
+    "init_definition": "(hour=0, minute=0, second=0, microsecond=0, tzinfo=None, *, fold=0)",
+    "isclass": true
+  },
+  "datetime.datetime": {
+    "docstring": "datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])\n\nThe year, month and day arguments are required. tzinfo may be None, or an\ninstance of a tzinfo subclass. The remaining arguments may be ints.",
+    "init_definition": "(\n    year,\n    month=None,\n    day=None,\n    hour=0,\n    minute=0,\n    second=0,\n    microsecond=0,\n    tzinfo=None,\n    *,\n    fold=0,\n)",
+    "isclass": true
+  },
+  "datetime.tzinfo": {
+    "docstring": "Abstract base class for time zone info classes.\n\nSubclasses must override the name(), utcoffset() and dst() methods.",
+    "init_definition": "(*args, **kwds)",
+    "isclass": true
+  },
+  "datetime.timezone": {
+    "docstring": "Abstract base class for time zone info classes.\n\nSubclasses must override the name(), utcoffset() and dst() methods.",
+    "init_definition": "(offset, name=<object object at 0x234567>)",
+    "isclass": true
+  },
+  "pathlib.PurePath": {
+    "docstring": "Base class for manipulating paths without I/O.\n\nPurePath represents a filesystem path and offers operations which\ndon't imply any actual filesystem I/O.  Depending on your system,\ninstantiating a PurePath will return either a PurePosixPath or a\nPureWindowsPath object.  You can also instantiate either of these classes\ndirectly, regardless of your system.",
+    "init_definition": "(*args)",
+    "isclass": true
+  },
+  "uuid.uuid4": {
+    "definition": "()",
+    "docstring": "Generate a random UUID."
+  },
+  "mimetypes.guess_type": {
+    "definition": "(url, strict=True)",
+    "docstring": "Guess the type of a file based on its URL.\n\nReturn value is a tuple (type, encoding) where type is None if the\ntype can't be guessed (no or unknown suffix) or a string of the\nform type/subtype, usable for a MIME Content-type header; and\nencoding is None for no encoding or the name of the program used\nto encode (e.g. compress or gzip).  The mappings are table\ndriven.  Encoding suffixes are case sensitive; type suffixes are\nfirst tried case sensitive, then case insensitive.\n\nThe suffixes .tgz, .taz and .tz (case sensitive!) are all mapped\nto \".tar.gz\".  (This is table-driven too, using the dictionary\nsuffix_map).\n\nOptional `strict' argument when false adds a bunch of commonly found, but\nnon-standard types."
+  },
+  "urllib.parse.parse_qs": {
+    "definition": "(\n    qs,\n    keep_blank_values=False,\n    strict_parsing=False,\n    encoding='utf-8',\n    errors='replace',\n    max_num_fields=None,\n    separator='&',\n)",
+    "docstring": "Parse a query given as a string argument.\n\nArguments:\n\nqs: percent-encoded query string to be parsed\n\nkeep_blank_values: flag indicating whether blank values in\n    percent-encoded queries should be treated as blank strings.\n    A true value indicates that blanks should be retained as\n    blank strings.  The default false value indicates that\n    blank values are to be ignored and treated as if they were\n    not included.\n\nstrict_parsing: flag indicating what to do with parsing errors.\n    If false (the default), errors are silently ignored.\n    If true, errors raise a ValueError exception.\n\nencoding and errors: specify how to decode percent-encoded sequences\n    into Unicode characters, as accepted by the bytes.decode() method.\n\nmax_num_fields: int. If set, then throws a ValueError if there\n    are more than n fields read by parse_qsl().\n\nseparator: str. The symbol to use for separating the query arguments.\n    Defaults to &.\n\nReturns a dictionary."
+  },
+  "urllib.parse.parse_qsl": {
+    "definition": "(\n    qs,\n    keep_blank_values=False,\n    strict_parsing=False,\n    encoding='utf-8',\n    errors='replace',\n    max_num_fields=None,\n    separator='&',\n)",
+    "docstring": "Parse a query given as a string argument.\n\nArguments:\n\nqs: percent-encoded query string to be parsed\n\nkeep_blank_values: flag indicating whether blank values in\n    percent-encoded queries should be treated as blank strings.\n    A true value indicates that blanks should be retained as blank\n    strings.  The default false value indicates that blank values\n    are to be ignored and treated as if they were  not included.\n\nstrict_parsing: flag indicating what to do with parsing errors. If\n    false (the default), errors are silently ignored. If true,\n    errors raise a ValueError exception.\n\nencoding and errors: specify how to decode percent-encoded sequences\n    into Unicode characters, as accepted by the bytes.decode() method.\n\nmax_num_fields: int. If set, then throws a ValueError\n    if there are more than n fields read by parse_qsl().\n\nseparator: str. The symbol to use for separating the query arguments.\n    Defaults to &.\n\nReturns a list, as G-d intended."
+  },
+  "urllib.parse.urlsplit": {
+    "definition": "(url, scheme='', allow_fragments=True)",
+    "docstring": "Parse a URL into 5 components:\n<scheme>://<netloc>/<path>?<query>#<fragment>\n\nThe result is a named 5-tuple with fields corresponding to the\nabove. It is either a SplitResult or SplitResultBytes object,\ndepending on the type of the url parameter.\n\nThe username, password, hostname, and port sub-components of netloc\ncan also be accessed as attributes of the returned object.\n\nThe scheme argument provides the default value of the scheme\ncomponent when no scheme is found in url.\n\nIf allow_fragments is False, no attempt is made to separate the\nfragment component from the previous component, which can be either\npath or query.\n\nNote that % escapes are not expanded."
+  },
+  "urllib.parse.urlunsplit": {
+    "definition": "(components)",
+    "docstring": "Combine the elements of a tuple as returned by urlsplit() into a\ncomplete URL as a string. The data argument can be any five-item iterable.\nThis may result in a slightly different, but equivalent URL, if the URL that\nwas parsed originally had unnecessary delimiters (for example, a ? with an\nempty query; the RFC states that these are equivalent)."
+  },
+  "urllib.parse.urljoin": {
+    "definition": "(base, url, allow_fragments=True)",
+    "docstring": "Join a base URL and a possibly relative URL to form an absolute\ninterpretation of the latter."
+  },
+  "urllib.parse.urldefrag": {
+    "definition": "(url)",
+    "docstring": "Removes any existing fragment from URL.\n\nReturns a tuple of the defragmented URL and the fragment.  If\nthe URL contained no fragments, the second element is the\nempty string."
+  },
+  "urllib.parse.quote": {
+    "definition": "(string, safe='/', encoding=None, errors=None)",
+    "docstring": "quote('abc def') -> 'abc%20def'\n\nEach part of a URL, e.g. the path info, the query, etc., has a\ndifferent set of reserved characters that must be quoted. The\nquote function offers a cautious (not minimal) way to quote a\nstring for most of these parts.\n\nRFC 3986 Uniform Resource Identifier (URI): Generic Syntax lists\nthe following (un)reserved characters.\n\nunreserved    = ALPHA / DIGIT / \"-\" / \".\" / \"_\" / \"~\"\nreserved      = gen-delims / sub-delims\ngen-delims    = \":\" / \"/\" / \"?\" / \"#\" / \"[\" / \"]\" / \"@\"\nsub-delims    = \"!\" / \"$\" / \"&\" / \"'\" / \"(\" / \")\"\n              / \"*\" / \"+\" / \",\" / \";\" / \"=\"\n\nEach of the reserved characters is reserved in some component of a URL,\nbut not necessarily in all of them.\n\nThe quote function %-escapes all characters that are neither in the\nunreserved chars (\"always safe\") nor the additional chars set via the\nsafe arg.\n\nThe default for the safe arg is '/'. The character is reserved, but in\ntypical usage the quote function is being called on a path where the\nexisting slash characters are to be preserved.\n\nPython 3.7 updates from using RFC 2396 to RFC 3986 to quote URL strings.\nNow, \"~\" is included in the set of unreserved characters.\n\nstring and safe may be either str or bytes objects. encoding and errors\nmust not be specified if string is a bytes object.\n\nThe optional encoding and errors parameters specify how to deal with\nnon-ASCII characters, as accepted by the str.encode method.\nBy default, encoding='utf-8' (characters are encoded with UTF-8), and\nerrors='strict' (unsupported characters raise a UnicodeEncodeError)."
+  },
+  "urllib.parse.quote_plus": {
+    "definition": "(string, safe='', encoding=None, errors=None)",
+    "docstring": "Like quote(), but also replace ' ' with '+', as required for quoting\nHTML form values. Plus signs in the original string are escaped unless\nthey are included in safe. It also does not have safe default to '/'."
+  },
+  "urllib.parse.quote_from_bytes": {
+    "definition": "(bs, safe='/')",
+    "docstring": "Like quote(), but accepts a bytes object rather than a str, and does\nnot perform string-to-bytes encoding.  It always returns an ASCII string.\nquote_from_bytes(b'abc def?') -> 'abc%20def%3f'"
+  },
+  "urllib.parse.unquote": {
+    "definition": "(string, encoding='utf-8', errors='replace')",
+    "docstring": "Replace %xx escapes by their single-character equivalent. The optional\nencoding and errors parameters specify how to decode percent-encoded\nsequences into Unicode characters, as accepted by the bytes.decode()\nmethod.\nBy default, percent-encoded sequences are decoded with UTF-8, and invalid\nsequences are replaced by a placeholder character.\n\nunquote('abc%20def') -> 'abc def'."
+  },
+  "urllib.parse.unquote_plus": {
+    "definition": "(string, encoding='utf-8', errors='replace')",
+    "docstring": "Like unquote(), but also replace plus signs by spaces, as required for\nunquoting HTML form values.\n\nunquote_plus('%7e/abc+def') -> '~/abc def'"
+  },
+  "urllib.parse.unquote_to_bytes": {
+    "definition": "(string)",
+    "docstring": "unquote_to_bytes('abc%20def') -> b'abc def'."
+  },
+  "base64.decodebytes": {
+    "definition": "(s)",
+    "docstring": "Decode a bytestring of base-64 data into a bytes object."
+  },
+  "base64.encodebytes": {
+    "definition": "(s)",
+    "docstring": "Encode a bytestring into a bytes object containing multiple lines\nof base-64 data."
+  },
+  "base64.b64decode": {
+    "definition": "(s, altchars=None, validate=False)",
+    "docstring": "Decode the Base64 encoded bytes-like object or ASCII string s.\n\nOptional altchars must be a bytes-like object or ASCII string of length 2\nwhich specifies the alternative alphabet used instead of the '+' and '/'\ncharacters.\n\nThe result is returned as a bytes object.  A binascii.Error is raised if\ns is incorrectly padded.\n\nIf validate is False (the default), characters that are neither in the\nnormal base-64 alphabet nor the alternative alphabet are discarded prior\nto the padding check.  If validate is True, these non-alphabet characters\nin the input result in a binascii.Error."
+  },
+  "base64.b64encode": {
+    "definition": "(s, altchars=None)",
+    "docstring": "Encode the bytes-like object s using Base64 and return a bytes object.\n\nOptional altchars should be a byte string of length 2 which specifies an\nalternative alphabet for the '+' and '/' characters.  This allows an\napplication to e.g. generate url or filesystem safe Base64 strings."
+  },
+  "base64.urlsafe_b64encode": {
+    "definition": "(s)",
+    "docstring": "Encode bytes using the URL- and filesystem-safe Base64 alphabet.\n\nArgument s is a bytes-like object to encode.  The result is returned as a\nbytes object.  The alphabet uses '-' instead of '+' and '_' instead of\n'/'."
+  },
+  "base64.urlsafe_b64decode": {
+    "definition": "(s)",
+    "docstring": "Decode bytes using the URL- and filesystem-safe Base64 alphabet.\n\nArgument s is a bytes-like object or ASCII string to decode.  The result\nis returned as a bytes object.  A binascii.Error is raised if the input\nis incorrectly padded.  Characters that are not in the URL-safe base-64\nalphabet, and are not a plus '+' or slash '/', are discarded prior to the\npadding check.\n\nThe alphabet uses '-' instead of '+' and '_' instead of '/'."
+  },
+  "decimal.Decimal": {
+    "docstring": "Floating point class for decimal arithmetic.",
+    "init_definition": "(value='0', context=None)",
+    "isclass": true
+  },
+  "simplejson.loads": {
+    "definition": "(\n    s,\n    encoding=None,\n    cls=None,\n    object_hook=None,\n    parse_float=None,\n    parse_int=None,\n    parse_constant=None,\n    object_pairs_hook=None,\n    use_decimal=False,\n    **kw,\n)",
+    "docstring": "Deserialize ``s`` (a ``str`` or ``unicode`` instance containing a JSON\ndocument) to a Python object.\n\n*encoding* determines the encoding used to interpret any\n:class:`bytes` objects decoded by this instance (``'utf-8'`` by\ndefault). It has no effect when decoding :class:`unicode` objects.\n\n*object_hook*, if specified, will be called with the result of every\nJSON object decoded and its return value will be used in place of the\ngiven :class:`dict`.  This can be used to provide custom\ndeserializations (e.g. to support JSON-RPC class hinting).\n\n*object_pairs_hook* is an optional function that will be called with\nthe result of any object literal decode with an ordered list of pairs.\nThe return value of *object_pairs_hook* will be used instead of the\n:class:`dict`.  This feature can be used to implement custom decoders\nthat rely on the order that the key and value pairs are decoded (for\nexample, :func:`collections.OrderedDict` will remember the order of\ninsertion). If *object_hook* is also defined, the *object_pairs_hook*\ntakes priority.\n\n*parse_float*, if specified, will be called with the string of every\nJSON float to be decoded.  By default, this is equivalent to\n``float(num_str)``. This can be used to use another datatype or parser\nfor JSON floats (e.g. :class:`decimal.Decimal`).\n\n*parse_int*, if specified, will be called with the string of every\nJSON int to be decoded.  By default, this is equivalent to\n``int(num_str)``.  This can be used to use another datatype or parser\nfor JSON integers (e.g. :class:`float`).\n\n*parse_constant*, if specified, will be called with one of the\nfollowing strings: ``'-Infinity'``, ``'Infinity'``, ``'NaN'``.  This\ncan be used to raise an exception if invalid JSON numbers are\nencountered.\n\nIf *use_decimal* is true (default: ``False``) then it implies\nparse_float=decimal.Decimal for parity with ``dump``.\n\nTo use a custom ``JSONDecoder`` subclass, specify it with the ``cls``\nkwarg. NOTE: You should use *object_hook* or *object_pairs_hook* instead\nof subclassing whenever possible."
+  },
+  "simplejson.errors.JSONDecodeError": {
+    "docstring": "Subclass of ValueError with the following additional properties:\n\nmsg: The unformatted error message\ndoc: The JSON document being parsed\npos: The start index of doc where parsing failed\nend: The end index of doc where parsing failed (may be None)\nlineno: The line corresponding to pos\ncolno: The column corresponding to pos\nendlineno: The line corresponding to end (may be None)\nendcolno: The column corresponding to end (may be None)",
+    "init_definition": "(msg, doc, pos, end=None)",
+    "isclass": true
+  },
+  "html.escape": {
+    "definition": "(s, quote=True)",
+    "docstring": "Replace special characters \"&\", \"<\" and \">\" to HTML-safe sequences.\nIf the optional flag quote is true (the default), the quotation mark\ncharacters, both double quote (\") and single quote (') characters are also\ntranslated."
+  },
+  "io.StringIO": {
+    "docstring": "<no docstring>",
+    "init_definition": "(self, initvalue=<no value>, newline=<no value>)",
+    "isclass": true
+  },
+  "io.BytesIO": {
+    "docstring": "Base class for buffered IO objects.\n\nThe main difference with RawIOBase is that the read() method\nsupports omitting the size argument, and does not have a default\nimplementation that defers to readinto().\n\nIn addition, read(), readinto() and write() may raise\nBlockingIOError if the underlying raw stream is in non-blocking\nmode and not ready; unlike their raw counterparts, they will never\nreturn None.\n\nA typical implementation should not inherit from a RawIOBase\nimplementation, but wrap one.",
+    "init_definition": "(self, initial_bytes=<no value>)",
+    "isclass": true
+  },
+  "hashlib.sha1": {
+    "definition": "(string=b'', usedforsecurity=True)",
+    "docstring": "<no docstring>"
+  },
+  "hashlib.sha256": {
+    "definition": "(string=b'', usedforsecurity=True)",
+    "docstring": "<no docstring>"
+  },
+  "typing.Callable": {
+    "definition": "(*args, **kwargs)",
+    "docstring": "Callable type; Callable[[int], str] is a function of (int) -> str.\n\nThe subscription syntax must always be used with exactly two\nvalues: the argument list and the return type.  The argument list\nmust be a list of types or ellipsis; the return type must be a single type.\n\nThere is no syntax to indicate optional or keyword arguments,\nsuch function types are rarely used as callback types.",
+    "class_docstring": "The central part of internal API.\n\nThis represents a generic version of type 'origin' with type arguments 'params'.\nThere are two kind of these aliases: user defined and special. The special ones\nare wrappers around builtin collections and ABCs in collections.abc. These must\nhave 'name' always set. If 'inst' is False, then the alias can't be instantiated,\nthis is used by e.g. typing.List and typing.Dict."
+  },
+  "typing.Any": {
+    "definition": "(*args, **kwds)",
+    "docstring": "Special type indicating an unconstrained type.\n\n- Any is compatible with every type.\n- Any assumed to have all methods.\n- All values assumed to be instances of Any.\n\nNote that all the above statements are true from the point of view of\nstatic type checkers. At runtime, Any should not be used with instance\nor class checks."
+  },
+  "typing.Union": {
+    "definition": "(*args, **kwds)",
+    "docstring": "Union type; Union[X, Y] means either X or Y.\n\nTo define a union, use e.g. Union[int, str].  Details:\n- The arguments must be types and there must be at least one.\n- None as an argument is a special case and is replaced by\n  type(None).\n- Unions of unions are flattened, e.g.::\n\n    Union[Union[int, str], float] == Union[int, str, float]\n\n- Unions of a single argument vanish, e.g.::\n\n    Union[int] == int  # The constructor actually returns int\n\n- Redundant arguments are skipped, e.g.::\n\n    Union[int, str, int] == Union[int, str]\n\n- When comparing unions, the argument order is ignored, e.g.::\n\n    Union[int, str] == Union[str, int]\n\n- You cannot subclass or instantiate a union.\n- You can use Optional[X] as a shorthand for Union[X, None]."
+  },
+  "typing.Optional": {
+    "definition": "(*args, **kwds)",
+    "docstring": "Optional type.\n\nOptional[X] is equivalent to Union[X, None]."
+  },
+  "typing.Literal": {
+    "definition": "(*args, **kwds)",
+    "docstring": "Special typing form to define literal types (a.k.a. value types).\n\nThis form can be used to indicate to type checkers that the corresponding\nvariable or function parameter has a value equivalent to the provided\nliteral (or one of several literals):\n\n  def validate_simple(data: Any) -> Literal[True]:  # always returns True\n      ...\n\n  MODE = Literal['r', 'rb', 'w', 'wb']\n  def open_helper(file: str, mode: MODE) -> str:\n      ...\n\n  open_helper('/some/path', 'r')  # Passes type check\n  open_helper('/other/path', 'typo')  # Error in type checker\n\nLiteral[...] cannot be subclassed. At runtime, an arbitrary value\nis allowed as type argument to Literal[...], but type checkers may\nimpose restrictions."
+  },
+  "typing.Annotated": {
+    "docstring": "Add context specific metadata to a type.\n\nExample: Annotated[int, runtime_check.Unsigned] indicates to the\nhypothetical runtime_check module that this type is an unsigned int.\nEvery other consumer of this type can ignore this metadata and treat\nthis type as int.\n\nThe first argument to Annotated must be a valid type.\n\nDetails:\n\n- It's an error to call `Annotated` with less than two arguments.\n- Nested Annotated are flattened::\n\n    Annotated[Annotated[T, Ann1, Ann2], Ann3] == Annotated[T, Ann1, Ann2, Ann3]\n\n- Instantiating an annotated type is equivalent to instantiating the\nunderlying type::\n\n    Annotated[C, Ann1](5) == C(5)\n\n- Annotated can be used as a generic type alias::\n\n    Optimized = Annotated[T, runtime.Optimize()]\n    Optimized[int] == Annotated[int, runtime.Optimize()]\n\n    OptimizedList = Annotated[List[T], runtime.Optimize()]\n    OptimizedList[int] == Annotated[List[int], runtime.Optimize()]",
+    "init_definition": "(*args, **kwargs)",
+    "isclass": true
+  },
+  "string.Template": {
+    "docstring": "A string class for supporting $-substitutions.",
+    "init_definition": "(template)",
+    "isclass": true
+  },
+  "re2.findall": {
+    "docstring": "Return a list of all non-overlapping matches in the string.\n\nEach match is represented as a string or a tuple (when there are two ore\nmore groups). Empty matches are included in the result.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.finditer": {
+    "docstring": "Yield all non-overlapping matches in the string.\n\nFor each match, the iterator returns a ``Match`` object.\nEmpty matches are included in the result.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.fullmatch": {
+    "docstring": "Try to apply the pattern to the entire string, returning\na ``Match`` object, or ``None`` if no match was found.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.match": {
+    "docstring": "Try to apply the pattern at the start of the string, returning\na ``Match`` object, or ``None`` if no match was found.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.search": {
+    "docstring": "Scan through string looking for a match to the pattern, returning\na ``Match`` object or none if no match was found.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.split": {
+    "docstring": "Split the source string by the occurrences of the pattern,\nreturning a list containing the resulting substrings.",
+    "call_def": "(*args, **keywords)"
+  },
+  "json.loads": {
+    "definition": "(\n    s,\n    encoding=None,\n    cls=None,\n    object_hook=None,\n    parse_float=None,\n    parse_int=None,\n    parse_constant=None,\n    object_pairs_hook=None,\n    use_decimal=False,\n    **kw,\n)",
+    "docstring": "Deserialize ``s`` (a ``str`` or ``unicode`` instance containing a JSON\ndocument) to a Python object.\n\n*encoding* determines the encoding used to interpret any\n:class:`bytes` objects decoded by this instance (``'utf-8'`` by\ndefault). It has no effect when decoding :class:`unicode` objects.\n\n*object_hook*, if specified, will be called with the result of every\nJSON object decoded and its return value will be used in place of the\ngiven :class:`dict`.  This can be used to provide custom\ndeserializations (e.g. to support JSON-RPC class hinting).\n\n*object_pairs_hook* is an optional function that will be called with\nthe result of any object literal decode with an ordered list of pairs.\nThe return value of *object_pairs_hook* will be used instead of the\n:class:`dict`.  This feature can be used to implement custom decoders\nthat rely on the order that the key and value pairs are decoded (for\nexample, :func:`collections.OrderedDict` will remember the order of\ninsertion). If *object_hook* is also defined, the *object_pairs_hook*\ntakes priority.\n\n*parse_float*, if specified, will be called with the string of every\nJSON float to be decoded.  By default, this is equivalent to\n``float(num_str)``. This can be used to use another datatype or parser\nfor JSON floats (e.g. :class:`decimal.Decimal`).\n\n*parse_int*, if specified, will be called with the string of every\nJSON int to be decoded.  By default, this is equivalent to\n``int(num_str)``.  This can be used to use another datatype or parser\nfor JSON integers (e.g. :class:`float`).\n\n*parse_constant*, if specified, will be called with one of the\nfollowing strings: ``'-Infinity'``, ``'Infinity'``, ``'NaN'``.  This\ncan be used to raise an exception if invalid JSON numbers are\nencountered.\n\nIf *use_decimal* is true (default: ``False``) then it implies\nparse_float=decimal.Decimal for parity with ``dump``.\n\nTo use a custom ``JSONDecoder`` subclass, specify it with the ``cls``\nkwarg. NOTE: You should use *object_hook* or *object_pairs_hook* instead\nof subclassing whenever possible."
+  },
+  "json.JSONDecodeError": {
+    "docstring": "Subclass of ValueError with the following additional properties:\n\nmsg: The unformatted error message\ndoc: The JSON document being parsed\npos: The start index of doc where parsing failed\nend: The end index of doc where parsing failed (may be None)\nlineno: The line corresponding to pos\ncolno: The column corresponding to pos\nendlineno: The line corresponding to end (may be None)\nendcolno: The column corresponding to end (may be None)",
+    "init_definition": "(msg, doc, pos, end=None)",
+    "isclass": true
+  },
+  "re2.UNICODE": {
+    "definition": "(function)",
+    "docstring": "<no docstring>"
+  },
+  "dys._chain": {
+    "definition": "(method, **params)",
+    "docstring": "The main way to interact with the chain from a script.\n\n:param method: the command to call on the chain, see TxBuilder for a list of possible commands\n`**kwargs` will depend on the command being called\n\n:returns: the response of the command or error"
+  },
+  "dys.rpc": {
+    "definition": "(method, **params)",
+    "docstring": "Depricated\nsee: dyson._chain"
+  },
+  "print": {
+    "definition": "(*args, sep=' ', end='\\n', file=None, flush=False)",
+    "docstring": "print(value, ..., sep=' ', end='\\n', file=sys.stdout, flush=False)\n\nPrints the values to a stream, or to sys.stdout by default.\nOptional keyword arguments:\nfile:  a file-like object (stream); defaults to the current sys.stdout.\nsep:   string inserted between values, default a space.\nend:   string appended after the last value, default a newline.\nflush: whether to forcibly flush the stream."
+  },
+  "dys.get_gas_consumed": {
+    "definition": "()",
+    "docstring": "The total amount of gas consumed so far."
+  },
+  "dys.get_gas_limit": {
+    "definition": "()",
+    "docstring": "The maximum amount of gas that can be used in this query or transaction"
+  },
+  "dys.get_script_address": {
+    "definition": "() -> str",
+    "docstring": "Returns the address of this current script."
+  },
+  "dys.get_caller": {
+    "definition": "() -> str",
+    "docstring": "Returns the address of the caller of this script."
+  },
+  "dys.get_block_info": {
+    "definition": "() -> dict",
+    "docstring": "Returns a dictionary of the current block info"
+  },
+  "dys.get_coins_sent": {
+    "definition": "()",
+    "docstring": "Returns the coins sent to this function.\nThis is not the gas or gas fees."
+  }
+}
