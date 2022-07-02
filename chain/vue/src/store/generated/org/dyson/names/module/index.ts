@@ -6,15 +6,15 @@ import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "
 import { Api } from "./rest";
 import { MsgDeleteName } from "./types/names/tx";
 import { MsgCreateName } from "./types/names/tx";
-import { MsgRegister } from "./types/names/tx";
 import { MsgUpdateName } from "./types/names/tx";
+import { MsgRegister } from "./types/names/tx";
 
 
 const types = [
   ["/names.MsgDeleteName", MsgDeleteName],
   ["/names.MsgCreateName", MsgCreateName],
-  ["/names.MsgRegister", MsgRegister],
   ["/names.MsgUpdateName", MsgUpdateName],
+  ["/names.MsgRegister", MsgRegister],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -49,8 +49,8 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
     msgDeleteName: (data: MsgDeleteName): EncodeObject => ({ typeUrl: "/names.MsgDeleteName", value: MsgDeleteName.fromPartial( data ) }),
     msgCreateName: (data: MsgCreateName): EncodeObject => ({ typeUrl: "/names.MsgCreateName", value: MsgCreateName.fromPartial( data ) }),
-    msgRegister: (data: MsgRegister): EncodeObject => ({ typeUrl: "/names.MsgRegister", value: MsgRegister.fromPartial( data ) }),
     msgUpdateName: (data: MsgUpdateName): EncodeObject => ({ typeUrl: "/names.MsgUpdateName", value: MsgUpdateName.fromPartial( data ) }),
+    msgRegister: (data: MsgRegister): EncodeObject => ({ typeUrl: "/names.MsgRegister", value: MsgRegister.fromPartial( data ) }),
     
   };
 };

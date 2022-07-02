@@ -4,6 +4,7 @@ import Relayers from '@/views/Relayers.vue'
 import ScriptList from '@/views/ScriptList.vue'
 import ScriptDetail from '@/views/ScriptDetail.vue'
 import TxBuilder from '@/views/TxBuilder.vue'
+import Docs from '@/views/Docs.vue'
 
 const routerHistory = createWebHistory()
 const routes = [
@@ -11,7 +12,7 @@ const routes = [
   { path: '/relayers', component: Relayers },
   { path: '/scripts', name: 'script-list', component: ScriptList },
   { path: '/scripts/:script_address', name: 'script-detail', component: ScriptDetail },
-  { path: '/txbuilder', name: 'tx-builder', component: TxBuilder},
+  { path: '/docs', name: 'docs', component: Docs},
 ]
 
 const router = createRouter({

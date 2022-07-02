@@ -21,6 +21,7 @@ from contextlib import redirect_stdout
 
 import requests
 import simplejson as json
+import simplejson
 from functools import partial
 
 import dyslang
@@ -134,7 +135,7 @@ def get_module_dict():
         return json.dumps(**kwargs)
 
     safe_json_dumps.__doc__ = json.dumps.__doc__
-    safe_json_dumps.__module__ = 'json'
+    safe_json_dumps.__module__ = 'simplejson'
     safe_json_dumps.__qualname__ = 'dumps'
     allow_func(safe_json_dumps)
 
@@ -174,10 +175,17 @@ def get_module_dict():
             "urlsafe_b64decode": base64.urlsafe_b64decode,
         },
         "decimal": {"Decimal": decimal.Decimal},
+        "simplejson": {
+            "dumps": safe_json_dumps,
+            "loads": simplejson.loads,
+        },
+        "simplejson.errors": {
+            "JSONDecodeError": simplejson.JSONDecodeError,
+        },
         "json": {
             "dumps": safe_json_dumps,
-            "loads": json.loads,
-            "JSONDecodeError": json.JSONDecodeError,
+            "loads": simplejson.loads,
+            "JSONDecodeError": simplejson.JSONDecodeError,
         },
         "html": {"escape": html.escape},
         "io": {"StringIO": io.StringIO, "BytesIO": io.BytesIO},

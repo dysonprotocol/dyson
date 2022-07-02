@@ -270,12 +270,12 @@ with open("vue/src/views/command_schema.json", "w") as f:
 from IPython.core.oinspect import Inspector
 from dyslang import WHITELIST_FUNCTIONS, dys_eval
 from dysvm_server import build_sandbox, get_module_dict
-import urllib, simplejson
 
 sandbox = build_sandbox("", "", "", "", "")
 inspector = Inspector()
 
 locals().update(sandbox.modules)
+import urllib, simplejson
 docs = {}
 
 
@@ -294,21 +294,26 @@ exclude_keys = [
     "name",
 ]
 
-for f in WHITELIST_FUNCTIONS:
-    ff = (
-        f.removeprefix("builtins.")
-        .removeprefix("script.*")
-        .replace("freezegun.api.FakeDatetime", "datetime.datetime")
-        .replace("_io", "io")
-        .replace("_hashlib", "hashlib")
-        .replace("openssl_", "")
-    )
+normalized_functions = sorted(
+    f.removeprefix("builtins.")
+    .removeprefix("script.*")
+    .replace("freezegun.api.FakeDatetime", "datetime.datetime")
+    .replace("_io", "io")
+    .replace("_hashlib", "hashlib")
+    .replace("openssl_", "")
+    for f in WHITELIST_FUNCTIONS
+    if not f.startswith("json.")
+)
+
+for ff in normalized_functions:
     if ff:
         d = inspector._info(
             eval(ff.removeprefix("builtins.").removeprefix("script.*")), detail_level=0
         )
-        #docs[ff] = d
-        docs[ff] = {k: v for k, v in d.items() if k not in exclude_keys and v is not None}
+        # docs[ff] = d
+        docs[ff] = {
+            k: v for k, v in d.items() if k not in exclude_keys and v is not None
+        }
 
 import json
 
