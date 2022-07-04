@@ -1032,8 +1032,12 @@ class DysEval(object):
             f = partial(f, **kwargs)
 
         self.call_stack.append([node, self.expr])
-        ret = f()
-        self.call_stack.pop()
+        try:
+            ret = f()
+        except:
+            raise
+        finally:
+            self.call_stack.pop()
         return ret
 
     def _eval_keyword(self, node):
