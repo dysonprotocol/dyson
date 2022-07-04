@@ -656,6 +656,127 @@ export const MsgDeleteNameResponse = {
         return message;
     }
 };
+const baseMsgReveal = { creator: '', name: '', salt: '' };
+export const MsgReveal = {
+    encode(message, writer = Writer.create()) {
+        if (message.creator !== '') {
+            writer.uint32(10).string(message.creator);
+        }
+        if (message.name !== '') {
+            writer.uint32(18).string(message.name);
+        }
+        if (message.salt !== '') {
+            writer.uint32(26).string(message.salt);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = { ...baseMsgReveal };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.creator = reader.string();
+                    break;
+                case 2:
+                    message.name = reader.string();
+                    break;
+                case 3:
+                    message.salt = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = { ...baseMsgReveal };
+        if (object.creator !== undefined && object.creator !== null) {
+            message.creator = String(object.creator);
+        }
+        else {
+            message.creator = '';
+        }
+        if (object.name !== undefined && object.name !== null) {
+            message.name = String(object.name);
+        }
+        else {
+            message.name = '';
+        }
+        if (object.salt !== undefined && object.salt !== null) {
+            message.salt = String(object.salt);
+        }
+        else {
+            message.salt = '';
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.creator !== undefined && (obj.creator = message.creator);
+        message.name !== undefined && (obj.name = message.name);
+        message.salt !== undefined && (obj.salt = message.salt);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = { ...baseMsgReveal };
+        if (object.creator !== undefined && object.creator !== null) {
+            message.creator = object.creator;
+        }
+        else {
+            message.creator = '';
+        }
+        if (object.name !== undefined && object.name !== null) {
+            message.name = object.name;
+        }
+        else {
+            message.name = '';
+        }
+        if (object.salt !== undefined && object.salt !== null) {
+            message.salt = object.salt;
+        }
+        else {
+            message.salt = '';
+        }
+        return message;
+    }
+};
+const baseMsgRevealResponse = {};
+export const MsgRevealResponse = {
+    encode(_, writer = Writer.create()) {
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = { ...baseMsgRevealResponse };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(_) {
+        const message = { ...baseMsgRevealResponse };
+        return message;
+    },
+    toJSON(_) {
+        const obj = {};
+        return obj;
+    },
+    fromPartial(_) {
+        const message = { ...baseMsgRevealResponse };
+        return message;
+    }
+};
 export class MsgClientImpl {
     constructor(rpc) {
         this.rpc = rpc;
@@ -679,5 +800,10 @@ export class MsgClientImpl {
         const data = MsgDeleteName.encode(request).finish();
         const promise = this.rpc.request('names.Msg', 'DeleteName', data);
         return promise.then((data) => MsgDeleteNameResponse.decode(new Reader(data)));
+    }
+    Reveal(request) {
+        const data = MsgReveal.encode(request).finish();
+        const promise = this.rpc.request('names.Msg', 'Reveal', data);
+        return promise.then((data) => MsgRevealResponse.decode(new Reader(data)));
     }
 }

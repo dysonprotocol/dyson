@@ -44,6 +44,14 @@ export interface MsgDeleteName {
 
 export interface MsgDeleteNameResponse {}
 
+export interface MsgReveal {
+  creator: string
+  name: string
+  salt: string
+}
+
+export interface MsgRevealResponse {}
+
 const baseMsgRegister: object = { owner: '', commit: '', price: '' }
 
 export const MsgRegister = {
@@ -705,13 +713,141 @@ export const MsgDeleteNameResponse = {
   }
 }
 
+const baseMsgReveal: object = { creator: '', name: '', salt: '' }
+
+export const MsgReveal = {
+  encode(message: MsgReveal, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== '') {
+      writer.uint32(10).string(message.creator)
+    }
+    if (message.name !== '') {
+      writer.uint32(18).string(message.name)
+    }
+    if (message.salt !== '') {
+      writer.uint32(26).string(message.salt)
+    }
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgReveal {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgReveal } as MsgReveal
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string()
+          break
+        case 2:
+          message.name = reader.string()
+          break
+        case 3:
+          message.salt = reader.string()
+          break
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(object: any): MsgReveal {
+    const message = { ...baseMsgReveal } as MsgReveal
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator)
+    } else {
+      message.creator = ''
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = String(object.name)
+    } else {
+      message.name = ''
+    }
+    if (object.salt !== undefined && object.salt !== null) {
+      message.salt = String(object.salt)
+    } else {
+      message.salt = ''
+    }
+    return message
+  },
+
+  toJSON(message: MsgReveal): unknown {
+    const obj: any = {}
+    message.creator !== undefined && (obj.creator = message.creator)
+    message.name !== undefined && (obj.name = message.name)
+    message.salt !== undefined && (obj.salt = message.salt)
+    return obj
+  },
+
+  fromPartial(object: DeepPartial<MsgReveal>): MsgReveal {
+    const message = { ...baseMsgReveal } as MsgReveal
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator
+    } else {
+      message.creator = ''
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name
+    } else {
+      message.name = ''
+    }
+    if (object.salt !== undefined && object.salt !== null) {
+      message.salt = object.salt
+    } else {
+      message.salt = ''
+    }
+    return message
+  }
+}
+
+const baseMsgRevealResponse: object = {}
+
+export const MsgRevealResponse = {
+  encode(_: MsgRevealResponse, writer: Writer = Writer.create()): Writer {
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgRevealResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgRevealResponse } as MsgRevealResponse
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(_: any): MsgRevealResponse {
+    const message = { ...baseMsgRevealResponse } as MsgRevealResponse
+    return message
+  },
+
+  toJSON(_: MsgRevealResponse): unknown {
+    const obj: any = {}
+    return obj
+  },
+
+  fromPartial(_: DeepPartial<MsgRevealResponse>): MsgRevealResponse {
+    const message = { ...baseMsgRevealResponse } as MsgRevealResponse
+    return message
+  }
+}
+
 /** Msg defines the Msg service. */
 export interface Msg {
   Register(request: MsgRegister): Promise<MsgRegisterResponse>
   CreateName(request: MsgCreateName): Promise<MsgCreateNameResponse>
   UpdateName(request: MsgUpdateName): Promise<MsgUpdateNameResponse>
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   DeleteName(request: MsgDeleteName): Promise<MsgDeleteNameResponse>
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  Reveal(request: MsgReveal): Promise<MsgRevealResponse>
 }
 
 export class MsgClientImpl implements Msg {
@@ -741,6 +877,12 @@ export class MsgClientImpl implements Msg {
     const data = MsgDeleteName.encode(request).finish()
     const promise = this.rpc.request('names.Msg', 'DeleteName', data)
     return promise.then((data) => MsgDeleteNameResponse.decode(new Reader(data)))
+  }
+
+  Reveal(request: MsgReveal): Promise<MsgRevealResponse> {
+    const data = MsgReveal.encode(request).finish()
+    const promise = this.rpc.request('names.Msg', 'Reveal', data)
+    return promise.then((data) => MsgRevealResponse.decode(new Reader(data)))
   }
 }
 

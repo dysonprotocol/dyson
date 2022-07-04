@@ -11,8 +11,7 @@ import (
 func (k msgServer) Register(goCtx context.Context, msg *types.MsgRegister) (*types.MsgRegisterResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	namename := "PRECOMMIT:" + msg.Commit
-	// Check if the value already exists
+	namename := "COMMIT:" + msg.Commit
 	_, isFound := k.GetName(
 		ctx,
 		namename,

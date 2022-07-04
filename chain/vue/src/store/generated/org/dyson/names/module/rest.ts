@@ -15,6 +15,8 @@ export type NamesMsgDeleteNameResponse = object;
 
 export type NamesMsgRegisterResponse = object;
 
+export type NamesMsgRevealResponse = object;
+
 export type NamesMsgUpdateNameResponse = object;
 
 export interface NamesName {

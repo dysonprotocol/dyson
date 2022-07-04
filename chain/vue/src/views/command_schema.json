@@ -9110,13 +9110,16 @@
             "authorized": {
               "type": "string"
             },
-            "precommit": {
+            "commit": {
               "type": "string"
             },
             "salt": {
               "type": "string"
             },
             "owner": {
+              "type": "string"
+            },
+            "height": {
               "type": "string"
             }
           },
@@ -9241,13 +9244,16 @@
             "authorized": {
               "type": "string"
             },
-            "precommit": {
+            "commit": {
               "type": "string"
             },
             "salt": {
               "type": "string"
             },
             "owner": {
+              "type": "string"
+            },
+            "height": {
               "type": "string"
             }
           },
@@ -9322,10 +9328,7 @@
             "owner": {
               "type": "string"
             },
-            "name": {
-              "type": "string"
-            },
-            "destination": {
+            "commit": {
               "type": "string"
             },
             "price": {
@@ -9379,7 +9382,7 @@
             "authorized": {
               "type": "string"
             },
-            "precommit": {
+            "commit": {
               "type": "string"
             },
             "salt": {
@@ -9433,7 +9436,7 @@
             "authorized": {
               "type": "string"
             },
-            "precommit": {
+            "commit": {
               "type": "string"
             },
             "salt": {

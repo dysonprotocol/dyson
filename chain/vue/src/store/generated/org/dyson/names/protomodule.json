@@ -135,6 +135,16 @@
 				"Name": "MsgDeleteNameResponse",
 				"Path": "/go/src/app/proto/names/tx.proto",
 				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgReveal",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgRevealResponse",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 0
 			}
 		],
 		"Services": [
@@ -217,6 +227,12 @@
 						"RequestType": "MsgDeleteName",
 						"ReturnsType": "MsgDeleteNameResponse",
 						"HTTPRules": null
+					},
+					{
+						"Name": "Reveal",
+						"RequestType": "MsgReveal",
+						"ReturnsType": "MsgRevealResponse",
+						"HTTPRules": null
 					}
 				]
 			}
@@ -229,11 +245,6 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgCreateName",
-			"URI": "names.MsgCreateName",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
 			"Name": "MsgDeleteName",
 			"URI": "names.MsgDeleteName",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
@@ -241,6 +252,16 @@
 		{
 			"Name": "MsgUpdateName",
 			"URI": "names.MsgUpdateName",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgReveal",
+			"URI": "names.MsgReveal",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgCreateName",
+			"URI": "names.MsgCreateName",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		}
 	],

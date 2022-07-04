@@ -1,6 +1,7 @@
 export declare type NamesMsgCreateNameResponse = object;
 export declare type NamesMsgDeleteNameResponse = object;
 export declare type NamesMsgRegisterResponse = object;
+export declare type NamesMsgRevealResponse = object;
 export declare type NamesMsgUpdateNameResponse = object;
 export interface NamesName {
     name?: string;

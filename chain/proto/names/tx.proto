@@ -12,6 +12,7 @@ service Msg {
   rpc CreateName(MsgCreateName) returns (MsgCreateNameResponse);
   rpc UpdateName(MsgUpdateName) returns (MsgUpdateNameResponse);
   rpc DeleteName(MsgDeleteName) returns (MsgDeleteNameResponse);
+  rpc Reveal(MsgReveal) returns (MsgRevealResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -55,5 +56,14 @@ message MsgDeleteName {
   string name = 2;
 }
 message MsgDeleteNameResponse {}
+
+message MsgReveal {
+  string creator = 1;
+  string name = 2;
+  string salt = 3;
+}
+
+message MsgRevealResponse {
+}
 
 // this line is used by starport scaffolding # proto/tx/message
