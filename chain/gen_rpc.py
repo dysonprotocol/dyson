@@ -304,12 +304,24 @@ normalized_functions = sorted(
     for f in WHITELIST_FUNCTIONS
     if not f.startswith("json.")
 )
-
+print(WHITELIST_FUNCTIONS)
 for ff in normalized_functions:
     if ff:
-        d = inspector._info(
-            eval(ff.removeprefix("builtins.").removeprefix("script.*")), detail_level=0
-        )
+        f = ff.removeprefix("builtins.").removeprefix("script.*")
+        print(ff,f)
+        try:
+            func = eval(f)
+            if callable(func):
+                d = inspector._info(
+                func, detail_level=0
+                )
+            else:
+                print('not callable:',f)
+                continue
+        except NameError:
+            print('name error:',f)
+            continue
+
         # docs[ff] = d
         docs[ff] = {
             k: v for k, v in d.items() if k not in exclude_keys and v is not None

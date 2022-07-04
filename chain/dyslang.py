@@ -60,36 +60,38 @@ BUILTIN_EXCEPTIONS = {
     "UnicodeTranslateError": UnicodeTranslateError,
     "ValueError": ValueError,
     "ZeroDivisionError": ZeroDivisionError,
+    "MemoryError":MemoryError,
 }
 
 
 DEFAULT_SCOPE = {
-    "True": True,
+    "Exception": Exception,
     "False": False,
     "None": None,
-    "int": int,
-    "float": float,
-    "str": str,
-    "bool": bool,
-    "list": list,
-    "tuple": tuple,
-    "dict": dict,
-    "set": set,
-    "len": len,
-    "min": min,
-    "max": max,
-    "any": any,
+    "True": True,
+    "abs":abs,
     "all": all,
-    "round": round,
-    "sorted": sorted,
-    "sum": sum,
-    "isinstance": isinstance,
+    "any": any,
+    "bool": bool,
+    "dict": dict,
     "enumerate": enumerate,
+    "float": float,
+    "hex": hex,
+    "int": int,
     "isinstance": isinstance,
     "issubclass": issubclass,
     "iter": iter,
+    "len": len,
+    "list": list,
+    "max": max,
+    "min": min,
     "range": range,
-    "Exception": Exception,
+    "round": round,
+    "set": set,
+    "sorted": sorted,
+    "str": str,
+    "sum": sum,
+    "tuple": tuple,
     **BUILTIN_EXCEPTIONS,
 }
 
@@ -187,6 +189,7 @@ class DysRuntimeError(Exception):
         super().__init__(msg)
 
 
+UNCATCHABLE_EXCEPTIONS = (DangerousValue, MemoryError)
 ########################################
 # Default simple functions to include:
 
@@ -218,7 +221,6 @@ def safe_mult(a, b):  # pylint: disable=invalid-name
 
 def safe_add(a, b):  # pylint: disable=invalid-name
     """iterable length limit again"""
-
     if hasattr(a, "__len__") and hasattr(b, "__len__"):
         if len(a) + len(b) > MAX_STRING_LENGTH:
             raise MemoryError(
@@ -472,6 +474,7 @@ class DysEval(object):
         return self._eval(ast.parse(expr))
 
     def _eval(self, node):
+        #print('-',ast.dump(node))
         """The internal evaluator used on each node in the parsed tree."""
 
         try:
@@ -708,7 +711,7 @@ class DysEval(object):
             )
             s.scope.push(local_scope)
             s.expr = self.expr
-            s.track = self.track
+            #s.track = self.track
             for b in node.body:
                 try:
                     s._eval(b)
@@ -978,6 +981,13 @@ class DysEval(object):
         _type, exc, traceback = sys.exc_info()
         if isinstance(exc, Return):
             return False
+
+        if (isinstance(exc, UNCATCHABLE_EXCEPTIONS)
+            or (
+                isinstance(exc, DysRuntimeError)
+                and isinstance(exc.__context__, UNCATCHABLE_EXCEPTIONS)
+            )):
+                return False
         if (
             (node.type is None)
             or isinstance(exc, self._eval(node.type))
@@ -1001,6 +1011,7 @@ class DysEval(object):
     def _eval_call(self, node):
         if len(self.call_stack) >= MAX_CALL_DEPTH:
             raise RecursionError("Sorry, stack is to large")
+
         func = self._eval(node.func)
         if not callable(func):
             raise TypeError(

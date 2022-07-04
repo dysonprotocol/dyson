@@ -1,4 +1,5 @@
 import ast
+import random
 from functools import wraps
 
 import forge
@@ -27,51 +28,7 @@ from functools import partial
 import dyslang
 
 MAX_CUM_SIZE = dyslang.MAX_SCOPE_SIZE * dyslang.MAX_NODE_CALLS
-
-
-class DysonEval(dyslang.DysEval):
-    cumsize = 0
-
-    consume_gas_func = None
-    last_node = None
-    unconsumed_size = 0
-    gas_consumed = 0
-    gas_limit = 0
-
-    def consume_gas(self):
-        # Calls ConsumeGas on the goctx
-        if self.consume_gas_func and self.unconsumed_size:
-            resp = self.consume_gas_func(amount=self.unconsumed_size)
-            self.unconsumed_size = 0
-            if resp["error"]:
-                raise MemoryError(f"Out of Gas: {resp['error']}")
-            self.gas_consumed = resp["result"].get("GasConsumed", None)
-            self.gas_limit = resp["result"].get("GasLimit", None)
-        else:
-            raise Exception("Missing consume gas func")
-
-    def track(self, node):
-        if hasattr(node, "nodes_called"):
-            return
-
-        if hasattr(node, "lineno"):
-            size = len(repr(self.scope)) + len(repr(self._last_eval_result))
-            if size > dyslang.MAX_SCOPE_SIZE:
-                raise MemoryError("Scope has used too much memory")
-
-            if node is not self.last_node:
-                self.last_node = node
-                self.nodes_called += 1
-
-                if self.nodes_called > dyslang.MAX_NODE_CALLS:
-                    raise MemoryError("This program has too many evaluations")
-
-                self.cumsize += size
-                self.unconsumed_size += size
-                if self.cumsize > MAX_CUM_SIZE:
-                    raise MemoryError("Cumsize too large")
-            if self.unconsumed_size > 100000 or isinstance(node, ast.Module):
-                self.consume_gas()
+GAS_MULTIPLE = 1
 
 
 def safe_module_import(dotted_module):
@@ -112,7 +69,7 @@ def main():
 
 
 def get_module_dict():
-    import pathlib, uuid, mimetypes, urllib, base64, decimal, jsonschema, html, hashlib, typing, string, datetime, inspect
+    import pathlib, mimetypes, urllib, base64, decimal, html, hashlib, typing, string, datetime, inspect, random
 
     @forge.copy(json.dumps)
     def safe_json_dumps(**kwargs):
@@ -135,8 +92,8 @@ def get_module_dict():
         return json.dumps(**kwargs)
 
     safe_json_dumps.__doc__ = json.dumps.__doc__
-    safe_json_dumps.__module__ = 'simplejson'
-    safe_json_dumps.__qualname__ = 'dumps'
+    safe_json_dumps.__module__ = "simplejson"
+    safe_json_dumps.__qualname__ = "dumps"
     allow_func(safe_json_dumps)
 
     mod_dict = {
@@ -149,7 +106,6 @@ def get_module_dict():
             "timezone": datetime.timezone,
         },
         "pathlib": {"PurePath": pathlib.PurePath},
-        "uuid": {"uuid4": uuid.uuid4},
         "mimetypes": {"guess_type": mimetypes.guess_type},
         "urllib.parse": {
             "parse_qs": urllib.parse.parse_qs,
@@ -187,7 +143,7 @@ def get_module_dict():
             "loads": simplejson.loads,
             "JSONDecodeError": simplejson.JSONDecodeError,
         },
-        "html": {"escape": html.escape},
+        "html": {"escape": html.escape, "unescape": html.unescape},
         "io": {"StringIO": io.StringIO, "BytesIO": io.BytesIO},
         "hashlib": {"sha1": hashlib.sha1, "sha256": hashlib.sha256},
         "typing": {
@@ -199,18 +155,59 @@ def get_module_dict():
             "Annotated": typing.Annotated,
         },
         "string": {"Template": string.Template},
+        "random": {
+            "betavariate": random.betavariate,
+            "choice": random.choice,
+            "choices": random.choices,
+            "expovariate": random.expovariate,
+            "gauss": random.gauss,
+            "paretovariate": random.paretovariate,
+            "random": random.random,
+            "sample": random.sample,
+            "shuffle": random.shuffle,
+            "triangular": random.triangular,
+            "uniform": random.uniform,
+        },
         "re2": {
+            "ASCII": re2.ASCII,
+            "BackreferencesException": re2.BackreferencesException,
+            "CharClassProblemException": re2.CharClassProblemException,
+            "DEBUG": re2.DEBUG,
+            "DOTALL": re2.DOTALL,
+            "FALLBACK_EXCEPTION": re2.FALLBACK_EXCEPTION,
+            "FALLBACK_QUIETLY": re2.FALLBACK_QUIETLY,
+            "FALLBACK_WARNING": re2.FALLBACK_WARNING,
+            "I": re2.I,
+            "IGNORECASE": re2.IGNORECASE,
+            "L": re2.L,
+            "LOCALE": re2.LOCALE,
+            "M": re2.M,
+            "MULTILINE": re2.MULTILINE,
+            "RegexError": re2.RegexError,
+            "S": re2.S,
+            "U": re2.U,
+            "UNICODE": re2.UNICODE,
+            "VERBOSE": re2.VERBOSE,
+            "X": re2.X,
+            "compile": re2.compile,
+            "contains": re2.contains,
+            "count": re2.count,
+            "error": re2.error,
+            "escape": re2.escape,
             "findall": re2.findall,
             "finditer": re2.finditer,
             "fullmatch": re2.fullmatch,
             "match": re2.match,
+            "re": re2.re,
             "search": re2.search,
             "split": re2.split,
-            "UNICODE": re2.UNICODE,
+            "sub": re2.sub,
+            "subn": re2.subn,
         },
     }
     return {
-        k: {kk: allow_func(vv) for kk, vv in v.items()} for k, v in mod_dict.items()
+        k: {kk: allow_func(vv, k, kk) for kk, vv in v.items()}
+        for k, v in mod_dict.items()
     }
 
 
@@ -249,7 +246,7 @@ def build_sandbox(port, creator, address, amount, block_info):
             return {"exception": res.text}
 
     _chain.__qualname__ = "_chain"
-    allow_func()(_chain)
+    allow_dys_func(_chain)
 
     def rpc(method, **params):
         """
@@ -262,10 +259,59 @@ def build_sandbox(port, creator, address, amount, block_info):
         return _chain(method, **params)
 
     rpc.__qualname__ = "rpc"
-    allow_func()(rpc)
+    allow_dys_func(rpc)
+
+    gas_state = {
+        "unconsumed_size": 0,
+        "gas_consumed": 0,
+        "gas_limit": 0,
+        "cumsize": 0,
+        "nodes_called": 0,
+    }
+
+    class ScopedDysonEval(dyslang.DysEval):
+
+        last_node = None
+        cumsize = 0
+
+        def consume_gas(self):
+            amount = int(gas_state["unconsumed_size"] * GAS_MULTIPLE)
+            if amount:
+                resp = _chain("ConsumeGas", amount=amount)
+                gas_state["unconsumed_size"] = 0
+                if resp["error"]:
+
+                    resp = _chain("GasLimit")
+                gas_state["gas_consumed"] = resp["result"].get("GasConsumed", None)
+                gas_state["gas_limit"] = resp["result"].get("GasLimit", None)
+                if gas_state["gas_consumed"] > gas_state["gas_limit"]:
+                    raise MemoryError(f"Out of Gas: {resp}")
+
+        def track(self, node):
+            if hasattr(node, "nodes_called"):
+                return
+
+            if hasattr(node, "lineno"):
+                size = len(repr(self.scope)) + len(repr(self._last_eval_result))
+                if size > dyslang.MAX_SCOPE_SIZE:
+                    raise MemoryError("Scope has used too much memory")
+
+                if node is not self.last_node:
+                    self.last_node = node
+                    gas_state["nodes_called"] += 1
+
+                    if gas_state["nodes_called"] > dyslang.MAX_NODE_CALLS:
+                        raise MemoryError("This program has too many evaluations")
+
+                    gas_state["cumsize"] += size
+                    gas_state["unconsumed_size"] += size
+                    if gas_state["cumsize"] > MAX_CUM_SIZE:
+                        raise MemoryError("Cumsize too large")
+                if gas_state["unconsumed_size"] > 10000 or isinstance(node, ast.Module):
+                    self.consume_gas()
 
     scope = {}
-    sandbox = DysonEval(
+    sandbox = ScopedDysonEval(
         scope=scope,
     )
 
@@ -276,53 +322,49 @@ def build_sandbox(port, creator, address, amount, block_info):
         print(*args, end=end)
 
     dyson_print.__doc__ = print.__doc__
-    dyson_print.__module__ = 'builtins'
-    dyson_print.__qualname__ = 'print'
+    dyson_print.__module__ = "builtins"
+    dyson_print.__qualname__ = "print"
     dyson_print = allow_func(dyson_print)
 
     sandbox.scope.dicts[0]["print"] = dyson_print
     # sandbox.scope.dicts[0]["globals"] = sandbox.scope.globals
     # sandbox.scope.dicts[0]["locals"] = sandbox.scope.locals
-    sandbox.chain = _chain
 
-    sandbox.consume_gas_func = lambda amount: _chain("ConsumeGas", amount=amount)
-    sandbox.get_gass_limit_func = lambda amount: _chain("GasLimit")
-
-    @allow_func()
+    @allow_dys_func
     def get_gas_consumed():
         """
         The total amount of gas consumed so far.
         """
-        return sandbox.gas_consumed
+        return gas_state["gas_consumed"]
 
-    @allow_func()
+    @allow_dys_func
     def get_gas_limit():
         """
         The maximum amount of gas that can be used in this query or transaction
         """
-        return sandbox.gas_limit
+        return gas_state["gas_limit"]
 
-    @allow_func()
+    @allow_dys_func
     def get_script_address() -> str:
         """
         Returns the address of this current script.
         """
         return address
 
-    @allow_func()
+    @allow_dys_func
     def get_caller() -> str:
         """
         Returns the address of the caller of this script.
         """
         return creator
 
-    @allow_func()
+    @allow_dys_func
     def get_block_info() -> dict:
         """
         Returns a dictionary of the current block info
         """
 
-    @allow_func()
+    @allow_dys_func
     def get_coins_sent():
         """
         Returns the coins sent to this function.
@@ -369,6 +411,17 @@ def eval_script(
     sandbox = None
     nodes_called = 0
     cumsize = 0
+
+    random.seed(
+        block_info
+        + creator
+        + address
+        + funcname
+        + json_args
+        + json_kwargs
+        + extra_line
+        + amount
+    )
     block_info = json.loads(block_info)
     with freeze_time(block_info["time"]):
         with io.StringIO() as buf, redirect_stdout(buf):
@@ -423,7 +476,7 @@ def eval_script(
                 if sandbox is not None:
                     nodes_called = sandbox.nodes_called
                     cumsize = sandbox.cumsize
-                stdout = buf.getvalue()[-1000:]
+                stdout = buf.getvalue()[-10000:]
 
     if exception is not None:
         exception = {
@@ -442,8 +495,10 @@ def eval_script(
         # https://github.com/tendermint/vue/issues/147
         # https://github.com/tendermint/starport/blob/develop/starport/pkg/cosmosgen/templates/vuex/store/index.ts.tpl#L170
         "nodes_called": nodes_called,
-        "gas_limit": sandbox.gas_limit if sandbox else None,
-        "script_gas_consumed": sandbox.gas_consumed if sandbox else None,
+        "gas_limit": sandbox.modules["dys"].get_gas_limit() if sandbox else None,
+        "script_gas_consumed": sandbox.modules["dys"].get_gas_consumed()
+        if sandbox
+        else None,
         "cumsize": cumsize,
     }
 
@@ -453,28 +508,112 @@ dyslang.WHITELIST_FUNCTIONS.update(
         "datetime.datetime.isoformat",
         "freezegun.api.FakeDatetime.now",
         "freezegun.api.FakeDatetime.timestamp",
+        # re2.Match.re
+        "contains",
+        "count",
+        "findall",
+        "finditer",
+        "fullmatch",
+        "match",
+        "scanner",
+        "search",
+        "split",
+        "sub",
+        "subn",
+        # str
+        "str.capitalize",
+        "str.casefold",
+        "str.count",
+        "str.encode",
+        "str.endswith",
+        "str.find",
+        "str.index",
+        "str.isalnum",
+        "str.isalpha",
+        "str.isascii",
+        "str.isdecimal",
+        "str.isdigit",
+        "str.isidentifier",
+        "str.islower",
+        "str.isnumeric",
+        "str.isprintable",
+        "str.isspace",
+        "str.istitle",
+        "str.isupper",
+        "str.join",
+        "str.lower",
+        "str.lstrip",
+        "str.partition",
+        "str.removeprefix",
+        "str.removesuffix",
+        "str.rfind",
+        "str.rindex",
+        "str.rpartition",
+        "str.rsplit",
+        "str.rstrip",
+        "str.split",
+        "str.splitlines",
+        "str.startswith",
+        "str.strip",
+        "str.swapcase",
+        "str.title",
+        "str.upper",
+        # list
+        "list.append",
+        "list.clear",
+        "list.copy",
+        "list.count",
+        "list.extend",
+        "list.index",
+        "list.insert",
+        "list.pop",
+        "list.remove",
+        "list.reverse",
+        "list.sort",
+        # dict
+        "dict.clear",
+        "dict.copy",
+        "dict.fromkeys",
+        "dict.get",
+        "dict.items",
+        "dict.keys",
+        "dict.pop",
+        "dict.popitem",
+        "dict.setdefault",
+        "dict.update",
+        "dict.values",
+        # Template
+        "string.Template.safe_substitute",
+        "string.Template.substitute",
+        # random
+        "Random.random",
+        "random.Random.uniform",
+        "random.Random.expovariate",
+        "random.Random.choice",
+        "random.Random.shuffle",
+        "random.Random.sample",
     ]
 )
 
 
-def allow_func(argument=None):
-    if callable(argument):
-        return _allow_func(argument)
-
-    def decorator(function):
-        function.__qualname__ = argument or function.__name__
-        function.__module__ = 'dys'
-        return wraps(function)(_allow_func)(function)
-
-    return decorator
+def allow_func(func=None, mod=None, name=None):
+    if callable(func):
+        return _allow_func(func, mod=mod, name=name)
+    return func
 
 
-def _allow_func(func):
+def allow_dys_func(function):
+    function.__qualname__ = function.__name__
+    function.__module__ = "dys"
+    return wraps(function)(_allow_func)(function)
+
+
+def _allow_func(func, mod=None, name=None):
     if not callable(func):
         return func
 
-    modname = getattr(func, "__module__", None)
-    qualname = getattr(
+    modname = mod or getattr(func, "__module__", None)
+    qualname = name or getattr(
         func, "__qualname__", getattr(func, "__name__", getattr(func, "_name", None))
     )
 

@@ -12,6 +12,7 @@ const routes = [
   { path: '/relayers', component: Relayers },
   { path: '/scripts', name: 'script-list', component: ScriptList },
   { path: '/scripts/:script_address', name: 'script-detail', component: ScriptDetail },
+  { path: '/txbuilder', name: 'tx-builder', component: TxBuilder},
   { path: '/docs', name: 'docs', component: Docs},
 ]
 

@@ -19,9 +19,6 @@
     "init_definition": "(self, *args)",
     "isclass": true
   },
-  "False": {
-    "docstring": "bool(x) -> bool\n\nReturns True when the argument x is true, False otherwise.\nThe builtins True and False are the only two instances of the class bool.\nThe class bool is a subclass of the class int, and cannot be subclassed."
-  },
   "FloatingPointError": {
     "docstring": "Floating point operation failed.",
     "init_definition": "(self, *args)",
@@ -47,6 +44,11 @@
     "init_definition": "(self, *args)",
     "isclass": true
   },
+  "MemoryError": {
+    "docstring": "Out of memory.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
   "ModuleNotFoundError": {
     "docstring": "Module not found.",
     "init_definition": "(self, *args, name=None, path=None)",
@@ -56,9 +58,6 @@
     "docstring": "Name not found globally.",
     "init_definition": "(self, *args, name=None)",
     "isclass": true
-  },
-  "None": {
-    "docstring": "<no docstring>"
   },
   "NotImplementedError": {
     "docstring": "Method or function hasn't been implemented yet.",
@@ -84,9 +83,6 @@
     "docstring": "Invalid syntax.",
     "init_definition": "(self, *args)",
     "isclass": true
-  },
-  "True": {
-    "docstring": "bool(x) -> bool\n\nReturns True when the argument x is true, False otherwise.\nThe builtins True and False are the only two instances of the class bool.\nThe class bool is a subclass of the class int, and cannot be subclassed."
   },
   "TypeError": {
     "docstring": "Inappropriate argument type.",
@@ -127,6 +123,10 @@
     "docstring": "Second argument to a division or modulo operation was zero.",
     "init_definition": "(self, *args)",
     "isclass": true
+  },
+  "abs": {
+    "definition": "(val)",
+    "docstring": "abs(number) -> number\n\nReturn the absolute value of the argument."
   },
   "all": {
     "definition": "(seq)",
@@ -217,6 +217,18 @@
     "init_definition": "(self, *args, **keywords)",
     "isclass": true
   },
+  "dict.clear": {
+    "definition": "(self)",
+    "docstring": "D.clear() -> None.  Remove all items from D."
+  },
+  "dict.copy": {
+    "definition": "(self)",
+    "docstring": "D.copy() -> a shallow copy of D"
+  },
+  "dict.fromkeys": {
+    "definition": "(iterable, value=<no value>)",
+    "docstring": "<no docstring>"
+  },
   "dict.get": {
     "definition": "(self, key, default=None)",
     "docstring": "D.get(k[,d]) -> D[k] if k in D, else d.  d defaults to None."
@@ -228,6 +240,22 @@
   "dict.keys": {
     "definition": "(self)",
     "docstring": "D.keys() -> a set-like object providing a view on D's keys"
+  },
+  "dict.pop": {
+    "definition": "(self, key, default=<no value>)",
+    "docstring": "D.pop(k[,d]) -> v, remove specified key and return the\n        corresponding value\nIf key is not found, d is returned if given,\n        otherwise KeyError is raised\n        "
+  },
+  "dict.popitem": {
+    "definition": "(self)",
+    "docstring": "D.popitem() -> (k, v), remove and return some (key, value) pair as\n        a\n2-tuple; but raise KeyError if D is empty"
+  },
+  "dict.setdefault": {
+    "definition": "(self, key, default=None)",
+    "docstring": "D.setdefault(k[,d]) -> D.get(k,d), also set D[k]=d if k not in D"
+  },
+  "dict.update": {
+    "definition": "(self, *args, **keywords)",
+    "docstring": "D.update(E, **F) -> None.  Update D from E and F: for k in E: D[k]\n        = E[k]\n(if E has keys else: for (k, v) in E: D[k] = v) then: for k in\n        F: D[k] = F[k]"
   },
   "dict.values": {
     "definition": "(self)",
@@ -283,9 +311,17 @@
     "definition": "(string=b'', usedforsecurity=True)",
     "docstring": "<no docstring>"
   },
+  "hex": {
+    "definition": "(x)",
+    "docstring": "Return the hexadecimal representation of an integer.\n\n>>> hex(12648430)\n'0xc0ffee'"
+  },
   "html.escape": {
     "definition": "(s, quote=True)",
     "docstring": "Replace special characters \"&\", \"<\" and \">\" to HTML-safe sequences.\nIf the optional flag quote is true (the default), the quotation mark\ncharacters, both double quote (\") and single quote (') characters are also\ntranslated."
+  },
+  "html.unescape": {
+    "definition": "(s)",
+    "docstring": "Convert all named and numeric character references (e.g. &gt;, &#62;,\n&x3e;) in the string s to the corresponding unicode characters.\nThis function uses the rules defined by the HTML 5 standard\nfor both valid and invalid character references, and the list of\nHTML 5 named character references defined in html.entities.html5."
   },
   "int": {
     "docstring": "int([x]) -> integer\nint(x, base=10) -> integer\n\nConvert a number or string to an integer, or return 0 if no arguments\nare given.  If x is a number, return x.__int__().  For floating point\nnumbers, this truncates towards zero.\n\nIf x is not a number or if base is given, then x must be a string,\nbytes, or bytearray instance representing an integer literal in the\ngiven base.  The literal can be preceded by '+' or '-' and be surrounded\nby whitespace.  The base defaults to 10.  Valid bases are 0 and 2-36.\nBase 0 means to interpret the base from the string as an integer literal.\n>>> int('0b100', base=0)\n4",
@@ -328,17 +364,37 @@
     "definition": "(self, item)",
     "docstring": "L.append(object) -> None -- append object to end"
   },
+  "list.clear": {
+    "definition": "(self)",
+    "docstring": "L.clear() -> None -- remove all items from L"
+  },
+  "list.copy": {
+    "definition": "(self)",
+    "docstring": "L.copy() -> list -- a shallow copy of L"
+  },
   "list.count": {
     "definition": "(self, value)",
     "docstring": "L.count(value) -> integer -- return number of occurrences of value"
+  },
+  "list.extend": {
+    "definition": "(self, iterable)",
+    "docstring": "L.extend(iterable) -- extend list by appending elements from the iterable"
   },
   "list.index": {
     "definition": "(self, value, start=0, stop=9223372036854775807)",
     "docstring": "L.index(value, [start, [stop]]) -> integer -- return first index of value.\nRaises ValueError if the value is not present."
   },
+  "list.insert": {
+    "definition": "(self, index, value)",
+    "docstring": "L.insert(index, object) -- insert object before index"
+  },
   "list.pop": {
     "definition": "(self, index=-1)",
     "docstring": "L.pop([index]) -> item -- remove and return item at index (default last).\nRaises IndexError if list is empty or index is out of range."
+  },
+  "list.remove": {
+    "definition": "(self, value)",
+    "docstring": "L.remove(value) -> None -- remove first occurrence of value.\nRaises ValueError if the value is not present."
   },
   "list.reverse": {
     "definition": "(self)",
@@ -369,14 +425,90 @@
     "definition": "(*args, sep=' ', end='\\n', file=None, flush=False)",
     "docstring": "print(value, ..., sep=' ', end='\\n', file=sys.stdout, flush=False)\n\nPrints the values to a stream, or to sys.stdout by default.\nOptional keyword arguments:\nfile:  a file-like object (stream); defaults to the current sys.stdout.\nsep:   string inserted between values, default a space.\nend:   string appended after the last value, default a newline.\nflush: whether to forcibly flush the stream."
   },
+  "random.betavariate": {
+    "definition": "(alpha, beta)",
+    "docstring": "Beta distribution.\n\nConditions on the parameters are alpha > 0 and beta > 0.\nReturned values range between 0 and 1."
+  },
+  "random.choice": {
+    "definition": "(seq)",
+    "docstring": "Choose a random element from a non-empty sequence."
+  },
+  "random.choices": {
+    "definition": "(population, weights=None, *, cum_weights=None, k=1)",
+    "docstring": "Return a k sized list of population elements chosen with replacement.\n\nIf the relative weights or cumulative weights are not specified,\nthe selections are made with equal probability."
+  },
+  "random.expovariate": {
+    "definition": "(lambd)",
+    "docstring": "Exponential distribution.\n\nlambd is 1.0 divided by the desired mean.  It should be\nnonzero.  (The parameter would be called \"lambda\", but that is\na reserved word in Python.)  Returned values range from 0 to\npositive infinity if lambd is positive, and from negative\ninfinity to 0 if lambd is negative."
+  },
+  "random.gauss": {
+    "definition": "(mu, sigma)",
+    "docstring": "Gaussian distribution.\n\nmu is the mean, and sigma is the standard deviation.  This is\nslightly faster than the normalvariate() function.\n\nNot thread-safe without a lock around calls."
+  },
+  "random.paretovariate": {
+    "definition": "(alpha)",
+    "docstring": "Pareto distribution.  alpha is the shape parameter."
+  },
+  "random.random": {
+    "definition": "()",
+    "docstring": "<no docstring>"
+  },
+  "random.sample": {
+    "definition": "(population, k, *, counts=None)",
+    "docstring": "Chooses k unique random elements from a population sequence or set.\n\nReturns a new list containing elements from the population while\nleaving the original population unchanged.  The resulting list is\nin selection order so that all sub-slices will also be valid random\nsamples.  This allows raffle winners (the sample) to be partitioned\ninto grand prize and second place winners (the subslices).\n\nMembers of the population need not be hashable or unique.  If the\npopulation contains repeats, then each occurrence is a possible\nselection in the sample.\n\nRepeated elements can be specified one at a time or with the optional\ncounts parameter.  For example:\n\n    sample(['red', 'blue'], counts=[4, 2], k=5)\n\nis equivalent to:\n\n    sample(['red', 'red', 'red', 'red', 'blue', 'blue'], k=5)\n\nTo choose a sample from a range of integers, use range() for the\npopulation argument.  This is especially fast and space efficient\nfor sampling from a large population:\n\n    sample(range(10000000), 60)"
+  },
+  "random.shuffle": {
+    "definition": "(x, random=None)",
+    "docstring": "Shuffle list x in place, and return None.\n\nOptional argument random is a 0-argument function returning a\nrandom float in [0.0, 1.0); if it is the default None, the\nstandard random.random will be used."
+  },
+  "random.triangular": {
+    "definition": "(low=0.0, high=1.0, mode=None)",
+    "docstring": "Triangular distribution.\n\nContinuous distribution bounded by given lower and upper limits,\nand having a given mode value in-between.\n\nhttp://en.wikipedia.org/wiki/Triangular_distribution"
+  },
+  "random.uniform": {
+    "definition": "(a, b)",
+    "docstring": "Get a random number in the range [a, b) or [a, b] depending on rounding."
+  },
   "range": {
     "docstring": "<no docstring>",
     "init_definition": "(obj, *args, **keywords)",
     "isclass": true
   },
-  "re2.UNICODE": {
-    "definition": "(function)",
-    "docstring": "<no docstring>"
+  "re2.BackreferencesException": {
+    "docstring": "Search pattern contains backreferences.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "re2.CharClassProblemException": {
+    "docstring": "Search pattern contains unsupported character class.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "re2.RegexError": {
+    "docstring": "Exception raised for invalid regular expressions.\n\nAttributes:\n\n    msg: The unformatted error message\n    pattern: The regular expression pattern\n    pos: The index in the pattern where compilation failed (may be None)\n    lineno: The line corresponding to pos (may be None)\n    colno: The column corresponding to pos (may be None)",
+    "init_definition": "(msg, pattern=None, pos=None)",
+    "isclass": true
+  },
+  "re2.compile": {
+    "docstring": "<no docstring>",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.contains": {
+    "docstring": "Scan through string looking for a match to the pattern, returning\nTrue or False.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.count": {
+    "docstring": "Return number of non-overlapping matches in the string.\n\nEmpty matches are included in the count.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.error": {
+    "docstring": "Exception raised for invalid regular expressions.\n\nAttributes:\n\n    msg: The unformatted error message\n    pattern: The regular expression pattern\n    pos: The index in the pattern where compilation failed (may be None)\n    lineno: The line corresponding to pos (may be None)\n    colno: The column corresponding to pos (may be None)",
+    "init_definition": "(msg, pattern=None, pos=None)",
+    "isclass": true
+  },
+  "re2.escape": {
+    "docstring": "Escape all non-alphanumeric characters in pattern.",
+    "call_def": "(*args, **keywords)"
   },
   "re2.findall": {
     "docstring": "Return a list of all non-overlapping matches in the string.\n\nEach match is represented as a string or a tuple (when there are two ore\nmore groups). Empty matches are included in the result.",
@@ -400,6 +532,14 @@
   },
   "re2.split": {
     "docstring": "Split the source string by the occurrences of the pattern,\nreturning a list containing the resulting substrings.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.sub": {
+    "docstring": "Return the string obtained by replacing the leftmost\nnon-overlapping occurrences of the pattern in string by the\nreplacement ``repl``. ``repl`` can be either a string or a callable;\nif a string, backslash escapes in it are processed. If it is\na callable, it's passed the ``Match`` object and must return\na replacement string to be used.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.subn": {
+    "docstring": "Return a 2-tuple containing ``(new_string, number)``.\nnew_string is the string obtained by replacing the leftmost\nnon-overlapping occurrences of the pattern in the source\nstring by the replacement ``repl``. ``number`` is the number of\nsubstitutions that were made. ``repl`` can be either a string or a\ncallable; if a string, backslash escapes in it are processed.\nIf it is a callable, it's passed the ``Match`` object and must\nreturn a replacement string to be used.",
     "call_def": "(*args, **keywords)"
   },
   "round": {
@@ -433,14 +573,166 @@
     "init_definition": "(obj, *args, **keywords)",
     "isclass": true
   },
+  "str.capitalize": {
+    "definition": "(self)",
+    "docstring": "S.capitalize() -> unicode\n\nReturn a capitalized version of S, i.e. make the first character\nhave upper case and the rest lower case."
+  },
+  "str.casefold": {
+    "definition": "(self)",
+    "docstring": "S.casefold() -> str\n\nReturn a version of S suitable for caseless comparisons."
+  },
+  "str.count": {
+    "definition": "(self, sub, start=<no value>, end=<no value>)",
+    "docstring": "S.count(sub[, start[, end]]) -> int\n\nReturn the number of non-overlapping occurrences of substring sub in\nUnicode string S[start:end].  Optional arguments start and end are\ninterpreted as in slice notation."
+  },
+  "str.encode": {
+    "definition": "(self, encoding=<no value>, errors=<no value>)",
+    "docstring": "S.encode(encoding=None, errors='strict') -> string or unicode\n\nEncode S using the codec registered for encoding. encoding defaults\nto the default encoding. errors may be given to set a different error\nhandling scheme. Default is 'strict' meaning that encoding errors raise\na UnicodeEncodeError. Other possible values are 'ignore', 'replace' and\n'xmlcharrefreplace' as well as any other name registered with\ncodecs.register_error that can handle UnicodeEncodeErrors."
+  },
+  "str.endswith": {
+    "definition": "(self, suffix, start=<no value>, end=<no value>)",
+    "docstring": "S.endswith(suffix[, start[, end]]) -> bool\n\nReturn True if S ends with the specified suffix, False otherwise.\nWith optional start, test S beginning at that position.\nWith optional end, stop comparing S at that position.\nsuffix can also be a tuple of strings to try."
+  },
+  "str.find": {
+    "definition": "(self, sub, start=<no value>, end=<no value>)",
+    "docstring": "S.find(sub[, start[, end]]) -> int\n\nReturn the lowest index in S where substring sub is found,\nsuch that sub is contained within S[start:end].  Optional\narguments start and end are interpreted as in slice notation.\n\nReturn -1 on failure."
+  },
+  "str.index": {
+    "definition": "(self, sub, start=<no value>, end=<no value>)",
+    "docstring": "S.index(sub[, start[, end]]) -> int\n\nLike S.find() but raise ValueError when the substring is not found."
+  },
+  "str.isalnum": {
+    "definition": "(self)",
+    "docstring": "S.isalnum() -> bool\n\nReturn True if all characters in S are alphanumeric\nand there is at least one character in S, False otherwise."
+  },
+  "str.isalpha": {
+    "definition": "(self)",
+    "docstring": "S.isalpha() -> bool\n\nReturn True if all characters in S are alphabetic\nand there is at least one character in S, False otherwise."
+  },
+  "str.isascii": {
+    "definition": "(self)",
+    "docstring": "Return True if all characters in the string are ASCII, False otherwise.\n\nASCII characters have code points in the range U+0000-U+007F.\nEmpty string is ASCII too."
+  },
+  "str.isdecimal": {
+    "definition": "(self)",
+    "docstring": "S.isdecimal() -> bool\n\nReturn True if there are only decimal characters in S,\nFalse otherwise."
+  },
+  "str.isdigit": {
+    "definition": "(self)",
+    "docstring": "S.isdigit() -> bool\n\nReturn True if all characters in S are digits\nand there is at least one character in S, False otherwise."
+  },
+  "str.isidentifier": {
+    "definition": "(self)",
+    "docstring": "S.isidentifier() -> bool\n\nReturn True if S is a valid identifier according to the language\ndefinition."
+  },
+  "str.islower": {
+    "definition": "(self)",
+    "docstring": "S.islower() -> bool\n\nReturn True if all cased characters in S are lowercase and there is\nat least one cased character in S, False otherwise."
+  },
+  "str.isnumeric": {
+    "definition": "(self)",
+    "docstring": "S.isnumeric() -> bool\n\nReturn True if there are only numeric characters in S,\nFalse otherwise."
+  },
+  "str.isprintable": {
+    "definition": "(self)",
+    "docstring": "S.isprintable() -> bool\n\nReturn True if all characters in S are considered printable in\nrepr() or S is empty, False otherwise."
+  },
+  "str.isspace": {
+    "definition": "(self)",
+    "docstring": "S.isspace() -> bool\n\nReturn True if all characters in S are whitespace\nand there is at least one character in S, False otherwise."
+  },
+  "str.istitle": {
+    "definition": "(self)",
+    "docstring": "S.istitle() -> bool\n\nReturn True if S is a titlecased string and there is at least one\ncharacter in S, i.e. upper- and titlecase characters may only\nfollow uncased characters and lowercase characters only cased ones.\nReturn False otherwise."
+  },
+  "str.isupper": {
+    "definition": "(self)",
+    "docstring": "S.isupper() -> bool\n\nReturn True if all cased characters in S are uppercase and there is\nat least one cased character in S, False otherwise."
+  },
   "str.join": {
     "definition": "(self, iterable)",
     "docstring": "S.join(iterable) -> unicode\n\nReturn a string which is the concatenation of the strings in the\niterable.  The separator between elements is S."
+  },
+  "str.lower": {
+    "definition": "(self)",
+    "docstring": "S.lower() -> unicode\n\nReturn a copy of the string S converted to lowercase."
+  },
+  "str.lstrip": {
+    "definition": "(self, chars=<no value>)",
+    "docstring": "S.lstrip([chars]) -> unicode\n\nReturn a copy of the string S with leading whitespace removed.\nIf chars is given and not None, remove characters in chars instead.\nIf chars is a str, it will be converted to unicode before stripping"
+  },
+  "str.partition": {
+    "definition": "(self, sub)",
+    "docstring": "S.partition(sep) -> (head, sep, tail)\n\nSearch for the separator sep in S, and return the part before it,\nthe separator itself, and the part after it.  If the separator is not\nfound, return S and two empty strings."
+  },
+  "str.removeprefix": {
+    "definition": "(self, prefix)",
+    "docstring": "<no docstring>"
+  },
+  "str.removesuffix": {
+    "definition": "(self, suffix)",
+    "docstring": "<no docstring>"
+  },
+  "str.rfind": {
+    "definition": "(self, sub, start=<no value>, end=<no value>)",
+    "docstring": "S.rfind(sub[, start[, end]]) -> int\n\nReturn the highest index in S where substring sub is found,\nsuch that sub is contained within S[start:end].  Optional\narguments start and end are interpreted as in slice notation.\n\nReturn -1 on failure."
+  },
+  "str.rindex": {
+    "definition": "(self, sub, start=<no value>, end=<no value>)",
+    "docstring": "S.rindex(sub[, start[, end]]) -> int\n\nLike S.rfind() but raise ValueError when the substring is not found."
+  },
+  "str.rpartition": {
+    "definition": "(self, sub)",
+    "docstring": "S.rpartition(sep) -> (head, sep, tail)\n\nSearch for the separator sep in S, starting at the end of S, and return\nthe part before it, the separator itself, and the part after it.  If\nthe separator is not found, return two empty strings and S."
+  },
+  "str.rsplit": {
+    "definition": "(self, sep=<no value>, maxsplit=<no value>)",
+    "docstring": "S.rsplit(sep=None, maxsplit=-1) -> list of strings\n\nReturn a list of the words in S, using sep as the\ndelimiter string, starting at the end of the string and\nworking to the front.  If maxsplit is given, at most maxsplit\nsplits are done. If sep is not specified, any whitespace string\nis a separator."
+  },
+  "str.rstrip": {
+    "definition": "(self, chars=<no value>)",
+    "docstring": "S.rstrip([chars]) -> unicode\n\nReturn a copy of the string S with trailing whitespace removed.\nIf chars is given and not None, remove characters in chars instead.\nIf chars is a str, it will be converted to unicode before stripping"
+  },
+  "str.split": {
+    "definition": "(self, sep=<no value>, maxsplit=<no value>)",
+    "docstring": "S.split(sep=None, maxsplit=-1) -> list of strings\n\nReturn a list of the words in S, using sep as the\ndelimiter string.  If maxsplit is given, at most maxsplit\nsplits are done. If sep is not specified or is None, any\nwhitespace string is a separator and empty strings are\nremoved from the result."
+  },
+  "str.splitlines": {
+    "definition": "(self, keepends=False)",
+    "docstring": "S.splitlines(keepends=False) -> list of strings\n\nReturn a list of the lines in S, breaking at line boundaries.\nLine breaks are not included in the resulting list unless keepends\nis given and true."
+  },
+  "str.startswith": {
+    "definition": "(self, prefix, start=<no value>, end=<no value>)",
+    "docstring": "S.startswith(prefix[, start[, end]]) -> bool\n\nReturn True if S starts with the specified prefix, False otherwise.\nWith optional start, test S beginning at that position.\nWith optional end, stop comparing S at that position.\nprefix can also be a tuple of strings to try."
+  },
+  "str.strip": {
+    "definition": "(self, chars=<no value>)",
+    "docstring": "S.strip([chars]) -> unicode\n\nReturn a copy of the string S with leading and trailing\nwhitespace removed.\nIf chars is given and not None, remove characters in chars instead.\nIf chars is a str, it will be converted to unicode before stripping"
+  },
+  "str.swapcase": {
+    "definition": "(self)",
+    "docstring": "S.swapcase() -> unicode\n\nReturn a copy of S with uppercase characters converted to lowercase\nand vice versa."
+  },
+  "str.title": {
+    "definition": "(self)",
+    "docstring": "S.title() -> unicode\n\nReturn a titlecased version of S, i.e. words start with title case\ncharacters, all remaining cased characters have lower case."
+  },
+  "str.upper": {
+    "definition": "(self)",
+    "docstring": "S.upper() -> unicode\n\nReturn a copy of S converted to uppercase."
   },
   "string.Template": {
     "docstring": "A string class for supporting $-substitutions.",
     "init_definition": "(template)",
     "isclass": true
+  },
+  "string.Template.safe_substitute": {
+    "definition": "(self, mapping={}, /, **kws)",
+    "docstring": "<no docstring>"
+  },
+  "string.Template.substitute": {
+    "definition": "(self, mapping={}, /, **kws)",
+    "docstring": "<no docstring>"
   },
   "sum": {
     "definition": "(sequence, start=0)",
@@ -524,9 +816,5 @@
   "urllib.parse.urlunsplit": {
     "definition": "(components)",
     "docstring": "Combine the elements of a tuple as returned by urlsplit() into a\ncomplete URL as a string. The data argument can be any five-item iterable.\nThis may result in a slightly different, but equivalent URL, if the URL that\nwas parsed originally had unnecessary delimiters (for example, a ? with an\nempty query; the RFC states that these are equivalent)."
-  },
-  "uuid.uuid4": {
-    "definition": "()",
-    "docstring": "Generate a random UUID."
   }
 }
