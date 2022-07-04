@@ -5,8 +5,7 @@ export const protobufPackage = 'names'
 
 export interface MsgRegister {
   owner: string
-  name: string
-  destination: string
+  commit: string
   price: string
 }
 
@@ -19,7 +18,7 @@ export interface MsgCreateName {
   price: string
   expires: string
   authorized: string
-  precommit: string
+  commit: string
   salt: string
 }
 
@@ -32,7 +31,7 @@ export interface MsgUpdateName {
   price: string
   expires: string
   authorized: string
-  precommit: string
+  commit: string
   salt: string
 }
 
@@ -45,18 +44,15 @@ export interface MsgDeleteName {
 
 export interface MsgDeleteNameResponse {}
 
-const baseMsgRegister: object = { owner: '', name: '', destination: '', price: '' }
+const baseMsgRegister: object = { owner: '', commit: '', price: '' }
 
 export const MsgRegister = {
   encode(message: MsgRegister, writer: Writer = Writer.create()): Writer {
     if (message.owner !== '') {
       writer.uint32(10).string(message.owner)
     }
-    if (message.name !== '') {
-      writer.uint32(18).string(message.name)
-    }
-    if (message.destination !== '') {
-      writer.uint32(26).string(message.destination)
+    if (message.commit !== '') {
+      writer.uint32(18).string(message.commit)
     }
     if (message.price !== '') {
       writer.uint32(34).string(message.price)
@@ -75,10 +71,7 @@ export const MsgRegister = {
           message.owner = reader.string()
           break
         case 2:
-          message.name = reader.string()
-          break
-        case 3:
-          message.destination = reader.string()
+          message.commit = reader.string()
           break
         case 4:
           message.price = reader.string()
@@ -98,15 +91,10 @@ export const MsgRegister = {
     } else {
       message.owner = ''
     }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = String(object.name)
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = String(object.commit)
     } else {
-      message.name = ''
-    }
-    if (object.destination !== undefined && object.destination !== null) {
-      message.destination = String(object.destination)
-    } else {
-      message.destination = ''
+      message.commit = ''
     }
     if (object.price !== undefined && object.price !== null) {
       message.price = String(object.price)
@@ -119,8 +107,7 @@ export const MsgRegister = {
   toJSON(message: MsgRegister): unknown {
     const obj: any = {}
     message.owner !== undefined && (obj.owner = message.owner)
-    message.name !== undefined && (obj.name = message.name)
-    message.destination !== undefined && (obj.destination = message.destination)
+    message.commit !== undefined && (obj.commit = message.commit)
     message.price !== undefined && (obj.price = message.price)
     return obj
   },
@@ -132,15 +119,10 @@ export const MsgRegister = {
     } else {
       message.owner = ''
     }
-    if (object.name !== undefined && object.name !== null) {
-      message.name = object.name
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = object.commit
     } else {
-      message.name = ''
-    }
-    if (object.destination !== undefined && object.destination !== null) {
-      message.destination = object.destination
-    } else {
-      message.destination = ''
+      message.commit = ''
     }
     if (object.price !== undefined && object.price !== null) {
       message.price = object.price
@@ -189,7 +171,7 @@ export const MsgRegisterResponse = {
   }
 }
 
-const baseMsgCreateName: object = { owner: '', name: '', destination: '', price: '', expires: '', authorized: '', precommit: '', salt: '' }
+const baseMsgCreateName: object = { owner: '', name: '', destination: '', price: '', expires: '', authorized: '', commit: '', salt: '' }
 
 export const MsgCreateName = {
   encode(message: MsgCreateName, writer: Writer = Writer.create()): Writer {
@@ -211,8 +193,8 @@ export const MsgCreateName = {
     if (message.authorized !== '') {
       writer.uint32(50).string(message.authorized)
     }
-    if (message.precommit !== '') {
-      writer.uint32(58).string(message.precommit)
+    if (message.commit !== '') {
+      writer.uint32(58).string(message.commit)
     }
     if (message.salt !== '') {
       writer.uint32(66).string(message.salt)
@@ -246,7 +228,7 @@ export const MsgCreateName = {
           message.authorized = reader.string()
           break
         case 7:
-          message.precommit = reader.string()
+          message.commit = reader.string()
           break
         case 8:
           message.salt = reader.string()
@@ -291,10 +273,10 @@ export const MsgCreateName = {
     } else {
       message.authorized = ''
     }
-    if (object.precommit !== undefined && object.precommit !== null) {
-      message.precommit = String(object.precommit)
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = String(object.commit)
     } else {
-      message.precommit = ''
+      message.commit = ''
     }
     if (object.salt !== undefined && object.salt !== null) {
       message.salt = String(object.salt)
@@ -312,7 +294,7 @@ export const MsgCreateName = {
     message.price !== undefined && (obj.price = message.price)
     message.expires !== undefined && (obj.expires = message.expires)
     message.authorized !== undefined && (obj.authorized = message.authorized)
-    message.precommit !== undefined && (obj.precommit = message.precommit)
+    message.commit !== undefined && (obj.commit = message.commit)
     message.salt !== undefined && (obj.salt = message.salt)
     return obj
   },
@@ -349,10 +331,10 @@ export const MsgCreateName = {
     } else {
       message.authorized = ''
     }
-    if (object.precommit !== undefined && object.precommit !== null) {
-      message.precommit = object.precommit
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = object.commit
     } else {
-      message.precommit = ''
+      message.commit = ''
     }
     if (object.salt !== undefined && object.salt !== null) {
       message.salt = object.salt
@@ -401,7 +383,7 @@ export const MsgCreateNameResponse = {
   }
 }
 
-const baseMsgUpdateName: object = { owner: '', name: '', destination: '', price: '', expires: '', authorized: '', precommit: '', salt: '' }
+const baseMsgUpdateName: object = { owner: '', name: '', destination: '', price: '', expires: '', authorized: '', commit: '', salt: '' }
 
 export const MsgUpdateName = {
   encode(message: MsgUpdateName, writer: Writer = Writer.create()): Writer {
@@ -423,8 +405,8 @@ export const MsgUpdateName = {
     if (message.authorized !== '') {
       writer.uint32(50).string(message.authorized)
     }
-    if (message.precommit !== '') {
-      writer.uint32(58).string(message.precommit)
+    if (message.commit !== '') {
+      writer.uint32(58).string(message.commit)
     }
     if (message.salt !== '') {
       writer.uint32(66).string(message.salt)
@@ -458,7 +440,7 @@ export const MsgUpdateName = {
           message.authorized = reader.string()
           break
         case 7:
-          message.precommit = reader.string()
+          message.commit = reader.string()
           break
         case 8:
           message.salt = reader.string()
@@ -503,10 +485,10 @@ export const MsgUpdateName = {
     } else {
       message.authorized = ''
     }
-    if (object.precommit !== undefined && object.precommit !== null) {
-      message.precommit = String(object.precommit)
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = String(object.commit)
     } else {
-      message.precommit = ''
+      message.commit = ''
     }
     if (object.salt !== undefined && object.salt !== null) {
       message.salt = String(object.salt)
@@ -524,7 +506,7 @@ export const MsgUpdateName = {
     message.price !== undefined && (obj.price = message.price)
     message.expires !== undefined && (obj.expires = message.expires)
     message.authorized !== undefined && (obj.authorized = message.authorized)
-    message.precommit !== undefined && (obj.precommit = message.precommit)
+    message.commit !== undefined && (obj.commit = message.commit)
     message.salt !== undefined && (obj.salt = message.salt)
     return obj
   },
@@ -561,10 +543,10 @@ export const MsgUpdateName = {
     } else {
       message.authorized = ''
     }
-    if (object.precommit !== undefined && object.precommit !== null) {
-      message.precommit = object.precommit
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = object.commit
     } else {
-      message.precommit = ''
+      message.commit = ''
     }
     if (object.salt !== undefined && object.salt !== null) {
       message.salt = object.salt

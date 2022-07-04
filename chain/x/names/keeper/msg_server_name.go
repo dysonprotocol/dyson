@@ -17,7 +17,7 @@ func (k msgServer) CreateName(goCtx context.Context, msg *types.MsgCreateName) (
 		msg.Name,
 	)
 	if isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "index already set")
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "name alrady registered")
 	}
 
 	var name = types.Name{
@@ -27,7 +27,7 @@ func (k msgServer) CreateName(goCtx context.Context, msg *types.MsgCreateName) (
 		Price:       msg.Price,
 		Expires:     msg.Expires,
 		Authorized:  msg.Authorized,
-		Precommit:   msg.Precommit,
+		Commit:      msg.Commit,
 		Salt:        msg.Salt,
 	}
 
@@ -62,7 +62,7 @@ func (k msgServer) UpdateName(goCtx context.Context, msg *types.MsgUpdateName) (
 		Price:       msg.Price,
 		Expires:     msg.Expires,
 		Authorized:  msg.Authorized,
-		Precommit:   msg.Precommit,
+		Commit:      msg.Commit,
 		Salt:        msg.Salt,
 	}
 

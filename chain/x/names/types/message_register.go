@@ -9,12 +9,11 @@ const TypeMsgRegister = "register"
 
 var _ sdk.Msg = &MsgRegister{}
 
-func NewMsgRegister(owner string, name string, destination string, price string) *MsgRegister {
+func NewMsgRegister(owner string, commit string, price string) *MsgRegister {
 	return &MsgRegister{
-		Owner:       owner,
-		Name:        name,
-		Destination: destination,
-		Price:       price,
+		Owner:  owner,
+		Commit: commit,
+		Price:  price,
 	}
 }
 

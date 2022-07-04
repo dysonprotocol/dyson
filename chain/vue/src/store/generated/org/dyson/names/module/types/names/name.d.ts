@@ -6,9 +6,10 @@ export interface Name {
     price: string;
     expires: string;
     authorized: string;
-    precommit: string;
+    commit: string;
     salt: string;
     owner: string;
+    height: number;
 }
 export declare const Name: {
     encode(message: Name, writer?: Writer): Writer;

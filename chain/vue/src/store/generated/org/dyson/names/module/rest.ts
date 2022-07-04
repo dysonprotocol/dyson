@@ -23,9 +23,12 @@ export interface NamesName {
   price?: string;
   expires?: string;
   authorized?: string;
-  precommit?: string;
+  commit?: string;
   salt?: string;
   owner?: string;
+
+  /** @format int64 */
+  height?: string;
 }
 
 /**

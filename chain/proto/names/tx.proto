@@ -17,8 +17,7 @@ service Msg {
 
 message MsgRegister {
   string owner = 1;
-  string name = 2;
-  string destination = 3;
+  string commit = 2;
   string price = 4;
 }
 
@@ -33,7 +32,7 @@ message MsgCreateName {
   string price = 4;
   string expires = 5;
   string authorized = 6;
-  string precommit = 7;
+  string commit = 7;
   string salt = 8;
 }
 message MsgCreateNameResponse {}
@@ -46,7 +45,7 @@ message MsgUpdateName {
   string price = 4;
   string expires = 5;
   string authorized = 6;
-  string precommit = 7;
+  string commit = 7;
   string salt = 8;
 }
 message MsgUpdateNameResponse {}

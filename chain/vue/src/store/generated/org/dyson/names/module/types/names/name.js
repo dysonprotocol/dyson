@@ -1,7 +1,8 @@
 /* eslint-disable */
-import { Writer, Reader } from 'protobufjs/minimal';
+import * as Long from 'long';
+import { util, configure, Writer, Reader } from 'protobufjs/minimal';
 export const protobufPackage = 'names';
-const baseName = { name: '', destination: '', price: '', expires: '', authorized: '', precommit: '', salt: '', owner: '' };
+const baseName = { name: '', destination: '', price: '', expires: '', authorized: '', commit: '', salt: '', owner: '', height: 0 };
 export const Name = {
     encode(message, writer = Writer.create()) {
         if (message.name !== '') {
@@ -19,14 +20,17 @@ export const Name = {
         if (message.authorized !== '') {
             writer.uint32(42).string(message.authorized);
         }
-        if (message.precommit !== '') {
-            writer.uint32(50).string(message.precommit);
+        if (message.commit !== '') {
+            writer.uint32(50).string(message.commit);
         }
         if (message.salt !== '') {
             writer.uint32(58).string(message.salt);
         }
         if (message.owner !== '') {
             writer.uint32(66).string(message.owner);
+        }
+        if (message.height !== 0) {
+            writer.uint32(72).int64(message.height);
         }
         return writer;
     },
@@ -53,13 +57,16 @@ export const Name = {
                     message.authorized = reader.string();
                     break;
                 case 6:
-                    message.precommit = reader.string();
+                    message.commit = reader.string();
                     break;
                 case 7:
                     message.salt = reader.string();
                     break;
                 case 8:
                     message.owner = reader.string();
+                    break;
+                case 9:
+                    message.height = longToNumber(reader.int64());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -100,11 +107,11 @@ export const Name = {
         else {
             message.authorized = '';
         }
-        if (object.precommit !== undefined && object.precommit !== null) {
-            message.precommit = String(object.precommit);
+        if (object.commit !== undefined && object.commit !== null) {
+            message.commit = String(object.commit);
         }
         else {
-            message.precommit = '';
+            message.commit = '';
         }
         if (object.salt !== undefined && object.salt !== null) {
             message.salt = String(object.salt);
@@ -118,6 +125,12 @@ export const Name = {
         else {
             message.owner = '';
         }
+        if (object.height !== undefined && object.height !== null) {
+            message.height = Number(object.height);
+        }
+        else {
+            message.height = 0;
+        }
         return message;
     },
     toJSON(message) {
@@ -127,9 +140,10 @@ export const Name = {
         message.price !== undefined && (obj.price = message.price);
         message.expires !== undefined && (obj.expires = message.expires);
         message.authorized !== undefined && (obj.authorized = message.authorized);
-        message.precommit !== undefined && (obj.precommit = message.precommit);
+        message.commit !== undefined && (obj.commit = message.commit);
         message.salt !== undefined && (obj.salt = message.salt);
         message.owner !== undefined && (obj.owner = message.owner);
+        message.height !== undefined && (obj.height = message.height);
         return obj;
     },
     fromPartial(object) {
@@ -164,11 +178,11 @@ export const Name = {
         else {
             message.authorized = '';
         }
-        if (object.precommit !== undefined && object.precommit !== null) {
-            message.precommit = object.precommit;
+        if (object.commit !== undefined && object.commit !== null) {
+            message.commit = object.commit;
         }
         else {
-            message.precommit = '';
+            message.commit = '';
         }
         if (object.salt !== undefined && object.salt !== null) {
             message.salt = object.salt;
@@ -182,6 +196,33 @@ export const Name = {
         else {
             message.owner = '';
         }
+        if (object.height !== undefined && object.height !== null) {
+            message.height = object.height;
+        }
+        else {
+            message.height = 0;
+        }
         return message;
     }
 };
+var globalThis = (() => {
+    if (typeof globalThis !== 'undefined')
+        return globalThis;
+    if (typeof self !== 'undefined')
+        return self;
+    if (typeof window !== 'undefined')
+        return window;
+    if (typeof global !== 'undefined')
+        return global;
+    throw 'Unable to locate global object';
+})();
+function longToNumber(long) {
+    if (long.gt(Number.MAX_SAFE_INTEGER)) {
+        throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER');
+    }
+    return long.toNumber();
+}
+if (util.Long !== Long) {
+    util.Long = Long;
+    configure();
+}

@@ -20,7 +20,7 @@ func NewMsgCreateName(
 	price string,
 	expires string,
 	authorized string,
-	precommit string,
+	commit string,
 	salt string,
 
 ) *MsgCreateName {
@@ -31,7 +31,7 @@ func NewMsgCreateName(
 		Price:       price,
 		Expires:     expires,
 		Authorized:  authorized,
-		Precommit:   precommit,
+		Commit:      commit,
 		Salt:        salt,
 	}
 }
@@ -74,7 +74,7 @@ func NewMsgUpdateName(
 	price string,
 	expires string,
 	authorized string,
-	precommit string,
+	commit string,
 	salt string,
 
 ) *MsgUpdateName {
@@ -85,7 +85,7 @@ func NewMsgUpdateName(
 		Price:       price,
 		Expires:     expires,
 		Authorized:  authorized,
-		Precommit:   precommit,
+		Commit:      commit,
 		Salt:        salt,
 	}
 }

@@ -22,7 +22,7 @@
                 "authorized": {
                     "type": "string"
                 },
-                "precommit": {
+                "commit": {
                     "type": "string"
                 },
                 "salt": {

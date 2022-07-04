@@ -13438,12 +13438,15 @@ paths:
                     type: string
                   authorized:
                     type: string
-                  precommit:
+                  commit:
                     type: string
                   salt:
                     type: string
                   owner:
                     type: string
+                  height:
+                    type: string
+                    format: int64
         default:
           description: An unexpected error response.
           schema:
@@ -13494,12 +13497,15 @@ paths:
                       type: string
                     authorized:
                       type: string
-                    precommit:
+                    commit:
                       type: string
                     salt:
                       type: string
                     owner:
                       type: string
+                    height:
+                      type: string
+                      format: int64
               pagination:
                 type: object
                 properties:
@@ -21496,12 +21502,15 @@ definitions:
         type: string
       authorized:
         type: string
-      precommit:
+      commit:
         type: string
       salt:
         type: string
       owner:
         type: string
+      height:
+        type: string
+        format: int64
   names.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -21523,12 +21532,15 @@ definitions:
               type: string
             authorized:
               type: string
-            precommit:
+            commit:
               type: string
             salt:
               type: string
             owner:
               type: string
+            height:
+              type: string
+              format: int64
       pagination:
         type: object
         properties:
@@ -21570,12 +21582,15 @@ definitions:
             type: string
           authorized:
             type: string
-          precommit:
+          commit:
             type: string
           salt:
             type: string
           owner:
             type: string
+          height:
+            type: string
+            format: int64
   names.QueryParamsResponse:
     type: object
     properties:

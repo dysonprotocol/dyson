@@ -2,8 +2,7 @@ import { Reader, Writer } from 'protobufjs/minimal';
 export declare const protobufPackage = "names";
 export interface MsgRegister {
     owner: string;
-    name: string;
-    destination: string;
+    commit: string;
     price: string;
 }
 export interface MsgRegisterResponse {
@@ -15,7 +14,7 @@ export interface MsgCreateName {
     price: string;
     expires: string;
     authorized: string;
-    precommit: string;
+    commit: string;
     salt: string;
 }
 export interface MsgCreateNameResponse {
@@ -27,7 +26,7 @@ export interface MsgUpdateName {
     price: string;
     expires: string;
     authorized: string;
-    precommit: string;
+    commit: string;
     salt: string;
 }
 export interface MsgUpdateNameResponse {

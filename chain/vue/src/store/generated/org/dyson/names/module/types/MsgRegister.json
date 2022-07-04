@@ -7,10 +7,7 @@
                 "owner": {
                     "type": "string"
                 },
-                "name": {
-                    "type": "string"
-                },
-                "destination": {
+                "commit": {
                     "type": "string"
                 },
                 "price": {

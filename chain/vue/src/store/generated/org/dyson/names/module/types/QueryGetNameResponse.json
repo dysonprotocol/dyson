@@ -30,13 +30,16 @@
                 "authorized": {
                     "type": "string"
                 },
-                "precommit": {
+                "commit": {
                     "type": "string"
                 },
                 "salt": {
                     "type": "string"
                 },
                 "owner": {
+                    "type": "string"
+                },
+                "height": {
                     "type": "string"
                 }
             },
