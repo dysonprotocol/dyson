@@ -425,6 +425,26 @@
     "definition": "(*args, sep=' ', end='\\n', file=None, flush=False)",
     "docstring": "print(value, ..., sep=' ', end='\\n', file=sys.stdout, flush=False)\n\nPrints the values to a stream, or to sys.stdout by default.\nOptional keyword arguments:\nfile:  a file-like object (stream); defaults to the current sys.stdout.\nsep:   string inserted between values, default a space.\nend:   string appended after the last value, default a newline.\nflush: whether to forcibly flush the stream."
   },
+  "random.Random.choice": {
+    "definition": "(self, seq)",
+    "docstring": "Choose a random element from a non-empty sequence."
+  },
+  "random.Random.expovariate": {
+    "definition": "(self, lambd)",
+    "docstring": "Exponential distribution.\n\nlambd is 1.0 divided by the desired mean.  It should be\nnonzero.  (The parameter would be called \"lambda\", but that is\na reserved word in Python.)  Returned values range from 0 to\npositive infinity if lambd is positive, and from negative\ninfinity to 0 if lambd is negative."
+  },
+  "random.Random.sample": {
+    "definition": "(self, population, k, *, counts=None)",
+    "docstring": "Chooses k unique random elements from a population sequence or set.\n\nReturns a new list containing elements from the population while\nleaving the original population unchanged.  The resulting list is\nin selection order so that all sub-slices will also be valid random\nsamples.  This allows raffle winners (the sample) to be partitioned\ninto grand prize and second place winners (the subslices).\n\nMembers of the population need not be hashable or unique.  If the\npopulation contains repeats, then each occurrence is a possible\nselection in the sample.\n\nRepeated elements can be specified one at a time or with the optional\ncounts parameter.  For example:\n\n    sample(['red', 'blue'], counts=[4, 2], k=5)\n\nis equivalent to:\n\n    sample(['red', 'red', 'red', 'red', 'blue', 'blue'], k=5)\n\nTo choose a sample from a range of integers, use range() for the\npopulation argument.  This is especially fast and space efficient\nfor sampling from a large population:\n\n    sample(range(10000000), 60)"
+  },
+  "random.Random.shuffle": {
+    "definition": "(self, x, random=None)",
+    "docstring": "Shuffle list x in place, and return None.\n\nOptional argument random is a 0-argument function returning a\nrandom float in [0.0, 1.0); if it is the default None, the\nstandard random.random will be used."
+  },
+  "random.Random.uniform": {
+    "definition": "(self, a, b)",
+    "docstring": "Get a random number in the range [a, b) or [a, b] depending on rounding."
+  },
   "random.betavariate": {
     "definition": "(alpha, beta)",
     "docstring": "Beta distribution.\n\nConditions on the parameters are alpha > 0 and beta > 0.\nReturned values range between 0 and 1."

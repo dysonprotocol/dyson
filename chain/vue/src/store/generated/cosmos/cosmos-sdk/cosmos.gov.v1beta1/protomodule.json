@@ -366,6 +366,11 @@
 	},
 	"Msgs": [
 		{
+			"Name": "MsgDeposit",
+			"URI": "cosmos.gov.v1beta1.MsgDeposit",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/gov/v1beta1/tx.proto"
+		},
+		{
 			"Name": "MsgSubmitProposal",
 			"URI": "cosmos.gov.v1beta1.MsgSubmitProposal",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/gov/v1beta1/tx.proto"
@@ -373,11 +378,6 @@
 		{
 			"Name": "MsgVoteWeighted",
 			"URI": "cosmos.gov.v1beta1.MsgVoteWeighted",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/gov/v1beta1/tx.proto"
-		},
-		{
-			"Name": "MsgDeposit",
-			"URI": "cosmos.gov.v1beta1.MsgDeposit",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/gov/v1beta1/tx.proto"
 		},
 		{

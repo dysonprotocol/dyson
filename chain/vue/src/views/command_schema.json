@@ -9497,5 +9497,44 @@
       }
     },
     "http_rules": null
+  },
+  "names/sendMsgReveal": {
+    "module_name": "names",
+    "name": "Reveal",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgReveal",
+      "definitions": {
+        "MsgReveal": {
+          "properties": {
+            "creator": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "salt": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Reveal"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgRevealResponse",
+      "definitions": {
+        "MsgRevealResponse": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Reveal Response"
+        }
+      }
+    },
+    "http_rules": null
   }
 }

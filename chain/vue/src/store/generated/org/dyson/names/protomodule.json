@@ -240,18 +240,13 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgRegister",
-			"URI": "names.MsgRegister",
+			"Name": "MsgUpdateName",
+			"URI": "names.MsgUpdateName",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
 			"Name": "MsgDeleteName",
 			"URI": "names.MsgDeleteName",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateName",
-			"URI": "names.MsgUpdateName",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -262,6 +257,11 @@
 		{
 			"Name": "MsgCreateName",
 			"URI": "names.MsgCreateName",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgRegister",
+			"URI": "names.MsgRegister",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		}
 	],

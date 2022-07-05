@@ -275,7 +275,7 @@ sandbox = build_sandbox("", "", "", "", "")
 inspector = Inspector()
 
 locals().update(sandbox.modules)
-import urllib, simplejson
+import urllib, simplejson, random
 docs = {}
 
 
