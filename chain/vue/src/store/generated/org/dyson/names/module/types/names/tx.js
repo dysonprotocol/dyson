@@ -1543,6 +1543,165 @@ export const MsgBurnCoinsResponse = {
         return message;
     }
 };
+const baseMsgForceTransfer = { owner: '', from: '', to: '', amount: '', denom: '' };
+export const MsgForceTransfer = {
+    encode(message, writer = Writer.create()) {
+        if (message.owner !== '') {
+            writer.uint32(10).string(message.owner);
+        }
+        if (message.from !== '') {
+            writer.uint32(18).string(message.from);
+        }
+        if (message.to !== '') {
+            writer.uint32(26).string(message.to);
+        }
+        if (message.amount !== '') {
+            writer.uint32(34).string(message.amount);
+        }
+        if (message.denom !== '') {
+            writer.uint32(42).string(message.denom);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = { ...baseMsgForceTransfer };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.owner = reader.string();
+                    break;
+                case 2:
+                    message.from = reader.string();
+                    break;
+                case 3:
+                    message.to = reader.string();
+                    break;
+                case 4:
+                    message.amount = reader.string();
+                    break;
+                case 5:
+                    message.denom = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = { ...baseMsgForceTransfer };
+        if (object.owner !== undefined && object.owner !== null) {
+            message.owner = String(object.owner);
+        }
+        else {
+            message.owner = '';
+        }
+        if (object.from !== undefined && object.from !== null) {
+            message.from = String(object.from);
+        }
+        else {
+            message.from = '';
+        }
+        if (object.to !== undefined && object.to !== null) {
+            message.to = String(object.to);
+        }
+        else {
+            message.to = '';
+        }
+        if (object.amount !== undefined && object.amount !== null) {
+            message.amount = String(object.amount);
+        }
+        else {
+            message.amount = '';
+        }
+        if (object.denom !== undefined && object.denom !== null) {
+            message.denom = String(object.denom);
+        }
+        else {
+            message.denom = '';
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.owner !== undefined && (obj.owner = message.owner);
+        message.from !== undefined && (obj.from = message.from);
+        message.to !== undefined && (obj.to = message.to);
+        message.amount !== undefined && (obj.amount = message.amount);
+        message.denom !== undefined && (obj.denom = message.denom);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = { ...baseMsgForceTransfer };
+        if (object.owner !== undefined && object.owner !== null) {
+            message.owner = object.owner;
+        }
+        else {
+            message.owner = '';
+        }
+        if (object.from !== undefined && object.from !== null) {
+            message.from = object.from;
+        }
+        else {
+            message.from = '';
+        }
+        if (object.to !== undefined && object.to !== null) {
+            message.to = object.to;
+        }
+        else {
+            message.to = '';
+        }
+        if (object.amount !== undefined && object.amount !== null) {
+            message.amount = object.amount;
+        }
+        else {
+            message.amount = '';
+        }
+        if (object.denom !== undefined && object.denom !== null) {
+            message.denom = object.denom;
+        }
+        else {
+            message.denom = '';
+        }
+        return message;
+    }
+};
+const baseMsgForceTransferResponse = {};
+export const MsgForceTransferResponse = {
+    encode(_, writer = Writer.create()) {
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = { ...baseMsgForceTransferResponse };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(_) {
+        const message = { ...baseMsgForceTransferResponse };
+        return message;
+    },
+    toJSON(_) {
+        const obj = {};
+        return obj;
+    },
+    fromPartial(_) {
+        const message = { ...baseMsgForceTransferResponse };
+        return message;
+    }
+};
 export class MsgClientImpl {
     constructor(rpc) {
         this.rpc = rpc;
@@ -1601,6 +1760,11 @@ export class MsgClientImpl {
         const data = MsgBurnCoins.encode(request).finish();
         const promise = this.rpc.request('names.Msg', 'BurnCoins', data);
         return promise.then((data) => MsgBurnCoinsResponse.decode(new Reader(data)));
+    }
+    ForceTransfer(request) {
+        const data = MsgForceTransfer.encode(request).finish();
+        const promise = this.rpc.request('names.Msg', 'ForceTransfer', data);
+        return promise.then((data) => MsgForceTransferResponse.decode(new Reader(data)));
     }
 }
 function toTimestamp(date) {

@@ -39,6 +39,7 @@ func GetTxCmd() *cobra.Command {
 	cmd.AddCommand(CmdBuy())
 	cmd.AddCommand(CmdMintCoins())
 	cmd.AddCommand(CmdBurnCoins())
+	cmd.AddCommand(CmdForceTransfer())
 	// this line is used by starport scaffolding # 1
 
 	return cmd

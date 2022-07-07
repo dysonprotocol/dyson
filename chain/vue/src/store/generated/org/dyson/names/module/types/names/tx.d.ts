@@ -93,6 +93,15 @@ export interface MsgBurnCoins {
 }
 export interface MsgBurnCoinsResponse {
 }
+export interface MsgForceTransfer {
+    owner: string;
+    from: string;
+    to: string;
+    amount: string;
+    denom: string;
+}
+export interface MsgForceTransferResponse {
+}
 export declare const MsgRegister: {
     encode(message: MsgRegister, writer?: Writer): Writer;
     decode(input: Reader | Uint8Array, length?: number): MsgRegister;
@@ -247,6 +256,20 @@ export declare const MsgBurnCoinsResponse: {
     toJSON(_: MsgBurnCoinsResponse): unknown;
     fromPartial(_: DeepPartial<MsgBurnCoinsResponse>): MsgBurnCoinsResponse;
 };
+export declare const MsgForceTransfer: {
+    encode(message: MsgForceTransfer, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgForceTransfer;
+    fromJSON(object: any): MsgForceTransfer;
+    toJSON(message: MsgForceTransfer): unknown;
+    fromPartial(object: DeepPartial<MsgForceTransfer>): MsgForceTransfer;
+};
+export declare const MsgForceTransferResponse: {
+    encode(_: MsgForceTransferResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgForceTransferResponse;
+    fromJSON(_: any): MsgForceTransferResponse;
+    toJSON(_: MsgForceTransferResponse): unknown;
+    fromPartial(_: DeepPartial<MsgForceTransferResponse>): MsgForceTransferResponse;
+};
 /** Msg defines the Msg service. */
 export interface Msg {
     Register(request: MsgRegister): Promise<MsgRegisterResponse>;
@@ -259,8 +282,9 @@ export interface Msg {
     Accept(request: MsgAccept): Promise<MsgAcceptResponse>;
     Buy(request: MsgBuy): Promise<MsgBuyResponse>;
     MintCoins(request: MsgMintCoins): Promise<MsgMintCoinsResponse>;
-    /** this line is used by starport scaffolding # proto/tx/rpc */
     BurnCoins(request: MsgBurnCoins): Promise<MsgBurnCoinsResponse>;
+    /** this line is used by starport scaffolding # proto/tx/rpc */
+    ForceTransfer(request: MsgForceTransfer): Promise<MsgForceTransferResponse>;
 }
 export declare class MsgClientImpl implements Msg {
     private readonly rpc;
@@ -276,6 +300,7 @@ export declare class MsgClientImpl implements Msg {
     Buy(request: MsgBuy): Promise<MsgBuyResponse>;
     MintCoins(request: MsgMintCoins): Promise<MsgMintCoinsResponse>;
     BurnCoins(request: MsgBurnCoins): Promise<MsgBurnCoinsResponse>;
+    ForceTransfer(request: MsgForceTransfer): Promise<MsgForceTransferResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;

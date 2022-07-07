@@ -22,6 +22,7 @@ service Msg {
   rpc Buy(MsgBuy) returns (MsgBuyResponse);
   rpc MintCoins(MsgMintCoins) returns (MsgMintCoinsResponse);
   rpc BurnCoins(MsgBurnCoins) returns (MsgBurnCoinsResponse);
+  rpc ForceTransfer(MsgForceTransfer) returns (MsgForceTransferResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -133,6 +134,17 @@ message MsgBurnCoins {
 }
 
 message MsgBurnCoinsResponse {
+}
+
+message MsgForceTransfer {
+  string owner = 1;
+  string from = 2;
+  string to = 3;
+  string amount = 4;
+  string denom = 5;
+}
+
+message MsgForceTransferResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func (k msgServer) BurnCoins(goCtx context.Context, msg *types.MsgBurnCoins) (*types.MsgBurnCoinsResponse, error) {
+func (k msgServer) ForceTransfer(goCtx context.Context, msg *types.MsgForceTransfer) (*types.MsgForceTransferResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	coin, err := sdk.ParseCoinNormalized(msg.Amount + msg.Denom)
@@ -32,20 +32,21 @@ func (k msgServer) BurnCoins(goCtx context.Context, msg *types.MsgBurnCoins) (*t
 	if msg.Owner != name.Owner {
 		return nil, sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "incorrect owner (%s): %s != %s", name.Name, msg.Owner, name.Owner)
 	}
-	fromAddr, err := sdk.AccAddressFromBech32(msg.Owner)
+	fromAddr, err := sdk.AccAddressFromBech32(msg.From)
 	if err != nil {
 		return nil, err
 	}
 
-	err = k.bankKeeper.SendCoinsFromAccountToModule(ctx, fromAddr, "names", sdk.Coins{coin})
-
-	if err != nil {
-		return nil, err
-	}
-	err = k.bankKeeper.BurnCoins(ctx, "names", sdk.Coins{coin})
+	toAddr, err := sdk.AccAddressFromBech32(msg.To)
 	if err != nil {
 		return nil, err
 	}
 
-	return &types.MsgBurnCoinsResponse{}, nil
+	err = k.bankKeeper.SendCoins(ctx, fromAddr, toAddr, sdk.Coins{coin})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &types.MsgForceTransferResponse{}, nil
 }

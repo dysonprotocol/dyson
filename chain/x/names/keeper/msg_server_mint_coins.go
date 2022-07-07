@@ -30,7 +30,7 @@ func (k msgServer) MintCoins(goCtx context.Context, msg *types.MsgMintCoins) (*t
 
 	// Checks if the the msg owner is the same as the current owner
 	if msg.Owner != name.Owner {
-		return nil, sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "incorrect owner: %s != %s", msg.Owner, name.Owner)
+		return nil, sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "incorrect owner (%s): %s != %s", name.Name, msg.Owner, name.Owner)
 	}
 	toAddr, err := sdk.AccAddressFromBech32(msg.Owner)
 	if err != nil {

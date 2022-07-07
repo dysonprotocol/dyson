@@ -9864,5 +9864,50 @@
       }
     },
     "http_rules": null
+  },
+  "names/sendMsgForceTransfer": {
+    "module_name": "names",
+    "name": "ForceTransfer",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgForceTransfer",
+      "definitions": {
+        "MsgForceTransfer": {
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "from": {
+              "type": "string"
+            },
+            "to": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "string"
+            },
+            "denom": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Force Transfer"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgForceTransferResponse",
+      "definitions": {
+        "MsgForceTransferResponse": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Force Transfer Response"
+        }
+      }
+    },
+    "http_rules": null
   }
 }

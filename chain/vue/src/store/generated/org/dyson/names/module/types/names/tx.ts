@@ -111,6 +111,16 @@ export interface MsgBurnCoins {
 
 export interface MsgBurnCoinsResponse {}
 
+export interface MsgForceTransfer {
+  owner: string
+  from: string
+  to: string
+  amount: string
+  denom: string
+}
+
+export interface MsgForceTransferResponse {}
+
 const baseMsgRegister: object = { owner: '', commit: '', price: '' }
 
 export const MsgRegister = {
@@ -1695,6 +1705,167 @@ export const MsgBurnCoinsResponse = {
   }
 }
 
+const baseMsgForceTransfer: object = { owner: '', from: '', to: '', amount: '', denom: '' }
+
+export const MsgForceTransfer = {
+  encode(message: MsgForceTransfer, writer: Writer = Writer.create()): Writer {
+    if (message.owner !== '') {
+      writer.uint32(10).string(message.owner)
+    }
+    if (message.from !== '') {
+      writer.uint32(18).string(message.from)
+    }
+    if (message.to !== '') {
+      writer.uint32(26).string(message.to)
+    }
+    if (message.amount !== '') {
+      writer.uint32(34).string(message.amount)
+    }
+    if (message.denom !== '') {
+      writer.uint32(42).string(message.denom)
+    }
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgForceTransfer {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgForceTransfer } as MsgForceTransfer
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        case 1:
+          message.owner = reader.string()
+          break
+        case 2:
+          message.from = reader.string()
+          break
+        case 3:
+          message.to = reader.string()
+          break
+        case 4:
+          message.amount = reader.string()
+          break
+        case 5:
+          message.denom = reader.string()
+          break
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(object: any): MsgForceTransfer {
+    const message = { ...baseMsgForceTransfer } as MsgForceTransfer
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = String(object.owner)
+    } else {
+      message.owner = ''
+    }
+    if (object.from !== undefined && object.from !== null) {
+      message.from = String(object.from)
+    } else {
+      message.from = ''
+    }
+    if (object.to !== undefined && object.to !== null) {
+      message.to = String(object.to)
+    } else {
+      message.to = ''
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = String(object.amount)
+    } else {
+      message.amount = ''
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = String(object.denom)
+    } else {
+      message.denom = ''
+    }
+    return message
+  },
+
+  toJSON(message: MsgForceTransfer): unknown {
+    const obj: any = {}
+    message.owner !== undefined && (obj.owner = message.owner)
+    message.from !== undefined && (obj.from = message.from)
+    message.to !== undefined && (obj.to = message.to)
+    message.amount !== undefined && (obj.amount = message.amount)
+    message.denom !== undefined && (obj.denom = message.denom)
+    return obj
+  },
+
+  fromPartial(object: DeepPartial<MsgForceTransfer>): MsgForceTransfer {
+    const message = { ...baseMsgForceTransfer } as MsgForceTransfer
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner
+    } else {
+      message.owner = ''
+    }
+    if (object.from !== undefined && object.from !== null) {
+      message.from = object.from
+    } else {
+      message.from = ''
+    }
+    if (object.to !== undefined && object.to !== null) {
+      message.to = object.to
+    } else {
+      message.to = ''
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount
+    } else {
+      message.amount = ''
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom
+    } else {
+      message.denom = ''
+    }
+    return message
+  }
+}
+
+const baseMsgForceTransferResponse: object = {}
+
+export const MsgForceTransferResponse = {
+  encode(_: MsgForceTransferResponse, writer: Writer = Writer.create()): Writer {
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgForceTransferResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgForceTransferResponse } as MsgForceTransferResponse
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(_: any): MsgForceTransferResponse {
+    const message = { ...baseMsgForceTransferResponse } as MsgForceTransferResponse
+    return message
+  },
+
+  toJSON(_: MsgForceTransferResponse): unknown {
+    const obj: any = {}
+    return obj
+  },
+
+  fromPartial(_: DeepPartial<MsgForceTransferResponse>): MsgForceTransferResponse {
+    const message = { ...baseMsgForceTransferResponse } as MsgForceTransferResponse
+    return message
+  }
+}
+
 /** Msg defines the Msg service. */
 export interface Msg {
   Register(request: MsgRegister): Promise<MsgRegisterResponse>
@@ -1707,8 +1878,9 @@ export interface Msg {
   Accept(request: MsgAccept): Promise<MsgAcceptResponse>
   Buy(request: MsgBuy): Promise<MsgBuyResponse>
   MintCoins(request: MsgMintCoins): Promise<MsgMintCoinsResponse>
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   BurnCoins(request: MsgBurnCoins): Promise<MsgBurnCoinsResponse>
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  ForceTransfer(request: MsgForceTransfer): Promise<MsgForceTransferResponse>
 }
 
 export class MsgClientImpl implements Msg {
@@ -1780,6 +1952,12 @@ export class MsgClientImpl implements Msg {
     const data = MsgBurnCoins.encode(request).finish()
     const promise = this.rpc.request('names.Msg', 'BurnCoins', data)
     return promise.then((data) => MsgBurnCoinsResponse.decode(new Reader(data)))
+  }
+
+  ForceTransfer(request: MsgForceTransfer): Promise<MsgForceTransferResponse> {
+    const data = MsgForceTransfer.encode(request).finish()
+    const promise = this.rpc.request('names.Msg', 'ForceTransfer', data)
+    return promise.then((data) => MsgForceTransferResponse.decode(new Reader(data)))
   }
 }
 
