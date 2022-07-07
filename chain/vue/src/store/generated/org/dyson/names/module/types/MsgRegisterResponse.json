@@ -3,6 +3,17 @@
     "$ref": "#/definitions/MsgRegisterResponse",
     "definitions": {
         "MsgRegisterResponse": {
+            "properties": {
+                "fee": {
+                    "type": "string",
+                    "description": "fee paid which is 1% of the price"
+                },
+                "expires": {
+                    "type": "string",
+                    "description": "when this name expires",
+                    "format": "date-time"
+                }
+            },
             "additionalProperties": true,
             "type": "object",
             "title": "Msg Register Response"

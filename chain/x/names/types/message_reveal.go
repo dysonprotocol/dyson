@@ -1,19 +1,24 @@
 package types
 
 import (
+	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"regexp"
 )
 
-const TypeMsgReveal = "reveal"
+const (
+	TypeMsgReveal = "reveal"
+	NameRegex     = `^[a-z][a-z0-9]{2,31}$`
+)
 
 var _ sdk.Msg = &MsgReveal{}
 
-func NewMsgReveal(creator string, name string, salt string) *MsgReveal {
+func NewMsgReveal(owner string, name string, salt string) *MsgReveal {
 	return &MsgReveal{
-		Creator: creator,
-		Name:    name,
-		Salt:    salt,
+		Owner: owner,
+		Name:  name,
+		Salt:  salt,
 	}
 }
 
@@ -26,11 +31,11 @@ func (msg *MsgReveal) Type() string {
 }
 
 func (msg *MsgReveal) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+	owner, err := sdk.AccAddressFromBech32(msg.Owner)
 	if err != nil {
 		panic(err)
 	}
-	return []sdk.AccAddress{creator}
+	return []sdk.AccAddress{owner}
 }
 
 func (msg *MsgReveal) GetSignBytes() []byte {
@@ -39,9 +44,16 @@ func (msg *MsgReveal) GetSignBytes() []byte {
 }
 
 func (msg *MsgReveal) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.Owner)
 	if err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid owner address (%s)", err)
+	}
+	matched, err := regexp.Match(NameRegex, []byte(msg.Name))
+	if err != nil {
+		return sdkerrors.Wrap(err, "Name regex error")
+	}
+	if !matched {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("name must match regex: %s", NameRegex))
 	}
 	return nil
 }

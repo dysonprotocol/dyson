@@ -4,10 +4,8 @@ export interface Name {
     name: string;
     destination: string;
     price: string;
-    expires: string;
+    expires: Date | undefined;
     authorized: string;
-    commit: string;
-    salt: string;
     owner: string;
     height: number;
 }

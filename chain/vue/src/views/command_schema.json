@@ -9105,15 +9105,10 @@
               "type": "string"
             },
             "expires": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "authorized": {
-              "type": "string"
-            },
-            "commit": {
-              "type": "string"
-            },
-            "salt": {
               "type": "string"
             },
             "owner": {
@@ -9239,15 +9234,10 @@
               "type": "string"
             },
             "expires": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "authorized": {
-              "type": "string"
-            },
-            "commit": {
-              "type": "string"
-            },
-            "salt": {
               "type": "string"
             },
             "owner": {
@@ -9315,6 +9305,60 @@
       }
     ]
   },
+  "names/QueryGenerateCommit": {
+    "module_name": "names",
+    "name": "GenerateCommit",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryGenerateCommitRequest",
+      "definitions": {
+        "QueryGenerateCommitRequest": {
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "salt": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query Generate Commit Request"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryGenerateCommitResponse",
+      "definitions": {
+        "QueryGenerateCommitResponse": {
+          "properties": {
+            "commit": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query Generate Commit Response"
+        }
+      }
+    },
+    "http_rules": [
+      {
+        "Params": [
+          "owner",
+          "name",
+          "salt"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
   "names/sendMsgRegister": {
     "module_name": "names",
     "name": "Register",
@@ -9329,10 +9373,12 @@
               "type": "string"
             },
             "commit": {
-              "type": "string"
+              "type": "string",
+              "description": "The Shake256(salt + name) hexdigest"
             },
             "price": {
-              "type": "string"
+              "type": "string",
+              "description": "The price that this name is valued at and can be purchaced for. The yearly fee is 1% of this price."
             }
           },
           "additionalProperties": true,
@@ -9346,6 +9392,17 @@
       "$ref": "#/definitions/MsgRegisterResponse",
       "definitions": {
         "MsgRegisterResponse": {
+          "properties": {
+            "fee": {
+              "type": "string",
+              "description": "fee paid which is 1% of the price"
+            },
+            "expires": {
+              "type": "string",
+              "description": "when this name expires",
+              "format": "date-time"
+            }
+          },
           "additionalProperties": true,
           "type": "object",
           "title": "Msg Register Response"
@@ -9377,7 +9434,8 @@
               "type": "string"
             },
             "expires": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "authorized": {
               "type": "string"
@@ -9431,7 +9489,8 @@
               "type": "string"
             },
             "expires": {
-              "type": "string"
+              "type": "string",
+              "format": "date-time"
             },
             "authorized": {
               "type": "string"
@@ -9508,7 +9567,7 @@
       "definitions": {
         "MsgReveal": {
           "properties": {
-            "creator": {
+            "owner": {
               "type": "string"
             },
             "name": {
@@ -9529,9 +9588,278 @@
       "$ref": "#/definitions/MsgRevealResponse",
       "definitions": {
         "MsgRevealResponse": {
+          "properties": {
+            "name": {
+              "$ref": "#/definitions/names.Name",
+              "additionalProperties": true
+            }
+          },
           "additionalProperties": true,
           "type": "object",
           "title": "Msg Reveal Response"
+        },
+        "names.Name": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "destination": {
+              "type": "string"
+            },
+            "price": {
+              "type": "string"
+            },
+            "expires": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "authorized": {
+              "type": "string"
+            },
+            "owner": {
+              "type": "string"
+            },
+            "height": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Name"
+        }
+      }
+    },
+    "http_rules": null
+  },
+  "names/sendMsgSetPriceAndExtend": {
+    "module_name": "names",
+    "name": "SetPriceAndExtend",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgSetPriceAndExtend",
+      "definitions": {
+        "MsgSetPriceAndExtend": {
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "price": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Set Price And Extend"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgSetPriceAndExtendResponse",
+      "definitions": {
+        "MsgSetPriceAndExtendResponse": {
+          "properties": {
+            "expiry": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Set Price And Extend Response"
+        }
+      }
+    },
+    "http_rules": null
+  },
+  "names/sendMsgOfferTo": {
+    "module_name": "names",
+    "name": "OfferTo",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgOfferTo",
+      "definitions": {
+        "MsgOfferTo": {
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "newOwner": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Offer To"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgOfferToResponse",
+      "definitions": {
+        "MsgOfferToResponse": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Offer To Response"
+        }
+      }
+    },
+    "http_rules": null
+  },
+  "names/sendMsgAccept": {
+    "module_name": "names",
+    "name": "Accept",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgAccept",
+      "definitions": {
+        "MsgAccept": {
+          "properties": {
+            "newOwner": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Accept"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgAcceptResponse",
+      "definitions": {
+        "MsgAcceptResponse": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Accept Response"
+        }
+      }
+    },
+    "http_rules": null
+  },
+  "names/sendMsgBuy": {
+    "module_name": "names",
+    "name": "Buy",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgBuy",
+      "definitions": {
+        "MsgBuy": {
+          "properties": {
+            "buyer": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Buy"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgBuyResponse",
+      "definitions": {
+        "MsgBuyResponse": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Buy Response"
+        }
+      }
+    },
+    "http_rules": null
+  },
+  "names/sendMsgMintCoins": {
+    "module_name": "names",
+    "name": "MintCoins",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgMintCoins",
+      "definitions": {
+        "MsgMintCoins": {
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "string"
+            },
+            "denom": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Mint Coins"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgMintCoinsResponse",
+      "definitions": {
+        "MsgMintCoinsResponse": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Mint Coins Response"
+        }
+      }
+    },
+    "http_rules": null
+  },
+  "names/sendMsgBurnCoins": {
+    "module_name": "names",
+    "name": "BurnCoins",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgBurnCoins",
+      "definitions": {
+        "MsgBurnCoins": {
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "string"
+            },
+            "denom": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Burn Coins"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgBurnCoinsResponse",
+      "definitions": {
+        "MsgBurnCoinsResponse": {
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Burn Coins Response"
         }
       }
     },

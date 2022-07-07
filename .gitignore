@@ -1,3 +1,5 @@
+vendor
+
 swag-conf/dns-conf/*
 
 .env.local

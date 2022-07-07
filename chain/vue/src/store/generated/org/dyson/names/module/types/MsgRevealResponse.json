@@ -3,9 +3,44 @@
     "$ref": "#/definitions/MsgRevealResponse",
     "definitions": {
         "MsgRevealResponse": {
+            "properties": {
+                "name": {
+                    "$ref": "#/definitions/names.Name",
+                    "additionalProperties": true
+                }
+            },
             "additionalProperties": true,
             "type": "object",
             "title": "Msg Reveal Response"
+        },
+        "names.Name": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "destination": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "expires": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "authorized": {
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Name"
         }
     }
 }

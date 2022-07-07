@@ -43,5 +43,12 @@ func (msg *MsgRegister) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid owner address (%s)", err)
 	}
+	coin, err := sdk.ParseCoinNormalized(msg.Price)
+	if err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid coins (%s): %s", msg.Price, err)
+	}
+	if coin.Denom != "dys" {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid coin denom, must be 'dys': %s", coin.Denom)
+	}
 	return nil
 }

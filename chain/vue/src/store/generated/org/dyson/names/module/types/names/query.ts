@@ -40,6 +40,16 @@ export interface QueryResolveResponse {
   address: string
 }
 
+export interface QueryGenerateCommitRequest {
+  owner: string
+  name: string
+  salt: string
+}
+
+export interface QueryGenerateCommitResponse {
+  commit: string
+}
+
 const baseQueryParamsRequest: object = {}
 
 export const QueryParamsRequest = {
@@ -487,6 +497,150 @@ export const QueryResolveResponse = {
   }
 }
 
+const baseQueryGenerateCommitRequest: object = { owner: '', name: '', salt: '' }
+
+export const QueryGenerateCommitRequest = {
+  encode(message: QueryGenerateCommitRequest, writer: Writer = Writer.create()): Writer {
+    if (message.owner !== '') {
+      writer.uint32(10).string(message.owner)
+    }
+    if (message.name !== '') {
+      writer.uint32(18).string(message.name)
+    }
+    if (message.salt !== '') {
+      writer.uint32(26).string(message.salt)
+    }
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): QueryGenerateCommitRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseQueryGenerateCommitRequest } as QueryGenerateCommitRequest
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        case 1:
+          message.owner = reader.string()
+          break
+        case 2:
+          message.name = reader.string()
+          break
+        case 3:
+          message.salt = reader.string()
+          break
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(object: any): QueryGenerateCommitRequest {
+    const message = { ...baseQueryGenerateCommitRequest } as QueryGenerateCommitRequest
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = String(object.owner)
+    } else {
+      message.owner = ''
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = String(object.name)
+    } else {
+      message.name = ''
+    }
+    if (object.salt !== undefined && object.salt !== null) {
+      message.salt = String(object.salt)
+    } else {
+      message.salt = ''
+    }
+    return message
+  },
+
+  toJSON(message: QueryGenerateCommitRequest): unknown {
+    const obj: any = {}
+    message.owner !== undefined && (obj.owner = message.owner)
+    message.name !== undefined && (obj.name = message.name)
+    message.salt !== undefined && (obj.salt = message.salt)
+    return obj
+  },
+
+  fromPartial(object: DeepPartial<QueryGenerateCommitRequest>): QueryGenerateCommitRequest {
+    const message = { ...baseQueryGenerateCommitRequest } as QueryGenerateCommitRequest
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner
+    } else {
+      message.owner = ''
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name
+    } else {
+      message.name = ''
+    }
+    if (object.salt !== undefined && object.salt !== null) {
+      message.salt = object.salt
+    } else {
+      message.salt = ''
+    }
+    return message
+  }
+}
+
+const baseQueryGenerateCommitResponse: object = { commit: '' }
+
+export const QueryGenerateCommitResponse = {
+  encode(message: QueryGenerateCommitResponse, writer: Writer = Writer.create()): Writer {
+    if (message.commit !== '') {
+      writer.uint32(10).string(message.commit)
+    }
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): QueryGenerateCommitResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseQueryGenerateCommitResponse } as QueryGenerateCommitResponse
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        case 1:
+          message.commit = reader.string()
+          break
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(object: any): QueryGenerateCommitResponse {
+    const message = { ...baseQueryGenerateCommitResponse } as QueryGenerateCommitResponse
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = String(object.commit)
+    } else {
+      message.commit = ''
+    }
+    return message
+  },
+
+  toJSON(message: QueryGenerateCommitResponse): unknown {
+    const obj: any = {}
+    message.commit !== undefined && (obj.commit = message.commit)
+    return obj
+  },
+
+  fromPartial(object: DeepPartial<QueryGenerateCommitResponse>): QueryGenerateCommitResponse {
+    const message = { ...baseQueryGenerateCommitResponse } as QueryGenerateCommitResponse
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = object.commit
+    } else {
+      message.commit = ''
+    }
+    return message
+  }
+}
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -497,6 +651,8 @@ export interface Query {
   NameAll(request: QueryAllNameRequest): Promise<QueryAllNameResponse>
   /** Queries a list of Resolve items. */
   Resolve(request: QueryResolveRequest): Promise<QueryResolveResponse>
+  /** Queries a list of GenerateCommit items. */
+  GenerateCommit(request: QueryGenerateCommitRequest): Promise<QueryGenerateCommitResponse>
 }
 
 export class QueryClientImpl implements Query {
@@ -526,6 +682,12 @@ export class QueryClientImpl implements Query {
     const data = QueryResolveRequest.encode(request).finish()
     const promise = this.rpc.request('names.Query', 'Resolve', data)
     return promise.then((data) => QueryResolveResponse.decode(new Reader(data)))
+  }
+
+  GenerateCommit(request: QueryGenerateCommitRequest): Promise<QueryGenerateCommitResponse> {
+    const data = QueryGenerateCommitRequest.encode(request).finish()
+    const promise = this.rpc.request('names.Query', 'GenerateCommit', data)
+    return promise.then((data) => QueryGenerateCommitResponse.decode(new Reader(data)))
   }
 }
 

@@ -9,13 +9,35 @@
  * ---------------------------------------------------------------
  */
 
+export type NamesMsgAcceptResponse = object;
+
+export type NamesMsgBurnCoinsResponse = object;
+
+export type NamesMsgBuyResponse = object;
+
 export type NamesMsgCreateNameResponse = object;
 
 export type NamesMsgDeleteNameResponse = object;
 
-export type NamesMsgRegisterResponse = object;
+export type NamesMsgMintCoinsResponse = object;
 
-export type NamesMsgRevealResponse = object;
+export type NamesMsgOfferToResponse = object;
+
+export interface NamesMsgRegisterResponse {
+  fee?: string;
+
+  /** @format date-time */
+  expires?: string;
+}
+
+export interface NamesMsgRevealResponse {
+  name?: NamesName;
+}
+
+export interface NamesMsgSetPriceAndExtendResponse {
+  /** @format date-time */
+  expiry?: string;
+}
 
 export type NamesMsgUpdateNameResponse = object;
 
@@ -23,10 +45,10 @@ export interface NamesName {
   name?: string;
   destination?: string;
   price?: string;
+
+  /** @format date-time */
   expires?: string;
   authorized?: string;
-  commit?: string;
-  salt?: string;
   owner?: string;
 
   /** @format int64 */
@@ -51,6 +73,10 @@ export interface NamesQueryAllNameResponse {
    *  }
    */
   pagination?: V1Beta1PageResponse;
+}
+
+export interface NamesQueryGenerateCommitResponse {
+  commit?: string;
 }
 
 export interface NamesQueryGetNameResponse {
@@ -335,6 +361,22 @@ export class HttpClient<SecurityDataType = unknown> {
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryGenerateCommit
+   * @summary Queries a list of GenerateCommit items.
+   * @request GET:/org/dyson/names/generate_commit/{owner}/{name}/{salt}
+   */
+  queryGenerateCommit = (owner: string, name: string, salt: string, params: RequestParams = {}) =>
+    this.request<NamesQueryGenerateCommitResponse, RpcStatus>({
+      path: `/org/dyson/names/generate_commit/${owner}/${name}/${salt}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *

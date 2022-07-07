@@ -32,6 +32,24 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		case *types.MsgReveal:
 			res, err := msgServer.Reveal(sdk.WrapSDKContext(ctx), msg)
 			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgSetPriceAndExtend:
+			res, err := msgServer.SetPriceAndExtend(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgOfferTo:
+			res, err := msgServer.OfferTo(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgAccept:
+			res, err := msgServer.Accept(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgBuy:
+			res, err := msgServer.Buy(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgMintCoins:
+			res, err := msgServer.MintCoins(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgBurnCoins:
+			res, err := msgServer.BurnCoins(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
 			// this line is used by starport scaffolding # 1
 		default:
 			errMsg := fmt.Sprintf("unrecognized %s message type: %T", types.ModuleName, msg)

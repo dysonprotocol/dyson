@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Timestamp } from '../google/protobuf/timestamp'
 import * as Long from 'long'
 import { util, configure, Writer, Reader } from 'protobufjs/minimal'
 
@@ -8,15 +9,13 @@ export interface Name {
   name: string
   destination: string
   price: string
-  expires: string
+  expires: Date | undefined
   authorized: string
-  commit: string
-  salt: string
   owner: string
   height: number
 }
 
-const baseName: object = { name: '', destination: '', price: '', expires: '', authorized: '', commit: '', salt: '', owner: '', height: 0 }
+const baseName: object = { name: '', destination: '', price: '', authorized: '', owner: '', height: 0 }
 
 export const Name = {
   encode(message: Name, writer: Writer = Writer.create()): Writer {
@@ -29,17 +28,11 @@ export const Name = {
     if (message.price !== '') {
       writer.uint32(26).string(message.price)
     }
-    if (message.expires !== '') {
-      writer.uint32(34).string(message.expires)
+    if (message.expires !== undefined) {
+      Timestamp.encode(toTimestamp(message.expires), writer.uint32(34).fork()).ldelim()
     }
     if (message.authorized !== '') {
       writer.uint32(42).string(message.authorized)
-    }
-    if (message.commit !== '') {
-      writer.uint32(50).string(message.commit)
-    }
-    if (message.salt !== '') {
-      writer.uint32(58).string(message.salt)
     }
     if (message.owner !== '') {
       writer.uint32(66).string(message.owner)
@@ -67,16 +60,10 @@ export const Name = {
           message.price = reader.string()
           break
         case 4:
-          message.expires = reader.string()
+          message.expires = fromTimestamp(Timestamp.decode(reader, reader.uint32()))
           break
         case 5:
           message.authorized = reader.string()
-          break
-        case 6:
-          message.commit = reader.string()
-          break
-        case 7:
-          message.salt = reader.string()
           break
         case 8:
           message.owner = reader.string()
@@ -110,24 +97,14 @@ export const Name = {
       message.price = ''
     }
     if (object.expires !== undefined && object.expires !== null) {
-      message.expires = String(object.expires)
+      message.expires = fromJsonTimestamp(object.expires)
     } else {
-      message.expires = ''
+      message.expires = undefined
     }
     if (object.authorized !== undefined && object.authorized !== null) {
       message.authorized = String(object.authorized)
     } else {
       message.authorized = ''
-    }
-    if (object.commit !== undefined && object.commit !== null) {
-      message.commit = String(object.commit)
-    } else {
-      message.commit = ''
-    }
-    if (object.salt !== undefined && object.salt !== null) {
-      message.salt = String(object.salt)
-    } else {
-      message.salt = ''
     }
     if (object.owner !== undefined && object.owner !== null) {
       message.owner = String(object.owner)
@@ -147,10 +124,8 @@ export const Name = {
     message.name !== undefined && (obj.name = message.name)
     message.destination !== undefined && (obj.destination = message.destination)
     message.price !== undefined && (obj.price = message.price)
-    message.expires !== undefined && (obj.expires = message.expires)
+    message.expires !== undefined && (obj.expires = message.expires !== undefined ? message.expires.toISOString() : null)
     message.authorized !== undefined && (obj.authorized = message.authorized)
-    message.commit !== undefined && (obj.commit = message.commit)
-    message.salt !== undefined && (obj.salt = message.salt)
     message.owner !== undefined && (obj.owner = message.owner)
     message.height !== undefined && (obj.height = message.height)
     return obj
@@ -176,22 +151,12 @@ export const Name = {
     if (object.expires !== undefined && object.expires !== null) {
       message.expires = object.expires
     } else {
-      message.expires = ''
+      message.expires = undefined
     }
     if (object.authorized !== undefined && object.authorized !== null) {
       message.authorized = object.authorized
     } else {
       message.authorized = ''
-    }
-    if (object.commit !== undefined && object.commit !== null) {
-      message.commit = object.commit
-    } else {
-      message.commit = ''
-    }
-    if (object.salt !== undefined && object.salt !== null) {
-      message.salt = object.salt
-    } else {
-      message.salt = ''
     }
     if (object.owner !== undefined && object.owner !== null) {
       message.owner = object.owner
@@ -227,6 +192,28 @@ export type DeepPartial<T> = T extends Builtin
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = date.getTime() / 1_000
+  const nanos = (date.getTime() % 1_000) * 1_000_000
+  return { seconds, nanos }
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = t.seconds * 1_000
+  millis += t.nanos / 1_000_000
+  return new Date(millis)
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof Date) {
+    return o
+  } else if (typeof o === 'string') {
+    return new Date(o)
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o))
+  }
+}
 
 function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {

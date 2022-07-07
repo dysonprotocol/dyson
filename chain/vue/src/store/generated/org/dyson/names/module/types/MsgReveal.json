@@ -4,7 +4,7 @@
     "definitions": {
         "MsgReveal": {
             "properties": {
-                "creator": {
+                "owner": {
                     "type": "string"
                 },
                 "name": {

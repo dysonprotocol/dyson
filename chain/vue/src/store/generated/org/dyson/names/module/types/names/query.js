@@ -418,6 +418,146 @@ export const QueryResolveResponse = {
         return message;
     }
 };
+const baseQueryGenerateCommitRequest = { owner: '', name: '', salt: '' };
+export const QueryGenerateCommitRequest = {
+    encode(message, writer = Writer.create()) {
+        if (message.owner !== '') {
+            writer.uint32(10).string(message.owner);
+        }
+        if (message.name !== '') {
+            writer.uint32(18).string(message.name);
+        }
+        if (message.salt !== '') {
+            writer.uint32(26).string(message.salt);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = { ...baseQueryGenerateCommitRequest };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.owner = reader.string();
+                    break;
+                case 2:
+                    message.name = reader.string();
+                    break;
+                case 3:
+                    message.salt = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = { ...baseQueryGenerateCommitRequest };
+        if (object.owner !== undefined && object.owner !== null) {
+            message.owner = String(object.owner);
+        }
+        else {
+            message.owner = '';
+        }
+        if (object.name !== undefined && object.name !== null) {
+            message.name = String(object.name);
+        }
+        else {
+            message.name = '';
+        }
+        if (object.salt !== undefined && object.salt !== null) {
+            message.salt = String(object.salt);
+        }
+        else {
+            message.salt = '';
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.owner !== undefined && (obj.owner = message.owner);
+        message.name !== undefined && (obj.name = message.name);
+        message.salt !== undefined && (obj.salt = message.salt);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = { ...baseQueryGenerateCommitRequest };
+        if (object.owner !== undefined && object.owner !== null) {
+            message.owner = object.owner;
+        }
+        else {
+            message.owner = '';
+        }
+        if (object.name !== undefined && object.name !== null) {
+            message.name = object.name;
+        }
+        else {
+            message.name = '';
+        }
+        if (object.salt !== undefined && object.salt !== null) {
+            message.salt = object.salt;
+        }
+        else {
+            message.salt = '';
+        }
+        return message;
+    }
+};
+const baseQueryGenerateCommitResponse = { commit: '' };
+export const QueryGenerateCommitResponse = {
+    encode(message, writer = Writer.create()) {
+        if (message.commit !== '') {
+            writer.uint32(10).string(message.commit);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = { ...baseQueryGenerateCommitResponse };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.commit = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = { ...baseQueryGenerateCommitResponse };
+        if (object.commit !== undefined && object.commit !== null) {
+            message.commit = String(object.commit);
+        }
+        else {
+            message.commit = '';
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.commit !== undefined && (obj.commit = message.commit);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = { ...baseQueryGenerateCommitResponse };
+        if (object.commit !== undefined && object.commit !== null) {
+            message.commit = object.commit;
+        }
+        else {
+            message.commit = '';
+        }
+        return message;
+    }
+};
 export class QueryClientImpl {
     constructor(rpc) {
         this.rpc = rpc;
@@ -441,5 +581,10 @@ export class QueryClientImpl {
         const data = QueryResolveRequest.encode(request).finish();
         const promise = this.rpc.request('names.Query', 'Resolve', data);
         return promise.then((data) => QueryResolveResponse.decode(new Reader(data)));
+    }
+    GenerateCommit(request) {
+        const data = QueryGenerateCommitRequest.encode(request).finish();
+        const promise = this.rpc.request('names.Query', 'GenerateCommit', data);
+        return promise.then((data) => QueryGenerateCommitResponse.decode(new Reader(data)));
     }
 }

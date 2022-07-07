@@ -33,15 +33,10 @@
                     "type": "string"
                 },
                 "expires": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "authorized": {
-                    "type": "string"
-                },
-                "commit": {
-                    "type": "string"
-                },
-                "salt": {
                     "type": "string"
                 },
                 "owner": {

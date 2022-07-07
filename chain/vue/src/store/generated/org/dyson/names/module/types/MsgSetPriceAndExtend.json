@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgSetPriceAndExtend",
+    "definitions": {
+        "MsgSetPriceAndExtend": {
+            "properties": {
+                "owner": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Set Price And Extend"
+        }
+    }
+}

@@ -30,6 +30,14 @@ export interface QueryResolveRequest {
 export interface QueryResolveResponse {
     address: string;
 }
+export interface QueryGenerateCommitRequest {
+    owner: string;
+    name: string;
+    salt: string;
+}
+export interface QueryGenerateCommitResponse {
+    commit: string;
+}
 export declare const QueryParamsRequest: {
     encode(_: QueryParamsRequest, writer?: Writer): Writer;
     decode(input: Reader | Uint8Array, length?: number): QueryParamsRequest;
@@ -86,6 +94,20 @@ export declare const QueryResolveResponse: {
     toJSON(message: QueryResolveResponse): unknown;
     fromPartial(object: DeepPartial<QueryResolveResponse>): QueryResolveResponse;
 };
+export declare const QueryGenerateCommitRequest: {
+    encode(message: QueryGenerateCommitRequest, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): QueryGenerateCommitRequest;
+    fromJSON(object: any): QueryGenerateCommitRequest;
+    toJSON(message: QueryGenerateCommitRequest): unknown;
+    fromPartial(object: DeepPartial<QueryGenerateCommitRequest>): QueryGenerateCommitRequest;
+};
+export declare const QueryGenerateCommitResponse: {
+    encode(message: QueryGenerateCommitResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): QueryGenerateCommitResponse;
+    fromJSON(object: any): QueryGenerateCommitResponse;
+    toJSON(message: QueryGenerateCommitResponse): unknown;
+    fromPartial(object: DeepPartial<QueryGenerateCommitResponse>): QueryGenerateCommitResponse;
+};
 /** Query defines the gRPC querier service. */
 export interface Query {
     /** Parameters queries the parameters of the module. */
@@ -96,6 +118,8 @@ export interface Query {
     NameAll(request: QueryAllNameRequest): Promise<QueryAllNameResponse>;
     /** Queries a list of Resolve items. */
     Resolve(request: QueryResolveRequest): Promise<QueryResolveResponse>;
+    /** Queries a list of GenerateCommit items. */
+    GenerateCommit(request: QueryGenerateCommitRequest): Promise<QueryGenerateCommitResponse>;
 }
 export declare class QueryClientImpl implements Query {
     private readonly rpc;
@@ -104,6 +128,7 @@ export declare class QueryClientImpl implements Query {
     Name(request: QueryGetNameRequest): Promise<QueryGetNameResponse>;
     NameAll(request: QueryAllNameRequest): Promise<QueryAllNameResponse>;
     Resolve(request: QueryResolveRequest): Promise<QueryResolveResponse>;
+    GenerateCommit(request: QueryGenerateCommitRequest): Promise<QueryGenerateCommitResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;

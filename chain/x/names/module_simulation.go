@@ -24,21 +24,29 @@ var (
 )
 
 const (
-	opWeightMsgRegister = "op_weight_msg_create_chain"
+	opWeightMsgSetPriceAndExtend = "op_weight_msg_create_chain"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgRegister int = 100
+	defaultWeightMsgSetPriceAndExtend int = 100
 
-	opWeightMsgCreateName = "op_weight_msg_create_chain"
+	opWeightMsgOfferTo = "op_weight_msg_create_chain"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateName int = 100
+	defaultWeightMsgOfferTo int = 100
 
-	opWeightMsgUpdateName = "op_weight_msg_create_chain"
+	opWeightMsgAccept = "op_weight_msg_create_chain"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdateName int = 100
+	defaultWeightMsgAccept int = 100
 
-	opWeightMsgDeleteName = "op_weight_msg_create_chain"
+	opWeightMsgBuy = "op_weight_msg_create_chain"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgDeleteName int = 100
+	defaultWeightMsgBuy int = 100
+
+	opWeightMsgMintCoins = "op_weight_msg_create_chain"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgMintCoins int = 100
+
+	opWeightMsgBurnCoins = "op_weight_msg_create_chain"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgBurnCoins int = 100
 
 	// this line is used by starport scaffolding # simapp/module/const
 )
@@ -50,16 +58,6 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 		accs[i] = acc.Address.String()
 	}
 	namesGenesis := types.GenesisState{
-		NameList: []types.Name{
-			{
-				Owner: sample.AccAddress(),
-				Name:  "0",
-			},
-			{
-				Owner: sample.AccAddress(),
-				Name:  "1",
-			},
-		},
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&namesGenesis)
@@ -83,48 +81,70 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
 
-	var weightMsgRegister int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgRegister, &weightMsgRegister, nil,
+	var weightMsgSetPriceAndExtend int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgSetPriceAndExtend, &weightMsgSetPriceAndExtend, nil,
 		func(_ *rand.Rand) {
-			weightMsgRegister = defaultWeightMsgRegister
+			weightMsgSetPriceAndExtend = defaultWeightMsgSetPriceAndExtend
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgRegister,
-		namessimulation.SimulateMsgRegister(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgSetPriceAndExtend,
+		namessimulation.SimulateMsgSetPriceAndExtend(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgCreateName int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateName, &weightMsgCreateName, nil,
+	var weightMsgOfferTo int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgOfferTo, &weightMsgOfferTo, nil,
 		func(_ *rand.Rand) {
-			weightMsgCreateName = defaultWeightMsgCreateName
+			weightMsgOfferTo = defaultWeightMsgOfferTo
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreateName,
-		namessimulation.SimulateMsgCreateName(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgOfferTo,
+		namessimulation.SimulateMsgOfferTo(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgUpdateName int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateName, &weightMsgUpdateName, nil,
+	var weightMsgAccept int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgAccept, &weightMsgAccept, nil,
 		func(_ *rand.Rand) {
-			weightMsgUpdateName = defaultWeightMsgUpdateName
+			weightMsgAccept = defaultWeightMsgAccept
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgUpdateName,
-		namessimulation.SimulateMsgUpdateName(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgAccept,
+		namessimulation.SimulateMsgAccept(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgDeleteName int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteName, &weightMsgDeleteName, nil,
+	var weightMsgBuy int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgBuy, &weightMsgBuy, nil,
 		func(_ *rand.Rand) {
-			weightMsgDeleteName = defaultWeightMsgDeleteName
+			weightMsgBuy = defaultWeightMsgBuy
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgDeleteName,
-		namessimulation.SimulateMsgDeleteName(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgBuy,
+		namessimulation.SimulateMsgBuy(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgMintCoins int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgMintCoins, &weightMsgMintCoins, nil,
+		func(_ *rand.Rand) {
+			weightMsgMintCoins = defaultWeightMsgMintCoins
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgMintCoins,
+		namessimulation.SimulateMsgMintCoins(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgBurnCoins int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgBurnCoins, &weightMsgBurnCoins, nil,
+		func(_ *rand.Rand) {
+			weightMsgBurnCoins = defaultWeightMsgBurnCoins
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgBurnCoins,
+		namessimulation.SimulateMsgBurnCoins(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

@@ -3,6 +3,7 @@ package types
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"time"
 )
 
 const (
@@ -18,7 +19,7 @@ func NewMsgCreateName(
 	name string,
 	destination string,
 	price string,
-	expires string,
+	expires time.Time,
 	authorized string,
 	commit string,
 	salt string,
@@ -72,7 +73,7 @@ func NewMsgUpdateName(
 	name string,
 	destination string,
 	price string,
-	expires string,
+	expires time.Time,
 	authorized string,
 	commit string,
 	salt string,

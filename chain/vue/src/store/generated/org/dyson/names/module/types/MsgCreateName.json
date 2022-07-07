@@ -17,7 +17,8 @@
                     "type": "string"
                 },
                 "expires": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "authorized": {
                     "type": "string"

@@ -3,14 +3,17 @@ package names;
 
 option go_package = "github.com/org/dyson/x/names/types";
 
+import "gogoproto/gogo.proto";
+
+import "google/protobuf/timestamp.proto";
+
+
 message Name {
   string name = 1; 
   string destination = 2; 
   string price = 3; 
-  string expires = 4; 
+  google.protobuf.Timestamp expires = 4  [(gogoproto.nullable) = false, (gogoproto.stdtime) = true]; 
   string authorized = 5; 
-  string commit = 6; 
-  string salt = 7; 
   string owner = 8;
   int64 height = 9;
 }

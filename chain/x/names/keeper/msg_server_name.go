@@ -27,8 +27,6 @@ func (k msgServer) CreateName(goCtx context.Context, msg *types.MsgCreateName) (
 		Price:       msg.Price,
 		Expires:     msg.Expires,
 		Authorized:  msg.Authorized,
-		Commit:      msg.Commit,
-		Salt:        msg.Salt,
 	}
 
 	k.SetName(
@@ -62,8 +60,6 @@ func (k msgServer) UpdateName(goCtx context.Context, msg *types.MsgUpdateName) (
 		Price:       msg.Price,
 		Expires:     msg.Expires,
 		Authorized:  msg.Authorized,
-		Commit:      msg.Commit,
-		Salt:        msg.Salt,
 	}
 
 	k.SetName(ctx, name)

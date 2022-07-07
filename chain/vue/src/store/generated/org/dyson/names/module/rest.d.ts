@@ -1,16 +1,30 @@
+export declare type NamesMsgAcceptResponse = object;
+export declare type NamesMsgBurnCoinsResponse = object;
+export declare type NamesMsgBuyResponse = object;
 export declare type NamesMsgCreateNameResponse = object;
 export declare type NamesMsgDeleteNameResponse = object;
-export declare type NamesMsgRegisterResponse = object;
-export declare type NamesMsgRevealResponse = object;
+export declare type NamesMsgMintCoinsResponse = object;
+export declare type NamesMsgOfferToResponse = object;
+export interface NamesMsgRegisterResponse {
+    fee?: string;
+    /** @format date-time */
+    expires?: string;
+}
+export interface NamesMsgRevealResponse {
+    name?: NamesName;
+}
+export interface NamesMsgSetPriceAndExtendResponse {
+    /** @format date-time */
+    expiry?: string;
+}
 export declare type NamesMsgUpdateNameResponse = object;
 export interface NamesName {
     name?: string;
     destination?: string;
     price?: string;
+    /** @format date-time */
     expires?: string;
     authorized?: string;
-    commit?: string;
-    salt?: string;
     owner?: string;
     /** @format int64 */
     height?: string;
@@ -31,6 +45,9 @@ export interface NamesQueryAllNameResponse {
      *  }
      */
     pagination?: V1Beta1PageResponse;
+}
+export interface NamesQueryGenerateCommitResponse {
+    commit?: string;
 }
 export interface NamesQueryGetNameResponse {
     name?: NamesName;
@@ -164,6 +181,15 @@ export declare class HttpClient<SecurityDataType = unknown> {
  * @version version not set
  */
 export declare class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryGenerateCommit
+     * @summary Queries a list of GenerateCommit items.
+     * @request GET:/org/dyson/names/generate_commit/{owner}/{name}/{salt}
+     */
+    queryGenerateCommit: (owner: string, name: string, salt: string, params?: RequestParams) => Promise<HttpResponse<NamesQueryGenerateCommitResponse, RpcStatus>>;
     /**
      * No description
      *

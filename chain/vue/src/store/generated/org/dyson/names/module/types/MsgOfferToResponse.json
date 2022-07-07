@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgOfferToResponse",
+    "definitions": {
+        "MsgOfferToResponse": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Offer To Response"
+        }
+    }
+}

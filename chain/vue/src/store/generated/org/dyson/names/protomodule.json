@@ -14,7 +14,10 @@
 			},
 			{
 				"Path": "/go/src/app/proto/names/name.proto",
-				"Dependencies": null
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"google/protobuf/timestamp.proto"
+				]
 			},
 			{
 				"Path": "/go/src/app/proto/names/params.proto",
@@ -35,6 +38,8 @@
 			{
 				"Path": "/go/src/app/proto/names/tx.proto",
 				"Dependencies": [
+					"google/protobuf/timestamp.proto",
+					"gogoproto/gogo.proto",
 					"names/name.proto"
 				]
 			}
@@ -97,6 +102,16 @@
 				"HighestFieldNumber": 1
 			},
 			{
+				"Name": "QueryGenerateCommitRequest",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "QueryGenerateCommitResponse",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
 				"Name": "MsgRegister",
 				"Path": "/go/src/app/proto/names/tx.proto",
 				"HighestFieldNumber": 4
@@ -104,7 +119,7 @@
 			{
 				"Name": "MsgRegisterResponse",
 				"Path": "/go/src/app/proto/names/tx.proto",
-				"HighestFieldNumber": 0
+				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgCreateName",
@@ -143,6 +158,66 @@
 			},
 			{
 				"Name": "MsgRevealResponse",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgSetPriceAndExtend",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgSetPriceAndExtendResponse",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 5
+			},
+			{
+				"Name": "MsgOfferTo",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgOfferToResponse",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgAccept",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "MsgAcceptResponse",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgBuy",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "MsgBuyResponse",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgMintCoins",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgMintCoinsResponse",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgBurnCoins",
+				"Path": "/go/src/app/proto/names/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgBurnCoinsResponse",
 				"Path": "/go/src/app/proto/names/tx.proto",
 				"HighestFieldNumber": 0
 			}
@@ -198,6 +273,22 @@
 								"HasBody": false
 							}
 						]
+					},
+					{
+						"Name": "GenerateCommit",
+						"RequestType": "QueryGenerateCommitRequest",
+						"ReturnsType": "QueryGenerateCommitResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"owner",
+									"name",
+									"salt"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
 					}
 				]
 			},
@@ -233,6 +324,42 @@
 						"RequestType": "MsgReveal",
 						"ReturnsType": "MsgRevealResponse",
 						"HTTPRules": null
+					},
+					{
+						"Name": "SetPriceAndExtend",
+						"RequestType": "MsgSetPriceAndExtend",
+						"ReturnsType": "MsgSetPriceAndExtendResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "OfferTo",
+						"RequestType": "MsgOfferTo",
+						"ReturnsType": "MsgOfferToResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "Accept",
+						"RequestType": "MsgAccept",
+						"ReturnsType": "MsgAcceptResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "Buy",
+						"RequestType": "MsgBuy",
+						"ReturnsType": "MsgBuyResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "MintCoins",
+						"RequestType": "MsgMintCoins",
+						"ReturnsType": "MsgMintCoinsResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "BurnCoins",
+						"RequestType": "MsgBurnCoins",
+						"ReturnsType": "MsgBurnCoinsResponse",
+						"HTTPRules": null
 					}
 				]
 			}
@@ -240,13 +367,13 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgUpdateName",
-			"URI": "names.MsgUpdateName",
+			"Name": "MsgOfferTo",
+			"URI": "names.MsgOfferTo",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgDeleteName",
-			"URI": "names.MsgDeleteName",
+			"Name": "MsgMintCoins",
+			"URI": "names.MsgMintCoins",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -255,13 +382,43 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
+			"Name": "MsgBuy",
+			"URI": "names.MsgBuy",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgSetPriceAndExtend",
+			"URI": "names.MsgSetPriceAndExtend",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
 			"Name": "MsgCreateName",
 			"URI": "names.MsgCreateName",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
+			"Name": "MsgBurnCoins",
+			"URI": "names.MsgBurnCoins",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
 			"Name": "MsgRegister",
 			"URI": "names.MsgRegister",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgAccept",
+			"URI": "names.MsgAccept",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgUpdateName",
+			"URI": "names.MsgUpdateName",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgDeleteName",
+			"URI": "names.MsgDeleteName",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		}
 	],
@@ -306,6 +463,21 @@
 				{
 					"Params": null,
 					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "GenerateCommit",
+			"FullName": "QueryGenerateCommit",
+			"Rules": [
+				{
+					"Params": [
+						"owner",
+						"name",
+						"salt"
+					],
+					"HasQuery": false,
 					"HasBody": false
 				}
 			]
