@@ -413,14 +413,14 @@ def eval_script(
     cumsize = 0
 
     random.seed(
-        block_info
-        + creator
-        + address
-        + funcname
-        + json_args
-        + json_kwargs
-        + extra_line
-        + amount
+        (block_info or "")
+        + (creator or "")
+        + (address or "")
+        + (funcname or "")
+        + (json_args or "")
+        + (json_kwargs or "")
+        + (extra_line or "")
+        + (amount or "")
     )
     block_info = json.loads(block_info)
     with freeze_time(block_info["time"]):

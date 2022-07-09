@@ -76,7 +76,7 @@ func (k Keeper) Wsgi(goCtx context.Context, req *types.QueryWsgiRequest) (*types
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	ctx, _ = ctx.CacheContext()
 	if ctx.GasMeter().Limit() == 0 {
-		ctx = ctx.WithGasMeter(sdk.NewGasMeter(500000))
+		ctx = ctx.WithGasMeter(sdk.NewGasMeter(1000000))
 		goCtx = sdk.WrapSDKContext(ctx)
 	}
 	_, isFound := k.GetScript(ctx, req.Index)
