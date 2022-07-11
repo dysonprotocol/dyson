@@ -107,20 +107,22 @@ def get_module_dict():
         },
         "pathlib": {"PurePath": pathlib.PurePath},
         "mimetypes": {"guess_type": mimetypes.guess_type},
-        "urllib.parse": {
-            "parse_qs": urllib.parse.parse_qs,
-            "parse_qsl": urllib.parse.parse_qsl,
-            "urlsplit": urllib.parse.urlsplit,
-            "urlunsplit": urllib.parse.urlunsplit,
-            "urljoin": urllib.parse.urljoin,
-            "urldefrag": urllib.parse.urldefrag,
-            "quote": urllib.parse.quote,
-            "quote_plus": urllib.parse.quote_plus,
-            "quote_from_bytes": urllib.parse.quote_from_bytes,
-            "unquote": urllib.parse.unquote,
-            "unquote_plus": urllib.parse.unquote_plus,
-            "unquote_to_bytes": urllib.parse.unquote_to_bytes,
-            "quote_from_bytes": urllib.parse.quote_from_bytes,
+        "urllib": {
+            "parse": {
+                "parse_qs": urllib.parse.parse_qs,
+                "parse_qsl": urllib.parse.parse_qsl,
+                "urlsplit": urllib.parse.urlsplit,
+                "urlunsplit": urllib.parse.urlunsplit,
+                "urljoin": urllib.parse.urljoin,
+                "urldefrag": urllib.parse.urldefrag,
+                "quote": urllib.parse.quote,
+                "quote_plus": urllib.parse.quote_plus,
+                "quote_from_bytes": urllib.parse.quote_from_bytes,
+                "unquote": urllib.parse.unquote,
+                "unquote_plus": urllib.parse.unquote_plus,
+                "unquote_to_bytes": urllib.parse.unquote_to_bytes,
+                "quote_from_bytes": urllib.parse.quote_from_bytes,
+            }
         },
         "base64": {
             "decodebytes": base64.decodebytes,
@@ -205,10 +207,16 @@ def get_module_dict():
             "subn": re2.subn,
         },
     }
-    return {
-        k: {kk: allow_func(vv, k, kk) for kk, vv in v.items()}
-        for k, v in mod_dict.items()
-    }
+
+    def walk(node):
+        for key, item in node.items():
+            if isinstance(item, dict):
+                walk(item)
+            else:
+                allow_func(item)
+
+    walk(mod_dict)
+    return mod_dict
 
 
 def build_sandbox(port, creator, address, amount, block_info):
@@ -495,8 +503,8 @@ def eval_script(
         # https://github.com/tendermint/vue/issues/147
         # https://github.com/tendermint/starport/blob/develop/starport/pkg/cosmosgen/templates/vuex/store/index.ts.tpl#L170
         "nodes_called": nodes_called,
-        "gas_limit": sandbox.modules["dys"].get_gas_limit() if sandbox else None,
-        "script_gas_consumed": sandbox.modules["dys"].get_gas_consumed()
+        "gas_limit": sandbox.modules.dys.get_gas_limit() if sandbox else None,
+        "script_gas_consumed": sandbox.modules.dys.get_gas_consumed()
         if sandbox
         else None,
         "cumsize": cumsize,
@@ -592,8 +600,23 @@ dyslang.WHITELIST_FUNCTIONS.update(
         "random.Random.choice",
         "random.Random.shuffle",
         "random.Random.sample",
+        # wsgi
+        "wsgiref.handlers.BaseHandler.start_response",
+        "wsgiref.handlers.BaseHandler.write",
     ]
 )
+
+
+def allow_modules(mod_dict):
+    allow_func(mod_dict)
+
+    if isinstance(
+        mod_dict,
+    ):
+        return mod_dict
+    ret = types.ModuleType(k)
+    for kk, vv in mod_dict.items():
+        ret.__dict__[kk] = make_modules(vv, kk)
 
 
 def allow_func(func=None, mod=None, name=None):

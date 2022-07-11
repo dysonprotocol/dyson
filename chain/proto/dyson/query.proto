@@ -123,6 +123,8 @@ message QueryGetSchemaResponse {
 message QueryWsgiRequest {
 		string index = 1;
 		string httprequest = 2;
+        // Gas to allow the WSGI request
+        uint64 gaslimit = 3;
 }
 
 message QueryWsgiResponse {

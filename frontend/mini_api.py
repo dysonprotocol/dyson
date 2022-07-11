@@ -52,6 +52,20 @@ TEMPLATES = [
     }
 ]
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+}
+
 
 DYSON_RESTHOST = os.environ.get("DYSON_RESTHOST", "http://localhost:1317")
 
@@ -138,7 +152,11 @@ def dys_view(request, script_address=None):
     address = script_address or request.script_address
     address = resolve_name(address)
     u = f"{settings.DYSON_RESTHOST}/dyson/wsgi"
-    params = {"httprequest": reconstruct_request(request), "index": address}
+    params = {
+        "httprequest": reconstruct_request(request),
+        "index": address,
+        "gaslimit": request.GET.get("DYS_WSGI_GASLIMIT", 100000000),
+    }
     dys_req = requests.get(u, params=params)
     if dys_req.status_code != 200:
         try:
@@ -219,6 +237,7 @@ urlpatterns = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + 
     re_path(r"^scripts/(?P<script_address>\w+)$", ScriptDetail.as_view()),
     re_path(r"^txbuilder$", ScriptDetail.as_view()),
     re_path(r"^web/(?P<script_address>\w+)", dys_view),
+    re_path(r"^docs", dys_view),
 ]
 
 # djanog-hosts callback

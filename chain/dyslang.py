@@ -60,7 +60,7 @@ BUILTIN_EXCEPTIONS = {
     "UnicodeTranslateError": UnicodeTranslateError,
     "ValueError": ValueError,
     "ZeroDivisionError": ZeroDivisionError,
-    "MemoryError":MemoryError,
+    "MemoryError": MemoryError,
 }
 
 
@@ -69,7 +69,7 @@ DEFAULT_SCOPE = {
     "False": False,
     "None": None,
     "True": True,
-    "abs":abs,
+    "abs": abs,
     "all": all,
     "any": any,
     "bool": bool,
@@ -229,11 +229,13 @@ def safe_add(a, b):  # pylint: disable=invalid-name
     return a + b
 
 
-def make_modules(mod_dict):
-    return {
-        k: (v.__dict__.update(mod_dict[k]) or v)
-        for k, v in {k: types.ModuleType(k) for k in mod_dict}.items()
-    }
+def make_modules(mod_dict, k=""):
+    if not isinstance(mod_dict, dict):
+        return mod_dict
+    ret = types.ModuleType(k)
+    for kk, vv in mod_dict.items():
+        ret.__dict__[kk] = make_modules(vv, kk)
+    return ret
 
 
 class Scope(MutableMapping):
@@ -474,7 +476,7 @@ class DysEval(object):
         return self._eval(ast.parse(expr))
 
     def _eval(self, node):
-        #print('-',ast.dump(node))
+        # print('-',ast.dump(node))
         """The internal evaluator used on each node in the parsed tree."""
 
         try:
@@ -553,17 +555,21 @@ class DysEval(object):
 
     def _eval_import(self, node):
         for alias in node.names:
-            asname = alias.asname or alias.name
+            asname = alias.asname or alias.name.split(".")[0]
+            m = self.modules
             try:
-                self.scope[asname] = self.modules[alias.name]
+                m = m.__dict__[asname]
             except KeyError:
                 raise ModuleNotFoundError(alias.name)
+            self.scope[asname] = m
 
     def _eval_importfrom(self, node):
         for alias in node.names:
             asname = alias.asname or alias.name
             try:
-                module = self.modules[node.module]
+                module = self.modules
+                for name in node.module.split("."):
+                    module = module.__dict__[name]
             except KeyError:
                 raise ModuleNotFoundError(node.module)
             if alias.name == "*":
@@ -711,7 +717,7 @@ class DysEval(object):
             )
             s.scope.push(local_scope)
             s.expr = self.expr
-            #s.track = self.track
+            # s.track = self.track
             for b in node.body:
                 try:
                     s._eval(b)
@@ -982,12 +988,11 @@ class DysEval(object):
         if isinstance(exc, Return):
             return False
 
-        if (isinstance(exc, UNCATCHABLE_EXCEPTIONS)
-            or (
-                isinstance(exc, DysRuntimeError)
-                and isinstance(exc.__context__, UNCATCHABLE_EXCEPTIONS)
-            )):
-                return False
+        if isinstance(exc, UNCATCHABLE_EXCEPTIONS) or (
+            isinstance(exc, DysRuntimeError)
+            and isinstance(exc.__context__, UNCATCHABLE_EXCEPTIONS)
+        ):
+            return False
         if (
             (node.type is None)
             or isinstance(exc, self._eval(node.type))

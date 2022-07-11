@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { Reader, Writer } from 'protobufjs/minimal'
+import { Reader, util, configure, Writer } from 'protobufjs/minimal'
+import * as Long from 'long'
 import { SchedualedRun } from '../dyson/schedualed_run'
 import { PageRequest, PageResponse } from '../cosmos/base/query/v1beta1/pagination'
 import { Storage } from '../dyson/storage'
@@ -62,6 +63,8 @@ export interface QueryGetSchemaResponse {
 export interface QueryWsgiRequest {
   index: string
   httprequest: string
+  /** Gas to allow the WSGI request */
+  gaslimit: number
 }
 
 export interface QueryWsgiResponse {
@@ -795,7 +798,7 @@ export const QueryGetSchemaResponse = {
   }
 }
 
-const baseQueryWsgiRequest: object = { index: '', httprequest: '' }
+const baseQueryWsgiRequest: object = { index: '', httprequest: '', gaslimit: 0 }
 
 export const QueryWsgiRequest = {
   encode(message: QueryWsgiRequest, writer: Writer = Writer.create()): Writer {
@@ -804,6 +807,9 @@ export const QueryWsgiRequest = {
     }
     if (message.httprequest !== '') {
       writer.uint32(18).string(message.httprequest)
+    }
+    if (message.gaslimit !== 0) {
+      writer.uint32(24).uint64(message.gaslimit)
     }
     return writer
   },
@@ -820,6 +826,9 @@ export const QueryWsgiRequest = {
           break
         case 2:
           message.httprequest = reader.string()
+          break
+        case 3:
+          message.gaslimit = longToNumber(reader.uint64() as Long)
           break
         default:
           reader.skipType(tag & 7)
@@ -841,6 +850,11 @@ export const QueryWsgiRequest = {
     } else {
       message.httprequest = ''
     }
+    if (object.gaslimit !== undefined && object.gaslimit !== null) {
+      message.gaslimit = Number(object.gaslimit)
+    } else {
+      message.gaslimit = 0
+    }
     return message
   },
 
@@ -848,6 +862,7 @@ export const QueryWsgiRequest = {
     const obj: any = {}
     message.index !== undefined && (obj.index = message.index)
     message.httprequest !== undefined && (obj.httprequest = message.httprequest)
+    message.gaslimit !== undefined && (obj.gaslimit = message.gaslimit)
     return obj
   },
 
@@ -862,6 +877,11 @@ export const QueryWsgiRequest = {
       message.httprequest = object.httprequest
     } else {
       message.httprequest = ''
+    }
+    if (object.gaslimit !== undefined && object.gaslimit !== null) {
+      message.gaslimit = object.gaslimit
+    } else {
+      message.gaslimit = 0
     }
     return message
   }
@@ -1300,6 +1320,16 @@ interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>
 }
 
+declare var self: any | undefined
+declare var window: any | undefined
+var globalThis: any = (() => {
+  if (typeof globalThis !== 'undefined') return globalThis
+  if (typeof self !== 'undefined') return self
+  if (typeof window !== 'undefined') return window
+  if (typeof global !== 'undefined') return global
+  throw 'Unable to locate global object'
+})()
+
 type Builtin = Date | Function | Uint8Array | string | number | undefined
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1310,3 +1340,15 @@ export type DeepPartial<T> = T extends Builtin
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>
+
+function longToNumber(long: Long): number {
+  if (long.gt(Number.MAX_SAFE_INTEGER)) {
+    throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER')
+  }
+  return long.toNumber()
+}
+
+if (util.Long !== Long) {
+  util.Long = Long as any
+  configure()
+}

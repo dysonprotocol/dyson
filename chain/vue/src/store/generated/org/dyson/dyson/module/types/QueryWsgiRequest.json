@@ -9,6 +9,10 @@
                 },
                 "httprequest": {
                     "type": "string"
+                },
+                "gaslimit": {
+                    "type": "string",
+                    "description": "Gas to allow the WSGI request"
                 }
             },
             "additionalProperties": true,

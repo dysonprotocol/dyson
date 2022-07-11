@@ -836,5 +836,13 @@
   "urllib.parse.urlunsplit": {
     "definition": "(components)",
     "docstring": "Combine the elements of a tuple as returned by urlsplit() into a\ncomplete URL as a string. The data argument can be any five-item iterable.\nThis may result in a slightly different, but equivalent URL, if the URL that\nwas parsed originally had unnecessary delimiters (for example, a ? with an\nempty query; the RFC states that these are equivalent)."
+  },
+  "wsgiref.handlers.BaseHandler.start_response": {
+    "definition": "(self, status, headers, exc_info=None)",
+    "docstring": "'start_response()' callable as specified by PEP 3333"
+  },
+  "wsgiref.handlers.BaseHandler.write": {
+    "definition": "(self, data)",
+    "docstring": "'write()' callable as specified by PEP 3333"
   }
 }

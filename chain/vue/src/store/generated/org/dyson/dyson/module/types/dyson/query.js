@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { Reader, Writer } from 'protobufjs/minimal';
+import { Reader, util, configure, Writer } from 'protobufjs/minimal';
+import * as Long from 'long';
 import { SchedualedRun } from '../dyson/schedualed_run';
 import { PageRequest, PageResponse } from '../cosmos/base/query/v1beta1/pagination';
 import { Storage } from '../dyson/storage';
@@ -668,7 +669,7 @@ export const QueryGetSchemaResponse = {
         return message;
     }
 };
-const baseQueryWsgiRequest = { index: '', httprequest: '' };
+const baseQueryWsgiRequest = { index: '', httprequest: '', gaslimit: 0 };
 export const QueryWsgiRequest = {
     encode(message, writer = Writer.create()) {
         if (message.index !== '') {
@@ -676,6 +677,9 @@ export const QueryWsgiRequest = {
         }
         if (message.httprequest !== '') {
             writer.uint32(18).string(message.httprequest);
+        }
+        if (message.gaslimit !== 0) {
+            writer.uint32(24).uint64(message.gaslimit);
         }
         return writer;
     },
@@ -691,6 +695,9 @@ export const QueryWsgiRequest = {
                     break;
                 case 2:
                     message.httprequest = reader.string();
+                    break;
+                case 3:
+                    message.gaslimit = longToNumber(reader.uint64());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -713,12 +720,19 @@ export const QueryWsgiRequest = {
         else {
             message.httprequest = '';
         }
+        if (object.gaslimit !== undefined && object.gaslimit !== null) {
+            message.gaslimit = Number(object.gaslimit);
+        }
+        else {
+            message.gaslimit = 0;
+        }
         return message;
     },
     toJSON(message) {
         const obj = {};
         message.index !== undefined && (obj.index = message.index);
         message.httprequest !== undefined && (obj.httprequest = message.httprequest);
+        message.gaslimit !== undefined && (obj.gaslimit = message.gaslimit);
         return obj;
     },
     fromPartial(object) {
@@ -734,6 +748,12 @@ export const QueryWsgiRequest = {
         }
         else {
             message.httprequest = '';
+        }
+        if (object.gaslimit !== undefined && object.gaslimit !== null) {
+            message.gaslimit = object.gaslimit;
+        }
+        else {
+            message.gaslimit = 0;
         }
         return message;
     }
@@ -1116,4 +1136,25 @@ export class QueryClientImpl {
         const promise = this.rpc.request('dyson.Query', 'PrefixStorage', data);
         return promise.then((data) => QueryPrefixStorageResponse.decode(new Reader(data)));
     }
+}
+var globalThis = (() => {
+    if (typeof globalThis !== 'undefined')
+        return globalThis;
+    if (typeof self !== 'undefined')
+        return self;
+    if (typeof window !== 'undefined')
+        return window;
+    if (typeof global !== 'undefined')
+        return global;
+    throw 'Unable to locate global object';
+})();
+function longToNumber(long) {
+    if (long.gt(Number.MAX_SAFE_INTEGER)) {
+        throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER');
+    }
+    return long.toNumber();
+}
+if (util.Long !== Long) {
+    util.Long = Long;
+    configure();
 }

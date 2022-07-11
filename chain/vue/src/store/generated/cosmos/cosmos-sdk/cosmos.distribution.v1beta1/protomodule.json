@@ -432,13 +432,13 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgWithdrawValidatorCommission",
-			"URI": "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission",
+			"Name": "MsgSetWithdrawAddress",
+			"URI": "cosmos.distribution.v1beta1.MsgSetWithdrawAddress",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgSetWithdrawAddress",
-			"URI": "cosmos.distribution.v1beta1.MsgSetWithdrawAddress",
+			"Name": "MsgFundCommunityPool",
+			"URI": "cosmos.distribution.v1beta1.MsgFundCommunityPool",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto"
 		},
 		{
@@ -447,8 +447,8 @@
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgFundCommunityPool",
-			"URI": "cosmos.distribution.v1beta1.MsgFundCommunityPool",
+			"Name": "MsgWithdrawValidatorCommission",
+			"URI": "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto"
 		}
 	],

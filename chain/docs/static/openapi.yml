@@ -12374,6 +12374,12 @@ paths:
           in: query
           required: false
           type: string
+        - name: gaslimit
+          description: Gas to allow the WSGI request
+          in: query
+          required: false
+          type: string
+          format: uint64
       tags:
         - Query
   /org/dyson/dyson/schedualedRun:

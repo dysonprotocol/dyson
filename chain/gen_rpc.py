@@ -275,7 +275,8 @@ sandbox = build_sandbox("", "", "", "", "")
 inspector = Inspector()
 
 locals().update(sandbox.modules)
-import urllib, simplejson, random
+import urllib, simplejson, random, wsgiref.handlers
+
 docs = {}
 
 
@@ -308,18 +309,16 @@ print(WHITELIST_FUNCTIONS)
 for ff in normalized_functions:
     if ff:
         f = ff.removeprefix("builtins.").removeprefix("script.*")
-        print(ff,f)
+        print(ff, f)
         try:
             func = eval(f)
             if callable(func):
-                d = inspector._info(
-                func, detail_level=0
-                )
+                d = inspector._info(func, detail_level=0)
             else:
-                print('not callable:',f)
+                print("not callable:", f)
                 continue
         except NameError:
-            print('name error:',f)
+            print("name error:", f)
             continue
 
         # docs[ff] = d
