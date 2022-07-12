@@ -456,8 +456,8 @@ def eval_script(
                     [
                         k
                         for k, v in scope.items()
-                        if v is not sandbox.modules["dys"]._chain
-                        if v is not sandbox.modules["dys"].rpc
+                        if v is not sandbox.modules.dys._chain
+                        if v is not sandbox.modules.dys.rpc
                         and not k.startswith("_")
                         and k not in ["app", "application"]
                     ],

@@ -558,7 +558,7 @@ class DysEval(object):
             asname = alias.asname or alias.name.split(".")[0]
             m = self.modules
             try:
-                m = m.__dict__[asname]
+                m = m.__dict__[alias.name.split(".")[0]]
             except KeyError:
                 raise ModuleNotFoundError(alias.name)
             self.scope[asname] = m
