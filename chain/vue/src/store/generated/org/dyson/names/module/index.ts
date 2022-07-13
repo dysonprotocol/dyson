@@ -4,33 +4,33 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgBuy } from "./types/names/tx";
-import { MsgBurnCoins } from "./types/names/tx";
-import { MsgOfferTo } from "./types/names/tx";
-import { MsgAccept } from "./types/names/tx";
 import { MsgDeleteName } from "./types/names/tx";
+import { MsgRegister } from "./types/names/tx";
+import { MsgBurnCoins } from "./types/names/tx";
+import { MsgSetPriceAndExtend } from "./types/names/tx";
+import { MsgBuy } from "./types/names/tx";
 import { MsgForceTransfer } from "./types/names/tx";
 import { MsgUpdateName } from "./types/names/tx";
-import { MsgCreateName } from "./types/names/tx";
+import { MsgAccept } from "./types/names/tx";
 import { MsgReveal } from "./types/names/tx";
+import { MsgCreateName } from "./types/names/tx";
 import { MsgMintCoins } from "./types/names/tx";
-import { MsgRegister } from "./types/names/tx";
-import { MsgSetPriceAndExtend } from "./types/names/tx";
+import { MsgOfferTo } from "./types/names/tx";
 
 
 const types = [
-  ["/names.MsgBuy", MsgBuy],
-  ["/names.MsgBurnCoins", MsgBurnCoins],
-  ["/names.MsgOfferTo", MsgOfferTo],
-  ["/names.MsgAccept", MsgAccept],
   ["/names.MsgDeleteName", MsgDeleteName],
+  ["/names.MsgRegister", MsgRegister],
+  ["/names.MsgBurnCoins", MsgBurnCoins],
+  ["/names.MsgSetPriceAndExtend", MsgSetPriceAndExtend],
+  ["/names.MsgBuy", MsgBuy],
   ["/names.MsgForceTransfer", MsgForceTransfer],
   ["/names.MsgUpdateName", MsgUpdateName],
-  ["/names.MsgCreateName", MsgCreateName],
+  ["/names.MsgAccept", MsgAccept],
   ["/names.MsgReveal", MsgReveal],
+  ["/names.MsgCreateName", MsgCreateName],
   ["/names.MsgMintCoins", MsgMintCoins],
-  ["/names.MsgRegister", MsgRegister],
-  ["/names.MsgSetPriceAndExtend", MsgSetPriceAndExtend],
+  ["/names.MsgOfferTo", MsgOfferTo],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -63,18 +63,18 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
-    msgBuy: (data: MsgBuy): EncodeObject => ({ typeUrl: "/names.MsgBuy", value: MsgBuy.fromPartial( data ) }),
-    msgBurnCoins: (data: MsgBurnCoins): EncodeObject => ({ typeUrl: "/names.MsgBurnCoins", value: MsgBurnCoins.fromPartial( data ) }),
-    msgOfferTo: (data: MsgOfferTo): EncodeObject => ({ typeUrl: "/names.MsgOfferTo", value: MsgOfferTo.fromPartial( data ) }),
-    msgAccept: (data: MsgAccept): EncodeObject => ({ typeUrl: "/names.MsgAccept", value: MsgAccept.fromPartial( data ) }),
     msgDeleteName: (data: MsgDeleteName): EncodeObject => ({ typeUrl: "/names.MsgDeleteName", value: MsgDeleteName.fromPartial( data ) }),
+    msgRegister: (data: MsgRegister): EncodeObject => ({ typeUrl: "/names.MsgRegister", value: MsgRegister.fromPartial( data ) }),
+    msgBurnCoins: (data: MsgBurnCoins): EncodeObject => ({ typeUrl: "/names.MsgBurnCoins", value: MsgBurnCoins.fromPartial( data ) }),
+    msgSetPriceAndExtend: (data: MsgSetPriceAndExtend): EncodeObject => ({ typeUrl: "/names.MsgSetPriceAndExtend", value: MsgSetPriceAndExtend.fromPartial( data ) }),
+    msgBuy: (data: MsgBuy): EncodeObject => ({ typeUrl: "/names.MsgBuy", value: MsgBuy.fromPartial( data ) }),
     msgForceTransfer: (data: MsgForceTransfer): EncodeObject => ({ typeUrl: "/names.MsgForceTransfer", value: MsgForceTransfer.fromPartial( data ) }),
     msgUpdateName: (data: MsgUpdateName): EncodeObject => ({ typeUrl: "/names.MsgUpdateName", value: MsgUpdateName.fromPartial( data ) }),
-    msgCreateName: (data: MsgCreateName): EncodeObject => ({ typeUrl: "/names.MsgCreateName", value: MsgCreateName.fromPartial( data ) }),
+    msgAccept: (data: MsgAccept): EncodeObject => ({ typeUrl: "/names.MsgAccept", value: MsgAccept.fromPartial( data ) }),
     msgReveal: (data: MsgReveal): EncodeObject => ({ typeUrl: "/names.MsgReveal", value: MsgReveal.fromPartial( data ) }),
+    msgCreateName: (data: MsgCreateName): EncodeObject => ({ typeUrl: "/names.MsgCreateName", value: MsgCreateName.fromPartial( data ) }),
     msgMintCoins: (data: MsgMintCoins): EncodeObject => ({ typeUrl: "/names.MsgMintCoins", value: MsgMintCoins.fromPartial( data ) }),
-    msgRegister: (data: MsgRegister): EncodeObject => ({ typeUrl: "/names.MsgRegister", value: MsgRegister.fromPartial( data ) }),
-    msgSetPriceAndExtend: (data: MsgSetPriceAndExtend): EncodeObject => ({ typeUrl: "/names.MsgSetPriceAndExtend", value: MsgSetPriceAndExtend.fromPartial( data ) }),
+    msgOfferTo: (data: MsgOfferTo): EncodeObject => ({ typeUrl: "/names.MsgOfferTo", value: MsgOfferTo.fromPartial( data ) }),
     
   };
 };

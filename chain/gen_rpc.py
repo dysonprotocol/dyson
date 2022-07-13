@@ -274,7 +274,7 @@ from dysvm_server import build_sandbox, get_module_dict
 sandbox = build_sandbox("", "", "", "", "")
 inspector = Inspector()
 
-locals().update(sandbox.modules)
+locals().update(sandbox.modules.__dict__)
 import urllib, simplejson, random, wsgiref.handlers
 
 docs = {}

@@ -425,13 +425,29 @@
     "definition": "(*args, sep=' ', end='\\n', file=None, flush=False)",
     "docstring": "print(value, ..., sep=' ', end='\\n', file=sys.stdout, flush=False)\n\nPrints the values to a stream, or to sys.stdout by default.\nOptional keyword arguments:\nfile:  a file-like object (stream); defaults to the current sys.stdout.\nsep:   string inserted between values, default a space.\nend:   string appended after the last value, default a newline.\nflush: whether to forcibly flush the stream."
   },
+  "random.Random.betavariate": {
+    "definition": "(self, alpha, beta)",
+    "docstring": "Beta distribution.\n\nConditions on the parameters are alpha > 0 and beta > 0.\nReturned values range between 0 and 1."
+  },
   "random.Random.choice": {
     "definition": "(self, seq)",
     "docstring": "Choose a random element from a non-empty sequence."
   },
+  "random.Random.choices": {
+    "definition": "(self, population, weights=None, *, cum_weights=None, k=1)",
+    "docstring": "Return a k sized list of population elements chosen with replacement.\n\nIf the relative weights or cumulative weights are not specified,\nthe selections are made with equal probability."
+  },
   "random.Random.expovariate": {
     "definition": "(self, lambd)",
     "docstring": "Exponential distribution.\n\nlambd is 1.0 divided by the desired mean.  It should be\nnonzero.  (The parameter would be called \"lambda\", but that is\na reserved word in Python.)  Returned values range from 0 to\npositive infinity if lambd is positive, and from negative\ninfinity to 0 if lambd is negative."
+  },
+  "random.Random.gauss": {
+    "definition": "(self, mu, sigma)",
+    "docstring": "Gaussian distribution.\n\nmu is the mean, and sigma is the standard deviation.  This is\nslightly faster than the normalvariate() function.\n\nNot thread-safe without a lock around calls."
+  },
+  "random.Random.paretovariate": {
+    "definition": "(self, alpha)",
+    "docstring": "Pareto distribution.  alpha is the shape parameter."
   },
   "random.Random.sample": {
     "definition": "(self, population, k, *, counts=None)",
@@ -440,6 +456,10 @@
   "random.Random.shuffle": {
     "definition": "(self, x, random=None)",
     "docstring": "Shuffle list x in place, and return None.\n\nOptional argument random is a 0-argument function returning a\nrandom float in [0.0, 1.0); if it is the default None, the\nstandard random.random will be used."
+  },
+  "random.Random.triangular": {
+    "definition": "(self, low=0.0, high=1.0, mode=None)",
+    "docstring": "Triangular distribution.\n\nContinuous distribution bounded by given lower and upper limits,\nand having a given mode value in-between.\n\nhttp://en.wikipedia.org/wiki/Triangular_distribution"
   },
   "random.Random.uniform": {
     "definition": "(self, a, b)",
