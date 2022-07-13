@@ -17,13 +17,5 @@ chain_build:
   # Default branch leaves tag empty (= latest tag)
   # All other branches are tagged with the escaped branch name (commit ref slug)
   script:
-    - |
-      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
-        tag=""
-        echo "Running on default branch '$CI_DEFAULT_BRANCH': tag = 'latest'"
-      else
-        tag=":$CI_COMMIT_REF_SLUG"
-        echo "Running on branch '$CI_COMMIT_BRANCH': tag = $tag"
-      fi
-    - GID=${GID} make build
-    - docker-compose push
+    -  tag="$CI_COMMIT_REF_SLUG" GID=${GID} make build
+    -  tag="$CI_COMMIT_REF_SLUG" docker-compose push

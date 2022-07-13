@@ -23,6 +23,8 @@ import (
 	ibcapplicationstransferv1types "github.com/cosmos/ibc-go/modules/apps/transfer/types"
 	"github.com/org/dyson/x/dyson/types"
 	dysontypes "github.com/org/dyson/x/dyson/types"
+	nameskeeper "github.com/org/dyson/x/names/keeper"
+	namestypes "github.com/org/dyson/x/names/types"
 	"net/http"
 )
 
@@ -47,12 +49,16 @@ func (rpcservice *RpcService) Cosmosauthzv1beta1sendmsggrant(_ *http.Request, ms
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -77,12 +83,16 @@ func (rpcservice *RpcService) Cosmosauthzv1beta1sendmsgexec(_ *http.Request, msg
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -107,12 +117,16 @@ func (rpcservice *RpcService) Cosmosauthzv1beta1sendmsgrevoke(_ *http.Request, m
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -221,12 +235,16 @@ func (rpcservice *RpcService) Cosmosbankv1beta1sendmsgsend(_ *http.Request, msg 
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -251,12 +269,16 @@ func (rpcservice *RpcService) Cosmosbankv1beta1sendmsgmultisend(_ *http.Request,
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -389,12 +411,16 @@ func (rpcservice *RpcService) Cosmosdistributionv1beta1sendmsgsetwithdrawaddress
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -419,12 +445,16 @@ func (rpcservice *RpcService) Cosmosdistributionv1beta1sendmsgwithdrawdelegatorr
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -449,12 +479,16 @@ func (rpcservice *RpcService) Cosmosdistributionv1beta1sendmsgwithdrawvalidatorc
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -479,12 +513,16 @@ func (rpcservice *RpcService) Cosmosdistributionv1beta1sendmsgfundcommunitypool(
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -533,12 +571,16 @@ func (rpcservice *RpcService) Cosmosevidencev1beta1sendmsgsubmitevidence(_ *http
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -587,12 +629,16 @@ func (rpcservice *RpcService) Cosmosfeegrantv1beta1sendmsggrantallowance(_ *http
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -617,12 +663,16 @@ func (rpcservice *RpcService) Cosmosfeegrantv1beta1sendmsgrevokeallowance(_ *htt
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -743,12 +793,16 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgsubmitproposal(_ *http.Requ
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -773,12 +827,16 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgvote(_ *http.Request, msg *
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -803,12 +861,16 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgvoteweighted(_ *http.Reques
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -833,12 +895,16 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgdeposit(_ *http.Request, ms
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -899,12 +965,16 @@ func (rpcservice *RpcService) Cosmosslashingv1beta1sendmsgunjail(_ *http.Request
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1097,12 +1167,16 @@ func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgcreatevalidator(_ *http
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1127,12 +1201,16 @@ func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgeditvalidator(_ *http.R
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1157,12 +1235,16 @@ func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgdelegate(_ *http.Reques
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1187,12 +1269,16 @@ func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgbeginredelegate(_ *http
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1217,12 +1303,16 @@ func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgundelegate(_ *http.Requ
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1247,12 +1337,16 @@ func (rpcservice *RpcService) Cosmosvestingv1beta1sendmsgcreatevestingaccount(_ 
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1313,12 +1407,16 @@ func (rpcservice *RpcService) Ibcapplicationstransferv1sendmsgtransfer(_ *http.R
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1463,12 +1561,16 @@ func (rpcservice *RpcService) Dysonsendmsgcreateschedualedrun(_ *http.Request, m
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1493,12 +1595,16 @@ func (rpcservice *RpcService) Dysonsendmsgcreatestorage(_ *http.Request, msg *dy
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1523,12 +1629,16 @@ func (rpcservice *RpcService) Dysonsendmsgupdatestorage(_ *http.Request, msg *dy
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1553,12 +1663,16 @@ func (rpcservice *RpcService) Dysonsendmsgdeletestorage(_ *http.Request, msg *dy
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1583,12 +1697,16 @@ func (rpcservice *RpcService) Dysonsendmsgcreatescript(_ *http.Request, msg *dys
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1613,12 +1731,16 @@ func (rpcservice *RpcService) Dysonsendmsgupdatescript(_ *http.Request, msg *dys
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1643,12 +1765,16 @@ func (rpcservice *RpcService) Dysonsendmsgdeletescript(_ *http.Request, msg *dys
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -1673,12 +1799,484 @@ func (rpcservice *RpcService) Dysonsendmsgrun(_ *http.Request, msg *dysontypes.M
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namesqueryparams(_ *http.Request, msg *namestypes.QueryParamsRequest, response *namestypes.QueryParamsResponse) (err error) {
+	r, err := rpcservice.k.nameskeeper.Params(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namesqueryname(_ *http.Request, msg *namestypes.QueryGetNameRequest, response *namestypes.QueryGetNameResponse) (err error) {
+	r, err := rpcservice.k.nameskeeper.Name(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namesquerynameall(_ *http.Request, msg *namestypes.QueryAllNameRequest, response *namestypes.QueryAllNameResponse) (err error) {
+	r, err := rpcservice.k.nameskeeper.NameAll(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namesqueryresolve(_ *http.Request, msg *namestypes.QueryResolveRequest, response *namestypes.QueryResolveResponse) (err error) {
+	r, err := rpcservice.k.nameskeeper.Resolve(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namesquerygeneratecommit(_ *http.Request, msg *namestypes.QueryGenerateCommitRequest, response *namestypes.QueryGenerateCommitResponse) (err error) {
+	r, err := rpcservice.k.nameskeeper.GenerateCommit(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgregister(_ *http.Request, msg *namestypes.MsgRegister, response *namestypes.MsgRegisterResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).Register
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).Register
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgcreatename(_ *http.Request, msg *namestypes.MsgCreateName, response *namestypes.MsgCreateNameResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).CreateName
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).CreateName
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgupdatename(_ *http.Request, msg *namestypes.MsgUpdateName, response *namestypes.MsgUpdateNameResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).UpdateName
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).UpdateName
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgdeletename(_ *http.Request, msg *namestypes.MsgDeleteName, response *namestypes.MsgDeleteNameResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).DeleteName
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).DeleteName
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgreveal(_ *http.Request, msg *namestypes.MsgReveal, response *namestypes.MsgRevealResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).Reveal
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).Reveal
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgsetpriceandextend(_ *http.Request, msg *namestypes.MsgSetPriceAndExtend, response *namestypes.MsgSetPriceAndExtendResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).SetPriceAndExtend
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).SetPriceAndExtend
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgofferto(_ *http.Request, msg *namestypes.MsgOfferTo, response *namestypes.MsgOfferToResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).OfferTo
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).OfferTo
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgaccept(_ *http.Request, msg *namestypes.MsgAccept, response *namestypes.MsgAcceptResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).Accept
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).Accept
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgbuy(_ *http.Request, msg *namestypes.MsgBuy, response *namestypes.MsgBuyResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).Buy
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).Buy
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgmintcoins(_ *http.Request, msg *namestypes.MsgMintCoins, response *namestypes.MsgMintCoinsResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).MintCoins
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).MintCoins
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgburncoins(_ *http.Request, msg *namestypes.MsgBurnCoins, response *namestypes.MsgBurnCoinsResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).BurnCoins
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).BurnCoins
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgforcetransfer(_ *http.Request, msg *namestypes.MsgForceTransfer, response *namestypes.MsgForceTransferResponse) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).ForceTransfer
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).ForceTransfer
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)

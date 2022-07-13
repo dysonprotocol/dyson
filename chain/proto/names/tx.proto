@@ -1,0 +1,150 @@
+syntax = "proto3";
+package names;
+
+import "google/protobuf/timestamp.proto";
+import "gogoproto/gogo.proto";
+
+import "names/name.proto";
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "github.com/org/dyson/x/names/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc Register(MsgRegister) returns (MsgRegisterResponse);
+  rpc CreateName(MsgCreateName) returns (MsgCreateNameResponse);
+  rpc UpdateName(MsgUpdateName) returns (MsgUpdateNameResponse);
+  rpc DeleteName(MsgDeleteName) returns (MsgDeleteNameResponse);
+  rpc Reveal(MsgReveal) returns (MsgRevealResponse);
+  rpc SetPriceAndExtend(MsgSetPriceAndExtend) returns (MsgSetPriceAndExtendResponse);
+  rpc OfferTo(MsgOfferTo) returns (MsgOfferToResponse);
+  rpc Accept(MsgAccept) returns (MsgAcceptResponse);
+  rpc Buy(MsgBuy) returns (MsgBuyResponse);
+  rpc MintCoins(MsgMintCoins) returns (MsgMintCoinsResponse);
+  rpc BurnCoins(MsgBurnCoins) returns (MsgBurnCoinsResponse);
+  rpc ForceTransfer(MsgForceTransfer) returns (MsgForceTransferResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgRegister {
+  string owner = 1;
+  // The Shake256(salt + name) hexdigest
+  string commit = 2;
+  // The price that this name is valued at and can be purchaced for. The yearly fee is 1% of this price.
+  string price = 4;
+}
+
+message MsgRegisterResponse {
+  // fee paid which is 1% of the price
+  string fee = 1;
+  // when this name expires
+  google.protobuf.Timestamp expires = 2  [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
+}
+
+message MsgCreateName {
+  string owner = 1;
+  string name = 2;
+
+  string destination = 3;
+  string price = 4;
+  google.protobuf.Timestamp expires = 5 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
+  string authorized = 6;
+  string commit = 7;
+  string salt = 8;
+}
+message MsgCreateNameResponse {}
+
+message MsgUpdateName {
+  string owner = 1;
+  string name = 2;
+
+  string destination = 3;
+  string price = 4;
+  google.protobuf.Timestamp expires = 5 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
+  string authorized = 6;
+  string commit = 7;
+  string salt = 8;
+}
+message MsgUpdateNameResponse {}
+
+message MsgDeleteName {
+  string owner = 1;
+  string name = 2;
+}
+message MsgDeleteNameResponse {}
+
+message MsgReveal {
+  string owner = 1;
+  string name = 2;
+  string salt = 3;
+}
+
+message MsgRevealResponse {
+  Name name = 1;
+}
+
+message MsgSetPriceAndExtend {
+  string owner = 1;
+  string name = 2;
+  string price = 3;
+}
+
+message MsgSetPriceAndExtendResponse {
+  google.protobuf.Timestamp expiry = 5 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
+}
+
+message MsgOfferTo {
+  string owner = 1;
+  string name = 2;
+  string newOwner = 3;
+}
+
+message MsgOfferToResponse {
+}
+
+message MsgAccept {
+  string newOwner = 1;
+  string name = 2;
+}
+
+message MsgAcceptResponse {
+}
+
+message MsgBuy {
+  string buyer = 1;
+  string name = 2;
+}
+
+message MsgBuyResponse {
+}
+
+message MsgMintCoins {
+  string owner = 1;
+  string amount = 2;
+  string denom = 3;
+}
+
+message MsgMintCoinsResponse {
+}
+
+message MsgBurnCoins {
+  string owner = 1;
+  string amount = 2;
+  string denom = 3;
+}
+
+message MsgBurnCoinsResponse {
+}
+
+message MsgForceTransfer {
+  string owner = 1;
+  string from = 2;
+  string to = 3;
+  string amount = 4;
+  string denom = 5;
+}
+
+message MsgForceTransferResponse {
+}
+
+// this line is used by starport scaffolding # proto/tx/message

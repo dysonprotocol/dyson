@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgRegister",
+    "definitions": {
+        "MsgRegister": {
+            "properties": {
+                "owner": {
+                    "type": "string"
+                },
+                "commit": {
+                    "type": "string",
+                    "description": "The Shake256(salt + name) hexdigest"
+                },
+                "price": {
+                    "type": "string",
+                    "description": "The price that this name is valued at and can be purchaced for. The yearly fee is 1% of this price."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Register"
+        }
+    }
+}

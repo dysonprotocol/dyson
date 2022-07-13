@@ -27,6 +27,9 @@ COPY requirements.txt .
 RUN pypy -m pip install -r requirements.txt
 
 RUN go install github.com/chrusty/protoc-gen-jsonschema/cmd/protoc-gen-jsonschema@latest
+
+RUN apt -y install black=20.8b1-4
+
 COPY . ./
 
 RUN starport chain build -v

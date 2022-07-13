@@ -47,6 +47,8 @@ export interface QueryGetSchemaResponse {
 export interface QueryWsgiRequest {
     index: string;
     httprequest: string;
+    /** Gas to allow the WSGI request */
+    gaslimit: number;
 }
 export interface QueryWsgiResponse {
     httpresponse: string;

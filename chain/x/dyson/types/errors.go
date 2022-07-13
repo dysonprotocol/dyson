@@ -10,5 +10,5 @@ import (
 var (
 	ErrorExtraLinesOrExternalScript = sdkerrors.Register(ModuleName, 1100, "cannot use extralines")
 	ScriptError                     = sdkerrors.Register(ModuleName, 1101, "Exception in Script")
-	RpcError                        = sdkerrors.Register(ModuleName, 1102, "Error in rpc call")
+	RpcError                        = sdkerrors.Register(ModuleName, 1102, "Error in chain call")
 )

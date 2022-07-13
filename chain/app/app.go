@@ -94,6 +94,9 @@ import (
 	dysonmodule "github.com/org/dyson/x/dyson"
 	dysonmodulekeeper "github.com/org/dyson/x/dyson/keeper"
 	dysonmoduletypes "github.com/org/dyson/x/dyson/types"
+	namesmodule "github.com/org/dyson/x/names"
+	namesmodulekeeper "github.com/org/dyson/x/names/keeper"
+	namesmoduletypes "github.com/org/dyson/x/names/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -147,6 +150,7 @@ var (
 		authzmodule.AppModuleBasic{},
 		vesting.AppModuleBasic{},
 		dysonmodule.AppModuleBasic{},
+		namesmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -159,6 +163,7 @@ var (
 		stakingtypes.NotBondedPoolName: {authtypes.Burner, authtypes.Staking},
 		govtypes.ModuleName:            {authtypes.Burner},
 		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
+		namesmoduletypes.ModuleName:    {authtypes.Minter, authtypes.Burner, authtypes.Staking},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -217,6 +222,8 @@ type App struct {
 	ScopedTransferKeeper capabilitykeeper.ScopedKeeper
 
 	DysonKeeper dysonmodulekeeper.Keeper
+
+	NamesKeeper namesmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// the module manager
@@ -252,6 +259,7 @@ func New(
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey,
 		dysonmoduletypes.StoreKey,
 		authzkeeper.StoreKey,
+		namesmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -351,6 +359,19 @@ func New(
 		&stakingKeeper, govRouter,
 	)
 
+	app.NamesKeeper = *namesmodulekeeper.NewKeeper(
+		appCodec,
+		keys[namesmoduletypes.StoreKey],
+		keys[namesmoduletypes.MemStoreKey],
+		app.GetSubspace(namesmoduletypes.ModuleName),
+
+		app.AccountKeeper,
+		app.BankKeeper,
+	)
+	namesModule := namesmodule.NewAppModule(appCodec, app.NamesKeeper, app.AccountKeeper, app.BankKeeper)
+
+	// this line is used by starport scaffolding # stargate/app/keeperDefinition
+
 	app.DysonKeeper = *dysonmodulekeeper.NewKeeper(
 		appCodec,
 		keys[dysonmoduletypes.StoreKey],
@@ -367,10 +388,9 @@ func New(
 		app.BankKeeper,
 		app.AuthzKeeper,
 		app.TransferKeeper,
+		app.NamesKeeper,
 	)
 	dysonModule := dysonmodule.NewAppModule(appCodec, app.DysonKeeper)
-
-	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
 	ibcRouter := ibcporttypes.NewRouter()
@@ -410,6 +430,7 @@ func New(
 		authzmodule.NewAppModule(appCodec, app.AuthzKeeper, app.AccountKeeper, app.BankKeeper, app.interfaceRegistry),
 		transferModule,
 		dysonModule,
+		namesModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -447,6 +468,7 @@ func New(
 		authz.ModuleName,
 
 		dysonmoduletypes.ModuleName,
+		namesmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -635,6 +657,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(ibctransfertypes.ModuleName)
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	paramsKeeper.Subspace(dysonmoduletypes.ModuleName)
+	paramsKeeper.Subspace(namesmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper

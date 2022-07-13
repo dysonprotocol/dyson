@@ -61,6 +61,8 @@ import 'ace-builds/src-noconflict/mode-json'
 import command_schema from './command_schema.json'
 import { JSONEditor } from '@json-editor/json-editor'
 
+window.command_schema = command_schema
+
 const snakeToCamel = (s) => s.replace(/(_\w)/g, (k) => k[1].toUpperCase())
 
 const flattenObject = (obj, prefix = '') =>
@@ -137,7 +139,7 @@ export default {
       editorData: {},
       error: '',
       response: '',
-      fee: null,
+      fee: "2000",
       showFee: false,
     }
   },
@@ -261,6 +263,7 @@ export default {
     },
     submit: async function (e) {
       e.preventDefault()
+	  this.responseEditor.setValue({})
       this.$store
         .dispatch(this.command, JSON.parse(this.data))
         .then((res) => (this.response = res))

@@ -605,7 +605,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @summary Queries a script wsgi app by index.
    * @request GET:/dyson/wsgi
    */
-  queryWsgi = (query?: { index?: string; httprequest?: string }, params: RequestParams = {}) =>
+  queryWsgi = (query?: { index?: string; httprequest?: string; gaslimit?: string }, params: RequestParams = {}) =>
     this.request<DysonQueryWsgiResponse, RpcStatus>({
       path: `/dyson/wsgi`,
       method: "GET",

@@ -15,7 +15,7 @@ import (
 	"github.com/org/dyson/testutil/network"
 	"github.com/org/dyson/testutil/nullify"
 	"github.com/org/dyson/x/dyson/client/cli"
-    "github.com/org/dyson/x/dyson/types"
+	"github.com/org/dyson/x/dyson/types"
 )
 
 // Prevent strconv unused error
@@ -25,12 +25,11 @@ func networkWithSchedualedRunObjects(t *testing.T, n int) (*network.Network, []t
 	t.Helper()
 	cfg := network.DefaultConfig()
 	state := types.GenesisState{}
-    require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
+	require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
 
 	for i := 0; i < n; i++ {
 		schedualedRun := types.SchedualedRun{
 			Index: strconv.Itoa(i),
-			
 		}
 		nullify.Fill(&schedualedRun)
 		state.SchedualedRunList = append(state.SchedualedRunList, schedualedRun)
@@ -49,24 +48,24 @@ func TestShowSchedualedRun(t *testing.T) {
 		fmt.Sprintf("--%s=json", tmcli.OutputFlag),
 	}
 	for _, tc := range []struct {
-		desc string
+		desc    string
 		idIndex string
-        
+
 		args []string
 		err  error
 		obj  types.SchedualedRun
 	}{
 		{
-			desc: "found",
+			desc:    "found",
 			idIndex: objs[0].Index,
-            
+
 			args: common,
 			obj:  objs[0],
 		},
 		{
-			desc: "not found",
+			desc:    "not found",
 			idIndex: strconv.Itoa(100000),
-            
+
 			args: common,
 			err:  status.Error(codes.InvalidArgument, "not found"),
 		},
@@ -74,8 +73,7 @@ func TestShowSchedualedRun(t *testing.T) {
 		tc := tc
 		t.Run(tc.desc, func(t *testing.T) {
 			args := []string{
-			    tc.idIndex,
-                
+				tc.idIndex,
 			}
 			args = append(args, tc.args...)
 			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdShowSchedualedRun(), args)
@@ -126,9 +124,9 @@ func TestListSchedualedRun(t *testing.T) {
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 			require.LessOrEqual(t, len(resp.SchedualedRun), step)
 			require.Subset(t,
-            	nullify.Fill(objs),
-            	nullify.Fill(resp.SchedualedRun),
-            )
+				nullify.Fill(objs),
+				nullify.Fill(resp.SchedualedRun),
+			)
 		}
 	})
 	t.Run("ByKey", func(t *testing.T) {
@@ -142,9 +140,9 @@ func TestListSchedualedRun(t *testing.T) {
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 			require.LessOrEqual(t, len(resp.SchedualedRun), step)
 			require.Subset(t,
-            	nullify.Fill(objs),
-            	nullify.Fill(resp.SchedualedRun),
-            )
+				nullify.Fill(objs),
+				nullify.Fill(resp.SchedualedRun),
+			)
 			next = resp.Pagination.NextKey
 		}
 	})

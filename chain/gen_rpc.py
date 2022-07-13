@@ -2,6 +2,7 @@ import glob
 from pathlib import Path
 from string import Template
 import json
+from dysvm_server import get_module_dict, dyslang, build_sandbox
 
 
 msg_template = Template(
@@ -15,12 +16,16 @@ func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$r
 	//
 	defer func() {
 		if r := recover(); r != nil {
-			err = sdkerrors.Wrapf(types.RpcError, "RPC ERROR: %+v", msg)
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
 		}
 	}()
 	err = msg.ValidateBasic()
 	if err != nil {
 		return err
+	}
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
@@ -55,6 +60,15 @@ func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$r
 )
 
 
+def to_camel_case(text):
+    s = text.replace("-", " ").replace("_", " ")
+    s = s.split()
+    if len(text) == 0:
+        return text
+    ret = s[0] + "".join(i.capitalize() for i in s[1:])
+    return ret
+
+
 types = set()
 keepers = set()
 code = []
@@ -82,6 +96,14 @@ for file_path in sorted(glob.glob("vue/src/**/protomodule.json", recursive=True)
                     )
                 )
             )
+
+            for k, v in req_schema["definitions"].items():
+                if "properties" in v:
+                    for p in list(v["properties"]):
+                        cc = to_camel_case(p)
+                        if p != cc:
+                            v["properties"][cc] = v["properties"].pop(p)
+
             res_schema = json.load(
                 open(
                     str(
@@ -218,14 +240,14 @@ schemas["dyson/sendMsgUpdateScript"]["request_schema"]["definitions"][
 
 schemas["dyson/QueryQueryScript"]["request_schema"]["definitions"]["MsgRun"][
     "properties"
-]["extra_lines"]["format"] = "textarea"
+]["extraLines"]["format"] = "textarea"
 
 schemas["dyson/QueryQueryScript"]["resp_schema"]["definitions"]["MsgRunResponse"][
     "properties"
 ]["response"]["format"] = "textarea"
 
 schemas["dyson/sendMsgRun"]["request_schema"]["definitions"]["MsgRun"]["properties"][
-    "extra_lines"
+    "extraLines"
 ]["format"] = "textarea"
 
 schemas["dyson/sendMsgRun"]["resp_schema"]["definitions"]["MsgRunResponse"][
@@ -243,3 +265,68 @@ schemas["dyson/sendMsgCreateStorage"]["request_schema"]["definitions"][
 
 with open("vue/src/views/command_schema.json", "w") as f:
     json.dump(schemas, f, indent=2)
+
+
+from IPython.core.oinspect import Inspector
+from dyslang import WHITELIST_FUNCTIONS, dys_eval
+from dysvm_server import build_sandbox, get_module_dict
+
+sandbox = build_sandbox("", "", "", "", "")
+inspector = Inspector()
+
+locals().update(sandbox.modules)
+import urllib, simplejson, random, wsgiref.handlers
+
+docs = {}
+
+
+exclude_keys = [
+    "file",
+    "isalias",
+    "ismagic",
+    "length",
+    "namespace",
+    "source",
+    "found",
+    "string_form",
+    "subclasses",
+    "type_name",
+    "base_class",
+    "name",
+]
+
+normalized_functions = sorted(
+    f.removeprefix("builtins.")
+    .removeprefix("script.*")
+    .replace("freezegun.api.FakeDatetime", "datetime.datetime")
+    .replace("_io", "io")
+    .replace("_hashlib", "hashlib")
+    .replace("openssl_", "")
+    for f in WHITELIST_FUNCTIONS
+    if not f.startswith("json.")
+)
+print(WHITELIST_FUNCTIONS)
+for ff in normalized_functions:
+    if ff:
+        f = ff.removeprefix("builtins.").removeprefix("script.*")
+        print(ff, f)
+        try:
+            func = eval(f)
+            if callable(func):
+                d = inspector._info(func, detail_level=0)
+            else:
+                print("not callable:", f)
+                continue
+        except NameError:
+            print("name error:", f)
+            continue
+
+        # docs[ff] = d
+        docs[ff] = {
+            k: v for k, v in d.items() if k not in exclude_keys and v is not None
+        }
+
+import json
+
+with open("vue/src/views/dyslang_docs.json", "w") as f:
+    json.dump(docs, f, indent=2)

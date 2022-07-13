@@ -46,11 +46,11 @@ func (k Keeper) SchedualedRun(c context.Context, req *types.QueryGetSchedualedRu
 	ctx := sdk.UnwrapSDKContext(c)
 
 	val, found := k.GetSchedualedRun(
-	    ctx,
-	    req.Index,
-        )
+		ctx,
+		req.Index,
+	)
 	if !found {
-	    return nil, status.Error(codes.InvalidArgument, "not found")
+		return nil, status.Error(codes.InvalidArgument, "not found")
 	}
 
 	return &types.QueryGetSchedualedRunResponse{SchedualedRun: val}, nil

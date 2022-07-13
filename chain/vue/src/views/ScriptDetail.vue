@@ -6,7 +6,7 @@
   display: grid;
   grid-gap: var(--gap);
   /* min() with 100% prevents overflow
-		in extra narrow spaces */
+    in extra narrow spaces */
   grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
   pre {
     white-space: pre-wrap;
@@ -37,12 +37,14 @@
       <div id="code">
         <div v-if="script || address == this.$route.params.script_address">
           <VAceEditor v-model:value="code" lang="python" theme="chrome" min-lines="30" max-lines="200" />
-          <button @click="save" :disabled="inFlight || address != this.$route.params.script_address" class="sp-button">save</button>
+          <button @click="save" :disabled="inFlight || address != this.$route.params.script_address" class="sp-button">
+            save
+          </button>
         </div>
         <pre v-if="txResult">
-        TX hash: {{ txResult.tx }}
-        Height: {{ txResult.height }}
-        Raw Log: {{ txResult.rawLog }}
+TX hash: {{ txResult.transactionHash }}
+Height: {{ txResult.height }}
+Raw Log: {{ txResult.rawLog }}
         </pre>
       </div>
     </div>
@@ -98,7 +100,9 @@ export default {
           query: { index: this.$route.params.script_address },
           options: { subscribe: false, all: false },
         })
-        .then(console.log)
+        .then(() => {
+          this.editedCode = null
+        })
       this.$store
         .dispatch('dyson/QuerySchema', {
           query: { index: this.$route.params.script_address },
@@ -108,6 +112,9 @@ export default {
     },
   },
   computed: {
+    address: function () {
+      return this.$store.getters['common/wallet/address']
+    },
     code: {
       get() {
         if (this.editedCode === null) {
@@ -120,9 +127,6 @@ export default {
         this.editedCode = newValue
       },
     },
-    address: function () {
-      return this.$store.getters['common/wallet/address']
-    },
     schemas: function () {
       const result = this.$store.getters['dyson/getSchema']({
         params: {},
@@ -130,7 +134,9 @@ export default {
       })
 
       const schemas = result.schema ? JSON.parse(result.schema) : []
-      return schemas.filter((s) => s.function != 'app' && !(s.function || '').startsWith('_'))
+      return schemas.filter((s) => {
+        return this.scriptAddress == this.address || (s.function != 'app' && !(s.function || '').startsWith('_'))
+      })
     },
     script: function () {
       const result = this.$store.getters['dyson/getScript']({
@@ -141,7 +147,7 @@ export default {
     },
   },
   created: async function () {
-    this.update() 
+    this.update()
   },
 }
 </script>

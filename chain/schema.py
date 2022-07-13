@@ -29,7 +29,8 @@ LOGGER = logging.getLogger()
 
 import pytojsonschema
 
-pytojsonschema.common.ALLOWED_ANNOTATION_KEYS.add('format')
+pytojsonschema.common.ALLOWED_ANNOTATION_KEYS.add("format")
+
 
 def process_code(code: str):
     ast_body = ast.parse(code).body
@@ -44,14 +45,26 @@ def process_code(code: str):
         s = {"function": ast_function_def.name}
 
         try:
-            s['schema'] = process_function_def(
+            s["schema"] = process_function_def(
                 ast_function_def, type_namespace, schema_map
             )
         except Exception as e:
-            s['error'] = str(e)
+            s["error"] = str(e)
         function_schema_list.append(s)
 
+    schema_all = None
     for node in ast_body:
+        ast_assign = node
+        if (
+            isinstance(node, ast.Assign)
+            and isinstance(ast_assign.targets[0], ast.Name)
+            and ast_assign.targets[0].id == "__all__"
+            and isinstance(ast_assign.value, ast.List)
+        ):
+            schema_all = [
+                i.value for i in ast_assign.value.elts if isinstance(i, ast.Constant)
+            ]
+
         node_type = type(node)
         process_map = {
             ast.Import: lambda: process_import(node, type_namespace, schema_map),
@@ -64,13 +77,19 @@ def process_code(code: str):
         }
         if node_type in process_map:
             process_map[node_type]()
-    # TODO filter by __all__ if available
-    return function_schema_list
+    if schema_all is not None:
+        return [s for s in function_schema_list if s["function"] in schema_all]
+    return [
+        s
+        for s in function_schema_list
+        if (not s["function"].startswith("_")) and (s["function"] not in ["app", "application"])
+    ]
 
 
 if __name__ == "__main__":
     import fileinput
+
     try:
         print(json.dumps(process_code("".join(fileinput.input()))))
     except Exception as e:
-        print(json.dumps([{'error': repr(e)}]))
+        print(json.dumps([{"error": repr(e)}]))

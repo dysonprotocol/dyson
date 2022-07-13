@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgUpdateName",
+    "definitions": {
+        "MsgUpdateName": {
+            "properties": {
+                "owner": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "destination": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "expires": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "authorized": {
+                    "type": "string"
+                },
+                "commit": {
+                    "type": "string"
+                },
+                "salt": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Update Name"
+        }
+    }
+}

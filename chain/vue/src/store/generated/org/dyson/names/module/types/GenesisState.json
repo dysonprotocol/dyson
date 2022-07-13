@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GenesisState",
+    "definitions": {
+        "GenesisState": {
+            "properties": {
+                "params": {
+                    "$ref": "#/definitions/names.Params",
+                    "additionalProperties": true
+                },
+                "nameList": {
+                    "items": {
+                        "$ref": "#/definitions/names.Name"
+                    },
+                    "type": "array",
+                    "description": "this line is used by starport scaffolding # genesis/proto/state"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Genesis State",
+            "description": "GenesisState defines the names module's genesis state."
+        },
+        "names.Name": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "destination": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "expires": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "authorized": {
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Name"
+        },
+        "names.Params": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "Params defines the parameters for the module."
+        }
+    }
+}

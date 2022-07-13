@@ -21,6 +21,7 @@ import (
 	cosmosstakingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	ibcapplicationstransferv1keeper "github.com/cosmos/ibc-go/modules/apps/transfer/keeper"
 	"github.com/org/dyson/x/dyson/types"
+	nameskeeper "github.com/org/dyson/x/names/keeper"
 )
 
 type (
@@ -40,6 +41,7 @@ type (
 		cosmosbankv1beta1keeper         bankkeeper.Keeper
 		cosmosauthzv1beta1keeper        cosmosauthzv1beta1keeper.Keeper
 		ibcapplicationstransferv1keeper ibcapplicationstransferv1keeper.Keeper
+		nameskeeper                     nameskeeper.Keeper
 		currentDepth                    int
 	}
 )
@@ -60,6 +62,7 @@ func NewKeeper(
 	cosmosbankv1beta1keeper bankkeeper.Keeper,
 	cosmosauthzv1beta1keeper cosmosauthzv1beta1keeper.Keeper,
 	ibcapplicationstransferv1keeper ibcapplicationstransferv1keeper.Keeper,
+	nameskeeper nameskeeper.Keeper,
 
 ) *Keeper {
 	return &Keeper{
@@ -79,7 +82,9 @@ func NewKeeper(
 		cosmosbankv1beta1keeper:         cosmosbankv1beta1keeper,
 		cosmosauthzv1beta1keeper:        cosmosauthzv1beta1keeper,
 		ibcapplicationstransferv1keeper: ibcapplicationstransferv1keeper,
-		currentDepth:                    0,
+		nameskeeper:                     nameskeeper,
+
+		currentDepth: 0,
 	}
 }
 

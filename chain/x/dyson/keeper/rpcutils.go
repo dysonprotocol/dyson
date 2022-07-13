@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"fmt"
 	"math"
 	"net/http"
 
@@ -21,6 +22,8 @@ func (rpcservice *RpcService) Consumegas(_ *http.Request, msg *ConsumeGasRequest
 	ctx := sdk.UnwrapSDKContext(rpcservice.ctx)
 	defer func() {
 		if r := recover(); r != nil {
+
+			fmt.Printf("Consumegas recovered: %v\n", r)
 			switch r := r.(type) {
 			case sdk.ErrorOutOfGas:
 				err = sdkerrors.Wrapf(sdkerrors.ErrOutOfGas,
@@ -46,10 +49,26 @@ func (rpcservice *RpcService) Consumegas(_ *http.Request, msg *ConsumeGasRequest
 
 	}()
 
+	// Recursive chain calls are exponentially more expensive
 	gasUsed := uint64(float64(msg.Amount) * math.Pow(2, float64(rpcservice.k.currentDepth-1)))
 	ctx.GasMeter().ConsumeGas(gasUsed, "gasUsed")
 	//fmt.Printf("gasUsed: %v\n", gasUsed)
 	*response = ConsumeGasResponse{GasConsumed: int(ctx.GasMeter().GasConsumed()), GasLimit: int(ctx.GasMeter().Limit())}
+	return nil
+
+}
+
+type GasLimitRequest struct {
+}
+
+type GasLimitResponse struct {
+	GasConsumed int `protobuf:"bytes,1,opt,name=GasConsumed,proto3" json:"GasConsumed,omitempty"`
+	GasLimit    int `protobuf:"bytes,1,opt,name=GasLimit,proto3" json:"GasLimit,omitempty"`
+}
+
+func (rpcservice *RpcService) Gaslimit(_ *http.Request, msg *GasLimitRequest, response *GasLimitResponse) (err error) {
+	ctx := sdk.UnwrapSDKContext(rpcservice.ctx)
+	*response = GasLimitResponse{GasConsumed: int(ctx.GasMeter().GasConsumed()), GasLimit: int(ctx.GasMeter().Limit())}
 	return nil
 
 }

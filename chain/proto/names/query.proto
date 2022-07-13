@@ -1,0 +1,87 @@
+syntax = "proto3";
+package names;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "names/params.proto";
+import "names/name.proto";
+// this line is used by starport scaffolding # 1
+
+option go_package = "github.com/org/dyson/x/names/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/org/dyson/names/params";
+  }
+  // Queries a Name by index.
+	rpc Name(QueryGetNameRequest) returns (QueryGetNameResponse) {
+		option (google.api.http).get = "/org/dyson/names/name";
+	}
+
+	// Queries a list of Name items.
+	rpc NameAll(QueryAllNameRequest) returns (QueryAllNameResponse) {
+		option (google.api.http).get = "/org/dyson/names/nameall";
+	}
+
+// Queries a list of Resolve items.
+	rpc Resolve(QueryResolveRequest) returns (QueryResolveResponse) {
+		option (google.api.http).get = "/org/dyson/names/resolve";
+	}
+
+// Queries a list of GenerateCommit items.
+	rpc GenerateCommit(QueryGenerateCommitRequest) returns (QueryGenerateCommitResponse) {
+		option (google.api.http).get = "/org/dyson/names/generate_commit/{owner}/{name}/{salt}";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetNameRequest {
+	  string name = 1;
+
+}
+
+message QueryGetNameResponse {
+	Name name = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllNameRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllNameResponse {
+	repeated Name name = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryResolveRequest {
+  string name = 1;
+}
+
+message QueryResolveResponse {
+  string address = 1;
+}
+
+message QueryGenerateCommitRequest {
+  string owner = 1;
+  string name = 2;
+  string salt = 3;
+}
+
+message QueryGenerateCommitResponse {
+  string commit = 1;
+}
+
+// this line is used by starport scaffolding # 3

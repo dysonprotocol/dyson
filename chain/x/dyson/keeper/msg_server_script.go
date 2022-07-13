@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/sha256"
 	"fmt"
+	"os/exec"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -38,6 +39,14 @@ func (k msgServer) CreateScript(goCtx context.Context, msg *types.MsgCreateScrip
 
 func (k msgServer) UpdateScript(goCtx context.Context, msg *types.MsgUpdateScript) (*types.MsgUpdateScriptResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	out, err := exec.Command("black", "-q", "-t", "py38", "-c", msg.Code).CombinedOutput()
+
+	if err != nil {
+		k.Logger(ctx).Info(fmt.Sprintf("black formatting error: %s", string(out)))
+	} else {
+		msg.Code = string(out)
+	}
 
 	var script = types.Script{
 		Index:   msg.Creator,

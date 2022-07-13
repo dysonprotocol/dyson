@@ -358,6 +358,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
     queryWsgi: (query?: {
         index?: string;
         httprequest?: string;
+        gaslimit?: string;
     }, params?: RequestParams) => Promise<HttpResponse<DysonQueryWsgiResponse, RpcStatus>>;
     /**
      * No description

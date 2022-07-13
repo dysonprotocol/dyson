@@ -4,11 +4,11 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/org/dyson/x/dyson/keeper"
-	"github.com/org/dyson/x/dyson/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	keepertest "github.com/org/dyson/testutil/keeper"
 	"github.com/org/dyson/testutil/nullify"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/org/dyson/x/dyson/keeper"
+	"github.com/org/dyson/x/dyson/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -19,7 +19,7 @@ func createNSchedualedRun(keeper *keeper.Keeper, ctx sdk.Context, n int) []types
 	items := make([]types.SchedualedRun, n)
 	for i := range items {
 		items[i].Index = strconv.Itoa(i)
-        
+
 		keeper.SetSchedualedRun(ctx, items[i])
 	}
 	return items
@@ -30,8 +30,7 @@ func TestSchedualedRunGet(t *testing.T) {
 	items := createNSchedualedRun(keeper, ctx, 10)
 	for _, item := range items {
 		rst, found := keeper.GetSchedualedRun(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		require.True(t, found)
 		require.Equal(t,
@@ -45,12 +44,10 @@ func TestSchedualedRunRemove(t *testing.T) {
 	items := createNSchedualedRun(keeper, ctx, 10)
 	for _, item := range items {
 		keeper.RemoveSchedualedRun(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		_, found := keeper.GetSchedualedRun(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		require.False(t, found)
 	}

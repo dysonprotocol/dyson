@@ -141,7 +141,7 @@
 			{
 				"Name": "QueryWsgiRequest",
 				"Path": "/go/src/app/proto/dyson/query.proto",
-				"HighestFieldNumber": 2
+				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryWsgiResponse",
@@ -462,28 +462,18 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
+			"Name": "MsgUpdateScript",
+			"URI": "dyson.MsgUpdateScript",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgCreateScript",
+			"URI": "dyson.MsgCreateScript",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
 			"Name": "MsgDeleteScript",
 			"URI": "dyson.MsgDeleteScript",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgDeleteSchedualedRun",
-			"URI": "dyson.MsgDeleteSchedualedRun",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateSchedualedRun",
-			"URI": "dyson.MsgUpdateSchedualedRun",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgRun",
-			"URI": "dyson.MsgRun",
-			"FilePath": "/go/src/app/proto/dyson/msgrun.proto"
-		},
-		{
-			"Name": "MsgCreateStorage",
-			"URI": "dyson.MsgCreateStorage",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
@@ -497,14 +487,24 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgUpdateScript",
-			"URI": "dyson.MsgUpdateScript",
+			"Name": "MsgUpdateSchedualedRun",
+			"URI": "dyson.MsgUpdateSchedualedRun",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgCreateScript",
-			"URI": "dyson.MsgCreateScript",
+			"Name": "MsgDeleteSchedualedRun",
+			"URI": "dyson.MsgDeleteSchedualedRun",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgCreateStorage",
+			"URI": "dyson.MsgCreateStorage",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgRun",
+			"URI": "dyson.MsgRun",
+			"FilePath": "/go/src/app/proto/dyson/msgrun.proto"
 		}
 	],
 	"HTTPQueries": [

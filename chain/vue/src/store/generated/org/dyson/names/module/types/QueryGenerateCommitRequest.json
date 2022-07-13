@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryGenerateCommitRequest",
+    "definitions": {
+        "QueryGenerateCommitRequest": {
+            "properties": {
+                "owner": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "salt": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Generate Commit Request"
+        }
+    }
+}
