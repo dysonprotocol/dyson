@@ -163,13 +163,13 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgGrantAllowance",
-			"URI": "cosmos.feegrant.v1beta1.MsgGrantAllowance",
+			"Name": "MsgRevokeAllowance",
+			"URI": "cosmos.feegrant.v1beta1.MsgRevokeAllowance",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgRevokeAllowance",
-			"URI": "cosmos.feegrant.v1beta1.MsgRevokeAllowance",
+			"Name": "MsgGrantAllowance",
+			"URI": "cosmos.feegrant.v1beta1.MsgGrantAllowance",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/tx.proto"
 		}
 	],

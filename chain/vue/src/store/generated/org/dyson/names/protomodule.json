@@ -122,16 +122,6 @@
 				"HighestFieldNumber": 2
 			},
 			{
-				"Name": "MsgCreateName",
-				"Path": "/go/src/app/proto/names/tx.proto",
-				"HighestFieldNumber": 8
-			},
-			{
-				"Name": "MsgCreateNameResponse",
-				"Path": "/go/src/app/proto/names/tx.proto",
-				"HighestFieldNumber": 0
-			},
-			{
 				"Name": "MsgUpdateName",
 				"Path": "/go/src/app/proto/names/tx.proto",
 				"HighestFieldNumber": 8
@@ -312,12 +302,6 @@
 						"HTTPRules": null
 					},
 					{
-						"Name": "CreateName",
-						"RequestType": "MsgCreateName",
-						"ReturnsType": "MsgCreateNameResponse",
-						"HTTPRules": null
-					},
-					{
 						"Name": "UpdateName",
 						"RequestType": "MsgUpdateName",
 						"ReturnsType": "MsgUpdateNameResponse",
@@ -383,18 +367,18 @@
 	},
 	"Msgs": [
 		{
+			"Name": "MsgForceTransfer",
+			"URI": "names.MsgForceTransfer",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgUpdateName",
+			"URI": "names.MsgUpdateName",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
 			"Name": "MsgDeleteName",
 			"URI": "names.MsgDeleteName",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgRegister",
-			"URI": "names.MsgRegister",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgBurnCoins",
-			"URI": "names.MsgBurnCoins",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -408,13 +392,8 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgForceTransfer",
-			"URI": "names.MsgForceTransfer",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateName",
-			"URI": "names.MsgUpdateName",
+			"Name": "MsgBurnCoins",
+			"URI": "names.MsgBurnCoins",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -428,8 +407,8 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgCreateName",
-			"URI": "names.MsgCreateName",
+			"Name": "MsgOfferTo",
+			"URI": "names.MsgOfferTo",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -438,8 +417,8 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgOfferTo",
-			"URI": "names.MsgOfferTo",
+			"Name": "MsgRegister",
+			"URI": "names.MsgRegister",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		}
 	],

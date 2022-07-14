@@ -14,18 +14,6 @@ export interface MsgRegisterResponse {
     /** when this name expires */
     expires: Date | undefined;
 }
-export interface MsgCreateName {
-    owner: string;
-    name: string;
-    destination: string;
-    price: string;
-    expires: Date | undefined;
-    authorized: string;
-    commit: string;
-    salt: string;
-}
-export interface MsgCreateNameResponse {
-}
 export interface MsgUpdateName {
     owner: string;
     name: string;
@@ -115,20 +103,6 @@ export declare const MsgRegisterResponse: {
     fromJSON(object: any): MsgRegisterResponse;
     toJSON(message: MsgRegisterResponse): unknown;
     fromPartial(object: DeepPartial<MsgRegisterResponse>): MsgRegisterResponse;
-};
-export declare const MsgCreateName: {
-    encode(message: MsgCreateName, writer?: Writer): Writer;
-    decode(input: Reader | Uint8Array, length?: number): MsgCreateName;
-    fromJSON(object: any): MsgCreateName;
-    toJSON(message: MsgCreateName): unknown;
-    fromPartial(object: DeepPartial<MsgCreateName>): MsgCreateName;
-};
-export declare const MsgCreateNameResponse: {
-    encode(_: MsgCreateNameResponse, writer?: Writer): Writer;
-    decode(input: Reader | Uint8Array, length?: number): MsgCreateNameResponse;
-    fromJSON(_: any): MsgCreateNameResponse;
-    toJSON(_: MsgCreateNameResponse): unknown;
-    fromPartial(_: DeepPartial<MsgCreateNameResponse>): MsgCreateNameResponse;
 };
 export declare const MsgUpdateName: {
     encode(message: MsgUpdateName, writer?: Writer): Writer;
@@ -273,7 +247,6 @@ export declare const MsgForceTransferResponse: {
 /** Msg defines the Msg service. */
 export interface Msg {
     Register(request: MsgRegister): Promise<MsgRegisterResponse>;
-    CreateName(request: MsgCreateName): Promise<MsgCreateNameResponse>;
     UpdateName(request: MsgUpdateName): Promise<MsgUpdateNameResponse>;
     DeleteName(request: MsgDeleteName): Promise<MsgDeleteNameResponse>;
     Reveal(request: MsgReveal): Promise<MsgRevealResponse>;
@@ -290,7 +263,6 @@ export declare class MsgClientImpl implements Msg {
     private readonly rpc;
     constructor(rpc: Rpc);
     Register(request: MsgRegister): Promise<MsgRegisterResponse>;
-    CreateName(request: MsgCreateName): Promise<MsgCreateNameResponse>;
     UpdateName(request: MsgUpdateName): Promise<MsgUpdateNameResponse>;
     DeleteName(request: MsgDeleteName): Promise<MsgDeleteNameResponse>;
     Reveal(request: MsgReveal): Promise<MsgRevealResponse>;

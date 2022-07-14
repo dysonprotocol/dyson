@@ -21532,8 +21532,6 @@ definitions:
     type: object
   names.MsgBuyResponse:
     type: object
-  names.MsgCreateNameResponse:
-    type: object
   names.MsgDeleteNameResponse:
     type: object
   names.MsgForceTransferResponse:

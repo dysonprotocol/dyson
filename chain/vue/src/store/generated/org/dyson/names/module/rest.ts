@@ -15,8 +15,6 @@ export type NamesMsgBurnCoinsResponse = object;
 
 export type NamesMsgBuyResponse = object;
 
-export type NamesMsgCreateNameResponse = object;
-
 export type NamesMsgDeleteNameResponse = object;
 
 export type NamesMsgForceTransferResponse = object;

@@ -9415,61 +9415,6 @@
     },
     "http_rules": null
   },
-  "names/sendMsgCreateName": {
-    "module_name": "names",
-    "name": "CreateName",
-    "service_name": "Msg",
-    "request_schema": {
-      "$schema": "http://json-schema.org/draft-04/schema#",
-      "$ref": "#/definitions/MsgCreateName",
-      "definitions": {
-        "MsgCreateName": {
-          "properties": {
-            "owner": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "destination": {
-              "type": "string"
-            },
-            "price": {
-              "type": "string"
-            },
-            "expires": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "authorized": {
-              "type": "string"
-            },
-            "commit": {
-              "type": "string"
-            },
-            "salt": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": true,
-          "type": "object",
-          "title": "Msg Create Name"
-        }
-      }
-    },
-    "resp_schema": {
-      "$schema": "http://json-schema.org/draft-04/schema#",
-      "$ref": "#/definitions/MsgCreateNameResponse",
-      "definitions": {
-        "MsgCreateNameResponse": {
-          "additionalProperties": true,
-          "type": "object",
-          "title": "Msg Create Name Response"
-        }
-      }
-    },
-    "http_rules": null
-  },
   "names/sendMsgUpdateName": {
     "module_name": "names",
     "name": "UpdateName",

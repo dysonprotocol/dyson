@@ -7,64 +7,9 @@ import (
 )
 
 const (
-	TypeMsgCreateName = "create_name"
 	TypeMsgUpdateName = "update_name"
 	TypeMsgDeleteName = "delete_name"
 )
-
-var _ sdk.Msg = &MsgCreateName{}
-
-func NewMsgCreateName(
-	owner string,
-	name string,
-	destination string,
-	price string,
-	expires time.Time,
-	authorized string,
-	commit string,
-	salt string,
-
-) *MsgCreateName {
-	return &MsgCreateName{
-		Owner:       owner,
-		Name:        name,
-		Destination: destination,
-		Price:       price,
-		Expires:     expires,
-		Authorized:  authorized,
-		Commit:      commit,
-		Salt:        salt,
-	}
-}
-
-func (msg *MsgCreateName) Route() string {
-	return RouterKey
-}
-
-func (msg *MsgCreateName) Type() string {
-	return TypeMsgCreateName
-}
-
-func (msg *MsgCreateName) GetSigners() []sdk.AccAddress {
-	owner, err := sdk.AccAddressFromBech32(msg.Owner)
-	if err != nil {
-		panic(err)
-	}
-	return []sdk.AccAddress{owner}
-}
-
-func (msg *MsgCreateName) GetSignBytes() []byte {
-	bz := ModuleCdc.MustMarshalJSON(msg)
-	return sdk.MustSortJSON(bz)
-}
-
-func (msg *MsgCreateName) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.Owner)
-	if err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid owner address (%s)", err)
-	}
-	return nil
-}
 
 var _ sdk.Msg = &MsgUpdateName{}
 

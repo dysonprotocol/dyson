@@ -12,7 +12,6 @@ option go_package = "github.com/org/dyson/x/names/types";
 // Msg defines the Msg service.
 service Msg {
   rpc Register(MsgRegister) returns (MsgRegisterResponse);
-  rpc CreateName(MsgCreateName) returns (MsgCreateNameResponse);
   rpc UpdateName(MsgUpdateName) returns (MsgUpdateNameResponse);
   rpc DeleteName(MsgDeleteName) returns (MsgDeleteNameResponse);
   rpc Reveal(MsgReveal) returns (MsgRevealResponse);
@@ -40,19 +39,6 @@ message MsgRegisterResponse {
   // when this name expires
   google.protobuf.Timestamp expires = 2  [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
 }
-
-message MsgCreateName {
-  string owner = 1;
-  string name = 2;
-
-  string destination = 3;
-  string price = 4;
-  google.protobuf.Timestamp expires = 5 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
-  string authorized = 6;
-  string commit = 7;
-  string salt = 8;
-}
-message MsgCreateNameResponse {}
 
 message MsgUpdateName {
   string owner = 1;
