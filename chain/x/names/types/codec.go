@@ -9,7 +9,6 @@ import (
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgRegister{}, "names/Register", nil)
-	cdc.RegisterConcrete(&MsgCreateName{}, "names/CreateName", nil)
 	cdc.RegisterConcrete(&MsgUpdateName{}, "names/UpdateName", nil)
 	cdc.RegisterConcrete(&MsgDeleteName{}, "names/DeleteName", nil)
 	cdc.RegisterConcrete(&MsgReveal{}, "names/Reveal", nil)
@@ -28,7 +27,6 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgRegister{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgCreateName{},
 		&MsgUpdateName{},
 		&MsgDeleteName{},
 	)

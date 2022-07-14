@@ -8,34 +8,6 @@ import (
 	"github.com/org/dyson/x/names/types"
 )
 
-func (k msgServer) CreateName(goCtx context.Context, msg *types.MsgCreateName) (*types.MsgCreateNameResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	// Check if the value already exists
-	_, isFound := k.GetName(
-		ctx,
-		msg.Name,
-	)
-	if isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "name alrady registered")
-	}
-
-	var name = types.Name{
-		Owner:       msg.Owner,
-		Name:        msg.Name,
-		Destination: msg.Destination,
-		Price:       msg.Price,
-		Expires:     msg.Expires,
-		Authorized:  msg.Authorized,
-	}
-
-	k.SetName(
-		ctx,
-		name,
-	)
-	return &types.MsgCreateNameResponse{}, nil
-}
-
 func (k msgServer) UpdateName(goCtx context.Context, msg *types.MsgUpdateName) (*types.MsgUpdateNameResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
