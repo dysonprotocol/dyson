@@ -17,7 +17,7 @@ func (k msgServer) MintCoins(goCtx context.Context, msg *types.MsgMintCoins) (*t
 		return nil, err
 	}
 
-	denomParts := strings.Split(coin.Denom, "/")
+	denomParts := strings.Split(coin.Denom, ".")
 	baseName := denomParts[0]
 
 	name, isFound := k.GetName(

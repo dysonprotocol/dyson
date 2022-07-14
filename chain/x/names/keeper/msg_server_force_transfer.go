@@ -17,7 +17,7 @@ func (k msgServer) ForceTransfer(goCtx context.Context, msg *types.MsgForceTrans
 		return nil, err
 	}
 
-	denomParts := strings.Split(coin.Denom, "/")
+	denomParts := strings.Split(coin.Denom, ".")
 	baseName := denomParts[0]
 
 	name, isFound := k.GetName(

@@ -17,7 +17,7 @@ func (k msgServer) BurnCoins(goCtx context.Context, msg *types.MsgBurnCoins) (*t
 		return nil, err
 	}
 
-	denomParts := strings.Split(coin.Denom, "/")
+	denomParts := strings.Split(coin.Denom, ".")
 	baseName := denomParts[0]
 
 	name, isFound := k.GetName(
