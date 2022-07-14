@@ -16,10 +16,9 @@ func CmdBurnCoins() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "burn-coins [amount] [denom]",
 		Short: "burn coins or sub coins of this name",
-		Args:  cobra.ExactArgs(2),
+		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			argAmount := args[0]
-			argDenom := args[1]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -29,7 +28,6 @@ func CmdBurnCoins() *cobra.Command {
 			msg := types.NewMsgBurnCoins(
 				clientCtx.GetFromAddress().String(),
 				argAmount,
-				argDenom,
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err

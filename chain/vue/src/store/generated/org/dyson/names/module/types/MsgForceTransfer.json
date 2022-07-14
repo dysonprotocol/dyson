@@ -15,9 +15,6 @@
                 },
                 "amount": {
                     "type": "string"
-                },
-                "denom": {
-                    "type": "string"
                 }
             },
             "additionalProperties": true,

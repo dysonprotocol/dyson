@@ -12,12 +12,12 @@ import (
 func (k msgServer) ForceTransfer(goCtx context.Context, msg *types.MsgForceTransfer) (*types.MsgForceTransferResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	coin, err := sdk.ParseCoinNormalized(msg.Amount + msg.Denom)
+	coin, err := sdk.ParseCoinNormalized(msg.Amount)
 	if err != nil {
 		return nil, err
 	}
 
-	denomParts := strings.Split(msg.Denom, "/")
+	denomParts := strings.Split(coin.Denom, "/")
 	baseName := denomParts[0]
 
 	name, isFound := k.GetName(

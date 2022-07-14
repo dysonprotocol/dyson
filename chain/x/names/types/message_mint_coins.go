@@ -3,18 +3,16 @@ package types
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"strings"
 )
 
 const TypeMsgMintCoins = "mint_coins"
 
 var _ sdk.Msg = &MsgMintCoins{}
 
-func NewMsgMintCoins(owner string, amount string, denom string) *MsgMintCoins {
+func NewMsgMintCoins(owner string, amount string) *MsgMintCoins {
 	return &MsgMintCoins{
 		Owner:  owner,
 		Amount: amount,
-		Denom:  denom,
 	}
 }
 
@@ -45,11 +43,7 @@ func (msg *MsgMintCoins) ValidateBasic() error {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid owner address (%s)", err)
 	}
 
-	if msg.Denom != strings.ToLower(msg.Denom) {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid denom, must be lowercase (%s)", msg.Denom)
-	}
-
-	_, err = sdk.ParseCoinNormalized(msg.Amount + msg.Denom)
+	_, err = sdk.ParseCoinNormalized(msg.Amount)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid coin (%s)", err)
 	}

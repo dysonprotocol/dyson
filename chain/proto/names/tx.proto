@@ -107,7 +107,6 @@ message MsgBuyResponse {
 message MsgMintCoins {
   string owner = 1;
   string amount = 2;
-  string denom = 3;
 }
 
 message MsgMintCoinsResponse {
@@ -116,7 +115,6 @@ message MsgMintCoinsResponse {
 message MsgBurnCoins {
   string owner = 1;
   string amount = 2;
-  string denom = 3;
 }
 
 message MsgBurnCoinsResponse {
@@ -127,7 +125,6 @@ message MsgForceTransfer {
   string from = 2;
   string to = 3;
   string amount = 4;
-  string denom = 5;
 }
 
 message MsgForceTransferResponse {

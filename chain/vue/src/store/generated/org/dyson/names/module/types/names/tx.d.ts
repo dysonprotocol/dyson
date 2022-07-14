@@ -70,14 +70,12 @@ export interface MsgBuyResponse {
 export interface MsgMintCoins {
     owner: string;
     amount: string;
-    denom: string;
 }
 export interface MsgMintCoinsResponse {
 }
 export interface MsgBurnCoins {
     owner: string;
     amount: string;
-    denom: string;
 }
 export interface MsgBurnCoinsResponse {
 }
@@ -86,7 +84,6 @@ export interface MsgForceTransfer {
     from: string;
     to: string;
     amount: string;
-    denom: string;
 }
 export interface MsgForceTransferResponse {
 }

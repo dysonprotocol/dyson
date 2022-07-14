@@ -9,13 +9,12 @@ const TypeMsgForceTransfer = "force_transfer"
 
 var _ sdk.Msg = &MsgForceTransfer{}
 
-func NewMsgForceTransfer(owner string, from string, to string, amount string, denom string) *MsgForceTransfer {
+func NewMsgForceTransfer(owner string, from string, to string, amount string) *MsgForceTransfer {
 	return &MsgForceTransfer{
 		Owner:  owner,
 		From:   from,
 		To:     to,
 		Amount: amount,
-		Denom:  denom,
 	}
 }
 

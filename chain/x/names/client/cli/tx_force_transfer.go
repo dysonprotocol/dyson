@@ -16,12 +16,11 @@ func CmdForceTransfer() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "force-transfer [from] [to] [amount] [denom]",
 		Short: "The owner of the name can tranfer coins between two accounts",
-		Args:  cobra.ExactArgs(4),
+		Args:  cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			argFrom := args[0]
 			argTo := args[1]
 			argAmount := args[2]
-			argDenom := args[3]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -33,7 +32,6 @@ func CmdForceTransfer() *cobra.Command {
 				argFrom,
 				argTo,
 				argAmount,
-				argDenom,
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err

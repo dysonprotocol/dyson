@@ -9,11 +9,10 @@ const TypeMsgBurnCoins = "burn_coins"
 
 var _ sdk.Msg = &MsgBurnCoins{}
 
-func NewMsgBurnCoins(owner string, amount string, denom string) *MsgBurnCoins {
+func NewMsgBurnCoins(owner string, amount string) *MsgBurnCoins {
 	return &MsgBurnCoins{
 		Owner:  owner,
 		Amount: amount,
-		Denom:  denom,
 	}
 }
 
@@ -42,6 +41,11 @@ func (msg *MsgBurnCoins) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Owner)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid owner address (%s)", err)
+	}
+
+	_, err = sdk.ParseCoinNormalized(msg.Amount)
+	if err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid coin (%s)", err)
 	}
 	return nil
 }

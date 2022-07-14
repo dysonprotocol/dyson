@@ -1085,7 +1085,7 @@ export const MsgBuyResponse = {
         return message;
     }
 };
-const baseMsgMintCoins = { owner: '', amount: '', denom: '' };
+const baseMsgMintCoins = { owner: '', amount: '' };
 export const MsgMintCoins = {
     encode(message, writer = Writer.create()) {
         if (message.owner !== '') {
@@ -1093,9 +1093,6 @@ export const MsgMintCoins = {
         }
         if (message.amount !== '') {
             writer.uint32(18).string(message.amount);
-        }
-        if (message.denom !== '') {
-            writer.uint32(26).string(message.denom);
         }
         return writer;
     },
@@ -1111,9 +1108,6 @@ export const MsgMintCoins = {
                     break;
                 case 2:
                     message.amount = reader.string();
-                    break;
-                case 3:
-                    message.denom = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1136,19 +1130,12 @@ export const MsgMintCoins = {
         else {
             message.amount = '';
         }
-        if (object.denom !== undefined && object.denom !== null) {
-            message.denom = String(object.denom);
-        }
-        else {
-            message.denom = '';
-        }
         return message;
     },
     toJSON(message) {
         const obj = {};
         message.owner !== undefined && (obj.owner = message.owner);
         message.amount !== undefined && (obj.amount = message.amount);
-        message.denom !== undefined && (obj.denom = message.denom);
         return obj;
     },
     fromPartial(object) {
@@ -1164,12 +1151,6 @@ export const MsgMintCoins = {
         }
         else {
             message.amount = '';
-        }
-        if (object.denom !== undefined && object.denom !== null) {
-            message.denom = object.denom;
-        }
-        else {
-            message.denom = '';
         }
         return message;
     }
@@ -1206,7 +1187,7 @@ export const MsgMintCoinsResponse = {
         return message;
     }
 };
-const baseMsgBurnCoins = { owner: '', amount: '', denom: '' };
+const baseMsgBurnCoins = { owner: '', amount: '' };
 export const MsgBurnCoins = {
     encode(message, writer = Writer.create()) {
         if (message.owner !== '') {
@@ -1214,9 +1195,6 @@ export const MsgBurnCoins = {
         }
         if (message.amount !== '') {
             writer.uint32(18).string(message.amount);
-        }
-        if (message.denom !== '') {
-            writer.uint32(26).string(message.denom);
         }
         return writer;
     },
@@ -1232,9 +1210,6 @@ export const MsgBurnCoins = {
                     break;
                 case 2:
                     message.amount = reader.string();
-                    break;
-                case 3:
-                    message.denom = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1257,19 +1232,12 @@ export const MsgBurnCoins = {
         else {
             message.amount = '';
         }
-        if (object.denom !== undefined && object.denom !== null) {
-            message.denom = String(object.denom);
-        }
-        else {
-            message.denom = '';
-        }
         return message;
     },
     toJSON(message) {
         const obj = {};
         message.owner !== undefined && (obj.owner = message.owner);
         message.amount !== undefined && (obj.amount = message.amount);
-        message.denom !== undefined && (obj.denom = message.denom);
         return obj;
     },
     fromPartial(object) {
@@ -1285,12 +1253,6 @@ export const MsgBurnCoins = {
         }
         else {
             message.amount = '';
-        }
-        if (object.denom !== undefined && object.denom !== null) {
-            message.denom = object.denom;
-        }
-        else {
-            message.denom = '';
         }
         return message;
     }
@@ -1327,7 +1289,7 @@ export const MsgBurnCoinsResponse = {
         return message;
     }
 };
-const baseMsgForceTransfer = { owner: '', from: '', to: '', amount: '', denom: '' };
+const baseMsgForceTransfer = { owner: '', from: '', to: '', amount: '' };
 export const MsgForceTransfer = {
     encode(message, writer = Writer.create()) {
         if (message.owner !== '') {
@@ -1341,9 +1303,6 @@ export const MsgForceTransfer = {
         }
         if (message.amount !== '') {
             writer.uint32(34).string(message.amount);
-        }
-        if (message.denom !== '') {
-            writer.uint32(42).string(message.denom);
         }
         return writer;
     },
@@ -1365,9 +1324,6 @@ export const MsgForceTransfer = {
                     break;
                 case 4:
                     message.amount = reader.string();
-                    break;
-                case 5:
-                    message.denom = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1402,12 +1358,6 @@ export const MsgForceTransfer = {
         else {
             message.amount = '';
         }
-        if (object.denom !== undefined && object.denom !== null) {
-            message.denom = String(object.denom);
-        }
-        else {
-            message.denom = '';
-        }
         return message;
     },
     toJSON(message) {
@@ -1416,7 +1366,6 @@ export const MsgForceTransfer = {
         message.from !== undefined && (obj.from = message.from);
         message.to !== undefined && (obj.to = message.to);
         message.amount !== undefined && (obj.amount = message.amount);
-        message.denom !== undefined && (obj.denom = message.denom);
         return obj;
     },
     fromPartial(object) {
@@ -1444,12 +1393,6 @@ export const MsgForceTransfer = {
         }
         else {
             message.amount = '';
-        }
-        if (object.denom !== undefined && object.denom !== null) {
-            message.denom = object.denom;
-        }
-        else {
-            message.denom = '';
         }
         return message;
     }
