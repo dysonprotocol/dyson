@@ -19,14 +19,14 @@ func (k msgServer) Reveal(goCtx context.Context, msg *types.MsgReveal) (*types.M
 	c1.Write([]byte(msg.Name))
 	c1.Write([]byte(msg.Salt))
 	c1.Read(out)
-	commit := hex.EncodeToString(out)
+	commit := "SHAKE256:" + hex.EncodeToString(out)
 
 	name, isFound := k.GetName(
 		ctx,
-		"SHAKE256:"+commit,
+		commit,
 	)
 	if !isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "name not registered")
+		return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "commit (%s) not registered", commit)
 	}
 
 	existingName, isFound := k.GetName(
@@ -35,7 +35,7 @@ func (k msgServer) Reveal(goCtx context.Context, msg *types.MsgReveal) (*types.M
 	)
 	if isFound {
 		if existingName.Height <= name.Height {
-			return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "name alrady registered")
+			return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "name (%s) alrady registered to address %s", msg.Name, existingName.Owner)
 		}
 
 	}
