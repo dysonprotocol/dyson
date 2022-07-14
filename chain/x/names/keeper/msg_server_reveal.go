@@ -12,6 +12,11 @@ import (
 func (k msgServer) Reveal(goCtx context.Context, msg *types.MsgReveal) (*types.MsgRevealResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	for _, v := range types.ForbiddenNames {
+		if v == msg.Name {
+			return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "name is forbidden: %s", msg.Name)
+		}
+	}
 	out := make([]byte, 16)
 
 	c1 := sha3.NewShake256()
@@ -28,6 +33,7 @@ func (k msgServer) Reveal(goCtx context.Context, msg *types.MsgReveal) (*types.M
 	if !isFound {
 		return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "commit (%s) not registered", commit)
 	}
+
 
 	existingName, isFound := k.GetName(
 		ctx,

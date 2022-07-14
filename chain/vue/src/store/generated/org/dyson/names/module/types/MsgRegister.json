@@ -9,7 +9,7 @@
                 },
                 "commit": {
                     "type": "string",
-                    "description": "The Shake256(salt + name) hexdigest"
+                    "description": "The Shake256(owner+name+salt) hexdigest"
                 },
                 "price": {
                     "type": "string",

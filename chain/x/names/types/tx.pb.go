@@ -34,7 +34,7 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type MsgRegister struct {
 	Owner string `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"`
-	// The Shake256(salt + name) hexdigest
+	// The Shake256(owner+name+salt) hexdigest
 	Commit string `protobuf:"bytes,2,opt,name=commit,proto3" json:"commit,omitempty"`
 	// The price that this name is valued at and can be purchaced for. The yearly fee is 1% of this price.
 	Price string `protobuf:"bytes,4,opt,name=price,proto3" json:"price,omitempty"`
