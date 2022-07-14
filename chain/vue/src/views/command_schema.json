@@ -9378,7 +9378,7 @@
             },
             "commit": {
               "type": "string",
-              "description": "The Shake256(salt + name) hexdigest"
+              "description": "The Shake256(owner+name+salt) hexdigest"
             },
             "price": {
               "type": "string",
@@ -9751,9 +9751,6 @@
             },
             "amount": {
               "type": "string"
-            },
-            "denom": {
-              "type": "string"
             }
           },
           "additionalProperties": true,
@@ -9789,9 +9786,6 @@
               "type": "string"
             },
             "amount": {
-              "type": "string"
-            },
-            "denom": {
               "type": "string"
             }
           },
@@ -9834,9 +9828,6 @@
               "type": "string"
             },
             "amount": {
-              "type": "string"
-            },
-            "denom": {
               "type": "string"
             }
           },
