@@ -27,7 +27,7 @@ service Msg {
 
 message MsgRegister {
   string owner = 1;
-  // The Shake256(salt + name) hexdigest
+  // The Shake256(owner+name+salt) hexdigest
   string commit = 2;
   // The price that this name is valued at and can be purchaced for. The yearly fee is 1% of this price.
   string price = 4;

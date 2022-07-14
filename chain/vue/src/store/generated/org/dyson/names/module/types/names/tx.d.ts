@@ -3,7 +3,7 @@ import { Name } from '../names/name';
 export declare const protobufPackage = "names";
 export interface MsgRegister {
     owner: string;
-    /** The Shake256(salt + name) hexdigest */
+    /** The Shake256(owner+name+salt) hexdigest */
     commit: string;
     /** The price that this name is valued at and can be purchaced for. The yearly fee is 1% of this price. */
     price: string;

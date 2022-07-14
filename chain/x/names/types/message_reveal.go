@@ -12,6 +12,8 @@ const (
 	NameRegex     = `^[a-z][a-z0-9]{2,31}$`
 )
 
+var ForbiddenNames = [...]string{"ibc", "dys", "dyson", "root", "admin", "www", "api", "docs", "sybil", "coin"}
+
 var _ sdk.Msg = &MsgReveal{}
 
 func NewMsgReveal(owner string, name string, salt string) *MsgReveal {
