@@ -17,7 +17,7 @@
     "@cosmjs/stargate": "^0.26.1",
     "@json-editor/json-editor": "^2.6.1",
     "@picocss/pico": "^1.4.4",
-    "@starport/vue": "^0.1.56",
+    "@starport/vue": "file:ignite-web/packages/vue",
     "@starport/vuex": "^0.1.56",
     "animate.css": "^4.1.1",
     "core-js": "^3.18.2",
