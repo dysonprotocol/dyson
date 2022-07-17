@@ -34,14 +34,13 @@ func (k msgServer) Reveal(goCtx context.Context, msg *types.MsgReveal) (*types.M
 		return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "commit (%s) not registered", commit)
 	}
 
-
 	existingName, isFound := k.GetName(
 		ctx,
 		msg.Name,
 	)
 	if isFound {
-		if existingName.Height <= name.Height {
-			return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "name (%s) alrady registered to address %s", msg.Name, existingName.Owner)
+		if existingName.Registered.Before(name.Registered) {
+			return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "name (%s) alrady registered to address %s on %s", msg.Name, existingName.Owner, existingName.Registered)
 		}
 
 	}

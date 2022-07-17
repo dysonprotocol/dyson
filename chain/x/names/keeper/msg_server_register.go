@@ -17,15 +17,15 @@ func (k msgServer) Register(goCtx context.Context, msg *types.MsgRegister) (*typ
 		namename,
 	)
 	if isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "name alrady registered")
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "commit alrady registered")
 	}
 
 	var name = types.Name{
-		Owner:   msg.Owner,
-		Name:    namename,
-		Price:   msg.Price,
-		Expires: ctx.BlockTime().AddDate(0, 1, 0), // expires in one month
-		Height:  ctx.BlockHeight(),
+		Owner:      msg.Owner,
+		Name:       namename,
+		Price:      msg.Price,
+		Expires:    ctx.BlockTime().AddDate(0, 1, 0), // expires in one month
+		Registered: ctx.BlockTime(),
 	}
 
 	coin, err := sdk.ParseCoinNormalized(msg.Price)

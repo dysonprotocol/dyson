@@ -49,8 +49,8 @@ export interface NamesName {
   authorized?: string;
   owner?: string;
 
-  /** @format int64 */
-  height?: string;
+  /** @format date-time */
+  registered?: string;
 }
 
 /**

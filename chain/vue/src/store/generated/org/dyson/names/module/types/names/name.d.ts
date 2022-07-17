@@ -7,7 +7,7 @@ export interface Name {
     expires: Date | undefined;
     authorized: string;
     owner: string;
-    height: number;
+    registered: Date | undefined;
 }
 export declare const Name: {
     encode(message: Name, writer?: Writer): Writer;
