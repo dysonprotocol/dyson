@@ -465,50 +465,6 @@
     "definition": "(self, a, b)",
     "docstring": "Get a random number in the range [a, b) or [a, b] depending on rounding."
   },
-  "random.betavariate": {
-    "definition": "(alpha, beta)",
-    "docstring": "Beta distribution.\n\nConditions on the parameters are alpha > 0 and beta > 0.\nReturned values range between 0 and 1."
-  },
-  "random.choice": {
-    "definition": "(seq)",
-    "docstring": "Choose a random element from a non-empty sequence."
-  },
-  "random.choices": {
-    "definition": "(population, weights=None, *, cum_weights=None, k=1)",
-    "docstring": "Return a k sized list of population elements chosen with replacement.\n\nIf the relative weights or cumulative weights are not specified,\nthe selections are made with equal probability."
-  },
-  "random.expovariate": {
-    "definition": "(lambd)",
-    "docstring": "Exponential distribution.\n\nlambd is 1.0 divided by the desired mean.  It should be\nnonzero.  (The parameter would be called \"lambda\", but that is\na reserved word in Python.)  Returned values range from 0 to\npositive infinity if lambd is positive, and from negative\ninfinity to 0 if lambd is negative."
-  },
-  "random.gauss": {
-    "definition": "(mu, sigma)",
-    "docstring": "Gaussian distribution.\n\nmu is the mean, and sigma is the standard deviation.  This is\nslightly faster than the normalvariate() function.\n\nNot thread-safe without a lock around calls."
-  },
-  "random.paretovariate": {
-    "definition": "(alpha)",
-    "docstring": "Pareto distribution.  alpha is the shape parameter."
-  },
-  "random.random": {
-    "definition": "()",
-    "docstring": "<no docstring>"
-  },
-  "random.sample": {
-    "definition": "(population, k, *, counts=None)",
-    "docstring": "Chooses k unique random elements from a population sequence or set.\n\nReturns a new list containing elements from the population while\nleaving the original population unchanged.  The resulting list is\nin selection order so that all sub-slices will also be valid random\nsamples.  This allows raffle winners (the sample) to be partitioned\ninto grand prize and second place winners (the subslices).\n\nMembers of the population need not be hashable or unique.  If the\npopulation contains repeats, then each occurrence is a possible\nselection in the sample.\n\nRepeated elements can be specified one at a time or with the optional\ncounts parameter.  For example:\n\n    sample(['red', 'blue'], counts=[4, 2], k=5)\n\nis equivalent to:\n\n    sample(['red', 'red', 'red', 'red', 'blue', 'blue'], k=5)\n\nTo choose a sample from a range of integers, use range() for the\npopulation argument.  This is especially fast and space efficient\nfor sampling from a large population:\n\n    sample(range(10000000), 60)"
-  },
-  "random.shuffle": {
-    "definition": "(x, random=None)",
-    "docstring": "Shuffle list x in place, and return None.\n\nOptional argument random is a 0-argument function returning a\nrandom float in [0.0, 1.0); if it is the default None, the\nstandard random.random will be used."
-  },
-  "random.triangular": {
-    "definition": "(low=0.0, high=1.0, mode=None)",
-    "docstring": "Triangular distribution.\n\nContinuous distribution bounded by given lower and upper limits,\nand having a given mode value in-between.\n\nhttp://en.wikipedia.org/wiki/Triangular_distribution"
-  },
-  "random.uniform": {
-    "definition": "(a, b)",
-    "docstring": "Get a random number in the range [a, b) or [a, b] depending on rounding."
-  },
   "range": {
     "docstring": "<no docstring>",
     "init_definition": "(obj, *args, **keywords)",
@@ -524,11 +480,6 @@
     "init_definition": "(self, *args)",
     "isclass": true
   },
-  "re2.RegexError": {
-    "docstring": "Exception raised for invalid regular expressions.\n\nAttributes:\n\n    msg: The unformatted error message\n    pattern: The regular expression pattern\n    pos: The index in the pattern where compilation failed (may be None)\n    lineno: The line corresponding to pos (may be None)\n    colno: The column corresponding to pos (may be None)",
-    "init_definition": "(msg, pattern=None, pos=None)",
-    "isclass": true
-  },
   "re2.compile": {
     "docstring": "<no docstring>",
     "call_def": "(*args, **keywords)"
@@ -540,11 +491,6 @@
   "re2.count": {
     "docstring": "Return number of non-overlapping matches in the string.\n\nEmpty matches are included in the count.",
     "call_def": "(*args, **keywords)"
-  },
-  "re2.error": {
-    "docstring": "Exception raised for invalid regular expressions.\n\nAttributes:\n\n    msg: The unformatted error message\n    pattern: The regular expression pattern\n    pos: The index in the pattern where compilation failed (may be None)\n    lineno: The line corresponding to pos (may be None)\n    colno: The column corresponding to pos (may be None)",
-    "init_definition": "(msg, pattern=None, pos=None)",
-    "isclass": true
   },
   "re2.escape": {
     "docstring": "Escape all non-alphanumeric characters in pattern.",

@@ -21534,8 +21534,6 @@ definitions:
     type: object
   names.MsgDeleteNameResponse:
     type: object
-  names.MsgForceTransferResponse:
-    type: object
   names.MsgMintCoinsResponse:
     type: object
   names.MsgOfferToResponse:
