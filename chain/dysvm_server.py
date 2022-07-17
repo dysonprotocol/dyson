@@ -353,6 +353,20 @@ def build_sandbox(port, creator, address, amount, block_info):
         return gas_state["gas_limit"]
 
     @allow_dys_func
+    def get_nodes_called():
+        """
+        The number of Python AST nodes evaluated in this query or transaction
+        """
+        return gas_state["nodes_called"]
+
+    @allow_dys_func
+    def get_cumulative_size():
+        """
+        The cumulative size of memory used for each node called in this query or script
+        """
+        return gas_state["cumsize"]
+
+    @allow_dys_func
     def get_script_address() -> str:
         """
         Returns the address of this current script.
@@ -395,6 +409,8 @@ def build_sandbox(port, creator, address, amount, block_info):
         "get_caller": get_caller,
         "get_block_info": get_block_info,
         "get_coins_sent": get_coins_sent,
+        "get_nodes_called": get_nodes_called,
+        "get_cumulative_size": get_cumulative_size,
     }
 
     sandbox.modules = dyslang.make_modules(module_dict)
@@ -502,12 +518,12 @@ def eval_script(
         # TODO wait for gas fix
         # https://github.com/tendermint/vue/issues/147
         # https://github.com/tendermint/starport/blob/develop/starport/pkg/cosmosgen/templates/vuex/store/index.ts.tpl#L170
-        "nodes_called": nodes_called,
+        "nodes_called": sandbox.modules.dys.get_nodes_called() if sandbox else None,
         "gas_limit": sandbox.modules.dys.get_gas_limit() if sandbox else None,
         "script_gas_consumed": sandbox.modules.dys.get_gas_consumed()
         if sandbox
         else None,
-        "cumsize": cumsize,
+        "cumsize": sandbox.modules.dys.get_cumulative_size() if sandbox else None,
     }
 
 

@@ -3,6 +3,7 @@ package types
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"strconv"
 )
 
 const TypeMsgRegister = "register"
@@ -40,12 +41,17 @@ func (msg *MsgRegister) GetSignBytes() []byte {
 
 func (msg *MsgRegister) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Owner)
+
+	_, err = strconv.ParseUint(msg.Commit, 16, 64)
+	if err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "Invalid commit hash (%s) should be Shake(owner+name+salt) with the 16 bytes output encoded as hex", err)
+	}
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid owner address (%s)", err)
 	}
 	coin, err := sdk.ParseCoinNormalized(msg.Price)
 	if err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid coins (%s): %s", msg.Price, err)
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid coins (%s) should be a number ending in 'dys': %s", msg.Price, err)
 	}
 	if coin.Denom != "dys" {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid coin denom, must be 'dys': %s", coin.Denom)
