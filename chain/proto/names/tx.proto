@@ -21,7 +21,6 @@ service Msg {
   rpc Buy(MsgBuy) returns (MsgBuyResponse);
   rpc MintCoins(MsgMintCoins) returns (MsgMintCoinsResponse);
   rpc BurnCoins(MsgBurnCoins) returns (MsgBurnCoinsResponse);
-  rpc ForceTransfer(MsgForceTransfer) returns (MsgForceTransferResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -29,7 +28,7 @@ message MsgRegister {
   string owner = 1;
   // The Shake256(owner+name+salt) hexdigest
   string commit = 2;
-  // The price that this name is valued at and can be purchaced for. The yearly fee is 1% of this price.
+  // The price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price. 
   string price = 4;
 }
 
@@ -118,16 +117,6 @@ message MsgBurnCoins {
 }
 
 message MsgBurnCoinsResponse {
-}
-
-message MsgForceTransfer {
-  string owner = 1;
-  string from = 2;
-  string to = 3;
-  string amount = 4;
-}
-
-message MsgForceTransferResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

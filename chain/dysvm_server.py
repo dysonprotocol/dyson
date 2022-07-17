@@ -526,8 +526,6 @@ dyslang.WHITELIST_FUNCTIONS.update(
         "scanner",
         "search",
         "split",
-        "sub",
-        "subn",
         # str
         "str.capitalize",
         "str.casefold",
@@ -647,12 +645,6 @@ def _allow_func(func, mod=None, name=None):
 
     dyslang.WHITELIST_FUNCTIONS.add(fullname)
     return func
-
-
-mod_dict = get_module_dict()
-for k, v in mod_dict.items():
-    for kk in v:
-        dyslang.WHITELIST_FUNCTIONS.add(k + "." + kk)
 
 
 if __name__ == "__main__":

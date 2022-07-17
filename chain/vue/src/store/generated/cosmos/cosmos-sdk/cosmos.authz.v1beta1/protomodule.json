@@ -164,6 +164,11 @@
 	},
 	"Msgs": [
 		{
+			"Name": "MsgExec",
+			"URI": "cosmos.authz.v1beta1.MsgExec",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto"
+		},
+		{
 			"Name": "MsgRevoke",
 			"URI": "cosmos.authz.v1beta1.MsgRevoke",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto"
@@ -171,11 +176,6 @@
 		{
 			"Name": "MsgGrant",
 			"URI": "cosmos.authz.v1beta1.MsgGrant",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto"
-		},
-		{
-			"Name": "MsgExec",
-			"URI": "cosmos.authz.v1beta1.MsgExec",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/authz/v1beta1/tx.proto"
 		}
 	],

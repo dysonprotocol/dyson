@@ -5,7 +5,7 @@ export interface MsgRegister {
     owner: string;
     /** The Shake256(owner+name+salt) hexdigest */
     commit: string;
-    /** The price that this name is valued at and can be purchaced for. The yearly fee is 1% of this price. */
+    /** The price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price. */
     price: string;
 }
 export interface MsgRegisterResponse {
@@ -78,14 +78,6 @@ export interface MsgBurnCoins {
     amount: string;
 }
 export interface MsgBurnCoinsResponse {
-}
-export interface MsgForceTransfer {
-    owner: string;
-    from: string;
-    to: string;
-    amount: string;
-}
-export interface MsgForceTransferResponse {
 }
 export declare const MsgRegister: {
     encode(message: MsgRegister, writer?: Writer): Writer;
@@ -227,20 +219,6 @@ export declare const MsgBurnCoinsResponse: {
     toJSON(_: MsgBurnCoinsResponse): unknown;
     fromPartial(_: DeepPartial<MsgBurnCoinsResponse>): MsgBurnCoinsResponse;
 };
-export declare const MsgForceTransfer: {
-    encode(message: MsgForceTransfer, writer?: Writer): Writer;
-    decode(input: Reader | Uint8Array, length?: number): MsgForceTransfer;
-    fromJSON(object: any): MsgForceTransfer;
-    toJSON(message: MsgForceTransfer): unknown;
-    fromPartial(object: DeepPartial<MsgForceTransfer>): MsgForceTransfer;
-};
-export declare const MsgForceTransferResponse: {
-    encode(_: MsgForceTransferResponse, writer?: Writer): Writer;
-    decode(input: Reader | Uint8Array, length?: number): MsgForceTransferResponse;
-    fromJSON(_: any): MsgForceTransferResponse;
-    toJSON(_: MsgForceTransferResponse): unknown;
-    fromPartial(_: DeepPartial<MsgForceTransferResponse>): MsgForceTransferResponse;
-};
 /** Msg defines the Msg service. */
 export interface Msg {
     Register(request: MsgRegister): Promise<MsgRegisterResponse>;
@@ -252,9 +230,8 @@ export interface Msg {
     Accept(request: MsgAccept): Promise<MsgAcceptResponse>;
     Buy(request: MsgBuy): Promise<MsgBuyResponse>;
     MintCoins(request: MsgMintCoins): Promise<MsgMintCoinsResponse>;
-    BurnCoins(request: MsgBurnCoins): Promise<MsgBurnCoinsResponse>;
     /** this line is used by starport scaffolding # proto/tx/rpc */
-    ForceTransfer(request: MsgForceTransfer): Promise<MsgForceTransferResponse>;
+    BurnCoins(request: MsgBurnCoins): Promise<MsgBurnCoinsResponse>;
 }
 export declare class MsgClientImpl implements Msg {
     private readonly rpc;
@@ -269,7 +246,6 @@ export declare class MsgClientImpl implements Msg {
     Buy(request: MsgBuy): Promise<MsgBuyResponse>;
     MintCoins(request: MsgMintCoins): Promise<MsgMintCoinsResponse>;
     BurnCoins(request: MsgBurnCoins): Promise<MsgBurnCoinsResponse>;
-    ForceTransfer(request: MsgForceTransfer): Promise<MsgForceTransferResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;

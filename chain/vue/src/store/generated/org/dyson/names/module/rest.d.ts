@@ -2,7 +2,6 @@ export declare type NamesMsgAcceptResponse = object;
 export declare type NamesMsgBurnCoinsResponse = object;
 export declare type NamesMsgBuyResponse = object;
 export declare type NamesMsgDeleteNameResponse = object;
-export declare type NamesMsgForceTransferResponse = object;
 export declare type NamesMsgMintCoinsResponse = object;
 export declare type NamesMsgOfferToResponse = object;
 export interface NamesMsgRegisterResponse {
