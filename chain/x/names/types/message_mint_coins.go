@@ -1,9 +1,24 @@
 package types
 
 import (
+	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"regexp"
 )
+
+const (
+	reDnmString = `[a-z][a-z0-9]{2,31}([.][a-z0-9]+)*`
+)
+
+var reDnm = regexp.MustCompile(fmt.Sprintf(`^%s$`, reDnmString))
+
+func ValidateDenom(denom string) error {
+	if !reDnm.MatchString(denom) {
+		return fmt.Errorf("invalid denom (%s) must match: %s", denom, reDnmString)
+	}
+	return nil
+}
 
 const TypeMsgMintCoins = "mint_coins"
 
@@ -43,9 +58,13 @@ func (msg *MsgMintCoins) ValidateBasic() error {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid owner address (%s)", err)
 	}
 
-	_, err = sdk.ParseCoinNormalized(msg.Amount)
+	coin, err := sdk.ParseCoinNormalized(msg.Amount)
 	if err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid coin (%s)", err)
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidCoins, "invalid coin (%s)", err)
+	}
+	err = ValidateDenom(coin.Denom)
+	if err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidCoins, "invalid coin %s", err)
 	}
 	return nil
 }

@@ -42,8 +42,9 @@
                 "owner": {
                     "type": "string"
                 },
-                "height": {
-                    "type": "string"
+                "registered": {
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
             "additionalProperties": true,

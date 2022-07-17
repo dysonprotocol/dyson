@@ -1,9 +1,8 @@
 /* eslint-disable */
 import { Timestamp } from '../google/protobuf/timestamp';
-import * as Long from 'long';
-import { util, configure, Writer, Reader } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 export const protobufPackage = 'names';
-const baseName = { name: '', destination: '', price: '', authorized: '', owner: '', height: 0 };
+const baseName = { name: '', destination: '', price: '', authorized: '', owner: '' };
 export const Name = {
     encode(message, writer = Writer.create()) {
         if (message.name !== '') {
@@ -24,8 +23,8 @@ export const Name = {
         if (message.owner !== '') {
             writer.uint32(66).string(message.owner);
         }
-        if (message.height !== 0) {
-            writer.uint32(72).int64(message.height);
+        if (message.registered !== undefined) {
+            Timestamp.encode(toTimestamp(message.registered), writer.uint32(82).fork()).ldelim();
         }
         return writer;
     },
@@ -54,8 +53,8 @@ export const Name = {
                 case 8:
                     message.owner = reader.string();
                     break;
-                case 9:
-                    message.height = longToNumber(reader.int64());
+                case 10:
+                    message.registered = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -102,11 +101,11 @@ export const Name = {
         else {
             message.owner = '';
         }
-        if (object.height !== undefined && object.height !== null) {
-            message.height = Number(object.height);
+        if (object.registered !== undefined && object.registered !== null) {
+            message.registered = fromJsonTimestamp(object.registered);
         }
         else {
-            message.height = 0;
+            message.registered = undefined;
         }
         return message;
     },
@@ -118,7 +117,7 @@ export const Name = {
         message.expires !== undefined && (obj.expires = message.expires !== undefined ? message.expires.toISOString() : null);
         message.authorized !== undefined && (obj.authorized = message.authorized);
         message.owner !== undefined && (obj.owner = message.owner);
-        message.height !== undefined && (obj.height = message.height);
+        message.registered !== undefined && (obj.registered = message.registered !== undefined ? message.registered.toISOString() : null);
         return obj;
     },
     fromPartial(object) {
@@ -159,26 +158,15 @@ export const Name = {
         else {
             message.owner = '';
         }
-        if (object.height !== undefined && object.height !== null) {
-            message.height = object.height;
+        if (object.registered !== undefined && object.registered !== null) {
+            message.registered = object.registered;
         }
         else {
-            message.height = 0;
+            message.registered = undefined;
         }
         return message;
     }
 };
-var globalThis = (() => {
-    if (typeof globalThis !== 'undefined')
-        return globalThis;
-    if (typeof self !== 'undefined')
-        return self;
-    if (typeof window !== 'undefined')
-        return window;
-    if (typeof global !== 'undefined')
-        return global;
-    throw 'Unable to locate global object';
-})();
 function toTimestamp(date) {
     const seconds = date.getTime() / 1000;
     const nanos = (date.getTime() % 1000) * 1000000;
@@ -199,14 +187,4 @@ function fromJsonTimestamp(o) {
     else {
         return fromTimestamp(Timestamp.fromJSON(o));
     }
-}
-function longToNumber(long) {
-    if (long.gt(Number.MAX_SAFE_INTEGER)) {
-        throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER');
-    }
-    return long.toNumber();
-}
-if (util.Long !== Long) {
-    util.Long = Long;
-    configure();
 }

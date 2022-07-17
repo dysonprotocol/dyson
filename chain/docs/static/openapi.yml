@@ -13492,9 +13492,9 @@ paths:
                     type: string
                   owner:
                     type: string
-                  height:
+                  registered:
                     type: string
-                    format: int64
+                    format: date-time
         default:
           description: An unexpected error response.
           schema:
@@ -13548,9 +13548,9 @@ paths:
                       type: string
                     owner:
                       type: string
-                    height:
+                    registered:
                       type: string
-                      format: int64
+                      format: date-time
               pagination:
                 type: object
                 properties:
@@ -21567,9 +21567,9 @@ definitions:
             type: string
           owner:
             type: string
-          height:
+          registered:
             type: string
-            format: int64
+            format: date-time
   names.MsgSetPriceAndExtendResponse:
     type: object
     properties:
@@ -21594,9 +21594,9 @@ definitions:
         type: string
       owner:
         type: string
-      height:
+      registered:
         type: string
-        format: int64
+        format: date-time
   names.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -21621,9 +21621,9 @@ definitions:
               type: string
             owner:
               type: string
-            height:
+            registered:
               type: string
-              format: int64
+              format: date-time
       pagination:
         type: object
         properties:
@@ -21673,9 +21673,9 @@ definitions:
             type: string
           owner:
             type: string
-          height:
+          registered:
             type: string
-            format: int64
+            format: date-time
   names.QueryParamsResponse:
     type: object
     properties:

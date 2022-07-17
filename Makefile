@@ -7,3 +7,4 @@ run:
 build:
 		docker-compose --env .env.sample build chain
 		docker-compose --env .env.sample build frontend
+

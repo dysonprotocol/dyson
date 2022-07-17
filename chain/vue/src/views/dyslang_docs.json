@@ -277,6 +277,10 @@
     "definition": "()",
     "docstring": "Returns the coins sent to this function.\nThis is not the gas or gas fees."
   },
+  "dys.get_cumulative_size": {
+    "definition": "()",
+    "docstring": "The cumulative size of memory used for each node called in this query or script"
+  },
   "dys.get_gas_consumed": {
     "definition": "()",
     "docstring": "The total amount of gas consumed so far."
@@ -284,6 +288,10 @@
   "dys.get_gas_limit": {
     "definition": "()",
     "docstring": "The maximum amount of gas that can be used in this query or transaction"
+  },
+  "dys.get_nodes_called": {
+    "definition": "()",
+    "docstring": "The number of Python AST nodes evaluated in this query or transaction"
   },
   "dys.get_script_address": {
     "definition": "() -> str",

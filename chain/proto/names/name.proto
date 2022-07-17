@@ -15,6 +15,6 @@ message Name {
   google.protobuf.Timestamp expires = 4  [(gogoproto.nullable) = false, (gogoproto.stdtime) = true]; 
   string authorized = 5; 
   string owner = 8;
-  int64 height = 9;
+  google.protobuf.Timestamp registered = 10  [(gogoproto.nullable) = false, (gogoproto.stdtime) = true]; 
 }
 

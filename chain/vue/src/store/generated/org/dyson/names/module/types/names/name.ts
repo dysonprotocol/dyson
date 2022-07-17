@@ -1,7 +1,6 @@
 /* eslint-disable */
 import { Timestamp } from '../google/protobuf/timestamp'
-import * as Long from 'long'
-import { util, configure, Writer, Reader } from 'protobufjs/minimal'
+import { Writer, Reader } from 'protobufjs/minimal'
 
 export const protobufPackage = 'names'
 
@@ -12,10 +11,10 @@ export interface Name {
   expires: Date | undefined
   authorized: string
   owner: string
-  height: number
+  registered: Date | undefined
 }
 
-const baseName: object = { name: '', destination: '', price: '', authorized: '', owner: '', height: 0 }
+const baseName: object = { name: '', destination: '', price: '', authorized: '', owner: '' }
 
 export const Name = {
   encode(message: Name, writer: Writer = Writer.create()): Writer {
@@ -37,8 +36,8 @@ export const Name = {
     if (message.owner !== '') {
       writer.uint32(66).string(message.owner)
     }
-    if (message.height !== 0) {
-      writer.uint32(72).int64(message.height)
+    if (message.registered !== undefined) {
+      Timestamp.encode(toTimestamp(message.registered), writer.uint32(82).fork()).ldelim()
     }
     return writer
   },
@@ -68,8 +67,8 @@ export const Name = {
         case 8:
           message.owner = reader.string()
           break
-        case 9:
-          message.height = longToNumber(reader.int64() as Long)
+        case 10:
+          message.registered = fromTimestamp(Timestamp.decode(reader, reader.uint32()))
           break
         default:
           reader.skipType(tag & 7)
@@ -111,10 +110,10 @@ export const Name = {
     } else {
       message.owner = ''
     }
-    if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height)
+    if (object.registered !== undefined && object.registered !== null) {
+      message.registered = fromJsonTimestamp(object.registered)
     } else {
-      message.height = 0
+      message.registered = undefined
     }
     return message
   },
@@ -127,7 +126,7 @@ export const Name = {
     message.expires !== undefined && (obj.expires = message.expires !== undefined ? message.expires.toISOString() : null)
     message.authorized !== undefined && (obj.authorized = message.authorized)
     message.owner !== undefined && (obj.owner = message.owner)
-    message.height !== undefined && (obj.height = message.height)
+    message.registered !== undefined && (obj.registered = message.registered !== undefined ? message.registered.toISOString() : null)
     return obj
   },
 
@@ -163,24 +162,14 @@ export const Name = {
     } else {
       message.owner = ''
     }
-    if (object.height !== undefined && object.height !== null) {
-      message.height = object.height
+    if (object.registered !== undefined && object.registered !== null) {
+      message.registered = object.registered
     } else {
-      message.height = 0
+      message.registered = undefined
     }
     return message
   }
 }
-
-declare var self: any | undefined
-declare var window: any | undefined
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis
-  if (typeof self !== 'undefined') return self
-  if (typeof window !== 'undefined') return window
-  if (typeof global !== 'undefined') return global
-  throw 'Unable to locate global object'
-})()
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined
 export type DeepPartial<T> = T extends Builtin
@@ -213,16 +202,4 @@ function fromJsonTimestamp(o: any): Date {
   } else {
     return fromTimestamp(Timestamp.fromJSON(o))
   }
-}
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER')
-  }
-  return long.toNumber()
-}
-
-if (util.Long !== Long) {
-  util.Long = Long as any
-  configure()
 }

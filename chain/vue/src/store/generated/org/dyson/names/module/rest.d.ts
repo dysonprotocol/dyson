@@ -25,8 +25,8 @@ export interface NamesName {
     expires?: string;
     authorized?: string;
     owner?: string;
-    /** @format int64 */
-    height?: string;
+    /** @format date-time */
+    registered?: string;
 }
 /**
  * Params defines the parameters for the module.
