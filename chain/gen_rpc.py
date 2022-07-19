@@ -24,6 +24,11 @@ func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$r
 	if err != nil {
 		return err
 	}
+
+    if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+    }
+
 	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
 	}

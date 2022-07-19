@@ -5,7 +5,7 @@ get-ignite-web:
 	tar -xf ignite-web.tar.gz --strip-components=1 -C ignite-web
 
 build: clean 
-	npm install --include dev --production=false && npm run build && cp -r /app/dist /tmp
+	npm install --include dev && NODE_ENV=production npm run build && cp -r /app/dist /tmp
 
 dev:
 	npm run dev

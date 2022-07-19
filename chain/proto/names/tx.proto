@@ -44,11 +44,7 @@ message MsgUpdateName {
   string name = 2;
 
   string destination = 3;
-  string price = 4;
-  google.protobuf.Timestamp expires = 5 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
   string authorized = 6;
-  string commit = 7;
-  string salt = 8;
 }
 message MsgUpdateNameResponse {}
 
