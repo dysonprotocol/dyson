@@ -128,7 +128,7 @@ class ScriptDetail(APIView):
     renderer_classes = [BetterTemplateHTMLRenderer, JSONRenderer, BrowsableAPIRenderer]
     template_name = "index.html"
 
-    def get(self, request, script_address=None):
+    def get(self, request, **kwargs):
         # TODO: read from settings
         return Response(None)
 
