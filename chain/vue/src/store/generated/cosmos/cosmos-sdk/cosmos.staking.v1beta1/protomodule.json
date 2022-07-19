@@ -603,18 +603,13 @@
 	},
 	"Msgs": [
 		{
+			"Name": "MsgCreateValidator",
+			"URI": "cosmos.staking.v1beta1.MsgCreateValidator",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
+		},
+		{
 			"Name": "MsgUndelegate",
 			"URI": "cosmos.staking.v1beta1.MsgUndelegate",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
-		},
-		{
-			"Name": "MsgBeginRedelegate",
-			"URI": "cosmos.staking.v1beta1.MsgBeginRedelegate",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
-		},
-		{
-			"Name": "MsgEditValidator",
-			"URI": "cosmos.staking.v1beta1.MsgEditValidator",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
 		},
 		{
@@ -623,8 +618,13 @@
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgCreateValidator",
-			"URI": "cosmos.staking.v1beta1.MsgCreateValidator",
+			"Name": "MsgEditValidator",
+			"URI": "cosmos.staking.v1beta1.MsgEditValidator",
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgBeginRedelegate",
+			"URI": "cosmos.staking.v1beta1.MsgBeginRedelegate",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/staking/v1beta1/tx.proto"
 		}
 	],

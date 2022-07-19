@@ -1,9 +1,9 @@
 package types
 
 import (
+	"encoding/hex"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"strconv"
 )
 
 const TypeMsgRegister = "register"
@@ -42,7 +42,7 @@ func (msg *MsgRegister) GetSignBytes() []byte {
 func (msg *MsgRegister) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Owner)
 
-	_, err = strconv.ParseUint(msg.Commit, 16, 64)
+	_, err = hex.DecodeString(msg.Commit)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "Invalid commit hash (%s) should be Shake(owner+name+salt) with the 16 bytes output encoded as hex", err)
 	}

@@ -33,7 +33,7 @@ service Query {
 
 // Queries a list of GenerateCommit items.
 	rpc GenerateCommit(QueryGenerateCommitRequest) returns (QueryGenerateCommitResponse) {
-		option (google.api.http).get = "/org/dyson/names/generate_commit/{owner}/{name}/{salt}";
+		option (google.api.http).get = "/org/dyson/names/generate_commit";
 	}
 
 // this line is used by starport scaffolding # 2

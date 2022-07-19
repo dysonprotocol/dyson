@@ -142,11 +142,12 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QueryGenerateCommit
          * @summary Queries a list of GenerateCommit items.
-         * @request GET:/org/dyson/names/generate_commit/{owner}/{name}/{salt}
+         * @request GET:/org/dyson/names/generate_commit
          */
-        this.queryGenerateCommit = (owner, name, salt, params = {}) => this.request({
-            path: `/org/dyson/names/generate_commit/${owner}/${name}/${salt}`,
+        this.queryGenerateCommit = (query, params = {}) => this.request({
+            path: `/org/dyson/names/generate_commit`,
             method: "GET",
+            query: query,
             format: "json",
             ...params,
         });

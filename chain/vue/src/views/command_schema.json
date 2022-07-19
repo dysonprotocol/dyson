@@ -9355,12 +9355,8 @@
     },
     "http_rules": [
       {
-        "Params": [
-          "owner",
-          "name",
-          "salt"
-        ],
-        "HasQuery": false,
+        "Params": null,
+        "HasQuery": true,
         "HasBody": false
       }
     ]
