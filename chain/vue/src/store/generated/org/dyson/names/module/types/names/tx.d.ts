@@ -18,11 +18,7 @@ export interface MsgUpdateName {
     owner: string;
     name: string;
     destination: string;
-    price: string;
-    expires: Date | undefined;
     authorized: string;
-    commit: string;
-    salt: string;
 }
 export interface MsgUpdateNameResponse {
 }

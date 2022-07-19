@@ -3,7 +3,6 @@ package types
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"time"
 )
 
 const (
@@ -17,22 +16,14 @@ func NewMsgUpdateName(
 	owner string,
 	name string,
 	destination string,
-	price string,
-	expires time.Time,
 	authorized string,
-	commit string,
-	salt string,
 
 ) *MsgUpdateName {
 	return &MsgUpdateName{
 		Owner:       owner,
 		Name:        name,
 		Destination: destination,
-		Price:       price,
-		Expires:     expires,
 		Authorized:  authorized,
-		Commit:      commit,
-		Salt:        salt,
 	}
 }
 

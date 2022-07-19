@@ -310,13 +310,13 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgSend",
-			"URI": "cosmos.bank.v1beta1.MsgSend",
+			"Name": "MsgMultiSend",
+			"URI": "cosmos.bank.v1beta1.MsgMultiSend",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgMultiSend",
-			"URI": "cosmos.bank.v1beta1.MsgMultiSend",
+			"Name": "MsgSend",
+			"URI": "cosmos.bank.v1beta1.MsgSend",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/bank/v1beta1/tx.proto"
 		}
 	],

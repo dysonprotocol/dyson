@@ -12,7 +12,7 @@ func (k msgServer) UpdateName(goCtx context.Context, msg *types.MsgUpdateName) (
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value exists
-	valFound, isFound := k.GetName(
+	name, isFound := k.GetName(
 		ctx,
 		msg.Name,
 	)
@@ -21,18 +21,12 @@ func (k msgServer) UpdateName(goCtx context.Context, msg *types.MsgUpdateName) (
 	}
 
 	// Checks if the the msg owner is the same as the current owner
-	if msg.Owner != valFound.Owner {
+	if msg.Owner != name.Owner {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 
-	var name = types.Name{
-		Owner:       msg.Owner,
-		Name:        msg.Name,
-		Destination: msg.Destination,
-		Price:       msg.Price,
-		Expires:     msg.Expires,
-		Authorized:  msg.Authorized,
-	}
+	name.Destination = msg.Destination
+	name.Authorized = msg.Authorized
 
 	k.SetName(ctx, name)
 

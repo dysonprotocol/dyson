@@ -9436,20 +9436,7 @@
             "destination": {
               "type": "string"
             },
-            "price": {
-              "type": "string"
-            },
-            "expires": {
-              "type": "string",
-              "format": "date-time"
-            },
             "authorized": {
-              "type": "string"
-            },
-            "commit": {
-              "type": "string"
-            },
-            "salt": {
               "type": "string"
             }
           },
