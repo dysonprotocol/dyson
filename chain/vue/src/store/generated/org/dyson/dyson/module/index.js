@@ -2,27 +2,27 @@
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgCreateSchedualedRun } from "./types/dyson/tx";
-import { MsgUpdateSchedualedRun } from "./types/dyson/tx";
-import { MsgUpdateScript } from "./types/dyson/tx";
-import { MsgDeleteStorage } from "./types/dyson/tx";
 import { MsgRun } from "./types/dyson/msgrun";
 import { MsgCreateStorage } from "./types/dyson/tx";
-import { MsgDeleteScript } from "./types/dyson/tx";
 import { MsgDeleteSchedualedRun } from "./types/dyson/tx";
 import { MsgCreateScript } from "./types/dyson/tx";
+import { MsgUpdateScript } from "./types/dyson/tx";
+import { MsgDeleteScript } from "./types/dyson/tx";
 import { MsgUpdateStorage } from "./types/dyson/tx";
+import { MsgCreateSchedualedRun } from "./types/dyson/tx";
+import { MsgUpdateSchedualedRun } from "./types/dyson/tx";
+import { MsgDeleteStorage } from "./types/dyson/tx";
 const types = [
-    ["/dyson.MsgCreateSchedualedRun", MsgCreateSchedualedRun],
-    ["/dyson.MsgUpdateSchedualedRun", MsgUpdateSchedualedRun],
-    ["/dyson.MsgUpdateScript", MsgUpdateScript],
-    ["/dyson.MsgDeleteStorage", MsgDeleteStorage],
     ["/dyson.MsgRun", MsgRun],
     ["/dyson.MsgCreateStorage", MsgCreateStorage],
-    ["/dyson.MsgDeleteScript", MsgDeleteScript],
     ["/dyson.MsgDeleteSchedualedRun", MsgDeleteSchedualedRun],
     ["/dyson.MsgCreateScript", MsgCreateScript],
+    ["/dyson.MsgUpdateScript", MsgUpdateScript],
+    ["/dyson.MsgDeleteScript", MsgDeleteScript],
     ["/dyson.MsgUpdateStorage", MsgUpdateStorage],
+    ["/dyson.MsgCreateSchedualedRun", MsgCreateSchedualedRun],
+    ["/dyson.MsgUpdateSchedualedRun", MsgUpdateSchedualedRun],
+    ["/dyson.MsgDeleteStorage", MsgDeleteStorage],
 ];
 export const MissingWalletError = new Error("wallet is required");
 export const registry = new Registry(types);
@@ -43,16 +43,16 @@ const txClient = async (wallet, { addr: addr } = { addr: "http://localhost:26657
     const { address } = (await wallet.getAccounts())[0];
     return {
         signAndBroadcast: (msgs, { fee, memo } = { fee: defaultFee, memo: "" }) => client.signAndBroadcast(address, msgs, fee, memo),
-        msgCreateSchedualedRun: (data) => ({ typeUrl: "/dyson.MsgCreateSchedualedRun", value: MsgCreateSchedualedRun.fromPartial(data) }),
-        msgUpdateSchedualedRun: (data) => ({ typeUrl: "/dyson.MsgUpdateSchedualedRun", value: MsgUpdateSchedualedRun.fromPartial(data) }),
-        msgUpdateScript: (data) => ({ typeUrl: "/dyson.MsgUpdateScript", value: MsgUpdateScript.fromPartial(data) }),
-        msgDeleteStorage: (data) => ({ typeUrl: "/dyson.MsgDeleteStorage", value: MsgDeleteStorage.fromPartial(data) }),
         msgRun: (data) => ({ typeUrl: "/dyson.MsgRun", value: MsgRun.fromPartial(data) }),
         msgCreateStorage: (data) => ({ typeUrl: "/dyson.MsgCreateStorage", value: MsgCreateStorage.fromPartial(data) }),
-        msgDeleteScript: (data) => ({ typeUrl: "/dyson.MsgDeleteScript", value: MsgDeleteScript.fromPartial(data) }),
         msgDeleteSchedualedRun: (data) => ({ typeUrl: "/dyson.MsgDeleteSchedualedRun", value: MsgDeleteSchedualedRun.fromPartial(data) }),
         msgCreateScript: (data) => ({ typeUrl: "/dyson.MsgCreateScript", value: MsgCreateScript.fromPartial(data) }),
+        msgUpdateScript: (data) => ({ typeUrl: "/dyson.MsgUpdateScript", value: MsgUpdateScript.fromPartial(data) }),
+        msgDeleteScript: (data) => ({ typeUrl: "/dyson.MsgDeleteScript", value: MsgDeleteScript.fromPartial(data) }),
         msgUpdateStorage: (data) => ({ typeUrl: "/dyson.MsgUpdateStorage", value: MsgUpdateStorage.fromPartial(data) }),
+        msgCreateSchedualedRun: (data) => ({ typeUrl: "/dyson.MsgCreateSchedualedRun", value: MsgCreateSchedualedRun.fromPartial(data) }),
+        msgUpdateSchedualedRun: (data) => ({ typeUrl: "/dyson.MsgUpdateSchedualedRun", value: MsgUpdateSchedualedRun.fromPartial(data) }),
+        msgDeleteStorage: (data) => ({ typeUrl: "/dyson.MsgDeleteStorage", value: MsgDeleteStorage.fromPartial(data) }),
     };
 };
 const queryClient = async ({ addr: addr } = { addr: "http://localhost:1317" }) => {

@@ -13421,7 +13421,7 @@ paths:
                         }
       tags:
         - Query
-  '/org/dyson/names/generate_commit/{owner}/{name}/{salt}':
+  /org/dyson/names/generate_commit:
     get:
       summary: Queries a list of GenerateCommit items.
       operationId: NamesGenerateCommit
@@ -13453,16 +13453,16 @@ paths:
                   additionalProperties: {}
       parameters:
         - name: owner
-          in: path
-          required: true
+          in: query
+          required: false
           type: string
         - name: name
-          in: path
-          required: true
+          in: query
+          required: false
           type: string
         - name: salt
-          in: path
-          required: true
+          in: query
+          required: false
           type: string
       tags:
         - Query

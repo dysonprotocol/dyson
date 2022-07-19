@@ -186,9 +186,13 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags Query
      * @name QueryGenerateCommit
      * @summary Queries a list of GenerateCommit items.
-     * @request GET:/org/dyson/names/generate_commit/{owner}/{name}/{salt}
+     * @request GET:/org/dyson/names/generate_commit
      */
-    queryGenerateCommit: (owner: string, name: string, salt: string, params?: RequestParams) => Promise<HttpResponse<NamesQueryGenerateCommitResponse, RpcStatus>>;
+    queryGenerateCommit: (query?: {
+        owner?: string;
+        name?: string;
+        salt?: string;
+    }, params?: RequestParams) => Promise<HttpResponse<NamesQueryGenerateCommitResponse, RpcStatus>>;
     /**
      * No description
      *

@@ -365,12 +365,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QueryGenerateCommit
    * @summary Queries a list of GenerateCommit items.
-   * @request GET:/org/dyson/names/generate_commit/{owner}/{name}/{salt}
+   * @request GET:/org/dyson/names/generate_commit
    */
-  queryGenerateCommit = (owner: string, name: string, salt: string, params: RequestParams = {}) =>
+  queryGenerateCommit = (query?: { owner?: string; name?: string; salt?: string }, params: RequestParams = {}) =>
     this.request<NamesQueryGenerateCommitResponse, RpcStatus>({
-      path: `/org/dyson/names/generate_commit/${owner}/${name}/${salt}`,
+      path: `/org/dyson/names/generate_commit`,
       method: "GET",
+      query: query,
       format: "json",
       ...params,
     });
