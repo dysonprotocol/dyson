@@ -3,6 +3,7 @@
     <template v-slot:default>
       <SpLinkIcon link="/" text="Dashboard" icon="Dashboard" />
       <SpLinkIcon link="/txbuilder" text="Tx Builder" icon="Form" />
+      <SpLinkIcon link="/name" text="Names" icon="Form" />
       <SpLinkIcon v-if="address" v-bind:link="'/scripts/' + address" text="Your Script" icon="Docs" />
       <SpLinkIcon v-if="!address" text="Your script (unlock wallet)" icon="Docs" />
       <SpLinkIcon link="/docs" text="Documentation" icon="Docs" />
