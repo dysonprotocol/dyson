@@ -53,7 +53,7 @@ func (msg *MsgRegister) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid coins (%s) should be a number ending in 'dys': %s", msg.Price, err)
 	}
-	if coin.Amount < 100 {
+	if coin.Amount.LT(sdk.NewInt(100)) {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid coin amount, must be greater than 100': %s", coin.Amount)
 	}
 	if coin.Denom != "dys" {
