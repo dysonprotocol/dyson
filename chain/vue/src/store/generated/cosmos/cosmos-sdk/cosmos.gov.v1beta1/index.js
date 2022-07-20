@@ -179,7 +179,7 @@ export default {
                 return getters['getProposal']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryProposal', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryProposal', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryProposals({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -197,7 +197,7 @@ export default {
                 return getters['getProposals']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryProposals', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryProposals', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryVote({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -211,7 +211,7 @@ export default {
                 return getters['getVote']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryVote', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryVote', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryVotes({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -229,7 +229,7 @@ export default {
                 return getters['getVotes']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryVotes', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryVotes', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryParams({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -243,7 +243,7 @@ export default {
                 return getters['getParams']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryParams', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryParams', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryDeposit({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -257,7 +257,7 @@ export default {
                 return getters['getDeposit']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryDeposit', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryDeposit', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryDeposits({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -275,7 +275,7 @@ export default {
                 return getters['getDeposits']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryDeposits', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryDeposits', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryTallyResult({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -289,23 +289,23 @@ export default {
                 return getters['getTallyResult']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryTallyResult', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryTallyResult', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
-        async sendMsgDeposit({ rootGetters }, { value, fee = [], memo = '' }) {
+        async sendMsgSubmitProposal({ rootGetters }, { value, fee = [], memo = '' }) {
             try {
                 const txClient = await initTxClient(rootGetters);
-                const msg = await txClient.msgDeposit(value);
+                const msg = await txClient.msgSubmitProposal(value);
                 const result = await txClient.signAndBroadcast([msg], { fee: { amount: fee,
                         gas: "200000" }, memo });
                 return result;
             }
             catch (e) {
                 if (e == MissingWalletError) {
-                    throw new SpVuexError('TxClient:MsgDeposit:Init', 'Could not initialize signing client. Wallet is required.');
+                    throw new SpVuexError('TxClient:MsgSubmitProposal:Init', 'Could not initialize signing client. Wallet is required.');
                 }
                 else {
-                    throw new SpVuexError('TxClient:MsgDeposit:Send', 'Could not broadcast Tx: ' + e.message);
+                    throw new SpVuexError('TxClient:MsgSubmitProposal:Send', 'Could not broadcast Tx: ' + e.message);
                 }
             }
         },
@@ -326,20 +326,20 @@ export default {
                 }
             }
         },
-        async sendMsgSubmitProposal({ rootGetters }, { value, fee = [], memo = '' }) {
+        async sendMsgDeposit({ rootGetters }, { value, fee = [], memo = '' }) {
             try {
                 const txClient = await initTxClient(rootGetters);
-                const msg = await txClient.msgSubmitProposal(value);
+                const msg = await txClient.msgDeposit(value);
                 const result = await txClient.signAndBroadcast([msg], { fee: { amount: fee,
                         gas: "200000" }, memo });
                 return result;
             }
             catch (e) {
                 if (e == MissingWalletError) {
-                    throw new SpVuexError('TxClient:MsgSubmitProposal:Init', 'Could not initialize signing client. Wallet is required.');
+                    throw new SpVuexError('TxClient:MsgDeposit:Init', 'Could not initialize signing client. Wallet is required.');
                 }
                 else {
-                    throw new SpVuexError('TxClient:MsgSubmitProposal:Send', 'Could not broadcast Tx: ' + e.message);
+                    throw new SpVuexError('TxClient:MsgDeposit:Send', 'Could not broadcast Tx: ' + e.message);
                 }
             }
         },
@@ -360,18 +360,18 @@ export default {
                 }
             }
         },
-        async MsgDeposit({ rootGetters }, { value }) {
+        async MsgSubmitProposal({ rootGetters }, { value }) {
             try {
                 const txClient = await initTxClient(rootGetters);
-                const msg = await txClient.msgDeposit(value);
+                const msg = await txClient.msgSubmitProposal(value);
                 return msg;
             }
             catch (e) {
                 if (e == MissingWalletError) {
-                    throw new SpVuexError('TxClient:MsgDeposit:Init', 'Could not initialize signing client. Wallet is required.');
+                    throw new SpVuexError('TxClient:MsgSubmitProposal:Init', 'Could not initialize signing client. Wallet is required.');
                 }
                 else {
-                    throw new SpVuexError('TxClient:MsgDeposit:Create', 'Could not create message: ' + e.message);
+                    throw new SpVuexError('TxClient:MsgSubmitProposal:Create', 'Could not create message: ' + e.message);
                 }
             }
         },
@@ -390,18 +390,18 @@ export default {
                 }
             }
         },
-        async MsgSubmitProposal({ rootGetters }, { value }) {
+        async MsgDeposit({ rootGetters }, { value }) {
             try {
                 const txClient = await initTxClient(rootGetters);
-                const msg = await txClient.msgSubmitProposal(value);
+                const msg = await txClient.msgDeposit(value);
                 return msg;
             }
             catch (e) {
                 if (e == MissingWalletError) {
-                    throw new SpVuexError('TxClient:MsgSubmitProposal:Init', 'Could not initialize signing client. Wallet is required.');
+                    throw new SpVuexError('TxClient:MsgDeposit:Init', 'Could not initialize signing client. Wallet is required.');
                 }
                 else {
-                    throw new SpVuexError('TxClient:MsgSubmitProposal:Create', 'Could not create message: ' + e.message);
+                    throw new SpVuexError('TxClient:MsgDeposit:Create', 'Could not create message: ' + e.message);
                 }
             }
         },

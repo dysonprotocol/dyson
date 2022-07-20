@@ -172,7 +172,7 @@ export default {
                 return getters['getBalance']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryBalance', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryBalance', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryAllBalances({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -190,7 +190,7 @@ export default {
                 return getters['getAllBalances']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryAllBalances', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryAllBalances', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryTotalSupply({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -208,7 +208,7 @@ export default {
                 return getters['getTotalSupply']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryTotalSupply', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryTotalSupply', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QuerySupplyOf({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -222,7 +222,7 @@ export default {
                 return getters['getSupplyOf']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QuerySupplyOf', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QuerySupplyOf', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryParams({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -236,7 +236,7 @@ export default {
                 return getters['getParams']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryParams', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryParams', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryDenomMetadata({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -250,7 +250,7 @@ export default {
                 return getters['getDenomMetadata']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryDenomMetadata', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryDenomMetadata', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryDenomsMetadata({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -268,7 +268,7 @@ export default {
                 return getters['getDenomsMetadata']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryDenomsMetadata', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryDenomsMetadata', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async sendMsgMultiSend({ rootGetters }, { value, fee = [], memo = '' }) {

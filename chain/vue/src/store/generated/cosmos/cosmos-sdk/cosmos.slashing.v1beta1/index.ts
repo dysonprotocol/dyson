@@ -153,7 +153,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryParams', payload: { options: { all }, params: {...key},query }})
 				return getters['getParams']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryParams', 'API Node Unavailable. Could not perform query: ' + e.message)
+				throw new SpVuexError('QueryClient:QueryParams', 'API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -175,7 +175,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QuerySigningInfo', payload: { options: { all }, params: {...key},query }})
 				return getters['getSigningInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QuerySigningInfo', 'API Node Unavailable. Could not perform query: ' + e.message)
+				throw new SpVuexError('QueryClient:QuerySigningInfo', 'API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -201,7 +201,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QuerySigningInfos', payload: { options: { all }, params: {...key},query }})
 				return getters['getSigningInfos']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QuerySigningInfos', 'API Node Unavailable. Could not perform query: ' + e.message)
+				throw new SpVuexError('QueryClient:QuerySigningInfos', 'API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},

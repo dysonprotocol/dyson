@@ -138,7 +138,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryEvidence', payload: { options: { all }, params: {...key},query }})
 				return getters['getEvidence']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryEvidence', 'API Node Unavailable. Could not perform query: ' + e.message)
+				throw new SpVuexError('QueryClient:QueryEvidence', 'API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -164,7 +164,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAllEvidence', payload: { options: { all }, params: {...key},query }})
 				return getters['getAllEvidence']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryAllEvidence', 'API Node Unavailable. Could not perform query: ' + e.message)
+				throw new SpVuexError('QueryClient:QueryAllEvidence', 'API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},

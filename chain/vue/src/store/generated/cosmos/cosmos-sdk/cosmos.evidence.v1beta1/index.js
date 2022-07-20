@@ -121,7 +121,7 @@ export default {
                 return getters['getEvidence']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryEvidence', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryEvidence', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async QueryAllEvidence({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
@@ -139,7 +139,7 @@ export default {
                 return getters['getAllEvidence']({ params: { ...key }, query }) ?? {};
             }
             catch (e) {
-                throw new SpVuexError('QueryClient:QueryAllEvidence', 'API Node Unavailable. Could not perform query: ' + e.message);
+                throw new SpVuexError('QueryClient:QueryAllEvidence', 'API Node Unavailable. Could not perform query: ' + e.error.message);
             }
         },
         async sendMsgSubmitEvidence({ rootGetters }, { value, fee = [], memo = '' }) {
