@@ -144,7 +144,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAllowance', payload: { options: { all }, params: {...key},query }})
 				return getters['getAllowance']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryAllowance', 'API Node Unavailable. Could not perform query: ' + e.message)
+				throw new SpVuexError('QueryClient:QueryAllowance', 'API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -170,7 +170,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAllowances', payload: { options: { all }, params: {...key},query }})
 				return getters['getAllowances']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryAllowances', 'API Node Unavailable. Could not perform query: ' + e.message)
+				throw new SpVuexError('QueryClient:QueryAllowances', 'API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},

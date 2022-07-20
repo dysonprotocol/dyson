@@ -128,7 +128,7 @@ class ScriptDetail(APIView):
     renderer_classes = [BetterTemplateHTMLRenderer, JSONRenderer, BrowsableAPIRenderer]
     template_name = "index.html"
 
-    def get(self, request, script_address=None):
+    def get(self, request, **kwargs):
         # TODO: read from settings
         return Response(None)
 
@@ -233,11 +233,13 @@ def node_info(request):
 urlpatterns = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + [
     re_path(r"^$", ScriptDetail.as_view(), name="index"),
     re_path(r"^tx$", ScriptDetail.as_view()),
-    re_path(r"^scripts/?$", ScriptDetail.as_view()),
-    re_path(r"^scripts/(?P<script_address>\w+)$", ScriptDetail.as_view()),
-    re_path(r"^txbuilder$", ScriptDetail.as_view()),
+    re_path(r"^scripts/$", ScriptDetail.as_view()),
+    re_path(r"^scripts/(?P<script_address>\w+)/$", ScriptDetail.as_view()),
+    re_path(r"^txbuilder/$", ScriptDetail.as_view()),
     re_path(r"^web/(?P<script_address>\w+)", dys_view),
     re_path(r"^docs", ScriptDetail.as_view()),
+    re_path(r"^name/$", ScriptDetail.as_view()),
+    re_path(r"^name/(?P<name>\w+)/$", ScriptDetail.as_view()),
 ]
 
 # djanog-hosts callback
