@@ -3,8 +3,10 @@ version: "3.9"
 services: 
   chain:
     build: ./chain
-    image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/chain:${tag:-latest}
+    image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/chain:${TAG}
     command: make dev
+    env_file:
+      - .env 
     ports: 
       - "26656-26657:26656-26657"
       - "1317:1317"
@@ -14,8 +16,10 @@ services:
 
   frontend:
     build: ./frontend
-    image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/frontend:${tag:-latest}
+    image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/frontend:${TAG}
     command: make dev
+    env_file:
+      - .env 
     user: "${UID}:${GID}"
     volumes:
       - ./frontend:/code
@@ -35,19 +39,15 @@ services:
 
   vue:
     build: ./chain/vue
-    image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/vue:${tag:-latest}
-    profiles: ["vue"]
-    command: make build
+    image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/vue:${TAG}
+    command: make dev
+    env_file:
+      - .env 
+    volumes:
+      - ./chain/vue:/app
     ports:
       - "8080:8080"
     environment:
-      - VUE_APP_ADDRESS_PREFIX=$$VUE_APP_ADDRESS_PREFIX
-      - VUE_APP_API_COSMOS=$$VUE_APP_API_COSMOS
-      - VUE_APP_API_TENDERMINT=$$VUE_APP_API_TENDERMINT
-      - VUE_APP_CHAIN_ID=$$VUE_APP_CHAIN_ID
-      - VUE_APP_CHAIN_NAME=$$VUE_APP_CHAIN_NAME
-      - VUE_APP_WS_TENDERMINT=$$VUE_APP_WS_TENDERMINT
-
       - NODE_ENV=$NODE_ENV
     volumes:
       - ./chain/vue:/app

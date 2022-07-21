@@ -23,7 +23,7 @@
     <div v-for="name in names" v-bind:key="name.name">
       <div v-if="name.name.toLowerCase().includes(search.toLowerCase())">
         <router-link :to="{ name: 'name-detail', params: { name: name.name } }">
-          {{ name.name }}
+          Name: {{ name.name }}
         </router-link>
       </div>
     </div>
@@ -40,13 +40,13 @@ export default {
       const items = this.$store.getters['names/getNameAll']()
       window.items = items
       return items ? items['name'] : []
-    }
+    },
   },
   created: async function () {
     await this.$store.dispatch('names/QueryNameAll', {
-      options: { subscribe: false, all: true }
+      options: { subscribe: false, all: true },
     })
   },
-  methods: {}
+  methods: {},
 }
 </script>

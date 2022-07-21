@@ -32,6 +32,7 @@ type RpcService struct {
 	ctx           context.Context
 	ScriptAddress sdk.Address
 }
+
 type EvalScriptContext struct {
 	Sender       string
 	Coins        string
@@ -42,6 +43,7 @@ type EvalScriptContext struct {
 	Code         string
 	ExtraLines   string
 }
+
 type EvalScriptResponse struct {
 	Response string
 }
@@ -74,7 +76,6 @@ func (k Keeper) GetScript(ctx sdk.Context, index string) (val types.Script, foun
 func (k Keeper) RemoveScript(
 	ctx sdk.Context,
 	index string,
-
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ScriptKeyPrefix))
 	store.Delete(types.ScriptKey(
@@ -110,11 +111,13 @@ func (k Keeper) GetSchema(ctx sdk.Context, index string) (val string, found bool
 	cmd.Stdin = strings.NewReader(script.Code)
 	out, runErr := cmd.CombinedOutput()
 	if runErr != nil {
-		fmt.Printf("Output: %s\n", out)
+		fmt.Printf("GetSchema Output: %s\n", out)
 		log.Fatal(runErr)
 	}
-	return string(out[:]), true
 
+	temp := strings.Split(strings.TrimSpace(string(out)), "\n")
+	response := string(temp[len(temp)-1])
+	return response, true
 }
 
 func (k Keeper) RunWsgi(goCtx context.Context, index string, httpreq string) (val string, found bool) {
@@ -159,11 +162,10 @@ func (k Keeper) RunWsgi(goCtx context.Context, index string, httpreq string) (va
 	fmt.Printf("out: %s\n", errStr)
 	if cmdErr != nil {
 		return fmt.Sprintf("HTTP/1.1 500\ncontent-type: text/plain\n\n%+v\nout: %s\nerr:%s", cmdErr, outStr, errStr), true
-		//log.Fatal(cmdErr)
+		// log.Fatal(cmdErr)
 	}
 
 	return string(outStr[:]), true
-
 }
 
 type ResultException struct {
@@ -178,7 +180,6 @@ type EvalResult struct {
 }
 
 func (k Keeper) NewRPCServer(goCtx context.Context, index string) (string, *http.Server, error) {
-
 	s := rpc.NewServer()
 	s.RegisterCodec(rpcjson.NewCodec(), "application/json")
 	s.RegisterCodec(rpcjson.NewCodec(), "application/json;charset=UTF-8")
@@ -199,7 +200,6 @@ func (k Keeper) NewRPCServer(goCtx context.Context, index string) (string, *http
 	srv := &http.Server{Handler: r}
 
 	listener, err := net.Listen("tcp", "localhost:0")
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -210,7 +210,6 @@ func (k Keeper) NewRPCServer(goCtx context.Context, index string) (string, *http
 		fmt.Println("start ListenAndServe")
 		srv.Serve(listener)
 		fmt.Println("end ListenAndServe")
-
 	}()
 	fmt.Println("running dysvm")
 	port := strconv.Itoa(listener.Addr().(*net.TCPAddr).Port)
@@ -218,7 +217,6 @@ func (k Keeper) NewRPCServer(goCtx context.Context, index string) (string, *http
 }
 
 func (k Keeper) EvalScript(goCtx context.Context, scriptCtx *EvalScriptContext, raiseRunErr bool) (resp *EvalScriptResponse, err error) {
-
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	cachedCtx, Write := ctx.CacheContext()
 	startingGas := ctx.GasMeter().GasConsumed()
@@ -307,7 +305,7 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 	}
 
 	out, runErr := exec.Command(
-		//TODO: should specify python binary?
+		// TODO: should specify python binary?
 		"python3",
 		"dysvm_server.py",
 		port,
@@ -333,7 +331,7 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 	if err1 != nil {
 		fmt.Println(err1.Error())
 	}
-	//ctx.GasMeter().ConsumeGas(evalResult.NodesCalled, "nodes_called")
+	// ctx.GasMeter().ConsumeGas(evalResult.NodesCalled, "nodes_called")
 	fmt.Printf("ctx.GasMeter().GasConsumed(): %v\n", ctx.GasMeter().GasConsumed())
 	fmt.Printf("cumsize: %v\n", evalResult.CumSize)
 	fmt.Printf("nodes called: %v\n", evalResult.NodesCalled)

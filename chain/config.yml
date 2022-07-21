@@ -27,6 +27,7 @@ init:
   app:
     minimum-gas-prices: "0.01dys"
 genesis:
+  chain_id: "dyson-testnet-01"
   app_state:
     staking:
       params:

@@ -1,10 +1,10 @@
 gen:
-		docker-compose --env .env.sample run chain make vuex
-		docker-compose --env .env.sample run chain make gen_rpc
+		docker-compose --env .env run chain make vuex
+		docker-compose --env .env run chain make gen_rpc
 run:
-		docker-compose --env .env.sample run vue
 
 build:
-		docker-compose --env .env.sample build chain
-		docker-compose --env .env.sample build frontend
+		docker-compose run -rm vue make build
+		docker-compose --env .env build chain
+		docker-compose --env .env build frontend
 
