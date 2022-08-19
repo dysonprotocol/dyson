@@ -4,7 +4,7 @@ gen:
 run:
 
 build:
-		docker-compose run -rm vue make build
+		docker-compose run --rm vue make build
 		docker-compose --env .env build chain
 		docker-compose --env .env build frontend
 
