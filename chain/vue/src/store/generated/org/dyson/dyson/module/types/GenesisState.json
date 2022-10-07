@@ -16,9 +16,15 @@
                     },
                     "type": "array"
                 },
-                "schedualed_run_list": {
+                "scheduled_run_list": {
                     "items": {
-                        "$ref": "#/definitions/dyson.SchedualedRun"
+                        "$ref": "#/definitions/dyson.ScheduledRun"
+                    },
+                    "type": "array"
+                },
+                "cronList": {
+                    "items": {
+                        "$ref": "#/definitions/dyson.Cron"
                     },
                     "type": "array",
                     "description": "this line is used by starport scaffolding # genesis/proto/state"
@@ -42,6 +48,36 @@
             "type": "object",
             "title": "Coin",
             "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+        },
+        "cosmos.base.v1beta1.DecCoin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Dec Coin",
+            "description": "DecCoin defines a token with a denomination and a decimal amount. NOTE: The amount field is an Dec which implements the custom method signatures required by gogoproto."
+        },
+        "dyson.Cron": {
+            "properties": {
+                "blockHeight": {
+                    "type": "string"
+                },
+                "indexes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Cron"
         },
         "dyson.MsgRun": {
             "properties": {
@@ -89,7 +125,7 @@
             "type": "object",
             "title": "Msg Run Response"
         },
-        "dyson.SchedualedRun": {
+        "dyson.ScheduledRun": {
             "properties": {
                 "index": {
                     "type": "string"
@@ -115,7 +151,7 @@
                     "type": "string"
                 },
                 "gasprice": {
-                    "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+                    "$ref": "#/definitions/cosmos.base.v1beta1.DecCoin",
                     "additionalProperties": true
                 },
                 "fee": {
@@ -125,7 +161,7 @@
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Schedualed Run"
+            "title": "Scheduled Run"
         },
         "dyson.Script": {
             "properties": {

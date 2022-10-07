@@ -25,7 +25,7 @@
             "properties": {
                 "next_key": {
                     "type": "string",
-                    "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
+                    "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.",
                     "format": "binary",
                     "binaryEncoding": "base64"
                 },
@@ -102,7 +102,8 @@
                 },
                 "final_tally_result": {
                     "$ref": "#/definitions/cosmos.gov.v1beta1.TallyResult",
-                    "additionalProperties": true
+                    "additionalProperties": true,
+                    "description": "final_tally_result is the final tally result of the proposal. When querying a proposal via gRPC, this field is not populated until the proposal's voting period has ended."
                 },
                 "submit_time": {
                     "type": "string",

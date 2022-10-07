@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/EventWithdrawProposal",
+    "definitions": {
+        "EventWithdrawProposal": {
+            "properties": {
+                "proposal_id": {
+                    "type": "string",
+                    "description": "proposal_id is the unique ID of the proposal."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Event Withdraw Proposal",
+            "description": "EventWithdrawProposal is an event emitted when a proposal is withdrawn."
+        }
+    }
+}

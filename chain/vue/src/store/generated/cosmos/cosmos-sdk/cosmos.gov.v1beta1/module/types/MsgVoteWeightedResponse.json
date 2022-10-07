@@ -6,7 +6,7 @@
             "additionalProperties": true,
             "type": "object",
             "title": "Msg Vote Weighted Response",
-            "description": "MsgVoteWeightedResponse defines the Msg/VoteWeighted response type."
+            "description": "MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. Since: cosmos-sdk 0.43"
         }
     }
 }

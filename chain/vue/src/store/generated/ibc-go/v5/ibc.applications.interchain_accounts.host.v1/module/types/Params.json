@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Params",
+    "definitions": {
+        "Params": {
+            "properties": {
+                "host_enabled": {
+                    "type": "boolean",
+                    "description": "host_enabled enables or disables the host submodule."
+                },
+                "allow_messages": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "allow_messages defines a list of sdk message typeURLs allowed to be executed on a host chain."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "Params defines the set of on-chain interchain accounts parameters. The following parameters may be used to disable the host submodule."
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/PacketSequence",
+    "definitions": {
+        "PacketSequence": {
+            "properties": {
+                "port_id": {
+                    "type": "string"
+                },
+                "channel_id": {
+                    "type": "string"
+                },
+                "sequence": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Packet Sequence",
+            "description": "PacketSequence defines the genesis type necessary to retrieve and store next send and receive sequences."
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgCreateClientResponse",
+    "definitions": {
+        "MsgCreateClientResponse": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Create Client Response",
+            "description": "MsgCreateClientResponse defines the Msg/CreateClient response type."
+        }
+    }
+}

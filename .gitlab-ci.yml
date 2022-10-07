@@ -16,5 +16,8 @@ chain_build:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - cp .env.sample .env
   script:
-    -  TAG="$CI_COMMIT_REF_SLUG" GID=${GID} make build
-    -  TAG="$CI_COMMIT_REF_SLUG" docker-compose push
+    - echo "USER=$USER UID=$UID GID=$GID"
+    - TAG="$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA" make build
+    - TAG="$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA" docker-compose push chain frontend pypy
+variables:
+      GIT_SUBMODULE_STRATEGY: recursive

@@ -3,12 +3,6 @@
     "$ref": "#/definitions/MsgSetPriceAndExtendResponse",
     "definitions": {
         "MsgSetPriceAndExtendResponse": {
-            "properties": {
-                "expiry": {
-                    "type": "string",
-                    "format": "date-time"
-                }
-            },
             "additionalProperties": true,
             "type": "object",
             "title": "Msg Set Price And Extend Response"

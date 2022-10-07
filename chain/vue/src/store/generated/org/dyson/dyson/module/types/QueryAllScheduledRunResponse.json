@@ -1,0 +1,153 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryAllScheduledRunResponse",
+    "definitions": {
+        "QueryAllScheduledRunResponse": {
+            "properties": {
+                "scheduled_run": {
+                    "items": {
+                        "$ref": "#/definitions/dyson.ScheduledRun"
+                    },
+                    "type": "array"
+                },
+                "pagination": {
+                    "$ref": "#/definitions/cosmos.base.query.v1beta1.PageResponse",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query All Scheduled Run Response"
+        },
+        "cosmos.base.query.v1beta1.PageResponse": {
+            "properties": {
+                "next_key": {
+                    "type": "string",
+                    "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "total": {
+                    "type": "string",
+                    "description": "total is total number of results available if PageRequest.count_total was set, its value is undefined otherwise"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Page Response",
+            "description": "PageResponse is to be embedded in gRPC response messages where the corresponding request message has used PageRequest.  message SomeResponse {          repeated Bar results = 1;          PageResponse page = 2;  }"
+        },
+        "cosmos.base.v1beta1.Coin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Coin",
+            "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+        },
+        "cosmos.base.v1beta1.DecCoin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Dec Coin",
+            "description": "DecCoin defines a token with a denomination and a decimal amount. NOTE: The amount field is an Dec which implements the custom method signatures required by gogoproto."
+        },
+        "dyson.MsgRun": {
+            "properties": {
+                "creator": {
+                    "type": "string",
+                    "description": "The account sending the transaction"
+                },
+                "address": {
+                    "type": "string",
+                    "description": "dys address of the scrit to call"
+                },
+                "extra_lines": {
+                    "type": "string",
+                    "description": "optional extra source code to append to the end of the script before running"
+                },
+                "function_name": {
+                    "type": "string",
+                    "description": "optional function to call"
+                },
+                "args": {
+                    "type": "string",
+                    "description": "optional args to call the function with"
+                },
+                "kwargs": {
+                    "type": "string",
+                    "description": "optional kwargs to run"
+                },
+                "coins": {
+                    "type": "string",
+                    "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Run",
+            "description": "MsgRun runs a script at a specific address"
+        },
+        "dyson.MsgRunResponse": {
+            "properties": {
+                "response": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Run Response"
+        },
+        "dyson.ScheduledRun": {
+            "properties": {
+                "index": {
+                    "type": "string"
+                },
+                "creator": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "string"
+                },
+                "gas": {
+                    "type": "string"
+                },
+                "msg": {
+                    "$ref": "#/definitions/dyson.MsgRun",
+                    "additionalProperties": true
+                },
+                "resp": {
+                    "$ref": "#/definitions/dyson.MsgRunResponse",
+                    "additionalProperties": true
+                },
+                "error": {
+                    "type": "string"
+                },
+                "gasprice": {
+                    "$ref": "#/definitions/cosmos.base.v1beta1.DecCoin",
+                    "additionalProperties": true
+                },
+                "fee": {
+                    "$ref": "#/definitions/cosmos.base.v1beta1.Coin",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Scheduled Run"
+        }
+    }
+}

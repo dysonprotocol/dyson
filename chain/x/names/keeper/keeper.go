@@ -2,7 +2,9 @@ package keeper
 
 import (
 	"fmt"
+
 	"github.com/cosmos/cosmos-sdk/codec"
+	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
@@ -15,8 +17,8 @@ import (
 type (
 	Keeper struct {
 		cdc        codec.BinaryCodec
-		storeKey   sdk.StoreKey
-		memKey     sdk.StoreKey
+		storeKey   storetypes.StoreKey
+		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
 
 		accountKeeper types.AccountKeeper
@@ -27,7 +29,7 @@ type (
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
-	memKey sdk.StoreKey,
+	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
 
 	accountKeeper types.AccountKeeper,
@@ -63,4 +65,33 @@ func (k Keeper) PayFee(ctx sdk.Context, from sdk.AccAddress, fees sdk.Coin) erro
 	}
 
 	return nil
+}
+
+func (k Keeper) ResolveIndex(ctx sdk.Context, index string) (destination string) {
+
+	_, err := sdk.AccAddressFromBech32(index)
+	if err != nil {
+		name, found := k.GetName(ctx, index)
+		if found {
+			if name.ExpirationHeight > uint64(ctx.BlockHeight()) {
+				return name.Destination
+			}
+		}
+		return ""
+	}
+	return index
+}
+
+func (k Keeper) DeleteExpiredNames(ctx sdk.Context) {
+	h := uint64(ctx.BlockHeight())
+	ctx.Logger().Info(fmt.Sprintf("DeleteExpiredNames: %+v", h))
+	experations, _ := k.GetExpirations(ctx, fmt.Sprint(h))
+	for i := range experations.Names {
+		name, found := k.GetName(ctx, experations.Names[i])
+		if found && name.ExpirationHeight <= h {
+			ctx.Logger().Info(fmt.Sprintf("Deleting %+v", name))
+			k.RemoveName(ctx, name.Name)
+		}
+	}
+	k.RemoveExpirations(ctx, fmt.Sprint(h))
 }

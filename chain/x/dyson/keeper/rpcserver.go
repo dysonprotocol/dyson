@@ -3,24 +3,25 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	cosmosvestingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/auth/vesting"
-	cosmosvestingv1beta1types "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
+	cosmosauthv1beta1types "github.com/cosmos/cosmos-sdk/x/auth/types"
 	cosmosauthzv1beta1types "github.com/cosmos/cosmos-sdk/x/authz"
 	cosmosbankv1beta1keeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	cosmosbankv1beta1types "github.com/cosmos/cosmos-sdk/x/bank/types"
 	cosmosdistributionv1beta1keeper "github.com/cosmos/cosmos-sdk/x/distribution/keeper"
 	cosmosdistributionv1beta1types "github.com/cosmos/cosmos-sdk/x/distribution/types"
-	cosmosevidencev1beta1keeper "github.com/cosmos/cosmos-sdk/x/evidence/keeper"
-	cosmosevidencev1beta1types "github.com/cosmos/cosmos-sdk/x/evidence/types"
 	cosmosfeegrantv1beta1types "github.com/cosmos/cosmos-sdk/x/feegrant"
 	cosmosfeegrantv1beta1keeper "github.com/cosmos/cosmos-sdk/x/feegrant/keeper"
-	cosmosgovv1beta1keeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
-	cosmosgovv1beta1types "github.com/cosmos/cosmos-sdk/x/gov/types"
+	cosmosgovv1keeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
+	cosmosgovv1types "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
+	cosmosgroupv1types "github.com/cosmos/cosmos-sdk/x/group"
+	cosmosmintv1beta1types "github.com/cosmos/cosmos-sdk/x/mint/types"
 	cosmosslashingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/slashing/keeper"
 	cosmosslashingv1beta1types "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	cosmosstakingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	cosmosstakingv1beta1types "github.com/cosmos/cosmos-sdk/x/staking/types"
-	ibcapplicationstransferv1types "github.com/cosmos/ibc-go/modules/apps/transfer/types"
+	cosmosupgradev1beta1keeper "github.com/cosmos/cosmos-sdk/x/upgrade/keeper"
+	cosmosupgradev1beta1types "github.com/cosmos/cosmos-sdk/x/upgrade/types"
+	ibcapplicationstransferv1types "github.com/cosmos/ibc-go/v5/modules/apps/transfer/types"
 	"github.com/org/dyson/x/dyson/types"
 	dysontypes "github.com/org/dyson/x/dyson/types"
 	nameskeeper "github.com/org/dyson/x/names/keeper"
@@ -28,11 +29,131 @@ import (
 	"net/http"
 )
 
+// Keeper: cosmosauthv1beta1keeper
+// Types: cosmosauthv1beta1types
+// github.com/cosmos/cosmos-sdk/x/auth/keeper
+func (rpcservice *RpcService) Cosmosauthv1beta1queryaccounts(_ *http.Request, msg *cosmosauthv1beta1types.QueryAccountsRequest, response *cosmosauthv1beta1types.QueryAccountsResponse) (err error) {
+	r, err := rpcservice.k.cosmosauthv1beta1keeper.Accounts(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosauthv1beta1keeper
+// Types: cosmosauthv1beta1types
+// github.com/cosmos/cosmos-sdk/x/auth/keeper
+func (rpcservice *RpcService) Cosmosauthv1beta1queryaccount(_ *http.Request, msg *cosmosauthv1beta1types.QueryAccountRequest, response *cosmosauthv1beta1types.QueryAccountResponse) (err error) {
+	r, err := rpcservice.k.cosmosauthv1beta1keeper.Account(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosauthv1beta1keeper
+// Types: cosmosauthv1beta1types
+// github.com/cosmos/cosmos-sdk/x/auth/keeper
+func (rpcservice *RpcService) Cosmosauthv1beta1queryaccountaddressbyid(_ *http.Request, msg *cosmosauthv1beta1types.QueryAccountAddressByIDRequest, response *cosmosauthv1beta1types.QueryAccountAddressByIDResponse) (err error) {
+	r, err := rpcservice.k.cosmosauthv1beta1keeper.AccountAddressByID(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosauthv1beta1keeper
+// Types: cosmosauthv1beta1types
+// github.com/cosmos/cosmos-sdk/x/auth/keeper
+func (rpcservice *RpcService) Cosmosauthv1beta1queryparams(_ *http.Request, msg *cosmosauthv1beta1types.QueryParamsRequest, response *cosmosauthv1beta1types.QueryParamsResponse) (err error) {
+	r, err := rpcservice.k.cosmosauthv1beta1keeper.Params(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosauthv1beta1keeper
+// Types: cosmosauthv1beta1types
+// github.com/cosmos/cosmos-sdk/x/auth/keeper
+func (rpcservice *RpcService) Cosmosauthv1beta1querymoduleaccounts(_ *http.Request, msg *cosmosauthv1beta1types.QueryModuleAccountsRequest, response *cosmosauthv1beta1types.QueryModuleAccountsResponse) (err error) {
+	r, err := rpcservice.k.cosmosauthv1beta1keeper.ModuleAccounts(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosauthv1beta1keeper
+// Types: cosmosauthv1beta1types
+// github.com/cosmos/cosmos-sdk/x/auth/keeper
+func (rpcservice *RpcService) Cosmosauthv1beta1querybech32prefix(_ *http.Request, msg *cosmosauthv1beta1types.Bech32PrefixRequest, response *cosmosauthv1beta1types.Bech32PrefixResponse) (err error) {
+	r, err := rpcservice.k.cosmosauthv1beta1keeper.Bech32Prefix(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosauthv1beta1keeper
+// Types: cosmosauthv1beta1types
+// github.com/cosmos/cosmos-sdk/x/auth/keeper
+func (rpcservice *RpcService) Cosmosauthv1beta1queryaddressbytestostring(_ *http.Request, msg *cosmosauthv1beta1types.AddressBytesToStringRequest, response *cosmosauthv1beta1types.AddressBytesToStringResponse) (err error) {
+	r, err := rpcservice.k.cosmosauthv1beta1keeper.AddressBytesToString(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosauthv1beta1keeper
+// Types: cosmosauthv1beta1types
+// github.com/cosmos/cosmos-sdk/x/auth/keeper
+func (rpcservice *RpcService) Cosmosauthv1beta1queryaddressstringtobytes(_ *http.Request, msg *cosmosauthv1beta1types.AddressStringToBytesRequest, response *cosmosauthv1beta1types.AddressStringToBytesResponse) (err error) {
+	r, err := rpcservice.k.cosmosauthv1beta1keeper.AddressStringToBytes(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
 // Keeper: cosmosauthzv1beta1keeper
 // Types: cosmosauthzv1beta1types
 // None
 func (rpcservice *RpcService) Cosmosauthzv1beta1querygrants(_ *http.Request, msg *cosmosauthzv1beta1types.QueryGrantsRequest, response *cosmosauthzv1beta1types.QueryGrantsResponse) (err error) {
 	r, err := rpcservice.k.cosmosauthzv1beta1keeper.Grants(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosauthzv1beta1keeper
+// Types: cosmosauthzv1beta1types
+// None
+func (rpcservice *RpcService) Cosmosauthzv1beta1querygrantergrants(_ *http.Request, msg *cosmosauthzv1beta1types.QueryGranterGrantsRequest, response *cosmosauthzv1beta1types.QueryGranterGrantsResponse) (err error) {
+	r, err := rpcservice.k.cosmosauthzv1beta1keeper.GranterGrants(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosauthzv1beta1keeper
+// Types: cosmosauthzv1beta1types
+// None
+func (rpcservice *RpcService) Cosmosauthzv1beta1querygranteegrants(_ *http.Request, msg *cosmosauthzv1beta1types.QueryGranteeGrantsRequest, response *cosmosauthzv1beta1types.QueryGranteeGrantsResponse) (err error) {
+	r, err := rpcservice.k.cosmosauthzv1beta1keeper.GranteeGrants(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -184,6 +305,18 @@ func (rpcservice *RpcService) Cosmosbankv1beta1queryallbalances(_ *http.Request,
 // Keeper: cosmosbankv1beta1keeper
 // Types: cosmosbankv1beta1types
 // github.com/cosmos/cosmos-sdk/x/bank/keeper
+func (rpcservice *RpcService) Cosmosbankv1beta1queryspendablebalances(_ *http.Request, msg *cosmosbankv1beta1types.QuerySpendableBalancesRequest, response *cosmosbankv1beta1types.QuerySpendableBalancesResponse) (err error) {
+	r, err := rpcservice.k.cosmosbankv1beta1keeper.SpendableBalances(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosbankv1beta1keeper
+// Types: cosmosbankv1beta1types
+// github.com/cosmos/cosmos-sdk/x/bank/keeper
 func (rpcservice *RpcService) Cosmosbankv1beta1querytotalsupply(_ *http.Request, msg *cosmosbankv1beta1types.QueryTotalSupplyRequest, response *cosmosbankv1beta1types.QueryTotalSupplyResponse) (err error) {
 	r, err := rpcservice.k.cosmosbankv1beta1keeper.TotalSupply(rpcservice.ctx, msg)
 	if err != nil {
@@ -234,6 +367,18 @@ func (rpcservice *RpcService) Cosmosbankv1beta1querydenommetadata(_ *http.Reques
 // github.com/cosmos/cosmos-sdk/x/bank/keeper
 func (rpcservice *RpcService) Cosmosbankv1beta1querydenomsmetadata(_ *http.Request, msg *cosmosbankv1beta1types.QueryDenomsMetadataRequest, response *cosmosbankv1beta1types.QueryDenomsMetadataResponse) (err error) {
 	r, err := rpcservice.k.cosmosbankv1beta1keeper.DenomsMetadata(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosbankv1beta1keeper
+// Types: cosmosbankv1beta1types
+// github.com/cosmos/cosmos-sdk/x/bank/keeper
+func (rpcservice *RpcService) Cosmosbankv1beta1querydenomowners(_ *http.Request, msg *cosmosbankv1beta1types.QueryDenomOwnersRequest, response *cosmosbankv1beta1types.QueryDenomOwnersResponse) (err error) {
+	r, err := rpcservice.k.cosmosbankv1beta1keeper.DenomOwners(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -583,69 +728,6 @@ func (rpcservice *RpcService) Cosmosdistributionv1beta1sendmsgfundcommunitypool(
 	return nil
 }
 
-// Keeper: cosmosevidencev1beta1keeper
-// Types: cosmosevidencev1beta1types
-// github.com/cosmos/cosmos-sdk/x/evidence/keeper
-func (rpcservice *RpcService) Cosmosevidencev1beta1queryevidence(_ *http.Request, msg *cosmosevidencev1beta1types.QueryEvidenceRequest, response *cosmosevidencev1beta1types.QueryEvidenceResponse) (err error) {
-	r, err := rpcservice.k.cosmosevidencev1beta1keeper.Evidence(rpcservice.ctx, msg)
-	if err != nil {
-		return err
-	}
-	*response = *r
-	return nil
-}
-
-// Keeper: cosmosevidencev1beta1keeper
-// Types: cosmosevidencev1beta1types
-// github.com/cosmos/cosmos-sdk/x/evidence/keeper
-func (rpcservice *RpcService) Cosmosevidencev1beta1queryallevidence(_ *http.Request, msg *cosmosevidencev1beta1types.QueryAllEvidenceRequest, response *cosmosevidencev1beta1types.QueryAllEvidenceResponse) (err error) {
-	r, err := rpcservice.k.cosmosevidencev1beta1keeper.AllEvidence(rpcservice.ctx, msg)
-	if err != nil {
-		return err
-	}
-	*response = *r
-	return nil
-}
-
-// Keeper: cosmosevidencev1beta1keeper
-// Types: cosmosevidencev1beta1types
-// github.com/cosmos/cosmos-sdk/x/evidence/keeper
-func (rpcservice *RpcService) Cosmosevidencev1beta1sendmsgsubmitevidence(_ *http.Request, msg *cosmosevidencev1beta1types.MsgSubmitEvidence, response *cosmosevidencev1beta1types.MsgSubmitEvidenceResponse) (err error) {
-	//handler := cosmosevidencev1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosevidencev1beta1keeper).SubmitEvidence
-	handler := cosmosevidencev1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosevidencev1beta1keeper).SubmitEvidence
-	//
-	defer func() {
-		if r := recover(); r != nil {
-
-			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
-		}
-	}()
-	err = msg.ValidateBasic()
-	if err != nil {
-		return err
-	}
-
-	if len(msg.GetSigners()) != 1 {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
-	}
-
-	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
-	}
-
-	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
-
-	cachedCtx, Write := sdkCtx.CacheContext()
-
-	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
-	if err != nil {
-		return err
-	}
-	Write()
-	*response = *r
-	return nil
-}
-
 // Keeper: cosmosfeegrantv1beta1keeper
 // Types: cosmosfeegrantv1beta1types
 // github.com/cosmos/cosmos-sdk/x/feegrant/keeper
@@ -663,6 +745,18 @@ func (rpcservice *RpcService) Cosmosfeegrantv1beta1queryallowance(_ *http.Reques
 // github.com/cosmos/cosmos-sdk/x/feegrant/keeper
 func (rpcservice *RpcService) Cosmosfeegrantv1beta1queryallowances(_ *http.Request, msg *cosmosfeegrantv1beta1types.QueryAllowancesRequest, response *cosmosfeegrantv1beta1types.QueryAllowancesResponse) (err error) {
 	r, err := rpcservice.k.cosmosfeegrantv1beta1keeper.Allowances(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosfeegrantv1beta1keeper
+// Types: cosmosfeegrantv1beta1types
+// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+func (rpcservice *RpcService) Cosmosfeegrantv1beta1queryallowancesbygranter(_ *http.Request, msg *cosmosfeegrantv1beta1types.QueryAllowancesByGranterRequest, response *cosmosfeegrantv1beta1types.QueryAllowancesByGranterResponse) (err error) {
+	r, err := rpcservice.k.cosmosfeegrantv1beta1keeper.AllowancesByGranter(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -748,11 +842,11 @@ func (rpcservice *RpcService) Cosmosfeegrantv1beta1sendmsgrevokeallowance(_ *htt
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
-// github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1queryproposal(_ *http.Request, msg *cosmosgovv1beta1types.QueryProposalRequest, response *cosmosgovv1beta1types.QueryProposalResponse) (err error) {
-	r, err := rpcservice.k.cosmosgovv1beta1keeper.Proposal(rpcservice.ctx, msg)
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
+// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+func (rpcservice *RpcService) Cosmosgovv1queryproposal(_ *http.Request, msg *cosmosgovv1types.QueryProposalRequest, response *cosmosgovv1types.QueryProposalResponse) (err error) {
+	r, err := rpcservice.k.cosmosgovv1keeper.Proposal(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -760,11 +854,11 @@ func (rpcservice *RpcService) Cosmosgovv1beta1queryproposal(_ *http.Request, msg
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
-// github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1queryproposals(_ *http.Request, msg *cosmosgovv1beta1types.QueryProposalsRequest, response *cosmosgovv1beta1types.QueryProposalsResponse) (err error) {
-	r, err := rpcservice.k.cosmosgovv1beta1keeper.Proposals(rpcservice.ctx, msg)
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
+// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+func (rpcservice *RpcService) Cosmosgovv1queryproposals(_ *http.Request, msg *cosmosgovv1types.QueryProposalsRequest, response *cosmosgovv1types.QueryProposalsResponse) (err error) {
+	r, err := rpcservice.k.cosmosgovv1keeper.Proposals(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -772,11 +866,11 @@ func (rpcservice *RpcService) Cosmosgovv1beta1queryproposals(_ *http.Request, ms
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
-// github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1queryvote(_ *http.Request, msg *cosmosgovv1beta1types.QueryVoteRequest, response *cosmosgovv1beta1types.QueryVoteResponse) (err error) {
-	r, err := rpcservice.k.cosmosgovv1beta1keeper.Vote(rpcservice.ctx, msg)
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
+// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+func (rpcservice *RpcService) Cosmosgovv1queryvote(_ *http.Request, msg *cosmosgovv1types.QueryVoteRequest, response *cosmosgovv1types.QueryVoteResponse) (err error) {
+	r, err := rpcservice.k.cosmosgovv1keeper.Vote(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -784,11 +878,11 @@ func (rpcservice *RpcService) Cosmosgovv1beta1queryvote(_ *http.Request, msg *co
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
-// github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1queryvotes(_ *http.Request, msg *cosmosgovv1beta1types.QueryVotesRequest, response *cosmosgovv1beta1types.QueryVotesResponse) (err error) {
-	r, err := rpcservice.k.cosmosgovv1beta1keeper.Votes(rpcservice.ctx, msg)
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
+// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+func (rpcservice *RpcService) Cosmosgovv1queryvotes(_ *http.Request, msg *cosmosgovv1types.QueryVotesRequest, response *cosmosgovv1types.QueryVotesResponse) (err error) {
+	r, err := rpcservice.k.cosmosgovv1keeper.Votes(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -796,11 +890,11 @@ func (rpcservice *RpcService) Cosmosgovv1beta1queryvotes(_ *http.Request, msg *c
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
-// github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1queryparams(_ *http.Request, msg *cosmosgovv1beta1types.QueryParamsRequest, response *cosmosgovv1beta1types.QueryParamsResponse) (err error) {
-	r, err := rpcservice.k.cosmosgovv1beta1keeper.Params(rpcservice.ctx, msg)
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
+// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+func (rpcservice *RpcService) Cosmosgovv1queryparams(_ *http.Request, msg *cosmosgovv1types.QueryParamsRequest, response *cosmosgovv1types.QueryParamsResponse) (err error) {
+	r, err := rpcservice.k.cosmosgovv1keeper.Params(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -808,11 +902,11 @@ func (rpcservice *RpcService) Cosmosgovv1beta1queryparams(_ *http.Request, msg *
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
-// github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1querydeposit(_ *http.Request, msg *cosmosgovv1beta1types.QueryDepositRequest, response *cosmosgovv1beta1types.QueryDepositResponse) (err error) {
-	r, err := rpcservice.k.cosmosgovv1beta1keeper.Deposit(rpcservice.ctx, msg)
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
+// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+func (rpcservice *RpcService) Cosmosgovv1querydeposit(_ *http.Request, msg *cosmosgovv1types.QueryDepositRequest, response *cosmosgovv1types.QueryDepositResponse) (err error) {
+	r, err := rpcservice.k.cosmosgovv1keeper.Deposit(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -820,11 +914,11 @@ func (rpcservice *RpcService) Cosmosgovv1beta1querydeposit(_ *http.Request, msg 
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
-// github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1querydeposits(_ *http.Request, msg *cosmosgovv1beta1types.QueryDepositsRequest, response *cosmosgovv1beta1types.QueryDepositsResponse) (err error) {
-	r, err := rpcservice.k.cosmosgovv1beta1keeper.Deposits(rpcservice.ctx, msg)
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
+// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+func (rpcservice *RpcService) Cosmosgovv1querydeposits(_ *http.Request, msg *cosmosgovv1types.QueryDepositsRequest, response *cosmosgovv1types.QueryDepositsResponse) (err error) {
+	r, err := rpcservice.k.cosmosgovv1keeper.Deposits(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -832,11 +926,11 @@ func (rpcservice *RpcService) Cosmosgovv1beta1querydeposits(_ *http.Request, msg
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
-// github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1querytallyresult(_ *http.Request, msg *cosmosgovv1beta1types.QueryTallyResultRequest, response *cosmosgovv1beta1types.QueryTallyResultResponse) (err error) {
-	r, err := rpcservice.k.cosmosgovv1beta1keeper.TallyResult(rpcservice.ctx, msg)
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
+// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+func (rpcservice *RpcService) Cosmosgovv1querytallyresult(_ *http.Request, msg *cosmosgovv1types.QueryTallyResultRequest, response *cosmosgovv1types.QueryTallyResultResponse) (err error) {
+	r, err := rpcservice.k.cosmosgovv1keeper.TallyResult(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -844,12 +938,12 @@ func (rpcservice *RpcService) Cosmosgovv1beta1querytallyresult(_ *http.Request, 
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
 // github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgsubmitproposal(_ *http.Request, msg *cosmosgovv1beta1types.MsgSubmitProposal, response *cosmosgovv1beta1types.MsgSubmitProposalResponse) (err error) {
-	//handler := cosmosgovv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1beta1keeper).SubmitProposal
-	handler := cosmosgovv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1beta1keeper).SubmitProposal
+func (rpcservice *RpcService) Cosmosgovv1sendmsgsubmitproposal(_ *http.Request, msg *cosmosgovv1types.MsgSubmitProposal, response *cosmosgovv1types.MsgSubmitProposalResponse) (err error) {
+	//handler := cosmosgovv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1keeper).SubmitProposal
+	handler := cosmosgovv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1keeper).SubmitProposal
 	//
 	defer func() {
 		if r := recover(); r != nil {
@@ -883,12 +977,12 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgsubmitproposal(_ *http.Requ
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
 // github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgvote(_ *http.Request, msg *cosmosgovv1beta1types.MsgVote, response *cosmosgovv1beta1types.MsgVoteResponse) (err error) {
-	//handler := cosmosgovv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1beta1keeper).Vote
-	handler := cosmosgovv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1beta1keeper).Vote
+func (rpcservice *RpcService) Cosmosgovv1sendmsgexeclegacycontent(_ *http.Request, msg *cosmosgovv1types.MsgExecLegacyContent, response *cosmosgovv1types.MsgExecLegacyContentResponse) (err error) {
+	//handler := cosmosgovv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1keeper).ExecLegacyContent
+	handler := cosmosgovv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1keeper).ExecLegacyContent
 	//
 	defer func() {
 		if r := recover(); r != nil {
@@ -922,12 +1016,12 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgvote(_ *http.Request, msg *
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
 // github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgvoteweighted(_ *http.Request, msg *cosmosgovv1beta1types.MsgVoteWeighted, response *cosmosgovv1beta1types.MsgVoteWeightedResponse) (err error) {
-	//handler := cosmosgovv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1beta1keeper).VoteWeighted
-	handler := cosmosgovv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1beta1keeper).VoteWeighted
+func (rpcservice *RpcService) Cosmosgovv1sendmsgvote(_ *http.Request, msg *cosmosgovv1types.MsgVote, response *cosmosgovv1types.MsgVoteResponse) (err error) {
+	//handler := cosmosgovv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1keeper).Vote
+	handler := cosmosgovv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1keeper).Vote
 	//
 	defer func() {
 		if r := recover(); r != nil {
@@ -961,12 +1055,12 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgvoteweighted(_ *http.Reques
 	return nil
 }
 
-// Keeper: cosmosgovv1beta1keeper
-// Types: cosmosgovv1beta1types
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
 // github.com/cosmos/cosmos-sdk/x/gov/keeper
-func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgdeposit(_ *http.Request, msg *cosmosgovv1beta1types.MsgDeposit, response *cosmosgovv1beta1types.MsgDepositResponse) (err error) {
-	//handler := cosmosgovv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1beta1keeper).Deposit
-	handler := cosmosgovv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1beta1keeper).Deposit
+func (rpcservice *RpcService) Cosmosgovv1sendmsgvoteweighted(_ *http.Request, msg *cosmosgovv1types.MsgVoteWeighted, response *cosmosgovv1types.MsgVoteWeightedResponse) (err error) {
+	//handler := cosmosgovv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1keeper).VoteWeighted
+	handler := cosmosgovv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1keeper).VoteWeighted
 	//
 	defer func() {
 		if r := recover(); r != nil {
@@ -996,6 +1090,783 @@ func (rpcservice *RpcService) Cosmosgovv1beta1sendmsgdeposit(_ *http.Request, ms
 		return err
 	}
 	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgovv1keeper
+// Types: cosmosgovv1types
+// github.com/cosmos/cosmos-sdk/x/gov/keeper
+func (rpcservice *RpcService) Cosmosgovv1sendmsgdeposit(_ *http.Request, msg *cosmosgovv1types.MsgDeposit, response *cosmosgovv1types.MsgDepositResponse) (err error) {
+	//handler := cosmosgovv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1keeper).Deposit
+	handler := cosmosgovv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1keeper).Deposit
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1querygroupinfo(_ *http.Request, msg *cosmosgroupv1types.QueryGroupInfoRequest, response *cosmosgroupv1types.QueryGroupInfoResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.GroupInfo(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1querygrouppolicyinfo(_ *http.Request, msg *cosmosgroupv1types.QueryGroupPolicyInfoRequest, response *cosmosgroupv1types.QueryGroupPolicyInfoResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.GroupPolicyInfo(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1querygroupmembers(_ *http.Request, msg *cosmosgroupv1types.QueryGroupMembersRequest, response *cosmosgroupv1types.QueryGroupMembersResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.GroupMembers(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1querygroupsbyadmin(_ *http.Request, msg *cosmosgroupv1types.QueryGroupsByAdminRequest, response *cosmosgroupv1types.QueryGroupsByAdminResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.GroupsByAdmin(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1querygrouppoliciesbygroup(_ *http.Request, msg *cosmosgroupv1types.QueryGroupPoliciesByGroupRequest, response *cosmosgroupv1types.QueryGroupPoliciesByGroupResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.GroupPoliciesByGroup(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1querygrouppoliciesbyadmin(_ *http.Request, msg *cosmosgroupv1types.QueryGroupPoliciesByAdminRequest, response *cosmosgroupv1types.QueryGroupPoliciesByAdminResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.GroupPoliciesByAdmin(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1queryproposal(_ *http.Request, msg *cosmosgroupv1types.QueryProposalRequest, response *cosmosgroupv1types.QueryProposalResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.Proposal(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1queryproposalsbygrouppolicy(_ *http.Request, msg *cosmosgroupv1types.QueryProposalsByGroupPolicyRequest, response *cosmosgroupv1types.QueryProposalsByGroupPolicyResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.ProposalsByGroupPolicy(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1queryvotebyproposalvoter(_ *http.Request, msg *cosmosgroupv1types.QueryVoteByProposalVoterRequest, response *cosmosgroupv1types.QueryVoteByProposalVoterResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.VoteByProposalVoter(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1queryvotesbyproposal(_ *http.Request, msg *cosmosgroupv1types.QueryVotesByProposalRequest, response *cosmosgroupv1types.QueryVotesByProposalResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.VotesByProposal(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1queryvotesbyvoter(_ *http.Request, msg *cosmosgroupv1types.QueryVotesByVoterRequest, response *cosmosgroupv1types.QueryVotesByVoterResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.VotesByVoter(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1querygroupsbymember(_ *http.Request, msg *cosmosgroupv1types.QueryGroupsByMemberRequest, response *cosmosgroupv1types.QueryGroupsByMemberResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.GroupsByMember(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1querytallyresult(_ *http.Request, msg *cosmosgroupv1types.QueryTallyResultRequest, response *cosmosgroupv1types.QueryTallyResultResponse) (err error) {
+	r, err := rpcservice.k.cosmosgroupv1keeper.TallyResult(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgcreategroup(_ *http.Request, msg *cosmosgroupv1types.MsgCreateGroup, response *cosmosgroupv1types.MsgCreateGroupResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).CreateGroup
+	handler := rpcservice.k.cosmosgroupv1keeper.CreateGroup
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgupdategroupmembers(_ *http.Request, msg *cosmosgroupv1types.MsgUpdateGroupMembers, response *cosmosgroupv1types.MsgUpdateGroupMembersResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).UpdateGroupMembers
+	handler := rpcservice.k.cosmosgroupv1keeper.UpdateGroupMembers
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgupdategroupadmin(_ *http.Request, msg *cosmosgroupv1types.MsgUpdateGroupAdmin, response *cosmosgroupv1types.MsgUpdateGroupAdminResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).UpdateGroupAdmin
+	handler := rpcservice.k.cosmosgroupv1keeper.UpdateGroupAdmin
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgupdategroupmetadata(_ *http.Request, msg *cosmosgroupv1types.MsgUpdateGroupMetadata, response *cosmosgroupv1types.MsgUpdateGroupMetadataResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).UpdateGroupMetadata
+	handler := rpcservice.k.cosmosgroupv1keeper.UpdateGroupMetadata
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgcreategrouppolicy(_ *http.Request, msg *cosmosgroupv1types.MsgCreateGroupPolicy, response *cosmosgroupv1types.MsgCreateGroupPolicyResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).CreateGroupPolicy
+	handler := rpcservice.k.cosmosgroupv1keeper.CreateGroupPolicy
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgcreategroupwithpolicy(_ *http.Request, msg *cosmosgroupv1types.MsgCreateGroupWithPolicy, response *cosmosgroupv1types.MsgCreateGroupWithPolicyResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).CreateGroupWithPolicy
+	handler := rpcservice.k.cosmosgroupv1keeper.CreateGroupWithPolicy
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgupdategrouppolicyadmin(_ *http.Request, msg *cosmosgroupv1types.MsgUpdateGroupPolicyAdmin, response *cosmosgroupv1types.MsgUpdateGroupPolicyAdminResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).UpdateGroupPolicyAdmin
+	handler := rpcservice.k.cosmosgroupv1keeper.UpdateGroupPolicyAdmin
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgupdategrouppolicydecisionpolicy(_ *http.Request, msg *cosmosgroupv1types.MsgUpdateGroupPolicyDecisionPolicy, response *cosmosgroupv1types.MsgUpdateGroupPolicyDecisionPolicyResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).UpdateGroupPolicyDecisionPolicy
+	handler := rpcservice.k.cosmosgroupv1keeper.UpdateGroupPolicyDecisionPolicy
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgupdategrouppolicymetadata(_ *http.Request, msg *cosmosgroupv1types.MsgUpdateGroupPolicyMetadata, response *cosmosgroupv1types.MsgUpdateGroupPolicyMetadataResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).UpdateGroupPolicyMetadata
+	handler := rpcservice.k.cosmosgroupv1keeper.UpdateGroupPolicyMetadata
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgsubmitproposal(_ *http.Request, msg *cosmosgroupv1types.MsgSubmitProposal, response *cosmosgroupv1types.MsgSubmitProposalResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).SubmitProposal
+	handler := rpcservice.k.cosmosgroupv1keeper.SubmitProposal
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgwithdrawproposal(_ *http.Request, msg *cosmosgroupv1types.MsgWithdrawProposal, response *cosmosgroupv1types.MsgWithdrawProposalResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).WithdrawProposal
+	handler := rpcservice.k.cosmosgroupv1keeper.WithdrawProposal
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgvote(_ *http.Request, msg *cosmosgroupv1types.MsgVote, response *cosmosgroupv1types.MsgVoteResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).Vote
+	handler := rpcservice.k.cosmosgroupv1keeper.Vote
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgexec(_ *http.Request, msg *cosmosgroupv1types.MsgExec, response *cosmosgroupv1types.MsgExecResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).Exec
+	handler := rpcservice.k.cosmosgroupv1keeper.Exec
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosgroupv1keeper
+// Types: cosmosgroupv1types
+// None
+func (rpcservice *RpcService) Cosmosgroupv1sendmsgleavegroup(_ *http.Request, msg *cosmosgroupv1types.MsgLeaveGroup, response *cosmosgroupv1types.MsgLeaveGroupResponse) (err error) {
+	//handler := cosmosgroupv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgroupv1keeper).LeaveGroup
+	handler := rpcservice.k.cosmosgroupv1keeper.LeaveGroup
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosmintv1beta1keeper
+// Types: cosmosmintv1beta1types
+// github.com/cosmos/cosmos-sdk/x/mint/keeper
+func (rpcservice *RpcService) Cosmosmintv1beta1queryparams(_ *http.Request, msg *cosmosmintv1beta1types.QueryParamsRequest, response *cosmosmintv1beta1types.QueryParamsResponse) (err error) {
+	r, err := rpcservice.k.cosmosmintv1beta1keeper.Params(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosmintv1beta1keeper
+// Types: cosmosmintv1beta1types
+// github.com/cosmos/cosmos-sdk/x/mint/keeper
+func (rpcservice *RpcService) Cosmosmintv1beta1queryinflation(_ *http.Request, msg *cosmosmintv1beta1types.QueryInflationRequest, response *cosmosmintv1beta1types.QueryInflationResponse) (err error) {
+	r, err := rpcservice.k.cosmosmintv1beta1keeper.Inflation(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosmintv1beta1keeper
+// Types: cosmosmintv1beta1types
+// github.com/cosmos/cosmos-sdk/x/mint/keeper
+func (rpcservice *RpcService) Cosmosmintv1beta1queryannualprovisions(_ *http.Request, msg *cosmosmintv1beta1types.QueryAnnualProvisionsRequest, response *cosmosmintv1beta1types.QueryAnnualProvisionsResponse) (err error) {
+	r, err := rpcservice.k.cosmosmintv1beta1keeper.AnnualProvisions(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
 	*response = *r
 	return nil
 }
@@ -1438,12 +2309,150 @@ func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgundelegate(_ *http.Requ
 	return nil
 }
 
-// Keeper: cosmosvestingv1beta1keeper
-// Types: cosmosvestingv1beta1types
-// github.com/cosmos/cosmos-sdk/x/auth/vesting
-func (rpcservice *RpcService) Cosmosvestingv1beta1sendmsgcreatevestingaccount(_ *http.Request, msg *cosmosvestingv1beta1types.MsgCreateVestingAccount, response *cosmosvestingv1beta1types.MsgCreateVestingAccountResponse) (err error) {
-	//handler := cosmosvestingv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosvestingv1beta1keeper).CreateVestingAccount
-	handler := cosmosvestingv1beta1keeper.NewMsgServerImpl(rpcservice.k.accountKeeper, rpcservice.k.bankkeeper).CreateVestingAccount
+// Keeper: cosmosstakingv1beta1keeper
+// Types: cosmosstakingv1beta1types
+// github.com/cosmos/cosmos-sdk/x/staking/keeper
+func (rpcservice *RpcService) Cosmosstakingv1beta1sendmsgcancelunbondingdelegation(_ *http.Request, msg *cosmosstakingv1beta1types.MsgCancelUnbondingDelegation, response *cosmosstakingv1beta1types.MsgCancelUnbondingDelegationResponse) (err error) {
+	//handler := cosmosstakingv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosstakingv1beta1keeper).CancelUnbondingDelegation
+	handler := cosmosstakingv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosstakingv1beta1keeper).CancelUnbondingDelegation
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosupgradev1beta1keeper
+// Types: cosmosupgradev1beta1types
+// github.com/cosmos/cosmos-sdk/x/upgrade/keeper
+func (rpcservice *RpcService) Cosmosupgradev1beta1querycurrentplan(_ *http.Request, msg *cosmosupgradev1beta1types.QueryCurrentPlanRequest, response *cosmosupgradev1beta1types.QueryCurrentPlanResponse) (err error) {
+	r, err := rpcservice.k.cosmosupgradev1beta1keeper.CurrentPlan(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosupgradev1beta1keeper
+// Types: cosmosupgradev1beta1types
+// github.com/cosmos/cosmos-sdk/x/upgrade/keeper
+func (rpcservice *RpcService) Cosmosupgradev1beta1queryappliedplan(_ *http.Request, msg *cosmosupgradev1beta1types.QueryAppliedPlanRequest, response *cosmosupgradev1beta1types.QueryAppliedPlanResponse) (err error) {
+	r, err := rpcservice.k.cosmosupgradev1beta1keeper.AppliedPlan(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosupgradev1beta1keeper
+// Types: cosmosupgradev1beta1types
+// github.com/cosmos/cosmos-sdk/x/upgrade/keeper
+func (rpcservice *RpcService) Cosmosupgradev1beta1queryupgradedconsensusstate(_ *http.Request, msg *cosmosupgradev1beta1types.QueryUpgradedConsensusStateRequest, response *cosmosupgradev1beta1types.QueryUpgradedConsensusStateResponse) (err error) {
+	r, err := rpcservice.k.cosmosupgradev1beta1keeper.UpgradedConsensusState(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosupgradev1beta1keeper
+// Types: cosmosupgradev1beta1types
+// github.com/cosmos/cosmos-sdk/x/upgrade/keeper
+func (rpcservice *RpcService) Cosmosupgradev1beta1querymoduleversions(_ *http.Request, msg *cosmosupgradev1beta1types.QueryModuleVersionsRequest, response *cosmosupgradev1beta1types.QueryModuleVersionsResponse) (err error) {
+	r, err := rpcservice.k.cosmosupgradev1beta1keeper.ModuleVersions(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosupgradev1beta1keeper
+// Types: cosmosupgradev1beta1types
+// github.com/cosmos/cosmos-sdk/x/upgrade/keeper
+func (rpcservice *RpcService) Cosmosupgradev1beta1queryauthority(_ *http.Request, msg *cosmosupgradev1beta1types.QueryAuthorityRequest, response *cosmosupgradev1beta1types.QueryAuthorityResponse) (err error) {
+	r, err := rpcservice.k.cosmosupgradev1beta1keeper.Authority(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosupgradev1beta1keeper
+// Types: cosmosupgradev1beta1types
+// github.com/cosmos/cosmos-sdk/x/upgrade/keeper
+func (rpcservice *RpcService) Cosmosupgradev1beta1sendmsgsoftwareupgrade(_ *http.Request, msg *cosmosupgradev1beta1types.MsgSoftwareUpgrade, response *cosmosupgradev1beta1types.MsgSoftwareUpgradeResponse) (err error) {
+	//handler := cosmosupgradev1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosupgradev1beta1keeper).SoftwareUpgrade
+	handler := cosmosupgradev1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosupgradev1beta1keeper).SoftwareUpgrade
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = *r
+	return nil
+}
+
+// Keeper: cosmosupgradev1beta1keeper
+// Types: cosmosupgradev1beta1types
+// github.com/cosmos/cosmos-sdk/x/upgrade/keeper
+func (rpcservice *RpcService) Cosmosupgradev1beta1sendmsgcancelupgrade(_ *http.Request, msg *cosmosupgradev1beta1types.MsgCancelUpgrade, response *cosmosupgradev1beta1types.MsgCancelUpgradeResponse) (err error) {
+	//handler := cosmosupgradev1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosupgradev1beta1keeper).CancelUpgrade
+	handler := cosmosupgradev1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosupgradev1beta1keeper).CancelUpgrade
 	//
 	defer func() {
 		if r := recover(); r != nil {
@@ -1516,6 +2525,30 @@ func (rpcservice *RpcService) Ibcapplicationstransferv1queryparams(_ *http.Reque
 // Keeper: ibcapplicationstransferv1keeper
 // Types: ibcapplicationstransferv1types
 // None
+func (rpcservice *RpcService) Ibcapplicationstransferv1querydenomhash(_ *http.Request, msg *ibcapplicationstransferv1types.QueryDenomHashRequest, response *ibcapplicationstransferv1types.QueryDenomHashResponse) (err error) {
+	r, err := rpcservice.k.ibcapplicationstransferv1keeper.DenomHash(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: ibcapplicationstransferv1keeper
+// Types: ibcapplicationstransferv1types
+// None
+func (rpcservice *RpcService) Ibcapplicationstransferv1queryescrowaddress(_ *http.Request, msg *ibcapplicationstransferv1types.QueryEscrowAddressRequest, response *ibcapplicationstransferv1types.QueryEscrowAddressResponse) (err error) {
+	r, err := rpcservice.k.ibcapplicationstransferv1keeper.EscrowAddress(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: ibcapplicationstransferv1keeper
+// Types: ibcapplicationstransferv1types
+// None
 func (rpcservice *RpcService) Ibcapplicationstransferv1sendmsgtransfer(_ *http.Request, msg *ibcapplicationstransferv1types.MsgTransfer, response *ibcapplicationstransferv1types.MsgTransferResponse) (err error) {
 	//handler := ibcapplicationstransferv1keeper.NewMsgServerImpl(rpcservice.k.ibcapplicationstransferv1keeper).Transfer
 	handler := rpcservice.k.ibcapplicationstransferv1keeper.Transfer
@@ -1555,8 +2588,8 @@ func (rpcservice *RpcService) Ibcapplicationstransferv1sendmsgtransfer(_ *http.R
 // Keeper: dysonkeeper
 // Types: dysontypes
 // github.com/org/dyson/x/dyson
-func (rpcservice *RpcService) Dysonqueryschedualedrun(_ *http.Request, msg *dysontypes.QueryGetSchedualedRunRequest, response *dysontypes.QueryGetSchedualedRunResponse) (err error) {
-	r, err := rpcservice.k.SchedualedRun(rpcservice.ctx, msg)
+func (rpcservice *RpcService) Dysonqueryscheduledrun(_ *http.Request, msg *dysontypes.QueryGetScheduledRunRequest, response *dysontypes.QueryGetScheduledRunResponse) (err error) {
+	r, err := rpcservice.k.ScheduledRun(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -1567,8 +2600,8 @@ func (rpcservice *RpcService) Dysonqueryschedualedrun(_ *http.Request, msg *dyso
 // Keeper: dysonkeeper
 // Types: dysontypes
 // github.com/org/dyson/x/dyson
-func (rpcservice *RpcService) Dysonqueryschedualedrunall(_ *http.Request, msg *dysontypes.QueryAllSchedualedRunRequest, response *dysontypes.QueryAllSchedualedRunResponse) (err error) {
-	r, err := rpcservice.k.SchedualedRunAll(rpcservice.ctx, msg)
+func (rpcservice *RpcService) Dysonqueryscheduledrunall(_ *http.Request, msg *dysontypes.QueryAllScheduledRunRequest, response *dysontypes.QueryAllScheduledRunResponse) (err error) {
+	r, err := rpcservice.k.ScheduledRunAll(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}
@@ -1675,9 +2708,45 @@ func (rpcservice *RpcService) Dysonqueryprefixstorage(_ *http.Request, msg *dyso
 // Keeper: dysonkeeper
 // Types: dysontypes
 // github.com/org/dyson/x/dyson
-func (rpcservice *RpcService) Dysonsendmsgcreateschedualedrun(_ *http.Request, msg *dysontypes.MsgCreateSchedualedRun, response *dysontypes.MsgCreateSchedualedRunResponse) (err error) {
-	//handler := dysonkeeper.NewMsgServerImpl(rpcservice.k.dysonkeeper).CreateSchedualedRun
-	handler := rpcservice.m.CreateSchedualedRun
+func (rpcservice *RpcService) Dysonqueryscheduledgaspriceandfeeatblock(_ *http.Request, msg *dysontypes.QueryScheduledGasPriceAndFeeAtBlockRequest, response *dysontypes.QueryScheduledGasPriceAndFeeAtBlockResponse) (err error) {
+	r, err := rpcservice.k.ScheduledGasPriceAndFeeAtBlock(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: dysonkeeper
+// Types: dysontypes
+// github.com/org/dyson/x/dyson
+func (rpcservice *RpcService) Dysonquerycron(_ *http.Request, msg *dysontypes.QueryGetCronRequest, response *dysontypes.QueryGetCronResponse) (err error) {
+	r, err := rpcservice.k.Cron(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: dysonkeeper
+// Types: dysontypes
+// github.com/org/dyson/x/dyson
+func (rpcservice *RpcService) Dysonquerycronall(_ *http.Request, msg *dysontypes.QueryAllCronRequest, response *dysontypes.QueryAllCronResponse) (err error) {
+	r, err := rpcservice.k.CronAll(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: dysonkeeper
+// Types: dysontypes
+// github.com/org/dyson/x/dyson
+func (rpcservice *RpcService) Dysonsendmsgcreatescheduledrun(_ *http.Request, msg *dysontypes.MsgCreateScheduledRun, response *dysontypes.MsgCreateScheduledRunResponse) (err error) {
+	//handler := dysonkeeper.NewMsgServerImpl(rpcservice.k.dysonkeeper).CreateScheduledRun
+	handler := rpcservice.m.CreateScheduledRun
 	//
 	defer func() {
 		if r := recover(); r != nil {
@@ -2037,6 +3106,30 @@ func (rpcservice *RpcService) Namesqueryresolve(_ *http.Request, msg *namestypes
 // github.com/org/dyson/x/names/keeper
 func (rpcservice *RpcService) Namesquerygeneratecommit(_ *http.Request, msg *namestypes.QueryGenerateCommitRequest, response *namestypes.QueryGenerateCommitResponse) (err error) {
 	r, err := rpcservice.k.nameskeeper.GenerateCommit(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namesqueryexpirations(_ *http.Request, msg *namestypes.QueryGetExpirationsRequest, response *namestypes.QueryGetExpirationsResponse) (err error) {
+	r, err := rpcservice.k.nameskeeper.Expirations(rpcservice.ctx, msg)
+	if err != nil {
+		return err
+	}
+	*response = *r
+	return nil
+}
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namesqueryexpirationsall(_ *http.Request, msg *namestypes.QueryAllExpirationsRequest, response *namestypes.QueryAllExpirationsResponse) (err error) {
+	r, err := rpcservice.k.nameskeeper.ExpirationsAll(rpcservice.ctx, msg)
 	if err != nil {
 		return err
 	}

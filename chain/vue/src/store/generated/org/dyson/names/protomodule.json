@@ -1,15 +1,21 @@
 {
 	"Name": "names",
+	"GoModulePath": "github.com/org/dyson",
 	"Pkg": {
 		"Name": "names",
 		"Path": "/go/src/app/proto/names",
 		"Files": [
 			{
+				"Path": "/go/src/app/proto/names/expirations.proto",
+				"Dependencies": null
+			},
+			{
 				"Path": "/go/src/app/proto/names/genesis.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"names/params.proto",
-					"names/name.proto"
+					"names/name.proto",
+					"names/expirations.proto"
 				]
 			},
 			{
@@ -32,7 +38,8 @@
 					"google/api/annotations.proto",
 					"cosmos/base/query/v1beta1/pagination.proto",
 					"names/params.proto",
-					"names/name.proto"
+					"names/name.proto",
+					"names/expirations.proto"
 				]
 			},
 			{
@@ -47,14 +54,19 @@
 		"GoImportName": "github.com/org/dyson/x/names/types",
 		"Messages": [
 			{
+				"Name": "Expirations",
+				"Path": "/go/src/app/proto/names/expirations.proto",
+				"HighestFieldNumber": 2
+			},
+			{
 				"Name": "GenesisState",
 				"Path": "/go/src/app/proto/names/genesis.proto",
-				"HighestFieldNumber": 2
+				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "Name",
 				"Path": "/go/src/app/proto/names/name.proto",
-				"HighestFieldNumber": 10
+				"HighestFieldNumber": 12
 			},
 			{
 				"Name": "Params",
@@ -112,6 +124,26 @@
 				"HighestFieldNumber": 1
 			},
 			{
+				"Name": "QueryGetExpirationsRequest",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryGetExpirationsResponse",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAllExpirationsRequest",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAllExpirationsResponse",
+				"Path": "/go/src/app/proto/names/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
 				"Name": "MsgRegister",
 				"Path": "/go/src/app/proto/names/tx.proto",
 				"HighestFieldNumber": 4
@@ -119,7 +151,7 @@
 			{
 				"Name": "MsgRegisterResponse",
 				"Path": "/go/src/app/proto/names/tx.proto",
-				"HighestFieldNumber": 2
+				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgUpdateName",
@@ -159,7 +191,7 @@
 			{
 				"Name": "MsgSetPriceAndExtendResponse",
 				"Path": "/go/src/app/proto/names/tx.proto",
-				"HighestFieldNumber": 5
+				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgOfferTo",
@@ -275,6 +307,32 @@
 								"HasBody": false
 							}
 						]
+					},
+					{
+						"Name": "Expirations",
+						"RequestType": "QueryGetExpirationsRequest",
+						"ReturnsType": "QueryGetExpirationsResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"blockHeight"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "ExpirationsAll",
+						"RequestType": "QueryAllExpirationsRequest",
+						"ReturnsType": "QueryAllExpirationsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
 					}
 				]
 			},
@@ -347,18 +405,8 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgAccept",
-			"URI": "names.MsgAccept",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgDeleteName",
-			"URI": "names.MsgDeleteName",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgReveal",
-			"URI": "names.MsgReveal",
+			"Name": "MsgUpdateName",
+			"URI": "names.MsgUpdateName",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -372,8 +420,18 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
+			"Name": "MsgDeleteName",
+			"URI": "names.MsgDeleteName",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
 			"Name": "MsgRegister",
 			"URI": "names.MsgRegister",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgAccept",
+			"URI": "names.MsgAccept",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -382,8 +440,8 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgUpdateName",
-			"URI": "names.MsgUpdateName",
+			"Name": "MsgBuy",
+			"URI": "names.MsgBuy",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -392,8 +450,8 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgBuy",
-			"URI": "names.MsgBuy",
+			"Name": "MsgReveal",
+			"URI": "names.MsgReveal",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		}
 	],
@@ -452,9 +510,37 @@
 					"HasBody": false
 				}
 			]
+		},
+		{
+			"Name": "Expirations",
+			"FullName": "QueryExpirations",
+			"Rules": [
+				{
+					"Params": [
+						"blockHeight"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "ExpirationsAll",
+			"FullName": "QueryExpirationsAll",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
 		}
 	],
 	"Types": [
+		{
+			"Name": "Expirations",
+			"FilePath": "/go/src/app/proto/names/expirations.proto"
+		},
 		{
 			"Name": "Name",
 			"FilePath": "/go/src/app/proto/names/name.proto"

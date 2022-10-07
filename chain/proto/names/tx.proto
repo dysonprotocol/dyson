@@ -25,9 +25,10 @@ service Msg {
 }
 
 message MsgRegister {
-  string owner = 1;
   // The Shake256(owner+name+salt) hexdigest
   string commit = 2;
+  // Address of the owner
+  string owner = 1;
   // The price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price. 
   string price = 4;
 }
@@ -35,28 +36,26 @@ message MsgRegister {
 message MsgRegisterResponse {
   // fee paid which is 1% of the price
   string fee = 1;
-  // when this name expires
-  google.protobuf.Timestamp expires = 2  [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
+  uint64 expiration_height = 3;
 }
 
 message MsgUpdateName {
-  string owner = 1;
   string name = 2;
-
+  string owner = 1;
   string destination = 3;
   string authorized = 6;
 }
 message MsgUpdateNameResponse {}
 
 message MsgDeleteName {
-  string owner = 1;
   string name = 2;
+  string owner = 1;
 }
 message MsgDeleteNameResponse {}
 
 message MsgReveal {
-  string owner = 1;
   string name = 2;
+  string owner = 1;
   string salt = 3;
 }
 
@@ -65,18 +64,17 @@ message MsgRevealResponse {
 }
 
 message MsgSetPriceAndExtend {
-  string owner = 1;
   string name = 2;
+  string owner = 1;
   string price = 3;
 }
 
 message MsgSetPriceAndExtendResponse {
-  google.protobuf.Timestamp expiry = 5 [(gogoproto.nullable) = false, (gogoproto.stdtime) = true];
 }
 
 message MsgOfferTo {
-  string owner = 1;
   string name = 2;
+  string owner = 1;
   string newOwner = 3;
 }
 
@@ -84,8 +82,8 @@ message MsgOfferToResponse {
 }
 
 message MsgAccept {
-  string newOwner = 1;
   string name = 2;
+  string newOwner = 1;
 }
 
 message MsgAcceptResponse {

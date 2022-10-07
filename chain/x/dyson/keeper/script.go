@@ -59,10 +59,11 @@ func (k Keeper) SetScript(ctx sdk.Context, script types.Script) {
 
 // GetScript returns a script from its index
 func (k Keeper) GetScript(ctx sdk.Context, index string) (val types.Script, found bool) {
+
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ScriptKeyPrefix))
 
 	b := store.Get(types.ScriptKey(
-		index,
+		k.nameskeeper.ResolveIndex(ctx, index),
 	))
 	if b == nil {
 		return val, false
@@ -79,7 +80,7 @@ func (k Keeper) RemoveScript(
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ScriptKeyPrefix))
 	store.Delete(types.ScriptKey(
-		index,
+		k.nameskeeper.ResolveIndex(ctx, index),
 	))
 }
 
@@ -229,6 +230,7 @@ func (k Keeper) EvalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 
 		if err == nil {
 			events := cachedCtx.EventManager().Events()
+			// TODO remove, not needed
 			ctx.EventManager().EmitEvents(events)
 			Write()
 		} else {

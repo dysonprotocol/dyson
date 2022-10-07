@@ -29,25 +29,25 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type MsgCreateSchedualedRun struct {
+type MsgCreateScheduledRun struct {
 	Creator string  `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Height  uint64  `protobuf:"varint,2,opt,name=height,proto3" json:"height,omitempty"`
 	Gas     uint64  `protobuf:"varint,3,opt,name=gas,proto3" json:"gas,omitempty"`
 	Msg     *MsgRun `protobuf:"bytes,4,opt,name=msg,proto3" json:"msg,omitempty"`
 }
 
-func (m *MsgCreateSchedualedRun) Reset()         { *m = MsgCreateSchedualedRun{} }
-func (m *MsgCreateSchedualedRun) String() string { return proto.CompactTextString(m) }
-func (*MsgCreateSchedualedRun) ProtoMessage()    {}
-func (*MsgCreateSchedualedRun) Descriptor() ([]byte, []int) {
+func (m *MsgCreateScheduledRun) Reset()         { *m = MsgCreateScheduledRun{} }
+func (m *MsgCreateScheduledRun) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateScheduledRun) ProtoMessage()    {}
+func (*MsgCreateScheduledRun) Descriptor() ([]byte, []int) {
 	return fileDescriptor_e8fb7800ed4c5286, []int{0}
 }
-func (m *MsgCreateSchedualedRun) XXX_Unmarshal(b []byte) error {
+func (m *MsgCreateScheduledRun) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgCreateSchedualedRun) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgCreateScheduledRun) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgCreateSchedualedRun.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgCreateScheduledRun.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -57,61 +57,61 @@ func (m *MsgCreateSchedualedRun) XXX_Marshal(b []byte, deterministic bool) ([]by
 		return b[:n], nil
 	}
 }
-func (m *MsgCreateSchedualedRun) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgCreateSchedualedRun.Merge(m, src)
+func (m *MsgCreateScheduledRun) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateScheduledRun.Merge(m, src)
 }
-func (m *MsgCreateSchedualedRun) XXX_Size() int {
+func (m *MsgCreateScheduledRun) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgCreateSchedualedRun) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgCreateSchedualedRun.DiscardUnknown(m)
+func (m *MsgCreateScheduledRun) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateScheduledRun.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgCreateSchedualedRun proto.InternalMessageInfo
+var xxx_messageInfo_MsgCreateScheduledRun proto.InternalMessageInfo
 
-func (m *MsgCreateSchedualedRun) GetCreator() string {
+func (m *MsgCreateScheduledRun) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgCreateSchedualedRun) GetHeight() uint64 {
+func (m *MsgCreateScheduledRun) GetHeight() uint64 {
 	if m != nil {
 		return m.Height
 	}
 	return 0
 }
 
-func (m *MsgCreateSchedualedRun) GetGas() uint64 {
+func (m *MsgCreateScheduledRun) GetGas() uint64 {
 	if m != nil {
 		return m.Gas
 	}
 	return 0
 }
 
-func (m *MsgCreateSchedualedRun) GetMsg() *MsgRun {
+func (m *MsgCreateScheduledRun) GetMsg() *MsgRun {
 	if m != nil {
 		return m.Msg
 	}
 	return nil
 }
 
-type MsgCreateSchedualedRunResponse struct {
+type MsgCreateScheduledRunResponse struct {
 }
 
-func (m *MsgCreateSchedualedRunResponse) Reset()         { *m = MsgCreateSchedualedRunResponse{} }
-func (m *MsgCreateSchedualedRunResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgCreateSchedualedRunResponse) ProtoMessage()    {}
-func (*MsgCreateSchedualedRunResponse) Descriptor() ([]byte, []int) {
+func (m *MsgCreateScheduledRunResponse) Reset()         { *m = MsgCreateScheduledRunResponse{} }
+func (m *MsgCreateScheduledRunResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateScheduledRunResponse) ProtoMessage()    {}
+func (*MsgCreateScheduledRunResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_e8fb7800ed4c5286, []int{1}
 }
-func (m *MsgCreateSchedualedRunResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgCreateScheduledRunResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgCreateSchedualedRunResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgCreateScheduledRunResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgCreateSchedualedRunResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgCreateScheduledRunResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -121,36 +121,36 @@ func (m *MsgCreateSchedualedRunResponse) XXX_Marshal(b []byte, deterministic boo
 		return b[:n], nil
 	}
 }
-func (m *MsgCreateSchedualedRunResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgCreateSchedualedRunResponse.Merge(m, src)
+func (m *MsgCreateScheduledRunResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateScheduledRunResponse.Merge(m, src)
 }
-func (m *MsgCreateSchedualedRunResponse) XXX_Size() int {
+func (m *MsgCreateScheduledRunResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgCreateSchedualedRunResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgCreateSchedualedRunResponse.DiscardUnknown(m)
+func (m *MsgCreateScheduledRunResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateScheduledRunResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgCreateSchedualedRunResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgCreateScheduledRunResponse proto.InternalMessageInfo
 
-type MsgUpdateSchedualedRun struct {
+type MsgUpdateScheduledRun struct {
 	Creator string  `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Index   string  `protobuf:"bytes,2,opt,name=index,proto3" json:"index,omitempty"`
 	Msg     *MsgRun `protobuf:"bytes,3,opt,name=msg,proto3" json:"msg,omitempty"`
 }
 
-func (m *MsgUpdateSchedualedRun) Reset()         { *m = MsgUpdateSchedualedRun{} }
-func (m *MsgUpdateSchedualedRun) String() string { return proto.CompactTextString(m) }
-func (*MsgUpdateSchedualedRun) ProtoMessage()    {}
-func (*MsgUpdateSchedualedRun) Descriptor() ([]byte, []int) {
+func (m *MsgUpdateScheduledRun) Reset()         { *m = MsgUpdateScheduledRun{} }
+func (m *MsgUpdateScheduledRun) String() string { return proto.CompactTextString(m) }
+func (*MsgUpdateScheduledRun) ProtoMessage()    {}
+func (*MsgUpdateScheduledRun) Descriptor() ([]byte, []int) {
 	return fileDescriptor_e8fb7800ed4c5286, []int{2}
 }
-func (m *MsgUpdateSchedualedRun) XXX_Unmarshal(b []byte) error {
+func (m *MsgUpdateScheduledRun) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgUpdateSchedualedRun) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgUpdateScheduledRun) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgUpdateSchedualedRun.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgUpdateScheduledRun.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -160,54 +160,54 @@ func (m *MsgUpdateSchedualedRun) XXX_Marshal(b []byte, deterministic bool) ([]by
 		return b[:n], nil
 	}
 }
-func (m *MsgUpdateSchedualedRun) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgUpdateSchedualedRun.Merge(m, src)
+func (m *MsgUpdateScheduledRun) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateScheduledRun.Merge(m, src)
 }
-func (m *MsgUpdateSchedualedRun) XXX_Size() int {
+func (m *MsgUpdateScheduledRun) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgUpdateSchedualedRun) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgUpdateSchedualedRun.DiscardUnknown(m)
+func (m *MsgUpdateScheduledRun) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateScheduledRun.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgUpdateSchedualedRun proto.InternalMessageInfo
+var xxx_messageInfo_MsgUpdateScheduledRun proto.InternalMessageInfo
 
-func (m *MsgUpdateSchedualedRun) GetCreator() string {
+func (m *MsgUpdateScheduledRun) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgUpdateSchedualedRun) GetIndex() string {
+func (m *MsgUpdateScheduledRun) GetIndex() string {
 	if m != nil {
 		return m.Index
 	}
 	return ""
 }
 
-func (m *MsgUpdateSchedualedRun) GetMsg() *MsgRun {
+func (m *MsgUpdateScheduledRun) GetMsg() *MsgRun {
 	if m != nil {
 		return m.Msg
 	}
 	return nil
 }
 
-type MsgUpdateSchedualedRunResponse struct {
+type MsgUpdateScheduledRunResponse struct {
 }
 
-func (m *MsgUpdateSchedualedRunResponse) Reset()         { *m = MsgUpdateSchedualedRunResponse{} }
-func (m *MsgUpdateSchedualedRunResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgUpdateSchedualedRunResponse) ProtoMessage()    {}
-func (*MsgUpdateSchedualedRunResponse) Descriptor() ([]byte, []int) {
+func (m *MsgUpdateScheduledRunResponse) Reset()         { *m = MsgUpdateScheduledRunResponse{} }
+func (m *MsgUpdateScheduledRunResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgUpdateScheduledRunResponse) ProtoMessage()    {}
+func (*MsgUpdateScheduledRunResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_e8fb7800ed4c5286, []int{3}
 }
-func (m *MsgUpdateSchedualedRunResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgUpdateScheduledRunResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgUpdateSchedualedRunResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgUpdateScheduledRunResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgUpdateSchedualedRunResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgUpdateScheduledRunResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -217,35 +217,35 @@ func (m *MsgUpdateSchedualedRunResponse) XXX_Marshal(b []byte, deterministic boo
 		return b[:n], nil
 	}
 }
-func (m *MsgUpdateSchedualedRunResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgUpdateSchedualedRunResponse.Merge(m, src)
+func (m *MsgUpdateScheduledRunResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateScheduledRunResponse.Merge(m, src)
 }
-func (m *MsgUpdateSchedualedRunResponse) XXX_Size() int {
+func (m *MsgUpdateScheduledRunResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgUpdateSchedualedRunResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgUpdateSchedualedRunResponse.DiscardUnknown(m)
+func (m *MsgUpdateScheduledRunResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateScheduledRunResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgUpdateSchedualedRunResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgUpdateScheduledRunResponse proto.InternalMessageInfo
 
-type MsgDeleteSchedualedRun struct {
+type MsgDeleteScheduledRun struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Index   string `protobuf:"bytes,2,opt,name=index,proto3" json:"index,omitempty"`
 }
 
-func (m *MsgDeleteSchedualedRun) Reset()         { *m = MsgDeleteSchedualedRun{} }
-func (m *MsgDeleteSchedualedRun) String() string { return proto.CompactTextString(m) }
-func (*MsgDeleteSchedualedRun) ProtoMessage()    {}
-func (*MsgDeleteSchedualedRun) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteScheduledRun) Reset()         { *m = MsgDeleteScheduledRun{} }
+func (m *MsgDeleteScheduledRun) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteScheduledRun) ProtoMessage()    {}
+func (*MsgDeleteScheduledRun) Descriptor() ([]byte, []int) {
 	return fileDescriptor_e8fb7800ed4c5286, []int{4}
 }
-func (m *MsgDeleteSchedualedRun) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteScheduledRun) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgDeleteSchedualedRun) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteScheduledRun) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgDeleteSchedualedRun.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteScheduledRun.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -255,47 +255,47 @@ func (m *MsgDeleteSchedualedRun) XXX_Marshal(b []byte, deterministic bool) ([]by
 		return b[:n], nil
 	}
 }
-func (m *MsgDeleteSchedualedRun) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgDeleteSchedualedRun.Merge(m, src)
+func (m *MsgDeleteScheduledRun) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteScheduledRun.Merge(m, src)
 }
-func (m *MsgDeleteSchedualedRun) XXX_Size() int {
+func (m *MsgDeleteScheduledRun) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgDeleteSchedualedRun) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgDeleteSchedualedRun.DiscardUnknown(m)
+func (m *MsgDeleteScheduledRun) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteScheduledRun.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgDeleteSchedualedRun proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteScheduledRun proto.InternalMessageInfo
 
-func (m *MsgDeleteSchedualedRun) GetCreator() string {
+func (m *MsgDeleteScheduledRun) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgDeleteSchedualedRun) GetIndex() string {
+func (m *MsgDeleteScheduledRun) GetIndex() string {
 	if m != nil {
 		return m.Index
 	}
 	return ""
 }
 
-type MsgDeleteSchedualedRunResponse struct {
+type MsgDeleteScheduledRunResponse struct {
 }
 
-func (m *MsgDeleteSchedualedRunResponse) Reset()         { *m = MsgDeleteSchedualedRunResponse{} }
-func (m *MsgDeleteSchedualedRunResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgDeleteSchedualedRunResponse) ProtoMessage()    {}
-func (*MsgDeleteSchedualedRunResponse) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteScheduledRunResponse) Reset()         { *m = MsgDeleteScheduledRunResponse{} }
+func (m *MsgDeleteScheduledRunResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteScheduledRunResponse) ProtoMessage()    {}
+func (*MsgDeleteScheduledRunResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_e8fb7800ed4c5286, []int{5}
 }
-func (m *MsgDeleteSchedualedRunResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteScheduledRunResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgDeleteSchedualedRunResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteScheduledRunResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgDeleteSchedualedRunResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteScheduledRunResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -305,17 +305,17 @@ func (m *MsgDeleteSchedualedRunResponse) XXX_Marshal(b []byte, deterministic boo
 		return b[:n], nil
 	}
 }
-func (m *MsgDeleteSchedualedRunResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgDeleteSchedualedRunResponse.Merge(m, src)
+func (m *MsgDeleteScheduledRunResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteScheduledRunResponse.Merge(m, src)
 }
-func (m *MsgDeleteSchedualedRunResponse) XXX_Size() int {
+func (m *MsgDeleteScheduledRunResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgDeleteSchedualedRunResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgDeleteSchedualedRunResponse.DiscardUnknown(m)
+func (m *MsgDeleteScheduledRunResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteScheduledRunResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgDeleteSchedualedRunResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteScheduledRunResponse proto.InternalMessageInfo
 
 // Create a new storage of arbitrary text
 type MsgCreateStorage struct {
@@ -863,12 +863,12 @@ func (m *MsgDeleteScriptResponse) XXX_DiscardUnknown() {
 var xxx_messageInfo_MsgDeleteScriptResponse proto.InternalMessageInfo
 
 func init() {
-	proto.RegisterType((*MsgCreateSchedualedRun)(nil), "dyson.MsgCreateSchedualedRun")
-	proto.RegisterType((*MsgCreateSchedualedRunResponse)(nil), "dyson.MsgCreateSchedualedRunResponse")
-	proto.RegisterType((*MsgUpdateSchedualedRun)(nil), "dyson.MsgUpdateSchedualedRun")
-	proto.RegisterType((*MsgUpdateSchedualedRunResponse)(nil), "dyson.MsgUpdateSchedualedRunResponse")
-	proto.RegisterType((*MsgDeleteSchedualedRun)(nil), "dyson.MsgDeleteSchedualedRun")
-	proto.RegisterType((*MsgDeleteSchedualedRunResponse)(nil), "dyson.MsgDeleteSchedualedRunResponse")
+	proto.RegisterType((*MsgCreateScheduledRun)(nil), "dyson.MsgCreateScheduledRun")
+	proto.RegisterType((*MsgCreateScheduledRunResponse)(nil), "dyson.MsgCreateScheduledRunResponse")
+	proto.RegisterType((*MsgUpdateScheduledRun)(nil), "dyson.MsgUpdateScheduledRun")
+	proto.RegisterType((*MsgUpdateScheduledRunResponse)(nil), "dyson.MsgUpdateScheduledRunResponse")
+	proto.RegisterType((*MsgDeleteScheduledRun)(nil), "dyson.MsgDeleteScheduledRun")
+	proto.RegisterType((*MsgDeleteScheduledRunResponse)(nil), "dyson.MsgDeleteScheduledRunResponse")
 	proto.RegisterType((*MsgCreateStorage)(nil), "dyson.MsgCreateStorage")
 	proto.RegisterType((*MsgCreateStorageResponse)(nil), "dyson.MsgCreateStorageResponse")
 	proto.RegisterType((*MsgUpdateStorage)(nil), "dyson.MsgUpdateStorage")
@@ -886,45 +886,45 @@ func init() {
 func init() { proto.RegisterFile("dyson/tx.proto", fileDescriptor_e8fb7800ed4c5286) }
 
 var fileDescriptor_e8fb7800ed4c5286 = []byte{
-	// 603 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x55, 0x4f, 0x6f, 0xd3, 0x30,
-	0x1c, 0x6d, 0x48, 0x37, 0xb6, 0x1f, 0x1b, 0x4c, 0xde, 0xe8, 0x42, 0x24, 0xd2, 0x2a, 0x12, 0x52,
-	0xa5, 0x49, 0x8d, 0xb6, 0xdd, 0x10, 0x12, 0xd2, 0x40, 0x13, 0x1c, 0x7a, 0x09, 0xe2, 0x02, 0x07,
-	0x94, 0x26, 0xc6, 0x8d, 0xd4, 0xc6, 0x55, 0x9c, 0x4c, 0xdd, 0x81, 0x3b, 0x47, 0x3e, 0xc2, 0x3e,
-	0xce, 0x8e, 0x3b, 0x72, 0x44, 0xed, 0x85, 0x8f, 0x81, 0xec, 0x38, 0x59, 0xbc, 0x98, 0xc2, 0x86,
-	0x38, 0xd5, 0xbf, 0x3f, 0x79, 0xef, 0xfd, 0xdc, 0x67, 0x1b, 0x1e, 0x46, 0xe7, 0x8c, 0x26, 0x5e,
-	0x36, 0x1f, 0xcc, 0x52, 0x9a, 0x51, 0xb4, 0x26, 0x62, 0x7b, 0x8f, 0x50, 0x42, 0x45, 0xc6, 0xe3,
-	0xab, 0xa2, 0x68, 0xa3, 0xa2, 0x99, 0x85, 0x69, 0x3c, 0xcb, 0x64, 0x6e, 0x57, 0xe6, 0x32, 0x9a,
-	0x06, 0x04, 0xab, 0x8d, 0x53, 0x46, 0xd2, 0x3c, 0x91, 0x39, 0x27, 0xa4, 0x6c, 0x4a, 0x99, 0x37,
-	0x0a, 0x18, 0xf6, 0xce, 0x0e, 0x47, 0x38, 0x0b, 0x0e, 0xbd, 0x90, 0xc6, 0x65, 0xdd, 0x2e, 0xc1,
-	0xc7, 0x38, 0xca, 0x83, 0x09, 0x8e, 0x3e, 0x55, 0xdf, 0xba, 0x5f, 0xa0, 0x33, 0x64, 0xe4, 0x55,
-	0x8a, 0x83, 0x0c, 0xbf, 0xab, 0x1a, 0xfc, 0x3c, 0x41, 0x16, 0xdc, 0x0f, 0x79, 0x9a, 0xa6, 0x96,
-	0xd1, 0x33, 0xfa, 0x9b, 0x7e, 0x19, 0xa2, 0x0e, 0xac, 0x8f, 0x71, 0x4c, 0xc6, 0x99, 0x75, 0xaf,
-	0x67, 0xf4, 0xdb, 0xbe, 0x8c, 0xd0, 0x0e, 0x98, 0x24, 0x60, 0x96, 0x29, 0x92, 0x7c, 0x89, 0xba,
-	0x60, 0x4e, 0x19, 0xb1, 0xda, 0x3d, 0xa3, 0xff, 0xe0, 0x68, 0x7b, 0x20, 0x74, 0x0c, 0x86, 0x8c,
-	0xf8, 0x79, 0xe2, 0xf3, 0x8a, 0xdb, 0x03, 0x47, 0x4f, 0xef, 0x63, 0x36, 0xa3, 0x09, 0xc3, 0x6e,
-	0x2c, 0x04, 0xbe, 0x9f, 0x45, 0xb7, 0x10, 0xb8, 0x07, 0x6b, 0x71, 0x12, 0xe1, 0xb9, 0xd0, 0xb7,
-	0xe9, 0x17, 0x41, 0x29, 0xc6, 0xfc, 0x83, 0x18, 0x0d, 0x55, 0x25, 0xe6, 0x8d, 0x10, 0xf3, 0x1a,
-	0x4f, 0xf0, 0x3f, 0x8a, 0x91, 0x5c, 0x1a, 0xa4, 0x8a, 0xeb, 0x0c, 0x76, 0xae, 0xb7, 0xa6, 0xf0,
-	0xc0, 0xad, 0x47, 0x46, 0xd0, 0x8e, 0x82, 0x2c, 0x10, 0x33, 0x6f, 0xfa, 0x62, 0xcd, 0x3b, 0x3f,
-	0xd3, 0x34, 0xc4, 0xe2, 0x5f, 0xd9, 0xf0, 0x8b, 0xe0, 0xf9, 0xc6, 0xd7, 0x8b, 0x6e, 0xeb, 0xe7,
-	0x45, 0xb7, 0xe5, 0xda, 0x60, 0xdd, 0xe4, 0xad, 0x34, 0x4d, 0x84, 0x26, 0xb9, 0x43, 0xff, 0x5b,
-	0x93, 0x54, 0xa2, 0xb0, 0x55, 0x4a, 0x4e, 0x84, 0x12, 0xb9, 0x7f, 0x77, 0x53, 0x22, 0xf1, 0x15,
-	0x8c, 0x0a, 0xff, 0x25, 0x3c, 0xaa, 0x19, 0x93, 0x9f, 0xca, 0x15, 0xf0, 0x08, 0xda, 0x21, 0x8d,
-	0x70, 0x39, 0x12, 0x5f, 0xbb, 0xc7, 0xb0, 0x7f, 0x03, 0xa0, 0xc4, 0xe6, 0x40, 0x41, 0x14, 0xa5,
-	0x98, 0xb1, 0x12, 0x48, 0x86, 0x92, 0xb5, 0x74, 0xe0, 0x9d, 0x59, 0xeb, 0x00, 0x7f, 0xc1, 0x7a,
-	0x20, 0x58, 0x4b, 0x2f, 0xae, 0x66, 0x75, 0x9f, 0x08, 0x86, 0x7a, 0x73, 0xc9, 0x70, 0x74, 0xd9,
-	0x06, 0x73, 0xc8, 0x08, 0xfa, 0x08, 0xbb, 0xba, 0x0b, 0xe5, 0xe9, 0xf5, 0x91, 0xd3, 0x94, 0xed,
-	0x67, 0x2b, 0xcb, 0xd5, 0x18, 0x6f, 0x61, 0x5b, 0x3d, 0x13, 0xfb, 0x8d, 0xef, 0x8a, 0x82, 0xdd,
-	0xfd, 0x4d, 0xa1, 0x0e, 0xa5, 0x5a, 0xb9, 0x06, 0xa5, 0x14, 0xea, 0x50, 0x5a, 0x3b, 0x72, 0x28,
-	0xd5, 0x8b, 0x35, 0x28, 0xa5, 0x50, 0x87, 0xd2, 0x3a, 0x0f, 0x9d, 0xc2, 0x96, 0x62, 0xbb, 0x4e,
-	0x73, 0x5f, 0x78, 0xde, 0x76, 0xf4, 0xf9, 0x3a, 0x8e, 0x62, 0xa4, 0x4e, 0x63, 0x86, 0x06, 0x8e,
-	0xd6, 0x37, 0xa7, 0xb0, 0xa5, 0x58, 0xa3, 0xd3, 0x18, 0xa0, 0x81, 0xa3, 0x73, 0x07, 0x3a, 0x00,
-	0x93, 0xbb, 0x40, 0xbd, 0x78, 0xed, 0xc7, 0xea, 0x3d, 0x2c, 0x9b, 0x4f, 0x5e, 0x5c, 0x2e, 0x1c,
-	0xe3, 0x6a, 0xe1, 0x18, 0x3f, 0x16, 0x8e, 0xf1, 0x6d, 0xe9, 0xb4, 0xae, 0x96, 0x4e, 0xeb, 0xfb,
-	0xd2, 0x69, 0x7d, 0x70, 0x49, 0x9c, 0x8d, 0xf3, 0xd1, 0x20, 0xa4, 0x53, 0x8f, 0xa6, 0xc4, 0x2b,
-	0xde, 0xb6, 0xb9, 0xfc, 0xcd, 0xce, 0x67, 0x98, 0x8d, 0xd6, 0xc5, 0xdb, 0x76, 0xfc, 0x2b, 0x00,
-	0x00, 0xff, 0xff, 0x82, 0xd5, 0xe6, 0x8f, 0x83, 0x07, 0x00, 0x00,
+	// 605 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x55, 0xcf, 0x6e, 0xd3, 0x30,
+	0x1c, 0x6e, 0x48, 0x37, 0xd6, 0x1f, 0x1b, 0x4c, 0x66, 0xeb, 0xb2, 0x08, 0xd2, 0x2a, 0xe2, 0x50,
+	0x69, 0x52, 0xa3, 0x6d, 0x37, 0x84, 0x84, 0x34, 0xd0, 0x10, 0x87, 0x5e, 0x82, 0x90, 0x10, 0x17,
+	0x94, 0x26, 0xc6, 0xad, 0xd4, 0xc6, 0x55, 0x9c, 0x4c, 0x9d, 0xc4, 0x03, 0x70, 0xe4, 0x11, 0xf6,
+	0x32, 0x48, 0x1c, 0x77, 0xe4, 0x88, 0xda, 0x0b, 0x8f, 0x81, 0xec, 0xd8, 0x59, 0xbc, 0x84, 0x32,
+	0x86, 0x38, 0xc5, 0xbf, 0x3f, 0xf9, 0xbe, 0xef, 0xe7, 0x7c, 0x76, 0xe0, 0x7e, 0x74, 0xce, 0x68,
+	0xec, 0xa5, 0xf3, 0xfe, 0x2c, 0xa1, 0x29, 0x45, 0x6b, 0x22, 0xb6, 0x77, 0x08, 0x25, 0x54, 0x64,
+	0x3c, 0xbe, 0xca, 0x8b, 0x36, 0xca, 0x9b, 0x59, 0x98, 0x8c, 0x67, 0xa9, 0xcc, 0x3d, 0x94, 0xb9,
+	0x94, 0x26, 0x01, 0xc1, 0x7a, 0xe3, 0x94, 0x91, 0x24, 0x8b, 0x65, 0xce, 0x09, 0x29, 0x9b, 0x52,
+	0xe6, 0x0d, 0x03, 0x86, 0xbd, 0xb3, 0xc3, 0x21, 0x4e, 0x83, 0x43, 0x2f, 0xa4, 0x63, 0x55, 0xdf,
+	0x57, 0xe0, 0x23, 0x1c, 0x65, 0x13, 0x1c, 0x7d, 0x28, 0x5e, 0x75, 0x3f, 0xc1, 0xee, 0x80, 0x91,
+	0x17, 0x09, 0x0e, 0x52, 0xfc, 0x46, 0xd5, 0xfd, 0x2c, 0x46, 0x16, 0xdc, 0x0d, 0x79, 0x96, 0x26,
+	0x96, 0xd1, 0x35, 0x7a, 0x2d, 0x5f, 0x85, 0xa8, 0x0d, 0xeb, 0x23, 0x3c, 0x26, 0xa3, 0xd4, 0xba,
+	0xd3, 0x35, 0x7a, 0x4d, 0x5f, 0x46, 0x68, 0x1b, 0x4c, 0x12, 0x30, 0xcb, 0x14, 0x49, 0xbe, 0x44,
+	0x1d, 0x30, 0xa7, 0x8c, 0x58, 0xcd, 0xae, 0xd1, 0xbb, 0x77, 0xb4, 0xd5, 0x17, 0x2a, 0xfa, 0x03,
+	0x46, 0xfc, 0x2c, 0xf6, 0x79, 0xc5, 0xed, 0xc0, 0xe3, 0x5a, 0x76, 0x1f, 0xb3, 0x19, 0x8d, 0x19,
+	0x76, 0x47, 0x42, 0xde, 0xdb, 0x59, 0x74, 0x73, 0x79, 0x3b, 0xb0, 0x36, 0x8e, 0x23, 0x3c, 0x17,
+	0xea, 0x5a, 0x7e, 0x1e, 0x28, 0x29, 0xe6, 0x1f, 0xa4, 0x54, 0x99, 0x0a, 0x29, 0xaf, 0x84, 0x94,
+	0x97, 0x78, 0x82, 0xff, 0x4d, 0x8a, 0x64, 0xaa, 0x02, 0x15, 0x4c, 0x67, 0xb0, 0x7d, 0xb5, 0x2b,
+	0xf9, 0xc7, 0xff, 0xeb, 0x79, 0x11, 0x34, 0xa3, 0x20, 0x0d, 0xc4, 0xc0, 0x2d, 0x5f, 0xac, 0x79,
+	0xe7, 0x47, 0x9a, 0x84, 0x58, 0x7c, 0x90, 0x0d, 0x3f, 0x0f, 0x9e, 0x6e, 0x7c, 0xbe, 0xe8, 0x34,
+	0x7e, 0x5e, 0x74, 0x1a, 0xae, 0x0d, 0xd6, 0x75, 0xde, 0x42, 0xd3, 0x44, 0x68, 0x92, 0xdb, 0xf3,
+	0xbf, 0x35, 0x49, 0x25, 0x1a, 0x5b, 0xa1, 0xe4, 0x44, 0x28, 0x91, 0xdb, 0x77, 0x3b, 0x25, 0x12,
+	0x5f, 0xc3, 0x28, 0xf0, 0x9f, 0xc3, 0x83, 0x92, 0x27, 0xf9, 0x71, 0x5c, 0x01, 0x8f, 0xa0, 0x19,
+	0xd2, 0x08, 0xab, 0x91, 0xf8, 0xda, 0x3d, 0x86, 0xbd, 0x6b, 0x00, 0x0a, 0x9b, 0x03, 0x05, 0x51,
+	0x94, 0x60, 0xc6, 0x14, 0x90, 0x0c, 0x25, 0xab, 0xb2, 0xdf, 0xad, 0x59, 0xcb, 0x00, 0x37, 0x60,
+	0x3d, 0x10, 0xac, 0xca, 0x8a, 0xab, 0x59, 0xdd, 0x7d, 0xc1, 0x50, 0x6e, 0x56, 0x0c, 0x47, 0x5f,
+	0x9b, 0x60, 0x0e, 0x18, 0x41, 0xef, 0x00, 0xd5, 0x5c, 0x25, 0x8f, 0xae, 0x8e, 0x5b, 0xb5, 0x6a,
+	0x3f, 0x59, 0x55, 0x2d, 0x66, 0x78, 0x0d, 0x5b, 0xfa, 0x81, 0xd8, 0xab, 0xbc, 0x96, 0x17, 0xec,
+	0xce, 0x6f, 0x0a, 0x65, 0x28, 0xdd, 0xc7, 0x25, 0x28, 0xad, 0x50, 0x86, 0xaa, 0xf5, 0x22, 0x87,
+	0xd2, 0x8d, 0x58, 0x82, 0xd2, 0x0a, 0x65, 0xa8, 0x5a, 0xdb, 0xa1, 0x53, 0xd8, 0xd4, 0x3c, 0xd7,
+	0xae, 0x6e, 0x0b, 0xcf, 0xdb, 0x4e, 0x7d, 0xbe, 0x8c, 0xa3, 0xb9, 0xa8, 0x5d, 0x99, 0xa1, 0x82,
+	0x53, 0x6b, 0x9a, 0x53, 0xd8, 0xd4, 0x7c, 0xd1, 0xae, 0x0c, 0x50, 0xc1, 0xa9, 0xb3, 0x06, 0x3a,
+	0x00, 0x93, 0x7b, 0x40, 0xbf, 0x72, 0xed, 0x5d, 0xfd, 0x06, 0x96, 0xcd, 0x27, 0xcf, 0xbe, 0x2d,
+	0x1c, 0xe3, 0x72, 0xe1, 0x18, 0x3f, 0x16, 0x8e, 0xf1, 0x65, 0xe9, 0x34, 0x2e, 0x97, 0x4e, 0xe3,
+	0xfb, 0xd2, 0x69, 0xbc, 0x77, 0xc9, 0x38, 0x1d, 0x65, 0xc3, 0x7e, 0x48, 0xa7, 0x1e, 0x4d, 0x88,
+	0x97, 0xff, 0xd1, 0xe6, 0xf2, 0x99, 0x9e, 0xcf, 0x30, 0x1b, 0xae, 0x8b, 0x5f, 0xda, 0xf1, 0xaf,
+	0x00, 0x00, 0x00, 0xff, 0xff, 0x07, 0x85, 0x83, 0x7b, 0x79, 0x07, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -939,9 +939,7 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
-	CreateSchedualedRun(ctx context.Context, in *MsgCreateSchedualedRun, opts ...grpc.CallOption) (*MsgCreateSchedualedRunResponse, error)
-	//rpc UpdateSchedualedRun(MsgUpdateSchedualedRun) returns (MsgUpdateSchedualedRunResponse);
-	//rpc DeleteSchedualedRun(MsgDeleteSchedualedRun) returns (MsgDeleteSchedualedRunResponse);
+	CreateScheduledRun(ctx context.Context, in *MsgCreateScheduledRun, opts ...grpc.CallOption) (*MsgCreateScheduledRunResponse, error)
 	// this line is used by starport scaffolding # proto/tx/rpc
 	CreateStorage(ctx context.Context, in *MsgCreateStorage, opts ...grpc.CallOption) (*MsgCreateStorageResponse, error)
 	UpdateStorage(ctx context.Context, in *MsgUpdateStorage, opts ...grpc.CallOption) (*MsgUpdateStorageResponse, error)
@@ -960,9 +958,9 @@ func NewMsgClient(cc grpc1.ClientConn) MsgClient {
 	return &msgClient{cc}
 }
 
-func (c *msgClient) CreateSchedualedRun(ctx context.Context, in *MsgCreateSchedualedRun, opts ...grpc.CallOption) (*MsgCreateSchedualedRunResponse, error) {
-	out := new(MsgCreateSchedualedRunResponse)
-	err := c.cc.Invoke(ctx, "/dyson.Msg/CreateSchedualedRun", in, out, opts...)
+func (c *msgClient) CreateScheduledRun(ctx context.Context, in *MsgCreateScheduledRun, opts ...grpc.CallOption) (*MsgCreateScheduledRunResponse, error) {
+	out := new(MsgCreateScheduledRunResponse)
+	err := c.cc.Invoke(ctx, "/dyson.Msg/CreateScheduledRun", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1034,9 +1032,7 @@ func (c *msgClient) Run(ctx context.Context, in *MsgRun, opts ...grpc.CallOption
 
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
-	CreateSchedualedRun(context.Context, *MsgCreateSchedualedRun) (*MsgCreateSchedualedRunResponse, error)
-	//rpc UpdateSchedualedRun(MsgUpdateSchedualedRun) returns (MsgUpdateSchedualedRunResponse);
-	//rpc DeleteSchedualedRun(MsgDeleteSchedualedRun) returns (MsgDeleteSchedualedRunResponse);
+	CreateScheduledRun(context.Context, *MsgCreateScheduledRun) (*MsgCreateScheduledRunResponse, error)
 	// this line is used by starport scaffolding # proto/tx/rpc
 	CreateStorage(context.Context, *MsgCreateStorage) (*MsgCreateStorageResponse, error)
 	UpdateStorage(context.Context, *MsgUpdateStorage) (*MsgUpdateStorageResponse, error)
@@ -1051,8 +1047,8 @@ type MsgServer interface {
 type UnimplementedMsgServer struct {
 }
 
-func (*UnimplementedMsgServer) CreateSchedualedRun(ctx context.Context, req *MsgCreateSchedualedRun) (*MsgCreateSchedualedRunResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateSchedualedRun not implemented")
+func (*UnimplementedMsgServer) CreateScheduledRun(ctx context.Context, req *MsgCreateScheduledRun) (*MsgCreateScheduledRunResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateScheduledRun not implemented")
 }
 func (*UnimplementedMsgServer) CreateStorage(ctx context.Context, req *MsgCreateStorage) (*MsgCreateStorageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateStorage not implemented")
@@ -1080,20 +1076,20 @@ func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
 	s.RegisterService(&_Msg_serviceDesc, srv)
 }
 
-func _Msg_CreateSchedualedRun_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgCreateSchedualedRun)
+func _Msg_CreateScheduledRun_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateScheduledRun)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).CreateSchedualedRun(ctx, in)
+		return srv.(MsgServer).CreateScheduledRun(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/dyson.Msg/CreateSchedualedRun",
+		FullMethod: "/dyson.Msg/CreateScheduledRun",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).CreateSchedualedRun(ctx, req.(*MsgCreateSchedualedRun))
+		return srv.(MsgServer).CreateScheduledRun(ctx, req.(*MsgCreateScheduledRun))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1229,8 +1225,8 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*MsgServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateSchedualedRun",
-			Handler:    _Msg_CreateSchedualedRun_Handler,
+			MethodName: "CreateScheduledRun",
+			Handler:    _Msg_CreateScheduledRun_Handler,
 		},
 		{
 			MethodName: "CreateStorage",
@@ -1265,7 +1261,7 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 	Metadata: "dyson/tx.proto",
 }
 
-func (m *MsgCreateSchedualedRun) Marshal() (dAtA []byte, err error) {
+func (m *MsgCreateScheduledRun) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1275,12 +1271,12 @@ func (m *MsgCreateSchedualedRun) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgCreateSchedualedRun) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgCreateScheduledRun) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgCreateSchedualedRun) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgCreateScheduledRun) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1317,7 +1313,7 @@ func (m *MsgCreateSchedualedRun) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgCreateSchedualedRunResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgCreateScheduledRunResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1327,12 +1323,12 @@ func (m *MsgCreateSchedualedRunResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgCreateSchedualedRunResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgCreateScheduledRunResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgCreateSchedualedRunResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgCreateScheduledRunResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1340,7 +1336,7 @@ func (m *MsgCreateSchedualedRunResponse) MarshalToSizedBuffer(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgUpdateSchedualedRun) Marshal() (dAtA []byte, err error) {
+func (m *MsgUpdateScheduledRun) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1350,12 +1346,12 @@ func (m *MsgUpdateSchedualedRun) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgUpdateSchedualedRun) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgUpdateScheduledRun) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgUpdateSchedualedRun) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgUpdateScheduledRun) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1389,7 +1385,7 @@ func (m *MsgUpdateSchedualedRun) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgUpdateSchedualedRunResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgUpdateScheduledRunResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1399,12 +1395,12 @@ func (m *MsgUpdateSchedualedRunResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgUpdateSchedualedRunResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgUpdateScheduledRunResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgUpdateSchedualedRunResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgUpdateScheduledRunResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1412,7 +1408,7 @@ func (m *MsgUpdateSchedualedRunResponse) MarshalToSizedBuffer(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgDeleteSchedualedRun) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteScheduledRun) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1422,12 +1418,12 @@ func (m *MsgDeleteSchedualedRun) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgDeleteSchedualedRun) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteScheduledRun) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgDeleteSchedualedRun) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteScheduledRun) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1449,7 +1445,7 @@ func (m *MsgDeleteSchedualedRun) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgDeleteSchedualedRunResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteScheduledRunResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1459,12 +1455,12 @@ func (m *MsgDeleteSchedualedRunResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgDeleteSchedualedRunResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteScheduledRunResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgDeleteSchedualedRunResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteScheduledRunResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1884,7 +1880,7 @@ func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *MsgCreateSchedualedRun) Size() (n int) {
+func (m *MsgCreateScheduledRun) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1907,7 +1903,7 @@ func (m *MsgCreateSchedualedRun) Size() (n int) {
 	return n
 }
 
-func (m *MsgCreateSchedualedRunResponse) Size() (n int) {
+func (m *MsgCreateScheduledRunResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1916,7 +1912,7 @@ func (m *MsgCreateSchedualedRunResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgUpdateSchedualedRun) Size() (n int) {
+func (m *MsgUpdateScheduledRun) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1937,7 +1933,7 @@ func (m *MsgUpdateSchedualedRun) Size() (n int) {
 	return n
 }
 
-func (m *MsgUpdateSchedualedRunResponse) Size() (n int) {
+func (m *MsgUpdateScheduledRunResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1946,7 +1942,7 @@ func (m *MsgUpdateSchedualedRunResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgDeleteSchedualedRun) Size() (n int) {
+func (m *MsgDeleteScheduledRun) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1963,7 +1959,7 @@ func (m *MsgDeleteSchedualedRun) Size() (n int) {
 	return n
 }
 
-func (m *MsgDeleteSchedualedRunResponse) Size() (n int) {
+func (m *MsgDeleteScheduledRunResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -2152,7 +2148,7 @@ func sovTx(x uint64) (n int) {
 func sozTx(x uint64) (n int) {
 	return sovTx(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *MsgCreateSchedualedRun) Unmarshal(dAtA []byte) error {
+func (m *MsgCreateScheduledRun) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2175,10 +2171,10 @@ func (m *MsgCreateSchedualedRun) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgCreateSchedualedRun: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgCreateScheduledRun: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgCreateSchedualedRun: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgCreateScheduledRun: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2308,7 +2304,7 @@ func (m *MsgCreateSchedualedRun) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgCreateSchedualedRunResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgCreateScheduledRunResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2331,10 +2327,10 @@ func (m *MsgCreateSchedualedRunResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgCreateSchedualedRunResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgCreateScheduledRunResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgCreateSchedualedRunResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgCreateScheduledRunResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -2358,7 +2354,7 @@ func (m *MsgCreateSchedualedRunResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgUpdateSchedualedRun) Unmarshal(dAtA []byte) error {
+func (m *MsgUpdateScheduledRun) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2381,10 +2377,10 @@ func (m *MsgUpdateSchedualedRun) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgUpdateSchedualedRun: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgUpdateScheduledRun: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgUpdateSchedualedRun: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgUpdateScheduledRun: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2508,7 +2504,7 @@ func (m *MsgUpdateSchedualedRun) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgUpdateSchedualedRunResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgUpdateScheduledRunResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2531,10 +2527,10 @@ func (m *MsgUpdateSchedualedRunResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgUpdateSchedualedRunResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgUpdateScheduledRunResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgUpdateSchedualedRunResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgUpdateScheduledRunResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -2558,7 +2554,7 @@ func (m *MsgUpdateSchedualedRunResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgDeleteSchedualedRun) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteScheduledRun) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2581,10 +2577,10 @@ func (m *MsgDeleteSchedualedRun) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgDeleteSchedualedRun: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteScheduledRun: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgDeleteSchedualedRun: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteScheduledRun: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2672,7 +2668,7 @@ func (m *MsgDeleteSchedualedRun) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgDeleteSchedualedRunResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteScheduledRunResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2695,10 +2691,10 @@ func (m *MsgDeleteSchedualedRunResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgDeleteSchedualedRunResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteScheduledRunResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgDeleteSchedualedRunResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteScheduledRunResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

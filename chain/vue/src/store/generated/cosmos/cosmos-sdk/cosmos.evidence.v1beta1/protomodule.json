@@ -1,24 +1,26 @@
 {
 	"Name": "v1beta1",
+	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.evidence.v1beta1",
-		"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/evidence.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/evidence.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
-					"google/protobuf/timestamp.proto"
+					"google/protobuf/timestamp.proto",
+					"cosmos_proto/cosmos.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/genesis.proto",
 				"Dependencies": [
 					"google/protobuf/any.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/query.proto",
 				"Dependencies": [
 					"cosmos/base/query/v1beta1/pagination.proto",
 					"gogoproto/gogo.proto",
@@ -27,11 +29,12 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/tx.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"google/protobuf/any.proto",
-					"cosmos_proto/cosmos.proto"
+					"cosmos_proto/cosmos.proto",
+					"cosmos/msg/v1/msg.proto"
 				]
 			}
 		],
@@ -39,42 +42,42 @@
 		"Messages": [
 			{
 				"Name": "Equivocation",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/evidence.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/evidence.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/genesis.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryEvidenceRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryEvidenceResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAllEvidenceRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAllEvidenceResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgSubmitEvidence",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgSubmitEvidenceResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/tx.proto",
 				"HighestFieldNumber": 4
 			}
 		],
@@ -127,7 +130,7 @@
 		{
 			"Name": "MsgSubmitEvidence",
 			"URI": "cosmos.evidence.v1beta1.MsgSubmitEvidence",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/tx.proto"
 		}
 	],
 	"HTTPQueries": [
@@ -159,7 +162,7 @@
 	"Types": [
 		{
 			"Name": "Equivocation",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/evidence/v1beta1/evidence.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/evidence/v1beta1/evidence.proto"
 		}
 	]
 }

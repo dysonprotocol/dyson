@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ModuleVersion",
+    "definitions": {
+        "ModuleVersion": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "name of the app module"
+                },
+                "version": {
+                    "type": "string",
+                    "description": "consensus version of the app module"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Module Version",
+            "description": "ModuleVersion specifies a module and its consensus version. Since: cosmos-sdk 0.43"
+        }
+    }
+}

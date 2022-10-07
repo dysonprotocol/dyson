@@ -4,6 +4,7 @@ package names;
 import "gogoproto/gogo.proto";
 import "names/params.proto";
 import "names/name.proto";
+import "names/expirations.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/org/dyson/x/names/types";
@@ -12,5 +13,6 @@ option go_package = "github.com/org/dyson/x/names/types";
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
   repeated Name nameList = 2 [(gogoproto.nullable) = false];
+  repeated Expirations expirationsList = 3 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

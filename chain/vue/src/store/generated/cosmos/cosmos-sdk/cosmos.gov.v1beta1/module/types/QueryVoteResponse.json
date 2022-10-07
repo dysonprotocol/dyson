@@ -51,7 +51,8 @@
                     "items": {
                         "$ref": "#/definitions/cosmos.gov.v1beta1.WeightedVoteOption"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "description": "Since: cosmos-sdk 0.43"
                 }
             },
             "additionalProperties": true,
@@ -92,7 +93,7 @@
             "additionalProperties": true,
             "type": "object",
             "title": "Weighted Vote Option",
-            "description": "WeightedVoteOption defines a unit of vote for vote split."
+            "description": "WeightedVoteOption defines a unit of vote for vote split. Since: cosmos-sdk 0.43"
         }
     }
 }

@@ -1,0 +1,364 @@
+{
+	"Name": "v1beta1",
+	"GoModulePath": "github.com/cosmos/cosmos-sdk",
+	"Pkg": {
+		"Name": "cosmos.auth.v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto",
+				"Dependencies": [
+					"cosmos_proto/cosmos.proto",
+					"gogoproto/gogo.proto",
+					"google/protobuf/any.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/genesis.proto",
+				"Dependencies": [
+					"google/protobuf/any.proto",
+					"gogoproto/gogo.proto",
+					"cosmos/auth/v1beta1/auth.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Dependencies": [
+					"cosmos/base/query/v1beta1/pagination.proto",
+					"gogoproto/gogo.proto",
+					"google/protobuf/any.proto",
+					"google/api/annotations.proto",
+					"cosmos/auth/v1beta1/auth.proto",
+					"cosmos_proto/cosmos.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/cosmos-sdk/x/auth/types",
+		"Messages": [
+			{
+				"Name": "BaseAccount",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "ModuleAccount",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "Params",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto",
+				"HighestFieldNumber": 5
+			},
+			{
+				"Name": "GenesisState",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/genesis.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryAccountsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAccountsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryAccountRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryModuleAccountsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryParamsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAccountResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryParamsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryModuleAccountsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "Bech32PrefixRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "Bech32PrefixResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "AddressBytesToStringRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "AddressBytesToStringResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "AddressStringToBytesRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "AddressStringToBytesResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAccountAddressByIDRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAccountAddressByIDResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "Accounts",
+						"RequestType": "QueryAccountsRequest",
+						"ReturnsType": "QueryAccountsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Account",
+						"RequestType": "QueryAccountRequest",
+						"ReturnsType": "QueryAccountResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"address"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "AccountAddressByID",
+						"RequestType": "QueryAccountAddressByIDRequest",
+						"ReturnsType": "QueryAccountAddressByIDResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Params",
+						"RequestType": "QueryParamsRequest",
+						"ReturnsType": "QueryParamsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "ModuleAccounts",
+						"RequestType": "QueryModuleAccountsRequest",
+						"ReturnsType": "QueryModuleAccountsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Bech32Prefix",
+						"RequestType": "Bech32PrefixRequest",
+						"ReturnsType": "Bech32PrefixResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "AddressBytesToString",
+						"RequestType": "AddressBytesToStringRequest",
+						"ReturnsType": "AddressBytesToStringResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"address_bytes"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "AddressStringToBytes",
+						"RequestType": "AddressStringToBytesRequest",
+						"ReturnsType": "AddressStringToBytesResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"address_string"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"Msgs": null,
+	"HTTPQueries": [
+		{
+			"Name": "Accounts",
+			"FullName": "QueryAccounts",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Account",
+			"FullName": "QueryAccount",
+			"Rules": [
+				{
+					"Params": [
+						"address"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "AccountAddressByID",
+			"FullName": "QueryAccountAddressByID",
+			"Rules": [
+				{
+					"Params": [
+						"id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Params",
+			"FullName": "QueryParams",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "ModuleAccounts",
+			"FullName": "QueryModuleAccounts",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Bech32Prefix",
+			"FullName": "QueryBech32Prefix",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "AddressBytesToString",
+			"FullName": "QueryAddressBytesToString",
+			"Rules": [
+				{
+					"Params": [
+						"address_bytes"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "AddressStringToBytes",
+			"FullName": "QueryAddressStringToBytes",
+			"Rules": [
+				{
+					"Params": [
+						"address_string"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "BaseAccount",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto"
+		},
+		{
+			"Name": "ModuleAccount",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto"
+		},
+		{
+			"Name": "Params",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto"
+		}
+	]
+}

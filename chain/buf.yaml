@@ -1,0 +1,14 @@
+version: v1beta1
+deps:
+  - buf.build/cosmos/cosmos-sdk:main
+  - buf.build/googleapis/googleapis:62f35d8aed1149c291d606d958a7ce32
+build:
+  roots:
+    - proto
+    - third_party
+lint:
+  use:
+    - DEFAULT
+breaking:
+  use:
+    - FILE

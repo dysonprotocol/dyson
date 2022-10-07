@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GrantQueueItem",
+    "definitions": {
+        "GrantQueueItem": {
+            "properties": {
+                "msg_type_urls": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "msg_type_urls contains the list of TypeURL of a sdk.Msg."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Grant Queue Item",
+            "description": "GrantQueueItem contains the list of TypeURL of a sdk.Msg."
+        }
+    }
+}

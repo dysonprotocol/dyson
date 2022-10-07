@@ -9,7 +9,12 @@
  * ---------------------------------------------------------------
  */
 
-export type DysonMsgCreateSchedualedRunResponse = object;
+export interface DysonCron {
+  blockHeight?: string;
+  indexes?: string[];
+}
+
+export type DysonMsgCreateScheduledRunResponse = object;
 
 export interface DysonMsgCreateScriptResponse {
   address?: string;
@@ -24,8 +29,8 @@ export type DysonMsgDeleteStorageResponse = object;
 export interface DysonMsgRun {
   creator?: string;
   address?: string;
-  extraLines?: string;
-  functionName?: string;
+  extra_lines?: string;
+  function_name?: string;
   args?: string;
   kwargs?: string;
   coins?: string;
@@ -41,8 +46,23 @@ export interface DysonMsgUpdateScriptResponse {
 
 export type DysonMsgUpdateStorageResponse = object;
 
-export interface DysonQueryAllSchedualedRunResponse {
-  schedualedRun?: DysonSchedualedRun[];
+export interface DysonQueryAllCronResponse {
+  cron?: DysonCron[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface DysonQueryAllScheduledRunResponse {
+  scheduled_run?: DysonScheduledRun[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -86,8 +106,12 @@ export interface DysonQueryAllStorageResponse {
   pagination?: V1Beta1PageResponse;
 }
 
-export interface DysonQueryGetSchedualedRunResponse {
-  schedualedRun?: DysonSchedualedRun;
+export interface DysonQueryGetCronResponse {
+  cron?: DysonCron;
+}
+
+export interface DysonQueryGetScheduledRunResponse {
+  scheduled_run?: DysonScheduledRun;
 }
 
 export interface DysonQueryGetSchemaResponse {
@@ -117,11 +141,29 @@ export interface DysonQueryPrefixStorageResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface DysonQueryScheduledGasPriceAndFeeAtBlockResponse {
+  /**
+   * DecCoin defines a token with a denomination and a decimal amount.
+   *
+   * NOTE: The amount field is an Dec which implements the custom method
+   * signatures required by gogoproto.
+   */
+  gasprice?: V1Beta1DecCoin;
+
+  /**
+   * Coin defines a token with a denomination and an amount.
+   *
+   * NOTE: The amount field is an Int which implements the custom method
+   * signatures required by gogoproto.
+   */
+  gasfee?: V1Beta1Coin;
+}
+
 export interface DysonQueryWsgiResponse {
   httpresponse?: string;
 }
 
-export interface DysonSchedualedRun {
+export interface DysonScheduledRun {
   index?: string;
   creator?: string;
 
@@ -135,12 +177,12 @@ export interface DysonSchedualedRun {
   error?: string;
 
   /**
-   * Coin defines a token with a denomination and an amount.
+   * DecCoin defines a token with a denomination and a decimal amount.
    *
-   * NOTE: The amount field is an Int which implements the custom method
+   * NOTE: The amount field is an Dec which implements the custom method
    * signatures required by gogoproto.
    */
-  gasprice?: V1Beta1Coin;
+  gasprice?: V1Beta1DecCoin;
 
   /**
    * Coin defines a token with a denomination and an amount.
@@ -186,6 +228,17 @@ export interface V1Beta1Coin {
 }
 
 /**
+* DecCoin defines a token with a denomination and a decimal amount.
+
+NOTE: The amount field is an Dec which implements the custom method
+signatures required by gogoproto.
+*/
+export interface V1Beta1DecCoin {
+  denom?: string;
+  amount?: string;
+}
+
+/**
 * message SomeRequest {
          Foo some_parameter = 1;
          PageRequest pagination = 2;
@@ -221,9 +274,13 @@ export interface V1Beta1PageRequest {
    * count_total is only respected when offset is used. It is ignored when key
    * is set.
    */
-  countTotal?: boolean;
+  count_total?: boolean;
 
-  /** reverse is set to true if results are to be returned in the descending order. */
+  /**
+   * reverse is set to true if results are to be returned in the descending order.
+   *
+   * Since: cosmos-sdk 0.43
+   */
   reverse?: boolean;
 }
 
@@ -237,8 +294,13 @@ corresponding request message has used PageRequest.
  }
 */
 export interface V1Beta1PageResponse {
-  /** @format byte */
-  nextKey?: string;
+  /**
+   * next_key is the key to be passed to PageRequest.key to
+   * query the next page most efficiently. It will be empty if
+   * there are no more results.
+   * @format byte
+   */
+  next_key?: string;
 
   /** @format uint64 */
   total?: string;
@@ -436,7 +498,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title dyson/genesis.proto
+ * @title dyson/cron.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
@@ -452,8 +514,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     query?: {
       creator?: string;
       address?: string;
-      extraLines?: string;
-      functionName?: string;
+      extra_lines?: string;
+      function_name?: string;
       args?: string;
       kwargs?: string;
       coins?: string;
@@ -508,20 +570,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QueryScriptAll
    * @summary Queries a list of script items.
-   * @request GET:/dyson/scriptiAll
+   * @request GET:/dyson/scriptAll
    */
   queryScriptAll = (
     query?: {
       "pagination.key"?: string;
       "pagination.offset"?: string;
       "pagination.limit"?: string;
-      "pagination.countTotal"?: boolean;
+      "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
   ) =>
     this.request<DysonQueryAllScriptResponse, RpcStatus>({
-      path: `/dyson/scriptiAll`,
+      path: `/dyson/scriptAll`,
       method: "GET",
       query: query,
       format: "json",
@@ -558,7 +620,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.key"?: string;
       "pagination.offset"?: string;
       "pagination.limit"?: string;
-      "pagination.countTotal"?: boolean;
+      "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
@@ -584,7 +646,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.key"?: string;
       "pagination.offset"?: string;
       "pagination.limit"?: string;
-      "pagination.countTotal"?: boolean;
+      "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
@@ -618,13 +680,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QuerySchedualedRun
-   * @summary Queries a schedualedRun by index.
-   * @request GET:/org/dyson/dyson/schedualedRun
+   * @name QueryCronAll
+   * @summary Queries a list of Cron items.
+   * @request GET:/org/dyson/dyson/cron
    */
-  querySchedualedRun = (query?: { index?: string }, params: RequestParams = {}) =>
-    this.request<DysonQueryGetSchedualedRunResponse, RpcStatus>({
-      path: `/org/dyson/dyson/schedualedRun`,
+  queryCronAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<DysonQueryAllCronResponse, RpcStatus>({
+      path: `/org/dyson/dyson/cron`,
       method: "GET",
       query: query,
       format: "json",
@@ -635,22 +706,60 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QuerySchedualedRunAll
-   * @summary Queries a list of schedualedRun items.
-   * @request GET:/org/dyson/dyson/schedualedRunAll
+   * @name QueryScheduledRun
+   * @summary Queries a scheduledRun by index.
+   * @request GET:/org/dyson/dyson/scheduledRun
    */
-  querySchedualedRunAll = (
+  queryScheduledRun = (query?: { index?: string }, params: RequestParams = {}) =>
+    this.request<DysonQueryGetScheduledRunResponse, RpcStatus>({
+      path: `/org/dyson/dyson/scheduledRun`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryScheduledRunAll
+   * @summary Queries a list of scheduledRun items.
+   * @request GET:/org/dyson/dyson/scheduledRunAll
+   */
+  queryScheduledRunAll = (
     query?: {
+      index?: string;
       "pagination.key"?: string;
       "pagination.offset"?: string;
       "pagination.limit"?: string;
-      "pagination.countTotal"?: boolean;
+      "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
   ) =>
-    this.request<DysonQueryAllSchedualedRunResponse, RpcStatus>({
-      path: `/org/dyson/dyson/schedualedRunAll`,
+    this.request<DysonQueryAllScheduledRunResponse, RpcStatus>({
+      path: `/org/dyson/dyson/scheduledRunAll`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryScheduledGasPriceAndFeeAtBlock
+   * @summary Queries a list of ScheduledGasPriceAtBlock items.
+   * @request GET:/org/dyson/dyson/scheduled_gas_price_at_block
+   */
+  queryScheduledGasPriceAndFeeAtBlock = (
+    query?: { blockheight?: string; gaswanted?: string },
+    params: RequestParams = {},
+  ) =>
+    this.request<DysonQueryScheduledGasPriceAndFeeAtBlockResponse, RpcStatus>({
+      path: `/org/dyson/dyson/scheduled_gas_price_at_block`,
       method: "GET",
       query: query,
       format: "json",

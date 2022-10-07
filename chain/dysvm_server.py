@@ -11,9 +11,46 @@ import logging
 
 import http.client as http_client
 
-import re2
+try:
+    import re2
+    re2.set_fallback_notification(re2.FALLBACK_EXCEPTION)
+    re2_dict = {
+            "ASCII": re2.ASCII,
+            "BackreferencesException": re2.BackreferencesException,
+            "CharClassProblemException": re2.CharClassProblemException,
+            "DEBUG": re2.DEBUG,
+            "DOTALL": re2.DOTALL,
+            "I": re2.I,
+            "IGNORECASE": re2.IGNORECASE,
+            "L": re2.L,
+            "LOCALE": re2.LOCALE,
+            "M": re2.M,
+            "MULTILINE": re2.MULTILINE,
+            "RegexError": re2.RegexError,
+            "S": re2.S,
+            "U": re2.U,
+            "UNICODE": re2.UNICODE,
+            "VERBOSE": re2.VERBOSE,
+            "X": re2.X,
+            "compile": re2.compile,
+            "contains": re2.contains,
+            "count": re2.count,
+            "error": re2.error,
+            "escape": re2.escape,
+            "findall": re2.findall,
+            "finditer": re2.finditer,
+            "fullmatch": re2.fullmatch,
+            "match": re2.match,
+            "re": re2.re,
+            "search": re2.search,
+            "split": re2.split,
+            "sub": re2.sub,
+            "subn": re2.subn,
+        }
+except:
+    re2_dict = {}
+    print("WARNING: Could not load re2")
 
-re2.set_fallback_notification(re2.FALLBACK_EXCEPTION)
 
 
 import io
@@ -170,42 +207,7 @@ def get_module_dict():
             "triangular": random.triangular,
             "uniform": random.uniform,
         },
-        "re2": {
-            "ASCII": re2.ASCII,
-            "BackreferencesException": re2.BackreferencesException,
-            "CharClassProblemException": re2.CharClassProblemException,
-            "DEBUG": re2.DEBUG,
-            "DOTALL": re2.DOTALL,
-            "FALLBACK_EXCEPTION": re2.FALLBACK_EXCEPTION,
-            "FALLBACK_QUIETLY": re2.FALLBACK_QUIETLY,
-            "FALLBACK_WARNING": re2.FALLBACK_WARNING,
-            "I": re2.I,
-            "IGNORECASE": re2.IGNORECASE,
-            "L": re2.L,
-            "LOCALE": re2.LOCALE,
-            "M": re2.M,
-            "MULTILINE": re2.MULTILINE,
-            "RegexError": re2.RegexError,
-            "S": re2.S,
-            "U": re2.U,
-            "UNICODE": re2.UNICODE,
-            "VERBOSE": re2.VERBOSE,
-            "X": re2.X,
-            "compile": re2.compile,
-            "contains": re2.contains,
-            "count": re2.count,
-            "error": re2.error,
-            "escape": re2.escape,
-            "findall": re2.findall,
-            "finditer": re2.finditer,
-            "fullmatch": re2.fullmatch,
-            "match": re2.match,
-            "re": re2.re,
-            "search": re2.search,
-            "split": re2.split,
-            "sub": re2.sub,
-            "subn": re2.subn,
-        },
+        "re2": re2_dict,
     }
 
     def walk(node):
@@ -256,21 +258,8 @@ def build_sandbox(port, creator, address, amount, block_info):
     _chain.__qualname__ = "_chain"
     allow_dys_func(_chain)
 
-    def rpc(method, **params):
-        """
-        Depricated
-        see: dyson._chain
-        """
-        print(
-            "DeprecationWarning: dyson.rpc is deprecated and will be removed. Use dyson._chain"
-        )
-        return _chain(method, **params)
-
-    rpc.__qualname__ = "rpc"
-    allow_dys_func(rpc)
-
     gas_state = {
-        "unconsumed_size": 0,
+        "unconsumed_size": 1,
         "gas_consumed": 0,
         "gas_limit": 0,
         "cumsize": 0,
@@ -288,7 +277,6 @@ def build_sandbox(port, creator, address, amount, block_info):
                 resp = _chain("ConsumeGas", amount=amount)
                 gas_state["unconsumed_size"] = 0
                 if resp["error"]:
-
                     resp = _chain("GasLimit")
                 gas_state["gas_consumed"] = resp["result"].get("GasConsumed", None)
                 gas_state["gas_limit"] = resp["result"].get("GasLimit", None)
@@ -300,7 +288,7 @@ def build_sandbox(port, creator, address, amount, block_info):
                 return
 
             if hasattr(node, "lineno"):
-                size = len(repr(self.scope)) + len(repr(self._last_eval_result))
+                size = len(repr(self.scope)) + len(repr(self._last_eval_result)) // 100
                 if size > dyslang.MAX_SCOPE_SIZE:
                     raise MemoryError("Scope has used too much memory")
 
@@ -337,6 +325,19 @@ def build_sandbox(port, creator, address, amount, block_info):
     sandbox.scope.dicts[0]["print"] = dyson_print
     # sandbox.scope.dicts[0]["globals"] = sandbox.scope.globals
     # sandbox.scope.dicts[0]["locals"] = sandbox.scope.locals
+
+    def rpc(method, **params):
+        """
+        Depricated
+        see: dyson._chain
+        """
+        dyson_print(
+            "DeprecationWarning: dyson.rpc is deprecated and will be removed. Use dyson._chain"
+        )
+        return _chain(method, **params)
+
+    rpc.__qualname__ = "rpc"
+    allow_dys_func(rpc)
 
     @allow_dys_func
     def get_gas_consumed():
@@ -385,6 +386,7 @@ def build_sandbox(port, creator, address, amount, block_info):
         """
         Returns a dictionary of the current block info
         """
+        return block_info
 
     @allow_dys_func
     def get_coins_sent():

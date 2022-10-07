@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryUpgradedConsensusStateResponse",
+    "definitions": {
+        "QueryUpgradedConsensusStateResponse": {
+            "properties": {
+                "upgraded_consensus_state": {
+                    "type": "string",
+                    "description": "Since: cosmos-sdk 0.43",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Upgraded Consensus State Response",
+            "description": "QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState RPC method."
+        }
+    }
+}

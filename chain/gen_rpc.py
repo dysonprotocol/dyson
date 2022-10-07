@@ -78,11 +78,40 @@ types = set()
 keepers = set()
 code = []
 schemas = {}
-for file_path in sorted(glob.glob("vue/src/**/protomodule.json", recursive=True)):
-    if "crisis" in file_path:
-        continue
+for file_path in [
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.auth.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.authz.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.bank.v1beta1/protomodule.json",
+    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.base.tendermint.v1beta1/protomodule.json",
+    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.crisis.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.distribution.v1beta1/protomodule.json",
+    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.evidence.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.feegrant.v1beta1/protomodule.json",
+    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.group.v1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.mint.v1beta1/protomodule.json",
+    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.nft.v1beta1/protomodule.json",
+    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.params.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.slashing.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.staking.v1beta1/protomodule.json",
+    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.tx.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.upgrade.v1beta1/protomodule.json",
+    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.vesting.v1beta1/protomodule.json",
+    # "vue/src/store/generated/ibc-go/v5/ibc.applications.interchain_accounts.controller.v1/protomodule.json",
+    # "vue/src/store/generated/ibc-go/v5/ibc.applications.interchain_accounts.host.v1/protomodule.json",
+    "vue/src/store/generated/ibc-go/v5/ibc.applications.transfer.v1/protomodule.json",
+    # "vue/src/store/generated/ibc-go/v5/ibc.core.channel.v1/protomodule.json",
+    # "vue/src/store/generated/ibc-go/v5/ibc.core.client.v1/protomodule.json",
+    # "vue/src/store/generated/ibc-go/v5/ibc.core.connection.v1/protomodule.json",
+    "vue/src/store/generated/org/dyson/dyson/protomodule.json",
+    "vue/src/store/generated/org/dyson/names/protomodule.json",
+]:
+
     data = json.load(open(file_path))
     for services in data["Pkg"]["Services"]:
+        if services["Name"] == "Service":
+            continue
         for d in services["RPCFuncs"]:
             if services["Name"] == "Msg":
                 command = (
@@ -102,12 +131,13 @@ for file_path in sorted(glob.glob("vue/src/**/protomodule.json", recursive=True)
                 )
             )
 
-            for k, v in req_schema["definitions"].items():
-                if "properties" in v:
-                    for p in list(v["properties"]):
-                        cc = to_camel_case(p)
-                        if p != cc:
-                            v["properties"][cc] = v["properties"].pop(p)
+            # don't force camel case
+            # for k, v in req_schema["definitions"].items():
+            # if "properties" in v:
+            #    for p in list(v["properties"]):
+            #        cc = to_camel_case(p)
+            #        if p != cc:
+            #            v["properties"][cc] = v["properties"].pop(p)
 
             res_schema = json.load(
                 open(
@@ -145,7 +175,7 @@ for file_path in sorted(glob.glob("vue/src/**/protomodule.json", recursive=True)
                     ".", ""
                 ).capitalize()
             else:
-                raise Exception(f"oh no: {service_name}")
+                raise Exception(f"oh no: {service_name}\n{services} ")
             mod_types = f"{data['Pkg']['Name']}types".lower().replace(".", "")
             mod_keeper = f"{data['Pkg']['Name']}keeper".lower().replace(".", "")
 
@@ -161,11 +191,24 @@ for file_path in sorted(glob.glob("vue/src/**/protomodule.json", recursive=True)
                     )
                 types.add(f'{mod_types} "{data["Pkg"]["GoImportName"]}"')
             else:
-                if "vesting" in mod_keeper:
+                if "gov" in mod_keeper:
+                    if service_name == "Msg":
+                        keeper_import = data["Pkg"]["GoImportName"].replace(
+                            "/types/v1", "/keeper"
+                        )
+
+                elif "vesting" in mod_keeper:
                     keeper_import = data["Pkg"]["GoImportName"].replace("/types", "")
                     if service_name == "Msg":
                         handler_template = Template(
                             "handler := $mod_keeper.NewMsgServerImpl(rpcservice.k.accountKeeper, rpcservice.k.bankkeeper).$keeper_function"
+                        )
+                elif "group" in mod_keeper:
+                    # none because it uses the one on the keeper
+                    keeper_import = None
+                    if service_name == "Msg":
+                        handler_template = Template(
+                            "handler := rpcservice.k.$mod_keeper.$keeper_function"
                         )
                 elif "ibcapplication" in mod_keeper:
                     # none because it uses the one on the keeper
@@ -175,6 +218,11 @@ for file_path in sorted(glob.glob("vue/src/**/protomodule.json", recursive=True)
                             "handler := rpcservice.k.$mod_keeper.$keeper_function"
                         )
                 elif ("staking" in mod_keeper) and (service_name == "Query"):
+                    mod_keeper = f"{data['Pkg']['Name']}querier".lower().replace(
+                        ".", ""
+                    )
+                    keeper_import = None
+                elif ("liquidity" in mod_keeper) and (service_name == "Query"):
                     mod_keeper = f"{data['Pkg']['Name']}querier".lower().replace(
                         ".", ""
                     )
@@ -193,7 +241,7 @@ for file_path in sorted(glob.glob("vue/src/**/protomodule.json", recursive=True)
                     keeper_import = data["Pkg"]["GoImportName"].replace(
                         "/types", "/keeper"
                     )
-                if keeper_import:
+                if keeper_import and service_name == "Msg":
                     keepers.add(f'{mod_keeper} "{keeper_import}"')
                 types.add(f'{mod_types} "{data["Pkg"]["GoImportName"]}"')
 
@@ -245,14 +293,14 @@ schemas["dyson/sendMsgUpdateScript"]["request_schema"]["definitions"][
 
 schemas["dyson/QueryQueryScript"]["request_schema"]["definitions"]["MsgRun"][
     "properties"
-]["extraLines"]["format"] = "textarea"
+]["extra_lines"]["format"] = "textarea"
 
 schemas["dyson/QueryQueryScript"]["resp_schema"]["definitions"]["MsgRunResponse"][
     "properties"
 ]["response"]["format"] = "textarea"
 
 schemas["dyson/sendMsgRun"]["request_schema"]["definitions"]["MsgRun"]["properties"][
-    "extraLines"
+    "extra_lines"
 ]["format"] = "textarea"
 
 schemas["dyson/sendMsgRun"]["resp_schema"]["definitions"]["MsgRunResponse"][

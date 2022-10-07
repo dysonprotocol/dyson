@@ -35,7 +35,7 @@
             "additionalProperties": true,
             "type": "object",
             "title": "Weighted Vote Option",
-            "description": "WeightedVoteOption defines a unit of vote for vote split."
+            "description": "WeightedVoteOption defines a unit of vote for vote split. Since: cosmos-sdk 0.43"
         }
     }
 }

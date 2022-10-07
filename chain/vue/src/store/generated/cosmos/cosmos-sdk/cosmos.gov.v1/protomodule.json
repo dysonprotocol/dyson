@@ -1,0 +1,541 @@
+{
+	"Name": "v1",
+	"GoModulePath": "github.com/cosmos/cosmos-sdk",
+	"Pkg": {
+		"Name": "cosmos.gov.v1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/genesis.proto",
+				"Dependencies": [
+					"cosmos/gov/v1/gov.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto",
+				"Dependencies": [
+					"cosmos/base/v1beta1/coin.proto",
+					"gogoproto/gogo.proto",
+					"google/protobuf/timestamp.proto",
+					"google/protobuf/any.proto",
+					"google/protobuf/duration.proto",
+					"cosmos_proto/cosmos.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"Dependencies": [
+					"cosmos/base/query/v1beta1/pagination.proto",
+					"google/api/annotations.proto",
+					"cosmos/gov/v1/gov.proto",
+					"cosmos_proto/cosmos.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto",
+				"Dependencies": [
+					"cosmos/base/v1beta1/coin.proto",
+					"cosmos/gov/v1/gov.proto",
+					"gogoproto/gogo.proto",
+					"cosmos_proto/cosmos.proto",
+					"google/protobuf/any.proto",
+					"cosmos/msg/v1/msg.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/cosmos-sdk/x/gov/types/v1",
+		"Messages": [
+			{
+				"Name": "GenesisState",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/genesis.proto",
+				"HighestFieldNumber": 7
+			},
+			{
+				"Name": "WeightedVoteOption",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "Deposit",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "Proposal",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto",
+				"HighestFieldNumber": 10
+			},
+			{
+				"Name": "TallyResult",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "Vote",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto",
+				"HighestFieldNumber": 5
+			},
+			{
+				"Name": "DepositParams",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "VotingParams",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "TallyParams",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "QueryProposalRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryProposalResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryProposalsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "QueryProposalsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryVoteRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryVoteResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryVotesRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryVotesResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryParamsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryParamsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "QueryDepositRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDepositResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryDepositsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryDepositsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryTallyResultRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryTallyResultResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgSubmitProposal",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "MsgSubmitProposalResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgExecLegacyContent",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "MsgExecLegacyContentResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgVote",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "MsgVoteResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgVoteWeighted",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "MsgVoteWeightedResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgDeposit",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgDepositResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto",
+				"HighestFieldNumber": 0
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "Proposal",
+						"RequestType": "QueryProposalRequest",
+						"ReturnsType": "QueryProposalResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"proposal_id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Proposals",
+						"RequestType": "QueryProposalsRequest",
+						"ReturnsType": "QueryProposalsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Vote",
+						"RequestType": "QueryVoteRequest",
+						"ReturnsType": "QueryVoteResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"proposal_id",
+									"voter"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Votes",
+						"RequestType": "QueryVotesRequest",
+						"ReturnsType": "QueryVotesResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"proposal_id"
+								],
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Params",
+						"RequestType": "QueryParamsRequest",
+						"ReturnsType": "QueryParamsResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"params_type"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Deposit",
+						"RequestType": "QueryDepositRequest",
+						"ReturnsType": "QueryDepositResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"proposal_id",
+									"depositor"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Deposits",
+						"RequestType": "QueryDepositsRequest",
+						"ReturnsType": "QueryDepositsResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"proposal_id"
+								],
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "TallyResult",
+						"RequestType": "QueryTallyResultRequest",
+						"ReturnsType": "QueryTallyResultResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"proposal_id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Msg",
+				"RPCFuncs": [
+					{
+						"Name": "SubmitProposal",
+						"RequestType": "MsgSubmitProposal",
+						"ReturnsType": "MsgSubmitProposalResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "ExecLegacyContent",
+						"RequestType": "MsgExecLegacyContent",
+						"ReturnsType": "MsgExecLegacyContentResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "Vote",
+						"RequestType": "MsgVote",
+						"ReturnsType": "MsgVoteResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "VoteWeighted",
+						"RequestType": "MsgVoteWeighted",
+						"ReturnsType": "MsgVoteWeightedResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "Deposit",
+						"RequestType": "MsgDeposit",
+						"ReturnsType": "MsgDepositResponse",
+						"HTTPRules": null
+					}
+				]
+			}
+		]
+	},
+	"Msgs": [
+		{
+			"Name": "MsgDeposit",
+			"URI": "cosmos.gov.v1.MsgDeposit",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto"
+		},
+		{
+			"Name": "MsgVote",
+			"URI": "cosmos.gov.v1.MsgVote",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto"
+		},
+		{
+			"Name": "MsgVoteWeighted",
+			"URI": "cosmos.gov.v1.MsgVoteWeighted",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto"
+		},
+		{
+			"Name": "MsgSubmitProposal",
+			"URI": "cosmos.gov.v1.MsgSubmitProposal",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/tx.proto"
+		}
+	],
+	"HTTPQueries": [
+		{
+			"Name": "Proposal",
+			"FullName": "QueryProposal",
+			"Rules": [
+				{
+					"Params": [
+						"proposal_id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Proposals",
+			"FullName": "QueryProposals",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Vote",
+			"FullName": "QueryVote",
+			"Rules": [
+				{
+					"Params": [
+						"proposal_id",
+						"voter"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Votes",
+			"FullName": "QueryVotes",
+			"Rules": [
+				{
+					"Params": [
+						"proposal_id"
+					],
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Params",
+			"FullName": "QueryParams",
+			"Rules": [
+				{
+					"Params": [
+						"params_type"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Deposit",
+			"FullName": "QueryDeposit",
+			"Rules": [
+				{
+					"Params": [
+						"proposal_id",
+						"depositor"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Deposits",
+			"FullName": "QueryDeposits",
+			"Rules": [
+				{
+					"Params": [
+						"proposal_id"
+					],
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "TallyResult",
+			"FullName": "QueryTallyResult",
+			"Rules": [
+				{
+					"Params": [
+						"proposal_id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "WeightedVoteOption",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto"
+		},
+		{
+			"Name": "Deposit",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto"
+		},
+		{
+			"Name": "Proposal",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto"
+		},
+		{
+			"Name": "TallyResult",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto"
+		},
+		{
+			"Name": "Vote",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto"
+		},
+		{
+			"Name": "DepositParams",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto"
+		},
+		{
+			"Name": "VotingParams",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto"
+		},
+		{
+			"Name": "TallyParams",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/gov/v1/gov.proto"
+		}
+	]
+}

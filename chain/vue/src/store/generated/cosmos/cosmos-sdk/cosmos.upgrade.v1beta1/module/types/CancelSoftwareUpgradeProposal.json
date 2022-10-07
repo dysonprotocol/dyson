@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/CancelSoftwareUpgradeProposal",
+    "definitions": {
+        "CancelSoftwareUpgradeProposal": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Cancel Software Upgrade Proposal",
+            "description": "CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software upgrade. Deprecated: This legacy proposal is deprecated in favor of Msg-based gov proposals, see MsgCancelUpgrade."
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GetSyncingResponse",
+    "definitions": {
+        "GetSyncingResponse": {
+            "properties": {
+                "syncing": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Get Syncing Response",
+            "description": "GetSyncingResponse is the response type for the Query/GetSyncing RPC method."
+        }
+    }
+}

@@ -15,9 +15,9 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgUpdateStorage{}, "dyson/UpdateStorage", nil)
 	cdc.RegisterConcrete(&MsgDeleteStorage{}, "dyson/DeleteStorage", nil)
 	cdc.RegisterConcrete(&MsgRun{}, "dys/Run", nil)
-	cdc.RegisterConcrete(&MsgCreateSchedualedRun{}, "dyson/CreateSchedualedRun", nil)
-	cdc.RegisterConcrete(&MsgUpdateSchedualedRun{}, "dyson/UpdateSchedualedRun", nil)
-	cdc.RegisterConcrete(&MsgDeleteSchedualedRun{}, "dyson/DeleteSchedualedRun", nil)
+	cdc.RegisterConcrete(&MsgCreateScheduledRun{}, "dyson/CreateScheduledRun", nil)
+	cdc.RegisterConcrete(&MsgUpdateScheduledRun{}, "dyson/UpdateScheduledRun", nil)
+	cdc.RegisterConcrete(&MsgDeleteScheduledRun{}, "dyson/DeleteScheduledRun", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -33,9 +33,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgDeleteStorage{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgCreateSchedualedRun{},
-		&MsgUpdateSchedualedRun{},
-		&MsgDeleteSchedualedRun{},
+		&MsgCreateScheduledRun{},
+		&MsgUpdateScheduledRun{},
+		&MsgDeleteScheduledRun{},
 	)
 	// this line is used by starport scaffolding # 3
 	registry.RegisterImplementations((*sdk.Msg)(nil),

@@ -40,7 +40,7 @@
                     },
                     "additionalProperties": true,
                     "type": "object",
-                    "description": "allowance can be any of basic and filtered fee allowance."
+                    "description": "allowance can be any of basic, periodic, allowed fee allowance."
                 }
             },
             "additionalProperties": true,

@@ -26,13 +26,28 @@ faucet:
 init:
   app:
     minimum-gas-prices: "0.01dys"
+  config:
+    consensus:
+      max_body_bytes: 10000
 genesis:
   chain_id: "dyson-testnet-01"
   app_state:
     staking:
       params:
         bond_denom: "dys"
+    mint:
+      params:
+        mint_denom: "dys"
+    crisis:
+      constant_fee:
+        denom: "dys"
+    gov:
+      voting_params:
+        voting_period: "20s"
+      deposit_params:
+        min_deposit:
+            - amount: "1000"
+              denom: "dys"
 
 build:
   main: "cmd/dysond"
-

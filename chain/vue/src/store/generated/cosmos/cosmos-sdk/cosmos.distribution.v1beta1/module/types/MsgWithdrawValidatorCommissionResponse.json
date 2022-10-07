@@ -3,10 +3,33 @@
     "$ref": "#/definitions/MsgWithdrawValidatorCommissionResponse",
     "definitions": {
         "MsgWithdrawValidatorCommissionResponse": {
+            "properties": {
+                "amount": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+                    },
+                    "type": "array",
+                    "description": "Since: cosmos-sdk 0.46"
+                }
+            },
             "additionalProperties": true,
             "type": "object",
             "title": "Msg Withdraw Validator Commission Response",
             "description": "MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type."
+        },
+        "cosmos.base.v1beta1.Coin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Coin",
+            "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
         }
     }
 }

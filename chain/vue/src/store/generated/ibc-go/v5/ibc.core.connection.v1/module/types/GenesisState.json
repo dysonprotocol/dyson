@@ -1,0 +1,172 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GenesisState",
+    "definitions": {
+        "GenesisState": {
+            "properties": {
+                "connections": {
+                    "items": {
+                        "$ref": "#/definitions/ibc.core.connection.v1.IdentifiedConnection"
+                    },
+                    "type": "array"
+                },
+                "client_connection_paths": {
+                    "items": {
+                        "$ref": "#/definitions/ibc.core.connection.v1.ConnectionPaths"
+                    },
+                    "type": "array"
+                },
+                "next_connection_sequence": {
+                    "type": "string",
+                    "description": "the sequence for the next generated connection identifier"
+                },
+                "params": {
+                    "$ref": "#/definitions/ibc.core.connection.v1.Params",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Genesis State",
+            "description": "GenesisState defines the ibc connection submodule's genesis state."
+        },
+        "ibc.core.commitment.v1.MerklePrefix": {
+            "properties": {
+                "key_prefix": {
+                    "type": "string",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Merkle Prefix",
+            "description": "MerklePrefix is merkle path prefixed to the key. The constructed key from the Path and the key will be append(Path.KeyPath, append(Path.KeyPrefix, key...))"
+        },
+        "ibc.core.connection.v1.ConnectionPaths": {
+            "properties": {
+                "client_id": {
+                    "type": "string",
+                    "description": "client state unique identifier"
+                },
+                "paths": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "list of connection paths"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Connection Paths",
+            "description": "ConnectionPaths define all the connection paths for a given client state."
+        },
+        "ibc.core.connection.v1.Counterparty": {
+            "properties": {
+                "client_id": {
+                    "type": "string",
+                    "description": "identifies the client on the counterparty chain associated with a given connection."
+                },
+                "connection_id": {
+                    "type": "string",
+                    "description": "identifies the connection end on the counterparty chain associated with a given connection."
+                },
+                "prefix": {
+                    "$ref": "#/definitions/ibc.core.commitment.v1.MerklePrefix",
+                    "additionalProperties": true,
+                    "description": "commitment merkle prefix of the counterparty chain."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Counterparty",
+            "description": "Counterparty defines the counterparty chain associated with a connection end."
+        },
+        "ibc.core.connection.v1.IdentifiedConnection": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "connection identifier."
+                },
+                "client_id": {
+                    "type": "string",
+                    "description": "client associated with this connection."
+                },
+                "versions": {
+                    "items": {
+                        "$ref": "#/definitions/ibc.core.connection.v1.Version"
+                    },
+                    "type": "array",
+                    "description": "IBC version which can be utilised to determine encodings or protocols for channels or packets utilising this connection"
+                },
+                "state": {
+                    "enum": [
+                        "STATE_UNINITIALIZED_UNSPECIFIED",
+                        0,
+                        "STATE_INIT",
+                        1,
+                        "STATE_TRYOPEN",
+                        2,
+                        "STATE_OPEN",
+                        3
+                    ],
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
+                    "title": "State",
+                    "description": "State defines if a connection is in one of the following states: INIT, TRYOPEN, OPEN or UNINITIALIZED."
+                },
+                "counterparty": {
+                    "$ref": "#/definitions/ibc.core.connection.v1.Counterparty",
+                    "additionalProperties": true,
+                    "description": "counterparty chain associated with this connection."
+                },
+                "delay_period": {
+                    "type": "string",
+                    "description": "delay period associated with this connection."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Identified Connection",
+            "description": "IdentifiedConnection defines a connection with additional connection identifier field."
+        },
+        "ibc.core.connection.v1.Params": {
+            "properties": {
+                "max_expected_time_per_block": {
+                    "type": "string",
+                    "description": "maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the largest amount of time that the chain might reasonably take to produce the next block under normal operating conditions. A safe choice is 3-5x the expected time per block."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "Params defines the set of Connection parameters."
+        },
+        "ibc.core.connection.v1.Version": {
+            "properties": {
+                "identifier": {
+                    "type": "string",
+                    "description": "unique version identifier"
+                },
+                "features": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "list of features compatible with the specified identifier"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Version",
+            "description": "Version defines the versioning scheme used to negotiate the IBC verison in the connection handshake."
+        }
+    }
+}

@@ -1,0 +1,136 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/AuxSignerData",
+    "definitions": {
+        "AuxSignerData": {
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "description": "address is the bech32-encoded address of the auxiliary signer. If using AuxSignerData across different chains, the bech32 prefix of the target chain (where the final transaction is broadcasted) should be used."
+                },
+                "sign_doc": {
+                    "$ref": "#/definitions/cosmos.tx.v1beta1.SignDocDirectAux",
+                    "additionalProperties": true,
+                    "description": "sign_doc is the SIGN_MODE_DIRECT_AUX sign doc that the auxiliary signer signs. Note: we use the same sign doc even if we're signing with LEGACY_AMINO_JSON."
+                },
+                "mode": {
+                    "enum": [
+                        "SIGN_MODE_UNSPECIFIED",
+                        0,
+                        "SIGN_MODE_DIRECT",
+                        1,
+                        "SIGN_MODE_TEXTUAL",
+                        2,
+                        "SIGN_MODE_DIRECT_AUX",
+                        3,
+                        "SIGN_MODE_LEGACY_AMINO_JSON",
+                        127,
+                        "SIGN_MODE_EIP_191",
+                        191
+                    ],
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
+                    "title": "Sign Mode",
+                    "description": "SignMode represents a signing mode with its own security guarantees. This enum should be considered a registry of all known sign modes in the Cosmos ecosystem. Apps are not expected to support all known sign modes. Apps that would like to support custom  sign modes are encouraged to open a small PR against this file to add a new case to this SignMode enum describing their sign mode so that different apps have a consistent version of this enum."
+                },
+                "sig": {
+                    "type": "string",
+                    "description": "sig is the signature of the sign doc.",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Aux Signer Data",
+            "description": "AuxSignerData is the intermediary format that an auxiliary signer (e.g. a tipper) builds and sends to the fee payer (who will build and broadcast the actual tx). AuxSignerData is not a valid tx in itself, and will be rejected by the node if sent directly as-is. Since: cosmos-sdk 0.46"
+        },
+        "cosmos.base.v1beta1.Coin": {
+            "properties": {
+                "denom": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Coin",
+            "description": "Coin defines a token with a denomination and an amount. NOTE: The amount field is an Int which implements the custom method signatures required by gogoproto."
+        },
+        "cosmos.tx.v1beta1.SignDocDirectAux": {
+            "properties": {
+                "body_bytes": {
+                    "type": "string",
+                    "description": "body_bytes is protobuf serialization of a TxBody that matches the representation in TxRaw.",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "public_key": {
+                    "properties": {
+                        "type_url": {
+                            "type": "string",
+                            "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+                        },
+                        "value": {
+                            "type": "string",
+                            "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                            "format": "binary",
+                            "binaryEncoding": "base64"
+                        }
+                    },
+                    "additionalProperties": true,
+                    "type": "object",
+                    "description": "public_key is the public key of the signing account."
+                },
+                "chain_id": {
+                    "type": "string",
+                    "description": "chain_id is the identifier of the chain this transaction targets. It prevents signed transactions from being used on another chain by an attacker."
+                },
+                "account_number": {
+                    "type": "string",
+                    "description": "account_number is the account number of the account in state."
+                },
+                "sequence": {
+                    "type": "string",
+                    "description": "sequence is the sequence number of the signing account."
+                },
+                "tip": {
+                    "$ref": "#/definitions/cosmos.tx.v1beta1.Tip",
+                    "additionalProperties": true,
+                    "description": "Tip is the optional tip used for transactions fees paid in another denom. It should be left empty if the signer is not the tipper for this transaction. This field is ignored if the chain didn't enable tips, i.e. didn't add the `TipDecorator` in its posthandler."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Sign Doc Direct Aux",
+            "description": "SignDocDirectAux is the type used for generating sign bytes for SIGN_MODE_DIRECT_AUX. Since: cosmos-sdk 0.46"
+        },
+        "cosmos.tx.v1beta1.Tip": {
+            "properties": {
+                "amount": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
+                    },
+                    "type": "array",
+                    "description": "amount is the amount of the tip"
+                },
+                "tipper": {
+                    "type": "string",
+                    "description": "tipper is the address of the account paying for the tip"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Tip",
+            "description": "Tip is the tip used for meta-transactions. Since: cosmos-sdk 0.46"
+        }
+    }
+}

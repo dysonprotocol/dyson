@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/PercentageDecisionPolicy",
+    "definitions": {
+        "PercentageDecisionPolicy": {
+            "properties": {
+                "percentage": {
+                    "type": "string",
+                    "description": "percentage is the minimum percentage the weighted sum of `YES` votes must meet for a proposal to succeed."
+                },
+                "windows": {
+                    "$ref": "#/definitions/cosmos.group.v1.DecisionPolicyWindows",
+                    "additionalProperties": true,
+                    "description": "windows defines the different windows for voting and execution."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Percentage Decision Policy",
+            "description": "PercentageDecisionPolicy is a decision policy where a proposal passes when it satisfies the two following conditions: 1. The percentage of all `YES` voters' weights out of the total group weight    is greater or equal than the given `percentage`. 2. The voting and execution periods of the proposal respect the parameters    given by `windows`."
+        },
+        "cosmos.group.v1.DecisionPolicyWindows": {
+            "properties": {
+                "voting_period": {
+                    "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+                    "type": "string",
+                    "description": "voting_period is the duration from submission of a proposal to the end of voting period Within this times votes can be submitted with MsgVote.",
+                    "format": "regex"
+                },
+                "min_execution_period": {
+                    "pattern": "^([0-9]+\\.?[0-9]*|\\.[0-9]+)s$",
+                    "type": "string",
+                    "description": "min_execution_period is the minimum duration after the proposal submission where members can start sending MsgExec. This means that the window for sending a MsgExec transaction is: `[ submission + min_execution_period ; submission + voting_period + max_execution_period]` where max_execution_period is a app-specific config, defined in the keeper. If not set, min_execution_period will default to 0. Please make sure to set a `min_execution_period` that is smaller than `voting_period + max_execution_period`, or else the above execution window is empty, meaning that all proposals created with this decision policy won't be able to be executed.",
+                    "format": "regex"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Decision Policy Windows",
+            "description": "DecisionPolicyWindows defines the different windows for voting and execution."
+        }
+    }
+}

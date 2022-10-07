@@ -4,10 +4,10 @@
     "definitions": {
         "MsgUpdateName": {
             "properties": {
-                "owner": {
+                "name": {
                     "type": "string"
                 },
-                "name": {
+                "owner": {
                     "type": "string"
                 },
                 "destination": {

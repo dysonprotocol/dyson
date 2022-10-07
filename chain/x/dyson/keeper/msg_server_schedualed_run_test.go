@@ -16,18 +16,18 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func TestSchedualedRunMsgServerCreate(t *testing.T) {
+func TestScheduledRunMsgServerCreate(t *testing.T) {
 	k, ctx := keepertest.DysonKeeper(t)
 	srv := keeper.NewMsgServerImpl(*k)
 	wctx := sdk.WrapSDKContext(ctx)
 	creator := "A"
 	for i := 0; i < 5; i++ {
-		expected := &types.MsgCreateSchedualedRun{Creator: creator,
+		expected := &types.MsgCreateScheduledRun{Creator: creator,
 			Index: strconv.Itoa(i),
 		}
-		_, err := srv.CreateSchedualedRun(wctx, expected)
+		_, err := srv.CreateScheduledRun(wctx, expected)
 		require.NoError(t, err)
-		rst, found := k.GetSchedualedRun(ctx,
+		rst, found := k.GetScheduledRun(ctx,
 			expected.Index,
 		)
 		require.True(t, found)
@@ -35,30 +35,30 @@ func TestSchedualedRunMsgServerCreate(t *testing.T) {
 	}
 }
 
-func TestSchedualedRunMsgServerUpdate(t *testing.T) {
+func TestScheduledRunMsgServerUpdate(t *testing.T) {
 	creator := "A"
 
 	for _, tc := range []struct {
 		desc    string
-		request *types.MsgUpdateSchedualedRun
+		request *types.MsgUpdateScheduledRun
 		err     error
 	}{
 		{
 			desc: "Completed",
-			request: &types.MsgUpdateSchedualedRun{Creator: creator,
+			request: &types.MsgUpdateScheduledRun{Creator: creator,
 				Index: strconv.Itoa(0),
 			},
 		},
 		{
 			desc: "Unauthorized",
-			request: &types.MsgUpdateSchedualedRun{Creator: "B",
+			request: &types.MsgUpdateScheduledRun{Creator: "B",
 				Index: strconv.Itoa(0),
 			},
 			err: sdkerrors.ErrUnauthorized,
 		},
 		{
 			desc: "KeyNotFound",
-			request: &types.MsgUpdateSchedualedRun{Creator: creator,
+			request: &types.MsgUpdateScheduledRun{Creator: creator,
 				Index: strconv.Itoa(100000),
 			},
 			err: sdkerrors.ErrKeyNotFound,
@@ -68,18 +68,18 @@ func TestSchedualedRunMsgServerUpdate(t *testing.T) {
 			k, ctx := keepertest.DysonKeeper(t)
 			srv := keeper.NewMsgServerImpl(*k)
 			wctx := sdk.WrapSDKContext(ctx)
-			expected := &types.MsgCreateSchedualedRun{Creator: creator,
+			expected := &types.MsgCreateScheduledRun{Creator: creator,
 				Index: strconv.Itoa(0),
 			}
-			_, err := srv.CreateSchedualedRun(wctx, expected)
+			_, err := srv.CreateScheduledRun(wctx, expected)
 			require.NoError(t, err)
 
-			_, err = srv.UpdateSchedualedRun(wctx, tc.request)
+			_, err = srv.UpdateScheduledRun(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
 				require.NoError(t, err)
-				rst, found := k.GetSchedualedRun(ctx,
+				rst, found := k.GetScheduledRun(ctx,
 					expected.Index,
 				)
 				require.True(t, found)
@@ -89,30 +89,30 @@ func TestSchedualedRunMsgServerUpdate(t *testing.T) {
 	}
 }
 
-func TestSchedualedRunMsgServerDelete(t *testing.T) {
+func TestScheduledRunMsgServerDelete(t *testing.T) {
 	creator := "A"
 
 	for _, tc := range []struct {
 		desc    string
-		request *types.MsgDeleteSchedualedRun
+		request *types.MsgDeleteScheduledRun
 		err     error
 	}{
 		{
 			desc: "Completed",
-			request: &types.MsgDeleteSchedualedRun{Creator: creator,
+			request: &types.MsgDeleteScheduledRun{Creator: creator,
 				Index: strconv.Itoa(0),
 			},
 		},
 		{
 			desc: "Unauthorized",
-			request: &types.MsgDeleteSchedualedRun{Creator: "B",
+			request: &types.MsgDeleteScheduledRun{Creator: "B",
 				Index: strconv.Itoa(0),
 			},
 			err: sdkerrors.ErrUnauthorized,
 		},
 		{
 			desc: "KeyNotFound",
-			request: &types.MsgDeleteSchedualedRun{Creator: creator,
+			request: &types.MsgDeleteScheduledRun{Creator: creator,
 				Index: strconv.Itoa(100000),
 			},
 			err: sdkerrors.ErrKeyNotFound,
@@ -123,16 +123,16 @@ func TestSchedualedRunMsgServerDelete(t *testing.T) {
 			srv := keeper.NewMsgServerImpl(*k)
 			wctx := sdk.WrapSDKContext(ctx)
 
-			_, err := srv.CreateSchedualedRun(wctx, &types.MsgCreateSchedualedRun{Creator: creator,
+			_, err := srv.CreateScheduledRun(wctx, &types.MsgCreateScheduledRun{Creator: creator,
 				Index: strconv.Itoa(0),
 			})
 			require.NoError(t, err)
-			_, err = srv.DeleteSchedualedRun(wctx, tc.request)
+			_, err = srv.DeleteScheduledRun(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
 				require.NoError(t, err)
-				_, found := k.GetSchedualedRun(ctx,
+				_, found := k.GetScheduledRun(ctx,
 					tc.request.Index,
 				)
 				require.False(t, found)

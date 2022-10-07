@@ -7,7 +7,7 @@
                 "pagination": {
                     "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
                     "additionalProperties": true,
-                    "description": "pagination defines an optional pagination for the request."
+                    "description": "pagination defines an optional pagination for the request. Since: cosmos-sdk 0.43"
                 }
             },
             "additionalProperties": true,
@@ -37,7 +37,7 @@
                 },
                 "reverse": {
                     "type": "boolean",
-                    "description": "reverse is set to true if results are to be returned in the descending order."
+                    "description": "reverse is set to true if results are to be returned in the descending order. Since: cosmos-sdk 0.43"
                 }
             },
             "additionalProperties": true,

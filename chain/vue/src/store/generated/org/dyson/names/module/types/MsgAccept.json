@@ -4,10 +4,10 @@
     "definitions": {
         "MsgAccept": {
             "properties": {
-                "newOwner": {
+                "name": {
                     "type": "string"
                 },
-                "name": {
+                "newOwner": {
                     "type": "string"
                 }
             },

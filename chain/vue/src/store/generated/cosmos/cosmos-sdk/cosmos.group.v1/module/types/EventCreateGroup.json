@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/EventCreateGroup",
+    "definitions": {
+        "EventCreateGroup": {
+            "properties": {
+                "group_id": {
+                    "type": "string",
+                    "description": "group_id is the unique ID of the group."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Event Create Group",
+            "description": "EventCreateGroup is an event emitted when a group is created."
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/PacketId",
+    "definitions": {
+        "PacketId": {
+            "properties": {
+                "port_id": {
+                    "type": "string",
+                    "description": "channel port identifier"
+                },
+                "channel_id": {
+                    "type": "string",
+                    "description": "channel unique identifier"
+                },
+                "sequence": {
+                    "type": "string",
+                    "description": "packet sequence"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Packet Id",
+            "description": "PacketId is an identifer for a unique Packet Source chains refer to packets by source port/channel Destination chains refer to packets by destination port/channel"
+        }
+    }
+}

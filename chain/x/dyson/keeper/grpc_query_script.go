@@ -13,6 +13,8 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+const MAX_QUERY_GAS = uint64(10000000)
+
 func (k Keeper) ScriptAll(c context.Context, req *types.QueryAllScriptRequest) (*types.QueryAllScriptResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -75,10 +77,10 @@ func (k Keeper) Wsgi(goCtx context.Context, req *types.QueryWsgiRequest) (*types
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	ctx, _ = ctx.CacheContext()
-	if ctx.GasMeter().Limit() == 0 {
-		ctx = ctx.WithGasMeter(sdk.NewGasMeter(req.Gaslimit))
-		goCtx = sdk.WrapSDKContext(ctx)
+	if ctx.GasMeter().Limit() < 1 || ctx.GasMeter().Limit() > MAX_QUERY_GAS {
+		ctx = ctx.WithGasMeter(sdk.NewGasMeter(MAX_QUERY_GAS))
 	}
+	goCtx = sdk.WrapSDKContext(ctx)
 	_, isFound := k.GetScript(ctx, req.Index)
 	if !isFound {
 		fmt.Println(fmt.Sprintf("Script at address %v not found", req.Index))
@@ -95,13 +97,11 @@ func (k Keeper) Wsgi(goCtx context.Context, req *types.QueryWsgiRequest) (*types
 
 func (k Keeper) QueryScript(goCtx context.Context, msg *types.MsgRun) (*types.MsgRunResponse, error) {
 
-	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	ctx, _ = ctx.CacheContext()
-	if ctx.GasMeter().Limit() == 0 {
-		ctx = ctx.WithGasMeter(sdk.NewGasMeter(200000))
-		goCtx = sdk.WrapSDKContext(ctx)
+	ctx, _ := sdk.UnwrapSDKContext(goCtx).CacheContext()
+	if ctx.GasMeter().Limit() < 1 || ctx.GasMeter().Limit() > MAX_QUERY_GAS {
+		ctx = ctx.WithGasMeter(sdk.NewGasMeter(MAX_QUERY_GAS))
 	}
+	goCtx = sdk.WrapSDKContext(ctx)
 	_, isFound := k.GetScript(ctx, msg.Address)
 	if !isFound {
 		fmt.Println(fmt.Sprintf("Script at address %v not found", msg.Address))
@@ -120,6 +120,5 @@ func (k Keeper) QueryScript(goCtx context.Context, msg *types.MsgRun) (*types.Ms
 	if err != nil {
 		return nil, err
 	}
-
 	return &types.MsgRunResponse{Response: res.Response}, nil
 }

@@ -36,14 +36,14 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		case *types.MsgDeleteStorage:
 			res, err := msgServer.DeleteStorage(sdk.WrapSDKContext(ctx), msg)
 			return sdk.WrapServiceResult(ctx, res, err)
-		case *types.MsgCreateSchedualedRun:
-			res, err := msgServer.CreateSchedualedRun(sdk.WrapSDKContext(ctx), msg)
+		case *types.MsgCreateScheduledRun:
+			res, err := msgServer.CreateScheduledRun(sdk.WrapSDKContext(ctx), msg)
 			return sdk.WrapServiceResult(ctx, res, err)
-		//case *types.MsgUpdateSchedualedRun:
-		//	res, err := msgServer.UpdateSchedualedRun(sdk.WrapSDKContext(ctx), msg)
+		//case *types.MsgUpdateScheduledRun:
+		//	res, err := msgServer.UpdateScheduledRun(sdk.WrapSDKContext(ctx), msg)
 		//	return sdk.WrapServiceResult(ctx, res, err)
-		//case *types.MsgDeleteSchedualedRun:
-		//	res, err := msgServer.DeleteSchedualedRun(sdk.WrapSDKContext(ctx), msg)
+		//case *types.MsgDeleteScheduledRun:
+		//	res, err := msgServer.DeleteScheduledRun(sdk.WrapSDKContext(ctx), msg)
 		//	return sdk.WrapServiceResult(ctx, res, err)
 		// this line is used by starport scaffolding # 1
 		case *types.MsgRun:

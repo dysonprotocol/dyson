@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryGetCronResponse",
+    "definitions": {
+        "QueryGetCronResponse": {
+            "properties": {
+                "cron": {
+                    "$ref": "#/definitions/dyson.Cron",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Get Cron Response"
+        },
+        "dyson.Cron": {
+            "properties": {
+                "blockHeight": {
+                    "type": "string"
+                },
+                "indexes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Cron"
+        }
+    }
+}

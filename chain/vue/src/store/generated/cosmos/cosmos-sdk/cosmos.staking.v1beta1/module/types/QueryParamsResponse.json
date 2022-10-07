@@ -38,6 +38,10 @@
                 "bond_denom": {
                     "type": "string",
                     "description": "bond_denom defines the bondable coin denomination."
+                },
+                "min_commission_rate": {
+                    "type": "string",
+                    "description": "min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators"
                 }
             },
             "additionalProperties": true,

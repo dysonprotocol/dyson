@@ -1,0 +1,307 @@
+{
+	"Name": "v1beta1",
+	"GoModulePath": "github.com/cosmos/cosmos-sdk",
+	"Pkg": {
+		"Name": "cosmos.upgrade.v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Dependencies": [
+					"google/api/annotations.proto",
+					"cosmos/upgrade/v1beta1/upgrade.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos_proto/cosmos.proto",
+					"cosmos/upgrade/v1beta1/upgrade.proto",
+					"cosmos/msg/v1/msg.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto",
+				"Dependencies": [
+					"google/protobuf/any.proto",
+					"gogoproto/gogo.proto",
+					"google/protobuf/timestamp.proto",
+					"cosmos_proto/cosmos.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/cosmos-sdk/x/upgrade/types",
+		"Messages": [
+			{
+				"Name": "QueryCurrentPlanRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryCurrentPlanResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAppliedPlanRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAppliedPlanResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryUpgradedConsensusStateRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryUpgradedConsensusStateResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryModuleVersionsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryModuleVersionsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryAuthorityRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryAuthorityResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgSoftwareUpgrade",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "MsgSoftwareUpgradeResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgCancelUpgrade",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgCancelUpgradeResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "Plan",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto",
+				"HighestFieldNumber": 5
+			},
+			{
+				"Name": "SoftwareUpgradeProposal",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "CancelSoftwareUpgradeProposal",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "ModuleVersion",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto",
+				"HighestFieldNumber": 2
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "CurrentPlan",
+						"RequestType": "QueryCurrentPlanRequest",
+						"ReturnsType": "QueryCurrentPlanResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "AppliedPlan",
+						"RequestType": "QueryAppliedPlanRequest",
+						"ReturnsType": "QueryAppliedPlanResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"name"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "UpgradedConsensusState",
+						"RequestType": "QueryUpgradedConsensusStateRequest",
+						"ReturnsType": "QueryUpgradedConsensusStateResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"last_height"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "ModuleVersions",
+						"RequestType": "QueryModuleVersionsRequest",
+						"ReturnsType": "QueryModuleVersionsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Authority",
+						"RequestType": "QueryAuthorityRequest",
+						"ReturnsType": "QueryAuthorityResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Msg",
+				"RPCFuncs": [
+					{
+						"Name": "SoftwareUpgrade",
+						"RequestType": "MsgSoftwareUpgrade",
+						"ReturnsType": "MsgSoftwareUpgradeResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "CancelUpgrade",
+						"RequestType": "MsgCancelUpgrade",
+						"ReturnsType": "MsgCancelUpgradeResponse",
+						"HTTPRules": null
+					}
+				]
+			}
+		]
+	},
+	"Msgs": [
+		{
+			"Name": "MsgSoftwareUpgrade",
+			"URI": "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgCancelUpgrade",
+			"URI": "cosmos.upgrade.v1beta1.MsgCancelUpgrade",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto"
+		}
+	],
+	"HTTPQueries": [
+		{
+			"Name": "CurrentPlan",
+			"FullName": "QueryCurrentPlan",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "AppliedPlan",
+			"FullName": "QueryAppliedPlan",
+			"Rules": [
+				{
+					"Params": [
+						"name"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "UpgradedConsensusState",
+			"FullName": "QueryUpgradedConsensusState",
+			"Rules": [
+				{
+					"Params": [
+						"last_height"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "ModuleVersions",
+			"FullName": "QueryModuleVersions",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Authority",
+			"FullName": "QueryAuthority",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "Plan",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto"
+		},
+		{
+			"Name": "SoftwareUpgradeProposal",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto"
+		},
+		{
+			"Name": "CancelSoftwareUpgradeProposal",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto"
+		},
+		{
+			"Name": "ModuleVersion",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto"
+		}
+	]
+}

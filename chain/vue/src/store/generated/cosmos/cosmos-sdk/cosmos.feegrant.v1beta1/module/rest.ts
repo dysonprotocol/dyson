@@ -140,7 +140,7 @@ export interface V1Beta1Grant {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee?: string;
 
-  /** allowance can be any of basic and filtered fee allowance. */
+  /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: ProtobufAny;
 }
 
@@ -190,9 +190,13 @@ export interface V1Beta1PageRequest {
    * count_total is only respected when offset is used. It is ignored when key
    * is set.
    */
-  countTotal?: boolean;
+  count_total?: boolean;
 
-  /** reverse is set to true if results are to be returned in the descending order. */
+  /**
+   * reverse is set to true if results are to be returned in the descending order.
+   *
+   * Since: cosmos-sdk 0.43
+   */
   reverse?: boolean;
 }
 
@@ -206,8 +210,13 @@ corresponding request message has used PageRequest.
  }
 */
 export interface V1Beta1PageResponse {
-  /** @format byte */
-  nextKey?: string;
+  /**
+   * next_key is the key to be passed to PageRequest.key to
+   * query the next page most efficiently. It will be empty if
+   * there are no more results.
+   * @format byte
+   */
+  next_key?: string;
 
   /** @format uint64 */
   total?: string;
@@ -219,6 +228,19 @@ export interface V1Beta1PageResponse {
 export interface V1Beta1QueryAllowanceResponse {
   /** allowance is a allowance granted for grantee by granter. */
   allowance?: V1Beta1Grant;
+}
+
+/**
+* QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method.
+
+Since: cosmos-sdk 0.46
+*/
+export interface V1Beta1QueryAllowancesByGranterResponse {
+  /** allowances that have been issued by the granter. */
+  allowances?: V1Beta1Grant[];
+
+  /** pagination defines an pagination for the response. */
+  pagination?: V1Beta1PageResponse;
 }
 
 /**
@@ -458,13 +480,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.key"?: string;
       "pagination.offset"?: string;
       "pagination.limit"?: string;
-      "pagination.countTotal"?: boolean;
+      "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
   ) =>
     this.request<V1Beta1QueryAllowancesResponse, RpcStatus>({
       path: `/cosmos/feegrant/v1beta1/allowances/${grantee}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * @description Since: cosmos-sdk 0.46
+   *
+   * @tags Query
+   * @name QueryAllowancesByGranter
+   * @summary AllowancesByGranter returns all the grants given by an address
+   * @request GET:/cosmos/feegrant/v1beta1/issued/{granter}
+   */
+  queryAllowancesByGranter = (
+    granter: string,
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<V1Beta1QueryAllowancesByGranterResponse, RpcStatus>({
+      path: `/cosmos/feegrant/v1beta1/issued/${granter}`,
       method: "GET",
       query: query,
       format: "json",

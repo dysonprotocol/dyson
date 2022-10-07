@@ -51,7 +51,8 @@
                 },
                 "final_tally_result": {
                     "$ref": "#/definitions/cosmos.gov.v1beta1.TallyResult",
-                    "additionalProperties": true
+                    "additionalProperties": true,
+                    "description": "final_tally_result is the final tally result of the proposal. When querying a proposal via gRPC, this field is not populated until the proposal's voting period has ended."
                 },
                 "submit_time": {
                     "type": "string",

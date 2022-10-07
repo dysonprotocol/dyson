@@ -12,6 +12,12 @@
                     "items": {
                         "$ref": "#/definitions/names.Name"
                     },
+                    "type": "array"
+                },
+                "expirationsList": {
+                    "items": {
+                        "$ref": "#/definitions/names.Expirations"
+                    },
                     "type": "array",
                     "description": "this line is used by starport scaffolding # genesis/proto/state"
                 }
@@ -20,6 +26,22 @@
             "type": "object",
             "title": "Genesis State",
             "description": "GenesisState defines the names module's genesis state."
+        },
+        "names.Expirations": {
+            "properties": {
+                "blockHeight": {
+                    "type": "string"
+                },
+                "names": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Expirations"
         },
         "names.Name": {
             "properties": {
@@ -32,19 +54,17 @@
                 "price": {
                     "type": "string"
                 },
-                "expires": {
-                    "type": "string",
-                    "format": "date-time"
-                },
                 "authorized": {
                     "type": "string"
                 },
                 "owner": {
                     "type": "string"
                 },
-                "registered": {
-                    "type": "string",
-                    "format": "date-time"
+                "expiration_height": {
+                    "type": "string"
+                },
+                "registration_height": {
+                    "type": "string"
                 }
             },
             "additionalProperties": true,

@@ -9,10 +9,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func CmdListSchedualedRun() *cobra.Command {
+func CmdListScheduledRun() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "list-schedualed-run",
-		Short: "list all SchedualedRun",
+		Use:   "list-scheduled-run",
+		Short: "list all ScheduledRun",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
@@ -23,11 +23,11 @@ func CmdListSchedualedRun() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryAllSchedualedRunRequest{
+			params := &types.QueryAllScheduledRunRequest{
 				Pagination: pageReq,
 			}
 
-			res, err := queryClient.SchedualedRunAll(context.Background(), params)
+			res, err := queryClient.ScheduledRunAll(context.Background(), params)
 			if err != nil {
 				return err
 			}
@@ -42,10 +42,10 @@ func CmdListSchedualedRun() *cobra.Command {
 	return cmd
 }
 
-func CmdShowSchedualedRun() *cobra.Command {
+func CmdShowScheduledRun() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-schedualed-run [index]",
-		Short: "shows a SchedualedRun",
+		Use:   "show-scheduled-run [index]",
+		Short: "shows a ScheduledRun",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx := client.GetClientContextFromCmd(cmd)
@@ -54,11 +54,11 @@ func CmdShowSchedualedRun() *cobra.Command {
 
 			argIndex := args[0]
 
-			params := &types.QueryGetSchedualedRunRequest{
+			params := &types.QueryGetScheduledRunRequest{
 				Index: argIndex,
 			}
 
-			res, err := queryClient.SchedualedRun(context.Background(), params)
+			res, err := queryClient.ScheduledRun(context.Background(), params)
 			if err != nil {
 				return err
 			}

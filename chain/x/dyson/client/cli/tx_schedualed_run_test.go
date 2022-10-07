@@ -18,7 +18,7 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func TestCreateSchedualedRun(t *testing.T) {
+func TestCreateScheduledRun(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
@@ -51,7 +51,7 @@ func TestCreateSchedualedRun(t *testing.T) {
 			}
 			args = append(args, fields...)
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateSchedualedRun(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateScheduledRun(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -64,7 +64,7 @@ func TestCreateSchedualedRun(t *testing.T) {
 	}
 }
 
-func TestUpdateSchedualedRun(t *testing.T) {
+func TestUpdateScheduledRun(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
@@ -81,7 +81,7 @@ func TestUpdateSchedualedRun(t *testing.T) {
 	}
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateSchedualedRun(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateScheduledRun(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -113,7 +113,7 @@ func TestUpdateSchedualedRun(t *testing.T) {
 			}
 			args = append(args, fields...)
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdUpdateSchedualedRun(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdUpdateScheduledRun(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -126,7 +126,7 @@ func TestUpdateSchedualedRun(t *testing.T) {
 	}
 }
 
-func TestDeleteSchedualedRun(t *testing.T) {
+func TestDeleteScheduledRun(t *testing.T) {
 	net := network.New(t)
 
 	val := net.Validators[0]
@@ -144,7 +144,7 @@ func TestDeleteSchedualedRun(t *testing.T) {
 	}
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateSchedualedRun(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateScheduledRun(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -175,7 +175,7 @@ func TestDeleteSchedualedRun(t *testing.T) {
 				tc.idIndex,
 			}
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeleteSchedualedRun(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeleteScheduledRun(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {

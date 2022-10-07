@@ -5,12 +5,12 @@ import "encoding/binary"
 var _ binary.ByteOrder
 
 const (
-	// SchedualedRunKeyPrefix is the prefix to retrieve all SchedualedRun
-	SchedualedRunKeyPrefix = "SchedualedRun/value/"
+	// ScheduledRunKeyPrefix is the prefix to retrieve all ScheduledRun
+	ScheduledRunKeyPrefix = "ScheduledRun/value/"
 )
 
-// SchedualedRunKey returns the store key to retrieve a SchedualedRun from the index fields
-func SchedualedRunKey(
+// ScheduledRunKey returns the store key to retrieve a ScheduledRun from the index fields
+func ScheduledRunKey(
 	index string,
 ) []byte {
 	var key []byte

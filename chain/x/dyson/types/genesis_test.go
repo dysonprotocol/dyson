@@ -54,7 +54,7 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
-				SchedualedRunList: []types.SchedualedRun{
+				ScheduledRunList: []types.ScheduledRun{
 					{
 						Index: "0",
 					},
@@ -62,7 +62,15 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
-				// this line is used by starport scaffolding # types/genesis/validField
+				CronList: []types.Cron{
+	{
+		BlockHeight: "0",
+},
+	{
+		BlockHeight: "1",
+},
+},
+// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
 		},
@@ -123,9 +131,9 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid: false,
 		},
 		{
-			desc: "duplicated schedualedRun",
+			desc: "duplicated scheduledRun",
 			genState: &types.GenesisState{
-				SchedualedRunList: []types.SchedualedRun{
+				ScheduledRunList: []types.ScheduledRun{
 					{
 						Index: "0",
 					},
@@ -136,7 +144,21 @@ func TestGenesisState_Validate(t *testing.T) {
 			},
 			valid: false,
 		},
-		// this line is used by starport scaffolding # types/genesis/testcase
+		{
+	desc:     "duplicated cron",
+	genState: &types.GenesisState{
+		CronList: []types.Cron{
+			{
+				BlockHeight: "0",
+},
+			{
+				BlockHeight: "0",
+},
+		},
+	},
+	valid:    false,
+},
+// this line is used by starport scaffolding # types/genesis/testcase
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
 			err := tc.genState.Validate()

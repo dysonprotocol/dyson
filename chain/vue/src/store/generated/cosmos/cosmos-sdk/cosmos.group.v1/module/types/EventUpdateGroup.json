@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/EventUpdateGroup",
+    "definitions": {
+        "EventUpdateGroup": {
+            "properties": {
+                "group_id": {
+                    "type": "string",
+                    "description": "group_id is the unique ID of the group."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Event Update Group",
+            "description": "EventUpdateGroup is an event emitted when a group is updated."
+        }
+    }
+}

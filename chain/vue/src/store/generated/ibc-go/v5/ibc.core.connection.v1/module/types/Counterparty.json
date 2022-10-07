@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Counterparty",
+    "definitions": {
+        "Counterparty": {
+            "properties": {
+                "client_id": {
+                    "type": "string",
+                    "description": "identifies the client on the counterparty chain associated with a given connection."
+                },
+                "connection_id": {
+                    "type": "string",
+                    "description": "identifies the connection end on the counterparty chain associated with a given connection."
+                },
+                "prefix": {
+                    "$ref": "#/definitions/ibc.core.commitment.v1.MerklePrefix",
+                    "additionalProperties": true,
+                    "description": "commitment merkle prefix of the counterparty chain."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Counterparty",
+            "description": "Counterparty defines the counterparty chain associated with a connection end."
+        },
+        "ibc.core.commitment.v1.MerklePrefix": {
+            "properties": {
+                "key_prefix": {
+                    "type": "string",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Merkle Prefix",
+            "description": "MerklePrefix is merkle path prefixed to the key. The constructed key from the Path and the key will be append(Path.KeyPath, append(Path.KeyPrefix, key...))"
+        }
+    }
+}

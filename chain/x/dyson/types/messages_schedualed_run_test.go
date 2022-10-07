@@ -8,21 +8,21 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMsgCreateSchedualedRun_ValidateBasic(t *testing.T) {
+func TestMsgCreateScheduledRun_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgCreateSchedualedRun
+		msg  MsgCreateScheduledRun
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgCreateSchedualedRun{
+			msg: MsgCreateScheduledRun{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgCreateSchedualedRun{
+			msg: MsgCreateScheduledRun{
 				Creator: sample.AccAddress(),
 			},
 		},
@@ -39,21 +39,21 @@ func TestMsgCreateSchedualedRun_ValidateBasic(t *testing.T) {
 	}
 }
 
-func TestMsgUpdateSchedualedRun_ValidateBasic(t *testing.T) {
+func TestMsgUpdateScheduledRun_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgUpdateSchedualedRun
+		msg  MsgUpdateScheduledRun
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgUpdateSchedualedRun{
+			msg: MsgUpdateScheduledRun{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgUpdateSchedualedRun{
+			msg: MsgUpdateScheduledRun{
 				Creator: sample.AccAddress(),
 			},
 		},
@@ -70,21 +70,21 @@ func TestMsgUpdateSchedualedRun_ValidateBasic(t *testing.T) {
 	}
 }
 
-func TestMsgDeleteSchedualedRun_ValidateBasic(t *testing.T) {
+func TestMsgDeleteScheduledRun_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgDeleteSchedualedRun
+		msg  MsgDeleteScheduledRun
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgDeleteSchedualedRun{
+			msg: MsgDeleteScheduledRun{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgDeleteSchedualedRun{
+			msg: MsgDeleteScheduledRun{
 				Creator: sample.AccAddress(),
 			},
 		},

@@ -1,3 +1,4 @@
+**/TAG.txt
 vendor
 
 swag-conf/dns-conf/*
@@ -6,8 +7,8 @@ swag-conf/dns-conf/*
 frontend/static_root/*
 
 __pycache__/
-chain_home
-frontend_home
+chain_home/**
+frontend_home/**
 .DS_Store
 vue/node_modules
 config/*key.json

@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/SignDoc",
+    "definitions": {
+        "SignDoc": {
+            "properties": {
+                "body_bytes": {
+                    "type": "string",
+                    "description": "body_bytes is protobuf serialization of a TxBody that matches the representation in TxRaw.",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "auth_info_bytes": {
+                    "type": "string",
+                    "description": "auth_info_bytes is a protobuf serialization of an AuthInfo that matches the representation in TxRaw.",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "chain_id": {
+                    "type": "string",
+                    "description": "chain_id is the unique identifier of the chain this transaction targets. It prevents signed transactions from being used on another chain by an attacker"
+                },
+                "account_number": {
+                    "type": "string",
+                    "description": "account_number is the account number of the account in state"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Sign Doc",
+            "description": "SignDoc is the type used for generating sign bytes for SIGN_MODE_DIRECT."
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/EventSend",
+    "definitions": {
+        "EventSend": {
+            "properties": {
+                "class_id": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "sender": {
+                    "type": "string"
+                },
+                "receiver": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Event Send",
+            "description": "EventSend is emitted on Msg/Send"
+        }
+    }
+}

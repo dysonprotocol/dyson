@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/BroadcastTxRequest",
+    "definitions": {
+        "BroadcastTxRequest": {
+            "properties": {
+                "tx_bytes": {
+                    "type": "string",
+                    "description": "tx_bytes is the raw transaction.",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "mode": {
+                    "enum": [
+                        "BROADCAST_MODE_UNSPECIFIED",
+                        0,
+                        "BROADCAST_MODE_BLOCK",
+                        1,
+                        "BROADCAST_MODE_SYNC",
+                        2,
+                        "BROADCAST_MODE_ASYNC",
+                        3
+                    ],
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
+                    "title": "Broadcast Mode",
+                    "description": "BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Broadcast Tx Request",
+            "description": "BroadcastTxRequest is the request type for the Service.BroadcastTxRequest RPC method."
+        }
+    }
+}

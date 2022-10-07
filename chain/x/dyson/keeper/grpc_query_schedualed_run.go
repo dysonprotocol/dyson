@@ -11,24 +11,24 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) SchedualedRunAll(c context.Context, req *types.QueryAllSchedualedRunRequest) (*types.QueryAllSchedualedRunResponse, error) {
+func (k Keeper) ScheduledRunAll(c context.Context, req *types.QueryAllScheduledRunRequest) (*types.QueryAllScheduledRunResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	var schedualedRuns []types.SchedualedRun
+	var scheduledRuns []types.ScheduledRun
 	ctx := sdk.UnwrapSDKContext(c)
 
 	store := ctx.KVStore(k.storeKey)
-	schedualedRunStore := prefix.NewStore(store, types.KeyPrefix(types.SchedualedRunKeyPrefix))
+	scheduledRunStore := prefix.NewStore(prefix.NewStore(store, types.KeyPrefix(types.ScheduledRunKeyPrefix)), types.KeyPrefix(req.Index))
 
-	pageRes, err := query.Paginate(schedualedRunStore, req.Pagination, func(key []byte, value []byte) error {
-		var schedualedRun types.SchedualedRun
-		if err := k.cdc.Unmarshal(value, &schedualedRun); err != nil {
+	pageRes, err := query.Paginate(scheduledRunStore, req.Pagination, func(key []byte, value []byte) error {
+		var scheduledRun types.ScheduledRun
+		if err := k.cdc.Unmarshal(value, &scheduledRun); err != nil {
 			return err
 		}
 
-		schedualedRuns = append(schedualedRuns, schedualedRun)
+		scheduledRuns = append(scheduledRuns, scheduledRun)
 		return nil
 	})
 
@@ -36,16 +36,16 @@ func (k Keeper) SchedualedRunAll(c context.Context, req *types.QueryAllScheduale
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryAllSchedualedRunResponse{SchedualedRun: schedualedRuns, Pagination: pageRes}, nil
+	return &types.QueryAllScheduledRunResponse{ScheduledRun: scheduledRuns, Pagination: pageRes}, nil
 }
 
-func (k Keeper) SchedualedRun(c context.Context, req *types.QueryGetSchedualedRunRequest) (*types.QueryGetSchedualedRunResponse, error) {
+func (k Keeper) ScheduledRun(c context.Context, req *types.QueryGetScheduledRunRequest) (*types.QueryGetScheduledRunResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 	ctx := sdk.UnwrapSDKContext(c)
 
-	val, found := k.GetSchedualedRun(
+	val, found := k.GetScheduledRun(
 		ctx,
 		req.Index,
 	)
@@ -53,5 +53,5 @@ func (k Keeper) SchedualedRun(c context.Context, req *types.QueryGetSchedualedRu
 		return nil, status.Error(codes.InvalidArgument, "not found")
 	}
 
-	return &types.QueryGetSchedualedRunResponse{SchedualedRun: val}, nil
+	return &types.QueryGetScheduledRunResponse{ScheduledRun: val}, nil
 }

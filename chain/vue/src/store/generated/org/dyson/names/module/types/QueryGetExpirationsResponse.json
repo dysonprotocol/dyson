@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryGetExpirationsResponse",
+    "definitions": {
+        "QueryGetExpirationsResponse": {
+            "properties": {
+                "expirations": {
+                    "$ref": "#/definitions/names.Expirations",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Get Expirations Response"
+        },
+        "names.Expirations": {
+            "properties": {
+                "blockHeight": {
+                    "type": "string"
+                },
+                "names": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Expirations"
+        }
+    }
+}

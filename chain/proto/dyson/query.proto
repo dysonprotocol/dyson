@@ -6,8 +6,10 @@ import "cosmos/base/query/v1beta1/pagination.proto";
 import "dyson/script.proto";
 import "dyson/tx.proto";
 import "dyson/storage.proto";
-import "dyson/schedualed_run.proto";
+import "dyson/scheduled_run.proto";
 import "dyson/msgrun.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "dyson/cron.proto";
 // this line is used by starport scaffolding # 1
 import "gogoproto/gogo.proto";
 
@@ -17,14 +19,14 @@ option go_package = "github.com/org/dyson/x/dyson/types";
 // Query defines the gRPC querier service.
 service Query {
 
-		// Queries a schedualedRun by index.
-		rpc SchedualedRun(QueryGetSchedualedRunRequest) returns (QueryGetSchedualedRunResponse) {
-				option (google.api.http).get = "/org/dyson/dyson/schedualedRun";
+		// Queries a scheduledRun by index.
+		rpc ScheduledRun(QueryGetScheduledRunRequest) returns (QueryGetScheduledRunResponse) {
+				option (google.api.http).get = "/org/dyson/dyson/scheduledRun";
 		}
 
-		// Queries a list of schedualedRun items.
-		rpc SchedualedRunAll(QueryAllSchedualedRunRequest) returns (QueryAllSchedualedRunResponse) {
-				option (google.api.http).get = "/org/dyson/dyson/schedualedRunAll";
+		// Queries a list of scheduledRun items.
+		rpc ScheduledRunAll(QueryAllScheduledRunRequest) returns (QueryAllScheduledRunResponse) {
+				option (google.api.http).get = "/org/dyson/dyson/scheduledRunAll";
 		}
 
 		// Queries a storage by index.
@@ -59,32 +61,48 @@ service Query {
 
 		// Queries a list of script items.
 		rpc ScriptAll(QueryAllScriptRequest) returns (QueryAllScriptResponse) {
-				option (google.api.http).get = "/dyson/scriptiAll";
+				option (google.api.http).get = "/dyson/scriptAll";
 		}
 
 		rpc PrefixStorage(QueryPrefixStorageRequest) returns (QueryPrefixStorageResponse) {
 				option (google.api.http).get = "/dyson/storageprefix";
 		}
 
-  // this line is used by starport scaffolding # 2
+		// Queries a list of ScheduledGasPriceAtBlock items.
+		rpc ScheduledGasPriceAndFeeAtBlock(QueryScheduledGasPriceAndFeeAtBlockRequest) returns (QueryScheduledGasPriceAndFeeAtBlockResponse) {
+				option (google.api.http).get = "/org/dyson/dyson/scheduled_gas_price_at_block";
+		}
+
+		// Queries a Cron by index.
+		rpc Cron(QueryGetCronRequest) returns (QueryGetCronResponse) {
+				option (google.api.http).get = "/org/dyson/dyson/cron";
+		}
+
+		// Queries a list of Cron items.
+		rpc CronAll(QueryAllCronRequest) returns (QueryAllCronResponse) {
+				option (google.api.http).get = "/org/dyson/dyson/cron";
+		}
+
+		// this line is used by starport scaffolding # 2
 
 }
 
-message QueryGetSchedualedRunRequest {
+message QueryGetScheduledRunRequest {
 		// inxex is the script address
 		string index = 1;
 }
 
-message QueryGetSchedualedRunResponse {
-		SchedualedRun schedualed_run = 1 [(gogoproto.nullable) = false];
+message QueryGetScheduledRunResponse {
+		ScheduledRun scheduled_run = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryAllSchedualedRunRequest {
-		cosmos.base.query.v1beta1.PageRequest pagination = 1;
+message QueryAllScheduledRunRequest {
+		string index = 1;
+		cosmos.base.query.v1beta1.PageRequest pagination = 2;
 }
 
-message QueryAllSchedualedRunResponse {
-		repeated SchedualedRun schedualed_run = 1 [(gogoproto.nullable) = false];
+message QueryAllScheduledRunResponse {
+		repeated ScheduledRun scheduled_run = 1 [(gogoproto.nullable) = false];
 		cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
@@ -123,8 +141,8 @@ message QueryGetSchemaResponse {
 message QueryWsgiRequest {
 		string index = 1;
 		string httprequest = 2;
-        // Gas to allow the WSGI request
-        uint64 gaslimit = 3;
+		// Gas to allow the WSGI request
+		uint64 gaslimit = 3;
 }
 
 message QueryWsgiResponse {
@@ -147,6 +165,34 @@ message QueryPrefixStorageRequest {
 
 message QueryPrefixStorageResponse {
 		repeated Storage storage = 1;
+		cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryScheduledGasPriceAndFeeAtBlockRequest {
+		uint64 blockheight = 1;
+		uint64 gaswanted = 2;
+}
+
+message QueryScheduledGasPriceAndFeeAtBlockResponse {
+		cosmos.base.v1beta1.DecCoin gasprice = 1;
+		cosmos.base.v1beta1.Coin gasfee = 2;
+}
+
+message QueryGetCronRequest {
+		string blockHeight = 1;
+
+}
+
+message QueryGetCronResponse {
+		Cron cron = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllCronRequest {
+		cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllCronResponse {
+		repeated Cron cron = 1 [(gogoproto.nullable) = false];
 		cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

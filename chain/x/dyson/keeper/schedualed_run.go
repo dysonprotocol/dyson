@@ -1,29 +1,39 @@
 package keeper
 
 import (
+	"fmt"
+
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/org/dyson/x/dyson/types"
 )
 
-// SetSchedualedRun set a specific schedualedRun in the store from its index
-func (k Keeper) SetSchedualedRun(ctx sdk.Context, schedualedRun types.SchedualedRun) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.SchedualedRunKeyPrefix))
-	b := k.cdc.MustMarshal(&schedualedRun)
-	store.Set(types.SchedualedRunKey(
-		schedualedRun.Index,
-	), b)
+func (k Keeper) SetScheduledRunCron(ctx sdk.Context, scheduledRun types.ScheduledRun) {
+	cron, _ := k.GetCron(ctx, fmt.Sprint(scheduledRun.Height))
+	cron.Indexes = append(cron.Indexes, scheduledRun.Index)
+	k.SetCron(ctx, cron)
+
 }
 
-// GetSchedualedRun returns a schedualedRun from its index
-func (k Keeper) GetSchedualedRun(
+// SetScheduledRun set a specific scheduledRun in the store from its index
+func (k Keeper) SetScheduledRun(ctx sdk.Context, scheduledRun types.ScheduledRun) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ScheduledRunKeyPrefix))
+	b := k.cdc.MustMarshal(&scheduledRun)
+	store.Set(types.ScheduledRunKey(
+		scheduledRun.Index,
+	), b)
+	k.SetScheduledRunCron(ctx, scheduledRun)
+}
+
+// GetScheduledRun returns a scheduledRun from its index
+func (k Keeper) GetScheduledRun(
 	ctx sdk.Context,
 	index string,
 
-) (val types.SchedualedRun, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.SchedualedRunKeyPrefix))
+) (val types.ScheduledRun, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ScheduledRunKeyPrefix))
 
-	b := store.Get(types.SchedualedRunKey(
+	b := store.Get(types.ScheduledRunKey(
 		index,
 	))
 	if b == nil {
@@ -34,20 +44,19 @@ func (k Keeper) GetSchedualedRun(
 	return val, true
 }
 
-// GetStorage returns a storage from its
-func (k Keeper) GetPrefixSchedualedRun(
+func (k Keeper) GetPrefixScheduledRun(
 	ctx sdk.Context,
 	path string,
 
-) (list []types.SchedualedRun) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.SchedualedRunKeyPrefix))
+) (list []types.ScheduledRun) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ScheduledRunKeyPrefix))
 
 	iterator := sdk.KVStorePrefixIterator(store, []byte(path))
 
 	defer iterator.Close()
 
 	for ; iterator.Valid(); iterator.Next() {
-		var val types.SchedualedRun
+		var val types.ScheduledRun
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
 		list = append(list, val)
 	}
@@ -55,27 +64,27 @@ func (k Keeper) GetPrefixSchedualedRun(
 	return
 }
 
-// RemoveSchedualedRun removes a schedualedRun from the store
-func (k Keeper) RemoveSchedualedRun(
+// RemoveScheduledRun removes a scheduledRun from the store
+func (k Keeper) RemoveScheduledRun(
 	ctx sdk.Context,
 	index string,
 
 ) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.SchedualedRunKeyPrefix))
-	store.Delete(types.SchedualedRunKey(
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ScheduledRunKeyPrefix))
+	store.Delete(types.ScheduledRunKey(
 		index,
 	))
 }
 
-// GetAllSchedualedRun returns all schedualedRun
-func (k Keeper) GetAllSchedualedRun(ctx sdk.Context) (list []types.SchedualedRun) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.SchedualedRunKeyPrefix))
+// GetAllScheduledRun returns all scheduledRun
+func (k Keeper) GetAllScheduledRun(ctx sdk.Context) (list []types.ScheduledRun) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ScheduledRunKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 
 	defer iterator.Close()
 
 	for ; iterator.Valid(); iterator.Next() {
-		var val types.SchedualedRun
+		var val types.ScheduledRun
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
 		list = append(list, val)
 	}

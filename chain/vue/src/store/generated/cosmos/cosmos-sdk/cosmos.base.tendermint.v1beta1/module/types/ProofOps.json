@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ProofOps",
+    "definitions": {
+        "ProofOps": {
+            "properties": {
+                "ops": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.base.tendermint.v1beta1.ProofOp"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Proof Ops",
+            "description": "ProofOps is Merkle proof defined by the list of ProofOps. Note: This type is a duplicate of the ProofOps proto type defined in Tendermint."
+        },
+        "cosmos.base.tendermint.v1beta1.ProofOp": {
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "data": {
+                    "type": "string",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Proof Op",
+            "description": "ProofOp defines an operation used for calculating Merkle root. The data could be arbitrary format, providing nessecary data for example neighbouring node hash. Note: This type is a duplicate of the ProofOp proto type defined in Tendermint."
+        }
+    }
+}

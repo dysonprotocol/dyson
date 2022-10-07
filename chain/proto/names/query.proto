@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "names/params.proto";
 import "names/name.proto";
+import "names/expirations.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/org/dyson/x/names/types";
@@ -34,6 +35,16 @@ service Query {
 // Queries a list of GenerateCommit items.
 	rpc GenerateCommit(QueryGenerateCommitRequest) returns (QueryGenerateCommitResponse) {
 		option (google.api.http).get = "/org/dyson/names/generate_commit";
+	}
+
+// Queries a Expirations by index.
+	rpc Expirations(QueryGetExpirationsRequest) returns (QueryGetExpirationsResponse) {
+		option (google.api.http).get = "/org/dyson/names/expirations/{blockHeight}";
+	}
+
+	// Queries a list of Expirations items.
+	rpc ExpirationsAll(QueryAllExpirationsRequest) returns (QueryAllExpirationsResponse) {
+		option (google.api.http).get = "/org/dyson/names/expirations";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -82,6 +93,24 @@ message QueryGenerateCommitRequest {
 
 message QueryGenerateCommitResponse {
   string commit = 1;
+}
+
+message QueryGetExpirationsRequest {
+	  string blockHeight = 1;
+
+}
+
+message QueryGetExpirationsResponse {
+	Expirations expirations = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllExpirationsRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllExpirationsResponse {
+	repeated Expirations expirations = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3
