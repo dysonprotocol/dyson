@@ -34,7 +34,7 @@
             "additionalProperties": true,
             "type": "object",
             "title": "Grant Authorization",
-            "description": "GrantAuthorization defines the GenesisState/GrantAuthorization type."
+            "description": "GrantAuthorization extends a grant with both the addresses of the grantee and granter. It is used in genesis.proto and query.proto"
         }
     }
 }

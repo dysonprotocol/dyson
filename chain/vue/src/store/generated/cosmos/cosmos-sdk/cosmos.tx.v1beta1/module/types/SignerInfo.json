@@ -1,0 +1,128 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/SignerInfo",
+    "definitions": {
+        "SignerInfo": {
+            "properties": {
+                "public_key": {
+                    "properties": {
+                        "type_url": {
+                            "type": "string",
+                            "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+                        },
+                        "value": {
+                            "type": "string",
+                            "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                            "format": "binary",
+                            "binaryEncoding": "base64"
+                        }
+                    },
+                    "additionalProperties": true,
+                    "type": "object",
+                    "description": "public_key is the public key of the signer. It is optional for accounts that already exist in state. If unset, the verifier can use the required \\ signer address for this position and lookup the public key."
+                },
+                "mode_info": {
+                    "$ref": "#/definitions/cosmos.tx.v1beta1.ModeInfo",
+                    "additionalProperties": true,
+                    "description": "mode_info describes the signing mode of the signer and is a nested structure to support nested multisig pubkey's"
+                },
+                "sequence": {
+                    "type": "string",
+                    "description": "sequence is the sequence of the account, which describes the number of committed transactions signed by a given address. It is used to prevent replay attacks."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Signer Info",
+            "description": "SignerInfo describes the public key and signing mode of a single top-level signer."
+        },
+        "cosmos.crypto.multisig.v1beta1.CompactBitArray": {
+            "properties": {
+                "extra_bits_stored": {
+                    "type": "integer"
+                },
+                "elems": {
+                    "type": "string",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Compact Bit Array",
+            "description": "CompactBitArray is an implementation of a space efficient bit array. This is used to ensure that the encoded data takes up a minimal amount of space after proto encoding. This is not thread safe, and is not intended for concurrent usage."
+        },
+        "cosmos.tx.v1beta1.ModeInfo": {
+            "properties": {
+                "single": {
+                    "$ref": "#/definitions/cosmos.tx.v1beta1.ModeInfo.Single",
+                    "additionalProperties": true,
+                    "description": "single represents a single signer"
+                },
+                "multi": {
+                    "$ref": "#/definitions/cosmos.tx.v1beta1.ModeInfo.Multi",
+                    "additionalProperties": true,
+                    "description": "multi represents a nested multisig signer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Mode Info",
+            "description": "ModeInfo describes the signing mode of a single or nested multisig signer."
+        },
+        "cosmos.tx.v1beta1.ModeInfo.Multi": {
+            "properties": {
+                "bitarray": {
+                    "$ref": "#/definitions/cosmos.crypto.multisig.v1beta1.CompactBitArray",
+                    "additionalProperties": true,
+                    "description": "bitarray specifies which keys within the multisig are signing"
+                },
+                "mode_infos": {
+                    "items": {
+                        "$ref": "#/definitions/cosmos.tx.v1beta1.ModeInfo"
+                    },
+                    "type": "array",
+                    "description": "mode_infos is the corresponding modes of the signers of the multisig which could include nested multisig public keys"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Multi",
+            "description": "Multi is the mode info for a multisig public key"
+        },
+        "cosmos.tx.v1beta1.ModeInfo.Single": {
+            "properties": {
+                "mode": {
+                    "enum": [
+                        "SIGN_MODE_UNSPECIFIED",
+                        0,
+                        "SIGN_MODE_DIRECT",
+                        1,
+                        "SIGN_MODE_TEXTUAL",
+                        2,
+                        "SIGN_MODE_DIRECT_AUX",
+                        3,
+                        "SIGN_MODE_LEGACY_AMINO_JSON",
+                        127,
+                        "SIGN_MODE_EIP_191",
+                        191
+                    ],
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
+                    "title": "Sign Mode",
+                    "description": "SignMode represents a signing mode with its own security guarantees. This enum should be considered a registry of all known sign modes in the Cosmos ecosystem. Apps are not expected to support all known sign modes. Apps that would like to support custom  sign modes are encouraged to open a small PR against this file to add a new case to this SignMode enum describing their sign mode so that different apps have a consistent version of this enum."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Single",
+            "description": "Single is the mode info for a single signer. It is structured as a message to allow for additional fields such as locale for SIGN_MODE_TEXTUAL in the future"
+        }
+    }
+}

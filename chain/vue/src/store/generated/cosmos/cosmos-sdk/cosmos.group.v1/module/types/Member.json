@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Member",
+    "definitions": {
+        "Member": {
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "description": "address is the member's account address."
+                },
+                "weight": {
+                    "type": "string",
+                    "description": "weight is the member's voting weight that should be greater than 0."
+                },
+                "metadata": {
+                    "type": "string",
+                    "description": "metadata is any arbitrary metadata attached to the member."
+                },
+                "added_at": {
+                    "type": "string",
+                    "description": "added_at is a timestamp specifying when a member was added.",
+                    "format": "date-time"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Member",
+            "description": "Member represents a group member with an account address, non-zero weight, metadata and added_at timestamp."
+        }
+    }
+}

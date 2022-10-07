@@ -1,0 +1,11 @@
+syntax = "proto3";
+package dyson;
+
+option go_package = "github.com/org/dyson/x/dyson/types";
+
+message Cron {
+  string blockHeight = 1; 
+  repeated string indexes = 2; 
+  
+}
+

@@ -39,13 +39,13 @@
                         }
                     ],
                     "title": "Authorization Type",
-                    "description": "AuthorizationType defines the type of staking module authorization type"
+                    "description": "AuthorizationType defines the type of staking module authorization type Since: cosmos-sdk 0.43"
                 }
             },
             "additionalProperties": true,
             "type": "object",
             "title": "Stake Authorization",
-            "description": "StakeAuthorization defines authorization for delegate/undelegate/redelegate."
+            "description": "StakeAuthorization defines authorization for delegate/undelegate/redelegate. Since: cosmos-sdk 0.43"
         },
         "cosmos.base.v1beta1.Coin": {
             "properties": {

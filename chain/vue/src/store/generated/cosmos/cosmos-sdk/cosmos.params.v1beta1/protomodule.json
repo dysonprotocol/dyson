@@ -1,0 +1,133 @@
+{
+	"Name": "v1beta1",
+	"GoModulePath": "github.com/cosmos/cosmos-sdk",
+	"Pkg": {
+		"Name": "cosmos.params.v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/params.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos_proto/cosmos.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"google/api/annotations.proto",
+					"cosmos/params/v1beta1/params.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/cosmos-sdk/x/params/types/proposal",
+		"Messages": [
+			{
+				"Name": "ParameterChangeProposal",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/params.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "ParamChange",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/params.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "QueryParamsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryParamsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QuerySubspacesRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QuerySubspacesResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "Subspace",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "Params",
+						"RequestType": "QueryParamsRequest",
+						"ReturnsType": "QueryParamsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Subspaces",
+						"RequestType": "QuerySubspacesRequest",
+						"ReturnsType": "QuerySubspacesResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"Msgs": null,
+	"HTTPQueries": [
+		{
+			"Name": "Params",
+			"FullName": "QueryParams",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Subspaces",
+			"FullName": "QuerySubspaces",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "ParameterChangeProposal",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/params.proto"
+		},
+		{
+			"Name": "ParamChange",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/params.proto"
+		},
+		{
+			"Name": "Subspace",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto"
+		}
+	]
+}

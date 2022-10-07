@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/PacketState",
+    "definitions": {
+        "PacketState": {
+            "properties": {
+                "port_id": {
+                    "type": "string",
+                    "description": "channel port identifier."
+                },
+                "channel_id": {
+                    "type": "string",
+                    "description": "channel unique identifier."
+                },
+                "sequence": {
+                    "type": "string",
+                    "description": "packet sequence."
+                },
+                "data": {
+                    "type": "string",
+                    "description": "embedded data that represents packet state.",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Packet State",
+            "description": "PacketState defines the generic type necessary to retrieve and store packet commitments, acknowledgements, and receipts. Caller is responsible for knowing the context necessary to interpret this state as a commitment, acknowledgement, or a receipt."
+        }
+    }
+}

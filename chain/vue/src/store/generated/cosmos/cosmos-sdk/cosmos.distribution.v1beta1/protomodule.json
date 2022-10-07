@@ -1,39 +1,45 @@
 {
 	"Name": "v1beta1",
+	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.distribution.v1beta1",
-		"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
-				"Dependencies": [
-					"gogoproto/gogo.proto",
-					"cosmos/base/v1beta1/coin.proto"
-				]
-			},
-			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos/base/v1beta1/coin.proto",
-					"cosmos/distribution/v1beta1/distribution.proto"
+					"cosmos_proto/cosmos.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos/base/v1beta1/coin.proto",
+					"cosmos/distribution/v1beta1/distribution.proto",
+					"cosmos_proto/cosmos.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"Dependencies": [
 					"cosmos/base/query/v1beta1/pagination.proto",
 					"gogoproto/gogo.proto",
 					"google/api/annotations.proto",
 					"cosmos/base/v1beta1/coin.proto",
-					"cosmos/distribution/v1beta1/distribution.proto"
+					"cosmos/distribution/v1beta1/distribution.proto",
+					"cosmos_proto/cosmos.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
-					"cosmos/base/v1beta1/coin.proto"
+					"cosmos/base/v1beta1/coin.proto",
+					"cosmos_proto/cosmos.proto",
+					"cosmos/msg/v1/msg.proto"
 				]
 			}
 		],
@@ -41,232 +47,232 @@
 		"Messages": [
 			{
 				"Name": "Params",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "ValidatorHistoricalRewards",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ValidatorCurrentRewards",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ValidatorAccumulatedCommission",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "ValidatorOutstandingRewards",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "ValidatorSlashEvent",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ValidatorSlashEvents",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "FeePool",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "CommunityPoolSpendProposal",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "DelegatorStartingInfo",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "DelegationDelegatorReward",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "CommunityPoolSpendProposalWithDeposit",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "DelegatorWithdrawInfo",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ValidatorOutstandingRewardsRecord",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ValidatorAccumulatedCommissionRecord",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ValidatorHistoricalRewardsRecord",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "ValidatorCurrentRewardsRecord",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "DelegatorStartingInfoRecord",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "ValidatorSlashEventRecord",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto",
 				"HighestFieldNumber": 10
 			},
 			{
 				"Name": "QueryParamsRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QueryParamsResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryValidatorOutstandingRewardsRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryValidatorOutstandingRewardsResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryValidatorCommissionRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryValidatorCommissionResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryValidatorSlashesRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "QueryValidatorSlashesResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryDelegationRewardsRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryDelegationRewardsResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDelegationTotalRewardsRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDelegationTotalRewardsResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryDelegatorValidatorsRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDelegatorValidatorsResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDelegatorWithdrawAddressRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDelegatorWithdrawAddressResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryCommunityPoolRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QueryCommunityPoolResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgSetWithdrawAddress",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgSetWithdrawAddressResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgWithdrawDelegatorReward",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgWithdrawDelegatorRewardResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto",
-				"HighestFieldNumber": 0
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto",
+				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgWithdrawValidatorCommission",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgWithdrawValidatorCommissionResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto",
-				"HighestFieldNumber": 0
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto",
+				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgFundCommunityPool",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgFundCommunityPoolResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			}
 		],
@@ -432,24 +438,24 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgWithdrawValidatorCommission",
-			"URI": "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto"
+			"Name": "MsgSetWithdrawAddress",
+			"URI": "cosmos.distribution.v1beta1.MsgSetWithdrawAddress",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto"
 		},
 		{
 			"Name": "MsgFundCommunityPool",
 			"URI": "cosmos.distribution.v1beta1.MsgFundCommunityPool",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto"
-		},
-		{
-			"Name": "MsgSetWithdrawAddress",
-			"URI": "cosmos.distribution.v1beta1.MsgSetWithdrawAddress",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto"
 		},
 		{
 			"Name": "MsgWithdrawDelegatorReward",
 			"URI": "cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgWithdrawValidatorCommission",
+			"URI": "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/tx.proto"
 		}
 	],
 	"HTTPQueries": [
@@ -571,79 +577,79 @@
 	"Types": [
 		{
 			"Name": "Params",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "ValidatorHistoricalRewards",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "ValidatorCurrentRewards",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "ValidatorAccumulatedCommission",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "ValidatorOutstandingRewards",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "ValidatorSlashEvent",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "ValidatorSlashEvents",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "FeePool",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "CommunityPoolSpendProposal",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "DelegatorStartingInfo",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "DelegationDelegatorReward",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "CommunityPoolSpendProposalWithDeposit",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/distribution.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/distribution.proto"
 		},
 		{
 			"Name": "DelegatorWithdrawInfo",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto"
 		},
 		{
 			"Name": "ValidatorOutstandingRewardsRecord",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto"
 		},
 		{
 			"Name": "ValidatorAccumulatedCommissionRecord",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto"
 		},
 		{
 			"Name": "ValidatorHistoricalRewardsRecord",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto"
 		},
 		{
 			"Name": "ValidatorCurrentRewardsRecord",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto"
 		},
 		{
 			"Name": "DelegatorStartingInfoRecord",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto"
 		},
 		{
 			"Name": "ValidatorSlashEventRecord",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/distribution/v1beta1/genesis.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/distribution/v1beta1/genesis.proto"
 		}
 	]
 }

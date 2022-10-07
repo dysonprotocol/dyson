@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgCreateScheduledRunResponse",
+    "definitions": {
+        "MsgCreateScheduledRunResponse": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Create Scheduled Run Response"
+        }
+    }
+}

@@ -1,0 +1,392 @@
+{
+	"Name": "v1beta1",
+	"GoModulePath": "github.com/cosmos/cosmos-sdk",
+	"Pkg": {
+		"Name": "cosmos.nft.v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/event.proto",
+				"Dependencies": null
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/genesis.proto",
+				"Dependencies": [
+					"cosmos/nft/v1beta1/nft.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/nft.proto",
+				"Dependencies": [
+					"google/protobuf/any.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"Dependencies": [
+					"cosmos/base/query/v1beta1/pagination.proto",
+					"google/api/annotations.proto",
+					"cosmos/nft/v1beta1/nft.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/tx.proto",
+				"Dependencies": [
+					"cosmos/msg/v1/msg.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/cosmos-sdk/x/nft",
+		"Messages": [
+			{
+				"Name": "EventSend",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/event.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "EventMint",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/event.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "EventBurn",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/event.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "GenesisState",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/genesis.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "Entry",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/genesis.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "Class",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/nft.proto",
+				"HighestFieldNumber": 7
+			},
+			{
+				"Name": "NFT",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/nft.proto",
+				"HighestFieldNumber": 10
+			},
+			{
+				"Name": "QueryBalanceRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryBalanceResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryOwnerRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryOwnerResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QuerySupplyRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QuerySupplyResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryNFTsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "QueryNFTsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryNFTRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryNFTResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryClassRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryClassResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryClassesRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryClassesResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "MsgSend",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/tx.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "MsgSendResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/tx.proto",
+				"HighestFieldNumber": 0
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "Balance",
+						"RequestType": "QueryBalanceRequest",
+						"ReturnsType": "QueryBalanceResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"owner",
+									"class_id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Owner",
+						"RequestType": "QueryOwnerRequest",
+						"ReturnsType": "QueryOwnerResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"class_id",
+									"id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Supply",
+						"RequestType": "QuerySupplyRequest",
+						"ReturnsType": "QuerySupplyResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"class_id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "NFTs",
+						"RequestType": "QueryNFTsRequest",
+						"ReturnsType": "QueryNFTsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "NFT",
+						"RequestType": "QueryNFTRequest",
+						"ReturnsType": "QueryNFTResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"class_id",
+									"id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Class",
+						"RequestType": "QueryClassRequest",
+						"ReturnsType": "QueryClassResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"class_id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Classes",
+						"RequestType": "QueryClassesRequest",
+						"ReturnsType": "QueryClassesResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Msg",
+				"RPCFuncs": [
+					{
+						"Name": "Send",
+						"RequestType": "MsgSend",
+						"ReturnsType": "MsgSendResponse",
+						"HTTPRules": null
+					}
+				]
+			}
+		]
+	},
+	"Msgs": null,
+	"HTTPQueries": [
+		{
+			"Name": "Balance",
+			"FullName": "QueryBalance",
+			"Rules": [
+				{
+					"Params": [
+						"owner",
+						"class_id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Owner",
+			"FullName": "QueryOwner",
+			"Rules": [
+				{
+					"Params": [
+						"class_id",
+						"id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Supply",
+			"FullName": "QuerySupply",
+			"Rules": [
+				{
+					"Params": [
+						"class_id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "NFTs",
+			"FullName": "QueryNFTs",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "NFT",
+			"FullName": "QueryNFT",
+			"Rules": [
+				{
+					"Params": [
+						"class_id",
+						"id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Class",
+			"FullName": "QueryClass",
+			"Rules": [
+				{
+					"Params": [
+						"class_id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Classes",
+			"FullName": "QueryClasses",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "EventSend",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/event.proto"
+		},
+		{
+			"Name": "EventMint",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/event.proto"
+		},
+		{
+			"Name": "EventBurn",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/event.proto"
+		},
+		{
+			"Name": "Entry",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/genesis.proto"
+		},
+		{
+			"Name": "Class",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/nft.proto"
+		},
+		{
+			"Name": "NFT",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/nft/v1beta1/nft.proto"
+		}
+	]
+}

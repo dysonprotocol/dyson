@@ -6,6 +6,5 @@ import (
 )
 
 func EndBlocker(ctx sdk.Context, k keeper.Keeper) {
-
-	k.RunSchedualedScripts(ctx)
+	k.RunScheduledScripts(ctx)
 }

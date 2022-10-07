@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Counterparty",
+    "definitions": {
+        "Counterparty": {
+            "properties": {
+                "port_id": {
+                    "type": "string",
+                    "description": "port on the counterparty chain which owns the other end of the channel."
+                },
+                "channel_id": {
+                    "type": "string",
+                    "description": "channel end on the counterparty chain"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Counterparty",
+            "description": "Counterparty defines a channel end counterparty"
+        }
+    }
+}

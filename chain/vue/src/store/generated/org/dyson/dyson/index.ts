@@ -1,15 +1,14 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
-// @ts-ignore
-import { SpVuexError } from '@starport/vuex'
 
-import { SchedualedRun } from "./module/types/dyson/schedualed_run"
+import { Cron } from "./module/types/dyson/cron"
+import { ScheduledRun } from "./module/types/dyson/scheduled_run"
 import { Script } from "./module/types/dyson/script"
 import { Storage } from "./module/types/dyson/storage"
-import { MsgUpdateSchedualedRunResponse } from "./module/types/dyson/tx"
-import { MsgDeleteSchedualedRunResponse } from "./module/types/dyson/tx"
+import { MsgUpdateScheduledRunResponse } from "./module/types/dyson/tx"
+import { MsgDeleteScheduledRunResponse } from "./module/types/dyson/tx"
 
 
-export { SchedualedRun, Script, Storage, MsgUpdateSchedualedRunResponse, MsgDeleteSchedualedRunResponse };
+export { Cron, ScheduledRun, Script, Storage, MsgUpdateScheduledRunResponse, MsgDeleteScheduledRunResponse };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -47,8 +46,8 @@ function getStructure(template) {
 
 const getDefaultState = () => {
 	return {
-				SchedualedRun: {},
-				SchedualedRunAll: {},
+				ScheduledRun: {},
+				ScheduledRunAll: {},
 				Storage: {},
 				StorageAll: {},
 				Script: {},
@@ -57,13 +56,17 @@ const getDefaultState = () => {
 				QueryScript: {},
 				ScriptAll: {},
 				PrefixStorage: {},
+				ScheduledGasPriceAndFeeAtBlock: {},
+				Cron: {},
+				CronAll: {},
 				
 				_Structure: {
-						SchedualedRun: getStructure(SchedualedRun.fromPartial({})),
+						Cron: getStructure(Cron.fromPartial({})),
+						ScheduledRun: getStructure(ScheduledRun.fromPartial({})),
 						Script: getStructure(Script.fromPartial({})),
 						Storage: getStructure(Storage.fromPartial({})),
-						MsgUpdateSchedualedRunResponse: getStructure(MsgUpdateSchedualedRunResponse.fromPartial({})),
-						MsgDeleteSchedualedRunResponse: getStructure(MsgDeleteSchedualedRunResponse.fromPartial({})),
+						MsgUpdateScheduledRunResponse: getStructure(MsgUpdateScheduledRunResponse.fromPartial({})),
+						MsgDeleteScheduledRunResponse: getStructure(MsgDeleteScheduledRunResponse.fromPartial({})),
 						
 		},
 		_Registry: registry,
@@ -92,17 +95,17 @@ export default {
 		}
 	},
 	getters: {
-				getSchedualedRun: (state) => (params = { params: {}}) => {
+				getScheduledRun: (state) => (params = { params: {}}) => {
 					if (!(<any> params).query) {
 						(<any> params).query=null
 					}
-			return state.SchedualedRun[JSON.stringify(params)] ?? {}
+			return state.ScheduledRun[JSON.stringify(params)] ?? {}
 		},
-				getSchedualedRunAll: (state) => (params = { params: {}}) => {
+				getScheduledRunAll: (state) => (params = { params: {}}) => {
 					if (!(<any> params).query) {
 						(<any> params).query=null
 					}
-			return state.SchedualedRunAll[JSON.stringify(params)] ?? {}
+			return state.ScheduledRunAll[JSON.stringify(params)] ?? {}
 		},
 				getStorage: (state) => (params = { params: {}}) => {
 					if (!(<any> params).query) {
@@ -152,6 +155,24 @@ export default {
 					}
 			return state.PrefixStorage[JSON.stringify(params)] ?? {}
 		},
+				getScheduledGasPriceAndFeeAtBlock: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ScheduledGasPriceAndFeeAtBlock[JSON.stringify(params)] ?? {}
+		},
+				getCron: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.Cron[JSON.stringify(params)] ?? {}
+		},
+				getCronAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.CronAll[JSON.stringify(params)] ?? {}
+		},
 				
 		getTypeStructure: (state) => (type) => {
 			return state._Structure[type].fields
@@ -181,7 +202,7 @@ export default {
 					const sub=JSON.parse(subscription)
 					await dispatch(sub.action, sub.payload)
 				}catch(e) {
-					throw new SpVuexError('Subscriptions: ' + e.message)
+					throw new Error('Subscriptions: ' + e.message)
 				}
 			})
 		},
@@ -191,22 +212,22 @@ export default {
 		 		
 		
 		
-		async QuerySchedualedRun({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+		async QueryScheduledRun({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
 				const key = params ?? {};
 				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.querySchedualedRun(query)).data
+				let value= (await queryClient.queryScheduledRun(query)).data
 				
 					
 				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
-					let next_values=(await queryClient.querySchedualedRun({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					let next_values=(await queryClient.queryScheduledRun({...query, 'pagination.key':(<any> value).pagination.next_key})).data
 					value = mergeResults(value, next_values);
 				}
-				commit('QUERY', { query: 'SchedualedRun', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QuerySchedualedRun', payload: { options: { all }, params: {...key},query }})
-				return getters['getSchedualedRun']( { params: {...key}, query}) ?? {}
+				commit('QUERY', { query: 'ScheduledRun', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScheduledRun', payload: { options: { all }, params: {...key},query }})
+				return getters['getScheduledRun']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QuerySchedualedRun', 'API Node Unavailable. Could not perform query: ' + e.error.message)
+				throw new Error('QueryClient:QueryScheduledRun API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -217,22 +238,22 @@ export default {
 		 		
 		
 		
-		async QuerySchedualedRunAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+		async QueryScheduledRunAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
 				const key = params ?? {};
 				const queryClient=await initQueryClient(rootGetters)
-				let value= (await queryClient.querySchedualedRunAll(query)).data
+				let value= (await queryClient.queryScheduledRunAll(query)).data
 				
 					
 				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
-					let next_values=(await queryClient.querySchedualedRunAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					let next_values=(await queryClient.queryScheduledRunAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
 					value = mergeResults(value, next_values);
 				}
-				commit('QUERY', { query: 'SchedualedRunAll', key: { params: {...key}, query}, value })
-				if (subscribe) commit('SUBSCRIBE', { action: 'QuerySchedualedRunAll', payload: { options: { all }, params: {...key},query }})
-				return getters['getSchedualedRunAll']( { params: {...key}, query}) ?? {}
+				commit('QUERY', { query: 'ScheduledRunAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScheduledRunAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getScheduledRunAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QuerySchedualedRunAll', 'API Node Unavailable. Could not perform query: ' + e.error.message)
+				throw new Error('QueryClient:QueryScheduledRunAll API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -258,7 +279,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStorage', payload: { options: { all }, params: {...key},query }})
 				return getters['getStorage']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryStorage', 'API Node Unavailable. Could not perform query: ' + e.error.message)
+				throw new Error('QueryClient:QueryStorage API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -284,7 +305,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStorageAll', payload: { options: { all }, params: {...key},query }})
 				return getters['getStorageAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryStorageAll', 'API Node Unavailable. Could not perform query: ' + e.error.message)
+				throw new Error('QueryClient:QueryStorageAll API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -310,7 +331,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScript', payload: { options: { all }, params: {...key},query }})
 				return getters['getScript']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryScript', 'API Node Unavailable. Could not perform query: ' + e.error.message)
+				throw new Error('QueryClient:QueryScript API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -336,7 +357,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QuerySchema', payload: { options: { all }, params: {...key},query }})
 				return getters['getSchema']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QuerySchema', 'API Node Unavailable. Could not perform query: ' + e.error.message)
+				throw new Error('QueryClient:QuerySchema API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -362,7 +383,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryWsgi', payload: { options: { all }, params: {...key},query }})
 				return getters['getWsgi']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryWsgi', 'API Node Unavailable. Could not perform query: ' + e.error.message)
+				throw new Error('QueryClient:QueryWsgi API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -388,7 +409,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryQueryScript', payload: { options: { all }, params: {...key},query }})
 				return getters['getQueryScript']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryQueryScript', 'API Node Unavailable. Could not perform query: ' + e.error.message)
+				throw new Error('QueryClient:QueryQueryScript API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -414,7 +435,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScriptAll', payload: { options: { all }, params: {...key},query }})
 				return getters['getScriptAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryScriptAll', 'API Node Unavailable. Could not perform query: ' + e.error.message)
+				throw new Error('QueryClient:QueryScriptAll API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
@@ -440,202 +461,251 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryPrefixStorage', payload: { options: { all }, params: {...key},query }})
 				return getters['getPrefixStorage']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryPrefixStorage', 'API Node Unavailable. Could not perform query: ' + e.error.message)
+				throw new Error('QueryClient:QueryPrefixStorage API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
 		
 		
-		async sendMsgDeleteSchedualedRun({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		 		
+		
+		
+		async QueryScheduledGasPriceAndFeeAtBlock({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeleteSchedualedRun(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgDeleteSchedualedRun:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgDeleteSchedualedRun:Send', 'Could not broadcast Tx: '+ e.message)
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryScheduledGasPriceAndFeeAtBlock(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryScheduledGasPriceAndFeeAtBlock({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
 				}
+				commit('QUERY', { query: 'ScheduledGasPriceAndFeeAtBlock', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScheduledGasPriceAndFeeAtBlock', payload: { options: { all }, params: {...key},query }})
+				return getters['getScheduledGasPriceAndFeeAtBlock']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryScheduledGasPriceAndFeeAtBlock API Node Unavailable. Could not perform query: ' + e.error.message)
+				
 			}
 		},
-		async sendMsgRun({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryCron({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgRun(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgRun:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgRun:Send', 'Could not broadcast Tx: '+ e.message)
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryCron(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryCron({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
 				}
+				commit('QUERY', { query: 'Cron', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryCron', payload: { options: { all }, params: {...key},query }})
+				return getters['getCron']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryCron API Node Unavailable. Could not perform query: ' + e.error.message)
+				
 			}
 		},
-		async sendMsgCreateSchedualedRun({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryCronAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreateSchedualedRun(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCreateSchedualedRun:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgCreateSchedualedRun:Send', 'Could not broadcast Tx: '+ e.message)
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryCronAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryCronAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
 				}
+				commit('QUERY', { query: 'CronAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryCronAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getCronAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryCronAll API Node Unavailable. Could not perform query: ' + e.error.message)
+				
 			}
 		},
-		async sendMsgUpdateStorage({ rootGetters }, { value, fee = [], memo = '' }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateStorage(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgUpdateStorage:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgUpdateStorage:Send', 'Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgCreateScript({ rootGetters }, { value, fee = [], memo = '' }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreateScript(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCreateScript:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgCreateScript:Send', 'Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgUpdateSchedualedRun({ rootGetters }, { value, fee = [], memo = '' }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateSchedualedRun(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgUpdateSchedualedRun:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgUpdateSchedualedRun:Send', 'Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgDeleteScript({ rootGetters }, { value, fee = [], memo = '' }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeleteScript(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgDeleteScript:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgDeleteScript:Send', 'Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgCreateStorage({ rootGetters }, { value, fee = [], memo = '' }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreateStorage(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCreateStorage:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgCreateStorage:Send', 'Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgUpdateScript({ rootGetters }, { value, fee = [], memo = '' }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateScript(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgUpdateScript:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgUpdateScript:Send', 'Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgDeleteStorage({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		async sendMsgDeleteStorage({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
 				const msg = await txClient.msgDeleteStorage(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
+	gas: gas}, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgDeleteStorage:Init', 'Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgDeleteStorage:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgDeleteStorage:Send', 'Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgDeleteStorage:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgUpdateStorage({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateStorage(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateStorage:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgUpdateStorage:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgCreateStorage({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgCreateStorage(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateStorage:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgCreateStorage:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgRun({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgRun(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgRun:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgRun:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgCreateScheduledRun({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgCreateScheduledRun(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateScheduledRun:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgCreateScheduledRun:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgUpdateScript({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateScript(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateScript:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgUpdateScript:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgDeleteScheduledRun({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgDeleteScheduledRun(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeleteScheduledRun:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgDeleteScheduledRun:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgCreateScript({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgCreateScript(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateScript:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgCreateScript:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgUpdateScheduledRun({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateScheduledRun(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateScheduledRun:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgUpdateScheduledRun:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgDeleteScript({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgDeleteScript(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeleteScript:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgDeleteScript:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
 		
-		async MsgDeleteSchedualedRun({ rootGetters }, { value }) {
+		async MsgDeleteStorage({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeleteSchedualedRun(value)
+				const msg = await txClient.msgDeleteStorage(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgDeleteSchedualedRun:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgDeleteSchedualedRun:Create', 'Could not create message: ' + e.message)
-					
-				}
-			}
-		},
-		async MsgRun({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgRun(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgRun:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgRun:Create', 'Could not create message: ' + e.message)
-					
-				}
-			}
-		},
-		async MsgCreateSchedualedRun({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreateSchedualedRun(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCreateSchedualedRun:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgCreateSchedualedRun:Create', 'Could not create message: ' + e.message)
-					
+					throw new Error('TxClient:MsgDeleteStorage:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgDeleteStorage:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -646,52 +716,9 @@ export default {
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgUpdateStorage:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgUpdateStorage:Create', 'Could not create message: ' + e.message)
-					
-				}
-			}
-		},
-		async MsgCreateScript({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreateScript(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCreateScript:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgCreateScript:Create', 'Could not create message: ' + e.message)
-					
-				}
-			}
-		},
-		async MsgUpdateSchedualedRun({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateSchedualedRun(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgUpdateSchedualedRun:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgUpdateSchedualedRun:Create', 'Could not create message: ' + e.message)
-					
-				}
-			}
-		},
-		async MsgDeleteScript({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeleteScript(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgDeleteScript:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgDeleteScript:Create', 'Could not create message: ' + e.message)
-					
+					throw new Error('TxClient:MsgUpdateStorage:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgUpdateStorage:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -702,10 +729,35 @@ export default {
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCreateStorage:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgCreateStorage:Create', 'Could not create message: ' + e.message)
-					
+					throw new Error('TxClient:MsgCreateStorage:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgCreateStorage:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgRun({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgRun(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgRun:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgRun:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgCreateScheduledRun({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgCreateScheduledRun(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateScheduledRun:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgCreateScheduledRun:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -716,24 +768,61 @@ export default {
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgUpdateScript:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgUpdateScript:Create', 'Could not create message: ' + e.message)
-					
+					throw new Error('TxClient:MsgUpdateScript:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgUpdateScript:Create Could not create message: ' + e.message)
 				}
 			}
 		},
-		async MsgDeleteStorage({ rootGetters }, { value }) {
+		async MsgDeleteScheduledRun({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeleteStorage(value)
+				const msg = await txClient.msgDeleteScheduledRun(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgDeleteStorage:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgDeleteStorage:Create', 'Could not create message: ' + e.message)
-					
+					throw new Error('TxClient:MsgDeleteScheduledRun:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgDeleteScheduledRun:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgCreateScript({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgCreateScript(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateScript:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgCreateScript:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgUpdateScheduledRun({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateScheduledRun(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateScheduledRun:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgUpdateScheduledRun:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgDeleteScript({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgDeleteScript(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeleteScript:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgDeleteScript:Create Could not create message: ' + e.message)
 				}
 			}
 		},

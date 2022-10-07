@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryAccountAddressByIDRequest",
+    "definitions": {
+        "QueryAccountAddressByIDRequest": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Account Address By ID Request",
+            "description": "QueryAccountAddressByIDRequest is the request type for AccountAddressByID rpc method"
+        }
+    }
+}

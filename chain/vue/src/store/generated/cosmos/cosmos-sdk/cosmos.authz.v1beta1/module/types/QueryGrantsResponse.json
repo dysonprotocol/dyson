@@ -42,6 +42,7 @@
                 },
                 "expiration": {
                     "type": "string",
+                    "description": "time when the grant will expire and will be pruned. If null, then the grant doesn't have a time expiration (other conditions  in `authorization` may apply to invalidate the grant)",
                     "format": "date-time"
                 }
             },
@@ -54,7 +55,7 @@
             "properties": {
                 "next_key": {
                     "type": "string",
-                    "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
+                    "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.",
                     "format": "binary",
                     "binaryEncoding": "base64"
                 },

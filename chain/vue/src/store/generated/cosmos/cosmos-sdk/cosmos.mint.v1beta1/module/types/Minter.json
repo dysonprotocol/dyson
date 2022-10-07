@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Minter",
+    "definitions": {
+        "Minter": {
+            "properties": {
+                "inflation": {
+                    "type": "string",
+                    "description": "current annual inflation rate"
+                },
+                "annual_provisions": {
+                    "type": "string",
+                    "description": "current annual expected provisions"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Minter",
+            "description": "Minter represents the minting state."
+        }
+    }
+}

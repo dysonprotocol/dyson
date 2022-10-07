@@ -1,4 +1,4 @@
-FROM node:17-slim
+FROM node:18-slim
 
 # install simple http server for serving static content
 RUN npm install -g http-server

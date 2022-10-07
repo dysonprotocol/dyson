@@ -22,6 +22,14 @@ func TestGenesis(t *testing.T) {
 				Name: "1",
 			},
 		},
+		ExpirationsList: []types.Expirations{
+			{
+				BlockHeight: "0",
+			},
+			{
+				BlockHeight: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -34,5 +42,6 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(got)
 
 	require.ElementsMatch(t, genesisState.NameList, got.NameList)
+	require.ElementsMatch(t, genesisState.ExpirationsList, got.ExpirationsList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

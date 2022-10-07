@@ -11,7 +11,6 @@ import (
 func (k msgServer) SetPriceAndExtend(goCtx context.Context, msg *types.MsgSetPriceAndExtend) (*types.MsgSetPriceAndExtendResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
 	_ = ctx
 
 	name, isFound := k.GetName(
@@ -22,10 +21,10 @@ func (k msgServer) SetPriceAndExtend(goCtx context.Context, msg *types.MsgSetPri
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "name not registered")
 	}
 	if name.Owner != msg.Owner {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "name.Owner !- msg.Creator")
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "name.Owner != msg.Creator")
 	}
 
-	name.Expires = ctx.BlockTime().AddDate(0, 1, 0) // expires in one month
+	name.ExpirationHeight = uint64(ctx.BlockHeight() + REGISTER_BLOCKS)
 	name.Price = msg.Price
 
 	coin, err := sdk.ParseCoinNormalized(msg.Price)
@@ -46,10 +45,9 @@ func (k msgServer) SetPriceAndExtend(goCtx context.Context, msg *types.MsgSetPri
 
 	}
 
-	// set the new revealed name, overwriting and existing one if it is newer
 	k.SetName(
 		ctx,
 		name,
 	)
-	return &types.MsgSetPriceAndExtendResponse{Expiry: name.Expires}, nil
+	return &types.MsgSetPriceAndExtendResponse{}, nil
 }

@@ -9,6 +9,11 @@
  * ---------------------------------------------------------------
  */
 
+export interface NamesExpirations {
+  blockHeight?: string;
+  names?: string[];
+}
+
 export type NamesMsgAcceptResponse = object;
 
 export type NamesMsgBurnCoinsResponse = object;
@@ -24,18 +29,15 @@ export type NamesMsgOfferToResponse = object;
 export interface NamesMsgRegisterResponse {
   fee?: string;
 
-  /** @format date-time */
-  expires?: string;
+  /** @format uint64 */
+  expiration_height?: string;
 }
 
 export interface NamesMsgRevealResponse {
   name?: NamesName;
 }
 
-export interface NamesMsgSetPriceAndExtendResponse {
-  /** @format date-time */
-  expiry?: string;
-}
+export type NamesMsgSetPriceAndExtendResponse = object;
 
 export type NamesMsgUpdateNameResponse = object;
 
@@ -43,20 +45,35 @@ export interface NamesName {
   name?: string;
   destination?: string;
   price?: string;
-
-  /** @format date-time */
-  expires?: string;
   authorized?: string;
   owner?: string;
 
-  /** @format date-time */
-  registered?: string;
+  /** @format uint64 */
+  expiration_height?: string;
+
+  /** @format uint64 */
+  registration_height?: string;
 }
 
 /**
  * Params defines the parameters for the module.
  */
 export type NamesParams = object;
+
+export interface NamesQueryAllExpirationsResponse {
+  expirations?: NamesExpirations[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
 
 export interface NamesQueryAllNameResponse {
   name?: NamesName[];
@@ -75,6 +92,10 @@ export interface NamesQueryAllNameResponse {
 
 export interface NamesQueryGenerateCommitResponse {
   commit?: string;
+}
+
+export interface NamesQueryGetExpirationsResponse {
+  expirations?: NamesExpirations;
 }
 
 export interface NamesQueryGetNameResponse {
@@ -140,9 +161,13 @@ export interface V1Beta1PageRequest {
    * count_total is only respected when offset is used. It is ignored when key
    * is set.
    */
-  countTotal?: boolean;
+  count_total?: boolean;
 
-  /** reverse is set to true if results are to be returned in the descending order. */
+  /**
+   * reverse is set to true if results are to be returned in the descending order.
+   *
+   * Since: cosmos-sdk 0.43
+   */
   reverse?: boolean;
 }
 
@@ -156,8 +181,13 @@ corresponding request message has used PageRequest.
  }
 */
 export interface V1Beta1PageResponse {
-  /** @format byte */
-  nextKey?: string;
+  /**
+   * next_key is the key to be passed to PageRequest.key to
+   * query the next page most efficiently. It will be empty if
+   * there are no more results.
+   * @format byte
+   */
+  next_key?: string;
 
   /** @format uint64 */
   total?: string;
@@ -355,10 +385,52 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title names/genesis.proto
+ * @title names/expirations.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryExpirationsAll
+   * @summary Queries a list of Expirations items.
+   * @request GET:/org/dyson/names/expirations
+   */
+  queryExpirationsAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<NamesQueryAllExpirationsResponse, RpcStatus>({
+      path: `/org/dyson/names/expirations`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryExpirations
+   * @summary Queries a Expirations by index.
+   * @request GET:/org/dyson/names/expirations/{blockHeight}
+   */
+  queryExpirations = (blockHeight: string, params: RequestParams = {}) =>
+    this.request<NamesQueryGetExpirationsResponse, RpcStatus>({
+      path: `/org/dyson/names/expirations/${blockHeight}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *
@@ -406,7 +478,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.key"?: string;
       "pagination.offset"?: string;
       "pagination.limit"?: string;
-      "pagination.countTotal"?: boolean;
+      "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},

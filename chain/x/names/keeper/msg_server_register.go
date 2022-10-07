@@ -8,6 +8,8 @@ import (
 	"github.com/org/dyson/x/names/types"
 )
 
+const REGISTER_BLOCKS = 2628288 // seconds in a month
+
 func (k msgServer) Register(goCtx context.Context, msg *types.MsgRegister) (*types.MsgRegisterResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
@@ -21,11 +23,12 @@ func (k msgServer) Register(goCtx context.Context, msg *types.MsgRegister) (*typ
 	}
 
 	var name = types.Name{
-		Owner:      msg.Owner,
-		Name:       namename,
-		Price:      msg.Price,
-		Expires:    ctx.BlockTime().AddDate(0, 1, 0), // expires in one month
-		Registered: ctx.BlockTime(),
+		Owner:              msg.Owner,
+		Name:               namename,
+		Destination:        msg.Owner,
+		Price:              msg.Price,
+		ExpirationHeight:   uint64(ctx.BlockHeight() + REGISTER_BLOCKS),
+		RegistrationHeight: uint64(ctx.BlockHeight()),
 	}
 
 	coin, err := sdk.ParseCoinNormalized(msg.Price)
@@ -39,11 +42,12 @@ func (k msgServer) Register(goCtx context.Context, msg *types.MsgRegister) (*typ
 	if coin.Denom != "dys" {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "invalid denom, must be 'dys'")
 	}
+
+	// calcualte the fee of 1%
 	coin.Amount = (coin.Amount.QuoRaw(100)) // divide by 100
 	err = k.PayFee(ctx, from, coin)
 	if err != nil {
 		return nil, err
-
 	}
 
 	k.SetName(
@@ -51,5 +55,8 @@ func (k msgServer) Register(goCtx context.Context, msg *types.MsgRegister) (*typ
 		name,
 	)
 
-	return &types.MsgRegisterResponse{}, nil
+	return &types.MsgRegisterResponse{
+		Fee:              coin.String(),
+		ExpirationHeight: name.ExpirationHeight,
+	}, nil
 }

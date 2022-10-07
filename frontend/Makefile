@@ -5,9 +5,23 @@ start: collectstatic
 dev: collectstatic
 	python ./mini_api.py runserver 0:8000
 
+
 collectstatic:
-	for f in $$(grep -rl "VUE_APP_[A-Z_]*" ./vue/dist/static/js/*.js); do envsubst '$${VUE_APP_API_COSMOS} $${VUE_APP_WS_TENDERMINT} $${VUE_APP_API_TENDERMINT} $${VUE_APP_API_TENDERMINT} $${VUE_APP_ADDRESS_PREFIX} $${VUE_APP_CHAIN_ID} $${VUE_APP_CHAIN_NAME}'	< $$f > $$f.out && mv $$f.out $$f;  done
+	rm -rf /static_root/*
 	python ./mini_api.py collectstatic --no-input
+	id
+	set -x ; \
+	for f in $$(grep -rl "REPLACE_VITE_[A-Z_]*" /static_root/); \
+	do \
+			sed -i'' "s|REPLACE_VITE_ADDRESS_PREFIX|$${VITE_ADDRESS_PREFIX}|g" $$f ; \
+			sed -i'' "s|REPLACE_VITE_API_COSMOS|$${VITE_API_COSMOS}|g" $$f ; \
+			sed -i'' "s|REPLACE_VITE_API_TENDERMINT|$${VITE_API_TENDERMINT}|g" $$f ; \
+			sed -i'' "s|REPLACE_VITE_CHAIN_ID|$${VITE_CHAIN_ID}|g" $$f ; \
+			sed -i'' "s|REPLACE_VITE_CHAIN_NAME|$${VITE_CHAIN_NAME}|g" $$f ; \
+			sed -i'' "s|REPLACE_VITE_WS_TENDERMINT|$${VITE_WS_TENDERMINT}|g" $$f ; \
+			sed -i'' "s|REPLACE_VITE_SENTRY_DSN|$${VITE_SENTRY_DSN}|g" $$f ; \
+	done
 
 bash:
 	exec bash
+

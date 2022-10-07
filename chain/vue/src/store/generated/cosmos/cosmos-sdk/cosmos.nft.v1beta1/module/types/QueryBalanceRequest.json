@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryBalanceRequest",
+    "definitions": {
+        "QueryBalanceRequest": {
+            "properties": {
+                "class_id": {
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Balance Request",
+            "description": "QueryBalanceRequest is the request type for the Query/Balance RPC method"
+        }
+    }
+}

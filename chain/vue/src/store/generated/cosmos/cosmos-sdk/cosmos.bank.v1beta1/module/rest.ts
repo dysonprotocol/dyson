@@ -32,6 +32,21 @@ export interface V1Beta1Coin {
 }
 
 /**
+* DenomOwner defines structure representing an account that owns or holds a
+particular denominated token. It contains the account address and account
+balance of the denominated token.
+
+Since: cosmos-sdk 0.46
+*/
+export interface V1Beta1DenomOwner {
+  /** address defines the address that owns a particular denomination. */
+  address?: string;
+
+  /** balance is the balance of the denominated coin for an account. */
+  balance?: V1Beta1Coin;
+}
+
+/**
 * DenomUnit represents a struct that describes a given
 denomination unit of the basic token.
 */
@@ -42,7 +57,7 @@ export interface V1Beta1DenomUnit {
   /**
    * exponent represents power of 10 exponent that one must
    * raise the base_denom to in order to equal the given DenomUnit's denom
-   * 1 denom = 1^exponent base_denom
+   * 1 denom = 10^exponent base_denom
    * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
    * exponent = 6, thus: 1 atom = 10^6 uatom).
    * @format int64
@@ -65,7 +80,7 @@ a basic token.
 */
 export interface V1Beta1Metadata {
   description?: string;
-  denomUnits?: V1Beta1DenomUnit[];
+  denom_units?: V1Beta1DenomUnit[];
 
   /** base represents the base denom (should be the DenomUnit with exponent = 0). */
   base?: string;
@@ -75,13 +90,32 @@ export interface V1Beta1Metadata {
    * displayed in clients.
    */
   display?: string;
+
+  /** Since: cosmos-sdk 0.43 */
   name?: string;
 
   /**
    * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
    * be the same as the display.
+   *
+   * Since: cosmos-sdk 0.43
    */
   symbol?: string;
+
+  /**
+   * URI to a document (on or off-chain) that contains additional information. Optional.
+   *
+   * Since: cosmos-sdk 0.46
+   */
+  uri?: string;
+
+  /**
+   * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
+   * the document didn't change. Optional.
+   *
+   * Since: cosmos-sdk 0.46
+   */
+  uri_hash?: string;
 }
 
 /**
@@ -138,9 +172,13 @@ export interface V1Beta1PageRequest {
    * count_total is only respected when offset is used. It is ignored when key
    * is set.
    */
-  countTotal?: boolean;
+  count_total?: boolean;
 
-  /** reverse is set to true if results are to be returned in the descending order. */
+  /**
+   * reverse is set to true if results are to be returned in the descending order.
+   *
+   * Since: cosmos-sdk 0.43
+   */
   reverse?: boolean;
 }
 
@@ -154,8 +192,13 @@ corresponding request message has used PageRequest.
  }
 */
 export interface V1Beta1PageResponse {
-  /** @format byte */
-  nextKey?: string;
+  /**
+   * next_key is the key to be passed to PageRequest.key to
+   * query the next page most efficiently. It will be empty if
+   * there are no more results.
+   * @format byte
+   */
+  next_key?: string;
 
   /** @format uint64 */
   total?: string;
@@ -165,8 +208,8 @@ export interface V1Beta1PageResponse {
  * Params defines the parameters for the bank module.
  */
 export interface V1Beta1Params {
-  sendEnabled?: V1Beta1SendEnabled[];
-  defaultSendEnabled?: boolean;
+  send_enabled?: V1Beta1SendEnabled[];
+  default_send_enabled?: boolean;
 }
 
 /**
@@ -199,6 +242,18 @@ export interface V1Beta1QueryDenomMetadataResponse {
 }
 
 /**
+* QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
+
+Since: cosmos-sdk 0.46
+*/
+export interface V1Beta1QueryDenomOwnersResponse {
+  denom_owners?: V1Beta1DenomOwner[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: V1Beta1PageResponse;
+}
+
+/**
 * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC
 method.
 */
@@ -219,6 +274,20 @@ export interface V1Beta1QueryParamsResponse {
 }
 
 /**
+* QuerySpendableBalancesResponse defines the gRPC response structure for querying
+an account's spendable balances.
+
+Since: cosmos-sdk 0.46
+*/
+export interface V1Beta1QuerySpendableBalancesResponse {
+  /** balances is the spendable balances of all the coins. */
+  balances?: V1Beta1Coin[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: V1Beta1PageResponse;
+}
+
+/**
  * QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
  */
 export interface V1Beta1QuerySupplyOfResponse {
@@ -229,7 +298,11 @@ export interface V1Beta1QuerySupplyOfResponse {
 export interface V1Beta1QueryTotalSupplyResponse {
   supply?: V1Beta1Coin[];
 
-  /** pagination defines the pagination in the response. */
+  /**
+   * pagination defines the pagination in the response.
+   *
+   * Since: cosmos-sdk 0.43
+   */
   pagination?: V1Beta1PageResponse;
 }
 
@@ -452,7 +525,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.key"?: string;
       "pagination.offset"?: string;
       "pagination.limit"?: string;
-      "pagination.countTotal"?: boolean;
+      "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
@@ -471,30 +544,60 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QueryBalance
    * @summary Balance queries the balance of a single coin for a single account.
-   * @request GET:/cosmos/bank/v1beta1/balances/{address}/{denom}
+   * @request GET:/cosmos/bank/v1beta1/balances/{address}/by_denom
    */
-  queryBalance = (address: string, denom: string, params: RequestParams = {}) =>
+  queryBalance = (address: string, query?: { denom?: string }, params: RequestParams = {}) =>
     this.request<V1Beta1QueryBalanceResponse, RpcStatus>({
-      path: `/cosmos/bank/v1beta1/balances/${address}/${denom}`,
+      path: `/cosmos/bank/v1beta1/balances/${address}/by_denom`,
       method: "GET",
+      query: query,
       format: "json",
       ...params,
     });
 
   /**
-   * No description
-   *
-   * @tags Query
-   * @name QueryDenomsMetadata
-   * @summary DenomsMetadata queries the client metadata for all registered coin denominations.
-   * @request GET:/cosmos/bank/v1beta1/denoms_metadata
-   */
+ * @description Since: cosmos-sdk 0.46
+ * 
+ * @tags Query
+ * @name QueryDenomOwners
+ * @summary DenomOwners queries for all account addresses that own a particular token
+denomination.
+ * @request GET:/cosmos/bank/v1beta1/denom_owners/{denom}
+ */
+  queryDenomOwners = (
+    denom: string,
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<V1Beta1QueryDenomOwnersResponse, RpcStatus>({
+      path: `/cosmos/bank/v1beta1/denom_owners/${denom}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+ * No description
+ * 
+ * @tags Query
+ * @name QueryDenomsMetadata
+ * @summary DenomsMetadata queries the client metadata for all registered coin
+denominations.
+ * @request GET:/cosmos/bank/v1beta1/denoms_metadata
+ */
   queryDenomsMetadata = (
     query?: {
       "pagination.key"?: string;
       "pagination.offset"?: string;
       "pagination.limit"?: string;
-      "pagination.countTotal"?: boolean;
+      "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
@@ -540,6 +643,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     });
 
   /**
+ * @description Since: cosmos-sdk 0.46
+ * 
+ * @tags Query
+ * @name QuerySpendableBalances
+ * @summary SpendableBalances queries the spenable balance of all coins for a single
+account.
+ * @request GET:/cosmos/bank/v1beta1/spendable_balances/{address}
+ */
+  querySpendableBalances = (
+    address: string,
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<V1Beta1QuerySpendableBalancesResponse, RpcStatus>({
+      path: `/cosmos/bank/v1beta1/spendable_balances/${address}`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
    * No description
    *
    * @tags Query
@@ -552,7 +683,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.key"?: string;
       "pagination.offset"?: string;
       "pagination.limit"?: string;
-      "pagination.countTotal"?: boolean;
+      "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
@@ -571,12 +702,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QuerySupplyOf
    * @summary SupplyOf queries the supply of a single coin.
-   * @request GET:/cosmos/bank/v1beta1/supply/{denom}
+   * @request GET:/cosmos/bank/v1beta1/supply/by_denom
    */
-  querySupplyOf = (denom: string, params: RequestParams = {}) =>
+  querySupplyOf = (query?: { denom?: string }, params: RequestParams = {}) =>
     this.request<V1Beta1QuerySupplyOfResponse, RpcStatus>({
-      path: `/cosmos/bank/v1beta1/supply/${denom}`,
+      path: `/cosmos/bank/v1beta1/supply/by_denom`,
       method: "GET",
+      query: query,
       format: "json",
       ...params,
     });

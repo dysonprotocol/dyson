@@ -1,0 +1,72 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GenesisState",
+    "definitions": {
+        "GenesisState": {
+            "properties": {
+                "minter": {
+                    "$ref": "#/definitions/cosmos.mint.v1beta1.Minter",
+                    "additionalProperties": true,
+                    "description": "minter is a space for holding current inflation information."
+                },
+                "params": {
+                    "$ref": "#/definitions/cosmos.mint.v1beta1.Params",
+                    "additionalProperties": true,
+                    "description": "params defines all the paramaters of the module."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Genesis State",
+            "description": "GenesisState defines the mint module's genesis state."
+        },
+        "cosmos.mint.v1beta1.Minter": {
+            "properties": {
+                "inflation": {
+                    "type": "string",
+                    "description": "current annual inflation rate"
+                },
+                "annual_provisions": {
+                    "type": "string",
+                    "description": "current annual expected provisions"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Minter",
+            "description": "Minter represents the minting state."
+        },
+        "cosmos.mint.v1beta1.Params": {
+            "properties": {
+                "mint_denom": {
+                    "type": "string",
+                    "description": "type of coin to mint"
+                },
+                "inflation_rate_change": {
+                    "type": "string",
+                    "description": "maximum annual change in inflation rate"
+                },
+                "inflation_max": {
+                    "type": "string",
+                    "description": "maximum inflation rate"
+                },
+                "inflation_min": {
+                    "type": "string",
+                    "description": "minimum inflation rate"
+                },
+                "goal_bonded": {
+                    "type": "string",
+                    "description": "goal of percent bonded atoms"
+                },
+                "blocks_per_year": {
+                    "type": "string",
+                    "description": "expected blocks per year"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "Params holds parameters for the mint module."
+        }
+    }
+}

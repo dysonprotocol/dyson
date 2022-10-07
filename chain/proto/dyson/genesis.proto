@@ -3,7 +3,8 @@ package dyson;
 
 import "dyson/script.proto";
 import "dyson/storage.proto";
-import "dyson/schedualed_run.proto";
+import "dyson/scheduled_run.proto";
+import "dyson/cron.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 import "gogoproto/gogo.proto";
 
@@ -13,6 +14,7 @@ option go_package = "github.com/org/dyson/x/dyson/types";
 message GenesisState {
   repeated Script script_list = 1 [(gogoproto.nullable) = false];
   repeated Storage storage_list = 2 [(gogoproto.nullable) = false];
-  repeated SchedualedRun schedualed_run_list = 4 [(gogoproto.nullable) = false];
+  repeated ScheduledRun scheduled_run_list = 4 [(gogoproto.nullable) = false];
+  repeated Cron cronList = 5 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

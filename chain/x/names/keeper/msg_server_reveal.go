@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 	"encoding/hex"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/org/dyson/x/names/types"
@@ -12,11 +13,6 @@ import (
 func (k msgServer) Reveal(goCtx context.Context, msg *types.MsgReveal) (*types.MsgRevealResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	for _, v := range types.ForbiddenNames {
-		if v == msg.Name {
-			return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "name is forbidden: %s", msg.Name)
-		}
-	}
 	out := make([]byte, 16)
 
 	c1 := sha3.NewShake256()
@@ -39,14 +35,21 @@ func (k msgServer) Reveal(goCtx context.Context, msg *types.MsgReveal) (*types.M
 		msg.Name,
 	)
 	if isFound {
-		if existingName.Registered.Before(name.Registered) {
-			return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "name (%s) alrady registered to address %s on %s", msg.Name, existingName.Owner, existingName.Registered)
+		if existingName.RegistrationHeight < name.RegistrationHeight {
+			return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest,
+				"name (%s) alrady registered to address %s on block %s",
+				msg.Name, existingName.Owner, existingName.RegistrationHeight)
 		}
 
 	}
+	err := msg.ValidateBasic()
 
 	// remove commit name
 	k.RemoveName(ctx, name.Name)
+
+	if err != nil {
+		return nil, err
+	}
 
 	//update Name.name
 	name.Name = msg.Name

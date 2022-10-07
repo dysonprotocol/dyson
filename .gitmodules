@@ -1,0 +1,3 @@
+[submodule "chain/vue/ignite-web"]
+	path = chain/vue/ignite-web
+	url = https://gitlab.com/dysonproject/ignite-web.git

@@ -17,7 +17,7 @@ func (k msgServer) UpdateName(goCtx context.Context, msg *types.MsgUpdateName) (
 		msg.Name,
 	)
 	if !isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "index not set")
+		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "Name not found")
 	}
 
 	// Checks if the the msg owner is the same as the current owner
@@ -42,7 +42,7 @@ func (k msgServer) DeleteName(goCtx context.Context, msg *types.MsgDeleteName) (
 		msg.Name,
 	)
 	if !isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "index not set")
+		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "Name not found")
 	}
 
 	// Checks if the the msg owner is the same as the current owner

@@ -29,7 +29,7 @@ func TestGenesis(t *testing.T) {
 				Index: "1",
 			},
 		},
-		SchedualedRunList: []types.SchedualedRun{
+		ScheduledRunList: []types.ScheduledRun{
 			{
 				Index: "0",
 			},
@@ -37,7 +37,15 @@ func TestGenesis(t *testing.T) {
 				Index: "1",
 			},
 		},
-		// this line is used by starport scaffolding # genesis/test/state
+		CronList: []types.Cron{
+		{
+			BlockHeight: "0",
+},
+		{
+			BlockHeight: "1",
+},
+	},
+	// this line is used by starport scaffolding # genesis/test/state
 	}
 
 	k, ctx := keepertest.DysonKeeper(t)
@@ -50,6 +58,7 @@ func TestGenesis(t *testing.T) {
 
 	require.ElementsMatch(t, genesisState.ScriptList, got.ScriptList)
 	require.ElementsMatch(t, genesisState.StorageList, got.StorageList)
-	require.ElementsMatch(t, genesisState.SchedualedRunList, got.SchedualedRunList)
-	// this line is used by starport scaffolding # genesis/test/assert
+	require.ElementsMatch(t, genesisState.ScheduledRunList, got.ScheduledRunList)
+	require.ElementsMatch(t, genesisState.CronList, got.CronList)
+// this line is used by starport scaffolding # genesis/test/assert
 }

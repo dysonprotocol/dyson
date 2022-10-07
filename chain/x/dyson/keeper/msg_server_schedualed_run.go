@@ -9,27 +9,31 @@ import (
 	"github.com/org/dyson/x/dyson/types"
 )
 
-func (k msgServer) CreateSchedualedRun(goCtx context.Context, msg *types.MsgCreateSchedualedRun) (*types.MsgCreateSchedualedRunResponse, error) {
+const MAX_FUTURE_BLOCKS = 60 * 60 // 5min
+func (k msgServer) CreateScheduledRun(goCtx context.Context, msg *types.MsgCreateScheduledRun) (*types.MsgCreateScheduledRunResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	count, gp := k.getSchdeualedCountAndGasPrice(ctx, msg.Height, msg.Gas)
+	count, gasPrice, gasFee := k.GetScheduledGasPriceAndFee(ctx, msg.Height, msg.Gas)
 
-	index := fmt.Sprintf("%v/%v", msg.Height, count)
+	if msg.Height <= uint64(ctx.BlockHeight()) {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "scheduled block height must be greater than the current block height")
+	}
+
+	if msg.Height > uint64(ctx.BlockHeight()+MAX_FUTURE_BLOCKS) {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("scheduled block height must be less than %v block in the future", MAX_FUTURE_BLOCKS))
+	}
+
+	index := fmt.Sprintf("%v/%v/%v", msg.Creator, msg.Height, count)
 	// Check if the value already exists but it shouldn't
-	_, isFound := k.GetSchedualedRun(
+	_, isFound := k.GetScheduledRun(
 		ctx,
 		index,
 	)
 	if isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "index already set")
+		// This should never happen
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "ScheduledRun already set")
 	}
 
-	// Determine the required fees by multiplying each required minimum gas
-	// price by the gas limit, where fee = ceil(minGasPrice * gasLimit).
-	glDec := sdk.NewInt(int64(msg.Gas))
-	fee := gp.Amount.Mul(glDec)
-	requiredFee := sdk.NewCoin(gp.Denom, fee)
-	// Send payment
 	from, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return nil, err
@@ -37,35 +41,35 @@ func (k msgServer) CreateSchedualedRun(goCtx context.Context, msg *types.MsgCrea
 
 	ctx.Logger().Info(fmt.Sprintf("from: %+v %+v", from, msg.Creator))
 
-	err = k.DeductFees(ctx, from, sdk.NewCoins(requiredFee))
+	err = k.DeductFees(ctx, from, sdk.NewCoins(gasFee))
 	if err != nil {
 		return nil, err
 	}
 
 	// Finished paying
-	var schedualedRun = types.SchedualedRun{
+	var scheduledRun = types.ScheduledRun{
 		Creator:  msg.Creator,
 		Index:    index,
 		Height:   msg.Height,
 		Msg:      msg.Msg,
 		Gas:      msg.Gas,
-		Gasprice: &gp,
-		Fee:      &requiredFee,
+		Gasprice: &gasPrice,
+		Fee:      &gasFee,
 	}
 
-	k.SetSchedualedRun(
+	k.SetScheduledRun(
 		ctx,
-		schedualedRun,
+		scheduledRun,
 	)
-	return &types.MsgCreateSchedualedRunResponse{}, nil
+	return &types.MsgCreateScheduledRunResponse{}, nil
 }
 
-func (k msgServer) UpdateSchedualedRun(goCtx context.Context, msg *types.MsgUpdateSchedualedRun) (*types.MsgUpdateSchedualedRunResponse, error) {
+func (k msgServer) UpdateScheduledRun(goCtx context.Context, msg *types.MsgUpdateScheduledRun) (*types.MsgUpdateScheduledRunResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	// TODO: only update runmsg
 
 	// Check if the value exists
-	valFound, isFound := k.GetSchedualedRun(
+	valFound, isFound := k.GetScheduledRun(
 		ctx,
 		msg.Index,
 	)
@@ -78,21 +82,21 @@ func (k msgServer) UpdateSchedualedRun(goCtx context.Context, msg *types.MsgUpda
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 
-	var schedualedRun = types.SchedualedRun{
+	var scheduledRun = types.ScheduledRun{
 		Creator: msg.Creator,
 		Index:   msg.Index,
 	}
 
-	k.SetSchedualedRun(ctx, schedualedRun)
+	k.SetScheduledRun(ctx, scheduledRun)
 
-	return &types.MsgUpdateSchedualedRunResponse{}, nil
+	return &types.MsgUpdateScheduledRunResponse{}, nil
 }
 
-func (k msgServer) DeleteSchedualedRun(goCtx context.Context, msg *types.MsgDeleteSchedualedRun) (*types.MsgDeleteSchedualedRunResponse, error) {
+func (k msgServer) DeleteScheduledRun(goCtx context.Context, msg *types.MsgDeleteScheduledRun) (*types.MsgDeleteScheduledRunResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value exists
-	valFound, isFound := k.GetSchedualedRun(
+	valFound, isFound := k.GetScheduledRun(
 		ctx,
 		msg.Index,
 	)
@@ -105,10 +109,10 @@ func (k msgServer) DeleteSchedualedRun(goCtx context.Context, msg *types.MsgDele
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 
-	k.RemoveSchedualedRun(
+	k.RemoveScheduledRun(
 		ctx,
 		msg.Index,
 	)
 
-	return &types.MsgDeleteSchedualedRunResponse{}, nil
+	return &types.MsgDeleteScheduledRunResponse{}, nil
 }

@@ -61,7 +61,7 @@
                         "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
                     },
                     "type": "array",
-                    "description": "spend_limit specifies the maximum amount of tokens that can be spent by this allowance and will be updated as tokens are spent. If it is empty, there is no spend limit and any amount of coins can be spent."
+                    "description": "spend_limit specifies the maximum amount of coins that can be spent by this allowance and will be updated as coins are spent. If it is empty, there is no spend limit and any amount of coins can be spent."
                 },
                 "expiration": {
                     "type": "string",
@@ -72,7 +72,7 @@
             "additionalProperties": true,
             "type": "object",
             "title": "Basic Allowance",
-            "description": "BasicAllowance implements Allowance with a one-time grant of tokens that optionally expires. The grantee can use up to SpendLimit to cover fees."
+            "description": "BasicAllowance implements Allowance with a one-time grant of coins that optionally expires. The grantee can use up to SpendLimit to cover fees."
         }
     }
 }

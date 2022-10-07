@@ -9,7 +9,7 @@
                         "$ref": "#/definitions/cosmos.staking.v1beta1.Validator"
                     },
                     "type": "array",
-                    "description": "validators defines the the validators' info of a delegator."
+                    "description": "validators defines the validators' info of a delegator."
                 },
                 "pagination": {
                     "$ref": "#/definitions/cosmos.base.query.v1beta1.PageResponse",
@@ -26,7 +26,7 @@
             "properties": {
                 "next_key": {
                     "type": "string",
-                    "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently",
+                    "description": "next_key is the key to be passed to PageRequest.key to query the next page most efficiently. It will be empty if there are no more results.",
                     "format": "binary",
                     "binaryEncoding": "base64"
                 },
@@ -184,7 +184,7 @@
                 },
                 "min_self_delegation": {
                     "type": "string",
-                    "description": "min_self_delegation is the validator's self declared minimum self delegation."
+                    "description": "min_self_delegation is the validator's self declared minimum self delegation. Since: cosmos-sdk 0.46"
                 }
             },
             "additionalProperties": true,

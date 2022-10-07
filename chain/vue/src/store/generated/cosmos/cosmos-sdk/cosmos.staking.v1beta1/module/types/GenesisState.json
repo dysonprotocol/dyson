@@ -184,6 +184,10 @@
                 "bond_denom": {
                     "type": "string",
                     "description": "bond_denom defines the bondable coin denomination."
+                },
+                "min_commission_rate": {
+                    "type": "string",
+                    "description": "min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators"
                 }
             },
             "additionalProperties": true,
@@ -369,7 +373,7 @@
                 },
                 "min_self_delegation": {
                     "type": "string",
-                    "description": "min_self_delegation is the validator's self declared minimum self delegation."
+                    "description": "min_self_delegation is the validator's self declared minimum self delegation. Since: cosmos-sdk 0.46"
                 }
             },
             "additionalProperties": true,

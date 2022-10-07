@@ -1,0 +1,11 @@
+syntax = "proto3";
+package names;
+
+option go_package = "github.com/org/dyson/x/names/types";
+
+message Expirations {
+  string blockHeight = 1; 
+  repeated string names = 2; 
+  
+}
+

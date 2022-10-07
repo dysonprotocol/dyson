@@ -38,7 +38,7 @@ def process_code(code: str):
     type_namespace = init_typing_namespace()
     type_namespace["Dict"].add("dict")
     type_namespace["List"].add("list")
-    function_schema_list = []
+    function_schema_dict = {}
     file_path = "file.py"
 
     def _process_function(ast_function_def: ast.FunctionDef):
@@ -50,7 +50,8 @@ def process_code(code: str):
             )
         except Exception as e:
             s["error"] = str(e)
-        function_schema_list.append(s)
+
+        function_schema_dict[ast_function_def.name] = s
 
     schema_all = None
     for node in ast_body:
@@ -78,10 +79,10 @@ def process_code(code: str):
         if node_type in process_map:
             process_map[node_type]()
     if schema_all is not None:
-        return [s for s in function_schema_list if s["function"] in schema_all]
+        return [s for s in function_schema_dict.values() if s["function"] in schema_all]
     return [
         s
-        for s in function_schema_list
+        for s in function_schema_dict.values()
         if (not s["function"].startswith("_")) and (s["function"] not in ["app", "application"])
     ]
 

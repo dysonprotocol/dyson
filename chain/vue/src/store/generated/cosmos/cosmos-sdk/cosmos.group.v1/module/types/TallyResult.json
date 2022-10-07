@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/TallyResult",
+    "definitions": {
+        "TallyResult": {
+            "properties": {
+                "yes_count": {
+                    "type": "string",
+                    "description": "yes_count is the weighted sum of yes votes."
+                },
+                "abstain_count": {
+                    "type": "string",
+                    "description": "abstain_count is the weighted sum of abstainers."
+                },
+                "no_count": {
+                    "type": "string",
+                    "description": "no_count is the weighted sum of no votes."
+                },
+                "no_with_veto_count": {
+                    "type": "string",
+                    "description": "no_with_veto_count is the weighted sum of veto."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Tally Result",
+            "description": "TallyResult represents the sum of weighted votes for each vote option."
+        }
+    }
+}

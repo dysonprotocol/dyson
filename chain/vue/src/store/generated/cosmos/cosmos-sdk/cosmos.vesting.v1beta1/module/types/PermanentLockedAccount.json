@@ -12,7 +12,7 @@
             "additionalProperties": true,
             "type": "object",
             "title": "Permanent Locked Account",
-            "description": "PermanentLockedAccount implements the VestingAccount interface. It does not ever release coins, locking them indefinitely. Coins in this account can still be used for delegating and for governance votes even while locked."
+            "description": "PermanentLockedAccount implements the VestingAccount interface. It does not ever release coins, locking them indefinitely. Coins in this account can still be used for delegating and for governance votes even while locked. Since: cosmos-sdk 0.43"
         },
         "cosmos.auth.v1beta1.BaseAccount": {
             "properties": {

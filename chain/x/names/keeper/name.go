@@ -1,10 +1,18 @@
 package keeper
 
 import (
+	"fmt"
+
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/org/dyson/x/names/types"
 )
+
+func (k Keeper) SetNameExperation(ctx sdk.Context, name types.Name) {
+	experations, _ := k.GetExpirations(ctx, fmt.Sprint(name.ExpirationHeight))
+	experations.Names = append(experations.Names, name.Name)
+	k.SetExpirations(ctx, experations)
+}
 
 // SetName set a specific name in the store from its index
 func (k Keeper) SetName(ctx sdk.Context, name types.Name) {
@@ -13,6 +21,7 @@ func (k Keeper) SetName(ctx sdk.Context, name types.Name) {
 	store.Set(types.NameKey(
 		name.Name,
 	), b)
+	k.SetNameExperation(ctx, name)
 }
 
 // GetName returns a name from its index
@@ -60,4 +69,8 @@ func (k Keeper) GetAllName(ctx sdk.Context) (list []types.Name) {
 	}
 
 	return
+}
+
+func (k Keeper) SetExpration(name types.Name) {
+
 }

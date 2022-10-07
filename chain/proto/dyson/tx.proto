@@ -6,16 +6,14 @@ import "dyson/script.proto";
 import "dyson/storage.proto";
 import "dyson/msgrun.proto";
 import "cosmos/base/v1beta1/coin.proto";
-import "dyson/schedualed_run.proto";
+import "dyson/scheduled_run.proto";
 // this line is used by starport scaffolding # proto/tx/import
 
 option go_package = "github.com/org/dyson/x/dyson/types";
 
 // Msg defines the Msg service.
 service Msg {
-    rpc CreateSchedualedRun(MsgCreateSchedualedRun) returns (MsgCreateSchedualedRunResponse);
-    //rpc UpdateSchedualedRun(MsgUpdateSchedualedRun) returns (MsgUpdateSchedualedRunResponse);
-    //rpc DeleteSchedualedRun(MsgDeleteSchedualedRun) returns (MsgDeleteSchedualedRunResponse);
+    rpc CreateScheduledRun(MsgCreateScheduledRun) returns (MsgCreateScheduledRunResponse);
     // this line is used by starport scaffolding # proto/tx/rpc
     rpc CreateStorage(MsgCreateStorage) returns (MsgCreateStorageResponse);
     rpc UpdateStorage(MsgUpdateStorage) returns (MsgUpdateStorageResponse);
@@ -26,7 +24,7 @@ service Msg {
     rpc Run(MsgRun) returns (MsgRunResponse);
 }
 
-message MsgCreateSchedualedRun {
+message MsgCreateScheduledRun {
     string creator = 1;
     uint64 height = 2;
     uint64 gas = 3;
@@ -34,20 +32,20 @@ message MsgCreateSchedualedRun {
 
 
 }
-message MsgCreateSchedualedRunResponse {}
+message MsgCreateScheduledRunResponse {}
 
-message MsgUpdateSchedualedRun {
+message MsgUpdateScheduledRun {
     string creator = 1;
     string index = 2;
     MsgRun msg = 3;
 }
-message MsgUpdateSchedualedRunResponse {}
+message MsgUpdateScheduledRunResponse {}
 
-message MsgDeleteSchedualedRun {
+message MsgDeleteScheduledRun {
     string creator = 1;
     string index = 2;
 }
-message MsgDeleteSchedualedRunResponse {}
+message MsgDeleteScheduledRunResponse {}
 
 // Create a new storage of arbitrary text
 message MsgCreateStorage {

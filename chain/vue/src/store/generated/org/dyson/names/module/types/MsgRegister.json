@@ -4,12 +4,13 @@
     "definitions": {
         "MsgRegister": {
             "properties": {
-                "owner": {
-                    "type": "string"
-                },
                 "commit": {
                     "type": "string",
                     "description": "The Shake256(owner+name+salt) hexdigest"
+                },
+                "owner": {
+                    "type": "string",
+                    "description": "Address of the owner"
                 },
                 "price": {
                     "type": "string",

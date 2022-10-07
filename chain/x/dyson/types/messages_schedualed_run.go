@@ -5,9 +5,9 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-var _ sdk.Msg = &MsgCreateSchedualedRun{}
+var _ sdk.Msg = &MsgCreateScheduledRun{}
 
-func NewMsgCreateSchedualedRun(
+func NewMsgCreateScheduledRun(
 	creator string,
 	height uint64,
 	gas uint64,
@@ -16,8 +16,8 @@ func NewMsgCreateSchedualedRun(
 	args string,
 	kwargs string,
 	extraLines string,
-	coins string) *MsgCreateSchedualedRun {
-	return &MsgCreateSchedualedRun{
+	coins string) *MsgCreateScheduledRun {
+	return &MsgCreateScheduledRun{
 		Creator: creator,
 		Height:  height,
 		Gas:     gas,
@@ -30,15 +30,15 @@ func NewMsgCreateSchedualedRun(
 	}
 }
 
-func (msg *MsgCreateSchedualedRun) Route() string {
+func (msg *MsgCreateScheduledRun) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgCreateSchedualedRun) Type() string {
-	return "CreateSchedualedRun"
+func (msg *MsgCreateScheduledRun) Type() string {
+	return "CreateScheduledRun"
 }
 
-func (msg *MsgCreateSchedualedRun) GetSigners() []sdk.AccAddress {
+func (msg *MsgCreateScheduledRun) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -46,12 +46,12 @@ func (msg *MsgCreateSchedualedRun) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgCreateSchedualedRun) GetSignBytes() []byte {
+func (msg *MsgCreateScheduledRun) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgCreateSchedualedRun) ValidateBasic() error {
+func (msg *MsgCreateScheduledRun) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
@@ -59,28 +59,28 @@ func (msg *MsgCreateSchedualedRun) ValidateBasic() error {
 	return nil
 }
 
-var _ sdk.Msg = &MsgUpdateSchedualedRun{}
+var _ sdk.Msg = &MsgUpdateScheduledRun{}
 
-func NewMsgUpdateSchedualedRun(
+func NewMsgUpdateScheduledRun(
 	creator string,
 	index string,
 
-) *MsgUpdateSchedualedRun {
-	return &MsgUpdateSchedualedRun{
+) *MsgUpdateScheduledRun {
+	return &MsgUpdateScheduledRun{
 		Creator: creator,
 		Index:   index,
 	}
 }
 
-func (msg *MsgUpdateSchedualedRun) Route() string {
+func (msg *MsgUpdateScheduledRun) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgUpdateSchedualedRun) Type() string {
-	return "UpdateSchedualedRun"
+func (msg *MsgUpdateScheduledRun) Type() string {
+	return "UpdateScheduledRun"
 }
 
-func (msg *MsgUpdateSchedualedRun) GetSigners() []sdk.AccAddress {
+func (msg *MsgUpdateScheduledRun) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -88,12 +88,12 @@ func (msg *MsgUpdateSchedualedRun) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgUpdateSchedualedRun) GetSignBytes() []byte {
+func (msg *MsgUpdateScheduledRun) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgUpdateSchedualedRun) ValidateBasic() error {
+func (msg *MsgUpdateScheduledRun) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
@@ -101,27 +101,27 @@ func (msg *MsgUpdateSchedualedRun) ValidateBasic() error {
 	return nil
 }
 
-var _ sdk.Msg = &MsgDeleteSchedualedRun{}
+var _ sdk.Msg = &MsgDeleteScheduledRun{}
 
-func NewMsgDeleteSchedualedRun(
+func NewMsgDeleteScheduledRun(
 	creator string,
 	index string,
 
-) *MsgDeleteSchedualedRun {
-	return &MsgDeleteSchedualedRun{
+) *MsgDeleteScheduledRun {
+	return &MsgDeleteScheduledRun{
 		Creator: creator,
 		Index:   index,
 	}
 }
-func (msg *MsgDeleteSchedualedRun) Route() string {
+func (msg *MsgDeleteScheduledRun) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgDeleteSchedualedRun) Type() string {
-	return "DeleteSchedualedRun"
+func (msg *MsgDeleteScheduledRun) Type() string {
+	return "DeleteScheduledRun"
 }
 
-func (msg *MsgDeleteSchedualedRun) GetSigners() []sdk.AccAddress {
+func (msg *MsgDeleteScheduledRun) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -129,12 +129,12 @@ func (msg *MsgDeleteSchedualedRun) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgDeleteSchedualedRun) GetSignBytes() []byte {
+func (msg *MsgDeleteScheduledRun) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgDeleteSchedualedRun) ValidateBasic() error {
+func (msg *MsgDeleteScheduledRun) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

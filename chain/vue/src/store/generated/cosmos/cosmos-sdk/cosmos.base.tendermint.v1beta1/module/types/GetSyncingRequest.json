@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/GetSyncingRequest",
+    "definitions": {
+        "GetSyncingRequest": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Get Syncing Request",
+            "description": "GetSyncingRequest is the request type for the Query/GetSyncing RPC method."
+        }
+    }
+}

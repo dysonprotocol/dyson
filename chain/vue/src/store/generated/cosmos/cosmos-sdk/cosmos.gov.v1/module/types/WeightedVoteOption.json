@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/WeightedVoteOption",
+    "definitions": {
+        "WeightedVoteOption": {
+            "properties": {
+                "option": {
+                    "enum": [
+                        "VOTE_OPTION_UNSPECIFIED",
+                        0,
+                        "VOTE_OPTION_YES",
+                        1,
+                        "VOTE_OPTION_ABSTAIN",
+                        2,
+                        "VOTE_OPTION_NO",
+                        3,
+                        "VOTE_OPTION_NO_WITH_VETO",
+                        4
+                    ],
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
+                    "title": "Vote Option",
+                    "description": "VoteOption enumerates the valid vote options for a given governance proposal."
+                },
+                "weight": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Weighted Vote Option",
+            "description": "WeightedVoteOption defines a unit of vote for vote split."
+        }
+    }
+}

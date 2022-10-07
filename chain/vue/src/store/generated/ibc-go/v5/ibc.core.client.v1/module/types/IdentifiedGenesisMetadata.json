@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/IdentifiedGenesisMetadata",
+    "definitions": {
+        "IdentifiedGenesisMetadata": {
+            "properties": {
+                "client_id": {
+                    "type": "string"
+                },
+                "client_metadata": {
+                    "items": {
+                        "$ref": "#/definitions/ibc.core.client.v1.GenesisMetadata"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Identified Genesis Metadata",
+            "description": "IdentifiedGenesisMetadata has the client metadata with the corresponding client id."
+        },
+        "ibc.core.client.v1.GenesisMetadata": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "store key of metadata without clientID-prefix",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "metadata value",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Genesis Metadata",
+            "description": "GenesisMetadata defines the genesis type for metadata that clients may return with ExportMetadata"
+        }
+    }
+}

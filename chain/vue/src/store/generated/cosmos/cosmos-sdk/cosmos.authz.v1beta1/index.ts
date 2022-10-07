@@ -1,15 +1,14 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
-// @ts-ignore
-import { SpVuexError } from '@starport/vuex'
 
 import { GenericAuthorization } from "./module/types/cosmos/authz/v1beta1/authz"
 import { Grant } from "./module/types/cosmos/authz/v1beta1/authz"
+import { GrantAuthorization } from "./module/types/cosmos/authz/v1beta1/authz"
+import { GrantQueueItem } from "./module/types/cosmos/authz/v1beta1/authz"
 import { EventGrant } from "./module/types/cosmos/authz/v1beta1/event"
 import { EventRevoke } from "./module/types/cosmos/authz/v1beta1/event"
-import { GrantAuthorization } from "./module/types/cosmos/authz/v1beta1/genesis"
 
 
-export { GenericAuthorization, Grant, EventGrant, EventRevoke, GrantAuthorization };
+export { GenericAuthorization, Grant, GrantAuthorization, GrantQueueItem, EventGrant, EventRevoke };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -48,13 +47,16 @@ function getStructure(template) {
 const getDefaultState = () => {
 	return {
 				Grants: {},
+				GranterGrants: {},
+				GranteeGrants: {},
 				
 				_Structure: {
 						GenericAuthorization: getStructure(GenericAuthorization.fromPartial({})),
 						Grant: getStructure(Grant.fromPartial({})),
+						GrantAuthorization: getStructure(GrantAuthorization.fromPartial({})),
+						GrantQueueItem: getStructure(GrantQueueItem.fromPartial({})),
 						EventGrant: getStructure(EventGrant.fromPartial({})),
 						EventRevoke: getStructure(EventRevoke.fromPartial({})),
-						GrantAuthorization: getStructure(GrantAuthorization.fromPartial({})),
 						
 		},
 		_Registry: registry,
@@ -89,6 +91,18 @@ export default {
 					}
 			return state.Grants[JSON.stringify(params)] ?? {}
 		},
+				getGranterGrants: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.GranterGrants[JSON.stringify(params)] ?? {}
+		},
+				getGranteeGrants: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.GranteeGrants[JSON.stringify(params)] ?? {}
+		},
 				
 		getTypeStructure: (state) => (type) => {
 			return state._Structure[type].fields
@@ -118,7 +132,7 @@ export default {
 					const sub=JSON.parse(subscription)
 					await dispatch(sub.action, sub.payload)
 				}catch(e) {
-					throw new SpVuexError('Subscriptions: ' + e.message)
+					throw new Error('Subscriptions: ' + e.message)
 				}
 			})
 		},
@@ -143,69 +157,120 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryGrants', payload: { options: { all }, params: {...key},query }})
 				return getters['getGrants']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new SpVuexError('QueryClient:QueryGrants', 'API Node Unavailable. Could not perform query: ' + e.error.message)
+				throw new Error('QueryClient:QueryGrants API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},
 		
 		
-		async sendMsgGrant({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		 		
+		
+		
+		async QueryGranterGrants({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgGrant(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgGrant:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgGrant:Send', 'Could not broadcast Tx: '+ e.message)
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryGranterGrants( key.granter, query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryGranterGrants( key.granter, {...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
 				}
+				commit('QUERY', { query: 'GranterGrants', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryGranterGrants', payload: { options: { all }, params: {...key},query }})
+				return getters['getGranterGrants']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryGranterGrants API Node Unavailable. Could not perform query: ' + e.error.message)
+				
 			}
 		},
-		async sendMsgExec({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryGranteeGrants({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgExec(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgExec:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgExec:Send', 'Could not broadcast Tx: '+ e.message)
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryGranteeGrants( key.grantee, query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryGranteeGrants( key.grantee, {...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
 				}
+				commit('QUERY', { query: 'GranteeGrants', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryGranteeGrants', payload: { options: { all }, params: {...key},query }})
+				return getters['getGranteeGrants']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryGranteeGrants API Node Unavailable. Could not perform query: ' + e.error.message)
+				
 			}
 		},
-		async sendMsgRevoke({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		async sendMsgRevoke({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
 				const msg = await txClient.msgRevoke(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
+	gas: gas}, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgRevoke:Init', 'Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgRevoke:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgRevoke:Send', 'Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgRevoke:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgExec({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgExec(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgExec:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgExec:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgGrant({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgGrant(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgGrant:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgGrant:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
 		
-		async MsgGrant({ rootGetters }, { value }) {
+		async MsgRevoke({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgGrant(value)
+				const msg = await txClient.msgRevoke(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgGrant:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgGrant:Create', 'Could not create message: ' + e.message)
-					
+					throw new Error('TxClient:MsgRevoke:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgRevoke:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -216,24 +281,22 @@ export default {
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgExec:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgExec:Create', 'Could not create message: ' + e.message)
-					
+					throw new Error('TxClient:MsgExec:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgExec:Create Could not create message: ' + e.message)
 				}
 			}
 		},
-		async MsgRevoke({ rootGetters }, { value }) {
+		async MsgGrant({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgRevoke(value)
+				const msg = await txClient.msgGrant(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgRevoke:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgRevoke:Create', 'Could not create message: ' + e.message)
-					
+					throw new Error('TxClient:MsgGrant:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgGrant:Create Could not create message: ' + e.message)
 				}
 			}
 		},

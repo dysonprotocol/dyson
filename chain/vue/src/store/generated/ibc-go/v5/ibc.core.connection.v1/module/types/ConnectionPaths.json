@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ConnectionPaths",
+    "definitions": {
+        "ConnectionPaths": {
+            "properties": {
+                "client_id": {
+                    "type": "string",
+                    "description": "client state unique identifier"
+                },
+                "paths": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "list of connection paths"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Connection Paths",
+            "description": "ConnectionPaths define all the connection paths for a given client state."
+        }
+    }
+}

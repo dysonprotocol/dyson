@@ -12,8 +12,9 @@ func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		ScriptList:        []Script{},
 		StorageList:       []Storage{},
-		SchedualedRunList: []SchedualedRun{},
-		// this line is used by starport scaffolding # genesis/types/default
+		ScheduledRunList: []ScheduledRun{},
+		CronList: []Cron{},
+// this line is used by starport scaffolding # genesis/types/default
 	}
 }
 
@@ -41,17 +42,27 @@ func (gs GenesisState) Validate() error {
 		storageIndexMap[index] = struct{}{}
 	}
 
-	// Check for duplicated index in schedualedRun
-	schedualedRunIndexMap := make(map[string]struct{})
+	// Check for duplicated index in scheduledRun
+	scheduledRunIndexMap := make(map[string]struct{})
 
-	for _, elem := range gs.SchedualedRunList {
-		index := string(SchedualedRunKey(elem.Index))
-		if _, ok := schedualedRunIndexMap[index]; ok {
-			return fmt.Errorf("duplicated index for schedualedRun")
+	for _, elem := range gs.ScheduledRunList {
+		index := string(ScheduledRunKey(elem.Index))
+		if _, ok := scheduledRunIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for scheduledRun")
 		}
-		schedualedRunIndexMap[index] = struct{}{}
+		scheduledRunIndexMap[index] = struct{}{}
 	}
-	// this line is used by starport scaffolding # genesis/types/validate
+	// Check for duplicated index in cron
+cronIndexMap := make(map[string]struct{})
+
+for _, elem := range gs.CronList {
+	index := string(CronKey(elem.BlockHeight))
+	if _, ok := cronIndexMap[index]; ok {
+		return fmt.Errorf("duplicated index for cron")
+	}
+	cronIndexMap[index] = struct{}{}
+}
+// this line is used by starport scaffolding # genesis/types/validate
 
 	return nil
 }

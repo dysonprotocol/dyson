@@ -13,6 +13,10 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.NameList {
 		k.SetName(ctx, elem)
 	}
+	// Set all the expirations
+	for _, elem := range genState.ExpirationsList {
+		k.SetExpirations(ctx, elem)
+	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetParams(ctx, genState.Params)
 }
@@ -23,6 +27,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis.Params = k.GetParams(ctx)
 
 	genesis.NameList = k.GetAllName(ctx)
+	genesis.ExpirationsList = k.GetAllExpirations(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

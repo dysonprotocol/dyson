@@ -4,10 +4,10 @@
     "definitions": {
         "MsgOfferTo": {
             "properties": {
-                "owner": {
+                "name": {
                     "type": "string"
                 },
-                "name": {
+                "owner": {
                     "type": "string"
                 },
                 "newOwner": {

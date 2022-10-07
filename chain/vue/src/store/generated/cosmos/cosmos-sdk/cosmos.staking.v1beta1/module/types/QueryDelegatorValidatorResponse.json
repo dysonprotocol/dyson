@@ -7,7 +7,7 @@
                 "validator": {
                     "$ref": "#/definitions/cosmos.staking.v1beta1.Validator",
                     "additionalProperties": true,
-                    "description": "validator defines the the validator info."
+                    "description": "validator defines the validator info."
                 }
             },
             "additionalProperties": true,
@@ -159,7 +159,7 @@
                 },
                 "min_self_delegation": {
                     "type": "string",
-                    "description": "min_self_delegation is the validator's self declared minimum self delegation."
+                    "description": "min_self_delegation is the validator's self declared minimum self delegation. Since: cosmos-sdk 0.46"
                 }
             },
             "additionalProperties": true,

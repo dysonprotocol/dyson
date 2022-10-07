@@ -1,0 +1,133 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Header",
+    "definitions": {
+        "Header": {
+            "properties": {
+                "version": {
+                    "$ref": "#/definitions/tendermint.version.Consensus",
+                    "additionalProperties": true,
+                    "description": "basic block info"
+                },
+                "chain_id": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "last_block_id": {
+                    "$ref": "#/definitions/tendermint.types.BlockID",
+                    "additionalProperties": true,
+                    "description": "prev block info"
+                },
+                "last_commit_hash": {
+                    "type": "string",
+                    "description": "hashes of block data  commit from validators from the last block",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "data_hash": {
+                    "type": "string",
+                    "description": "transactions",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "validators_hash": {
+                    "type": "string",
+                    "description": "hashes from the app output from the prev block  validators for the current block",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "next_validators_hash": {
+                    "type": "string",
+                    "description": "validators for the next block",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "consensus_hash": {
+                    "type": "string",
+                    "description": "consensus params for current block",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "app_hash": {
+                    "type": "string",
+                    "description": "state after txs from the previous block",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "last_results_hash": {
+                    "type": "string",
+                    "description": "root hash of all results from the txs from the previous block",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "evidence_hash": {
+                    "type": "string",
+                    "description": "consensus info  evidence included in the block",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "proposer_address": {
+                    "type": "string",
+                    "description": "proposer_address is the original block proposer address, formatted as a Bech32 string. In Tendermint, this type is `bytes`, but in the SDK, we convert it to a Bech32 string for better UX.  original proposer of the block"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Header",
+            "description": "Header defines the structure of a Tendermint block header."
+        },
+        "tendermint.types.BlockID": {
+            "properties": {
+                "hash": {
+                    "type": "string",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "part_set_header": {
+                    "$ref": "#/definitions/tendermint.types.PartSetHeader",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Block ID",
+            "description": "BlockID"
+        },
+        "tendermint.types.PartSetHeader": {
+            "properties": {
+                "total": {
+                    "type": "integer"
+                },
+                "hash": {
+                    "type": "string",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Part Set Header",
+            "description": "PartsetHeader"
+        },
+        "tendermint.version.Consensus": {
+            "properties": {
+                "block": {
+                    "type": "string"
+                },
+                "app": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Consensus",
+            "description": "Consensus captures the consensus rules for processing a block in the blockchain, including all blockchain data structures and the rules of the application's state transition machine."
+        }
+    }
+}

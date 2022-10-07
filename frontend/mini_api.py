@@ -1,18 +1,17 @@
-import re
-import tldextract
 import base64
-import simplejson as json
-
 import http.client
-from io import BytesIO
-import requests
-from os.path import abspath, dirname, join
 import os
+import re
+from io import BytesIO
+from os.path import abspath, dirname, join
 
 import django
+import requests
+import simplejson as json
+import tldextract
 from django.conf import settings
-from django.urls import re_path
 from django.shortcuts import redirect
+from django.urls import re_path
 
 from utils import get_txt_records
 
@@ -46,7 +45,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             BASE_DIR,
-            join(BASE_DIR, "vue/dist/"),
+            join(BASE_DIR, "vue/"),
         ],
         "APP_DIRS": True,
     }
@@ -72,9 +71,9 @@ DYSON_RESTHOST = os.environ.get("DYSON_RESTHOST", "http://localhost:1317")
 DEFAULT_HOST = os.environ.get("DEFAULT_HOST", "clear")
 ROOT_HOSTCONF = "hosts"
 STATIC_URL = "/static/"
-STATIC_ROOT = join(BASE_DIR, "static_root")
+STATIC_ROOT = "/static_root"
 STATICFILES_DIRS = [
-    join(BASE_DIR, "vue/dist/static"),
+    join(BASE_DIR, "vue/static"),
 ]
 CLEAR_DOMAIN = os.environ.get("CLEAR_DOMAIN", "localhost:8000")
 
@@ -84,13 +83,14 @@ if not settings.configured:
     print("SETTINGS", json.dumps(SETTINGS, indent=2))
 django.setup()
 
+from django.conf.urls.static import static
+from django.http import HttpResponse, JsonResponse
+from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer
 # Settings must be configured before importing some things like staticfiles
 from rest_framework.response import Response
-from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
-from renderers import BetterTemplateHTMLRenderer
 from rest_framework.views import APIView
-from django.http import HttpResponse, JsonResponse
-from django.conf.urls.static import static
+
+from renderers import BetterTemplateHTMLRenderer
 
 # VIEWS
 
@@ -140,17 +140,8 @@ class FakeSocket:
     def makefile(self, *args, **kwargs):
         return self._file
 
-
-def resolve_name(name_or_address):
-    u = f"{settings.DYSON_RESTHOST}/org/dyson/names/resolve"
-    params = {"name": name_or_address}
-    req = requests.get(u, params=params)
-    return req.json().get("address", None)
-
-
 def dys_view(request, script_address=None):
     address = script_address or request.script_address
-    address = resolve_name(address)
     u = f"{settings.DYSON_RESTHOST}/dyson/wsgi"
     params = {
         "httprequest": reconstruct_request(request),
@@ -160,7 +151,7 @@ def dys_view(request, script_address=None):
     dys_req = requests.get(u, params=params)
     if dys_req.status_code != 200:
         try:
-            if dys_req.json().get("code", None) == 3:
+            if dys_req.json().get("code", None) == 2:
                 # Script not found
                 return HttpResponse(f"Script not found: {address}", status=404)
         except:
@@ -182,6 +173,7 @@ def dys_view(request, script_address=None):
 
 def dys_js_tags(request, js_asset=None):
     from html.parser import HTMLParser
+
     from django_hosts.resolvers import reverse
 
     tags = []
@@ -193,11 +185,11 @@ def dys_js_tags(request, js_asset=None):
                 tags.append(src)
 
     try:
-        with open("vue/dist/index.html") as f:
+        with open("vue/index.html") as f:
             h = f.read()
     except FileNotFoundError:
         return HttpResponse(
-            """<script>alert('vue/dist/index.html not found, cannot load chain functions')</script>"""
+            """<script>alert('vue/index.html not found, cannot load chain functions')</script>"""
         )
 
     base_host = reverse("index", host="clear")
@@ -220,27 +212,28 @@ def dys_js_tags(request, js_asset=None):
 
 def node_info(request):
     info = {
-        "VUE_APP_API_COSMOS": os.environ.get("VUE_APP_API_COSMOS"),
-        "VUE_APP_WS_TENDERMINT": os.environ.get("VUE_APP_WS_TENDERMINT"),
-        "VUE_APP_API_TENDERMINT": os.environ.get("VUE_APP_API_TENDERMINT"),
-        "VUE_APP_API_TENDERMINT": os.environ.get("VUE_APP_API_TENDERMINT"),
+        "VITE_API_COSMOS": os.environ.get("VITE_API_COSMOS"),
+        "VITE_WS_TENDERMINT": os.environ.get("VITE_WS_TENDERMINT"),
+        "VITE_API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
+        "VITE_API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
         "CLEAR_DOMAIN": os.environ.get("CLEAR_DOMAIN"),
     }
     return JsonResponse(info)
 
 
 # URL
+
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+
+from django.urls import path
+
 urlpatterns = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + [
-    re_path(r"^$", ScriptDetail.as_view(), name="index"),
-    re_path(r"^tx$", ScriptDetail.as_view()),
-    re_path(r"^scripts/$", ScriptDetail.as_view()),
-    re_path(r"^scripts/(?P<script_address>\w+)/$", ScriptDetail.as_view()),
-    re_path(r"^txbuilder/$", ScriptDetail.as_view()),
     re_path(r"^web/(?P<script_address>\w+)", dys_view),
-    re_path(r"^docs", ScriptDetail.as_view()),
-    re_path(r"^name/$", ScriptDetail.as_view()),
-    re_path(r"^name/(?P<name>\w+)/$", ScriptDetail.as_view()),
-    re_path(r"^register/$", ScriptDetail.as_view()),
+    re_path(r"", ScriptDetail.as_view(), name="index"),
+    path("sentry-debug/", trigger_error),
 ]
 
 # djanog-hosts callback
@@ -287,6 +280,18 @@ def clear_custom_dns_callback(request, domain=None):
     print("txt", txt_dict)
     print("script_address", request.script_address)
 
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn=os.environ.get("PYTHON_SENTRY_DSN"),
+    # dsn="https://679c7175bcf949ac9021156cfbb372ae@o1422051.ingest.sentry.io/6768384",
+    integrations=[
+        DjangoIntegration(),
+    ],
+    traces_sample_rate=1.0,
+)
 
 # CLI
 

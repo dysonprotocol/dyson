@@ -8,10 +8,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func CmdCreateSchedualedRun() *cobra.Command {
+func CmdCreateScheduledRun() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-schedualed-run [index] [address]",
-		Short: "Create a new SchedualedRun",
+		Use:   "create-scheduled-run [index] [address]",
+		Short: "Create a new ScheduledRun",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 
@@ -48,12 +48,12 @@ func CmdCreateSchedualedRun() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			gas, err := cmd.Flags().GetUint64("schedualedgaslimit")
+			gas, err := cmd.Flags().GetUint64("scheduledgaslimit")
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgCreateSchedualedRun(
+			msg := types.NewMsgCreateScheduledRun(
 				clientCtx.GetFromAddress().String(),
 				height,
 				gas,
@@ -73,7 +73,7 @@ func CmdCreateSchedualedRun() *cobra.Command {
 
 	flags.AddTxFlagsToCmd(cmd)
 	cmd.PersistentFlags().Uint64("height", 0, "block height to run this script")
-	cmd.PersistentFlags().Uint64("schedualedgaslimit", 234, "amount of gas your schedualed script will reserve")
+	cmd.PersistentFlags().Uint64("scheduledgaslimit", 234, "amount of gas your scheduled script will reserve")
 	cmd.PersistentFlags().String("function", "", "function in of the script to run")
 	cmd.PersistentFlags().String("args", "", "json list of the positional argument to the function")
 	cmd.PersistentFlags().String("kwargs", "", "json object of the keyword argument to the function")
@@ -83,10 +83,10 @@ func CmdCreateSchedualedRun() *cobra.Command {
 	return cmd
 }
 
-func CmdUpdateSchedualedRun() *cobra.Command {
+func CmdUpdateScheduledRun() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "update-schedualed-run [index]",
-		Short: "Update a SchedualedRun",
+		Use:   "update-scheduled-run [index]",
+		Short: "Update a ScheduledRun",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			// Get indexes
@@ -99,7 +99,7 @@ func CmdUpdateSchedualedRun() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgUpdateSchedualedRun(
+			msg := types.NewMsgUpdateScheduledRun(
 				clientCtx.GetFromAddress().String(),
 				indexIndex,
 			)
@@ -115,10 +115,10 @@ func CmdUpdateSchedualedRun() *cobra.Command {
 	return cmd
 }
 
-func CmdDeleteSchedualedRun() *cobra.Command {
+func CmdDeleteScheduledRun() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "delete-schedualed-run [index]",
-		Short: "Delete a SchedualedRun",
+		Use:   "delete-scheduled-run [index]",
+		Short: "Delete a ScheduledRun",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			indexIndex := args[0]
@@ -128,7 +128,7 @@ func CmdDeleteSchedualedRun() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgDeleteSchedualedRun(
+			msg := types.NewMsgDeleteScheduledRun(
 				clientCtx.GetFromAddress().String(),
 				indexIndex,
 			)

@@ -1,30 +1,30 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Index from '@/views/Index.vue'
-import Relayers from '@/views/Relayers.vue'
-import ScriptList from '@/views/ScriptList.vue'
-import ScriptDetail from '@/views/ScriptDetail.vue'
-import NameList from '@/views/NameList.vue'
-import NameDetail from '@/views/NameDetail.vue'
-import TxBuilder from '@/views/TxBuilder.vue'
-import Docs from '@/views/Docs.vue'
-import RegisterName from '@/views/RegisterName.vue'
+import { createRouter, createWebHistory } from "vue-router";
 
-const routerHistory = createWebHistory()
+import Data from "../views/Data.vue";
+import Portfolio from "../views/Portfolio.vue";
+import Docs from "../views/Docs.vue";
+import TxBuilder from "../views/TxBuilder.vue";
+import ScriptDetail from "../views/ScriptDetail.vue";
+
+const routerHistory = createWebHistory();
 const routes = [
-  { path: '/', component: Index },
-  { path: '/relayers', component: Relayers },
-  { path: '/scripts', name: 'script-list', component: ScriptList },
-  { path: '/scripts/:script_address', name: 'script-detail', component: ScriptDetail },
-  { path: '/register', name: 'register-name', component: RegisterName },
-  { path: '/name', name: 'name-list', component: NameList },
-  { path: '/name/:name', name: 'name-detail', component: NameDetail },
-  { path: '/txbuilder', name: 'tx-builder', component: TxBuilder},
-  { path: '/docs', name: 'docs', component: Docs},
-]
+  { path: "/", name: "index", component: Portfolio },
+  { path: "/portfolio", name: "portfolio", component: Portfolio },
+  { path: "/documentation", name: "documentation", component: Docs },
+  {
+    path: "/scripts/:script_address",
+    name: "script-detail",
+    component: ScriptDetail,
+  },
+
+  { path: "/docs", name: "docs", component: Docs },
+  { path: "/txbuilder", name: "tx-builder", component: TxBuilder },
+  { path: "/commands", name: "commands", component: TxBuilder },
+];
 
 const router = createRouter({
   history: routerHistory,
   routes,
-})
+});
 
-export default router
+export default router;

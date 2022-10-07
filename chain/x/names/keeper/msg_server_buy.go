@@ -31,14 +31,17 @@ func (k msgServer) Buy(goCtx context.Context, msg *types.MsgBuy) (*types.MsgBuyR
 	if err != nil {
 		return nil, err
 	}
-	err = k.bankKeeper.SendCoins(ctx, from, to, sdk.Coins{coin})
-	if err != nil {
-		return nil, sdkerrors.Wrapf(sdkerrors.ErrInsufficientFunds, err.Error())
+	// check if is expired, then FREE!
+	if name.ExpirationHeight > uint64(ctx.BlockHeight()) {
+		err = k.bankKeeper.SendCoins(ctx, from, to, sdk.Coins{coin})
+		if err != nil {
+			return nil, sdkerrors.Wrapf(sdkerrors.ErrInsufficientFunds, err.Error())
+		}
 	}
-
+	//change owner
 	name.Owner = msg.Buyer
+	// Reset authorized
 	name.Authorized = ""
-	name.Destination = ""
 
 	k.SetName(
 		ctx,

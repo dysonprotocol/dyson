@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryScheduledGasPriceAndFeeAtBlockRequest",
+    "definitions": {
+        "QueryScheduledGasPriceAndFeeAtBlockRequest": {
+            "properties": {
+                "blockheight": {
+                    "type": "string"
+                },
+                "gaswanted": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Scheduled Gas Price And Fee At Block Request"
+        }
+    }
+}

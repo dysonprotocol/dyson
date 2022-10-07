@@ -1,11 +1,12 @@
 {
 	"Name": "v1beta1",
+	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.feegrant.v1beta1",
-		"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/feegrant.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/feegrant.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"google/protobuf/any.proto",
@@ -16,26 +17,27 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/genesis.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos/feegrant/v1beta1/feegrant.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/query.proto",
 				"Dependencies": [
 					"cosmos/feegrant/v1beta1/feegrant.proto",
 					"cosmos/base/query/v1beta1/pagination.proto",
-					"google/api/annotations.proto"
+					"google/api/annotations.proto",
+					"cosmos_proto/cosmos.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/tx.proto",
 				"Dependencies": [
-					"gogoproto/gogo.proto",
 					"google/protobuf/any.proto",
-					"cosmos_proto/cosmos.proto"
+					"cosmos_proto/cosmos.proto",
+					"cosmos/msg/v1/msg.proto"
 				]
 			}
 		],
@@ -43,67 +45,77 @@
 		"Messages": [
 			{
 				"Name": "BasicAllowance",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/feegrant.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/feegrant.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "PeriodicAllowance",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/feegrant.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/feegrant.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "AllowedMsgAllowance",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/feegrant.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/feegrant.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "Grant",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/feegrant.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/feegrant.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/genesis.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAllowanceRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryAllowanceResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAllowancesRequest",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryAllowancesResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryAllowancesByGranterRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryAllowancesByGranterResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgGrantAllowance",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgGrantAllowanceResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgRevokeAllowance",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgRevokeAllowanceResponse",
-				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			}
 		],
@@ -139,6 +151,20 @@
 								"HasBody": false
 							}
 						]
+					},
+					{
+						"Name": "AllowancesByGranter",
+						"RequestType": "QueryAllowancesByGranterRequest",
+						"ReturnsType": "QueryAllowancesByGranterResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"granter"
+								],
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
 					}
 				]
 			},
@@ -165,12 +191,12 @@
 		{
 			"Name": "MsgGrantAllowance",
 			"URI": "cosmos.feegrant.v1beta1.MsgGrantAllowance",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/tx.proto"
 		},
 		{
 			"Name": "MsgRevokeAllowance",
 			"URI": "cosmos.feegrant.v1beta1.MsgRevokeAllowance",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/tx.proto"
 		}
 	],
 	"HTTPQueries": [
@@ -200,24 +226,37 @@
 					"HasBody": false
 				}
 			]
+		},
+		{
+			"Name": "AllowancesByGranter",
+			"FullName": "QueryAllowancesByGranter",
+			"Rules": [
+				{
+					"Params": [
+						"granter"
+					],
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
 		}
 	],
 	"Types": [
 		{
 			"Name": "BasicAllowance",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/feegrant.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/feegrant.proto"
 		},
 		{
 			"Name": "PeriodicAllowance",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/feegrant.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/feegrant.proto"
 		},
 		{
 			"Name": "AllowedMsgAllowance",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/feegrant.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/feegrant.proto"
 		},
 		{
 			"Name": "Grant",
-			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.44.4-0.20220213074822-d20b66deafcd/proto/cosmos/feegrant/v1beta1/feegrant.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/feegrant/v1beta1/feegrant.proto"
 		}
 	]
 }

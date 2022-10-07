@@ -7,19 +7,25 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 
 	"github.com/cosmos/cosmos-sdk/codec"
+	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	cosmosauthzv1beta1keeper "github.com/cosmos/cosmos-sdk/x/authz/keeper"
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
+	cosmoscrisisv1beta1keeper "github.com/cosmos/cosmos-sdk/x/crisis/keeper"
 	cosmosdistributionv1beta1keeper "github.com/cosmos/cosmos-sdk/x/distribution/keeper"
 	cosmosevidencev1beta1keeper "github.com/cosmos/cosmos-sdk/x/evidence/keeper"
 	cosmosfeegrantv1beta1keeper "github.com/cosmos/cosmos-sdk/x/feegrant/keeper"
-	cosmosgovv1beta1keeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
+	cosmosgovv1keeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
+	cosmosgroupv1keeper "github.com/cosmos/cosmos-sdk/x/group/keeper"
+	cosmosmintv1beta1keeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
 	cosmosslashingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/slashing/keeper"
 	cosmosstakingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
-	ibcapplicationstransferv1keeper "github.com/cosmos/ibc-go/modules/apps/transfer/keeper"
+	cosmosupgradev1beta1keeper "github.com/cosmos/cosmos-sdk/x/upgrade/keeper"
+	ibcapplicationstransferv1keeper "github.com/cosmos/ibc-go/v5/modules/apps/transfer/keeper"
+
 	"github.com/org/dyson/x/dyson/types"
 	nameskeeper "github.com/org/dyson/x/names/keeper"
 )
@@ -27,14 +33,17 @@ import (
 type (
 	Keeper struct {
 		cdc                             codec.BinaryCodec
-		storeKey                        sdk.StoreKey
-		memKey                          sdk.StoreKey
+		storeKey                        storetypes.StoreKey
+		memKey                          storetypes.StoreKey
 		bankkeeper                      bankkeeper.Keeper
 		accountKeeper                   authkeeper.AccountKeeper
+		cosmosauthv1beta1keeper         authkeeper.AccountKeeper
 		cosmosdistributionv1beta1keeper cosmosdistributionv1beta1keeper.Keeper
 		cosmosevidencev1beta1keeper     cosmosevidencev1beta1keeper.Keeper
 		cosmosfeegrantv1beta1keeper     cosmosfeegrantv1beta1keeper.Keeper
-		cosmosgovv1beta1keeper          cosmosgovv1beta1keeper.Keeper
+		cosmosgovv1keeper               cosmosgovv1keeper.Keeper
+		cosmosgroupv1keeper             cosmosgroupv1keeper.Keeper
+
 		cosmosslashingv1beta1keeper     cosmosslashingv1beta1keeper.Keeper
 		cosmosstakingv1beta1keeper      cosmosstakingv1beta1keeper.Keeper
 		cosmosstakingv1beta1querier     cosmosstakingv1beta1keeper.Querier
@@ -42,20 +51,24 @@ type (
 		cosmosauthzv1beta1keeper        cosmosauthzv1beta1keeper.Keeper
 		ibcapplicationstransferv1keeper ibcapplicationstransferv1keeper.Keeper
 		nameskeeper                     nameskeeper.Keeper
-		currentDepth                    int
+		cosmosmintv1beta1keeper         cosmosmintv1beta1keeper.Keeper
+		cosmosupgradev1beta1keeper      cosmosupgradev1beta1keeper.Keeper
+		cosmoscrisisv1beta1keeper       cosmoscrisisv1beta1keeper.Keeper
+
+		currentDepth int
 	}
 )
 
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
-	memKey sdk.StoreKey,
+	memKey storetypes.StoreKey,
 	bankkeeper bankkeeper.Keeper,
 	accountKeeper authkeeper.AccountKeeper,
 	cosmosdistributionv1beta1keeper cosmosdistributionv1beta1keeper.Keeper,
 	cosmosevidencev1beta1keeper cosmosevidencev1beta1keeper.Keeper,
 	cosmosfeegrantv1beta1keeper cosmosfeegrantv1beta1keeper.Keeper,
-	cosmosgovv1beta1keeper cosmosgovv1beta1keeper.Keeper,
+	cosmosgovv1keeper cosmosgovv1keeper.Keeper,
 	cosmosslashingv1beta1keeper cosmosslashingv1beta1keeper.Keeper,
 	cosmosstakingv1beta1keeper cosmosstakingv1beta1keeper.Keeper,
 	cosmosstakingv1beta1querier cosmosstakingv1beta1keeper.Querier,
@@ -63,7 +76,9 @@ func NewKeeper(
 	cosmosauthzv1beta1keeper cosmosauthzv1beta1keeper.Keeper,
 	ibcapplicationstransferv1keeper ibcapplicationstransferv1keeper.Keeper,
 	nameskeeper nameskeeper.Keeper,
-
+	cosmosmintv1beta1keeper cosmosmintv1beta1keeper.Keeper,
+	cosmosupgradev1beta1keeper cosmosupgradev1beta1keeper.Keeper,
+	cosmoscrisisv1beta1keeper cosmoscrisisv1beta1keeper.Keeper,
 ) *Keeper {
 	return &Keeper{
 
@@ -72,10 +87,11 @@ func NewKeeper(
 		memKey:                          memKey,
 		bankkeeper:                      bankkeeper,
 		accountKeeper:                   accountKeeper,
+		cosmosauthv1beta1keeper:         accountKeeper,
 		cosmosdistributionv1beta1keeper: cosmosdistributionv1beta1keeper,
 		cosmosevidencev1beta1keeper:     cosmosevidencev1beta1keeper,
 		cosmosfeegrantv1beta1keeper:     cosmosfeegrantv1beta1keeper,
-		cosmosgovv1beta1keeper:          cosmosgovv1beta1keeper,
+		cosmosgovv1keeper:               cosmosgovv1keeper,
 		cosmosslashingv1beta1keeper:     cosmosslashingv1beta1keeper,
 		cosmosstakingv1beta1keeper:      cosmosstakingv1beta1keeper,
 		cosmosstakingv1beta1querier:     cosmosstakingv1beta1querier,
@@ -83,8 +99,10 @@ func NewKeeper(
 		cosmosauthzv1beta1keeper:        cosmosauthzv1beta1keeper,
 		ibcapplicationstransferv1keeper: ibcapplicationstransferv1keeper,
 		nameskeeper:                     nameskeeper,
-
-		currentDepth: 0,
+		cosmosmintv1beta1keeper:         cosmosmintv1beta1keeper,
+		cosmosupgradev1beta1keeper:      cosmosupgradev1beta1keeper,
+		cosmoscrisisv1beta1keeper:       cosmoscrisisv1beta1keeper,
+		currentDepth:                    0,
 	}
 }
 
@@ -92,53 +110,62 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
 
-func (k Keeper) getSchdeualedCountAndGasPrice(ctx sdk.Context, blockHeight uint64, gasWanted uint64) (int, sdk.Coin) {
+func (k Keeper) GetScheduledGasPriceAndFee(ctx sdk.Context, blockHeight uint64, gasWanted uint64) (count int, gasPrice sdk.DecCoin, gasFee sdk.Coin) {
 
 	prefix := fmt.Sprintf("%v/", blockHeight)
-	total := 0
-	count := 0
-	for _, schedualedRun := range k.GetPrefixSchedualedRun(ctx, prefix) {
-		total += int(schedualedRun.Gas)
+	//total := 0
+	count = 1
+	for _, scheduledRun := range k.GetPrefixScheduledRun(ctx, prefix) {
+		_ = scheduledRun
+		//total += int(scheduledRun.Gas)
 		count += 1
 	}
-	// TODO pull from settings
-	var RATIO int64
-	RATIO = 3
-	fee := sdk.NewInt64Coin("dys", (int64(total)+int64(gasWanted))/RATIO)
-	k.Logger(ctx).Info(fmt.Sprintf("---getSchdeualedCountAndGasPrice: count %+v total %+v fee %+v", count, total, fee))
-	return count, fee
+	minGasPrices := sdk.NewDecCoins(sdk.NewDecCoinFromDec("dys", sdk.MustNewDecFromStr("0.01")))
+	gasPrices := minGasPrices.MulDec(sdk.NewDec(int64(count)))
+	gasFees := gasPrices.MulDec(sdk.NewDec(int64(gasWanted)))
+	k.Logger(ctx).Info(fmt.Sprintf("GetScheduledGasPricesAndFees: count %+v gasPrice %+v gasFees %+v", count, gasPrices, gasFees))
+	return count, gasPrices[0], sdk.NewCoin(gasFees[0].Denom, gasFees[0].Amount.Ceil().RoundInt())
 }
 
-func (k Keeper) RunSchedualedScripts(ctx sdk.Context) {
-	prefix := fmt.Sprintf("%v/", ctx.BlockHeight())
+func (k Keeper) RunScheduledScripts(ctx sdk.Context) {
+	blockHeight := fmt.Sprint(ctx.BlockHeight())
 
 	m := &msgServer{Keeper: k}
 
-	for index, schedualedRun := range k.GetPrefixSchedualedRun(ctx, prefix) {
-		msg := schedualedRun.Msg
+	cron, found := k.GetCron(ctx, blockHeight)
+	if !found {
+		k.Logger(ctx).Info(fmt.Sprintf("no cron at block: %+v", blockHeight))
+		return
+	}
+	for _, index := range cron.Indexes {
+		scheduledRun, found := k.GetScheduledRun(ctx, index)
+		if !found {
+			continue
+		}
+		msg := scheduledRun.Msg
 		signers := msg.GetSigners()
 
 		if len(signers) != 1 {
 			err := sdkerrors.ErrInvalidRequest.Wrap("Msg must have one signer")
 			k.Logger(ctx).Info(fmt.Sprintf("error: %+v", err))
-			schedualedRun.Error = fmt.Sprintf("%+v", err)
-			k.SetSchedualedRun(ctx, schedualedRun)
+			scheduledRun.Error = fmt.Sprintf("%+v", err)
+			k.SetScheduledRun(ctx, scheduledRun)
 			return
 		}
 
-		add, err := sdk.AccAddressFromBech32(schedualedRun.Creator)
+		add, err := sdk.AccAddressFromBech32(scheduledRun.Creator)
 		if err != nil {
 			k.Logger(ctx).Info(fmt.Sprintf("error: %+v", err))
-			schedualedRun.Error = fmt.Sprintf("bad schedualed script address %+v", err)
-			k.SetSchedualedRun(ctx, schedualedRun)
+			scheduledRun.Error = fmt.Sprintf("bad scheduled script address %+v", err)
+			k.SetScheduledRun(ctx, scheduledRun)
 		}
 
 		if !add.Equals(signers[0]) {
-			err = sdkerrors.ErrInvalidRequest.Wrap("Invalid schedual script signer")
+			err = sdkerrors.ErrInvalidRequest.Wrap("Invalid schedul script signer")
 
 			k.Logger(ctx).Info(fmt.Sprintf("error: %+v", err))
-			schedualedRun.Error = fmt.Sprintf("%+v", err)
-			k.SetSchedualedRun(ctx, schedualedRun)
+			scheduledRun.Error = fmt.Sprintf("%+v", err)
+			k.SetScheduledRun(ctx, scheduledRun)
 			return
 		}
 
@@ -146,13 +173,13 @@ func (k Keeper) RunSchedualedScripts(ctx sdk.Context) {
 		startingGas := ctx.BlockGasMeter().GasConsumed()
 		k.Logger(ctx).Info(fmt.Sprintf("startingGas: %+v", startingGas))
 
-		cachedCtx = cachedCtx.WithGasMeter(sdk.NewGasMeter(schedualedRun.Gas))
+		cachedCtx = cachedCtx.WithGasMeter(sdk.NewGasMeter(scheduledRun.Gas))
 
 		func() {
 			// Panic recovery.
 			defer func() {
 				if r := recover(); r != nil {
-					schedualedRun.Error = handleRecovery(r, ctx)
+					scheduledRun.Error = handleRecovery(r, cachedCtx)
 
 				}
 			}()
@@ -176,15 +203,15 @@ func (k Keeper) RunSchedualedScripts(ctx sdk.Context) {
 			if err != nil {
 
 				k.Logger(ctx).Info(fmt.Sprintf("error: %+v", err))
-				schedualedRun.Error = err.Error()
+				scheduledRun.Error = err.Error()
 			} else {
 				Write()
-				schedualedRun.Resp = r
+				scheduledRun.Resp = r
 			}
 		}()
 
-		k.SetSchedualedRun(ctx, schedualedRun)
-		k.Logger(ctx).Info(fmt.Sprintf("RunSchedualedScripts %v: %v %+v", prefix, index, schedualedRun))
+		k.SetScheduledRun(ctx, scheduledRun)
+		k.Logger(ctx).Info(fmt.Sprintf("RunScheduledScripts %v: %v %+v", blockHeight, index, scheduledRun))
 	}
 
 }
@@ -203,16 +230,16 @@ func (k Keeper) DeductFees(ctx sdk.Context, from sdk.AccAddress, fees sdk.Coins)
 	return nil
 }
 
-func handleRecovery(r interface{}, sdkCtx sdk.Context) string {
+func handleRecovery(r interface{}, cachedCtx sdk.Context) string {
 	switch r := r.(type) {
 	case sdk.ErrorOutOfGas:
 		return fmt.Sprintf(
-			"schedualed script out of gas in location: %v; gasWanted: %d, gasUsed: %d",
-			r.Descriptor, sdkCtx.GasMeter().Limit(), sdkCtx.GasMeter().GasConsumed(),
+			"scheduled script out of gas: %v; gasWanted: %d",
+			r.Descriptor, cachedCtx.GasMeter().Limit(),
 		)
 
 	default:
 		panic(sdkerrors.ErrPanic.Wrapf(
-			"schedualed script recovered: %v\nstack:\n%v", r, string(debug.Stack())))
+			"scheduled script recovered: %v\nstack:\n%v", r, string(debug.Stack())))
 	}
 }

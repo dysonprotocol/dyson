@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Module",
+    "definitions": {
+        "Module": {
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "module path"
+                },
+                "version": {
+                    "type": "string",
+                    "description": "module version"
+                },
+                "sum": {
+                    "type": "string",
+                    "description": "checksum"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Module",
+            "description": "Module is the type for VersionInfo"
+        }
+    }
+}

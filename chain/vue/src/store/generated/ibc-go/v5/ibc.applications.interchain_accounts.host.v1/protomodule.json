@@ -1,0 +1,80 @@
+{
+	"Name": "v1",
+	"GoModulePath": "github.com/cosmos/ibc-go/v5",
+	"Pkg": {
+		"Name": "ibc.applications.interchain_accounts.host.v1",
+		"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/interchain_accounts/host/v1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/interchain_accounts/host/v1/host.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/interchain_accounts/host/v1/query.proto",
+				"Dependencies": [
+					"google/api/annotations.proto",
+					"ibc/applications/interchain_accounts/host/v1/host.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/ibc-go/v5/modules/apps/27-interchain-accounts/host/types",
+		"Messages": [
+			{
+				"Name": "Params",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/interchain_accounts/host/v1/host.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryParamsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/interchain_accounts/host/v1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryParamsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/interchain_accounts/host/v1/query.proto",
+				"HighestFieldNumber": 1
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "Params",
+						"RequestType": "QueryParamsRequest",
+						"ReturnsType": "QueryParamsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"Msgs": null,
+	"HTTPQueries": [
+		{
+			"Name": "Params",
+			"FullName": "QueryParams",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "Params",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/interchain_accounts/host/v1/host.proto"
+		}
+	]
+}
