@@ -1,6 +1,6 @@
-FROM registry.gitlab.com/dysonproject/dyson/pypy:3.9 as dyson-pypy
+FROM --platform=linux/amd64 registry.gitlab.com/dysonproject/dyson/pypy:3.9 as dyson-pypy
 
-FROM golang:1.18
+FROM --platform=linux/amd64 golang:1.18 
 
 WORKDIR /go/src/app
 

@@ -70360,6 +70360,9 @@ definitions:
           type: string
   dyson.MsgCreateScheduledRunResponse:
     type: object
+    properties:
+      index:
+        type: string
   dyson.MsgCreateScriptResponse:
     type: object
     properties:

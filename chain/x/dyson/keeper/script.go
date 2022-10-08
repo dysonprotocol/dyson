@@ -136,6 +136,7 @@ func (k Keeper) RunWsgi(goCtx context.Context, index string, httpreq string) (va
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	cmd := exec.Command(
 		"python3",
 		"simplewsgi.py",
@@ -220,9 +221,6 @@ func (k Keeper) NewRPCServer(goCtx context.Context, index string) (string, *http
 func (k Keeper) EvalScript(goCtx context.Context, scriptCtx *EvalScriptContext, raiseRunErr bool) (resp *EvalScriptResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	cachedCtx, Write := ctx.CacheContext()
-	startingGas := ctx.GasMeter().GasConsumed()
-	k.Logger(ctx).Info(fmt.Sprintf("startingGas: %+v", startingGas))
-	k.Logger(ctx).Info(fmt.Sprintf("limit: %+v", ctx.GasMeter().Limit()))
 	defer func() {
 		if r := recover(); r != nil {
 			err = handleRunRecovery(r, ctx)

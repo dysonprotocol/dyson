@@ -29,8 +29,8 @@ pre {
           v-model:value="code"
           lang="python"
           theme="chrome"
-          min-lines="30"
-          max-lines="500"
+          :min-lines="30"
+          :max-lines="500"
           :readonly="disabled"
         />
 
@@ -89,8 +89,14 @@ export default {
     FunctionDetail,
     VAceEditor,
   },
+  watch: {
+    $route(to, from) {
+      this.update();
+    },
+  },
   methods: {
     async save(e) {
+        console.log("this.gas", this.gas)
       this.inFlight = true;
       this.txResult = null;
       this.error = null;
@@ -112,13 +118,14 @@ export default {
         this.inFlight = false;
         console.log("txResult", this.txResult);
         if (this.txResult.rawLog.endsWith("out of gas")) {
-            console.log("trying again")
-            this.gas *= 3
-            this.save(e)
-            return
+          this.gas = this.txResult.gasUsed * 2;
+          console.log("trying again", this.gas);
+          this.save(e);
+          return;
+        } else {
+          this.gas = this.txResult.gasUsed * 1.2;
         }
         JSON.parse(this.txResult.rawLog);
-        this.gas = this.txResult.gasUsed * 1.2;
 
         this.update();
       } catch (e) {

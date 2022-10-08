@@ -23,7 +23,7 @@ func (k msgServer) CreateScheduledRun(goCtx context.Context, msg *types.MsgCreat
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("scheduled block height must be less than %v block in the future", MAX_FUTURE_BLOCKS))
 	}
 
-	index := fmt.Sprintf("%v/%v/%v", msg.Creator, msg.Height, count)
+	index := fmt.Sprintf("%v/%012d/%v", msg.Creator, msg.Height, count)
 	// Check if the value already exists but it shouldn't
 	_, isFound := k.GetScheduledRun(
 		ctx,
@@ -61,7 +61,7 @@ func (k msgServer) CreateScheduledRun(goCtx context.Context, msg *types.MsgCreat
 		ctx,
 		scheduledRun,
 	)
-	return &types.MsgCreateScheduledRunResponse{}, nil
+	return &types.MsgCreateScheduledRunResponse{Index: index}, nil
 }
 
 func (k msgServer) UpdateScheduledRun(goCtx context.Context, msg *types.MsgUpdateScheduledRun) (*types.MsgUpdateScheduledRunResponse, error) {

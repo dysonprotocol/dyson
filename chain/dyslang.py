@@ -64,36 +64,7 @@ BUILTIN_EXCEPTIONS = {
 }
 
 
-DEFAULT_SCOPE = {
-    "Exception": Exception,
-    "False": False,
-    "None": None,
-    "True": True,
-    "abs": abs,
-    "all": all,
-    "any": any,
-    "bool": bool,
-    "dict": dict,
-    "enumerate": enumerate,
-    "float": float,
-    "hex": hex,
-    "int": int,
-    "isinstance": isinstance,
-    "issubclass": issubclass,
-    "iter": iter,
-    "len": len,
-    "list": list,
-    "max": max,
-    "min": min,
-    "range": range,
-    "round": round,
-    "set": set,
-    "sorted": sorted,
-    "str": str,
-    "sum": sum,
-    "tuple": tuple,
-    **BUILTIN_EXCEPTIONS,
-}
+
 
 
 DISALLOW_FUNCTIONS = {
@@ -108,23 +79,7 @@ DISALLOW_FUNCTIONS = {
     exec,
     format,
     vars,
-    zip,
 }
-
-
-_whitelist_functions_dict = {
-    "str": ["join"],
-    "builtins": [*list(DEFAULT_SCOPE.keys())],
-    "dict": ["get", "items", "keys", "values"],
-    "list": ["sort", "append", "pop", "count", "index", "reverse"],
-}
-
-
-WHITELIST_FUNCTIONS = set()
-
-for k, v in _whitelist_functions_dict.items():
-    for kk in v:
-        WHITELIST_FUNCTIONS.add(k + "." + kk)
 
 
 def assert_func_allowed(func):
@@ -227,6 +182,68 @@ def safe_add(a, b):  # pylint: disable=invalid-name
                 "Sorry, adding those two together would make something too long."
             )
     return a + b
+
+DEFAULT_SCOPE = {
+    "Exception": Exception,
+    "False": False,
+    "None": None,
+    "True": True,
+    "abs": abs,
+    "all": all,
+    "any": any,
+    "bin": bin,
+    "bool": bool,
+    "bytearray": bytearray,
+    "bytes": bytes,
+    "callable": callable,
+    "chr":chr,
+    "complex":complex,
+    "dict": dict,
+    "divmod":divmod,
+    "enumerate": enumerate,
+    "filter":filter,
+    "frozenset":frozenset,
+    "hex": hex,
+    "int": int,
+    "isinstance": isinstance,
+    "issubclass": issubclass,
+    "iter": iter,
+    "len": len,
+    "list": list,
+    "map":map,
+    "max": max,
+    "min": min,
+    "oct":oct,
+    "ord":ord,
+    "pow": safe_power,
+    "range": range,
+    "reversed":reversed,
+    "round": round,
+    "set": set,
+    "slice":slice,
+    "sorted": sorted,
+    "str": str,
+    "sum": sum,
+    "tuple": tuple,
+    "zip":zip,
+    **BUILTIN_EXCEPTIONS,
+}
+
+_whitelist_functions_dict = {
+    "str": ["join"],
+    "builtins": [*list(DEFAULT_SCOPE.keys())],
+    "dict": ["get", "items", "keys", "values"],
+    "list": ["sort", "append", "pop", "count", "index", "reverse"],
+}
+
+
+WHITELIST_FUNCTIONS = set()
+
+for k, v in _whitelist_functions_dict.items():
+    for kk in v:
+        WHITELIST_FUNCTIONS.add(k + "." + kk)
+
+
 
 
 def make_modules(mod_dict, k=""):

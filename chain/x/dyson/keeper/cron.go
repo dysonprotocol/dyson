@@ -10,9 +10,7 @@ import (
 func (k Keeper) SetCron(ctx sdk.Context, cron types.Cron) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.CronKeyPrefix))
 	b := k.cdc.MustMarshal(&cron)
-	store.Set(types.CronKey(
-		cron.BlockHeight,
-	), b)
+	store.Set(types.CronKey(cron.BlockHeight), b)
 }
 
 // GetCron returns a cron from its index

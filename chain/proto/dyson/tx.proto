@@ -1,100 +1,108 @@
 syntax = "proto3";
 package dyson;
 
-import "gogoproto/gogo.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "dyson/msgrun.proto";
+import "dyson/scheduled_run.proto";
 import "dyson/script.proto";
 import "dyson/storage.proto";
-import "dyson/msgrun.proto";
-import "cosmos/base/v1beta1/coin.proto";
-import "dyson/scheduled_run.proto";
+import "gogoproto/gogo.proto";
 // this line is used by starport scaffolding # proto/tx/import
 
 option go_package = "github.com/org/dyson/x/dyson/types";
 
 // Msg defines the Msg service.
 service Msg {
-    rpc CreateScheduledRun(MsgCreateScheduledRun) returns (MsgCreateScheduledRunResponse);
-    // this line is used by starport scaffolding # proto/tx/rpc
-    rpc CreateStorage(MsgCreateStorage) returns (MsgCreateStorageResponse);
-    rpc UpdateStorage(MsgUpdateStorage) returns (MsgUpdateStorageResponse);
-    rpc DeleteStorage(MsgDeleteStorage) returns (MsgDeleteStorageResponse);
-    rpc CreateScript(MsgCreateScript) returns (MsgCreateScriptResponse);
-    rpc UpdateScript(MsgUpdateScript) returns (MsgUpdateScriptResponse);
-    rpc DeleteScript(MsgDeleteScript) returns (MsgDeleteScriptResponse);
-    rpc Run(MsgRun) returns (MsgRunResponse);
+  rpc CreateScheduledRun(MsgCreateScheduledRun) returns (MsgCreateScheduledRunResponse);
+  // this line is used by starport scaffolding # proto/tx/rpc
+  rpc CreateStorage(MsgCreateStorage) returns (MsgCreateStorageResponse);
+  rpc UpdateStorage(MsgUpdateStorage) returns (MsgUpdateStorageResponse);
+  rpc DeleteStorage(MsgDeleteStorage) returns (MsgDeleteStorageResponse);
+  rpc CreateScript(MsgCreateScript) returns (MsgCreateScriptResponse);
+  rpc UpdateScript(MsgUpdateScript) returns (MsgUpdateScriptResponse);
+  rpc DeleteScript(MsgDeleteScript) returns (MsgDeleteScriptResponse);
+  rpc Run(MsgRun) returns (MsgRunResponse);
 }
 
 message MsgCreateScheduledRun {
-    string creator = 1;
-    uint64 height = 2;
-    uint64 gas = 3;
-    MsgRun msg = 4;
+  string creator = 1;
+  uint64 height = 2;
+  uint64 gas = 3;
+  MsgRun msg = 4;
 
 
 }
-message MsgCreateScheduledRunResponse {}
+message MsgCreateScheduledRunResponse {
+  string index = 1;
+}
 
 message MsgUpdateScheduledRun {
-    string creator = 1;
-    string index = 2;
-    MsgRun msg = 3;
+  string creator = 1;
+  string index = 2;
+  MsgRun msg = 3;
 }
-message MsgUpdateScheduledRunResponse {}
+message MsgUpdateScheduledRunResponse {
+}
 
 message MsgDeleteScheduledRun {
-    string creator = 1;
-    string index = 2;
+  string creator = 1;
+  string index = 2;
 }
-message MsgDeleteScheduledRunResponse {}
+message MsgDeleteScheduledRunResponse {
+}
 
 // Create a new storage of arbitrary text
 message MsgCreateStorage {
-    option (gogoproto.equal)           = false;
-    option (gogoproto.goproto_getters) = false;
-    // The address signing this transaction
-    string creator = 1;
-    // Name of the Storage, must be prefixed with the creators address (for example: "dys..1a3/some_name")
-    string index = 2;
-    // data to stor at this index
-    string data = 3;
-    // If true, force will always store the data at this address regardless of already existing storage
-    bool force = 4;
+  option (gogoproto.equal)           = false;
+  option (gogoproto.goproto_getters) = false;
+  // The address signing this transaction
+  string creator = 1;
+  // Name of the Storage, must be prefixed with the creators address (for example: "dys..1a3/some_name")
+  string index = 2;
+  // data to stor at this index
+  string data = 3;
+  // If true, force will always store the data at this address regardless of already existing storage
+  bool force = 4;
 }
-message MsgCreateStorageResponse { }
+message MsgCreateStorageResponse {
+}
 
 message MsgUpdateStorage {
-    string creator = 1;
-    string index = 2;
-    string data = 3;
-    bool force = 4;
+  string creator = 1;
+  string index = 2;
+  string data = 3;
+  bool force = 4;
 }
-message MsgUpdateStorageResponse { }
+message MsgUpdateStorageResponse {
+}
 
 message MsgDeleteStorage {
-    string creator = 1;
-    string index = 2;
+  string creator = 1;
+  string index = 2;
 }
-message MsgDeleteStorageResponse { }
+message MsgDeleteStorageResponse {
+}
 
 message MsgCreateScript {
-    string creator = 1;
-    string code = 3;
+  string creator = 1;
+  string code = 3;
 }
 message MsgCreateScriptResponse { 
-    string address = 1;
+  string address = 1;
 }
 
 message MsgUpdateScript {
-    string creator = 1;
-    string code = 3;
+  string creator = 1;
+  string code = 3;
 }
 message MsgUpdateScriptResponse {
-    string address = 1;
+  string address = 1;
 }
 
 message MsgDeleteScript {
-    string creator = 1;
+  string creator = 1;
 }
-message MsgDeleteScriptResponse { }
+message MsgDeleteScriptResponse {
+}
 
 

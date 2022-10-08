@@ -78,9 +78,9 @@
           </li>
         </ul>
       </div>
-      <pre v-if="queryResponseErr" class="alert alert-danger">{{
+      <div v-if="queryResponseErr" class="alert alert-danger">{{
         queryResponseErr
-      }}</pre>
+      }}</div>
       <div v-if="queryResponse">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">

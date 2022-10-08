@@ -14,8 +14,8 @@ type ConsumeGasRequest struct {
 }
 
 type ConsumeGasResponse struct {
-	GasConsumed int `protobuf:"bytes,1,opt,name=GasConsumed,proto3" json:"GasConsumed,omitempty"`
-	GasLimit    int `protobuf:"bytes,1,opt,name=GasLimit,proto3" json:"GasLimit,omitempty"`
+	GasConsumed int64 `protobuf:"bytes,1,opt,name=GasConsumed,proto3" json:"GasConsumed,omitempty"`
+	GasLimit    int64 `protobuf:"bytes,1,opt,name=GasLimit,proto3" json:"GasLimit,omitempty"`
 }
 
 func (rpcservice *RpcService) Consumegas(_ *http.Request, msg *ConsumeGasRequest, response *ConsumeGasResponse) (err error) {
@@ -51,9 +51,13 @@ func (rpcservice *RpcService) Consumegas(_ *http.Request, msg *ConsumeGasRequest
 
 	// Recursive chain calls are exponentially more expensive
 	gasUsed := uint64(float64(msg.Amount) * math.Pow(2, float64(rpcservice.k.currentDepth-1)))
+	fmt.Printf("444 block limit: %+v", ctx.BlockGasMeter().Limit())
 	ctx.GasMeter().ConsumeGas(gasUsed, "gasUsed")
 	//fmt.Printf("gasUsed: %v\n", gasUsed)
-	*response = ConsumeGasResponse{GasConsumed: int(ctx.GasMeter().GasConsumed()), GasLimit: int(ctx.GasMeter().Limit())}
+	*response = ConsumeGasResponse{
+		GasConsumed: int64(ctx.GasMeter().GasConsumed()),
+		GasLimit:    int64(ctx.GasMeter().Limit()),
+	}
 	return nil
 
 }
@@ -62,13 +66,17 @@ type GasLimitRequest struct {
 }
 
 type GasLimitResponse struct {
-	GasConsumed int `protobuf:"bytes,1,opt,name=GasConsumed,proto3" json:"GasConsumed,omitempty"`
-	GasLimit    int `protobuf:"bytes,1,opt,name=GasLimit,proto3" json:"GasLimit,omitempty"`
+	GasConsumed int64 `protobuf:"bytes,1,opt,name=GasConsumed,proto3" json:"GasConsumed,omitempty"`
+	GasLimit    int64 `protobuf:"bytes,1,opt,name=GasLimit,proto3" json:"GasLimit,omitempty"`
 }
 
 func (rpcservice *RpcService) Gaslimit(_ *http.Request, msg *GasLimitRequest, response *GasLimitResponse) (err error) {
 	ctx := sdk.UnwrapSDKContext(rpcservice.ctx)
-	*response = GasLimitResponse{GasConsumed: int(ctx.GasMeter().GasConsumed()), GasLimit: int(ctx.GasMeter().Limit())}
+	gm := ctx.GasMeter()
+	*response = GasLimitResponse{
+		GasConsumed: int64(gm.GasConsumed()),
+		GasLimit:    int64(gm.Limit()),
+	}
 	return nil
 
 }

@@ -1,66 +1,63 @@
 import ast
+import http.client as http_client
+import logging
 import random
+import re
 from functools import wraps
 
 import forge
-
 from freezegun import freeze_time
-
-import re
-import logging
-
-import http.client as http_client
 
 try:
     import re2
+
     re2.set_fallback_notification(re2.FALLBACK_EXCEPTION)
     re2_dict = {
-            "ASCII": re2.ASCII,
-            "BackreferencesException": re2.BackreferencesException,
-            "CharClassProblemException": re2.CharClassProblemException,
-            "DEBUG": re2.DEBUG,
-            "DOTALL": re2.DOTALL,
-            "I": re2.I,
-            "IGNORECASE": re2.IGNORECASE,
-            "L": re2.L,
-            "LOCALE": re2.LOCALE,
-            "M": re2.M,
-            "MULTILINE": re2.MULTILINE,
-            "RegexError": re2.RegexError,
-            "S": re2.S,
-            "U": re2.U,
-            "UNICODE": re2.UNICODE,
-            "VERBOSE": re2.VERBOSE,
-            "X": re2.X,
-            "compile": re2.compile,
-            "contains": re2.contains,
-            "count": re2.count,
-            "error": re2.error,
-            "escape": re2.escape,
-            "findall": re2.findall,
-            "finditer": re2.finditer,
-            "fullmatch": re2.fullmatch,
-            "match": re2.match,
-            "re": re2.re,
-            "search": re2.search,
-            "split": re2.split,
-            "sub": re2.sub,
-            "subn": re2.subn,
-        }
+        "ASCII": re2.ASCII,
+        "BackreferencesException": re2.BackreferencesException,
+        "CharClassProblemException": re2.CharClassProblemException,
+        "DEBUG": re2.DEBUG,
+        "DOTALL": re2.DOTALL,
+        "I": re2.I,
+        "IGNORECASE": re2.IGNORECASE,
+        "L": re2.L,
+        "LOCALE": re2.LOCALE,
+        "M": re2.M,
+        "MULTILINE": re2.MULTILINE,
+        "RegexError": re2.RegexError,
+        "S": re2.S,
+        "U": re2.U,
+        "UNICODE": re2.UNICODE,
+        "VERBOSE": re2.VERBOSE,
+        "X": re2.X,
+        "compile": re2.compile,
+        "contains": re2.contains,
+        "count": re2.count,
+        "error": re2.error,
+        "escape": re2.escape,
+        "findall": re2.findall,
+        "finditer": re2.finditer,
+        "fullmatch": re2.fullmatch,
+        "match": re2.match,
+        "re": re2.re,
+        "search": re2.search,
+        "split": re2.split,
+        "sub": re2.sub,
+        "subn": re2.subn,
+    }
 except:
     re2_dict = {}
     print("WARNING: Could not load re2")
 
 
-
 import io
 import sys
 from contextlib import redirect_stdout
+from functools import partial
 
 import requests
-import simplejson as json
 import simplejson
-from functools import partial
+import simplejson as json
 
 import dyslang
 
@@ -106,7 +103,19 @@ def main():
 
 
 def get_module_dict():
-    import pathlib, mimetypes, urllib, base64, decimal, html, hashlib, typing, string, datetime, inspect, random
+    import base64
+    import datetime
+    import decimal
+    import hashlib
+    import html
+    import math
+    import inspect
+    import mimetypes
+    import pathlib
+    import random
+    import string
+    import typing
+    import urllib
 
     @forge.copy(json.dumps)
     def safe_json_dumps(**kwargs):
@@ -144,6 +153,7 @@ def get_module_dict():
         },
         "pathlib": {"PurePath": pathlib.PurePath},
         "mimetypes": {"guess_type": mimetypes.guess_type},
+        "math": {"math":math.trunc,"remainder":math.remainder,"isclose": math.isclose},
         "urllib": {
             "parse": {
                 "parse_qs": urllib.parse.parse_qs,
@@ -193,7 +203,19 @@ def get_module_dict():
             "Literal": typing.Literal,
             "Annotated": typing.Annotated,
         },
-        "string": {"Template": string.Template},
+        "string": {
+            "Template": string.Template,
+            "capwords": string.capwords,
+            "ascii_letters": string.ascii_letters,
+            "ascii_lowercase": string.ascii_lowercase,
+            "ascii_uppercase": string.ascii_uppercase,
+            "digits": string.digits,
+            "hexdigits": string.hexdigits,
+            "octdigits": string.octdigits,
+            "punctuation": string.punctuation,
+            "printable": string.printable,
+            "whitespace": string.whitespace,
+        },
         "random": {
             "betavariate": random.betavariate,
             "choice": random.choice,
@@ -205,6 +227,7 @@ def get_module_dict():
             "sample": random.sample,
             "shuffle": random.shuffle,
             "triangular": random.triangular,
+            "seed": random.seed,
             "uniform": random.uniform,
         },
         "re2": re2_dict,
@@ -270,6 +293,10 @@ def build_sandbox(port, creator, address, amount, block_info):
 
         last_node = None
         cumsize = 0
+
+
+        def gas_state(self):
+            return gas_state
 
         def consume_gas(self):
             amount = int(gas_state["unconsumed_size"] * GAS_MULTIPLE)
@@ -438,16 +465,6 @@ def eval_script(
     nodes_called = 0
     cumsize = 0
 
-    random.seed(
-        (block_info or "")
-        + (creator or "")
-        + (address or "")
-        + (funcname or "")
-        + (json_args or "")
-        + (json_kwargs or "")
-        + (extra_line or "")
-        + (amount or "")
-    )
     block_info = json.loads(block_info)
     with freeze_time(block_info["time"]):
         with io.StringIO() as buf, redirect_stdout(buf):
@@ -462,6 +479,18 @@ def eval_script(
                 )
                 sandbox.unconsumed_size = 1
                 sandbox.consume_gas()
+
+                random.seed(
+                    (str(block_info) or "")
+                    + (creator or "")
+                    + (address or "")
+                    + (funcname or "")
+                    + (json_args or "")
+                    + (json_kwargs or "")
+                    + (extra_line or "")
+                    + (amount or "")
+                    + str(sandbox.gas_state() or "")
+                )
                 result = (
                     sandbox.eval(
                         code + "\n" + extra_line,

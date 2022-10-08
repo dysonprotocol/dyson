@@ -25,7 +25,7 @@ faucet:
 
 init:
   app:
-    minimum-gas-prices: "0.01dys"
+    minimum-gas-prices: "0.001dys"
   config:
     consensus:
       max_body_bytes: 10000
