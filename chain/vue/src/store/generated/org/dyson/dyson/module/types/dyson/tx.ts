@@ -12,7 +12,9 @@ export interface MsgCreateScheduledRun {
   msg: MsgRun | undefined;
 }
 
-export interface MsgCreateScheduledRunResponse {}
+export interface MsgCreateScheduledRunResponse {
+  index: string;
+}
 
 export interface MsgUpdateScheduledRun {
   creator: string;
@@ -195,13 +197,16 @@ export const MsgCreateScheduledRun = {
   },
 };
 
-const baseMsgCreateScheduledRunResponse: object = {};
+const baseMsgCreateScheduledRunResponse: object = { index: "" };
 
 export const MsgCreateScheduledRunResponse = {
   encode(
-    _: MsgCreateScheduledRunResponse,
+    message: MsgCreateScheduledRunResponse,
     writer: Writer = Writer.create()
   ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
     return writer;
   },
 
@@ -217,6 +222,9 @@ export const MsgCreateScheduledRunResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -225,24 +233,35 @@ export const MsgCreateScheduledRunResponse = {
     return message;
   },
 
-  fromJSON(_: any): MsgCreateScheduledRunResponse {
+  fromJSON(object: any): MsgCreateScheduledRunResponse {
     const message = {
       ...baseMsgCreateScheduledRunResponse,
     } as MsgCreateScheduledRunResponse;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
     return message;
   },
 
-  toJSON(_: MsgCreateScheduledRunResponse): unknown {
+  toJSON(message: MsgCreateScheduledRunResponse): unknown {
     const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
     return obj;
   },
 
   fromPartial(
-    _: DeepPartial<MsgCreateScheduledRunResponse>
+    object: DeepPartial<MsgCreateScheduledRunResponse>
   ): MsgCreateScheduledRunResponse {
     const message = {
       ...baseMsgCreateScheduledRunResponse,
     } as MsgCreateScheduledRunResponse;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
     return message;
   },
 };

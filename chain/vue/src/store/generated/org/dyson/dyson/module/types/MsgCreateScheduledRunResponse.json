@@ -3,6 +3,11 @@
     "$ref": "#/definitions/MsgCreateScheduledRunResponse",
     "definitions": {
         "MsgCreateScheduledRunResponse": {
+            "properties": {
+                "index": {
+                    "type": "string"
+                }
+            },
             "additionalProperties": true,
             "type": "object",
             "title": "Msg Create Scheduled Run Response"

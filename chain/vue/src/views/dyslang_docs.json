@@ -160,8 +160,36 @@
     "definition": "(s)",
     "docstring": "Encode bytes using the URL- and filesystem-safe Base64 alphabet.\n\nArgument s is a bytes-like object to encode.  The result is returned as a\nbytes object.  The alphabet uses '-' instead of '+' and '_' instead of\n'/'."
   },
+  "bin": {
+    "definition": "(x)",
+    "docstring": "Return the binary representation of an integer.\n\n>>> bin(2796202)\n'0b1010101010101010101010'"
+  },
   "bool": {
     "docstring": "bool(x) -> bool\n\nReturns True when the argument x is true, False otherwise.\nThe builtins True and False are the only two instances of the class bool.\nThe class bool is a subclass of the class int, and cannot be subclassed.",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
+  "bytearray": {
+    "docstring": "bytearray(iterable_of_ints) -> bytearray\nbytearray(string, encoding[, errors]) -> bytearray\nbytearray(bytes_or_bytearray) -> mutable copy of bytes_or_bytearray\nbytearray(memory_view) -> bytearray\n\nConstruct an mutable bytearray object from:\n  - an iterable yielding integers in range(256)\n  - a text string encoded using the specified encoding\n  - a bytes or a bytearray object\n  - any object implementing the buffer API.\n\nbytearray(int) -> bytearray.\n\nConstruct a zero-initialized bytearray of the given length.",
+    "init_definition": "(self, source=<no value>, encoding=<no value>, errors=<no value>)",
+    "init_docstring": "Initialize self.  See help(type(self)) for accurate signature.",
+    "isclass": true
+  },
+  "bytes": {
+    "docstring": "bytes(iterable_of_ints) -> bytes\nbytes(string, encoding[, errors]) -> bytes\nbytes(bytes_or_buffer) -> immutable copy of bytes_or_buffer\nbytes(int) -> bytes object of size given by the parameter initialized with null bytes\nbytes() -> empty bytes object\n\nConstruct an immutable array of bytes from:\n  - an iterable yielding integers in range(256)\n  - a text string encoded using the specified encoding\n  - any object implementing the buffer API.\n  - an integer",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
+  "callable": {
+    "definition": "(object)",
+    "docstring": "Check whether the object appears to be callable (i.e., some kind of\nfunction).  Note that classes are callable."
+  },
+  "chr": {
+    "definition": "(code)",
+    "docstring": "Return a Unicode string of one character with the given ordinal."
+  },
+  "complex": {
+    "docstring": "complex(real[, imag]) -> complex number\n\nCreate a complex number from a real part and an optional imaginary part.\nThis is equivalent to (real + imag*1j) where imag defaults to 0.",
     "init_definition": "(obj, *args, **keywords)",
     "isclass": true
   },
@@ -199,7 +227,7 @@
   },
   "datetime.timezone": {
     "docstring": "Abstract base class for time zone info classes.\n\nSubclasses must override the name(), utcoffset() and dst() methods.",
-    "init_definition": "(offset, name=<object object at 0x00007f9888035320>)",
+    "init_definition": "(offset, name=<object object at 0x234567>)",
     "isclass": true
   },
   "datetime.tzinfo": {
@@ -261,17 +289,13 @@
     "definition": "(self)",
     "docstring": "D.values() -> an object providing a view on D's values"
   },
+  "divmod": {
+    "definition": "(x, y)",
+    "docstring": "Return the tuple ((x-x%y)/y, x%y).  Invariant: div*y + mod == x."
+  },
   "dys._chain": {
     "definition": "(method, **params)",
     "docstring": "The main way to interact with the chain from a script.\n\n:param method: the command to call on the chain, see TxBuilder for a list of possible commands\n`**kwargs` will depend on the command being called\n\n:returns: the response of the command or error"
-  },
-  "dys.get_block_gas_consumed": {
-    "definition": "()",
-    "docstring": "The total amount of gas consumed so far."
-  },
-  "dys.get_block_gas_limit": {
-    "definition": "()",
-    "docstring": "The maximum amount of gas that can be used in this query or transaction"
   },
   "dys.get_block_info": {
     "definition": "() -> dict",
@@ -314,8 +338,13 @@
     "init_definition": "(obj, *args, **keywords)",
     "isclass": true
   },
-  "float": {
-    "docstring": "float(x) -> floating point number\n\nConvert a string or number to a floating point number, if possible.",
+  "filter": {
+    "docstring": "Return an iterator yielding those items of iterable for which function(item)\nis true. If function is None, return the items that are true.",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
+  "frozenset": {
+    "docstring": "frozenset(iterable) --> frozenset object\n\nBuild an immutable unordered collection.",
     "init_definition": "(obj, *args, **keywords)",
     "isclass": true
   },
@@ -420,6 +449,11 @@
     "definition": "(self, key=<no value>, reverse=<no value>)",
     "docstring": "L.sort(key=None, reverse=False) -> None -- stable sort *IN PLACE*"
   },
+  "map": {
+    "docstring": "Make an iterator that computes the function using arguments from\neach of the iterables.  Stops when the shortest iterable is exhausted.",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
   "max": {
     "definition": "(*args, **keywords)",
     "docstring": "max(iterable, *[, default=obj, key=func]) -> value\nmax(arg1, arg2, *args, *[, key=func]) -> value\n\nWith a single iterable argument, return its biggest item. The\ndefault keyword-only argument specifies an object to return if\nthe provided iterable is empty.\nWith two or more arguments, return the largest argument.\n    "
@@ -432,10 +466,22 @@
     "definition": "(*args, **keywords)",
     "docstring": "min(iterable, *[, default=obj, key=func]) -> value\nmin(arg1, arg2, *args, *[, key=func]) -> value\n\nWith a single iterable argument, return its smallest item. The\ndefault keyword-only argument specifies an object to return if\nthe provided iterable is empty.\nWith two or more arguments, return the smallest argument.\n    "
   },
+  "oct": {
+    "definition": "(x)",
+    "docstring": "Return the octal representation of an integer.\n\n>>> oct(342391)\n'0o1234567'"
+  },
+  "ord": {
+    "definition": "(val)",
+    "docstring": "Return the integer ordinal of a character."
+  },
   "pathlib.PurePath": {
     "docstring": "Base class for manipulating paths without I/O.\n\nPurePath represents a filesystem path and offers operations which\ndon't imply any actual filesystem I/O.  Depending on your system,\ninstantiating a PurePath will return either a PurePosixPath or a\nPureWindowsPath object.  You can also instantiate either of these classes\ndirectly, regardless of your system.",
     "init_definition": "(*args)",
     "isclass": true
+  },
+  "pow": {
+    "definition": "(base, exp, mod=None)",
+    "docstring": "With two arguments, equivalent to ``base**exp''.\nWith three arguments, equivalent to ``(base**exp) % mod''.\n\nSome types, such as ints, are able to use a more efficient algorithm when\ninvoked using the three argument form."
   },
   "print": {
     "definition": "(*args, sep=' ', end='\\n', file=None, flush=False)",
@@ -490,6 +536,69 @@
     "init_definition": "(obj, *args, **keywords)",
     "isclass": true
   },
+  "re2.BackreferencesException": {
+    "docstring": "Search pattern contains backreferences.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "re2.CharClassProblemException": {
+    "docstring": "Search pattern contains unsupported character class.",
+    "init_definition": "(self, *args)",
+    "isclass": true
+  },
+  "re2.compile": {
+    "docstring": "<no docstring>",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.contains": {
+    "docstring": "Scan through string looking for a match to the pattern, returning\nTrue or False.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.count": {
+    "docstring": "Return number of non-overlapping matches in the string.\n\nEmpty matches are included in the count.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.escape": {
+    "docstring": "Escape all non-alphanumeric characters in pattern.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.findall": {
+    "docstring": "Return a list of all non-overlapping matches in the string.\n\nEach match is represented as a string or a tuple (when there are two ore\nmore groups). Empty matches are included in the result.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.finditer": {
+    "docstring": "Yield all non-overlapping matches in the string.\n\nFor each match, the iterator returns a ``Match`` object.\nEmpty matches are included in the result.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.fullmatch": {
+    "docstring": "Try to apply the pattern to the entire string, returning\na ``Match`` object, or ``None`` if no match was found.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.match": {
+    "docstring": "Try to apply the pattern at the start of the string, returning\na ``Match`` object, or ``None`` if no match was found.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.search": {
+    "docstring": "Scan through string looking for a match to the pattern, returning\na ``Match`` object or none if no match was found.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.split": {
+    "docstring": "Split the source string by the occurrences of the pattern,\nreturning a list containing the resulting substrings.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.sub": {
+    "docstring": "Return the string obtained by replacing the leftmost\nnon-overlapping occurrences of the pattern in string by the\nreplacement ``repl``. ``repl`` can be either a string or a callable;\nif a string, backslash escapes in it are processed. If it is\na callable, it's passed the ``Match`` object and must return\na replacement string to be used.",
+    "call_def": "(*args, **keywords)"
+  },
+  "re2.subn": {
+    "docstring": "Return a 2-tuple containing ``(new_string, number)``.\nnew_string is the string obtained by replacing the leftmost\nnon-overlapping occurrences of the pattern in the source\nstring by the replacement ``repl``. ``number`` is the number of\nsubstitutions that were made. ``repl`` can be either a string or a\ncallable; if a string, backslash escapes in it are processed.\nIf it is a callable, it's passed the ``Match`` object and must\nreturn a replacement string to be used.",
+    "call_def": "(*args, **keywords)"
+  },
+  "reversed": {
+    "docstring": "<no docstring>",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
   "round": {
     "definition": "(number, ndigits=<no value>)",
     "docstring": "round(number[, ndigits]) -> number\n\nRound a number to a given precision in decimal digits (default 0 digits).\nThis returns an int when called with one argument or if ndigits=None,\notherwise the same type as the number. ndigits may be negative."
@@ -511,6 +620,11 @@
   "simplejson.loads": {
     "definition": "(\n    s,\n    encoding=None,\n    cls=None,\n    object_hook=None,\n    parse_float=None,\n    parse_int=None,\n    parse_constant=None,\n    object_pairs_hook=None,\n    use_decimal=False,\n    **kw,\n)",
     "docstring": "Deserialize ``s`` (a ``str`` or ``unicode`` instance containing a JSON\ndocument) to a Python object.\n\n*encoding* determines the encoding used to interpret any\n:class:`bytes` objects decoded by this instance (``'utf-8'`` by\ndefault). It has no effect when decoding :class:`unicode` objects.\n\n*object_hook*, if specified, will be called with the result of every\nJSON object decoded and its return value will be used in place of the\ngiven :class:`dict`.  This can be used to provide custom\ndeserializations (e.g. to support JSON-RPC class hinting).\n\n*object_pairs_hook* is an optional function that will be called with\nthe result of any object literal decode with an ordered list of pairs.\nThe return value of *object_pairs_hook* will be used instead of the\n:class:`dict`.  This feature can be used to implement custom decoders\nthat rely on the order that the key and value pairs are decoded (for\nexample, :func:`collections.OrderedDict` will remember the order of\ninsertion). If *object_hook* is also defined, the *object_pairs_hook*\ntakes priority.\n\n*parse_float*, if specified, will be called with the string of every\nJSON float to be decoded.  By default, this is equivalent to\n``float(num_str)``. This can be used to use another datatype or parser\nfor JSON floats (e.g. :class:`decimal.Decimal`).\n\n*parse_int*, if specified, will be called with the string of every\nJSON int to be decoded.  By default, this is equivalent to\n``int(num_str)``.  This can be used to use another datatype or parser\nfor JSON integers (e.g. :class:`float`).\n\n*parse_constant*, if specified, will be called with one of the\nfollowing strings: ``'-Infinity'``, ``'Infinity'``, ``'NaN'``.  This\ncan be used to raise an exception if invalid JSON numbers are\nencountered.\n\nIf *use_decimal* is true (default: ``False``) then it implies\nparse_float=decimal.Decimal for parity with ``dump``.\n\nTo use a custom ``JSONDecoder`` subclass, specify it with the ``cls``\nkwarg. NOTE: You should use *object_hook* or *object_pairs_hook* instead\nof subclassing whenever possible."
+  },
+  "slice": {
+    "docstring": "slice([start,] stop[, step])\n\nCreate a slice object.  This is used for extended slicing (e.g. a[0:10:2]).",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
   },
   "sorted": {
     "definition": "(iterable, /, *, key=None, reverse=False)",
@@ -682,6 +796,10 @@
     "definition": "(self, mapping={}, /, **kws)",
     "docstring": "<no docstring>"
   },
+  "string.capwords": {
+    "definition": "(s, sep=None)",
+    "docstring": "capwords(s [,sep]) -> string\n\nSplit the argument into words using split, capitalize each\nword using capitalize, and join the capitalized words using\njoin.  If the optional second argument sep is absent or None,\nruns of whitespace characters are replaced by a single space\nand leading and trailing whitespace are removed, otherwise\nsep is used to split and join the words."
+  },
   "sum": {
     "definition": "(sequence, start=0)",
     "docstring": "sum(sequence[, start]) -> value\n\nReturns the sum of a sequence of numbers (NOT strings) plus the value\nof parameter 'start' (which defaults to 0).  When the sequence is\nempty, returns start."
@@ -772,5 +890,10 @@
   "wsgiref.handlers.BaseHandler.write": {
     "definition": "(self, data)",
     "docstring": "'write()' callable as specified by PEP 3333"
+  },
+  "zip": {
+    "docstring": "Return a zip object whose .__next__() method returns a tuple where\nthe i-th element comes from the i-th iterable argument.  The .__next__()\nmethod continues until the shortest iterable in the argument sequence\nis exhausted and then it raises StopIteration.",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
   }
 }

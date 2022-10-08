@@ -108,7 +108,6 @@ def get_module_dict():
     import decimal
     import hashlib
     import html
-    import math
     import inspect
     import mimetypes
     import pathlib
@@ -153,7 +152,6 @@ def get_module_dict():
         },
         "pathlib": {"PurePath": pathlib.PurePath},
         "mimetypes": {"guess_type": mimetypes.guess_type},
-        "math": {"math":math.trunc,"remainder":math.remainder,"isclose": math.isclose},
         "urllib": {
             "parse": {
                 "parse_qs": urllib.parse.parse_qs,

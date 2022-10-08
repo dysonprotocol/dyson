@@ -14,7 +14,9 @@ export interface DysonCron {
   indexes?: string[];
 }
 
-export type DysonMsgCreateScheduledRunResponse = object;
+export interface DysonMsgCreateScheduledRunResponse {
+  index?: string;
+}
 
 export interface DysonMsgCreateScriptResponse {
   address?: string;
