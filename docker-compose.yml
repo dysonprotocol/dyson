@@ -4,8 +4,6 @@ services:
   pypy:
     build: ./pypy
     image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/pypy:3.9
-    environment:
-      - TAG
 
   chain:
     build: 
@@ -41,6 +39,7 @@ services:
     environment:
       - DYSON_RESTHOST=http://chain:1317
       - CLEAR_DOMAIN=$CLEAR_DOMAIN
+      - TAG
     deploy:
       restart_policy:
         condition: on-failure
