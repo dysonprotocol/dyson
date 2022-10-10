@@ -18,6 +18,6 @@ chain_build:
   script:
     - echo "USER=$USER UID=$UID GID=$GID"
     - export TAG="$CI_COMMIT_REF_SLUG-$(date +%s)-$CI_COMMIT_SHORT_SHA" ; make build && docker-compose push chain frontend pypy
-    - export TAG="$CI_COMMIT_REF_SLUG" ; make build && docker-compose push chain frontend pypy
+    - export TAG="$CI_COMMIT_REF_SLUG" ; docker-compose build chain frontend && docker-compose push chain frontend
 variables:
       GIT_SUBMODULE_STRATEGY: recursive

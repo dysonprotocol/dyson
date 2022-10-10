@@ -28,7 +28,4 @@ RUN go mod download -x
 
 COPY . ./
 
-ARG TAG
-ENV TAG $TAG
-
 RUN make build 
