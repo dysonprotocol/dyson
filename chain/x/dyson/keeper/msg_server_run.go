@@ -13,7 +13,6 @@ func (k msgServer) Run(goCtx context.Context, msg *types.MsgRun) (*types.MsgRunR
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	k.Logger(ctx).Info(fmt.Sprintf("111 block limit: %+v", ctx.BlockGasMeter().Limit()))
 	_, isFound := k.GetScript(ctx, msg.Address)
 	if !isFound {
 		fmt.Println(fmt.Sprintf("Script at address %v not found", msg.Address))

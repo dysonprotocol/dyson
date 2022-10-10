@@ -272,7 +272,9 @@ def build_sandbox(port, creator, address, amount, block_info):
         # print(f"rpc {method}: {res.status_code} response from golang: {res.text}")
         try:
             ret_json = res.json()
-            if ret_json["error"].startswith("CHAIN ERROR: types.ErrorOutOfGas"):
+            if ret_json["error"] and ret_json["error"].startswith(
+                "CHAIN ERROR: types.ErrorOutOfGas"
+            ):
                 raise MemoryError("Out of Gas")
             return ret_json
         except json.JSONDecodeError:
@@ -561,7 +563,12 @@ dyslang.WHITELIST_FUNCTIONS.update(
     [
         "datetime.datetime.isoformat",
         "freezegun.api.FakeDatetime.now",
+        "freezegun.api.FakeDatetime.datetime",
+        "freezegun.api.FakeDatetime.time",
+        "freezegun.api.FakeDatetime.date",
         "freezegun.api.FakeDatetime.timestamp",
+        "datetime.datetime.time",
+        "datetime.datetime.date",
         # re2.Match.re
         "contains",
         "count",

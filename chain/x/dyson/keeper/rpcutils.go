@@ -51,7 +51,6 @@ func (rpcservice *RpcService) Consumegas(_ *http.Request, msg *ConsumeGasRequest
 
 	// Recursive chain calls are exponentially more expensive
 	gasUsed := uint64(float64(msg.Amount) * math.Pow(2, float64(rpcservice.k.currentDepth-1)))
-	fmt.Printf("444 block limit: %+v", ctx.BlockGasMeter().Limit())
 	ctx.GasMeter().ConsumeGas(gasUsed, "gasUsed")
 	//fmt.Printf("gasUsed: %v\n", gasUsed)
 	*response = ConsumeGasResponse{
