@@ -272,6 +272,8 @@ def build_sandbox(port, creator, address, amount, block_info):
         # print(f"rpc {method}: {res.status_code} response from golang: {res.text}")
         try:
             ret_json = res.json()
+            if ret_json["error"].startswith("CHAIN ERROR: types.ErrorOutOfGas"):
+                raise MemoryError("Out of Gas")
             return ret_json
         except json.JSONDecodeError:
             return {"exception": res.text}
@@ -292,7 +294,6 @@ def build_sandbox(port, creator, address, amount, block_info):
         last_node = None
         cumsize = 0
 
-
         def gas_state(self):
             return gas_state
 
@@ -306,7 +307,7 @@ def build_sandbox(port, creator, address, amount, block_info):
                 gas_state["gas_consumed"] = resp["result"].get("GasConsumed", None)
                 gas_state["gas_limit"] = resp["result"].get("GasLimit", None)
                 if gas_state["gas_consumed"] > gas_state["gas_limit"]:
-                    raise MemoryError(f"Out of Gas: {resp}")
+                    raise MemoryError("Out of Gas")
 
         def track(self, node):
             if hasattr(node, "nodes_called"):
