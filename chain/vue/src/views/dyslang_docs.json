@@ -203,6 +203,10 @@
     "init_definition": "(\n    year,\n    month=None,\n    day=None,\n    hour=0,\n    minute=0,\n    second=0,\n    microsecond=0,\n    tzinfo=None,\n    *,\n    fold=0,\n)",
     "isclass": true
   },
+  "datetime.datetime.date": {
+    "definition": "(self)",
+    "docstring": "Return the date part."
+  },
   "datetime.datetime.isoformat": {
     "definition": "(self, sep='T', timespec='auto')",
     "docstring": "Return the time formatted according to ISO.\n\nThe full format looks like 'YYYY-MM-DD HH:MM:SS.mmmmmm'.\nBy default, the fractional part is omitted if self.microsecond == 0.\n\nIf self.tzinfo is not None, the UTC offset is also attached, giving\ngiving a full format of 'YYYY-MM-DD HH:MM:SS.mmmmmm+HH:MM'.\n\nOptional argument sep specifies the separator between date and\ntime, default 'T'.\n\nThe optional argument timespec specifies the number of additional\nterms of the time to include. Valid options are 'auto', 'hours',\n'minutes', 'seconds', 'milliseconds' and 'microseconds'."
@@ -210,6 +214,10 @@
   "datetime.datetime.now": {
     "definition": "(tz=None)",
     "docstring": "Construct a datetime from time.time() and optional time zone info."
+  },
+  "datetime.datetime.time": {
+    "definition": "(self)",
+    "docstring": "Return the time part, with tzinfo None."
   },
   "datetime.datetime.timestamp": {
     "definition": "(self)",

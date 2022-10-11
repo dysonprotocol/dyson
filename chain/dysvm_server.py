@@ -276,6 +276,11 @@ def build_sandbox(port, creator, address, amount, block_info):
                 "CHAIN ERROR: types.ErrorOutOfGas"
             ):
                 raise MemoryError("Out of Gas")
+            try: 
+                # some rpc responses are json encoded
+                ret_json['result'] = json.loads(str(ret_json['result']).encode()) 
+            except json.JSONDecodeError: 
+                pass
             return ret_json
         except json.JSONDecodeError:
             return {"exception": res.text}
@@ -563,12 +568,11 @@ dyslang.WHITELIST_FUNCTIONS.update(
     [
         "datetime.datetime.isoformat",
         "freezegun.api.FakeDatetime.now",
-        "freezegun.api.FakeDatetime.datetime",
         "freezegun.api.FakeDatetime.time",
         "freezegun.api.FakeDatetime.date",
         "freezegun.api.FakeDatetime.timestamp",
-        "datetime.datetime.time",
-        "datetime.datetime.date",
+        "datetime.time",
+        "datetime.date",
         # re2.Match.re
         "contains",
         "count",

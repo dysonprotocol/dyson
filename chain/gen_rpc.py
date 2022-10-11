@@ -10,7 +10,7 @@ msg_template = Template(
 // Keeper: $mod_keeper
 // Types: $mod_types
 // $keeper_import
-func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$req_type, response *$mod_types.$resp_type) (err error) {
+func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$req_type, response *string) (err error) {
 	//handler := $mod_keeper.NewMsgServerImpl(rpcservice.k.$mod_keeper).$keeper_function
     $handler
 	//
@@ -42,7 +42,7 @@ func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$r
 		return err
 	}
 	Write()
-	*response = *r
+    *response = string(rpcservice.k.cdc.MustMarshalJSON(r))
 	return nil
 }
 """
@@ -53,12 +53,12 @@ query_template = Template(
 // Keeper: $mod_keeper
 // Types: $mod_types
 // $keeper_import
-func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$req_type, response *$mod_types.$resp_type) (err error) {
+func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$req_type, response *string) (err error) {
     $handler
 	if err != nil {
 		return err
 	}
-	*response = *r
+    *response = string(rpcservice.k.cdc.MustMarshalJSON(r))
 	return nil
 }
 """
@@ -249,7 +249,7 @@ for file_path in [
                 function_name=function_name,
                 mod_types=mod_types,
                 req_type=d["RequestType"],
-                resp_type=d["ReturnsType"],
+                #resp_type=d["ReturnsType"],
                 mod_keeper=mod_keeper,
                 keeper_function=d["Name"],
                 keeper_import=keeper_import,
