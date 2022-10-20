@@ -6,9 +6,9 @@ clear_domain = re.escape(settings.CLEAR_DOMAIN)
 dys_domain = re.escape(settings.DYS_DOMAIN)
 
 host_patterns = patterns(
-    fr"{ dys_domain }",
+    "",
     host(
-        rf"{ dys_domain }",
+        fr"{ dys_domain }",
         settings.ROOT_URLCONF,
         callback="mini_api.clear_main_callback",
         name="clear",
