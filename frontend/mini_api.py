@@ -76,6 +76,7 @@ STATICFILES_DIRS = [
     join(BASE_DIR, "vue/static"),
 ]
 CLEAR_DOMAIN = os.environ.get("CLEAR_DOMAIN", "localhost:8000")
+DYS_DOMAIN = os.environ.get("DYS_DOMAIN", "dys."+CLEAR_DOMAIN)
 
 SETTINGS = dict((key, val) for key, val in locals().items() if key.isupper())
 if not settings.configured:
@@ -217,6 +218,7 @@ def node_info(request):
         "VITE_API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
         "VITE_API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
         "CLEAR_DOMAIN": os.environ.get("CLEAR_DOMAIN"),
+        "DYS_DOMAIN": os.environ.get("DYS_DOMAIN"),
     }
     return JsonResponse(info)
 
