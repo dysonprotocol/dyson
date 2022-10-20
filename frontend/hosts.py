@@ -5,12 +5,8 @@ from django_hosts import patterns, host
 clear_domain = re.escape(settings.CLEAR_DOMAIN)
 dys_domain = re.escape(settings.DYS_DOMAIN)
 
-if not dys_domain:
-    dys_domain = f"dys.{ clear_domain }"
-
 host_patterns = patterns(
-    dys_domain,
-    "",
+    fr"{ dys_domain }",
     host(
         rf"{ dys_domain }",
         settings.ROOT_URLCONF,
