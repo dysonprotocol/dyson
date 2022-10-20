@@ -9,7 +9,7 @@ if not dys_domain:
     dys_domain = f"dys.{ clear_domain }"
 
 host_patterns = patterns(
-    dys_domain
+    dys_domain,
     "",
     host(
         rf"{ dys_domain }",
