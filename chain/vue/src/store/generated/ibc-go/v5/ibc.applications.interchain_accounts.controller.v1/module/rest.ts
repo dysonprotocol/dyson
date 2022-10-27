@@ -40,7 +40,10 @@ export interface V1QueryInterchainAccountResponse {
  * QueryParamsResponse is the response type for the Query/Params RPC method.
  */
 export interface V1QueryParamsResponse {
-  /** params defines the parameters of the module. */
+  /**
+   * Params defines the set of on-chain interchain accounts parameters.
+   * The following parameters may be used to disable the controller submodule.
+   */
   params?: V1Params;
 }
 

@@ -4,8 +4,7 @@ import mini_api
 
 node_info_patterns = [
     path("node_info", mini_api.node_info, name="node-info"),
-    path("dys_js_tags", mini_api.dys_js_tags, name="dys_js_tags"),
-    path("dys_js_tags/<js_asset>", mini_api.dys_js_tags, name="dys_js_tags"),
+    path("dyson.js", mini_api.dys_js_tags, name="dys_js_tags"),
 ]
 
 urlpatterns = [

@@ -10,7 +10,7 @@ import requests
 import simplejson as json
 import tldextract
 from django.conf import settings
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import re_path
 
 from utils import get_txt_records
@@ -46,6 +46,7 @@ TEMPLATES = [
         "DIRS": [
             BASE_DIR,
             join(BASE_DIR, "vue/"),
+            join(BASE_DIR, "templates/"),
         ],
         "APP_DIRS": True,
     }
@@ -76,7 +77,7 @@ STATICFILES_DIRS = [
     join(BASE_DIR, "vue/static"),
 ]
 CLEAR_DOMAIN = os.environ.get("CLEAR_DOMAIN", "localhost:8000")
-DYS_DOMAIN = os.environ.get("DYS_DOMAIN", "dys."+CLEAR_DOMAIN)
+DYS_DOMAIN = os.environ.get("DYS_DOMAIN") or "dys." + CLEAR_DOMAIN
 
 SETTINGS = dict((key, val) for key, val in locals().items() if key.isupper())
 if not settings.configured:
@@ -87,6 +88,7 @@ django.setup()
 from django.conf.urls.static import static
 from django.http import HttpResponse, JsonResponse
 from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer
+
 # Settings must be configured before importing some things like staticfiles
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -141,6 +143,7 @@ class FakeSocket:
     def makefile(self, *args, **kwargs):
         return self._file
 
+
 def dys_view(request, script_address=None):
     address = script_address or request.script_address
     u = f"{settings.DYSON_RESTHOST}/dyson/wsgi"
@@ -173,42 +176,20 @@ def dys_view(request, script_address=None):
 
 
 def dys_js_tags(request, js_asset=None):
-    from html.parser import HTMLParser
-
-    from django_hosts.resolvers import reverse
-
-    tags = []
-
-    class ScriptHTMLParser(HTMLParser):
-        def handle_starttag(self, tag, attrs):
-            src = dict(attrs).get("src")
-            if tag == "script" and src:
-                tags.append(src)
-
     try:
         with open("vue/index.html") as f:
             h = f.read()
     except FileNotFoundError:
-        return HttpResponse(
-            """<script>alert('vue/index.html not found, cannot load chain functions')</script>"""
-        )
+        return HttpResponse("""Cannot extract js files""")
 
-    base_host = reverse("index", host="clear")
-    parser = ScriptHTMLParser()
-    parser.feed(h)
-    js_asset_dict = {
-        re.match(r"/static/js/(?P<base_asset_name>[a-z-]+)", t).groupdict()[
-            "base_asset_name"
-        ]
-        + ".js": base_host
-        + t
-        for t in tags
-    }
+    js_assets = re.findall(r'"/static/(?P<base_asset_name>.*\.js)"', h)
 
-    if js_asset in js_asset_dict:
-        return redirect(js_asset_dict[js_asset])
-
-    return JsonResponse(js_asset_dict)
+    return render(
+        request,
+        "loader.js",
+        {"script_paths": [settings.STATIC_URL + a for a in js_assets]},
+        content_type="application/javascript",
+    )
 
 
 def node_info(request):
@@ -218,7 +199,7 @@ def node_info(request):
         "VITE_API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
         "VITE_API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
         "CLEAR_DOMAIN": os.environ.get("CLEAR_DOMAIN"),
-        "DYS_DOMAIN": os.environ.get("DYS_DOMAIN"),
+        "DYS_DOMAIN": DYS_DOMAIN,
     }
     return JsonResponse(info)
 

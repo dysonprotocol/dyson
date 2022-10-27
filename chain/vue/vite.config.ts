@@ -6,16 +6,15 @@ import { dynamicImport } from "vite-plugin-dynamic-import";
 import envCompatible from "vite-plugin-env-compatible";
 import commonjs from "@rollup/plugin-commonjs";
 
-
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {},
   build: {
     assetsDir: "static",
     minify: true,
-    sourcemap: false,
+    sourcemap: true,
     rollupOptions: {
-     external: [],
+      external: [],
     },
   },
   server: {
@@ -31,9 +30,9 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          whitespace: 'preserve'
-        }
-      }
+          whitespace: "preserve",
+        },
+      },
     }),
     nodeResolve(),
     dynamicImport(),
