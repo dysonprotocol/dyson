@@ -27,7 +27,7 @@ func (rpcservice *RpcService) Consumegas(_ *http.Request, msg *ConsumeGasRequest
 			switch r := r.(type) {
 			case sdk.ErrorOutOfGas:
 				err = sdkerrors.Wrapf(sdkerrors.ErrOutOfGas,
-					"script out of gas, gasWanted: %d, gasUsed: %d",
+					"Consumegas script out of gas, gasWanted: %d, gasUsed: %d",
 					ctx.GasMeter().Limit(), ctx.GasMeter().GasConsumed(),
 				)
 
@@ -38,7 +38,7 @@ func (rpcservice *RpcService) Consumegas(_ *http.Request, msg *ConsumeGasRequest
 		} else {
 			if ctx.GasMeter().IsPastLimit() {
 				err = sdkerrors.Wrapf(sdkerrors.ErrOutOfGas,
-					"script out of gas, gasWanted: %d, gasUsed: %d",
+					"PastLimit script out of gas, gasWanted: %d, gasUsed: %d",
 					ctx.GasMeter().Limit(), ctx.GasMeter().GasConsumed(),
 				)
 				response = nil
