@@ -359,7 +359,7 @@ func handleRunRecovery(r interface{}, sdkCtx sdk.Context) error {
 	switch r := r.(type) {
 	case sdk.ErrorOutOfGas:
 		return sdkerrors.Wrapf(sdkerrors.ErrOutOfGas,
-			"script out of gas in location: %v; gasWanted: %d, gasUsed: %d",
+			"ErrorOutofGas script out of gas in location: %v; gasWanted: %d, gasUsed: %d",
 			r.Descriptor, sdkCtx.GasMeter().Limit(), sdkCtx.GasMeter().GasConsumed(),
 		)
 

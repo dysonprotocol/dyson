@@ -75,6 +75,7 @@ STATIC_URL = "/static/"
 STATIC_ROOT = "/static_root"
 STATICFILES_DIRS = [
     join(BASE_DIR, "vue/static"),
+    join(BASE_DIR, "static"),
 ]
 CLEAR_DOMAIN = os.environ.get("CLEAR_DOMAIN", "localhost:8000")
 DYS_DOMAIN = os.environ.get("DYS_DOMAIN") or "dys." + CLEAR_DOMAIN
