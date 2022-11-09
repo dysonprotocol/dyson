@@ -7,8 +7,10 @@ import (
 	"regexp"
 )
 
+
 const (
-	reDnmString = `[a-z][a-z0-9]{2,31}([.][a-z0-9]+)*`
+    // Make sure this matche NameRegex
+	reDnmString = `[^/]*([/][a-z0-9]{1,8}){0,1}`
 )
 
 var reDnm = regexp.MustCompile(fmt.Sprintf(`^%s$`, reDnmString))

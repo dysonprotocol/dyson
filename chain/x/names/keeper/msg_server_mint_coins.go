@@ -8,16 +8,20 @@ import (
 	"github.com/org/dyson/x/names/types"
 	"strings"
 )
+const COIN_GAS_COST = 1
 
 func (k msgServer) MintCoins(goCtx context.Context, msg *types.MsgMintCoins) (*types.MsgMintCoinsResponse, error) {
+
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	coin, err := sdk.ParseCoinNormalized(msg.Amount)
 	if err != nil {
 		return nil, err
 	}
+    gasToUse := coin.Amount.MulRaw(COIN_GAS_COST).Uint64()
+    ctx.GasMeter().ConsumeGas(gasToUse, "MintCoins")
 
-	denomParts := strings.Split(coin.Denom, ".")
+	denomParts := strings.Split(coin.Denom, "/")
 	baseName := denomParts[0]
 
 	name, isFound := k.GetName(

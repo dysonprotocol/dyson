@@ -207,3 +207,5 @@ require (
 replace github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
 
 replace github.com/ignite/cli => gitlab.com/dysonproject/ignite-cli v0.0.0-nightly
+
+

@@ -10,10 +10,8 @@ import (
 
 const (
 	TypeMsgReveal = "reveal"
-	NameRegex     = `^[a-z][a-z0-9-]{1,62}[a-z0-9]$`
+	NameRegex     = `^[a-z0-9][a-z0-9-]{0,15}[.]dys$`
 )
-
-var ForbiddenNames = [...]string{"ibc", "dys", "dyson", "root", "admin", "www", "api", "docs", "sybil", "coin"}
 
 var _ sdk.Msg = &MsgReveal{}
 
@@ -54,14 +52,10 @@ func ValidateName(name string) error {
 	if !matched {
 		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("name must match the regular expression: %s", NameRegex))
 	}
-	if strings.Contains(name, "dys") {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("name must not contain the substring 'dys'"))
+    if strings.Contains(strings.TrimSuffix(name, ".dys"), "dys") {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("main name cannot contain 'dys'"))
 	}
-	for _, v := range ForbiddenNames {
-		if v == name {
-			return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "name is forbidden: %s", name)
-		}
-	}
+
 	return nil
 }
 

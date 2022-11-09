@@ -43,5 +43,15 @@ func (msg *MsgSetPriceAndExtend) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid owner address (%s)", err)
 	}
+	coin, err := sdk.ParseCoinNormalized(msg.Price)
+	if err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid coins (%s) should be a number ending in 'dys': %s", msg.Price, err)
+	}
+	if coin.Amount.LT(sdk.NewInt(100)) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid coin amount, must be greater than 100': %s", coin.Amount)
+	}
+	if coin.Denom != "dys" {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid coin denom, must be 'dys': %s", coin.Denom)
+	}
 	return nil
 }

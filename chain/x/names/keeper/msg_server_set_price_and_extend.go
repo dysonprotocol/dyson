@@ -38,6 +38,7 @@ func (k msgServer) SetPriceAndExtend(goCtx context.Context, msg *types.MsgSetPri
 	if coin.Denom != "dys" {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "invalid denom, must be 'dys'")
 	}
+	// calcualte the fee of 1%
 	coin.Amount = (coin.Amount.QuoRaw(100)) // divide by 100
 	err = k.PayFee(ctx, from, coin)
 	if err != nil {
