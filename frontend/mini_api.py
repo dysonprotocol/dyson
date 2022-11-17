@@ -231,6 +231,9 @@ def clear_main_callback(request):
 
 # djanog-hosts callback
 def clear_dns_callback(request, domain=None, subdomains=None):
+    if not domain.startswith("dys"):
+        # not an address, so append .dys
+        domain = domain + ".dys"
     request.domain = domain
     request.subdomains = []
     if subdomains:
@@ -240,7 +243,6 @@ def clear_dns_callback(request, domain=None, subdomains=None):
     print("domain", request.domain)
     request.script_address = domain
     print("subdomains", request.subdomains)
-    request.domain = domain
 
 
 # djanog-hosts callback
