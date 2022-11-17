@@ -27,7 +27,7 @@ export:
 restore-latest:
 	ORIG_GENESIS=~/latest-export.json ; \
 	NEW_GENESIS=~/.dyson/config/genesis.json ; \
-	cat $$ORIG_GENESIS | jq '.consensus_params.block += {"time_iota_ms": "10000"} ' > $$NEW_GENESIS && git -P diff --no-index $$ORIG_GENESIS $$NEW_GENESIS || echo "done"
+	cat $$ORIG_GENESIS | jq '.consensus_params.block += {"time_iota_ms": "1000"} ' > $$NEW_GENESIS && git -P diff --no-index $$ORIG_GENESIS $$NEW_GENESIS || echo "done"
 
 
 reset:

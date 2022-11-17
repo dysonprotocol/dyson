@@ -30,7 +30,7 @@ init:
     consensus:
       max_body_bytes: 10000
 genesis:
-  chain_id: "dyson-testnet-01"
+  chain_id: "dyson"
   app_state:
     staking:
       params:
