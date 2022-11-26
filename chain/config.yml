@@ -53,3 +53,4 @@ build:
   main: "cmd/dysond"
   ldflags:
    - "-X github.com/cosmos/cosmos-sdk/version.Version=" # AUTOMATICALLY GENERATED LDFLAGS TAG
+   - "-X github.com/cosmos/cosmos-sdk/version.Commit=" # AUTOMATICALLY GENERATED LDFLAGS COMMIT
