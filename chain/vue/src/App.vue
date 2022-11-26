@@ -2,7 +2,7 @@
   <!-- TODO fix to the top right of page-->
   <div class="container-fluid">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <router-link class="navbar-brand" to="/">Dyson Protocol </router-link>
+      <router-link class="navbar-brand" to="/">Dyson Protocol</router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -15,7 +15,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <router-link class="nav-link" active-class="active" to="/commands"
               >Commands</router-link
@@ -33,7 +33,7 @@
               :href="apiCosmos"
               target="_blank"
             >
-            API 
+              API
             </a>
           </li>
           <li class="nav-item">
@@ -52,6 +52,7 @@
           </li>
           <DysAcc />
         </ul>
+        <div class="navbar-text">Chain ID: {{ chainId }}</div>
       </div>
     </nav>
     <router-view />

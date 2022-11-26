@@ -1,11 +1,12 @@
 package main
 
 import (
+	"os"
+
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 	"github.com/ignite/cli/ignite/pkg/cosmoscmd"
 	"github.com/ignite/cli/ignite/pkg/xstrings"
 	"github.com/org/dyson/app"
-	"os"
 )
 
 func main() {
