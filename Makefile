@@ -4,7 +4,7 @@ write-commit-info:
 		echo ${TAG} > chain/app/TAG.txt
 		echo ${TAG} > chain/vue/TAG.txt
 		echo ${TAG} > frontend/TAG.txt
-		sed -i "" 's;^.*AUTOMATICALLY GENERATED LDFLAGS TAG.*$$;   - "-X github.com/cosmos/cosmos-sdk/version.Version=${TAG}" # AUTOMATICALLY GENERATED LDFLAGS TAG;' chain/config.yml
+		sed -i 's;^.*AUTOMATICALLY GENERATED LDFLAGS TAG.*$$;   - "-X github.com/cosmos/cosmos-sdk/version.Version=${TAG}" # AUTOMATICALLY GENERATED LDFLAGS TAG;' chain/config.yml
 
 gen:
 		#docker run --rm -v chain:/workspace --workdir /workspace tendermintdev/sdk-proto-gen:master sh scripts/protocgen.sh
