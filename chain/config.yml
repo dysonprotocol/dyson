@@ -1,74 +1,58 @@
-version: 1
-build:
-  main: cmd/dysond
-  ldflags:
-  - -X github.com/cosmos/cosmos-sdk/version.Version=
-  - -X github.com/cosmos/cosmos-sdk/version.Commit=
-  proto:
-    path: proto
-    third_party_paths:
-    - third_party/proto
-    - proto_vendor
 accounts:
-- name: carol
-  coins:
-  - 10000token
-  - 3000000000000dys
-  mnemonic: wall surround income depart flock fox banana cram meat section talent
-    torch employ coast boat include file whale pulse junior mad when about pave
-- name: alice
-  coins:
-  - 20000token
-  - 2000000000000dys
-  mnemonic: general cliff hard outer private tag vibrant state short honey custom
-    decade
-- name: bob
-  coins:
-  - 10000token
-  - 10000000000000dys
-  mnemonic: heavy shed march coast smoke garden atom disagree struggle usage frown
-    sniff
-- name: alice2
-  coins:
-  - 10000token
-  - 30000000000000dys
-  mnemonic: where device mixture army forward today sand penalty kidney dress equip
-    famous main earn chapter ramp core question act transfer coin pride clip angry
-faucet:
-  name: bob
-  coins:
-  - 5token
-  - 100000000000dys
-  host: 0.0.0.0:4500
+  - name: carol
+    mnemonic: wall surround income depart flock fox banana cram meat section talent torch employ coast boat include file whale pulse junior mad when about pave
+    coins: ["10000token", "3000000000000dys"]
+  - name: alice
+    coins: ["20000token", "2000000000000dys"]
+    mnemonic: general cliff hard outer private tag vibrant state short honey custom decade
+  - name: bob
+    coins: ["10000token", "10000000000000dys"]
+    mnemonic: heavy shed march coast smoke garden atom disagree struggle usage frown sniff
+  - name: alice2
+    coins: ["10000token", "30000000000000dys"]
+    mnemonic: where device mixture army forward today sand penalty kidney dress equip famous main earn chapter ramp core question act transfer coin pride clip angry
+validator:
+  name: alice2
+  staked: "10000000dys"
 client:
   vuex:
-    path: vue/src/store
+    path: "vue/src/store"
   openapi:
-    path: docs/static/openapi.yml
-genesis:
-  app_state:
-    crisis:
-      constant_fee:
-        denom: dys
-    gov:
-      deposit_params:
-        min_deposit:
-        - amount: "1000"
-          denom: dys
-      voting_params:
-        voting_period: 20s
-    mint:
-      params:
-        mint_denom: dys
-    staking:
-      params:
-        bond_denom: dys
-  chain_id: dyson
-validators:
-- name: alice2
-  bonded: 10000000dys
+    path: "docs/static/openapi.yml"
+faucet:
+  name: bob
+  coins: ["5token", "100000000000dys"]
+
+init:
   app:
-    minimum-gas-prices: 0.001dys
+    minimum-gas-prices: "0.001dys"
   config:
     consensus:
-      max_body_bytes: "10000"
+      max_body_bytes: 10000
+genesis:
+  chain_id: "dyson-dev"
+  app_state:
+    staking:
+      params:
+        bond_denom: "dys"
+    mint:
+      params:
+        mint_denom: "dys"
+    crisis:
+      constant_fee:
+        denom: "dys"
+    gov:
+      voting_params:
+        voting_period: "30s"
+      deposit_params:
+        min_deposit:
+            - amount: "1000"
+              denom: "dys"
+
+build:
+  main: "cmd/dysond"
+  ldflags:
+   - "-X github.com/cosmos/cosmos-sdk/version.Version=dev" # AUTOMATICALLY GENERATED LDFLAGS TAG
+   - "-X github.com/cosmos/cosmos-sdk/version.Commit=" # AUTOMATICALLY GENERATED LDFLAGS COMMIT
+
+

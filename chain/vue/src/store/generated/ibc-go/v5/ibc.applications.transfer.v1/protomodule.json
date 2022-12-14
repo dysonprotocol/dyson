@@ -3,17 +3,17 @@
 	"GoModulePath": "github.com/cosmos/ibc-go/v5",
 	"Pkg": {
 		"Name": "ibc.applications.transfer.v1",
-		"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1",
+		"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/genesis.proto",
 				"Dependencies": [
 					"ibc/applications/transfer/v1/transfer.proto",
 					"gogoproto/gogo.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/query.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos/base/query/v1beta1/pagination.proto",
@@ -22,13 +22,13 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/transfer.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/transfer.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/tx.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos/base/v1beta1/coin.proto",
@@ -40,78 +40,78 @@
 		"Messages": [
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/genesis.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryDenomTraceRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDenomTraceResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDenomTracesRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDenomTracesResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryParamsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QueryParamsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDenomHashRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDenomHashResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryEscrowAddressRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryEscrowAddressResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "DenomTrace",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/transfer.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/transfer.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "Params",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/transfer.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/transfer.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgTransfer",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/tx.proto",
-				"HighestFieldNumber": 7
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/tx.proto",
+				"HighestFieldNumber": 8
 			},
 			{
 				"Name": "MsgTransferResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/tx.proto",
-				"HighestFieldNumber": 0
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/tx.proto",
+				"HighestFieldNumber": 1
 			}
 		],
 		"Services": [
@@ -204,7 +204,7 @@
 		{
 			"Name": "MsgTransfer",
 			"URI": "ibc.applications.transfer.v1.MsgTransfer",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/tx.proto"
 		}
 	],
 	"HTTPQueries": [
@@ -274,11 +274,11 @@
 	"Types": [
 		{
 			"Name": "DenomTrace",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/transfer.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/transfer.proto"
 		},
 		{
 			"Name": "Params",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/applications/transfer/v1/transfer.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/applications/transfer/v1/transfer.proto"
 		}
 	]
 }

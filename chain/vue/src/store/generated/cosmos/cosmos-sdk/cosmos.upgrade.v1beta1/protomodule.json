@@ -3,17 +3,17 @@
 	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.upgrade.v1beta1",
-		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/query.proto",
 				"Dependencies": [
 					"google/api/annotations.proto",
 					"cosmos/upgrade/v1beta1/upgrade.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/tx.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos_proto/cosmos.proto",
@@ -22,7 +22,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/upgrade.proto",
 				"Dependencies": [
 					"google/protobuf/any.proto",
 					"gogoproto/gogo.proto",
@@ -35,92 +35,92 @@
 		"Messages": [
 			{
 				"Name": "QueryCurrentPlanRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QueryCurrentPlanResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAppliedPlanRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAppliedPlanResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryUpgradedConsensusStateRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryUpgradedConsensusStateResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryModuleVersionsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryModuleVersionsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAuthorityRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QueryAuthorityResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgSoftwareUpgrade",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgSoftwareUpgradeResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgCancelUpgrade",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/tx.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgCancelUpgradeResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "Plan",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/upgrade.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "SoftwareUpgradeProposal",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/upgrade.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "CancelSoftwareUpgradeProposal",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/upgrade.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ModuleVersion",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/upgrade.proto",
 				"HighestFieldNumber": 2
 			}
 		],
@@ -215,14 +215,14 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgSoftwareUpgrade",
-			"URI": "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto"
-		},
-		{
 			"Name": "MsgCancelUpgrade",
 			"URI": "cosmos.upgrade.v1beta1.MsgCancelUpgrade",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgSoftwareUpgrade",
+			"URI": "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/tx.proto"
 		}
 	],
 	"HTTPQueries": [
@@ -289,19 +289,19 @@
 	"Types": [
 		{
 			"Name": "Plan",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/upgrade.proto"
 		},
 		{
 			"Name": "SoftwareUpgradeProposal",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/upgrade.proto"
 		},
 		{
 			"Name": "CancelSoftwareUpgradeProposal",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/upgrade.proto"
 		},
 		{
 			"Name": "ModuleVersion",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/upgrade/v1beta1/upgrade.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/upgrade/v1beta1/upgrade.proto"
 		}
 	]
 }

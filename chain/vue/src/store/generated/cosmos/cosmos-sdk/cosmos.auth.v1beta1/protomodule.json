@@ -3,10 +3,10 @@
 	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.auth.v1beta1",
-		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/auth.proto",
 				"Dependencies": [
 					"cosmos_proto/cosmos.proto",
 					"gogoproto/gogo.proto",
@@ -14,7 +14,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/genesis.proto",
 				"Dependencies": [
 					"google/protobuf/any.proto",
 					"gogoproto/gogo.proto",
@@ -22,7 +22,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"Dependencies": [
 					"cosmos/base/query/v1beta1/pagination.proto",
 					"gogoproto/gogo.proto",
@@ -37,102 +37,112 @@
 		"Messages": [
 			{
 				"Name": "BaseAccount",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/auth.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "ModuleAccount",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/auth.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "Params",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/auth.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/genesis.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryAccountsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAccountsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryAccountRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
-				"HighestFieldNumber": 1
-			},
-			{
-				"Name": "QueryModuleAccountsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
-				"HighestFieldNumber": 0
-			},
-			{
-				"Name": "QueryParamsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAccountResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryParamsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryParamsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryModuleAccountsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QueryModuleAccountsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryModuleAccountByNameRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryModuleAccountByNameResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "Bech32PrefixRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "Bech32PrefixResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "AddressBytesToStringRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "AddressBytesToStringResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "AddressStringToBytesRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "AddressStringToBytesResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAccountAddressByIDRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAccountAddressByIDResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			}
 		],
@@ -199,6 +209,20 @@
 						"HTTPRules": [
 							{
 								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "ModuleAccountByName",
+						"RequestType": "QueryModuleAccountByNameRequest",
+						"ReturnsType": "QueryModuleAccountByNameResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"name"
+								],
 								"HasQuery": false,
 								"HasBody": false
 							}
@@ -310,6 +334,19 @@
 			]
 		},
 		{
+			"Name": "ModuleAccountByName",
+			"FullName": "QueryModuleAccountByName",
+			"Rules": [
+				{
+					"Params": [
+						"name"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
 			"Name": "Bech32Prefix",
 			"FullName": "QueryBech32Prefix",
 			"Rules": [
@@ -350,15 +387,15 @@
 	"Types": [
 		{
 			"Name": "BaseAccount",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/auth.proto"
 		},
 		{
 			"Name": "ModuleAccount",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/auth.proto"
 		},
 		{
 			"Name": "Params",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/auth/v1beta1/auth.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/auth/v1beta1/auth.proto"
 		}
 	]
 }

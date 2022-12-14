@@ -193,13 +193,14 @@
         "QueryAccountAddressByIDRequest": {
           "properties": {
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "id is the account number of the address to be queried. This field should have been an uint64 (like all account numbers), and will be updated to uint64 in a future version of the auth query."
             }
           },
           "additionalProperties": true,
           "type": "object",
           "title": "Query Account Address By ID Request",
-          "description": "QueryAccountAddressByIDRequest is the request type for AccountAddressByID rpc method"
+          "description": "QueryAccountAddressByIDRequest is the request type for AccountAddressByID rpc method Since: cosmos-sdk 0.46.2"
         }
       }
     },
@@ -216,7 +217,7 @@
           "additionalProperties": true,
           "type": "object",
           "title": "Query Account Address By ID Response",
-          "description": "QueryAccountAddressByIDResponse is the response type for AccountAddressByID rpc method"
+          "description": "QueryAccountAddressByIDResponse is the response type for AccountAddressByID rpc method Since: cosmos-sdk 0.46.2"
         }
       }
     },
@@ -350,6 +351,67 @@
     "http_rules": [
       {
         "Params": null,
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "cosmos.auth.v1beta1/QueryModuleAccountByName": {
+    "module_name": "cosmos.auth.v1beta1",
+    "name": "ModuleAccountByName",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryModuleAccountByNameRequest",
+      "definitions": {
+        "QueryModuleAccountByNameRequest": {
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query Module Account By Name Request",
+          "description": "QueryModuleAccountByNameRequest is the request type for the Query/ModuleAccountByName RPC method."
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryModuleAccountByNameResponse",
+      "definitions": {
+        "QueryModuleAccountByNameResponse": {
+          "properties": {
+            "account": {
+              "properties": {
+                "type_url": {
+                  "type": "string",
+                  "description": "A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading \".\" is not accepted). In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows: * If no scheme is provided, `https` is assumed. * An HTTP GET on the URL must yield a [google.protobuf.Type][]   value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the   URL, or have them precompiled into a binary to avoid any   lookup. Therefore, binary compatibility needs to be preserved   on changes to types. (Use versioned type names to manage   breaking changes.) Note: this functionality is not currently available in the official protobuf release, and it is not used for type URLs beginning with type.googleapis.com. Schemes other than `http`, `https` (or the empty scheme) might be used with implementation specific semantics."
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                  "format": "binary",
+                  "binaryEncoding": "base64"
+                }
+              },
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Query Module Account By Name Response",
+          "description": "QueryModuleAccountByNameResponse is the response type for the Query/ModuleAccountByName RPC method."
+        }
+      }
+    },
+    "http_rules": [
+      {
+        "Params": [
+          "name"
+        ],
         "HasQuery": false,
         "HasBody": false
       }
@@ -12092,6 +12154,10 @@
             "timeout_timestamp": {
               "type": "string",
               "description": "Timeout timestamp in absolute nanoseconds since unix epoch. The timeout is disabled when set to 0."
+            },
+            "memo": {
+              "type": "string",
+              "description": "optional memo"
             }
           },
           "additionalProperties": true,
@@ -12136,6 +12202,12 @@
       "$ref": "#/definitions/MsgTransferResponse",
       "definitions": {
         "MsgTransferResponse": {
+          "properties": {
+            "sequence": {
+              "type": "string",
+              "description": "sequence number of the transfer packet sent"
+            }
+          },
           "additionalProperties": true,
           "type": "object",
           "title": "Msg Transfer Response",
