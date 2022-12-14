@@ -1,16 +1,18 @@
-from collections import namedtuple as nt
-from collections.abc import MutableMapping
-import re
 import ast
-import operator as op
 import builtins
+import inspect
+import itertools
+import operator as op
+import re
 import sys
 import types
-import itertools
+import typing
 from collections import Counter, defaultdict
-from functools import partial
-import inspect
+from collections import namedtuple as nt
+from collections.abc import MutableMapping
 from copy import copy
+from functools import partial
+
 import forge
 
 ########################################
@@ -64,9 +66,6 @@ BUILTIN_EXCEPTIONS = {
 }
 
 
-
-
-
 DISALLOW_FUNCTIONS = {
     type,
     eval,
@@ -83,8 +82,8 @@ DISALLOW_FUNCTIONS = {
 
 
 def assert_func_allowed(func):
-    modname = getattr(func, "__module__", None)
-    qualname = getattr(func, "__qualname__", getattr(func, "__name__", None))
+    modname = getattr(func, "__module__", "MISSING MODNAME")
+    qualname = getattr(func, "__qualname__", getattr(func, "__name__", "MISSING NAME"))
 
     if modname:
         fullname = modname + "." + qualname
@@ -95,7 +94,12 @@ def assert_func_allowed(func):
         raise DangerousValue(f"This function is forbidden: {fullname}")
 
     if fullname not in WHITELIST_FUNCTIONS:
-        raise NotImplementedError("This function is not allowed: {}".format(fullname))
+        if type(func) is typing._AnnotatedAlias:
+            # This is not strictly neccasary because __origin__ should have 
+            # already been checked. But it's good to be safe.
+            assert_func_allowed(func.__origin__)
+        else:
+            raise NotImplementedError("This function is not allowed: {}".format(fullname))
 
 
 ########################################
@@ -183,6 +187,7 @@ def safe_add(a, b):  # pylint: disable=invalid-name
             )
     return a + b
 
+
 DEFAULT_SCOPE = {
     "Exception": Exception,
     "False": False,
@@ -196,13 +201,13 @@ DEFAULT_SCOPE = {
     "bytearray": bytearray,
     "bytes": bytes,
     "callable": callable,
-    "chr":chr,
-    "complex":complex,
+    "chr": chr,
+    "complex": complex,
     "dict": dict,
-    "divmod":divmod,
+    "divmod": divmod,
     "enumerate": enumerate,
-    "filter":filter,
-    "frozenset":frozenset,
+    "filter": filter,
+    "frozenset": frozenset,
     "hex": hex,
     "int": int,
     "isinstance": isinstance,
@@ -210,22 +215,22 @@ DEFAULT_SCOPE = {
     "iter": iter,
     "len": len,
     "list": list,
-    "map":map,
+    "map": map,
     "max": max,
     "min": min,
-    "oct":oct,
-    "ord":ord,
+    "oct": oct,
+    "ord": ord,
     "pow": safe_power,
     "range": range,
-    "reversed":reversed,
+    "reversed": reversed,
     "round": round,
     "set": set,
-    "slice":slice,
+    "slice": slice,
     "sorted": sorted,
     "str": str,
     "sum": sum,
     "tuple": tuple,
-    "zip":zip,
+    "zip": zip,
     **BUILTIN_EXCEPTIONS,
 }
 
@@ -242,8 +247,6 @@ WHITELIST_FUNCTIONS = set()
 for k, v in _whitelist_functions_dict.items():
     for kk in v:
         WHITELIST_FUNCTIONS.add(k + "." + kk)
-
-
 
 
 def make_modules(mod_dict, k=""):
@@ -1318,3 +1321,4 @@ def ascii_format_coverage(coverage, source):
         out += (c * "-") + "^\n"
     out += f"{ int(pct * 100) }% coverage\n"
     return out
+

@@ -243,6 +243,7 @@ def get_module_dict():
 
 
 def build_sandbox(port, creator, address, amount, block_info):
+    amount = json.loads(amount or "{}")
     url = f"http://localhost:{port}/rpc"
 
     def _chain(method, **params):

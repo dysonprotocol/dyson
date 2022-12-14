@@ -1,5 +1,9 @@
 <template>
-  <!-- TODO fix to the top right of page-->
+  <marquee
+    v-if="chainId != 'dyson-mainnet-01'"
+    style="background: red; color: white"
+    >You are using Chain ID: {{ chainId }}</marquee
+  >
   <div class="container-fluid">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <router-link class="navbar-brand" to="/">Dyson Protocol</router-link>

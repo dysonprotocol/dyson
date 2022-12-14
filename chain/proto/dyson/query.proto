@@ -13,7 +13,7 @@ import "dyson/cron.proto";
 // this line is used by starport scaffolding # 1
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/org/dyson/x/dyson/types";
+option go_package = "github.com/x/dyson/types";
 
 
 // Query defines the gRPC querier service.
@@ -21,12 +21,12 @@ service Query {
 
 		// Queries a scheduledRun by index.
 		rpc ScheduledRun(QueryGetScheduledRunRequest) returns (QueryGetScheduledRunResponse) {
-				option (google.api.http).get = "/org/dyson/dyson/scheduledRun";
+				option (google.api.http).get = "/dyson/scheduledRun";
 		}
 
 		// Queries a list of scheduledRun items.
 		rpc ScheduledRunAll(QueryAllScheduledRunRequest) returns (QueryAllScheduledRunResponse) {
-				option (google.api.http).get = "/org/dyson/dyson/scheduledRunAll";
+				option (google.api.http).get = "/dyson/scheduledRunAll";
 		}
 
 		// Queries a storage by index.
@@ -70,17 +70,17 @@ service Query {
 
 		// Queries a list of ScheduledGasPriceAtBlock items.
 		rpc ScheduledGasPriceAndFeeAtBlock(QueryScheduledGasPriceAndFeeAtBlockRequest) returns (QueryScheduledGasPriceAndFeeAtBlockResponse) {
-				option (google.api.http).get = "/org/dyson/dyson/scheduled_gas_price_at_block";
+				option (google.api.http).get = "/dyson/scheduled_gas_price_at_block";
 		}
 
 		// Queries a Cron by index.
 		rpc Cron(QueryGetCronRequest) returns (QueryGetCronResponse) {
-				option (google.api.http).get = "/org/dyson/dyson/cron";
+				option (google.api.http).get = "/dyson/cron";
 		}
 
 		// Queries a list of Cron items.
 		rpc CronAll(QueryAllCronRequest) returns (QueryAllCronResponse) {
-				option (google.api.http).get = "/org/dyson/dyson/cron";
+				option (google.api.http).get = "/dyson/cronAll";
 		}
 
 		// this line is used by starport scaffolding # 2
