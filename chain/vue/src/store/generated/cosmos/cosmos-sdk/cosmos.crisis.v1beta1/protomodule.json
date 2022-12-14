@@ -3,17 +3,17 @@
 	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.crisis.v1beta1",
-		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/crisis/v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/crisis/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/crisis/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/crisis/v1beta1/genesis.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos/base/v1beta1/coin.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/crisis/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/crisis/v1beta1/tx.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos_proto/cosmos.proto",
@@ -25,17 +25,17 @@
 		"Messages": [
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/crisis/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/crisis/v1beta1/genesis.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgVerifyInvariant",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/crisis/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/crisis/v1beta1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgVerifyInvariantResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/crisis/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/crisis/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			}
 		],
@@ -57,7 +57,7 @@
 		{
 			"Name": "MsgVerifyInvariant",
 			"URI": "cosmos.crisis.v1beta1.MsgVerifyInvariant",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/crisis/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/crisis/v1beta1/tx.proto"
 		}
 	],
 	"HTTPQueries": null,

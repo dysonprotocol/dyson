@@ -5,14 +5,13 @@
         "QueryAccountAddressByIDRequest": {
             "properties": {
                 "id": {
-                    "type": "string",
-                    "description": "id is the account number of the address to be queried. This field should have been an uint64 (like all account numbers), and will be updated to uint64 in a future version of the auth query."
+                    "type": "string"
                 }
             },
             "additionalProperties": true,
             "type": "object",
             "title": "Query Account Address By ID Request",
-            "description": "QueryAccountAddressByIDRequest is the request type for AccountAddressByID rpc method Since: cosmos-sdk 0.46.2"
+            "description": "QueryAccountAddressByIDRequest is the request type for AccountAddressByID rpc method"
         }
     }
 }

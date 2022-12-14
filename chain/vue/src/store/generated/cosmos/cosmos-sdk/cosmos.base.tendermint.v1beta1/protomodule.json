@@ -3,10 +3,10 @@
 	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.base.tendermint.v1beta1",
-		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"google/protobuf/any.proto",
@@ -20,7 +20,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/types.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"tendermint/types/types.proto",
@@ -34,107 +34,107 @@
 		"Messages": [
 			{
 				"Name": "GetValidatorSetByHeightRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "GetValidatorSetByHeightResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "GetLatestValidatorSetRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "GetLatestValidatorSetResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "Validator",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "GetBlockByHeightRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "GetBlockByHeightResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "GetLatestBlockRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "GetLatestBlockResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "GetSyncingRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "GetSyncingResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "GetNodeInfoRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "GetNodeInfoResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "VersionInfo",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 8
 			},
 			{
 				"Name": "Module",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "ABCIQueryRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "ABCIQueryResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 10
 			},
 			{
 				"Name": "ProofOp",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "ProofOps",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "Block",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/types.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "Header",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/types.proto",
 				"HighestFieldNumber": 14
 			}
 		],
@@ -321,31 +321,31 @@
 	"Types": [
 		{
 			"Name": "Validator",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto"
 		},
 		{
 			"Name": "VersionInfo",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto"
 		},
 		{
 			"Name": "Module",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto"
 		},
 		{
 			"Name": "ProofOp",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto"
 		},
 		{
 			"Name": "ProofOps",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/query.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/query.proto"
 		},
 		{
 			"Name": "Block",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/types.proto"
 		},
 		{
 			"Name": "Header",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/base/tendermint/v1beta1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/base/tendermint/v1beta1/types.proto"
 		}
 	]
 }

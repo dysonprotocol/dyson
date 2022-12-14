@@ -3,24 +3,24 @@
 	"GoModulePath": "github.com/cosmos/ibc-go/v5",
 	"Pkg": {
 		"Name": "ibc.core.channel.v1",
-		"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1",
+		"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"ibc/core/client/v1/client.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/genesis.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"ibc/core/channel/v1/channel.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"Dependencies": [
 					"ibc/core/client/v1/client.proto",
 					"cosmos/base/query/v1beta1/pagination.proto",
@@ -31,7 +31,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"ibc/core/client/v1/client.proto",
@@ -43,277 +43,277 @@
 		"Messages": [
 			{
 				"Name": "Channel",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "IdentifiedChannel",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto",
 				"HighestFieldNumber": 7
 			},
 			{
 				"Name": "Counterparty",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "Packet",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto",
 				"HighestFieldNumber": 8
 			},
 			{
 				"Name": "PacketState",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "PacketId",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "Acknowledgement",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/genesis.proto",
 				"HighestFieldNumber": 8
 			},
 			{
 				"Name": "PacketSequence",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/genesis.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryChannelRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryChannelResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryChannelsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryChannelsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryConnectionChannelsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryConnectionChannelsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryChannelClientStateRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryChannelClientStateResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryChannelConsensusStateRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "QueryChannelConsensusStateResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "QueryPacketCommitmentRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryPacketCommitmentResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryPacketCommitmentsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryPacketCommitmentsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryPacketReceiptRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryPacketReceiptResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "QueryPacketAcknowledgementRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryPacketAcknowledgementResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryPacketAcknowledgementsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "QueryPacketAcknowledgementsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryUnreceivedPacketsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryUnreceivedPacketsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryUnreceivedAcksRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryUnreceivedAcksResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryNextSequenceReceiveRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryNextSequenceReceiveResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgChannelOpenInit",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgChannelOpenInitResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgChannelOpenTry",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 7
 			},
 			{
 				"Name": "MsgChannelOpenTryResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgChannelOpenAck",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 7
 			},
 			{
 				"Name": "MsgChannelOpenAckResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgChannelOpenConfirm",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "MsgChannelOpenConfirmResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgChannelCloseInit",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgChannelCloseInitResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgChannelCloseConfirm",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "MsgChannelCloseConfirmResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgRecvPacket",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "MsgRecvPacketResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgTimeout",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "MsgTimeoutResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgTimeoutOnClose",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 6
 			},
 			{
 				"Name": "MsgTimeoutOnCloseResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgAcknowledgement",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "MsgAcknowledgementResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/tx.proto",
 				"HighestFieldNumber": 1
 			}
 		],
@@ -779,35 +779,35 @@
 	"Types": [
 		{
 			"Name": "Channel",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto"
 		},
 		{
 			"Name": "IdentifiedChannel",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto"
 		},
 		{
 			"Name": "Counterparty",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto"
 		},
 		{
 			"Name": "Packet",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto"
 		},
 		{
 			"Name": "PacketState",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto"
 		},
 		{
 			"Name": "PacketId",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto"
 		},
 		{
 			"Name": "Acknowledgement",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/channel.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/channel.proto"
 		},
 		{
 			"Name": "PacketSequence",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/channel/v1/genesis.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/channel/v1/genesis.proto"
 		}
 	]
 }

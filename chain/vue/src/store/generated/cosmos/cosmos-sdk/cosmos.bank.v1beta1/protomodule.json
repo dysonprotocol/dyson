@@ -3,10 +3,10 @@
 	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.bank.v1beta1",
-		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/authz.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/authz.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos_proto/cosmos.proto",
@@ -14,7 +14,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos_proto/cosmos.proto",
@@ -23,7 +23,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/genesis.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos/base/v1beta1/coin.proto",
@@ -32,7 +32,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"Dependencies": [
 					"cosmos/base/query/v1beta1/pagination.proto",
 					"gogoproto/gogo.proto",
@@ -43,7 +43,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/tx.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos/base/v1beta1/coin.proto",
@@ -57,167 +57,167 @@
 		"Messages": [
 			{
 				"Name": "SendAuthorization",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/authz.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/authz.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "Params",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "SendEnabled",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "Input",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "Output",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "Supply",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "DenomUnit",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "Metadata",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto",
 				"HighestFieldNumber": 8
 			},
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/genesis.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "Balance",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/genesis.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryBalanceRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryBalanceResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryAllBalancesRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryAllBalancesResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QuerySpendableBalancesRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QuerySpendableBalancesResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryTotalSupplyRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryTotalSupplyResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QuerySupplyOfRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QuerySupplyOfResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryParamsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QueryParamsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDenomsMetadataRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDenomsMetadataResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryDenomMetadataRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDenomMetadataResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryDenomOwnersRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "DenomOwner",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryDenomOwnersResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgSend",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgSendResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgMultiSend",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgMultiSendResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			}
 		],
@@ -366,14 +366,14 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgMultiSend",
-			"URI": "cosmos.bank.v1beta1.MsgMultiSend",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/tx.proto"
-		},
-		{
 			"Name": "MsgSend",
 			"URI": "cosmos.bank.v1beta1.MsgSend",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgMultiSend",
+			"URI": "cosmos.bank.v1beta1.MsgMultiSend",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/tx.proto"
 		}
 	],
 	"HTTPQueries": [
@@ -490,43 +490,43 @@
 	"Types": [
 		{
 			"Name": "SendAuthorization",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/authz.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/authz.proto"
 		},
 		{
 			"Name": "Params",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto"
 		},
 		{
 			"Name": "SendEnabled",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto"
 		},
 		{
 			"Name": "Input",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto"
 		},
 		{
 			"Name": "Output",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto"
 		},
 		{
 			"Name": "Supply",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto"
 		},
 		{
 			"Name": "DenomUnit",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto"
 		},
 		{
 			"Name": "Metadata",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/bank.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/bank.proto"
 		},
 		{
 			"Name": "Balance",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/genesis.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/genesis.proto"
 		},
 		{
 			"Name": "DenomOwner",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.6/proto/cosmos/bank/v1beta1/query.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/bank/v1beta1/query.proto"
 		}
 	]
 }

@@ -92,18 +92,6 @@ func (rpcservice *RpcService) Cosmosauthv1beta1querymoduleaccounts(_ *http.Reque
 // Keeper: cosmosauthv1beta1keeper
 // Types: cosmosauthv1beta1types
 // github.com/cosmos/cosmos-sdk/x/auth/keeper
-func (rpcservice *RpcService) Cosmosauthv1beta1querymoduleaccountbyname(_ *http.Request, msg *cosmosauthv1beta1types.QueryModuleAccountByNameRequest, response *string) (err error) {
-	r, err := rpcservice.k.cosmosauthv1beta1keeper.ModuleAccountByName(rpcservice.ctx, msg)
-	if err != nil {
-		return err
-	}
-	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
-	return nil
-}
-
-// Keeper: cosmosauthv1beta1keeper
-// Types: cosmosauthv1beta1types
-// github.com/cosmos/cosmos-sdk/x/auth/keeper
 func (rpcservice *RpcService) Cosmosauthv1beta1querybech32prefix(_ *http.Request, msg *cosmosauthv1beta1types.Bech32PrefixRequest, response *string) (err error) {
 	r, err := rpcservice.k.cosmosauthv1beta1keeper.Bech32Prefix(rpcservice.ctx, msg)
 	if err != nil {

@@ -3,12 +3,6 @@
     "$ref": "#/definitions/MsgTransferResponse",
     "definitions": {
         "MsgTransferResponse": {
-            "properties": {
-                "sequence": {
-                    "type": "string",
-                    "description": "sequence number of the transfer packet sent"
-                }
-            },
             "additionalProperties": true,
             "type": "object",
             "title": "Msg Transfer Response",

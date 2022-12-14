@@ -187,10 +187,7 @@ export interface V1Height {
 /**
  * MsgTransferResponse defines the Msg/Transfer response type.
  */
-export interface V1MsgTransferResponse {
-  /** @format uint64 */
-  sequence?: string;
-}
+export type V1MsgTransferResponse = object;
 
 /**
 * QueryDenomHashResponse is the response type for the Query/DenomHash RPC
