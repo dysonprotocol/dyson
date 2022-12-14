@@ -48,6 +48,7 @@ const getDefaultState = () => {
 				AccountAddressByID: {},
 				Params: {},
 				ModuleAccounts: {},
+				ModuleAccountByName: {},
 				Bech32Prefix: {},
 				AddressBytesToString: {},
 				AddressStringToBytes: {},
@@ -113,6 +114,12 @@ export default {
 						(<any> params).query=null
 					}
 			return state.ModuleAccounts[JSON.stringify(params)] ?? {}
+		},
+				getModuleAccountByName: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ModuleAccountByName[JSON.stringify(params)] ?? {}
 		},
 				getBech32Prefix: (state) => (params = { params: {}}) => {
 					if (!(<any> params).query) {
@@ -275,6 +282,28 @@ export default {
 				return getters['getModuleAccounts']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryModuleAccounts API Node Unavailable. Could not perform query: ' + e.error.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryModuleAccountByName({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryModuleAccountByName( key.name)).data
+				
+					
+				commit('QUERY', { query: 'ModuleAccountByName', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryModuleAccountByName', payload: { options: { all }, params: {...key},query }})
+				return getters['getModuleAccountByName']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryModuleAccountByName API Node Unavailable. Could not perform query: ' + e.error.message)
 				
 			}
 		},

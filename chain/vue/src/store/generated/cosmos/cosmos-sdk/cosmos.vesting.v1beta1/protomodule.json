@@ -3,10 +3,10 @@
 	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.vesting.v1beta1",
-		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/tx.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos/base/v1beta1/coin.proto",
@@ -16,7 +16,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos/base/v1beta1/coin.proto",
@@ -28,62 +28,62 @@
 		"Messages": [
 			{
 				"Name": "MsgCreateVestingAccount",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/tx.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "MsgCreateVestingAccountResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgCreatePermanentLockedAccount",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgCreatePermanentLockedAccountResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgCreatePeriodicVestingAccount",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/tx.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "MsgCreatePeriodicVestingAccountResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "BaseVestingAccount",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "ContinuousVestingAccount",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "DelayedVestingAccount",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "Period",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "PeriodicVestingAccount",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "PermanentLockedAccount",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto",
 				"HighestFieldNumber": 1
 			}
 		],
@@ -117,44 +117,44 @@
 		{
 			"Name": "MsgCreateVestingAccount",
 			"URI": "cosmos.vesting.v1beta1.MsgCreateVestingAccount",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/tx.proto"
 		},
 		{
 			"Name": "MsgCreatePermanentLockedAccount",
 			"URI": "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/tx.proto"
 		},
 		{
 			"Name": "MsgCreatePeriodicVestingAccount",
 			"URI": "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/tx.proto"
 		}
 	],
 	"HTTPQueries": null,
 	"Types": [
 		{
 			"Name": "BaseVestingAccount",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto"
 		},
 		{
 			"Name": "ContinuousVestingAccount",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto"
 		},
 		{
 			"Name": "DelayedVestingAccount",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto"
 		},
 		{
 			"Name": "Period",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto"
 		},
 		{
 			"Name": "PeriodicVestingAccount",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto"
 		},
 		{
 			"Name": "PermanentLockedAccount",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/vesting/v1beta1/vesting.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/vesting/v1beta1/vesting.proto"
 		}
 	]
 }

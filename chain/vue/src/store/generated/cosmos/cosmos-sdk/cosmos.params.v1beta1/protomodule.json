@@ -3,17 +3,17 @@
 	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.params.v1beta1",
-		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/params.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/params.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos_proto/cosmos.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/query.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"google/api/annotations.proto",
@@ -25,37 +25,37 @@
 		"Messages": [
 			{
 				"Name": "ParameterChangeProposal",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/params.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/params.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "ParamChange",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/params.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/params.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryParamsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryParamsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QuerySubspacesRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QuerySubspacesResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "Subspace",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			}
 		],
@@ -119,15 +119,15 @@
 	"Types": [
 		{
 			"Name": "ParameterChangeProposal",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/params.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/params.proto"
 		},
 		{
 			"Name": "ParamChange",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/params.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/params.proto"
 		},
 		{
 			"Name": "Subspace",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/params/v1beta1/query.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/params/v1beta1/query.proto"
 		}
 	]
 }

@@ -508,6 +508,49 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
+   * @name QueryCron
+   * @summary Queries a Cron by index.
+   * @request GET:/dyson/cron
+   */
+  queryCron = (query?: { blockHeight?: string }, params: RequestParams = {}) =>
+    this.request<DysonQueryGetCronResponse, RpcStatus>({
+      path: `/dyson/cron`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryCronAll
+   * @summary Queries a list of Cron items.
+   * @request GET:/dyson/cronAll
+   */
+  queryCronAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<DysonQueryAllCronResponse, RpcStatus>({
+      path: `/dyson/cronAll`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
    * @name QueryQueryScript
    * @summary Queries a script by index.
    * @request GET:/dyson/query
@@ -526,6 +569,70 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   ) =>
     this.request<DysonMsgRunResponse, RpcStatus>({
       path: `/dyson/query`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryScheduledRun
+   * @summary Queries a scheduledRun by index.
+   * @request GET:/dyson/scheduledRun
+   */
+  queryScheduledRun = (query?: { index?: string }, params: RequestParams = {}) =>
+    this.request<DysonQueryGetScheduledRunResponse, RpcStatus>({
+      path: `/dyson/scheduledRun`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryScheduledRunAll
+   * @summary Queries a list of scheduledRun items.
+   * @request GET:/dyson/scheduledRunAll
+   */
+  queryScheduledRunAll = (
+    query?: {
+      index?: string;
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<DysonQueryAllScheduledRunResponse, RpcStatus>({
+      path: `/dyson/scheduledRunAll`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryScheduledGasPriceAndFeeAtBlock
+   * @summary Queries a list of ScheduledGasPriceAtBlock items.
+   * @request GET:/dyson/scheduled_gas_price_at_block
+   */
+  queryScheduledGasPriceAndFeeAtBlock = (
+    query?: { blockheight?: string; gaswanted?: string },
+    params: RequestParams = {},
+  ) =>
+    this.request<DysonQueryScheduledGasPriceAndFeeAtBlockResponse, RpcStatus>({
+      path: `/dyson/scheduled_gas_price_at_block`,
       method: "GET",
       query: query,
       format: "json",
@@ -672,96 +779,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryWsgi = (query?: { index?: string; httprequest?: string; gaslimit?: string }, params: RequestParams = {}) =>
     this.request<DysonQueryWsgiResponse, RpcStatus>({
       path: `/dyson/wsgi`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Query
-   * @name QueryCronAll
-   * @summary Queries a list of Cron items.
-   * @request GET:/org/dyson/dyson/cron
-   */
-  queryCronAll = (
-    query?: {
-      "pagination.key"?: string;
-      "pagination.offset"?: string;
-      "pagination.limit"?: string;
-      "pagination.count_total"?: boolean;
-      "pagination.reverse"?: boolean;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<DysonQueryAllCronResponse, RpcStatus>({
-      path: `/org/dyson/dyson/cron`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Query
-   * @name QueryScheduledRun
-   * @summary Queries a scheduledRun by index.
-   * @request GET:/org/dyson/dyson/scheduledRun
-   */
-  queryScheduledRun = (query?: { index?: string }, params: RequestParams = {}) =>
-    this.request<DysonQueryGetScheduledRunResponse, RpcStatus>({
-      path: `/org/dyson/dyson/scheduledRun`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Query
-   * @name QueryScheduledRunAll
-   * @summary Queries a list of scheduledRun items.
-   * @request GET:/org/dyson/dyson/scheduledRunAll
-   */
-  queryScheduledRunAll = (
-    query?: {
-      index?: string;
-      "pagination.key"?: string;
-      "pagination.offset"?: string;
-      "pagination.limit"?: string;
-      "pagination.count_total"?: boolean;
-      "pagination.reverse"?: boolean;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<DysonQueryAllScheduledRunResponse, RpcStatus>({
-      path: `/org/dyson/dyson/scheduledRunAll`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Query
-   * @name QueryScheduledGasPriceAndFeeAtBlock
-   * @summary Queries a list of ScheduledGasPriceAtBlock items.
-   * @request GET:/org/dyson/dyson/scheduled_gas_price_at_block
-   */
-  queryScheduledGasPriceAndFeeAtBlock = (
-    query?: { blockheight?: string; gaswanted?: string },
-    params: RequestParams = {},
-  ) =>
-    this.request<DysonQueryScheduledGasPriceAndFeeAtBlockResponse, RpcStatus>({
-      path: `/org/dyson/dyson/scheduled_gas_price_at_block`,
       method: "GET",
       query: query,
       format: "json",

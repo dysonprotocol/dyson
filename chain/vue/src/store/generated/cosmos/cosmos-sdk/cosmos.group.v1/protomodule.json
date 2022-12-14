@@ -3,23 +3,23 @@
 	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.group.v1",
-		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto",
 				"Dependencies": [
 					"cosmos_proto/cosmos.proto",
 					"cosmos/group/v1/types.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/genesis.proto",
 				"Dependencies": [
 					"cosmos/group/v1/types.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"google/api/annotations.proto",
@@ -29,7 +29,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos_proto/cosmos.proto",
@@ -39,7 +39,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"google/protobuf/duration.proto",
@@ -53,377 +53,377 @@
 		"Messages": [
 			{
 				"Name": "EventCreateGroup",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "EventUpdateGroup",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "EventCreateGroupPolicy",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "EventUpdateGroupPolicy",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "EventSubmitProposal",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "EventWithdrawProposal",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "EventVote",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "EventExec",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "EventLeaveGroup",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/genesis.proto",
 				"HighestFieldNumber": 8
 			},
 			{
 				"Name": "QueryGroupInfoRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryGroupInfoResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryGroupPolicyInfoRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryGroupPolicyInfoResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryGroupMembersRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGroupMembersResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGroupsByAdminRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGroupsByAdminResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGroupPoliciesByGroupRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGroupPoliciesByGroupResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGroupPoliciesByAdminRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGroupPoliciesByAdminResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryProposalRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryProposalResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryProposalsByGroupPolicyRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryProposalsByGroupPolicyResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryVoteByProposalVoterRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryVoteByProposalVoterResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryVotesByProposalRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryVotesByProposalResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryVotesByVoterRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryVotesByVoterResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGroupsByMemberRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGroupsByMemberResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryTallyResultRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryTallyResultResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgCreateGroup",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgCreateGroupResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgUpdateGroupMembers",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgUpdateGroupMembersResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgUpdateGroupAdmin",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgUpdateGroupAdminResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgUpdateGroupMetadata",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgUpdateGroupMetadataResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgCreateGroupPolicy",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "MsgCreateGroupPolicyResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgUpdateGroupPolicyAdmin",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgCreateGroupWithPolicy",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 6
 			},
 			{
 				"Name": "MsgCreateGroupWithPolicyResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgUpdateGroupPolicyAdminResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgUpdateGroupPolicyDecisionPolicy",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgUpdateGroupPolicyDecisionPolicyResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgUpdateGroupPolicyMetadata",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgUpdateGroupPolicyMetadataResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgSubmitProposal",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "MsgSubmitProposalResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgWithdrawProposal",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgWithdrawProposalResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgVote",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "MsgVoteResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgExec",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgExecResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgLeaveGroup",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgLeaveGroupResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "Member",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "MemberRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "ThresholdDecisionPolicy",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "PercentageDecisionPolicy",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "DecisionPolicyWindows",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "GroupInfo",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"HighestFieldNumber": 6
 			},
 			{
 				"Name": "GroupMember",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "GroupPolicyInfo",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"HighestFieldNumber": 7
 			},
 			{
 				"Name": "Proposal",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"HighestFieldNumber": 12
 			},
 			{
 				"Name": "TallyResult",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "Vote",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto",
 				"HighestFieldNumber": 5
 			}
 		],
@@ -709,74 +709,74 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgUpdateGroupPolicyAdmin",
-			"URI": "cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateGroupPolicyMetadata",
-			"URI": "cosmos.group.v1.MsgUpdateGroupPolicyMetadata",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgCreateGroupWithPolicy",
-			"URI": "cosmos.group.v1.MsgCreateGroupWithPolicy",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
-		},
-		{
 			"Name": "MsgSubmitProposal",
 			"URI": "cosmos.group.v1.MsgSubmitProposal",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgCreateGroup",
-			"URI": "cosmos.group.v1.MsgCreateGroup",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgVote",
-			"URI": "cosmos.group.v1.MsgVote",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateGroupAdmin",
-			"URI": "cosmos.group.v1.MsgUpdateGroupAdmin",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgExec",
-			"URI": "cosmos.group.v1.MsgExec",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgCreateGroupPolicy",
-			"URI": "cosmos.group.v1.MsgCreateGroupPolicy",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
 		},
 		{
 			"Name": "MsgUpdateGroupMembers",
 			"URI": "cosmos.group.v1.MsgUpdateGroupMembers",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgLeaveGroup",
-			"URI": "cosmos.group.v1.MsgLeaveGroup",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateGroupPolicyDecisionPolicy",
-			"URI": "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgWithdrawProposal",
-			"URI": "cosmos.group.v1.MsgWithdrawProposal",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
 		},
 		{
 			"Name": "MsgUpdateGroupMetadata",
 			"URI": "cosmos.group.v1.MsgUpdateGroupMetadata",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgVote",
+			"URI": "cosmos.group.v1.MsgVote",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgCreateGroup",
+			"URI": "cosmos.group.v1.MsgCreateGroup",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgLeaveGroup",
+			"URI": "cosmos.group.v1.MsgLeaveGroup",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgUpdateGroupPolicyMetadata",
+			"URI": "cosmos.group.v1.MsgUpdateGroupPolicyMetadata",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgCreateGroupWithPolicy",
+			"URI": "cosmos.group.v1.MsgCreateGroupWithPolicy",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgCreateGroupPolicy",
+			"URI": "cosmos.group.v1.MsgCreateGroupPolicy",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgWithdrawProposal",
+			"URI": "cosmos.group.v1.MsgWithdrawProposal",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgExec",
+			"URI": "cosmos.group.v1.MsgExec",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgUpdateGroupPolicyDecisionPolicy",
+			"URI": "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgUpdateGroupAdmin",
+			"URI": "cosmos.group.v1.MsgUpdateGroupAdmin",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgUpdateGroupPolicyAdmin",
+			"URI": "cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/tx.proto"
 		}
 	],
 	"HTTPQueries": [
@@ -954,83 +954,83 @@
 	"Types": [
 		{
 			"Name": "EventCreateGroup",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto"
 		},
 		{
 			"Name": "EventUpdateGroup",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto"
 		},
 		{
 			"Name": "EventCreateGroupPolicy",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto"
 		},
 		{
 			"Name": "EventUpdateGroupPolicy",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto"
 		},
 		{
 			"Name": "EventSubmitProposal",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto"
 		},
 		{
 			"Name": "EventWithdrawProposal",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto"
 		},
 		{
 			"Name": "EventVote",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto"
 		},
 		{
 			"Name": "EventExec",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto"
 		},
 		{
 			"Name": "EventLeaveGroup",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/events.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/events.proto"
 		},
 		{
 			"Name": "Member",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto"
 		},
 		{
 			"Name": "MemberRequest",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto"
 		},
 		{
 			"Name": "ThresholdDecisionPolicy",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto"
 		},
 		{
 			"Name": "PercentageDecisionPolicy",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto"
 		},
 		{
 			"Name": "DecisionPolicyWindows",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto"
 		},
 		{
 			"Name": "GroupInfo",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto"
 		},
 		{
 			"Name": "GroupMember",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto"
 		},
 		{
 			"Name": "GroupPolicyInfo",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto"
 		},
 		{
 			"Name": "Proposal",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto"
 		},
 		{
 			"Name": "TallyResult",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto"
 		},
 		{
 			"Name": "Vote",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.1/proto/cosmos/group/v1/types.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/group/v1/types.proto"
 		}
 	]
 }
