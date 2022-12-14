@@ -3,7 +3,7 @@ module github.com/org/dyson
 go 1.18
 
 require (
-	github.com/cosmos/cosmos-sdk v0.46.1
+	github.com/cosmos/cosmos-sdk v0.46.4
 	github.com/cosmos/ibc-go/v5 v5.1.0
 	github.com/getsentry/sentry-go v0.13.0
 	github.com/gogo/protobuf v1.3.3
