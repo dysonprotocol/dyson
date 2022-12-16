@@ -10,11 +10,11 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default Capability genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		ScriptList:        []Script{},
-		StorageList:       []Storage{},
+		ScriptList:       []Script{},
+		StorageList:      []Storage{},
 		ScheduledRunList: []ScheduledRun{},
-		CronList: []Cron{},
-// this line is used by starport scaffolding # genesis/types/default
+		CronList:         []Cron{},
+		// this line is used by starport scaffolding # genesis/types/default
 	}
 }
 
@@ -53,16 +53,16 @@ func (gs GenesisState) Validate() error {
 		scheduledRunIndexMap[index] = struct{}{}
 	}
 	// Check for duplicated index in cron
-cronIndexMap := make(map[string]struct{})
+	cronIndexMap := make(map[string]struct{})
 
-for _, elem := range gs.CronList {
-	index := string(CronKey(elem.BlockHeight))
-	if _, ok := cronIndexMap[index]; ok {
-		return fmt.Errorf("duplicated index for cron")
+	for _, elem := range gs.CronList {
+		index := string(CronKey(elem.BlockHeight))
+		if _, ok := cronIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for cron")
+		}
+		cronIndexMap[index] = struct{}{}
 	}
-	cronIndexMap[index] = struct{}{}
-}
-// this line is used by starport scaffolding # genesis/types/validate
+	// this line is used by starport scaffolding # genesis/types/validate
 
 	return nil
 }

@@ -13503,7 +13503,8 @@
           },
           "additionalProperties": true,
           "type": "object",
-          "title": "Msg Create Scheduled Run"
+          "title": "this line is used by starport scaffolding # proto/tx/message",
+          "description": "this line is used by starport scaffolding # proto/tx/message"
         },
         "dyson.MsgRun": {
           "properties": {
@@ -13556,6 +13557,53 @@
           "additionalProperties": true,
           "type": "object",
           "title": "Msg Create Scheduled Run Response"
+        }
+      }
+    },
+    "http_rules": null
+  },
+  "dyson/sendMsgBetterSubmitProposal": {
+    "module_name": "dyson",
+    "name": "BetterSubmitProposal",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgBetterSubmitProposal",
+      "definitions": {
+        "MsgBetterSubmitProposal": {
+          "properties": {
+            "proposer": {
+              "type": "string"
+            },
+            "messages": {
+              "type": "string"
+            },
+            "metadata": {
+              "type": "string"
+            },
+            "deposit": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Better Submit Proposal"
+        }
+      }
+    },
+    "resp_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgBetterSubmitProposalResponse",
+      "definitions": {
+        "MsgBetterSubmitProposalResponse": {
+          "properties": {
+            "proposalId": {
+              "type": "integer"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object",
+          "title": "Msg Better Submit Proposal Response"
         }
       }
     },

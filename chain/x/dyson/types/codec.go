@@ -18,6 +18,7 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgCreateScheduledRun{}, "dyson/CreateScheduledRun", nil)
 	cdc.RegisterConcrete(&MsgUpdateScheduledRun{}, "dyson/UpdateScheduledRun", nil)
 	cdc.RegisterConcrete(&MsgDeleteScheduledRun{}, "dyson/DeleteScheduledRun", nil)
+	cdc.RegisterConcrete(&MsgBetterSubmitProposal{}, "dyson/BetterSubmitProposal", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -36,6 +37,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgCreateScheduledRun{},
 		&MsgUpdateScheduledRun{},
 		&MsgDeleteScheduledRun{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgBetterSubmitProposal{},
 	)
 	// this line is used by starport scaffolding # 3
 	registry.RegisterImplementations((*sdk.Msg)(nil),

@@ -14,6 +14,11 @@ export interface DysonCron {
   indexes?: string[];
 }
 
+export interface DysonMsgBetterSubmitProposalResponse {
+  /** @format uint64 */
+  proposal_id?: string;
+}
+
 export interface DysonMsgCreateScheduledRunResponse {
   index?: string;
 }

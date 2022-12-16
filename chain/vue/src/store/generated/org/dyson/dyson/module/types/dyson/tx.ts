@@ -1,9 +1,25 @@
 /* eslint-disable */
 import { Reader, util, configure, Writer } from "protobufjs/minimal";
 import * as Long from "long";
+import { Coin } from "../cosmos/base/v1beta1/coin";
 import { MsgRun, MsgRunResponse } from "../dyson/msgrun";
 
 export const protobufPackage = "dyson";
+
+export interface MsgBetterSubmitProposal {
+  /** messages are the JSON arbitrary messages to be executed if proposal passes. */
+  messages: string[];
+  /** initial_deposit is the deposit value that must be paid at proposal submission. */
+  initial_deposit: Coin[];
+  /** proposer is the account address of the proposer. */
+  proposer: string;
+  /** metadata is any arbitrary metadata attached to the proposal. */
+  metadata: string;
+}
+
+export interface MsgBetterSubmitProposalResponse {
+  proposal_id: number;
+}
 
 export interface MsgCreateScheduledRun {
   creator: string;
@@ -84,6 +100,219 @@ export interface MsgDeleteScript {
 }
 
 export interface MsgDeleteScriptResponse {}
+
+const baseMsgBetterSubmitProposal: object = {
+  messages: "",
+  proposer: "",
+  metadata: "",
+};
+
+export const MsgBetterSubmitProposal = {
+  encode(
+    message: MsgBetterSubmitProposal,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.messages) {
+      writer.uint32(10).string(v!);
+    }
+    for (const v of message.initial_deposit) {
+      Coin.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    if (message.proposer !== "") {
+      writer.uint32(26).string(message.proposer);
+    }
+    if (message.metadata !== "") {
+      writer.uint32(34).string(message.metadata);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgBetterSubmitProposal {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgBetterSubmitProposal,
+    } as MsgBetterSubmitProposal;
+    message.messages = [];
+    message.initial_deposit = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.messages.push(reader.string());
+          break;
+        case 2:
+          message.initial_deposit.push(Coin.decode(reader, reader.uint32()));
+          break;
+        case 3:
+          message.proposer = reader.string();
+          break;
+        case 4:
+          message.metadata = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgBetterSubmitProposal {
+    const message = {
+      ...baseMsgBetterSubmitProposal,
+    } as MsgBetterSubmitProposal;
+    message.messages = [];
+    message.initial_deposit = [];
+    if (object.messages !== undefined && object.messages !== null) {
+      for (const e of object.messages) {
+        message.messages.push(String(e));
+      }
+    }
+    if (
+      object.initial_deposit !== undefined &&
+      object.initial_deposit !== null
+    ) {
+      for (const e of object.initial_deposit) {
+        message.initial_deposit.push(Coin.fromJSON(e));
+      }
+    }
+    if (object.proposer !== undefined && object.proposer !== null) {
+      message.proposer = String(object.proposer);
+    } else {
+      message.proposer = "";
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = String(object.metadata);
+    } else {
+      message.metadata = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgBetterSubmitProposal): unknown {
+    const obj: any = {};
+    if (message.messages) {
+      obj.messages = message.messages.map((e) => e);
+    } else {
+      obj.messages = [];
+    }
+    if (message.initial_deposit) {
+      obj.initial_deposit = message.initial_deposit.map((e) =>
+        e ? Coin.toJSON(e) : undefined
+      );
+    } else {
+      obj.initial_deposit = [];
+    }
+    message.proposer !== undefined && (obj.proposer = message.proposer);
+    message.metadata !== undefined && (obj.metadata = message.metadata);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<MsgBetterSubmitProposal>
+  ): MsgBetterSubmitProposal {
+    const message = {
+      ...baseMsgBetterSubmitProposal,
+    } as MsgBetterSubmitProposal;
+    message.messages = [];
+    message.initial_deposit = [];
+    if (object.messages !== undefined && object.messages !== null) {
+      for (const e of object.messages) {
+        message.messages.push(e);
+      }
+    }
+    if (
+      object.initial_deposit !== undefined &&
+      object.initial_deposit !== null
+    ) {
+      for (const e of object.initial_deposit) {
+        message.initial_deposit.push(Coin.fromPartial(e));
+      }
+    }
+    if (object.proposer !== undefined && object.proposer !== null) {
+      message.proposer = object.proposer;
+    } else {
+      message.proposer = "";
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = object.metadata;
+    } else {
+      message.metadata = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgBetterSubmitProposalResponse: object = { proposal_id: 0 };
+
+export const MsgBetterSubmitProposalResponse = {
+  encode(
+    message: MsgBetterSubmitProposalResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.proposal_id !== 0) {
+      writer.uint32(8).uint64(message.proposal_id);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgBetterSubmitProposalResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgBetterSubmitProposalResponse,
+    } as MsgBetterSubmitProposalResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.proposal_id = longToNumber(reader.uint64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgBetterSubmitProposalResponse {
+    const message = {
+      ...baseMsgBetterSubmitProposalResponse,
+    } as MsgBetterSubmitProposalResponse;
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposal_id = Number(object.proposal_id);
+    } else {
+      message.proposal_id = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgBetterSubmitProposalResponse): unknown {
+    const obj: any = {};
+    message.proposal_id !== undefined &&
+      (obj.proposal_id = message.proposal_id);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<MsgBetterSubmitProposalResponse>
+  ): MsgBetterSubmitProposalResponse {
+    const message = {
+      ...baseMsgBetterSubmitProposalResponse,
+    } as MsgBetterSubmitProposalResponse;
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposal_id = object.proposal_id;
+    } else {
+      message.proposal_id = 0;
+    }
+    return message;
+  },
+};
 
 const baseMsgCreateScheduledRun: object = { creator: "", height: 0, gas: 0 };
 
@@ -1374,6 +1603,9 @@ export interface Msg {
   CreateScheduledRun(
     request: MsgCreateScheduledRun
   ): Promise<MsgCreateScheduledRunResponse>;
+  BetterSubmitProposal(
+    request: MsgBetterSubmitProposal
+  ): Promise<MsgBetterSubmitProposalResponse>;
   /** this line is used by starport scaffolding # proto/tx/rpc */
   CreateStorage(request: MsgCreateStorage): Promise<MsgCreateStorageResponse>;
   UpdateStorage(request: MsgUpdateStorage): Promise<MsgUpdateStorageResponse>;
@@ -1396,6 +1628,16 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request("dyson.Msg", "CreateScheduledRun", data);
     return promise.then((data) =>
       MsgCreateScheduledRunResponse.decode(new Reader(data))
+    );
+  }
+
+  BetterSubmitProposal(
+    request: MsgBetterSubmitProposal
+  ): Promise<MsgBetterSubmitProposalResponse> {
+    const data = MsgBetterSubmitProposal.encode(request).finish();
+    const promise = this.rpc.request("dyson.Msg", "BetterSubmitProposal", data);
+    return promise.then((data) =>
+      MsgBetterSubmitProposalResponse.decode(new Reader(data))
     );
   }
 

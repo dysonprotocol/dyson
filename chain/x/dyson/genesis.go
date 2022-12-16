@@ -23,10 +23,10 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 		k.SetScheduledRun(ctx, elem)
 	}
 	// Set all the cron
-for _, elem := range genState.CronList {
-	k.SetCron(ctx, elem)
-}
-// this line is used by starport scaffolding # genesis/module/init
+	for _, elem := range genState.CronList {
+		k.SetCron(ctx, elem)
+	}
+	// this line is used by starport scaffolding # genesis/module/init
 }
 
 // ExportGenesis returns the capability module's exported genesis.
@@ -37,7 +37,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis.StorageList = k.GetAllStorage(ctx)
 	genesis.ScheduledRunList = k.GetAllScheduledRun(ctx)
 	genesis.CronList = k.GetAllCron(ctx)
-// this line is used by starport scaffolding # genesis/module/export
+	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis
 }

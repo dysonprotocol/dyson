@@ -1111,9 +1111,9 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Query_ScheduledRun_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 1, 2, 2}, []string{"org", "dyson", "scheduledRun"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_ScheduledRun_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"dyson", "scheduledRun"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_ScheduledRunAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 1, 2, 2}, []string{"org", "dyson", "scheduledRunAll"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_ScheduledRunAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"dyson", "scheduledRunAll"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_Query_Storage_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"dyson", "storage"}, "", runtime.AssumeColonVerbOpt(true)))
 
@@ -1131,11 +1131,11 @@ var (
 
 	pattern_Query_PrefixStorage_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"dyson", "storageprefix"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_ScheduledGasPriceAndFeeAtBlock_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 1, 2, 2}, []string{"org", "dyson", "scheduled_gas_price_at_block"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_ScheduledGasPriceAndFeeAtBlock_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"dyson", "scheduled_gas_price_at_block"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_Cron_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 1, 2, 2}, []string{"org", "dyson", "cron"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Cron_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"dyson", "cron"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_CronAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 1, 2, 2}, []string{"org", "dyson", "cron"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_CronAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"dyson", "cronAll"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (

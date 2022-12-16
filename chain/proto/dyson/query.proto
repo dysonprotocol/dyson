@@ -13,7 +13,7 @@ import "dyson/cron.proto";
 // this line is used by starport scaffolding # 1
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/x/dyson/types";
+option go_package = "github.com/org/dyson/x/dyson/types";
 
 
 // Query defines the gRPC querier service.

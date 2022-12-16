@@ -46,11 +46,11 @@ func (k Keeper) Cron(c context.Context, req *types.QueryGetCronRequest) (*types.
 	ctx := sdk.UnwrapSDKContext(c)
 
 	val, found := k.GetCron(
-	    ctx,
-	    req.BlockHeight,
-        )
+		ctx,
+		req.BlockHeight,
+	)
 	if !found {
-	    return nil, status.Error(codes.NotFound, "not found")
+		return nil, status.Error(codes.NotFound, "not found")
 	}
 
 	return &types.QueryGetCronResponse{Cron: val}, nil

@@ -52,7 +52,7 @@ func ValidateName(name string) error {
 	if !matched {
 		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("name must match the regular expression: %s", NameRegex))
 	}
-    if strings.Contains(strings.TrimSuffix(name, ".dys"), "dys") {
+	if strings.Contains(strings.TrimSuffix(name, ".dys"), "dys") {
 		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("main name cannot contain 'dys'"))
 	}
 

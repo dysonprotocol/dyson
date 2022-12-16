@@ -38,14 +38,14 @@ func TestGenesis(t *testing.T) {
 			},
 		},
 		CronList: []types.Cron{
-		{
-			BlockHeight: "0",
-},
-		{
-			BlockHeight: "1",
-},
-	},
-	// this line is used by starport scaffolding # genesis/test/state
+			{
+				BlockHeight: "0",
+			},
+			{
+				BlockHeight: "1",
+			},
+		},
+		// this line is used by starport scaffolding # genesis/test/state
 	}
 
 	k, ctx := keepertest.DysonKeeper(t)
@@ -60,5 +60,5 @@ func TestGenesis(t *testing.T) {
 	require.ElementsMatch(t, genesisState.StorageList, got.StorageList)
 	require.ElementsMatch(t, genesisState.ScheduledRunList, got.ScheduledRunList)
 	require.ElementsMatch(t, genesisState.CronList, got.CronList)
-// this line is used by starport scaffolding # genesis/test/assert
+	// this line is used by starport scaffolding # genesis/test/assert
 }

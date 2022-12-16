@@ -15,7 +15,7 @@ import (
 	"github.com/org/dyson/testutil/network"
 	"github.com/org/dyson/testutil/nullify"
 	"github.com/org/dyson/x/dyson/client/cli"
-    "github.com/org/dyson/x/dyson/types"
+	"github.com/org/dyson/x/dyson/types"
 )
 
 // Prevent strconv unused error
@@ -25,12 +25,11 @@ func networkWithCronObjects(t *testing.T, n int) (*network.Network, []types.Cron
 	t.Helper()
 	cfg := network.DefaultConfig()
 	state := types.GenesisState{}
-    require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
+	require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
 
 	for i := 0; i < n; i++ {
 		cron := types.Cron{
 			BlockHeight: strconv.Itoa(i),
-			
 		}
 		nullify.Fill(&cron)
 		state.CronList = append(state.CronList, cron)
@@ -49,32 +48,31 @@ func TestShowCron(t *testing.T) {
 		fmt.Sprintf("--%s=json", tmcli.OutputFlag),
 	}
 	for _, tc := range []struct {
-		desc string
+		desc          string
 		idBlockHeight string
-        
+
 		args []string
 		err  error
 		obj  types.Cron
 	}{
 		{
-			desc: "found",
+			desc:          "found",
 			idBlockHeight: objs[0].BlockHeight,
-            
+
 			args: common,
 			obj:  objs[0],
 		},
 		{
-			desc: "not found",
+			desc:          "not found",
 			idBlockHeight: strconv.Itoa(100000),
-            
+
 			args: common,
 			err:  status.Error(codes.NotFound, "not found"),
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
 			args := []string{
-			    tc.idBlockHeight,
-                
+				tc.idBlockHeight,
 			}
 			args = append(args, tc.args...)
 			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdShowCron(), args)
@@ -125,9 +123,9 @@ func TestListCron(t *testing.T) {
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 			require.LessOrEqual(t, len(resp.Cron), step)
 			require.Subset(t,
-            	nullify.Fill(objs),
-            	nullify.Fill(resp.Cron),
-            )
+				nullify.Fill(objs),
+				nullify.Fill(resp.Cron),
+			)
 		}
 	})
 	t.Run("ByKey", func(t *testing.T) {
@@ -141,9 +139,9 @@ func TestListCron(t *testing.T) {
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 			require.LessOrEqual(t, len(resp.Cron), step)
 			require.Subset(t,
-            	nullify.Fill(objs),
-            	nullify.Fill(resp.Cron),
-            )
+				nullify.Fill(objs),
+				nullify.Fill(resp.Cron),
+			)
 			next = resp.Pagination.NextKey
 		}
 	})

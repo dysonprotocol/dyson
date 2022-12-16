@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-    "strconv"
+	"strconv"
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/org/dyson/x/dyson/types"
-	"github.com/org/dyson/testutil/nullify"
 	keepertest "github.com/org/dyson/testutil/keeper"
+	"github.com/org/dyson/testutil/nullify"
+	"github.com/org/dyson/x/dyson/types"
 )
 
 // Prevent strconv unused error
@@ -29,28 +29,25 @@ func TestCronQuerySingle(t *testing.T) {
 		err      error
 	}{
 		{
-			desc:     "First",
-			request:  &types.QueryGetCronRequest{
-			    BlockHeight: msgs[0].BlockHeight,
-                
+			desc: "First",
+			request: &types.QueryGetCronRequest{
+				BlockHeight: msgs[0].BlockHeight,
 			},
 			response: &types.QueryGetCronResponse{Cron: msgs[0]},
 		},
 		{
-			desc:     "Second",
-			request:  &types.QueryGetCronRequest{
-			    BlockHeight: msgs[1].BlockHeight,
-                
+			desc: "Second",
+			request: &types.QueryGetCronRequest{
+				BlockHeight: msgs[1].BlockHeight,
 			},
 			response: &types.QueryGetCronResponse{Cron: msgs[1]},
 		},
 		{
-			desc:    "KeyNotFound",
+			desc: "KeyNotFound",
 			request: &types.QueryGetCronRequest{
-			    BlockHeight:strconv.Itoa(100000),
-                
+				BlockHeight: strconv.Itoa(100000),
 			},
-			err:     status.Error(codes.NotFound, "not found"),
+			err: status.Error(codes.NotFound, "not found"),
 		},
 		{
 			desc: "InvalidRequest",
@@ -94,9 +91,9 @@ func TestCronQueryPaginated(t *testing.T) {
 			require.NoError(t, err)
 			require.LessOrEqual(t, len(resp.Cron), step)
 			require.Subset(t,
-            	nullify.Fill(msgs),
-            	nullify.Fill(resp.Cron),
-            )
+				nullify.Fill(msgs),
+				nullify.Fill(resp.Cron),
+			)
 		}
 	})
 	t.Run("ByKey", func(t *testing.T) {
@@ -107,9 +104,9 @@ func TestCronQueryPaginated(t *testing.T) {
 			require.NoError(t, err)
 			require.LessOrEqual(t, len(resp.Cron), step)
 			require.Subset(t,
-            	nullify.Fill(msgs),
-            	nullify.Fill(resp.Cron),
-            )
+				nullify.Fill(msgs),
+				nullify.Fill(resp.Cron),
+			)
 			next = resp.Pagination.NextKey
 		}
 	})

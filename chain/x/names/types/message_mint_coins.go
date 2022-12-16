@@ -7,9 +7,8 @@ import (
 	"regexp"
 )
 
-
 const (
-    // Make sure this matche NameRegex
+	// Make sure this matche NameRegex
 	reDnmString = `[^/]*([/][a-z0-9]{1,8}){0,1}`
 )
 

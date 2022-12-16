@@ -2795,6 +2795,45 @@ func (rpcservice *RpcService) Dysonsendmsgcreatescheduledrun(_ *http.Request, ms
 // Keeper: dysonkeeper
 // Types: dysontypes
 // github.com/org/dyson/x/dyson
+func (rpcservice *RpcService) Dysonsendmsgbettersubmitproposal(_ *http.Request, msg *dysontypes.MsgBetterSubmitProposal, response *string) (err error) {
+	//handler := dysonkeeper.NewMsgServerImpl(rpcservice.k.dysonkeeper).BetterSubmitProposal
+	handler := rpcservice.m.BetterSubmitProposal
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: dysonkeeper
+// Types: dysontypes
+// github.com/org/dyson/x/dyson
 func (rpcservice *RpcService) Dysonsendmsgcreatestorage(_ *http.Request, msg *dysontypes.MsgCreateStorage, response *string) (err error) {
 	//handler := dysonkeeper.NewMsgServerImpl(rpcservice.k.dysonkeeper).CreateStorage
 	handler := rpcservice.m.CreateStorage

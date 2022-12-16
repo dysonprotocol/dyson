@@ -20,7 +20,8 @@
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Create Scheduled Run"
+            "title": "this line is used by starport scaffolding # proto/tx/message",
+            "description": "this line is used by starport scaffolding # proto/tx/message"
         },
         "dyson.MsgRun": {
             "properties": {
