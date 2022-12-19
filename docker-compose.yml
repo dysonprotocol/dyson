@@ -60,4 +60,8 @@ services:
       - ./chain/vue:/app
       - ./frontend/vue:/app/dist/
       - ./frontend_home:/root/
+  hermes:
+    build: ./hermes
+    image: ${REGISTRY-registry.gitlab.com/dysonproject}/hermes:1.2.0
+
 
