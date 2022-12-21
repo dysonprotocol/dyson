@@ -18,7 +18,7 @@ run:
 		docker-compose --env .env up chain frontend
 
 build: 
-		#docker-compose --env .env build pypy
+		#docker-compose --env .env build pypy hermes
 		docker-compose --env .env build chain
 		docker-compose --env .env build frontend
 

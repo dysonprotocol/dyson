@@ -167,6 +167,8 @@ var (
 		vesting.AppModuleBasic{},
 		dysonmodule.AppModuleBasic{},
 		namesmodule.AppModuleBasic{},
+		ibctm.AppModuleBasic{},
+
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
