@@ -211,6 +211,3 @@ replace github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alp
 replace github.com/ignite/cli => gitlab.com/dysonproject/ignite-cli v0.0.0-nightly
 
 replace github.com/confio/ics23/go => github.com/cosmos/cosmos-sdk/ics23/go v0.8.0
-
-// TODO RM
-replace github.com/cosmos/cosmos-sdk => ./cosmos-sdk
