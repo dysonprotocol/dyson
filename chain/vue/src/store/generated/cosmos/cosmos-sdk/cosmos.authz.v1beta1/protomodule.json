@@ -3,10 +3,10 @@
 	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.authz.v1beta1",
-		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/authz.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/authz.proto",
 				"Dependencies": [
 					"cosmos_proto/cosmos.proto",
 					"google/protobuf/timestamp.proto",
@@ -15,20 +15,20 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/event.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/event.proto",
 				"Dependencies": [
 					"cosmos_proto/cosmos.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/genesis.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos/authz/v1beta1/authz.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/query.proto",
 				"Dependencies": [
 					"google/api/annotations.proto",
 					"cosmos/base/query/v1beta1/pagination.proto",
@@ -37,7 +37,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/tx.proto",
 				"Dependencies": [
 					"cosmos_proto/cosmos.proto",
 					"gogoproto/gogo.proto",
@@ -51,97 +51,97 @@
 		"Messages": [
 			{
 				"Name": "GenericAuthorization",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/authz.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/authz.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "Grant",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/authz.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/authz.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "GrantAuthorization",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/authz.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/authz.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "GrantQueueItem",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/authz.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/authz.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "EventGrant",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/event.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/event.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "EventRevoke",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/event.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/event.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/genesis.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryGrantsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/query.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "QueryGrantsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGranterGrantsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGranterGrantsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGranteeGrantsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryGranteeGrantsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgGrant",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgExecResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/tx.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgExec",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/tx.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MsgGrantResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgRevoke",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgRevokeResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			}
 		],
@@ -218,19 +218,19 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgGrant",
-			"URI": "cosmos.authz.v1beta1.MsgGrant",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/tx.proto"
-		},
-		{
 			"Name": "MsgExec",
 			"URI": "cosmos.authz.v1beta1.MsgExec",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/tx.proto"
 		},
 		{
 			"Name": "MsgRevoke",
 			"URI": "cosmos.authz.v1beta1.MsgRevoke",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgGrant",
+			"URI": "cosmos.authz.v1beta1.MsgGrant",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/tx.proto"
 		}
 	],
 	"HTTPQueries": [
@@ -275,27 +275,27 @@
 	"Types": [
 		{
 			"Name": "GenericAuthorization",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/authz.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/authz.proto"
 		},
 		{
 			"Name": "Grant",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/authz.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/authz.proto"
 		},
 		{
 			"Name": "GrantAuthorization",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/authz.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/authz.proto"
 		},
 		{
 			"Name": "GrantQueueItem",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/authz.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/authz.proto"
 		},
 		{
 			"Name": "EventGrant",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/event.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/event.proto"
 		},
 		{
 			"Name": "EventRevoke",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.4/proto/cosmos/authz/v1beta1/event.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/authz/v1beta1/event.proto"
 		}
 	]
 }

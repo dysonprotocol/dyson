@@ -87,7 +87,7 @@ for file_path in [
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.distribution.v1beta1/protomodule.json",
     # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.evidence.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.feegrant.v1beta1/protomodule.json",
-    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1beta1/protomodule.json",
+    #"vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.group.v1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.mint.v1beta1/protomodule.json",
@@ -192,6 +192,9 @@ for file_path in [
                 types.add(f'{mod_types} "{data["Pkg"]["GoImportName"]}"')
             else:
                 if "gov" in mod_keeper:
+                    keeper_import = data["Pkg"]["GoImportName"].replace(
+                        "/types", "/keeper"
+                    )
                     if service_name == "Msg":
                         keeper_import = data["Pkg"]["GoImportName"].replace(
                             "/types/v1", "/keeper"

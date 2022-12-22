@@ -3,10 +3,10 @@
 	"GoModulePath": "github.com/cosmos/ibc-go/v5",
 	"Pkg": {
 		"Name": "ibc.core.client.v1",
-		"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1",
+		"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"google/protobuf/any.proto",
@@ -15,14 +15,14 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/genesis.proto",
 				"Dependencies": [
 					"ibc/core/client/v1/client.proto",
 					"gogoproto/gogo.proto"
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"Dependencies": [
 					"cosmos/base/query/v1beta1/pagination.proto",
 					"ibc/core/client/v1/client.proto",
@@ -32,7 +32,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/tx.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"google/protobuf/any.proto"
@@ -43,182 +43,182 @@
 		"Messages": [
 			{
 				"Name": "IdentifiedClientState",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ConsensusStateWithHeight",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ClientConsensusStates",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ClientUpdateProposal",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "UpgradeProposal",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "Height",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "Params",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/genesis.proto",
 				"HighestFieldNumber": 6
 			},
 			{
 				"Name": "GenesisMetadata",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/genesis.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "IdentifiedGenesisMetadata",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/genesis.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/genesis.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryClientStateRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryClientStateResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryClientStatesRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryClientStatesResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryConsensusStateRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 4
 			},
 			{
 				"Name": "QueryConsensusStateResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "QueryConsensusStatesRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryConsensusStatesResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryConsensusStateHeightsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryConsensusStateHeightsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryClientStatusRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryClientStatusResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryClientParamsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QueryClientParamsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryUpgradedClientStateRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QueryUpgradedClientStateResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QueryUpgradedConsensusStateRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QueryUpgradedConsensusStateResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/query.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgCreateClient",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgCreateClientResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgUpdateClient",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgUpdateClientResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgUpgradeClient",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/tx.proto",
 				"HighestFieldNumber": 6
 			},
 			{
 				"Name": "MsgUpgradeClientResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/tx.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "MsgSubmitMisbehaviour",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgSubmitMisbehaviourResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/tx.proto",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/tx.proto",
 				"HighestFieldNumber": 0
 			}
 		],
@@ -496,39 +496,39 @@
 	"Types": [
 		{
 			"Name": "IdentifiedClientState",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto"
 		},
 		{
 			"Name": "ConsensusStateWithHeight",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto"
 		},
 		{
 			"Name": "ClientConsensusStates",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto"
 		},
 		{
 			"Name": "ClientUpdateProposal",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto"
 		},
 		{
 			"Name": "UpgradeProposal",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto"
 		},
 		{
 			"Name": "Height",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto"
 		},
 		{
 			"Name": "Params",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/client.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/client.proto"
 		},
 		{
 			"Name": "GenesisMetadata",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/genesis.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/genesis.proto"
 		},
 		{
 			"Name": "IdentifiedGenesisMetadata",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.0.0-rc2/proto/ibc/core/client/v1/genesis.proto"
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v5@v5.1.0/proto/ibc/core/client/v1/genesis.proto"
 		}
 	]
 }

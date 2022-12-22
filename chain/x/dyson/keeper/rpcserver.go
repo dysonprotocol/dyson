@@ -856,7 +856,7 @@ func (rpcservice *RpcService) Cosmosfeegrantv1beta1sendmsgrevokeallowance(_ *htt
 
 // Keeper: cosmosgovv1keeper
 // Types: cosmosgovv1types
-// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+// github.com/cosmos/cosmos-sdk/x/gov/keeper/v1
 func (rpcservice *RpcService) Cosmosgovv1queryproposal(_ *http.Request, msg *cosmosgovv1types.QueryProposalRequest, response *string) (err error) {
 	r, err := rpcservice.k.cosmosgovv1keeper.Proposal(rpcservice.ctx, msg)
 	if err != nil {
@@ -868,7 +868,7 @@ func (rpcservice *RpcService) Cosmosgovv1queryproposal(_ *http.Request, msg *cos
 
 // Keeper: cosmosgovv1keeper
 // Types: cosmosgovv1types
-// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+// github.com/cosmos/cosmos-sdk/x/gov/keeper/v1
 func (rpcservice *RpcService) Cosmosgovv1queryproposals(_ *http.Request, msg *cosmosgovv1types.QueryProposalsRequest, response *string) (err error) {
 	r, err := rpcservice.k.cosmosgovv1keeper.Proposals(rpcservice.ctx, msg)
 	if err != nil {
@@ -880,7 +880,7 @@ func (rpcservice *RpcService) Cosmosgovv1queryproposals(_ *http.Request, msg *co
 
 // Keeper: cosmosgovv1keeper
 // Types: cosmosgovv1types
-// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+// github.com/cosmos/cosmos-sdk/x/gov/keeper/v1
 func (rpcservice *RpcService) Cosmosgovv1queryvote(_ *http.Request, msg *cosmosgovv1types.QueryVoteRequest, response *string) (err error) {
 	r, err := rpcservice.k.cosmosgovv1keeper.Vote(rpcservice.ctx, msg)
 	if err != nil {
@@ -892,7 +892,7 @@ func (rpcservice *RpcService) Cosmosgovv1queryvote(_ *http.Request, msg *cosmosg
 
 // Keeper: cosmosgovv1keeper
 // Types: cosmosgovv1types
-// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+// github.com/cosmos/cosmos-sdk/x/gov/keeper/v1
 func (rpcservice *RpcService) Cosmosgovv1queryvotes(_ *http.Request, msg *cosmosgovv1types.QueryVotesRequest, response *string) (err error) {
 	r, err := rpcservice.k.cosmosgovv1keeper.Votes(rpcservice.ctx, msg)
 	if err != nil {
@@ -904,7 +904,7 @@ func (rpcservice *RpcService) Cosmosgovv1queryvotes(_ *http.Request, msg *cosmos
 
 // Keeper: cosmosgovv1keeper
 // Types: cosmosgovv1types
-// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+// github.com/cosmos/cosmos-sdk/x/gov/keeper/v1
 func (rpcservice *RpcService) Cosmosgovv1queryparams(_ *http.Request, msg *cosmosgovv1types.QueryParamsRequest, response *string) (err error) {
 	r, err := rpcservice.k.cosmosgovv1keeper.Params(rpcservice.ctx, msg)
 	if err != nil {
@@ -916,7 +916,7 @@ func (rpcservice *RpcService) Cosmosgovv1queryparams(_ *http.Request, msg *cosmo
 
 // Keeper: cosmosgovv1keeper
 // Types: cosmosgovv1types
-// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+// github.com/cosmos/cosmos-sdk/x/gov/keeper/v1
 func (rpcservice *RpcService) Cosmosgovv1querydeposit(_ *http.Request, msg *cosmosgovv1types.QueryDepositRequest, response *string) (err error) {
 	r, err := rpcservice.k.cosmosgovv1keeper.Deposit(rpcservice.ctx, msg)
 	if err != nil {
@@ -928,7 +928,7 @@ func (rpcservice *RpcService) Cosmosgovv1querydeposit(_ *http.Request, msg *cosm
 
 // Keeper: cosmosgovv1keeper
 // Types: cosmosgovv1types
-// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+// github.com/cosmos/cosmos-sdk/x/gov/keeper/v1
 func (rpcservice *RpcService) Cosmosgovv1querydeposits(_ *http.Request, msg *cosmosgovv1types.QueryDepositsRequest, response *string) (err error) {
 	r, err := rpcservice.k.cosmosgovv1keeper.Deposits(rpcservice.ctx, msg)
 	if err != nil {
@@ -940,7 +940,7 @@ func (rpcservice *RpcService) Cosmosgovv1querydeposits(_ *http.Request, msg *cos
 
 // Keeper: cosmosgovv1keeper
 // Types: cosmosgovv1types
-// github.com/cosmos/cosmos-sdk/x/feegrant/keeper
+// github.com/cosmos/cosmos-sdk/x/gov/keeper/v1
 func (rpcservice *RpcService) Cosmosgovv1querytallyresult(_ *http.Request, msg *cosmosgovv1types.QueryTallyResultRequest, response *string) (err error) {
 	r, err := rpcservice.k.cosmosgovv1keeper.TallyResult(rpcservice.ctx, msg)
 	if err != nil {

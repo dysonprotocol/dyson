@@ -12154,6 +12154,10 @@
             "timeout_timestamp": {
               "type": "string",
               "description": "Timeout timestamp in absolute nanoseconds since unix epoch. The timeout is disabled when set to 0."
+            },
+            "memo": {
+              "type": "string",
+              "description": "optional memo"
             }
           },
           "additionalProperties": true,
@@ -12198,6 +12202,12 @@
       "$ref": "#/definitions/MsgTransferResponse",
       "definitions": {
         "MsgTransferResponse": {
+          "properties": {
+            "sequence": {
+              "type": "string",
+              "description": "sequence number of the transfer packet sent"
+            }
+          },
           "additionalProperties": true,
           "type": "object",
           "title": "Msg Transfer Response",
