@@ -131,6 +131,14 @@ func (am AppModule) RegisterServices(cfg module.Configurator) {
 	types.RegisterQueryServer(cfg.QueryServer(), am.keeper)
 
 	m := keeper.NewMigrator(am.keeper)
+	if err := cfg.RegisterMigration(types.ModuleName, 1, m.Noop); err != nil {
+		panic(fmt.Sprintf("failed to migrate x/dyson from version 1 to 2: %v", err))
+	}
+
+	if err := cfg.RegisterMigration(types.ModuleName, 2, m.Noop); err != nil {
+		panic(fmt.Sprintf("failed to migrate x/dyson from version 2 to 3: %v", err))
+	}
+
 	if err := cfg.RegisterMigration(types.ModuleName, 3, m.Noop); err != nil {
 		panic(fmt.Sprintf("failed to migrate x/dyson from version 3 to 4: %v", err))
 	}

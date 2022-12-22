@@ -8,8 +8,6 @@ services:
   chain:
     build: 
       context: ./chain
-      args:
-        - TAG=${TAG}
     image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/chain:${TAG}
     command: make start
     environment:
