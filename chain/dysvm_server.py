@@ -116,6 +116,13 @@ def get_module_dict():
     import typing
     import urllib
 
+    @forge.copy(random.seed)
+    def safe_random_seed(a=None, version=2):
+        assert a is not None, "in Dyson seed must not be None"
+        return random.seed(a, version)
+    allow_func(safe_random_seed)
+
+
     @forge.copy(json.dumps)
     def safe_json_dumps(**kwargs):
         if kwargs.get("separators", None):
@@ -277,10 +284,10 @@ def build_sandbox(port, creator, address, amount, block_info):
                 "CHAIN ERROR: types.ErrorOutOfGas"
             ):
                 raise MemoryError("Out of Gas")
-            try: 
+            try:
                 # some rpc responses are json encoded
-                ret_json['result'] = json.loads(str(ret_json['result']).encode()) 
-            except json.JSONDecodeError: 
+                ret_json["result"] = json.loads(str(ret_json["result"]).encode())
+            except json.JSONDecodeError:
                 pass
             return ret_json
         except json.JSONDecodeError:
