@@ -232,7 +232,7 @@ def get_module_dict():
             "sample": random.sample,
             "shuffle": random.shuffle,
             "triangular": random.triangular,
-            "seed": random.seed,
+            "seed": safe_random_seed,
             "uniform": random.uniform,
         },
         "re2": re2_dict,
