@@ -120,6 +120,9 @@ def get_module_dict():
     def safe_random_seed(a=None, version=2):
         assert a is not None, "in Dyson seed must not be None"
         return random.seed(a, version)
+    safe_random_seed.__doc__ = random.Random.seed.__doc__
+    safe_random_seed.__module__ = random.Random.seed.__module__
+    safe_random_seed.__qualname__ = random.Random.seed.__qualname__
     allow_func(safe_random_seed)
 
 

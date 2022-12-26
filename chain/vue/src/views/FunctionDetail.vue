@@ -78,9 +78,9 @@
           </li>
         </ul>
       </div>
-      <div v-if="queryResponseErr" class="alert alert-danger">{{
-        queryResponseErr
-      }}</div>
+      <div v-if="queryResponseErr" class="alert alert-danger">
+        {{ queryResponseErr }}
+      </div>
       <div v-if="queryResponse">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
@@ -195,7 +195,7 @@ export default {
           try {
             txResult = await this.$store.dispatch("dyson/sendMsgRun", opts);
             console.log("txResult", txResult);
-            this.gas = txResult.gasUsed * 1.2;
+            this.gas = txResult.gasUsed * 2;
             runResponse = JSON.parse(
               JSON.parse(txResult["rawLog"])[0]
                 ["events"].filter((i) => i.type == "run")[0]
@@ -204,9 +204,14 @@ export default {
           } catch (objError) {
             console.info("objError", objError);
             if (objError instanceof SyntaxError) {
-              runResponse = JSON.parse(
-                txResult.rawLog.match(/Output:\n(.*): Exception in Script$/s)[1]
+              let match = txResult.rawLog.match(
+                /Output:\n(.*): Exception in Script$/s
               );
+              if (match) {
+                runResponse = JSON.parse(match[1]);
+              } else {
+                runResponse.exception = txResult.rawLog;
+              }
             } else {
               runResponse.exception = objError.message;
             }
