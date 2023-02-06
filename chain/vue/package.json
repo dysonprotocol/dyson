@@ -12,7 +12,6 @@
     "bootstrap": "^4.6.2",
     "buffer": "^6.0.3",
     "core-js": "^3.18.2",
-    "org-dyson-client-ts": "file:../ts-client",
     "vue": "^3.2.6",
     "vue-router": "^4.0.3",
     "vue3-ace-editor": "^2.2.1",

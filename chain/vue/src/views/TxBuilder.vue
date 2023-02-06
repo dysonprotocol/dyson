@@ -1,20 +1,6 @@
-<style scoped>
-</style>
+<style scoped></style>
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col">
-        <pre>
-from dys import _chain
-
-
-def example():
-    return _chain("{{ command || "example/command" }}"{{ command_kwargs }})
-
-</pre
-        >
-      </div>
-    </div>
     <div class="row">
       <div class="col-sm-12 col-md-4 align-top">
         <h3>Commands</h3>
@@ -66,16 +52,41 @@ def example():
         </div>
       </div>
       <div class="col-md-8">
+        <div class="row mb-3">
+          <div class="col">
+            <h2>Example Usage</h2>
+            <VAceEditor
+              v-model:value="example"
+              lang="python"
+              theme="chrome"
+              :min-lines="10"
+              :max-lines="200"
+              readonly="true"
+            />
+          </div>
+        </div>
         <div id="editor"></div>
         <form v-on:submit="submit" class="">
           <div class="form-group">
-            <VAceEditor
-              v-model:value="data"
-              lang="json"
-              theme="chrome"
-              min-lines="10"
-              max-lines="200"
-            />
+            <div class="row mb-3" v-if="showFee">
+              <div class="col">
+                <label for="exampleFormControlTextarea1" class="form-label"
+                  >Gas</label
+                >
+                <input class="form-control" v-model="gas" />
+              </div>
+              <div class="col">
+                <label for="exampleFormControlTextarea1" class="form-label"
+                  >Fee</label
+                >
+                <div class="input-group">
+                  <input class="form-control" v-model="fee" />
+                  <div class="input-group-append">
+                    <div class="input-group-text">dys</div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <button
               v-if="inflight"
               class="btn btn-primary btn-lg"
@@ -111,6 +122,9 @@ def example():
 </template>
 <script>
 import command_schema from "./command_schema.json";
+import { VAceEditor } from "vue3-ace-editor";
+import "ace-builds/src-noconflict/theme-chrome";
+import "ace-builds/src-noconflict/mode-python";
 
 console.log("command_schema", command_schema);
 import { JSONEditor } from "@json-editor/json-editor";
@@ -217,7 +231,8 @@ export default {
       error: "",
       response: "",
       command: "",
-      fee: "2000",
+      fee: "123",
+      gas: "10000",
       showFee: false,
       search: "",
       link: "",
@@ -257,8 +272,16 @@ export default {
         this.error = e;
       }
     },
+    gas: function (val, oldVal) {
+      console.log("watch gas", val, oldVal);
+      this.fee = String(Math.ceil(val * 0.0001));
+      if (oldVal !== null) {
+        this.editorChanged();
+      }
+    },
     fee: function (val, oldVal) {
-      console.log("watch fee", val, oldVal);
+      console.log("watch gas", val, oldVal);
+      this.gas = String(val * 10000);
       if (oldVal !== null) {
         this.editorChanged();
       }
@@ -269,6 +292,15 @@ export default {
     },
   },
   computed: {
+    example: function () {
+      return `from dys import _chain
+
+
+def example():
+    return _chain(
+        "${this.command || ''}"${this.command_kwargs}
+    )`;
+    },
     groupedCommands: function () {
       return groupBy(["module_name", "service_name"])(
         Object.values(this.filted_command_schema)
@@ -312,8 +344,10 @@ export default {
     updateQuery: function () {
       var searchParams = new URLSearchParams(window.location.search);
       searchParams.set("data", JSON.stringify(this.editor.getValue()));
+      searchParams.set("gas", this.gas);
+      searchParams.set("fee", this.fee);
       var newQuery = window.location.pathname + "?" + searchParams.toString();
-      history.pushState(null, "", newQuery);
+      history.pushState({}, "", newQuery);
     },
     updateEditorFromQuery() {
       var val = this.$route.query;
@@ -321,15 +355,18 @@ export default {
       if (this.editor) {
         this.editor.setValue(JSON.parse(val["data"] || "{}"));
       }
+      this.gas = val.gas || "0";
+      this.fee = val.fee || "0";
     },
     updateLink: function () {
       var searchParams = new URLSearchParams(window.location.search);
       searchParams.set("data", JSON.stringify(this.editor.getValue()));
+      searchParams.set("gas", this.gas);
+      searchParams.set("fee", this.fee);
       this.link = window.location.pathname + "?" + searchParams.toString();
       console.log("link", this.link);
     },
     editorChanged() {
-      console.log("editorChanged", this.data);
       this.updateLink();
       this.error = "";
       if (this.command && command_schema[this.command]) {
@@ -353,15 +390,20 @@ export default {
           this.showFee = true;
           var value = JSON.parse(JSON.stringify(this.editor.getValue()));
           const fee = [{ amount: this.fee, denom: "dys" }];
-          this.data = JSON.stringify({ value: value, fee: fee }, null, 2);
+          this.data = JSON.stringify(
+            { value: value, fee: fee, gas: this.gas },
+            null,
+            2
+          );
         }
         var data = JSON.parse(JSON.stringify(this.editor.getValue()));
         this.command_kwargs = Object.keys(data)
           .map(function (key, index) {
-            return ", " + key + "=" + pythonify(data[key]);
+            return ",\n        " + key + "=" + pythonify(data[key]);
           })
           .join("");
       }
+      console.log("editorChanged", this.data);
     },
     setupEditor() {
       console.log("setupEditor", self.data, this.command);
@@ -392,6 +434,7 @@ export default {
       }
     },
     submit: async function (e) {
+      this.editorChanged();
       this.updateQuery();
       e.preventDefault();
       console.log("data", this.data);
@@ -437,7 +480,9 @@ export default {
     console.log("created");
     window.$store = this.$store;
   },
-  components: {},
+  components: {
+    VAceEditor,
+  },
 
   mounted: function () {
     console.log("mounted");
@@ -451,14 +496,6 @@ export default {
     this.command = this.$route.query.command;
     const data = JSON.parse(this.$route.query.data || "{}");
     const s = JSON.stringify(data, null, 2);
-    if (data.fee !== undefined) {
-      for (const fee of data.fee) {
-        console.log("fee", fee);
-        if (fee.denom === "dys") {
-          this.fee = fee.amount;
-        }
-      }
-    }
 
     this.data = s;
     this.setupEditor();
