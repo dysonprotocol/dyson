@@ -1,8 +1,16 @@
 import glob
+import yaml
 from pathlib import Path
 from string import Template
 import json
 from dysvm_server import get_module_dict, dyslang, build_sandbox
+
+with open("docs/static/openapi.yml") as f:
+    y = yaml.safe_load(f)
+
+rest_query_paths = {
+    v.get("get", {}).get("operationId", p).lower(): p for p, v in y["paths"].items()
+}
 
 
 msg_template = Template(
@@ -82,12 +90,12 @@ for file_path in [
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.auth.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.authz.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.bank.v1beta1/protomodule.json",
-    #"vue/src/store/generated/cosmos/cosmos-sdk/cosmos.base.tendermint.v1beta1/protomodule.json",
+    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.base.tendermint.v1beta1/protomodule.json",
     # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.crisis.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.distribution.v1beta1/protomodule.json",
     # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.evidence.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.feegrant.v1beta1/protomodule.json",
-    #"vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1beta1/protomodule.json",
+    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.group.v1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.mint.v1beta1/protomodule.json",
@@ -148,12 +156,14 @@ for file_path in [
                     )
                 )
             )
+            rest_path = f'{ data["Pkg"]["Name"] }{ d["Name"] }'.lower().replace(".", "")
             schemas[command] = {
                 "module_name": data["Pkg"]["Name"],
                 "name": d["Name"],
                 "service_name": services["Name"],
                 "request_schema": req_schema,
                 "resp_schema": res_schema,
+                "rest_path": rest_query_paths.get(rest_path),
                 "http_rules": d["HTTPRules"],
             }
             # print(d)
@@ -252,7 +262,7 @@ for file_path in [
                 function_name=function_name,
                 mod_types=mod_types,
                 req_type=d["RequestType"],
-                #resp_type=d["ReturnsType"],
+                # resp_type=d["ReturnsType"],
                 mod_keeper=mod_keeper,
                 keeper_function=d["Name"],
                 keeper_import=keeper_import,

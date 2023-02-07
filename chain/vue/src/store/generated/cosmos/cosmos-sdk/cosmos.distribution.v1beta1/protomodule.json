@@ -438,16 +438,6 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgFundCommunityPool",
-			"URI": "cosmos.distribution.v1beta1.MsgFundCommunityPool",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/distribution/v1beta1/tx.proto"
-		},
-		{
-			"Name": "MsgWithdrawDelegatorReward",
-			"URI": "cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/distribution/v1beta1/tx.proto"
-		},
-		{
 			"Name": "MsgWithdrawValidatorCommission",
 			"URI": "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/distribution/v1beta1/tx.proto"
@@ -455,6 +445,16 @@
 		{
 			"Name": "MsgSetWithdrawAddress",
 			"URI": "cosmos.distribution.v1beta1.MsgSetWithdrawAddress",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/distribution/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgFundCommunityPool",
+			"URI": "cosmos.distribution.v1beta1.MsgFundCommunityPool",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/distribution/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgWithdrawDelegatorReward",
+			"URI": "cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/distribution/v1beta1/tx.proto"
 		}
 	],

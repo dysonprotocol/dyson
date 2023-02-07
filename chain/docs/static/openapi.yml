@@ -5156,6 +5156,41 @@ paths:
           type: string
       tags:
         - Query
+  /cosmos/base/node/v1beta1/config:
+    get:
+      summary: Config queries for the operator configuration.
+      operationId: CosmosBaseNodeV1Beta1Config
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              minimum_gas_price:
+                type: string
+            description: >-
+              ConfigResponse defines the response structure for the Config gRPC
+              query.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Service
   /cosmos/base/tendermint/v1beta1/abci_query:
     get:
       summary: >-
@@ -35125,94 +35160,6 @@ paths:
           format: uint64
       tags:
         - Query
-  '/ibc/apps/interchain_accounts/controller/v1/owners/{owner}/connections/{connection_id}':
-    get:
-      summary: >-
-        InterchainAccount returns the interchain account address for a given
-        owner address on a given connection
-      operationId: IbcApplicationsInterchainAccountsControllerV1InterchainAccount
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              address:
-                type: string
-            description: >-
-              QueryInterchainAccountResponse the response type for the
-              Query/InterchainAccount RPC method.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: owner
-          in: path
-          required: true
-          type: string
-        - name: connection_id
-          in: path
-          required: true
-          type: string
-      tags:
-        - Query
-  /ibc/apps/interchain_accounts/controller/v1/params:
-    get:
-      summary: Params queries all parameters of the ICA controller submodule.
-      operationId: IbcApplicationsInterchainAccountsControllerV1Params
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              params:
-                description: params defines the parameters of the module.
-                type: object
-                properties:
-                  controller_enabled:
-                    type: boolean
-                    description: >-
-                      controller_enabled enables or disables the controller
-                      submodule.
-            description: >-
-              QueryParamsResponse is the response type for the Query/Params RPC
-              method.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
   /ibc/apps/interchain_accounts/host/v1/params:
     get:
       summary: Params queries all parameters of the ICA host submodule.
@@ -49196,6 +49143,12 @@ definitions:
 
       NOTE: The amount field is an Int which implements the custom method
       signatures required by gogoproto.
+  cosmos.base.node.v1beta1.ConfigResponse:
+    type: object
+    properties:
+      minimum_gas_price:
+        type: string
+    description: ConfigResponse defines the response structure for the Config gRPC query.
   cosmos.base.tendermint.v1beta1.ABCIQueryResponse:
     type: object
     properties:
@@ -71958,34 +71911,6 @@ definitions:
         type: string
       data:
         type: string
-  ibc.applications.interchain_accounts.controller.v1.Params:
-    type: object
-    properties:
-      controller_enabled:
-        type: boolean
-        description: controller_enabled enables or disables the controller submodule.
-    description: |-
-      Params defines the set of on-chain interchain accounts parameters.
-      The following parameters may be used to disable the controller submodule.
-  ibc.applications.interchain_accounts.controller.v1.QueryInterchainAccountResponse:
-    type: object
-    properties:
-      address:
-        type: string
-    description: >-
-      QueryInterchainAccountResponse the response type for the
-      Query/InterchainAccount RPC method.
-  ibc.applications.interchain_accounts.controller.v1.QueryParamsResponse:
-    type: object
-    properties:
-      params:
-        description: params defines the parameters of the module.
-        type: object
-        properties:
-          controller_enabled:
-            type: boolean
-            description: controller_enabled enables or disables the controller submodule.
-    description: QueryParamsResponse is the response type for the Query/Params RPC method.
   ibc.applications.interchain_accounts.host.v1.Params:
     type: object
     properties:
@@ -72040,6 +71965,11 @@ definitions:
       source tracing information path.
   ibc.applications.transfer.v1.MsgTransferResponse:
     type: object
+    properties:
+      sequence:
+        type: string
+        format: uint64
+        title: sequence number of the transfer packet sent
     description: MsgTransferResponse defines the Msg/Transfer response type.
   ibc.applications.transfer.v1.Params:
     type: object

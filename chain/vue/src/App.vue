@@ -1,9 +1,10 @@
 <template>
-  <marquee
-    v-if="chainId != 'dyson-mainnet-01'"
-    style="background: red; color: white"
-    >You are using Chain ID: {{ chainId }}</marquee
+  <div
+    v-show="chainId && chainId !== 'dyson-mainnet-01'"
+    style="background: red; color: white; text-align: center"
   >
+    You are using Chain ID: {{ chainId }}
+  </div>
   <div class="container-fluid">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <router-link class="navbar-brand" to="/">Dyson Protocol</router-link>
@@ -27,18 +28,8 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" active-class="active" to="/docs"
-              >Documentation</router-link
+              >Python Functions</router-link
             >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              active-class="active"
-              :href="apiCosmos"
-              target="_blank"
-            >
-              API
-            </a>
           </li>
           <li class="nav-item">
             <router-link
@@ -55,6 +46,25 @@
             <a v-else class="nav-link disabled">My script</a>
           </li>
           <DysAcc />
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="https://docs.dysonprotocol.com/"
+              target="_blank"
+            >
+              Docs ↗
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              active-class="active"
+              :href="apiCosmos"
+              target="_blank"
+            >
+              Rest API ↗
+            </a>
+          </li>
         </ul>
         <div class="navbar-text">Chain ID: {{ chainId }}</div>
       </div>
@@ -112,12 +122,16 @@ export default {
 </script>
 
 <style lang="scss">
-.sp-acc {
+.navbar-nav {
   .modal {
-    width: initial;
-    height: initial;
+    .modal-dialog {
+    }
+
     .modal-header {
-      align-items: initial;
+      display: initial;
+    }
+    .modal-footer {
+      justify-content: center;
     }
   }
   .account-dropdown {

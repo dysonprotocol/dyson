@@ -111,6 +111,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/auth/v1beta1/accounts",
     "http_rules": [
       {
         "Params": null,
@@ -172,6 +173,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/auth/v1beta1/accounts/{address}",
     "http_rules": [
       {
         "Params": [
@@ -221,6 +223,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/auth/v1beta1/address_by_id/{id}",
     "http_rules": [
       {
         "Params": [
@@ -289,6 +292,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/auth/v1beta1/params",
     "http_rules": [
       {
         "Params": null,
@@ -348,6 +352,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/auth/v1beta1/module_accounts",
     "http_rules": [
       {
         "Params": null,
@@ -407,6 +412,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/auth/v1beta1/module_accounts/{name}",
     "http_rules": [
       {
         "Params": [
@@ -450,6 +456,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/auth/v1beta1/bech32",
     "http_rules": [
       {
         "Params": null,
@@ -498,6 +505,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/auth/v1beta1/bech32/{address_bytes}",
     "http_rules": [
       {
         "Params": [
@@ -548,6 +556,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/auth/v1beta1/bech32/{address_string}",
     "http_rules": [
       {
         "Params": [
@@ -694,6 +703,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/authz/v1beta1/grants",
     "http_rules": [
       {
         "Params": null,
@@ -836,6 +846,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/authz/v1beta1/grants/granter/{granter}",
     "http_rules": [
       {
         "Params": [
@@ -980,6 +991,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/authz/v1beta1/grants/grantee/{grantee}",
     "http_rules": [
       {
         "Params": [
@@ -1059,6 +1071,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.authz.v1beta1/sendMsgExec": {
@@ -1126,6 +1139,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.authz.v1beta1/sendMsgRevoke": {
@@ -1167,6 +1181,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.bank.v1beta1/QueryBalance": {
@@ -1228,6 +1243,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/bank/v1beta1/balances/{address}/by_denom",
     "http_rules": [
       {
         "Params": [
@@ -1353,6 +1369,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/bank/v1beta1/balances/{address}",
     "http_rules": [
       {
         "Params": [
@@ -1478,6 +1495,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/bank/v1beta1/spendable_balances/{address}",
     "http_rules": [
       {
         "Params": [
@@ -1599,6 +1617,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/bank/v1beta1/supply",
     "http_rules": [
       {
         "Params": null,
@@ -1662,6 +1681,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/bank/v1beta1/supply/by_denom",
     "http_rules": [
       {
         "Params": null,
@@ -1735,6 +1755,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/bank/v1beta1/params",
     "http_rules": [
       {
         "Params": null,
@@ -1849,6 +1870,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/bank/v1beta1/denoms_metadata/{denom}",
     "http_rules": [
       {
         "Params": [
@@ -2021,6 +2043,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/bank/v1beta1/denoms_metadata",
     "http_rules": [
       {
         "Params": null,
@@ -2160,6 +2183,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/bank/v1beta1/denom_owners/{denom}",
     "http_rules": [
       {
         "Params": [
@@ -2226,6 +2250,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.bank.v1beta1/sendMsgMultiSend": {
@@ -2318,6 +2343,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.distribution.v1beta1/QueryParams": {
@@ -2375,6 +2401,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/distribution/v1beta1/params",
     "http_rules": [
       {
         "Params": null,
@@ -2451,6 +2478,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/distribution/v1beta1/validators/{validator_address}/outstanding_rewards",
     "http_rules": [
       {
         "Params": [
@@ -2530,6 +2558,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/distribution/v1beta1/validators/{validator_address}/commission",
     "http_rules": [
       {
         "Params": [
@@ -2663,6 +2692,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/distribution/v1beta1/validators/{validator_address}/slashes",
     "http_rules": [
       {
         "Params": [
@@ -2734,6 +2764,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards/{validator_address}",
     "http_rules": [
       {
         "Params": [
@@ -2826,6 +2857,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards",
     "http_rules": [
       {
         "Params": [
@@ -2879,6 +2911,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/distribution/v1beta1/delegators/{delegator_address}/validators",
     "http_rules": [
       {
         "Params": [
@@ -2929,6 +2962,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/distribution/v1beta1/delegators/{delegator_address}/withdraw_address",
     "http_rules": [
       {
         "Params": [
@@ -2990,6 +3024,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/distribution/v1beta1/community_pool",
     "http_rules": [
       {
         "Params": null,
@@ -3034,6 +3069,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.distribution.v1beta1/sendMsgWithdrawDelegatorReward": {
@@ -3095,6 +3131,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.distribution.v1beta1/sendMsgWithdrawValidatorCommission": {
@@ -3153,6 +3190,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.distribution.v1beta1/sendMsgFundCommunityPool": {
@@ -3208,6 +3246,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.feegrant.v1beta1/QueryAllowance": {
@@ -3288,6 +3327,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/feegrant/v1beta1/allowance/{granter}/{grantee}",
     "http_rules": [
       {
         "Params": [
@@ -3432,6 +3472,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/feegrant/v1beta1/allowances/{grantee}",
     "http_rules": [
       {
         "Params": [
@@ -3575,6 +3616,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/feegrant/v1beta1/issued/{granter}",
     "http_rules": [
       {
         "Params": [
@@ -3640,6 +3682,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.feegrant.v1beta1/sendMsgRevokeAllowance": {
@@ -3680,6 +3723,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.gov.v1/QueryProposal": {
@@ -3845,6 +3889,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/gov/v1/proposals/{proposal_id}",
     "http_rules": [
       {
         "Params": [
@@ -4108,6 +4153,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/gov/v1/proposals",
     "http_rules": [
       {
         "Params": null,
@@ -4220,6 +4266,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/gov/v1/proposals/{proposal_id}/votes/{voter}",
     "http_rules": [
       {
         "Params": [
@@ -4391,6 +4438,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/gov/v1/proposals/{proposal_id}/votes",
     "http_rules": [
       {
         "Params": [
@@ -4521,6 +4569,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/gov/v1/params/{params_type}",
     "http_rules": [
       {
         "Params": [
@@ -4610,6 +4659,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/gov/v1/proposals/{proposal_id}/deposits/{depositor}",
     "http_rules": [
       {
         "Params": [
@@ -4755,6 +4805,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/gov/v1/proposals/{proposal_id}/deposits",
     "http_rules": [
       {
         "Params": [
@@ -4826,6 +4877,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/gov/v1/proposals/{proposal_id}/tally",
     "http_rules": [
       {
         "Params": [
@@ -4919,6 +4971,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.gov.v1/sendMsgExecLegacyContent": {
@@ -4972,6 +5025,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.gov.v1/sendMsgVote": {
@@ -5037,6 +5091,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/gov/v1/proposals/{proposal_id}/votes/{voter}",
     "http_rules": null
   },
   "cosmos.gov.v1/sendMsgVoteWeighted": {
@@ -5119,6 +5174,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.gov.v1/sendMsgDeposit": {
@@ -5177,6 +5233,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/gov/v1/proposals/{proposal_id}/deposits/{depositor}",
     "http_rules": null
   },
   "cosmos.group.v1/QueryGroupInfo": {
@@ -5253,6 +5310,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/group_info/{group_id}",
     "http_rules": [
       {
         "Params": [
@@ -5354,6 +5412,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/group_policy_info/{address}",
     "http_rules": [
       {
         "Params": [
@@ -5507,6 +5566,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/group_members/{group_id}",
     "http_rules": [
       {
         "Params": [
@@ -5651,6 +5711,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/groups_by_admin/{admin}",
     "http_rules": [
       {
         "Params": [
@@ -5812,6 +5873,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/group_policies_by_group/{group_id}",
     "http_rules": [
       {
         "Params": [
@@ -5973,6 +6035,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/group_policies_by_admin/{admin}",
     "http_rules": [
       {
         "Params": [
@@ -6168,6 +6231,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/proposal/{proposal_id}",
     "http_rules": [
       {
         "Params": [
@@ -6423,6 +6487,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/proposals_by_group_policy/{address}",
     "http_rules": [
       {
         "Params": [
@@ -6527,6 +6592,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/vote_by_proposal_voter/{proposal_id}/{voter}",
     "http_rules": [
       {
         "Params": [
@@ -6688,6 +6754,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/votes_by_proposal/{proposal_id}",
     "http_rules": [
       {
         "Params": [
@@ -6848,6 +6915,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/votes_by_voter/{voter}",
     "http_rules": [
       {
         "Params": [
@@ -6992,6 +7060,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/groups_by_member/{address}",
     "http_rules": [
       {
         "Params": [
@@ -7067,6 +7136,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/group/v1/proposals/{proposal_id}/tally",
     "http_rules": [
       {
         "Params": [
@@ -7148,6 +7218,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgUpdateGroupMembers": {
@@ -7215,6 +7286,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgUpdateGroupAdmin": {
@@ -7259,6 +7331,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgUpdateGroupMetadata": {
@@ -7303,6 +7376,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgCreateGroupPolicy": {
@@ -7370,6 +7444,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgCreateGroupWithPolicy": {
@@ -7472,6 +7547,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgUpdateGroupPolicyAdmin": {
@@ -7516,6 +7592,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgUpdateGroupPolicyDecisionPolicy": {
@@ -7573,6 +7650,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgUpdateGroupPolicyMetadata": {
@@ -7617,6 +7695,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgSubmitProposal": {
@@ -7710,6 +7789,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgWithdrawProposal": {
@@ -7750,6 +7830,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgVote": {
@@ -7836,6 +7917,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgExec": {
@@ -7900,6 +7982,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.group.v1/sendMsgLeaveGroup": {
@@ -7940,6 +8023,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.mint.v1beta1/QueryParams": {
@@ -8009,6 +8093,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/mint/v1beta1/params",
     "http_rules": [
       {
         "Params": null,
@@ -8053,6 +8138,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/mint/v1beta1/inflation",
     "http_rules": [
       {
         "Params": null,
@@ -8097,6 +8183,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/mint/v1beta1/annual_provisions",
     "http_rules": [
       {
         "Params": null,
@@ -8170,6 +8257,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/slashing/v1beta1/params",
     "http_rules": [
       {
         "Params": null,
@@ -8251,6 +8339,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/slashing/v1beta1/signing_infos/{cons_address}",
     "http_rules": [
       {
         "Params": [
@@ -8388,6 +8477,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/slashing/v1beta1/signing_infos",
     "http_rules": [
       {
         "Params": null,
@@ -8429,6 +8519,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.staking.v1beta1/QueryValidators": {
@@ -8684,6 +8775,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/validators",
     "http_rules": [
       {
         "Params": null,
@@ -8885,6 +8977,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/validators/{validator_addr}",
     "http_rules": [
       {
         "Params": [
@@ -9045,6 +9138,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations",
     "http_rules": [
       {
         "Params": [
@@ -9203,6 +9297,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations",
     "http_rules": [
       {
         "Params": [
@@ -9308,6 +9403,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}",
     "http_rules": [
       {
         "Params": [
@@ -9412,6 +9508,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation",
     "http_rules": [
       {
         "Params": [
@@ -9574,6 +9671,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/delegations/{delegator_addr}",
     "http_rules": [
       {
         "Params": [
@@ -9732,6 +9830,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/unbonding_delegations",
     "http_rules": [
       {
         "Params": [
@@ -9935,6 +10034,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/redelegations",
     "http_rules": [
       {
         "Params": [
@@ -10198,6 +10298,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators",
     "http_rules": [
       {
         "Params": [
@@ -10405,6 +10506,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators/{validator_addr}",
     "http_rules": [
       {
         "Params": [
@@ -10756,6 +10858,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/historical_info/{height}",
     "http_rules": [
       {
         "Params": [
@@ -10815,6 +10918,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/pool",
     "http_rules": [
       {
         "Params": null,
@@ -10892,6 +10996,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/staking/v1beta1/params",
     "http_rules": [
       {
         "Params": null,
@@ -11029,6 +11134,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.staking.v1beta1/sendMsgEditValidator": {
@@ -11103,6 +11209,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.staking.v1beta1/sendMsgDelegate": {
@@ -11159,6 +11266,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.staking.v1beta1/sendMsgBeginRedelegate": {
@@ -11224,6 +11332,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.staking.v1beta1/sendMsgUndelegate": {
@@ -11286,6 +11395,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.staking.v1beta1/sendMsgCancelUnbondingDelegation": {
@@ -11347,6 +11457,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.upgrade.v1beta1/QueryCurrentPlan": {
@@ -11426,6 +11537,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/upgrade/v1beta1/current_plan",
     "http_rules": [
       {
         "Params": null,
@@ -11474,6 +11586,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/upgrade/v1beta1/applied_plan/{name}",
     "http_rules": [
       {
         "Params": [
@@ -11526,6 +11639,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/upgrade/v1beta1/upgraded_consensus_state/{last_height}",
     "http_rules": [
       {
         "Params": [
@@ -11595,6 +11709,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/upgrade/v1beta1/module_versions",
     "http_rules": [
       {
         "Params": null,
@@ -11636,6 +11751,7 @@
         }
       }
     },
+    "rest_path": "/cosmos/upgrade/v1beta1/authority",
     "http_rules": [
       {
         "Params": null,
@@ -11725,6 +11841,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "cosmos.upgrade.v1beta1/sendMsgCancelUpgrade": {
@@ -11761,6 +11878,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "ibc.applications.transfer.v1/QueryDenomTrace": {
@@ -11820,6 +11938,7 @@
         }
       }
     },
+    "rest_path": "/ibc/apps/transfer/v1/denom_traces/{hash}",
     "http_rules": [
       {
         "Params": [
@@ -11943,6 +12062,7 @@
         }
       }
     },
+    "rest_path": "/ibc/apps/transfer/v1/denom_traces",
     "http_rules": [
       {
         "Params": null,
@@ -12002,6 +12122,7 @@
         }
       }
     },
+    "rest_path": "/ibc/apps/transfer/v1/params",
     "http_rules": [
       {
         "Params": null,
@@ -12050,6 +12171,7 @@
         }
       }
     },
+    "rest_path": "/ibc/apps/transfer/v1/denom_hashes/{trace}",
     "http_rules": [
       {
         "Params": [
@@ -12104,6 +12226,7 @@
         }
       }
     },
+    "rest_path": "/ibc/apps/transfer/v1/channels/{channel_id}/ports/{port_id}/escrow_address",
     "http_rules": [
       {
         "Params": [
@@ -12215,6 +12338,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "dyson/QueryScheduledRun": {
@@ -12367,6 +12491,7 @@
         }
       }
     },
+    "rest_path": "/dyson/scheduledRun",
     "http_rules": [
       {
         "Params": null,
@@ -12582,6 +12707,7 @@
         }
       }
     },
+    "rest_path": "/dyson/scheduledRunAll",
     "http_rules": [
       {
         "Params": null,
@@ -12643,6 +12769,7 @@
         }
       }
     },
+    "rest_path": "/dyson/storage",
     "http_rules": [
       {
         "Params": null,
@@ -12759,6 +12886,7 @@
         }
       }
     },
+    "rest_path": "/dyson/storageAll",
     "http_rules": [
       {
         "Params": null,
@@ -12820,6 +12948,7 @@
         }
       }
     },
+    "rest_path": "/dyson/script",
     "http_rules": [
       {
         "Params": null,
@@ -12864,6 +12993,7 @@
         }
       }
     },
+    "rest_path": "/dyson/schema",
     "http_rules": [
       {
         "Params": null,
@@ -12915,6 +13045,7 @@
         }
       }
     },
+    "rest_path": "/dyson/wsgi",
     "http_rules": [
       {
         "Params": null,
@@ -12987,6 +13118,7 @@
         }
       }
     },
+    "rest_path": "/dyson/query",
     "http_rules": [
       {
         "Params": null,
@@ -13103,6 +13235,7 @@
         }
       }
     },
+    "rest_path": "/dyson/scriptAll",
     "http_rules": [
       {
         "Params": null,
@@ -13222,6 +13355,7 @@
         }
       }
     },
+    "rest_path": "/dyson/storageprefix",
     "http_rules": [
       {
         "Params": null,
@@ -13302,6 +13436,7 @@
         }
       }
     },
+    "rest_path": "/dyson/scheduled_gas_price_at_block",
     "http_rules": [
       {
         "Params": null,
@@ -13363,6 +13498,7 @@
         }
       }
     },
+    "rest_path": "/dyson/cron",
     "http_rules": [
       {
         "Params": null,
@@ -13479,6 +13615,7 @@
         }
       }
     },
+    "rest_path": "/dyson/cronAll",
     "http_rules": [
       {
         "Params": null,
@@ -13570,6 +13707,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "dyson/sendMsgBetterSubmitProposal": {
@@ -13641,6 +13779,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "dyson/sendMsgCreateStorage": {
@@ -13689,6 +13828,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "dyson/sendMsgUpdateStorage": {
@@ -13732,6 +13872,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "dyson/sendMsgDeleteStorage": {
@@ -13768,6 +13909,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "dyson/sendMsgCreateScript": {
@@ -13810,6 +13952,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "dyson/sendMsgUpdateScript": {
@@ -13852,6 +13995,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "dyson/sendMsgDeleteScript": {
@@ -13885,6 +14029,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "dyson/sendMsgRun": {
@@ -13951,6 +14096,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "names/QueryParams": {
@@ -13994,6 +14140,7 @@
         }
       }
     },
+    "rest_path": "/org/dyson/names/params",
     "http_rules": [
       {
         "Params": null,
@@ -14067,6 +14214,7 @@
         }
       }
     },
+    "rest_path": "/org/dyson/names/name",
     "http_rules": [
       {
         "Params": null,
@@ -14195,6 +14343,7 @@
         }
       }
     },
+    "rest_path": "/org/dyson/names/nameall",
     "http_rules": [
       {
         "Params": null,
@@ -14239,6 +14388,7 @@
         }
       }
     },
+    "rest_path": "/org/dyson/names/resolve",
     "http_rules": [
       {
         "Params": null,
@@ -14289,6 +14439,7 @@
         }
       }
     },
+    "rest_path": "/org/dyson/names/generate_commit",
     "http_rules": [
       {
         "Params": null,
@@ -14350,6 +14501,7 @@
         }
       }
     },
+    "rest_path": "/org/dyson/names/expirations/{blockHeight}",
     "http_rules": [
       {
         "Params": [
@@ -14468,6 +14620,7 @@
         }
       }
     },
+    "rest_path": "/org/dyson/names/expirations",
     "http_rules": [
       {
         "Params": null,
@@ -14525,6 +14678,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "names/sendMsgUpdateName": {
@@ -14567,6 +14721,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "names/sendMsgDeleteName": {
@@ -14603,6 +14758,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "names/sendMsgReveal": {
@@ -14676,6 +14832,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "names/sendMsgSetPriceAndExtend": {
@@ -14715,6 +14872,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "names/sendMsgOfferTo": {
@@ -14754,6 +14912,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "names/sendMsgAccept": {
@@ -14790,6 +14949,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "names/sendMsgBuy": {
@@ -14826,6 +14986,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "names/sendMsgMintCoins": {
@@ -14862,6 +15023,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   },
   "names/sendMsgBurnCoins": {
@@ -14898,6 +15060,7 @@
         }
       }
     },
+    "rest_path": null,
     "http_rules": null
   }
 }

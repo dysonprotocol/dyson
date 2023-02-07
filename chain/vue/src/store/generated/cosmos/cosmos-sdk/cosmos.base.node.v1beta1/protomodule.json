@@ -1,0 +1,63 @@
+{
+	"Name": "v1beta1",
+	"GoModulePath": "github.com/cosmos/cosmos-sdk",
+	"Pkg": {
+		"Name": "cosmos.base.node.v1beta1",
+		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/base/node/v1beta1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/base/node/v1beta1/query.proto",
+				"Dependencies": [
+					"google/api/annotations.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/cosmos-sdk/client/grpc/node",
+		"Messages": [
+			{
+				"Name": "ConfigRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/base/node/v1beta1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "ConfigResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/base/node/v1beta1/query.proto",
+				"HighestFieldNumber": 1
+			}
+		],
+		"Services": [
+			{
+				"Name": "Service",
+				"RPCFuncs": [
+					{
+						"Name": "Config",
+						"RequestType": "ConfigRequest",
+						"ReturnsType": "ConfigResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"Msgs": null,
+	"HTTPQueries": [
+		{
+			"Name": "Config",
+			"FullName": "ServiceConfig",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": null
+}

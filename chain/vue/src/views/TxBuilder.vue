@@ -1,70 +1,55 @@
 <style scoped></style>
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-4 align-top">
-        <h3>Commands</h3>
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            v-model="search"
-            class="form-control"
-            placeholder="Search commands.."
-          />
-          <div class="input-group-append">
-            <button type="button" class="btn btn-primary" @click="search = ''">
-              clear
-            </button>
-          </div>
-        </div>
-        <div
+  <div class="">
+    <div class="row mb-5">
+      <div class="col align-top">
+        <h2>Step 1: Select a Command</h2>
+        <p class="lead">
+        The Dyson Dashboard Commands interface allows you to access the chain from the browser. 
+        Make requests and sign transactions all without opening the terminal.
+        </p>
+        <span
           v-for="(value, name) in groupedCommands"
           v-bind:key="name"
-          class="list-group mt-5"
+          class="dropdown"
         >
-          <h4>{{ name }}</h4>
-          <strong
-            v-if="value.Msg"
-            class="list-group-item list-group-item-action list-group-item-dark"
-            >Tx</strong
+          <button
+            class="btn btn-secondary dropdown-toggle mb-2 mr-1"
+            type="button"
+            data-toggle="dropdown"
+            aria-expanded="false"
           >
-          <router-link
-            :to="{ query: { command: c.full_command } }"
-            v-for="c in value.Msg"
-            v-bind:key="c.name"
-            class="list-group-item list-group-item-action"
-          >
-            {{ c.name }}
-          </router-link>
-          <strong
-            v-if="value.Query"
-            class="list-group-item list-group-item-action list-group-item-dark"
-            >Query</strong
-          >
-          <router-link
-            :to="{ query: { command: c.full_command } }"
-            v-for="c in value.Query"
-            v-bind:key="c.name"
-            class="list-group-item list-group-item-action"
-          >
-            {{ c.name }}
-          </router-link>
-        </div>
-      </div>
-      <div class="col-md-8">
-        <div class="row mb-3">
-          <div class="col">
-            <h2>Example Usage</h2>
-            <VAceEditor
-              v-model:value="example"
-              lang="python"
-              theme="chrome"
-              :min-lines="10"
-              :max-lines="200"
-              readonly="true"
-            />
+            {{ name }}
+          </button>
+          <div class="dropdown-menu">
+            <h6 v-if="value.Query" class="dropdown-header">Queries</h6>
+            <router-link
+              :to="{ query: { command: c.full_command } }"
+              v-for="c in value.Query"
+              v-bind:key="c.name"
+              class="dropdown-item"
+            >
+              {{ c.name }}
+            </router-link>
+            <div v-if="value.Query && value.Msg" class="dropdown-divider"></div>
+            <h6 v-if="value.Msg" class="dropdown-header">Transactions</h6>
+            <router-link
+              :to="{ query: { command: c.full_command } }"
+              v-for="c in value.Msg"
+              v-bind:key="c.name"
+              class="dropdown-item"
+            >
+              {{ c.name }}
+            </router-link>
           </div>
-        </div>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <h2>Step 2: Input data </h2>
+        <p class="lead">Here you can customize your request with any info and see the response.</p>
         <div id="editor"></div>
         <form v-on:submit="submit" class="">
           <div class="form-group">
@@ -87,9 +72,10 @@
                 </div>
               </div>
             </div>
+            <a class="btn btn-link" :href="link">Link</a>
             <button
               v-if="inflight"
-              class="btn btn-primary btn-lg"
+              class="btn btn-primary btn-lg btn-block"
               type="button"
               disabled
             >
@@ -106,16 +92,65 @@
               :disabled="disabled"
               type="submit"
               value="run"
-              class="btn btn-primary btn-lg"
+              class="btn btn-primary btn-lg btn-block"
             >
               {{ buttontxt }}
             </button>
-            <a class="btn btn-link" :href="link">Link</a>
           </div>
         </form>
 
         <div v-if="error" class="alert alert-warning">{{ error }}</div>
-        <pre class=""><code>{{ response }}</code></pre>
+        <div id="responseEditor"></div>
+      </div>
+      <div class="col-lg-8">
+        <h2>Step 4: Integrate in your distributed web app</h2>
+        <p class="lead">Use these examples as a guide as you develop your app.</p>
+        <div class="row mb-5">
+          <div class="col">
+            <h3>Use it in a Script</h3>
+            <p class="lead">
+           Connect your wallet and click "My Script" in the menu. Copy this example usage to your Script and save it. Then you will see the form called "Example" which you can use to interact with the function.</p>
+            <VAceEditor
+              v-model:value="example"
+              lang="python"
+              theme="chrome"
+              :min-lines="10"
+              :max-lines="200"
+              readonly="true"
+            />
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col">
+            <h3>Plain Javascript Usage</h3>
+            <p class="lead">This is the simplest way to read from the API. </p>
+            <VAceEditor
+              v-model:value="fetchExample"
+              lang="javascript"
+              theme="chrome"
+              :min-lines="5"
+              :max-lines="200"
+              readonly="true"
+            />
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col">
+            <h3>DysonLoader Usage</h3>
+            <p class="lead">
+            See the <a href="https://docs.dysonprotocol.com/">Dyson Protocl Documentation</a> for examples how to initialize DysonLoader in your
+              distributed web app frontend. connect to the wallet, and sign transactions.
+            </p>
+            <VAceEditor
+              v-model:value="vueExample"
+              lang="javascript"
+              theme="chrome"
+              :min-lines="10"
+              :max-lines="200"
+              readonly="true"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -125,6 +160,9 @@ import command_schema from "./command_schema.json";
 import { VAceEditor } from "vue3-ace-editor";
 import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/mode-html";
+import { useStore } from "vuex";
 
 console.log("command_schema", command_schema);
 import { JSONEditor } from "@json-editor/json-editor";
@@ -225,6 +263,8 @@ export default {
       tx: [],
       query: [],
       command_kwargs: "",
+      fetchExample: "",
+      rest_path: "",
       inflight: false,
       data: "{}",
       editorData: {},
@@ -247,7 +287,7 @@ export default {
         this.command = val.command;
         this.setupEditor();
         this.setupResponseEditor();
-        this.response = null;
+        this.response = "";
       },
       deep: true,
       immediate: true,
@@ -287,18 +327,69 @@ export default {
       }
     },
     response: function (val, oldVal) {
-      //this.responseEditor.setValue(val);
-      //this.responseEditor.disable();
+      this.responseEditor.setValue(val);
+      this.responseEditor.disable();
     },
   },
   computed: {
+    fetchExample: function () {
+      const path = command_schema[this.command].rest_path || "";
+      if (!path) {
+        return `// Cannot make \`${this.command}\` requests with the REST API`;
+      }
+      const interpolateUrl = (string, values) =>
+        string.replace(/{(.*?)}/g, (match, offset) => values[offset] || match);
+
+      let api = this.$store.getters["common/env/apiCosmos"];
+      const data = JSON.parse(this.data);
+      api += interpolateUrl(
+        command_schema[this.command].rest_path,
+        data.params || {}
+      );
+      let searchParams = "";
+      if (Object.keys(data.query || {}).length) {
+        searchParams = `+ '?' + new URLSearchParams(${JSON.stringify(
+          data.query,
+          null,
+          2
+        )})`;
+      }
+      return `response = await fetch('${api}'${searchParams})
+await response.json()`;
+    },
+    restUrl: function () {
+      const interpolateUrl = (string, values) =>
+        string.replace(/{(.*?)}/g, (match, offset) => values[offset] || match);
+
+      let api = this.$store.getters["common/env/apiCosmos"];
+      const data = JSON.parse(this.data);
+      api += interpolateUrl(path, data.params || {});
+      const qs = new URLSearchParams(data.query).toString();
+
+      if (qs) {
+        api += "?" + qs;
+      }
+      return api;
+    },
+    vueExample: function () {
+      return `/*
+This is Experimental!
+DysonLoader can save a lot of time if complex integration is needed with the
+chain, however consider making normal Javascript requests with the Rest API
+if the frontend is read only.
+*/
+
+const command = "${this.command || ""}"
+const data = ${this.data}
+await dysonVueStore.dispatch(command, data)`;
+    },
     example: function () {
       return `from dys import _chain
 
 
 def example():
     return _chain(
-        "${this.command || ''}"${this.command_kwargs}
+        "${this.command || ""}"${this.command_kwargs}
     )`;
     },
     groupedCommands: function () {
@@ -320,15 +411,15 @@ def example():
     buttontxt: function () {
       if (this.tx.includes(this.command)) {
         if (!this.address) {
-          return "Unlock Wallet to Sign Transaction";
+          return "Step 3: Connect Wallet to Sign Transaction";
         } else {
-          return "Sign Transaction";
+          return "Step 3: Sign Transaction";
         }
       }
       if (this.query.includes(this.command)) {
-        return "Run Query";
+        return "Step 3: Run Query";
       }
-      return "Select Command";
+      return "Step 3: Run Query or Transaction";
     },
     disabled: function () {
       if (this.inflight || !this.command) {
@@ -438,7 +529,7 @@ def example():
       this.updateQuery();
       e.preventDefault();
       console.log("data", this.data);
-      //this.responseEditor.setValue({});
+      this.responseEditor.setValue({});
       this.error = null;
       this.response = null;
       this.inflight = true;
@@ -450,7 +541,9 @@ def example():
         .catch((res) => {
           this.error = res;
         })
-        .finally((res) => (this.inflight = false));
+        .finally((res) => {
+          this.inflight = false;
+        });
     },
     setupResponseEditor: function () {
       const element = document.getElementById("responseEditor");
@@ -465,6 +558,11 @@ def example():
           disable_collapse: true,
           disable_properties: true,
           disable_edit_json: true,
+          disable_array_add: true,
+          disable_array_delete: true,
+          disable_array_delete_last_row: true,
+          disable_array_reorder: true,
+          no_additional_properties: true,
           show_opt_in: false,
           theme: "bootstrap4",
         });

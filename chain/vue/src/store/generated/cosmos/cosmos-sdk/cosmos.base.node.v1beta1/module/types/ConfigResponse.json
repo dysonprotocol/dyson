@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/ConfigResponse",
+    "definitions": {
+        "ConfigResponse": {
+            "properties": {
+                "minimum_gas_price": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Config Response",
+            "description": "ConfigResponse defines the response structure for the Config gRPC query."
+        }
+    }
+}
