@@ -215,13 +215,13 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgCancelUpgrade",
-			"URI": "cosmos.upgrade.v1beta1.MsgCancelUpgrade",
+			"Name": "MsgSoftwareUpgrade",
+			"URI": "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/upgrade/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgSoftwareUpgrade",
-			"URI": "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+			"Name": "MsgCancelUpgrade",
+			"URI": "cosmos.upgrade.v1beta1.MsgCancelUpgrade",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/upgrade/v1beta1/tx.proto"
 		}
 	],

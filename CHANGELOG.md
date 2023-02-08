@@ -42,5 +42,3 @@ the Github issue reference in the following format:
 * (frontend) [#55](https://gitlab.com/dysonproject/dyson/-/issues/55) Fix async issue with DysonLoader
 * (dyslang) [#51](https://gitlab.com/dysonproject/dyson/-/issues/51) Fix function annotation for texareas
 
-
-

@@ -709,18 +709,13 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgCreateGroupWithPolicy",
-			"URI": "cosmos.group.v1.MsgCreateGroupWithPolicy",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateGroupMembers",
-			"URI": "cosmos.group.v1.MsgUpdateGroupMembers",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
-		},
-		{
 			"Name": "MsgUpdateGroupAdmin",
 			"URI": "cosmos.group.v1.MsgUpdateGroupAdmin",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgExec",
+			"URI": "cosmos.group.v1.MsgExec",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
 		},
 		{
@@ -729,8 +724,48 @@
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
 		},
 		{
+			"Name": "MsgSubmitProposal",
+			"URI": "cosmos.group.v1.MsgSubmitProposal",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
+		},
+		{
 			"Name": "MsgUpdateGroupMetadata",
 			"URI": "cosmos.group.v1.MsgUpdateGroupMetadata",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgUpdateGroupPolicyAdmin",
+			"URI": "cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgCreateGroupWithPolicy",
+			"URI": "cosmos.group.v1.MsgCreateGroupWithPolicy",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgCreateGroupPolicy",
+			"URI": "cosmos.group.v1.MsgCreateGroupPolicy",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgLeaveGroup",
+			"URI": "cosmos.group.v1.MsgLeaveGroup",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgUpdateGroupMembers",
+			"URI": "cosmos.group.v1.MsgUpdateGroupMembers",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgWithdrawProposal",
+			"URI": "cosmos.group.v1.MsgWithdrawProposal",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
+		},
+		{
+			"Name": "MsgCreateGroup",
+			"URI": "cosmos.group.v1.MsgCreateGroup",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
 		},
 		{
@@ -741,41 +776,6 @@
 		{
 			"Name": "MsgVote",
 			"URI": "cosmos.group.v1.MsgVote",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgSubmitProposal",
-			"URI": "cosmos.group.v1.MsgSubmitProposal",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgLeaveGroup",
-			"URI": "cosmos.group.v1.MsgLeaveGroup",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgCreateGroup",
-			"URI": "cosmos.group.v1.MsgCreateGroup",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgCreateGroupPolicy",
-			"URI": "cosmos.group.v1.MsgCreateGroupPolicy",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateGroupPolicyAdmin",
-			"URI": "cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgExec",
-			"URI": "cosmos.group.v1.MsgExec",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
-		},
-		{
-			"Name": "MsgWithdrawProposal",
-			"URI": "cosmos.group.v1.MsgWithdrawProposal",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/group/v1/tx.proto"
 		}
 	],

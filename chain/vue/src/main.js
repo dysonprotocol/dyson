@@ -9,13 +9,13 @@ util.Long = Long;
 import starportLibrary from "@starport/vue";
 import { useKeplr } from "@starport/vue";
 import { createApp } from "vue";
-import "./app.scss";
 import * as Sentry from "@sentry/vue";
 import { BrowserTracing } from "@sentry/tracing";
 
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import "./app.scss";
 
 window.dysonVueStore = store;
 
@@ -69,3 +69,4 @@ window.dysonUseKeplr = (onAccountChange) => {
     k.connectToKeplr(onKeplrConnect, onKeplrError);
   });
 };
+

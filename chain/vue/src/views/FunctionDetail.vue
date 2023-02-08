@@ -44,8 +44,8 @@
             Run {{ name }}
             {{ (!address && "[connect wallet]") || "" }}
           </button>
-          <a class="btn btn-link" :href="link">Link</a>
         </div>
+          <a class="btn btn-link" :href="link">Link</a>
       </form>
       <div v-if="runResponse">
         <ul class="list-group list-group-flush">

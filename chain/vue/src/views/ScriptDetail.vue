@@ -5,63 +5,65 @@ pre {
 </style>
 
 <template>
-  <div class="row">
-    <div id="schemas" class="col-sm-12 col-md-4">
-      <div v-if="schemas && schemas.error">Error: {{ schemas.error }}</div>
-      <div v-for="item in schemas" v-bind:key="item.function">
-        <FunctionDetail
-          v-if="item.schema"
-          v-bind:schema="item.schema"
-          v-bind:name="item.function"
-          v-bind:scriptAddress="this.$route.params.script_address"
-        />
-        <div v-if="item.error" class="card mb-5">
-          <div class="card-body">
-            <h3>{{ item.function }}</h3>
-            <pre>Error: {{ item.error }}</pre>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="schemas" class="col-sm-12 col-md-4">
+        <div v-if="schemas && schemas.error">Error: {{ schemas.error }}</div>
+        <div v-for="item in schemas" v-bind:key="item.function">
+          <FunctionDetail
+            v-if="item.schema"
+            v-bind:schema="item.schema"
+            v-bind:name="item.function"
+            v-bind:scriptAddress="this.$route.params.script_address"
+          />
+          <div v-if="item.error" class="card mb-5">
+            <div class="card-body">
+              <h3>{{ item.function }}</h3>
+              <pre>Error: {{ item.error }}</pre>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="code" class="col">
-      <div class="mb-3">
-        <VAceEditor
-          v-model:value="code"
-          lang="python"
-          theme="chrome"
-          :min-lines="30"
-          :max-lines="500"
-          :readonly="disabled"
-        />
+      <div id="code" class="col">
+        <div class="mb-3">
+          <VAceEditor
+            v-model:value="code"
+            lang="python"
+            theme="chrome"
+            :min-lines="30"
+            :max-lines="500"
+            :readonly="disabled"
+          />
 
-        <button @click="save" :disabled="disabled" class="sp-button">
-          save
-          <span
-            v-if="inFlight"
-            class="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="true"
-          ></span>
-        </button>
-        <span v-if="unsavedChanges" class="m-5" role="alert"
-          >unsaved changes</span
+          <button @click="save" :disabled="disabled" class="btn-primary btn btn-lg">
+            save
+            <span
+              v-if="inFlight"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          </button>
+          <span v-if="unsavedChanges" class="m-5" role="alert"
+            >unsaved changes</span
+          >
+        </div>
+        <div v-if="error" class="alert alert-warning">
+          {{ error }}
+        </div>
+        <div
+          v-if="txResult"
+          class="alert"
+          :class="{ 'alert-primary': txSuccess, 'alert-warning': !txSuccess }"
         >
-      </div>
-      <div v-if="error" class="alert alert-warning">
-        {{ error }}
-      </div>
-      <div
-        v-if="txResult"
-        class="alert"
-        :class="{ 'alert-primary': txSuccess, 'alert-warning': !txSuccess }"
-      >
-        <pre>
+          <pre>
 TX hash: {{ txResult.transactionHash }}
 Height: {{ txResult.height }}
 Gas Used: {{ txResult.gasUsed }}
 Gas Wanted: {{ txResult.gasWanted }}
 Raw Log: {{ txResult.rawLog }}</pre
-        >
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -96,7 +98,7 @@ export default {
   },
   methods: {
     async save(e) {
-        console.log("this.gas", this.gas)
+      console.log("this.gas", this.gas);
       this.inFlight = true;
       this.txResult = null;
       this.error = null;

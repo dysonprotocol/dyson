@@ -1,154 +1,185 @@
-<style scoped></style>
+<style>
+h3 {
+  /* Wrap form headings*/
+  white-space: initial;
+}
+</style>
 <template>
-  <div class="">
-    <div class="row mb-5">
-      <div class="col align-top">
-        <h2>Step 1: Select a Command</h2>
-        <p class="lead">
-        The Dyson Dashboard Commands interface allows you to access the chain from the browser. 
-        Make requests and sign transactions all without opening the terminal.
-        </p>
-        <span
-          v-for="(value, name) in groupedCommands"
-          v-bind:key="name"
-          class="dropdown"
-        >
-          <button
-            class="btn btn-secondary dropdown-toggle mb-2 mr-1"
-            type="button"
-            data-toggle="dropdown"
-            aria-expanded="false"
-          >
-            {{ name }}
-          </button>
-          <div class="dropdown-menu">
-            <h6 v-if="value.Query" class="dropdown-header">Queries</h6>
-            <router-link
-              :to="{ query: { command: c.full_command } }"
-              v-for="c in value.Query"
-              v-bind:key="c.name"
-              class="dropdown-item"
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card m-2">
+          <div class="card-body">
+            <h2 class="">Step 1: Select a Command</h2>
+            <p class="">
+              The Dyson Dashboard Commands interface allows you to access the
+              chain from the browser. Make requests and sign transactions all
+              without opening the terminal.
+            </p>
+            <span
+              v-for="(value, name) in groupedCommands"
+              v-bind:key="name"
+              class="dropdown"
             >
-              {{ c.name }}
-            </router-link>
-            <div v-if="value.Query && value.Msg" class="dropdown-divider"></div>
-            <h6 v-if="value.Msg" class="dropdown-header">Transactions</h6>
-            <router-link
-              :to="{ query: { command: c.full_command } }"
-              v-for="c in value.Msg"
-              v-bind:key="c.name"
-              class="dropdown-item"
-            >
-              {{ c.name }}
-            </router-link>
+              <button
+                class="btn btn-secondary dropdown-toggle mb-2 mr-1"
+                type="button"
+                data-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {{ name }}
+              </button>
+              <div class="dropdown-menu">
+                <h6 v-if="value.Query" class="dropdown-header">Queries</h6>
+                <router-link
+                  :to="{ query: { command: c.full_command } }"
+                  v-for="c in value.Query"
+                  v-bind:key="c.name"
+                  class="dropdown-item"
+                >
+                  {{ c.name }}
+                </router-link>
+                <div
+                  v-if="value.Query && value.Msg"
+                  class="dropdown-divider"
+                ></div>
+                <h6 v-if="value.Msg" class="dropdown-header">Transactions</h6>
+                <router-link
+                  :to="{ query: { command: c.full_command } }"
+                  v-for="c in value.Msg"
+                  v-bind:key="c.name"
+                  class="dropdown-item"
+                >
+                  {{ c.name }}
+                </router-link>
+              </div>
+            </span>
           </div>
-        </span>
+        </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-lg-4">
-        <h2>Step 2: Input data </h2>
-        <p class="lead">Here you can customize your request with any info and see the response.</p>
-        <div id="editor"></div>
-        <form v-on:submit="submit" class="">
-          <div class="form-group">
-            <div class="row mb-3" v-if="showFee">
-              <div class="col">
-                <label for="exampleFormControlTextarea1" class="form-label"
-                  >Gas</label
-                >
-                <input class="form-control" v-model="gas" />
-              </div>
-              <div class="col">
-                <label for="exampleFormControlTextarea1" class="form-label"
-                  >Fee</label
-                >
-                <div class="input-group">
-                  <input class="form-control" v-model="fee" />
-                  <div class="input-group-append">
-                    <div class="input-group-text">dys</div>
+      <div class="col-md-4">
+        <div class="card m-2">
+          <div class="card-body">
+            <h2>Step 2: Input data</h2>
+            <p class="">
+              Here you can customize your request with any info and see the
+              response.
+            </p>
+            <div id="editor"></div>
+            <form v-on:submit="submit" class="">
+              <div class="form-group">
+                <div class="row mb-3" v-if="showFee">
+                  <div class="col">
+                    <label for="exampleFormControlTextarea1" class="form-label"
+                      >Gas</label
+                    >
+                    <input class="form-control" v-model="gas" />
+                  </div>
+                  <div class="col">
+                    <label for="exampleFormControlTextarea1" class="form-label"
+                      >Fee</label
+                    >
+                    <div class="input-group">
+                      <input class="form-control" v-model="fee" />
+                      <div class="input-group-append">
+                        <div class="input-group-text">dys</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <a class="btn btn-link" :href="link">Link</a>
+                <button
+                  v-if="inflight"
+                  class="btn btn-primary btn-lg btn-block"
+                  type="button"
+                  disabled
+                >
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Loading...
+                </button>
+                <button
+                  v-else
+                  name="action"
+                  :disabled="disabled"
+                  type="submit"
+                  value="run"
+                  class="btn btn-primary btn-lg btn-block"
+                >
+                  {{ buttontxt }}
+                </button>
+              </div>
+            </form>
+
+            <div v-if="error" class="alert alert-warning">{{ error }}</div>
+            <div id="responseEditor"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card m-2">
+          <div class="card-body">
+            <h2>Step 4: Integrate in your distributed web app</h2>
+            <p class="">
+              Use these examples as a guide as you develop your app.
+            </p>
+            <div class="row mb-5">
+              <div class="col">
+                <h3>Use it in a Script</h3>
+                <VAceEditor
+                  v-model:value="example"
+                  lang="python"
+                  theme="chrome"
+                  :min-lines="10"
+                  :max-lines="200"
+                  readonly="true"
+                />
               </div>
             </div>
-            <a class="btn btn-link" :href="link">Link</a>
-            <button
-              v-if="inflight"
-              class="btn btn-primary btn-lg btn-block"
-              type="button"
-              disabled
-            >
-              <span
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
-              Loading...
-            </button>
-            <button
-              v-else
-              name="action"
-              :disabled="disabled"
-              type="submit"
-              value="run"
-              class="btn btn-primary btn-lg btn-block"
-            >
-              {{ buttontxt }}
-            </button>
-          </div>
-        </form>
-
-        <div v-if="error" class="alert alert-warning">{{ error }}</div>
-        <div id="responseEditor"></div>
-      </div>
-      <div class="col-lg-8">
-        <h2>Step 4: Integrate in your distributed web app</h2>
-        <p class="lead">Use these examples as a guide as you develop your app.</p>
-        <div class="row mb-5">
-          <div class="col">
-            <h3>Use it in a Script</h3>
-            <p class="lead">
-           Connect your wallet and click "My Script" in the menu. Copy this example usage to your Script and save it. Then you will see the form called "Example" which you can use to interact with the function.</p>
-            <VAceEditor
-              v-model:value="example"
-              lang="python"
-              theme="chrome"
-              :min-lines="10"
-              :max-lines="200"
-              readonly="true"
-            />
-          </div>
-        </div>
-        <div class="row mb-5">
-          <div class="col">
-            <h3>Plain Javascript Usage</h3>
-            <p class="lead">This is the simplest way to read from the API. </p>
-            <VAceEditor
-              v-model:value="fetchExample"
-              lang="javascript"
-              theme="chrome"
-              :min-lines="5"
-              :max-lines="200"
-              readonly="true"
-            />
-          </div>
-        </div>
-        <div class="row mb-5">
-          <div class="col">
-            <h3>DysonLoader Usage</h3>
-            <p class="lead">
-            See the <a href="https://docs.dysonprotocol.com/">Dyson Protocl Documentation</a> for examples how to initialize DysonLoader in your
-              distributed web app frontend. connect to the wallet, and sign transactions.
-            </p>
-            <VAceEditor
-              v-model:value="vueExample"
-              lang="javascript"
-              theme="chrome"
-              :min-lines="10"
-              :max-lines="200"
-              readonly="true"
-            />
+            <div class="row mb-5">
+              <div class="col">
+                <h3>Plain Javascript Usage</h3>
+                <p class="">
+                  This is the simplest way to read from the API.
+                </p>
+                <VAceEditor
+                  v-model:value="fetchExample"
+                  lang="javascript"
+                  theme="chrome"
+                  :min-lines="5"
+                  :max-lines="200"
+                  readonly="true"
+                />
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col">
+                <h3>DysonLoader Usage</h3>
+                <p class="">
+                  See the
+                  <a href="https://docs.dysonprotocol.com/"
+                    >Dyson Protocol Documentation</a
+                  >
+                  for examples how to initialize DysonLoader in your distributed
+                  web app frontend. connect to the wallet, and sign
+                  transactions.
+                </p>
+                <VAceEditor
+                  v-model:value="vueExample"
+                  lang="javascript"
+                  theme="chrome"
+                  :min-lines="10"
+                  :max-lines="200"
+                  readonly="true"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -333,7 +364,7 @@ export default {
   },
   computed: {
     fetchExample: function () {
-      const path = command_schema[this.command].rest_path || "";
+      const path = command_schema[this.command]?.rest_path || "";
       if (!path) {
         return `// Cannot make \`${this.command}\` requests with the REST API`;
       }
@@ -343,7 +374,7 @@ export default {
       let api = this.$store.getters["common/env/apiCosmos"];
       const data = JSON.parse(this.data);
       api += interpolateUrl(
-        command_schema[this.command].rest_path,
+        command_schema[this.command]?.rest_path || "",
         data.params || {}
       );
       let searchParams = "";
@@ -386,11 +417,9 @@ await dysonVueStore.dispatch(command, data)`;
     example: function () {
       return `from dys import _chain
 
-
-def example():
-    return _chain(
-        "${this.command || ""}"${this.command_kwargs}
-    )`;
+_chain(
+    "${this.command || ""}"${this.command_kwargs}
+)`;
     },
     groupedCommands: function () {
       return groupBy(["module_name", "service_name"])(
@@ -490,7 +519,7 @@ def example():
         var data = JSON.parse(JSON.stringify(this.editor.getValue()));
         this.command_kwargs = Object.keys(data)
           .map(function (key, index) {
-            return ",\n        " + key + "=" + pythonify(data[key]);
+            return ",\n    " + key + "=" + pythonify(data[key]);
           })
           .join("");
       }
@@ -509,11 +538,12 @@ def example():
           form_name_root: "editor",
           schema: command_schema[this.command]?.request_schema || {},
           disable_collapse: true,
-          disable_properties: false,
-          disable_edit_json: false,
+          disable_properties: true,
+          disable_edit_json: true,
           show_opt_in: true,
           input_width: "100%",
           theme: "bootstrap4",
+          object_layout: "table",
         });
         this.editor.on("change", this.editorChanged);
         this.editor.on("ready", () => {

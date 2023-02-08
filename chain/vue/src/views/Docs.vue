@@ -1,8 +1,7 @@
 <style scoped>
 :target {
-   background-color: #ffa;
+  background-color: #ffa;
 }
-
 </style>
 <template>
   <div class="container">
@@ -66,12 +65,15 @@ export default {
   watch: {},
   methods: {
     scrollToId(id) {
-      document.getElementById(id).scrollIntoView();
+      const el = document.getElementById(id)
+      if (el) {
+        scrollIntoView();
+      }
     },
   },
   mounted() {
-      console.log("scrollto", location.hash);
-      this.scrollToId(location.hash);
+    console.log("scrollto", location.hash);
+    this.scrollToId(location.hash);
   },
 };
 </script>

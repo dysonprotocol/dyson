@@ -623,8 +623,13 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgEditValidator",
-			"URI": "cosmos.staking.v1beta1.MsgEditValidator",
+			"Name": "MsgCancelUnbondingDelegation",
+			"URI": "cosmos.staking.v1beta1.MsgCancelUnbondingDelegation",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/staking/v1beta1/tx.proto"
+		},
+		{
+			"Name": "MsgBeginRedelegate",
+			"URI": "cosmos.staking.v1beta1.MsgBeginRedelegate",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/staking/v1beta1/tx.proto"
 		},
 		{
@@ -643,13 +648,8 @@
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/staking/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgCancelUnbondingDelegation",
-			"URI": "cosmos.staking.v1beta1.MsgCancelUnbondingDelegation",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/staking/v1beta1/tx.proto"
-		},
-		{
-			"Name": "MsgBeginRedelegate",
-			"URI": "cosmos.staking.v1beta1.MsgBeginRedelegate",
+			"Name": "MsgEditValidator",
+			"URI": "cosmos.staking.v1beta1.MsgEditValidator",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/staking/v1beta1/tx.proto"
 		}
 	],

@@ -369,13 +369,13 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgVote",
-			"URI": "cosmos.gov.v1beta1.MsgVote",
+			"Name": "MsgSubmitProposal",
+			"URI": "cosmos.gov.v1beta1.MsgSubmitProposal",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/gov/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgDeposit",
-			"URI": "cosmos.gov.v1beta1.MsgDeposit",
+			"Name": "MsgVote",
+			"URI": "cosmos.gov.v1beta1.MsgVote",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/gov/v1beta1/tx.proto"
 		},
 		{
@@ -384,8 +384,8 @@
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/gov/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgSubmitProposal",
-			"URI": "cosmos.gov.v1beta1.MsgSubmitProposal",
+			"Name": "MsgDeposit",
+			"URI": "cosmos.gov.v1beta1.MsgDeposit",
 			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/gov/v1beta1/tx.proto"
 		}
 	],
