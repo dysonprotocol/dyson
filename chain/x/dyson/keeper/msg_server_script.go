@@ -11,6 +11,8 @@ import (
 	"github.com/org/dyson/x/dyson/types"
 )
 
+const CreateScriptGasCost uint64 = 10000000
+
 func (k msgServer) CreateScript(goCtx context.Context, msg *types.MsgCreateScript) (*types.MsgCreateScriptResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
@@ -33,6 +35,12 @@ func (k msgServer) CreateScript(goCtx context.Context, msg *types.MsgCreateScrip
 	k.SetScript(
 		ctx,
 		script,
+	)
+	ctx.GasMeter().ConsumeGas(CreateScriptGasCost, "CreateScript") 
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent("CreateScript",
+			sdk.NewAttribute("address", scriptAddress),
+		),
 	)
 	return &types.MsgCreateScriptResponse{Address: scriptAddress}, nil
 }
