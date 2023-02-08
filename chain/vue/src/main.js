@@ -47,25 +47,22 @@ window.dysonUseKeplr = (onAccountChange) => {
     if (k.isKeplrAvailable == false) {
       reject("keplr is not available");
     }
+
     let chainId = store.getters["common/env/chainId"];
 
     let onKeplrConnect = async () => {
+      await store.dispatch("common/wallet/connectWithKeplr", k.getOfflineSigner(chainId))
       let keplrParams = await k.getKeplrAccParams(chainId);
-
-      store.dispatch(
-        "common/wallet/connectWithKeplr",
-        k.getOfflineSigner(chainId)
-      );
-
-      k.listenToAccChange(onKeplrConnect);
-      resolve(keplrParams);
       if (onAccountChange) {
         onAccountChange(keplrParams);
       }
+      resolve(keplrParams);
     };
 
+    k.listenToAccChange(onKeplrConnect);
+
     let onKeplrError = (e) => {
-      console.error("could not connect with keplr");
+      console.error("could not connect with keplr", e);
       reject("could not connect with keplr", e);
     };
 
