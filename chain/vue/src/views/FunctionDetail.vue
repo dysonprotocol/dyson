@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card mb-5"
+    class="card mt-3"
     :class="{
       'border-danger': queryResponse?.exception || runResponse?.exception,
     }"

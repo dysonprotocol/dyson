@@ -8,13 +8,19 @@ h3 {
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <div class="card m-2">
+        <div class="card mb-4 mt-3">
+          <h4 class="card-header">Step 1: Select a Command</h4>
+
           <div class="card-body">
-            <h2 class="">Step 1: Select a Command</h2>
             <p class="">
               The Dyson Dashboard Commands interface allows you to access the
               chain from the browser. Make requests and sign transactions all
               without opening the terminal.
+            </p>
+            <p>
+              <strong v-if="command" class="">
+                Selected Command <code>{{ command }}</code>
+              </strong>
             </p>
             <span
               v-for="(value, name) in groupedCommands"
@@ -36,6 +42,7 @@ h3 {
                   v-for="c in value.Query"
                   v-bind:key="c.name"
                   class="dropdown-item"
+                  :class="{ active: command === c.full_command }"
                 >
                   {{ c.name }}
                 </router-link>
@@ -60,10 +67,10 @@ h3 {
     </div>
 
     <div class="row">
-      <div class="col-md-4">
-        <div class="card m-2">
+      <div class="col-lg">
+        <div class="card mb-4">
+          <h4 class="card-header">Step 2: Run command</h4>
           <div class="card-body">
-            <h2>Step 2: Input data</h2>
             <p class="">
               Here you can customize your request with any info and see the
               response.
@@ -122,65 +129,65 @@ h3 {
           </div>
         </div>
       </div>
-      <div class="col-md-8">
-        <div class="card m-2">
-          <div class="card-body">
-            <h2>Step 4: Integrate in your distributed web app</h2>
-            <p class="">
-              Use these examples as a guide as you develop your app.
-            </p>
-            <div class="row mb-5">
-              <div class="col">
-                <h3>Use it in a Script</h3>
-                <VAceEditor
-                  v-model:value="example"
-                  lang="python"
-                  theme="chrome"
-                  :min-lines="10"
-                  :max-lines="200"
-                  readonly="true"
-                />
-              </div>
+      <div class="col-lg">
+        <div class="card mb-4">
+          <h4 class="card-header">
+            Step 3: Integrate in your distributed web app
+          </h4>
+          <div class="list-group list-group-flush">
+            <div class="list-group-item">
+              <h5>Use it in a Script</h5>
+              <p class="">
+                Copy this into your function and use it in a script.
+              </p>
+              <VAceEditor
+                v-model:value="example"
+                lang="python"
+                theme="chrome"
+                :min-lines="10"
+                :max-lines="200"
+                readonly="true"
+              />
             </div>
-            <div class="row mb-5">
-              <div class="col">
-                <h3>Plain Javascript Usage</h3>
-                <p class="">
-                  This is the simplest way to read from the API.
-                </p>
-                <VAceEditor
-                  v-model:value="fetchExample"
-                  lang="javascript"
-                  theme="chrome"
-                  :min-lines="5"
-                  :max-lines="200"
-                  readonly="true"
-                />
-              </div>
+            <div class="list-group-item">
+              <h5>Plain Javascript Usage</h5>
+              <p class="">This is the simplest way to read from the API.</p>
+              <VAceEditor
+                v-model:value="fetchExample"
+                lang="javascript"
+                theme="chrome"
+                :min-lines="5"
+                :max-lines="200"
+                readonly="true"
+              />
             </div>
-            <div class="row mb-5">
-              <div class="col">
-                <h3>DysonLoader Usage</h3>
-                <p class="">
-                  See the
-                  <a href="https://docs.dysonprotocol.com/"
-                    >Dyson Protocol Documentation</a
-                  >
-                  for examples how to initialize DysonLoader in your distributed
-                  web app frontend. connect to the wallet, and sign
-                  transactions.
-                </p>
-                <VAceEditor
-                  v-model:value="vueExample"
-                  lang="javascript"
-                  theme="chrome"
-                  :min-lines="10"
-                  :max-lines="200"
-                  readonly="true"
-                />
-              </div>
+            <div class="list-group-item">
+              <h5>DysonLoader Usage</h5>
+              <p class="">
+                See the
+                <a href="https://docs.dysonprotocol.com/"
+                  >Dyson Protocol Documentation</a
+                >
+                for examples how to initialize <code>DysonLoader</code> in your
+                distributed web app frontend, connect to the wallet, and sign
+                transactions.
+              </p>
+              <VAceEditor
+                v-model:value="vueExample"
+                lang="javascript"
+                theme="chrome"
+                :min-lines="10"
+                :max-lines="200"
+                readonly="true"
+              />
             </div>
           </div>
+        </div>
+        <div class="card mb-4">
+          <h4 class="card-header">Step 4: ???</h4>
+        </div>
+        <div class="card mb-4">
+          <h4 class="card-header">Step 5: Profit</h4>
         </div>
       </div>
     </div>
@@ -440,15 +447,15 @@ _chain(
     buttontxt: function () {
       if (this.tx.includes(this.command)) {
         if (!this.address) {
-          return "Step 3: Connect Wallet to Sign Transaction";
+          return "Connect Wallet to Sign Transaction";
         } else {
-          return "Step 3: Sign Transaction";
+          return "Sign Transaction";
         }
       }
       if (this.query.includes(this.command)) {
-        return "Step 3: Run Query";
+        return "Run Query";
       }
-      return "Step 3: Run Query or Transaction";
+      return "Run Query or Transaction";
     },
     disabled: function () {
       if (this.inflight || !this.command) {
