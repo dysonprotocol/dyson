@@ -35,7 +35,7 @@
               params: { script_address: address },
             }"
           >
-            My script
+            My Script
           </router-link>
           <a v-else class="nav-link disabled">My script</a>
         </li>
@@ -63,12 +63,10 @@
             Rest API ↗
           </a>
         </li>
-      <DysAcc v-if="isLoaded" />
-      <li v-else class="navbar-text">Loading Wallet...</li>
+        <DysAcc v-if="isLoaded" />
+        <li v-else class="navbar-text">Loading Wallet...</li>
       </ul>
-      <div class="navbar-text">
-        Chain ID: {{ chainId }}
-      </div>
+      <div class="navbar-text">Chain ID: {{ chainId }}</div>
     </div>
   </nav>
   <div class="">

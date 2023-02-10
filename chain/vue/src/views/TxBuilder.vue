@@ -9,7 +9,7 @@ h3 {
     <div class="row">
       <div class="col">
         <div class="card mb-4 mt-3">
-          <h4 class="card-header">Step 1: Select a Command</h4>
+          <h4 class="card-header">Step 1: Select a command</h4>
 
           <div class="card-body">
             <p class="">
@@ -69,7 +69,7 @@ h3 {
     <div class="row">
       <div class="col-lg">
         <div class="card mb-4">
-          <h4 class="card-header">Step 2: Run command</h4>
+          <h4 class="card-header">Step 2: Run the command</h4>
           <div class="card-body">
             <p class="">
               Here you can customize your request with any info and see the
@@ -131,15 +131,14 @@ h3 {
       </div>
       <div class="col-lg">
         <div class="card mb-4">
-          <h4 class="card-header">
-            Step 3: Integrate in your distributed web app
-          </h4>
+          <h4 class="card-header">Step 3: Integrate the command in your project</h4>
           <div class="list-group list-group-flush">
             <div class="list-group-item">
-              <h5>Use it in a Script</h5>
+              <h5>Use it in a DysonScript</h5>
               <p class="">
-                Copy this into your function and use it in a script.
+                Note: <code>dys</code> is a virtual module generated automatically by the chain. It is not downloadable or installable by pip.
               </p>
+
               <VAceEditor
                 v-model:value="example"
                 lang="python"
@@ -151,7 +150,9 @@ h3 {
             </div>
             <div class="list-group-item">
               <h5>Plain Javascript Usage</h5>
-              <p class="">This is the simplest way to read from the API.</p>
+              <p class="">
+                This is the simplest way to read from the REST API.
+              </p>
               <VAceEditor
                 v-model:value="fetchExample"
                 lang="javascript"
@@ -182,12 +183,6 @@ h3 {
               />
             </div>
           </div>
-        </div>
-        <div class="card mb-4">
-          <h4 class="card-header">Step 4: ???</h4>
-        </div>
-        <div class="card mb-4">
-          <h4 class="card-header">Step 5: Profit</h4>
         </div>
       </div>
     </div>
@@ -320,9 +315,10 @@ export default {
     "$route.query": {
       handler: function (val, oldVal) {
         console.log("watch command:", val, oldVal);
-        //const query = { ...this.$route.query, command: val };
-        //this.$router.replace({ query });
-        this.command = val.command;
+        this.command = "";
+        if (command_schema[val.command]) {
+          this.command = val.command;
+        }
         this.setupEditor();
         this.setupResponseEditor();
         this.response = "";
@@ -412,10 +408,20 @@ await response.json()`;
     vueExample: function () {
       return `/*
 This is Experimental!
+
+Place this in the head tag
+<script src=\"\/_\/dyson.js\"><\/script>
+
 DysonLoader can save a lot of time if complex integration is needed with the
-chain, however consider making normal Javascript requests with the Rest API
+chain, however consider making normal Javascript requests with the REST API
 if the frontend is read only.
 */
+
+// initialize Dyson
+await DysonLoader()
+
+// Connect to Keplr to sign transactions
+account = await dysonUseKeplr()
 
 const command = "${this.command || ""}"
 const data = ${this.data}
@@ -627,8 +633,10 @@ _chain(
     this.query = Object.keys(this.$store["_actions"]).filter((key) =>
       key.match("Query")
     );
-
-    this.command = this.$route.query.command;
+    this.command = "";
+    if (command_schema[this.$route.query.command]) {
+      this.command = this.$route.query.command;
+    }
     const data = JSON.parse(this.$route.query.data || "{}");
     const s = JSON.stringify(data, null, 2);
 
