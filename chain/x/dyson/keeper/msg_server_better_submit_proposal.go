@@ -4,16 +4,13 @@ import (
 	"context"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/org/dyson/x/dyson/types"
-	gov "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	govkeeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
-	 
-
+	gov "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
+	"github.com/org/dyson/x/dyson/types"
 )
 
 func (k msgServer) BetterSubmitProposal(goCtx context.Context, msg *types.MsgBetterSubmitProposal) (*types.MsgBetterSubmitProposalResponse, error) {
 	//ctx := sdk.UnwrapSDKContext(goCtx)
-
 
 	msgs := make([]sdk.Msg, len(msg.Messages))
 	for i, anyJSON := range msg.Messages {
@@ -31,7 +28,7 @@ func (k msgServer) BetterSubmitProposal(goCtx context.Context, msg *types.MsgBet
 	}
 	govMsgServer := govkeeper.NewMsgServerImpl(k.cosmosgovv1keeper)
 	resp, err := govMsgServer.SubmitProposal(goCtx, proposal)
-	
+
 	if err != nil {
 		return nil, err
 	}

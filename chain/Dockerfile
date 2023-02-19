@@ -22,7 +22,7 @@ RUN make install-ignite
 COPY requirements.txt .
 RUN pypy -m pip install -r requirements.txt
 
-COPY go.mod go.sum .go-version  ./
+COPY go.mod go.sum .go-version ./
 RUN go mod download -x
 
 

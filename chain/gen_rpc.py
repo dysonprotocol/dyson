@@ -1,9 +1,12 @@
 import glob
-import yaml
+import json
 from pathlib import Path
 from string import Template
-import json
-from dysvm_server import get_module_dict, dyslang, build_sandbox
+
+import yaml
+
+from dysvm_server import build_sandbox, dyslang, get_module_dict
+
 
 with open("docs/static/openapi.yml") as f:
     y = yaml.safe_load(f)
@@ -18,9 +21,14 @@ msg_template = Template(
 // Keeper: $mod_keeper
 // Types: $mod_types
 // $keeper_import
-func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$req_type, response *string) (err error) {
+func (rpcservice *RpcService) $function_name(_ *http.Request, req *RpcReq, response *string) (err error) {
 	//handler := $mod_keeper.NewMsgServerImpl(rpcservice.k.$mod_keeper).$keeper_function
-    $handler
+        var msg $mod_types.$req_type
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+$handler
 	//
 	defer func() {
 		if r := recover(); r != nil {
@@ -45,7 +53,7 @@ func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$r
 
 	cachedCtx, Write := sdkCtx.CacheContext()
 
-	r, err := handler(sdk.WrapSDKContext(cachedCtx), msg)
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), &msg)
 	if err != nil {
 		return err
 	}
@@ -61,13 +69,18 @@ query_template = Template(
 // Keeper: $mod_keeper
 // Types: $mod_types
 // $keeper_import
-func (rpcservice *RpcService) $function_name(_ *http.Request, msg *$mod_types.$req_type, response *string) (err error) {
+func (rpcservice *RpcService) $function_name(_ *http.Request, req *RpcReq, response *string) (err error) {
+    var msg $mod_types.$req_type
+    err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+    if err != nil {
+        return err
+    }
     $handler
-	if err != nil {
-		return err
-	}
+    if err != nil {
+        return err
+    }
     *response = string(rpcservice.k.cdc.MustMarshalJSON(r))
-	return nil
+    return nil
 }
 """
 )
@@ -80,6 +93,126 @@ def to_camel_case(text):
         return text
     ret = s[0] + "".join(i.capitalize() for i in s[1:])
     return ret
+
+
+def fetch_concrete_schema(concrete_type):
+    mod, _, name = concrete_type[1:].rpartition(".")
+    schema_path = glob.glob(f"**/{mod}/**/{name}.json", recursive=True)
+    if not schema_path:
+        print(f"Schema for {concrete_type} not found")
+        return None, None
+    with open(schema_path[0]) as f:
+        schema = json.load(f)
+        return schema["$ref"], schema["definitions"]
+
+
+# expand the exported interface json schema
+with open("./vue/src/views/exported-interfaces.json") as f:
+    exported_interfaces = json.load(f)
+
+
+def walk(func, key, node, root):
+    if isinstance(node, dict):
+        for k in list(node.keys()):
+            node[k] = walk(func, f"{key}.{k}", node[k], root)
+        node = func(key, node, root)
+    return node
+
+
+# maps the command schema lookup to the exported interface schmea key
+PROTOANY_MAPPING = {
+    "cosmos.group.v1/sendMsgCreateGroupWithPolicy.definitions.MsgCreateGroupWithPolicy.properties.decision_policy": "cosmos.group.v1.DecisionPolicy",
+    "cosmos.authz.v1beta1/sendMsgGrant.definitions.cosmos.authz.v1beta1.Grant.properties.authorization": "cosmos.v1beta1.Authorization",
+    "cosmos.authz.v1beta1/sendMsgExec.definitions.MsgExec.properties.msgs.items": "cosmos.base.v1beta1.Msg",
+    "cosmos.feegrant.v1beta1/sendMsgGrantAllowance.definitions.MsgGrantAllowance.properties.allowance": "cosmos.base.v1beta1.Msg",
+    "cosmos.gov.v1/sendMsgSubmitProposal.definitions.MsgSubmitProposal.properties.messages.items": "cosmos.base.v1beta1.Msg",
+    "cosmos.group.v1/sendMsgCreateGroupPolicy.definitions.MsgCreateGroupPolicy.properties.decision_policy": "cosmos.group.v1.DecisionPolicy",
+    "cosmos.group.v1/sendMsgUpdateGroupPolicyDecisionPolicy.definitions.MsgUpdateGroupPolicyDecisionPolicy.properties.decision_policy": "cosmos.group.v1.DecisionPolicy",
+    "cosmos.group.v1/sendMsgSubmitProposal.definitions.MsgSubmitProposal.properties.messages.items": "cosmos.base.v1beta1.Msg",
+}
+
+
+def no_additional_properties(key, node, root):
+    if "additionalProperties" in node:
+        node["additionalProperties"] = False
+    return node
+
+
+def better_page_request(key, node, root):
+    if key.endswith("cosmos.base.query.v1beta1.PageRequest"):
+        node["options"] = {"show_opt_in": True, "required_by_default": False}
+        node["required"] = []
+    return node
+
+
+def better_any(key, node, root):
+    if "properties" in node:
+        properties = node["properties"]
+        if "type_url" in properties and "value" in properties:
+
+            properties["json_value"] = {
+                "description": "This is a helper form to encode the proper base64 encoded protobuf value",
+                "type": "string",
+                "description": "Must be a valid json object of the above specified type.",
+                "format": "json",
+            }
+            properties["type_url"].update(
+                {
+                    "description": "Registered fully-qualified proto name for a message type valid for this request",
+                }
+            )
+
+            node["title"] = "JSON"
+            node = {
+                "oneOf": [node],
+            }
+
+            if key in PROTOANY_MAPPING:
+                node["oneOf"] = []
+                print(f"Embeding Mapping for better_any: {key}")
+                for ct in exported_interfaces[PROTOANY_MAPPING[key]]:
+                    name = ct[1:]
+                    ref, defs = fetch_concrete_schema(ct)
+
+                    if ref and defs:
+                        if "MsgCreateScript" in defs:
+                            defs["MsgCreateScript"]["properties"]["code"][
+                                "format"
+                            ] = "python"
+
+                        if "MsgUpdateScript" in defs:
+                            defs["MsgUpdateScript"]["properties"]["code"][
+                                "format"
+                            ] = "python"
+
+                        node["oneOf"] += [
+                            {
+                                "title": name.split(".")[-1],
+                                "type": "object",
+                                "properties": {
+                                    "type_url": {
+                                        "type": "string",
+                                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                                        "readOnly": True,
+                                        "default": ct,
+                                        "enum": [ct],
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                                        "format": "binary",
+                                        "readOnly": True,
+                                        "binaryEncoding": "base64",
+                                    },
+                                    "object_value": {"$ref": ref},
+                                },
+                            }
+                        ]
+                        root["definitions"].update(defs)
+            else:
+                print(f"Missing Mapping for better_any: {key}")
+
+    return node
 
 
 types = set()
@@ -138,6 +271,9 @@ for file_path in [
                     )
                 )
             )
+            req_schema = walk(better_page_request, command, req_schema, req_schema)
+            req_schema = walk(better_any, command, req_schema, req_schema)
+            req_schema = walk(no_additional_properties, command, req_schema, req_schema)
 
             # don't force camel case
             # for k, v in req_schema["definitions"].items():
@@ -146,16 +282,16 @@ for file_path in [
             #        cc = to_camel_case(p)
             #        if p != cc:
             #            v["properties"][cc] = v["properties"].pop(p)
-
-            res_schema = json.load(
-                open(
-                    str(
-                        Path(file_path).parent
-                        / Path("module/types")
-                        / Path(f"{d['ReturnsType']}.json")
-                    )
-                )
-            )
+            res_schema = {"type": "string", "format": "json", "title": "Response"}
+            # res_schema = json.load(
+            #    open(
+            #        str(
+            #            Path(file_path).parent
+            #            / Path("module/types")
+            #            / Path(f"{d['ReturnsType']}.json")
+            #        )
+            #    )
+            # )
             rest_path = f'{ data["Pkg"]["Name"] }{ d["Name"] }'.lower().replace(".", "")
             schemas[command] = {
                 "module_name": data["Pkg"]["Name"],
@@ -179,7 +315,7 @@ for file_path in [
             elif service_name == "Query":
                 template = query_template
                 handler_template = Template(
-                    """r, err := rpcservice.k.$mod_keeper.$keeper_function(rpcservice.ctx, msg)"""
+                    """r, err := rpcservice.k.$mod_keeper.$keeper_function(rpcservice.ctx, &msg)"""
                 )
                 function_name = f"{data['Pkg']['Name']}Query{d['Name']}".replace(
                     ".", ""
@@ -197,7 +333,7 @@ for file_path in [
                     )
                 elif service_name == "Query":
                     handler_template = Template(
-                        """r, err := rpcservice.k.$keeper_function(rpcservice.ctx, msg)"""
+                        """r, err := rpcservice.k.$keeper_function(rpcservice.ctx, &msg)"""
                     )
                 types.add(f'{mod_types} "{data["Pkg"]["GoImportName"]}"')
             else:
@@ -278,7 +414,8 @@ imports = "\n".join(types | keepers)
 funcs = "\n".join(code)
 
 
-out = f"""package keeper
+out = (
+    f"""package keeper
 
 import (
     "net/http"
@@ -287,9 +424,17 @@ import (
 	"github.com/org/dyson/x/dyson/types"
     { imports }
 )
+"""
+    + """
+type RpcReq struct {
+	S string
+}
+"""
+    + f"""
 
 { funcs }
 """
+)
 
 
 with open("x/dyson/keeper/rpcserver.go", "w") as f:
@@ -298,35 +443,35 @@ with open("x/dyson/keeper/rpcserver.go", "w") as f:
 # override schema to use textareas
 schemas["dyson/sendMsgCreateScript"]["request_schema"]["definitions"][
     "MsgCreateScript"
-]["properties"]["code"]["format"] = "textarea"
+]["properties"]["code"]["format"] = "python"
 
 schemas["dyson/sendMsgUpdateScript"]["request_schema"]["definitions"][
     "MsgUpdateScript"
-]["properties"]["code"]["format"] = "textarea"
+]["properties"]["code"]["format"] = "python"
 
 schemas["dyson/QueryQueryScript"]["request_schema"]["definitions"]["MsgRun"][
     "properties"
-]["extra_lines"]["format"] = "textarea"
+]["extra_lines"]["format"] = "python"
 
-schemas["dyson/QueryQueryScript"]["resp_schema"]["definitions"]["MsgRunResponse"][
-    "properties"
-]["response"]["format"] = "textarea"
+# schemas["dyson/QueryQueryScript"]["resp_schema"]["definitions"]["MsgRunResponse"][
+#    "properties"
+# ]["response"]["format"] = "textarea"
 
 schemas["dyson/sendMsgRun"]["request_schema"]["definitions"]["MsgRun"]["properties"][
     "extra_lines"
-]["format"] = "textarea"
+]["format"] = "python"
 
-schemas["dyson/sendMsgRun"]["resp_schema"]["definitions"]["MsgRunResponse"][
-    "properties"
-]["response"]["format"] = "textarea"
+# schemas["dyson/sendMsgRun"]["resp_schema"]["definitions"]["MsgRunResponse"][
+#    "properties"
+# ]["response"]["format"] = "textarea"
 
 schemas["dyson/sendMsgUpdateStorage"]["request_schema"]["definitions"][
     "MsgUpdateStorage"
-]["properties"]["data"]["format"] = "textarea"
+]["properties"]["data"]["format"] = "json"
 
 schemas["dyson/sendMsgCreateStorage"]["request_schema"]["definitions"][
     "MsgCreateStorage"
-]["properties"]["data"]["format"] = "textarea"
+]["properties"]["data"]["format"] = "json"
 
 
 with open("vue/src/views/command_schema.json", "w") as f:
@@ -334,6 +479,7 @@ with open("vue/src/views/command_schema.json", "w") as f:
 
 
 from IPython.core.oinspect import Inspector
+
 from dyslang import WHITELIST_FUNCTIONS, dys_eval
 from dysvm_server import build_sandbox, get_module_dict
 
@@ -341,7 +487,11 @@ sandbox = build_sandbox("", "", "", "", "")
 inspector = Inspector()
 
 locals().update(sandbox.modules.__dict__)
-import urllib, simplejson, random, wsgiref.handlers
+import random
+import urllib
+import wsgiref.handlers
+
+import simplejson
 
 docs = {}
 
@@ -375,16 +525,16 @@ print(WHITELIST_FUNCTIONS)
 for ff in normalized_functions:
     if ff:
         f = ff.removeprefix("builtins.").removeprefix("script.*")
-        print(ff, f)
+        # print(ff, f)
         try:
             func = eval(f)
             if callable(func):
                 d = inspector._info(func, detail_level=0)
             else:
-                print("not callable:", f)
+                # print("not callable:", f)
                 continue
         except NameError:
-            print("name error:", f)
+            # print("name error:", f)
             continue
 
         # docs[ff] = d

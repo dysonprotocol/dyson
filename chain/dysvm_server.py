@@ -1,4 +1,5 @@
 import ast
+import json
 import http.client as http_client
 import logging
 import random
@@ -273,6 +274,9 @@ def build_sandbox(port, creator, address, amount, block_info):
             return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
 
         params = {snake(k): v for k, v in params.items()}
+        if method not in ["ConsumeGas", "Gaslimit"]:
+            # normal rpc calls are encoded as json strings
+            params = {"s": json.dumps(params)}
         payload = {
             "method": f"RpcService.{method}",
             "params": [params],
@@ -322,10 +326,13 @@ def build_sandbox(port, creator, address, amount, block_info):
                 gas_state["unconsumed_size"] = 0
                 if resp["error"]:
                     resp = _chain("GasLimit")
-                gas_state["gas_consumed"] = resp["result"].get("GasConsumed", None)
-                gas_state["gas_limit"] = resp["result"].get("GasLimit", None)
-                if gas_state["gas_consumed"] > gas_state["gas_limit"]:
-                    raise MemoryError("Out of Gas")
+            else:
+                resp = _chain("GasLimit")
+
+            gas_state["gas_consumed"] = resp["result"].get("GasConsumed", None)
+            gas_state["gas_limit"] = resp["result"].get("GasLimit", None)
+            if gas_state["gas_consumed"] > gas_state["gas_limit"]:
+                raise MemoryError("Out of Gas")
 
         def track(self, node):
             if hasattr(node, "nodes_called"):
@@ -348,7 +355,7 @@ def build_sandbox(port, creator, address, amount, block_info):
                     if gas_state["cumsize"] > MAX_CUM_SIZE:
                         raise MemoryError("Cumsize too large")
                 if gas_state["unconsumed_size"] > 10000 or isinstance(node, ast.Module):
-                    self.consume_gas()
+                    sandbox.consume_gas()
 
     scope = {}
     sandbox = ScopedDysonEval(
@@ -494,7 +501,6 @@ def eval_script(
                     amount,
                     block_info,
                 )
-                sandbox.unconsumed_size = 1
                 sandbox.consume_gas()
 
                 random.seed(
@@ -538,6 +544,8 @@ def eval_script(
                             raise Exception(f"function not public: {funcname}")
                     else:
                         raise Exception(f"function not defined: {funcname}")
+                # consume final gas
+                sandbox.consume_gas()
             except dyslang.DysRuntimeError as e:
                 exception = e
                 print("ERR:", repr(e.__context__))

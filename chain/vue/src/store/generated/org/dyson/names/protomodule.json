@@ -410,33 +410,8 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgSetPriceAndExtend",
-			"URI": "names.MsgSetPriceAndExtend",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgOfferTo",
-			"URI": "names.MsgOfferTo",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
 			"Name": "MsgUpdateName",
 			"URI": "names.MsgUpdateName",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgBurnCoins",
-			"URI": "names.MsgBurnCoins",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgRegister",
-			"URI": "names.MsgRegister",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgDeleteName",
-			"URI": "names.MsgDeleteName",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -445,8 +420,33 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
+			"Name": "MsgBurnCoins",
+			"URI": "names.MsgBurnCoins",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgOfferTo",
+			"URI": "names.MsgOfferTo",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgRegister",
+			"URI": "names.MsgRegister",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
 			"Name": "MsgMintCoins",
 			"URI": "names.MsgMintCoins",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgSetPriceAndExtend",
+			"URI": "names.MsgSetPriceAndExtend",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgDeleteName",
+			"URI": "names.MsgDeleteName",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{

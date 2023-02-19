@@ -28,6 +28,8 @@ import (
 
 	"github.com/org/dyson/x/dyson/types"
 	nameskeeper "github.com/org/dyson/x/names/keeper"
+
+	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 )
 
 type (
@@ -55,6 +57,8 @@ type (
 		cosmosupgradev1beta1keeper      cosmosupgradev1beta1keeper.Keeper
 		cosmoscrisisv1beta1keeper       cosmoscrisisv1beta1keeper.Keeper
 
+		registry cdctypes.InterfaceRegistry
+
 		currentDepth int
 	}
 )
@@ -69,6 +73,7 @@ func NewKeeper(
 	cosmosevidencev1beta1keeper cosmosevidencev1beta1keeper.Keeper,
 	cosmosfeegrantv1beta1keeper cosmosfeegrantv1beta1keeper.Keeper,
 	cosmosgovv1keeper cosmosgovv1keeper.Keeper,
+	cosmosgroupv1keeper cosmosgroupv1keeper.Keeper,
 	cosmosslashingv1beta1keeper cosmosslashingv1beta1keeper.Keeper,
 	cosmosstakingv1beta1keeper cosmosstakingv1beta1keeper.Keeper,
 	cosmosstakingv1beta1querier cosmosstakingv1beta1keeper.Querier,
@@ -79,6 +84,8 @@ func NewKeeper(
 	cosmosmintv1beta1keeper cosmosmintv1beta1keeper.Keeper,
 	cosmosupgradev1beta1keeper cosmosupgradev1beta1keeper.Keeper,
 	cosmoscrisisv1beta1keeper cosmoscrisisv1beta1keeper.Keeper,
+	registry cdctypes.InterfaceRegistry,
+
 ) *Keeper {
 	return &Keeper{
 
@@ -92,6 +99,7 @@ func NewKeeper(
 		cosmosevidencev1beta1keeper:     cosmosevidencev1beta1keeper,
 		cosmosfeegrantv1beta1keeper:     cosmosfeegrantv1beta1keeper,
 		cosmosgovv1keeper:               cosmosgovv1keeper,
+		cosmosgroupv1keeper:             cosmosgroupv1keeper,
 		cosmosslashingv1beta1keeper:     cosmosslashingv1beta1keeper,
 		cosmosstakingv1beta1keeper:      cosmosstakingv1beta1keeper,
 		cosmosstakingv1beta1querier:     cosmosstakingv1beta1querier,
@@ -102,6 +110,7 @@ func NewKeeper(
 		cosmosmintv1beta1keeper:         cosmosmintv1beta1keeper,
 		cosmosupgradev1beta1keeper:      cosmosupgradev1beta1keeper,
 		cosmoscrisisv1beta1keeper:       cosmoscrisisv1beta1keeper,
+		registry:                        registry,
 		currentDepth:                    0,
 	}
 }

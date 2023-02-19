@@ -513,7 +513,7 @@ func New(
 		app.EvidenceKeeper,
 		app.FeeGrantKeeper,
 		app.GovKeeper,
-		//app.GroupKeeper,
+		app.GroupKeeper,
 		app.SlashingKeeper,
 		app.StakingKeeper,
 		stakingkeeper.Querier{app.StakingKeeper},
@@ -524,8 +524,9 @@ func New(
 		app.MintKeeper,
 		app.UpgradeKeeper,
 		app.CrisisKeeper,
+		app.interfaceRegistry,
 	)
-	dysonModule := dysonmodule.NewAppModule(appCodec, app.DysonKeeper)
+	dysonModule := dysonmodule.NewAppModule(appCodec, app.DysonKeeper,)
 
 	/****  Module Options ****/
 

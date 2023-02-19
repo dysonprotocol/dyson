@@ -123,6 +123,16 @@ export interface QueryAllCronResponse {
   pagination: PageResponse | undefined;
 }
 
+export interface QueryEncodeProtoAnyRequest {
+  type_url: string;
+  json_value: string;
+}
+
+export interface QueryEncodeProtoAnyResponse {
+  type_url: string;
+  base64_value: string;
+}
+
 const baseQueryGetScheduledRunRequest: object = { index: "" };
 
 export const QueryGetScheduledRunRequest = {
@@ -1932,6 +1942,182 @@ export const QueryAllCronResponse = {
   },
 };
 
+const baseQueryEncodeProtoAnyRequest: object = { type_url: "", json_value: "" };
+
+export const QueryEncodeProtoAnyRequest = {
+  encode(
+    message: QueryEncodeProtoAnyRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.type_url !== "") {
+      writer.uint32(10).string(message.type_url);
+    }
+    if (message.json_value !== "") {
+      writer.uint32(18).string(message.json_value);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryEncodeProtoAnyRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryEncodeProtoAnyRequest,
+    } as QueryEncodeProtoAnyRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.type_url = reader.string();
+          break;
+        case 2:
+          message.json_value = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryEncodeProtoAnyRequest {
+    const message = {
+      ...baseQueryEncodeProtoAnyRequest,
+    } as QueryEncodeProtoAnyRequest;
+    if (object.type_url !== undefined && object.type_url !== null) {
+      message.type_url = String(object.type_url);
+    } else {
+      message.type_url = "";
+    }
+    if (object.json_value !== undefined && object.json_value !== null) {
+      message.json_value = String(object.json_value);
+    } else {
+      message.json_value = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryEncodeProtoAnyRequest): unknown {
+    const obj: any = {};
+    message.type_url !== undefined && (obj.type_url = message.type_url);
+    message.json_value !== undefined && (obj.json_value = message.json_value);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryEncodeProtoAnyRequest>
+  ): QueryEncodeProtoAnyRequest {
+    const message = {
+      ...baseQueryEncodeProtoAnyRequest,
+    } as QueryEncodeProtoAnyRequest;
+    if (object.type_url !== undefined && object.type_url !== null) {
+      message.type_url = object.type_url;
+    } else {
+      message.type_url = "";
+    }
+    if (object.json_value !== undefined && object.json_value !== null) {
+      message.json_value = object.json_value;
+    } else {
+      message.json_value = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryEncodeProtoAnyResponse: object = {
+  type_url: "",
+  base64_value: "",
+};
+
+export const QueryEncodeProtoAnyResponse = {
+  encode(
+    message: QueryEncodeProtoAnyResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.type_url !== "") {
+      writer.uint32(10).string(message.type_url);
+    }
+    if (message.base64_value !== "") {
+      writer.uint32(18).string(message.base64_value);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryEncodeProtoAnyResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryEncodeProtoAnyResponse,
+    } as QueryEncodeProtoAnyResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.type_url = reader.string();
+          break;
+        case 2:
+          message.base64_value = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryEncodeProtoAnyResponse {
+    const message = {
+      ...baseQueryEncodeProtoAnyResponse,
+    } as QueryEncodeProtoAnyResponse;
+    if (object.type_url !== undefined && object.type_url !== null) {
+      message.type_url = String(object.type_url);
+    } else {
+      message.type_url = "";
+    }
+    if (object.base64_value !== undefined && object.base64_value !== null) {
+      message.base64_value = String(object.base64_value);
+    } else {
+      message.base64_value = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryEncodeProtoAnyResponse): unknown {
+    const obj: any = {};
+    message.type_url !== undefined && (obj.type_url = message.type_url);
+    message.base64_value !== undefined &&
+      (obj.base64_value = message.base64_value);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryEncodeProtoAnyResponse>
+  ): QueryEncodeProtoAnyResponse {
+    const message = {
+      ...baseQueryEncodeProtoAnyResponse,
+    } as QueryEncodeProtoAnyResponse;
+    if (object.type_url !== undefined && object.type_url !== null) {
+      message.type_url = object.type_url;
+    } else {
+      message.type_url = "";
+    }
+    if (object.base64_value !== undefined && object.base64_value !== null) {
+      message.base64_value = object.base64_value;
+    } else {
+      message.base64_value = "";
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Queries a scheduledRun by index. */
@@ -1967,6 +2153,10 @@ export interface Query {
   Cron(request: QueryGetCronRequest): Promise<QueryGetCronResponse>;
   /** Queries a list of Cron items. */
   CronAll(request: QueryAllCronRequest): Promise<QueryAllCronResponse>;
+  /** Queries a list of EncodeProtoAny items. */
+  EncodeProtoAny(
+    request: QueryEncodeProtoAnyRequest
+  ): Promise<QueryEncodeProtoAnyResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -2087,6 +2277,16 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("dyson.Query", "CronAll", data);
     return promise.then((data) =>
       QueryAllCronResponse.decode(new Reader(data))
+    );
+  }
+
+  EncodeProtoAny(
+    request: QueryEncodeProtoAnyRequest
+  ): Promise<QueryEncodeProtoAnyResponse> {
+    const data = QueryEncodeProtoAnyRequest.encode(request).finish();
+    const promise = this.rpc.request("dyson.Query", "EncodeProtoAny", data);
+    return promise.then((data) =>
+      QueryEncodeProtoAnyResponse.decode(new Reader(data))
     );
   }
 }

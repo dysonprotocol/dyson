@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"encoding/json"
 	"encoding/hex"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -12,6 +13,8 @@ import (
 
 	"github.com/org/dyson/x/dyson/types"
 	"github.com/spf13/cobra"
+
+	_ "unsafe"
 )
 
 func CmdListScript() *cobra.Command {
@@ -131,6 +134,7 @@ func CmdWSGI() *cobra.Command {
 
 	return cmd
 }
+
 func CmdDecodeRunResult() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "decode [index]",
@@ -153,6 +157,34 @@ func CmdDecodeRunResult() *cobra.Command {
 			}
 
 			return nil
+		},
+	}
+
+	flags.AddQueryFlagsToCmd(cmd)
+
+	return cmd
+}
+
+func CmdExportInterfaces() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "export-interfaces",
+		Short: "export interfaces and their concrete implementations as json",
+		Args:  cobra.ExactArgs(0),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx := client.GetClientContextFromCmd(cmd)
+			datas := make(map[string][]string)
+			allInterfaces := clientCtx.InterfaceRegistry.ListAllInterfaces()
+			for _, i := range allInterfaces {
+				impls := clientCtx.InterfaceRegistry.ListImplementations(i)
+				datas[i] = impls
+			}
+
+			out, err := json.Marshal(datas)
+			if err != nil {
+				return err
+			}
+
+			return clientCtx.PrintBytes(out)
 		},
 	}
 

@@ -17,7 +17,8 @@ import (
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
-	"github.com/cosmos/cosmos-sdk/store/prefix"
+	prefix "github.com/cosmos/cosmos-sdk/store/prefix"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/gorilla/mux"
@@ -198,7 +199,6 @@ func (k Keeper) NewRPCServer(goCtx context.Context, index string) (string, *http
 	s.RegisterService(rpcservice, "")
 	r := mux.NewRouter()
 	r.Handle("/rpc", s)
-
 	srv := &http.Server{Handler: r}
 
 	listener, err := net.Listen("tcp", "localhost:0")
@@ -244,24 +244,43 @@ func (k Keeper) EvalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 	}()
 
 	resp, err = k.evalScript(sdk.WrapSDKContext(cachedCtx), scriptCtx, raiseRunErr)
+	ctx.GasMeter().ConsumeGas(cachedCtx.GasMeter().GasConsumed(), "EvalScript gas")
 	return
 }
 
 func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, raiseRunErr bool) (*EvalScriptResponse, error) {
 	k.currentDepth += 1
 
-	if k.currentDepth > 5 {
+	if k.currentDepth > 3 {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Maximum Run recusion depth")
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	valFound, isFound := k.GetScript(ctx, scriptCtx.Index)
+
 	if !isFound {
-		fmt.Println(fmt.Sprintf("Script at address %v not set", scriptCtx.Index))
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("Script at address %v not set", scriptCtx.Index))
+		acc, err := sdk.AccAddressFromBech32(scriptCtx.Sender)
+		if err == nil && scriptCtx.Index == scriptCtx.Sender && k.accountKeeper.HasAccount(ctx, acc) {
+			k.SetScript(ctx, types.Script{
+				Index:   scriptCtx.Sender,
+				Creator: scriptCtx.Sender,
+				Code:    ""})
+			valFound, isFound = k.GetScript(ctx, scriptCtx.Index)
+			if !isFound {
+				// This shouldn't happen
+				fmt.Println(fmt.Sprintf("Script at address really %v not set", scriptCtx.Index))
+				return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("Script at address really %v not set", scriptCtx.Index))
+			}
+		} else {
+			fmt.Println(fmt.Sprintf("Script not found: %v", scriptCtx.Index))
+			return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("Script not found: %v", scriptCtx.Index))
+		}
 	}
-	if (scriptCtx.Sender != valFound.Index) && (scriptCtx.ExtraLines != "") {
-		fmt.Println(fmt.Sprintf("Only if Script.Index==Sender can use ExtraLines %v", scriptCtx))
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, fmt.Sprintf("Only if Script.Index==Sender can use ExtraLines %v", scriptCtx))
+	if scriptCtx.Sender != valFound.Index {
+		if scriptCtx.ExtraLines != "" {
+			fmt.Println(fmt.Sprintf("Only if Script.Index==Sender can use ExtraLines %v", scriptCtx))
+			return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, fmt.Sprintf("Only if Script.Index==Sender can use ExtraLines %v, %v", valFound, scriptCtx))
+		}
+
 	}
 	port, srv, err := k.NewRPCServer(goCtx, valFound.Index)
 	if err != nil {

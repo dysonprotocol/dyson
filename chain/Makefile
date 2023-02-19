@@ -18,6 +18,7 @@ vuex:
 	chown 1000:1000 -R ./vue/src/store/generated
 
 gen_rpc:
+	dysond q dyson export-interfaces | jq > ./vue/src/views/exported-interfaces.json
 	python3 gen_rpc.py
 	gofmt -s -w x/dyson/keeper/rpcserver.go
 

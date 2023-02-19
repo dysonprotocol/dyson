@@ -35160,6 +35160,49 @@ paths:
           format: uint64
       tags:
         - Query
+  /org/dyson/dyson/encode_proto_any:
+    get:
+      summary: Queries a list of EncodeProtoAny items.
+      operationId: DysonEncodeProtoAny
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              type_url:
+                type: string
+              base64_value:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: type_url
+          in: query
+          required: false
+          type: string
+        - name: json_value
+          in: query
+          required: false
+          type: string
+      tags:
+        - Query
   /ibc/apps/interchain_accounts/host/v1/params:
     get:
       summary: Params queries all parameters of the ICA host submodule.
@@ -71625,6 +71668,13 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
+  dyson.QueryEncodeProtoAnyResponse:
+    type: object
+    properties:
+      type_url:
+        type: string
+      base64_value:
+        type: string
   dyson.QueryGetCronResponse:
     type: object
     properties:

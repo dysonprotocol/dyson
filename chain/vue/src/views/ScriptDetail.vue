@@ -7,7 +7,7 @@ pre {
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div id="schemas" class="col-sm-12 col-md-4">
+      <div id="schemas" class="col-md-6">
         <div v-if="schemas && schemas.error">Error: {{ schemas.error }}</div>
         <div v-for="item in schemas" v-bind:key="item.function">
           <FunctionDetail
@@ -24,7 +24,7 @@ pre {
           </div>
         </div>
       </div>
-      <div id="code" class="col">
+      <div id="code" class="col-md-6">
         <div class="mb-3">
           <VAceEditor
             v-model:value="code"
@@ -35,7 +35,11 @@ pre {
             :readonly="disabled"
           />
 
-          <button @click="save" :disabled="disabled" class="btn-primary btn btn-lg">
+          <button
+            @click="save"
+            :disabled="disabled"
+            class="btn-primary btn btn-lg"
+          >
             save
             <span
               v-if="inFlight"
@@ -98,7 +102,6 @@ export default {
   },
   methods: {
     async save(e) {
-      console.log("this.gas", this.gas);
       this.inFlight = true;
       this.txResult = null;
       this.error = null;
@@ -118,10 +121,8 @@ export default {
           }
         );
         this.inFlight = false;
-        console.log("txResult", this.txResult);
         if (this.txResult.rawLog.endsWith("out of gas")) {
           this.gas = this.txResult.gasUsed * 2;
-          console.log("trying again", this.gas);
           this.save(e);
           return;
         } else {
@@ -150,12 +151,10 @@ export default {
         .then(() => {
           this.editedCode = null;
         });
-      this.$store
-        .dispatch("dyson/QuerySchema", {
-          query: { index: this.$route.params.script_address },
-          options: { subscribe: false, all: false },
-        })
-        .then(console.log);
+      this.$store.dispatch("dyson/QuerySchema", {
+        query: { index: this.$route.params.script_address },
+        options: { subscribe: false, all: false },
+      });
     },
   },
   computed: {

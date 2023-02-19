@@ -1,3 +1,8 @@
+<style scoped>
+pre {
+  white-space: pre-wrap;
+}
+</style>
 <style>
 h3 {
   /* Wrap form headings*/
@@ -10,7 +15,6 @@ h3 {
       <div class="col">
         <div class="card mb-4 mt-3">
           <h4 class="card-header">Step 1: Select a command</h4>
-
           <div class="card-body">
             <p class="">
               The Dyson Dashboard Commands interface allows you to access the
@@ -129,14 +133,18 @@ h3 {
           </div>
         </div>
       </div>
-      <div class="col-lg">
+      <div class="col-lg-6">
         <div class="card mb-4">
-          <h4 class="card-header">Step 3: Integrate the command in your project</h4>
+          <h4 class="card-header">
+            Step 3: Integrate the command in your project
+          </h4>
           <div class="list-group list-group-flush">
             <div class="list-group-item">
               <h5>Use it in a DysonScript</h5>
-              <p class="">
-                Note: <code>dys</code> is a virtual module generated automatically by the chain. It is not downloadable or installable by pip.
+              <p>
+                The <code>dys</code> import is a virtual module generated
+                automatically by the chain. It is not downloadable or
+                installable by pip.
               </p>
 
               <VAceEditor
@@ -145,8 +153,47 @@ h3 {
                 theme="chrome"
                 :min-lines="10"
                 :max-lines="200"
-                readonly="true"
+                :readonly="true"
               />
+              <p>
+                Clicking "Query Script" here will make a read-only query in the
+                context of the script specified, and return the output of the
+                <code>_chain</code> function.
+              </p>
+              <div class="mt-2">
+                <div
+                  v-if="queryExampleScriptError"
+                  class="alert alert-danger"
+                  role="alert"
+                >
+                  {{ queryExampleScriptError }}
+                </div>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Script Address"
+                    aria-label="Script Address"
+                    v-model="queryExampleAddress"
+                  />
+                  <div class="input-group-append" id="button-addon4">
+                    <button
+                      @click="queryExampleScript"
+                      class="btn btn-primary"
+                      :disabled="inFlight"
+                    >
+                      Query Script
+                    </button>
+                  </div>
+                </div>
+
+                <pre v-if="queryExampleScriptResult" class="m-2">{{
+                  queryExampleScriptResult
+                }}</pre>
+                <pre v-if="queryExampleScriptException" class="m-2">{{
+                  queryExampleScriptException
+                }}</pre>
+              </div>
             </div>
             <div class="list-group-item">
               <h5>Plain Javascript Usage</h5>
@@ -159,8 +206,20 @@ h3 {
                 theme="chrome"
                 :min-lines="5"
                 :max-lines="200"
-                readonly="true"
+                :readonly="true"
               />
+              <div class="mt-2">
+                <div class="btn-group" role="group">
+                  <button
+                    @click="queryFetchExample"
+                    class="btn btn-primary"
+                    :disabled="inFlight || !fetchUrl"
+                  >
+                    Run Javascript
+                  </button>
+                </div>
+                <pre class="m-2">{{ queryFetchExampleResult }}</pre>
+              </div>
             </div>
             <div class="list-group-item">
               <h5>DysonLoader Usage</h5>
@@ -179,8 +238,11 @@ h3 {
                 theme="chrome"
                 :min-lines="10"
                 :max-lines="200"
-                readonly="true"
+                :readonly="true"
               />
+              <p class="mt-2">
+                To test <code>DysonLoader</code>, run the form in Step 2.
+              </p>
             </div>
           </div>
         </div>
@@ -191,14 +253,134 @@ h3 {
 <script>
 import command_schema from "./command_schema.json";
 import { VAceEditor } from "vue3-ace-editor";
+import parserBabel from "prettier/parser-babel";
+import prettier from "prettier/standalone";
+
 import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-html";
 import { useStore } from "vuex";
-
-console.log("command_schema", command_schema);
+import { debounce, set } from "lodash";
 import { JSONEditor } from "@json-editor/json-editor";
+//import dottie from "dottie";
+
+//window.dottie = dottie
+window.JSONEditor = JSONEditor;
+
+// Dyson Python scripts need different struction than the Dyson Loader for some types
+// This is a regisry of types, paths
+
+let pythonScriptTypeReplacements = {};
+let dysonLoaderTypeReplacements = {};
+
+/// ProtoAny editor
+class AnyEditor extends JSONEditor.defaults.editors.object {
+  async load() {}
+
+  unregister() {
+    super.unregister();
+    if (this.path) {
+      let path = this.path.split(".").slice(1).join(".");
+      delete pythonScriptTypeReplacements[path];
+      delete dysonLoaderTypeReplacements[path];
+    }
+  }
+  register() {
+    super.register();
+    console.log("regisry any", this)
+    let path = this.path.split(".").slice(1).join(".");
+    pythonScriptTypeReplacements[path] = "protoany";
+    dysonLoaderTypeReplacements[path] = "protoany";
+
+    const updateProtoAnyValue = debounce((path) => {
+      const command = "dyson/QueryEncodeProtoAny";
+      const data = {
+        query: {
+          type_url: this.editors?.type_url.getValue(),
+          json_value:
+            this.editors.json_value?.getValue() ||
+            JSON.stringify(this.editors.object_value?.getValue()),
+        },
+        params: {},
+      };
+      $store.dispatch(command, data).then(
+        (data) => {
+          this.editors.value.setValue(data.base64_value);
+        },
+        (er) => {
+          editor.validation_results = [
+            {
+              path: this.editors.value.path,
+              property: "test",
+              message: er,
+            },
+          ];
+          this.editors.value.showValidationErrors(editor.validation_results);
+        }
+      );
+    }, 1000);
+
+    editor.watch(this.editors.type_url.path, () => {
+      this.editors.value.setValue("");
+      updateProtoAnyValue.bind(this, this.editors.type_url.path)();
+    });
+    if (this.editors.object_value) {
+      editor.watch(this.editors.object_value.path, () => {
+        this.editors.value.setValue("");
+        updateProtoAnyValue.bind(this, this.editors.object_value.path)();
+      });
+    }
+    if (this.editors.json_value) {
+      editor.watch(
+        this.editors.json_value.path,
+        updateProtoAnyValue.bind(this, this.editors.json_value.path)
+      );
+    }
+  }
+  getValue() {
+    const val = super.getValue();
+    //console.log("AnyEditor getValue", val, this);
+    return val;
+  }
+}
+
+JSONEditor.defaults.editors["any"] = AnyEditor;
+
+class BetterDatetimeEditor extends JSONEditor.defaults.editors.datetime {
+  register() {
+    super.register();
+    //console.log("BetterDatetimeEditor register", this);
+    pythonScriptTypeReplacements[this.path.split(".").slice(1).join(".")] =
+      "date";
+    dysonLoaderTypeReplacements[this.path.split(".").slice(1).join(".")] =
+      "date";
+  }
+  getValue() {
+    const val = super.getValue();
+    return val;
+  }
+}
+
+JSONEditor.defaults.editors["datetime-local"] = BetterDatetimeEditor;
+//JSONEditor.defaults.editors["date-time"] = JSONEditor.defaults.editors["datetime-local"];
+
+JSONEditor.defaults.resolvers.unshift((schema) => {
+  if (
+    schema.type === "object" &&
+    schema.properties?.type_url &&
+    schema.properties?.value
+  ) {
+    return "any";
+  }
+
+  if (schema.format == "date-time") {
+    //schema.format = "datetime-local"
+    return "datetime-local";
+  }
+  // If no valid editor is returned, the next resolver function will be used
+});
 
 const groupBy = (keys) => (array) =>
   array.reduce((objectsByKeyValue, obj) => {
@@ -294,13 +476,12 @@ export default {
   data: function () {
     return {
       tx: [],
+
       query: [],
-      command_kwargs: "",
-      fetchExample: "",
       rest_path: "",
       inflight: false,
-      data: "{}",
-      editorData: {},
+      data: {},
+      editor: null,
       error: "",
       response: "",
       command: "",
@@ -309,12 +490,25 @@ export default {
       showFee: false,
       search: "",
       link: "",
+      fetchUrl: "",
+      inFlight: false,
+      searchParams: {},
+      fetchApi: "",
+      queryExampleAddress: "",
+      queryFetchExampleResult: "",
+      queryExampleScriptError: "",
+      queryExampleScriptException: "",
+      queryExampleScriptResult: "",
     };
   },
   watch: {
+    data: function (val, oldVal) {},
+    address: function (val, oldVal) {
+      this.queryExampleAddress = val;
+    },
     "$route.query": {
       handler: function (val, oldVal) {
-        console.log("watch command:", val, oldVal);
+        //console.log("watch command:", val, oldVal);
         this.command = "";
         if (command_schema[val.command]) {
           this.command = val.command;
@@ -326,42 +520,22 @@ export default {
       deep: true,
       immediate: true,
     },
-    old_data: function (val, oldVal) {
-      console.log("watch data:", val, oldVal);
-      try {
-        if (
-          JSON.stringify(JSON.parse(val)) !== JSON.stringify(JSON.parse(oldVal))
-        ) {
-          const s = JSON.stringify(JSON.parse(val), null, 2);
-          const obj = JSON.parse(val);
-          const query = { ...this.$route.query, data: JSON.stringify(obj) };
-          this.data = s;
-          this.$router.replace({ query });
-          var deepData = { ...obj.value, ...obj.query, ...obj.params };
-          deepData = deepen(deepData);
-          if (this.editor) this.editor.setValue(deepData);
-        }
-        this.error = null;
-      } catch (e) {
-        this.error = e;
-      }
-    },
     gas: function (val, oldVal) {
-      console.log("watch gas", val, oldVal);
+      //console.log("watch gas", val, oldVal);
       this.fee = String(Math.ceil(val * 0.0001));
       if (oldVal !== null) {
         this.editorChanged();
       }
     },
     fee: function (val, oldVal) {
-      console.log("watch gas", val, oldVal);
+      //console.log("watch gas", val, oldVal);
       this.gas = String(val * 10000);
       if (oldVal !== null) {
         this.editorChanged();
       }
     },
     response: function (val, oldVal) {
-      this.responseEditor.setValue(val);
+      this.responseEditor.setValue(JSON.stringify(val, null, 2));
       this.responseEditor.disable();
     },
   },
@@ -369,13 +543,14 @@ export default {
     fetchExample: function () {
       const path = command_schema[this.command]?.rest_path || "";
       if (!path) {
+        this.fetchUrl = "";
         return `// Cannot make \`${this.command}\` requests with the REST API`;
       }
       const interpolateUrl = (string, values) =>
         string.replace(/{(.*?)}/g, (match, offset) => values[offset] || match);
 
       let api = this.$store.getters["common/env/apiCosmos"];
-      const data = JSON.parse(this.data);
+      const data = this.data;
       api += interpolateUrl(
         command_schema[this.command]?.rest_path || "",
         data.params || {}
@@ -388,15 +563,16 @@ export default {
           2
         )})`;
       }
+      this.fetchUrl = api + "?" + new URLSearchParams(data.query);
       return `response = await fetch('${api}'${searchParams})
-await response.json()`;
+result = await response.json()`;
     },
     restUrl: function () {
       const interpolateUrl = (string, values) =>
         string.replace(/{(.*?)}/g, (match, offset) => values[offset] || match);
 
       let api = this.$store.getters["common/env/apiCosmos"];
-      const data = JSON.parse(this.data);
+      const data = this.data;
       api += interpolateUrl(path, data.params || {});
       const qs = new URLSearchParams(data.query).toString();
 
@@ -406,7 +582,54 @@ await response.json()`;
       return api;
     },
     vueExample: function () {
-      return `/*
+      let data = JSON.parse(JSON.stringify(this.data));
+      let processedTypes = "";
+      let placeholder;
+      if (data.value) {
+        Object.keys(pythonScriptTypeReplacements)
+          .sort()
+          .reverse()
+          .forEach(function (path) {
+            let replaceEditor = editor.getEditor("editor." + path);
+            if (replaceEditor) {
+              let new_value = JSON.parse(
+                JSON.stringify(replaceEditor.getValue())
+              );
+              let new_var_name = path.split(".").join("_");
+              placeholder = "XXX___" + new_var_name + "___XXX";
+              if (dysonLoaderTypeReplacements[path] == "protoany") {
+                //delete new_value.object_value;
+                //delete new_value.json_value;
+                processedTypes += `// See command: dyson/QueryEncodeProtoAny
+var {type_url, base64_value} = await dysonVueStore.dispatch("dyson/QueryEncodeProtoAny", {"query": {"type_url": ${JSON.stringify(
+                  new_value?.type_url
+                )},"json_value": JSON.stringify(${
+                  new_value?.json_value ||
+                  JSON.stringify(new_value?.object_value)
+                })}})
+var ${new_var_name} = {type_url: type_url, value: base64_value}
+
+`;
+              } else if (dysonLoaderTypeReplacements[path] == "date") {
+                processedTypes += `let ${new_var_name}=new Date(${JSON.stringify(
+                  new_value,
+                  null,
+                  2
+                )}) // ${dysonLoaderTypeReplacements[path]}\n\n`;
+              } else {
+                processedTypes += `let ${new_var_name}= ${JSON.stringify(
+                  new_value,
+                  null,
+                  2
+                )} // ${dysonLoaderTypeReplacements[path]}\n\n`;
+              }
+              set(data.value, path, placeholder);
+            }
+          });
+      }
+
+      return prettier.format(
+        `/*
 This is Experimental!
 
 Place this in the head tag
@@ -423,15 +646,84 @@ await DysonLoader()
 // Connect to Keplr to sign transactions
 account = await dysonUseKeplr()
 
+${processedTypes}
 const command = "${this.command || ""}"
-const data = ${this.data}
-await dysonVueStore.dispatch(command, data)`;
+const data = ${JSON.stringify(data, null, 2)
+          .replaceAll('"XXX___', "")
+          .replaceAll('___XXX"', "")}
+await dysonVueStore.dispatch(command, data)`,
+        {
+          parser: "babel",
+          plugins: [parserBabel],
+        }
+      );
     },
     example: function () {
+      let processedTypes = "";
+      let command_kwargs = "";
+      let data = JSON.parse(
+        JSON.stringify(
+          deepen({
+            ...this.data.value,
+            ...this.data.params,
+            ...this.data.query,
+          })
+        )
+      );
+      let placeholder;
+      Object.keys(pythonScriptTypeReplacements)
+        .sort()
+        .reverse()
+        .forEach(function (path) {
+          let replaceEditor = editor.getEditor("editor." + path);
+          if (replaceEditor) {
+            let new_value = JSON.parse(
+              JSON.stringify(replaceEditor.getValue())
+            );
+            let new_var_name = path.split(".").join("_");
+            placeholder = "XXX___" + new_var_name + "___XXX";
+            if (pythonScriptTypeReplacements[path] == "protoany") {
+              if (new_value?.object_value) {
+                let type = new_value.type_url;
+                new_value = new_value.object_value;
+                new_value["@type"] = type;
+                new_value = JSON.stringify(new_value, null, 2);
+                processedTypes += `${new_var_name}=${new_value} # ${pythonScriptTypeReplacements[path]}\n\n`;
+              } else {
+                try {
+                  let url = new_value.type_url;
+                  new_value = JSON.parse(new_value.json_value || "{}");
+                  new_value["@type"] = url;
+                } catch {}
+                processedTypes += `${new_var_name}=${JSON.stringify(
+                  new_value,
+                  null,
+                  2
+                )} # ${pythonScriptTypeReplacements[path]}\n\n`;
+              }
+            } else {
+              processedTypes += `${new_var_name}=${JSON.stringify(
+                new_value
+              )} # ${pythonScriptTypeReplacements[path]}\n\n`;
+            }
+            //replaceEditor.setValue(placeholder);
+            set(data, path, placeholder);
+          }
+        });
+
+      command_kwargs = Object.keys(data)
+        .map(function (key, index) {
+          return ",\n    " + key + "=" + pythonify(data[key]);
+        })
+        .join("");
+
+      command_kwargs = command_kwargs.replaceAll('"XXX___', "");
+      command_kwargs = command_kwargs.replaceAll('___XXX"', "");
       return `from dys import _chain
 
+${processedTypes}
 _chain(
-    "${this.command || ""}"${this.command_kwargs}
+    "${this.command || ""}"${command_kwargs}
 )`;
     },
     groupedCommands: function () {
@@ -474,6 +766,49 @@ _chain(
     },
   },
   methods: {
+    queryFetchExample: async function () {
+      this.inFlight = true;
+      this.queryFetchExampleResult = "// loading...";
+      const response = await fetch(this.fetchUrl);
+      this.queryFetchExampleResult = JSON.stringify(
+        await response.json(),
+        null,
+        2
+      );
+      this.inFlight = false;
+    },
+    queryExampleScript: async function () {
+      this.queryExampleScriptResult = "// loading...";
+      this.queryExampleScriptError = "";
+      this.queryExampleScriptException = "";
+      this.inFlight = true;
+
+      const command = "dyson/QueryQueryScript";
+      const data = {
+        query: {
+          creator: this.queryExampleAddress,
+          address: this.queryExampleAddress,
+          extra_lines: this.example,
+          function_name: "",
+          args: "",
+          kwargs: "",
+          coins: "",
+        },
+        params: {},
+      };
+
+      const resp = (await dysonVueStore.dispatch(command, data)).response;
+      try {
+        let r = JSON.parse(resp);
+        this.queryExampleScriptResult = r.result;
+        this.queryExampleScriptException = r.exception;
+      } catch {
+        this.queryExampleScriptResult = "";
+        this.queryExampleScriptException = "";
+        this.queryExampleScriptError = resp;
+      }
+      this.inFlight = false;
+    },
     updateQuery: function () {
       var searchParams = new URLSearchParams(window.location.search);
       searchParams.set("data", JSON.stringify(this.editor.getValue()));
@@ -484,7 +819,7 @@ _chain(
     },
     updateEditorFromQuery() {
       var val = this.$route.query;
-      console.log("watch query:", val);
+      //console.log("watch query:", val);
       if (this.editor) {
         this.editor.setValue(JSON.parse(val["data"] || "{}"));
       }
@@ -497,7 +832,7 @@ _chain(
       searchParams.set("gas", this.gas);
       searchParams.set("fee", this.fee);
       this.link = window.location.pathname + "?" + searchParams.toString();
-      console.log("link", this.link);
+      //console.log("link", this.link);
     },
     editorChanged() {
       this.updateLink();
@@ -518,28 +853,23 @@ _chain(
             }
             query = flattenObject(query);
           }
-          this.data = JSON.stringify({ query: query, params: params }, null, 2);
+          this.data = { query: query, params: params };
         } else if (command_schema[this.command].service_name === "Msg") {
           this.showFee = true;
           var value = JSON.parse(JSON.stringify(this.editor.getValue()));
           const fee = [{ amount: this.fee, denom: "dys" }];
-          this.data = JSON.stringify(
-            { value: value, fee: fee, gas: this.gas },
-            null,
-            2
-          );
+          this.data = { value: value, fee: fee, gas: this.gas };
         }
-        var data = JSON.parse(JSON.stringify(this.editor.getValue()));
-        this.command_kwargs = Object.keys(data)
-          .map(function (key, index) {
-            return ",\n    " + key + "=" + pythonify(data[key]);
-          })
-          .join("");
       }
-      console.log("editorChanged", this.data);
+      //console.log("editorChanged", this.data);
     },
     setupEditor() {
-      console.log("setupEditor", self.data, this.command);
+      //console.log("setupEditor", self.data, this.command);
+
+      this.queryExampleScriptResult = "";
+      this.queryExampleScriptException = "";
+      pythonScriptTypeReplacements = {};
+      dysonLoaderTypeReplacements = {};
       const element = document.getElementById("editor");
       if (!element) return;
       if (this.editor) {
@@ -553,10 +883,14 @@ _chain(
           disable_collapse: true,
           disable_properties: true,
           disable_edit_json: true,
-          show_opt_in: true,
+          keep_oneof_values: false,
+          show_opt_in: false,
+          required_by_default: true,
+          remove_empty_properties: false,
           input_width: "100%",
-          theme: "bootstrap4",
-          object_layout: "table",
+          theme: "bootstrap5",
+          show_errors: "always",
+          //object_layout: "table",
         });
         this.editor.on("change", this.editorChanged);
         this.editor.on("ready", () => {
@@ -571,13 +905,35 @@ _chain(
       this.editorChanged();
       this.updateQuery();
       e.preventDefault();
-      console.log("data", this.data);
-      this.responseEditor.setValue({});
+      this.responseEditor.setValue("{}");
       this.error = null;
-      this.response = null;
+      this.response = "// loading...";
       this.inflight = true;
+
+      let data = JSON.parse(JSON.stringify(this.data));
+      if (data.value) {
+        Object.keys(pythonScriptTypeReplacements)
+          .sort()
+          .reverse()
+          .forEach(function (path) {
+            let replacementEditor = editor.getEditor(path);
+            if (replacementEditor) {
+              let new_value = JSON.parse(
+                JSON.stringify(replacementEditor.getValue)
+              );
+              if (dysonLoaderTypeReplacements[path] == "protoany") {
+                delete new_value.object_value;
+                delete new_value.json_value;
+              } else if (dysonLoaderTypeReplacements[path] == "date") {
+                new_value = new Date(new_value);
+              }
+              set(data, path, placeholder);
+            }
+          });
+      }
+
       this.$store
-        .dispatch(this.command, JSON.parse(this.data))
+        .dispatch(this.command, data)
         .then((res) => {
           this.response = res;
         })
@@ -600,12 +956,12 @@ _chain(
           schema: command_schema[this.command].resp_schema,
           disable_collapse: true,
           disable_properties: true,
-          disable_edit_json: true,
+          disable_edit_json: false,
           disable_array_add: true,
           disable_array_delete: true,
           disable_array_delete_last_row: true,
           disable_array_reorder: true,
-          no_additional_properties: true,
+          no_additional_properties: false,
           show_opt_in: false,
           theme: "bootstrap4",
         });
@@ -618,7 +974,7 @@ _chain(
     },
   },
   created: async function () {
-    console.log("created");
+    //console.log("created");
     window.$store = this.$store;
   },
   components: {
@@ -626,7 +982,7 @@ _chain(
   },
 
   mounted: function () {
-    console.log("mounted");
+    //console.log("mounted");
     this.tx = Object.keys(this.$store["_actions"]).filter((key) =>
       key.match("sendMsg")
     );
@@ -640,7 +996,7 @@ _chain(
     const data = JSON.parse(this.$route.query.data || "{}");
     const s = JSON.stringify(data, null, 2);
 
-    this.data = s;
+    this.data = data;
     this.setupEditor();
     this.setupResponseEditor();
   },

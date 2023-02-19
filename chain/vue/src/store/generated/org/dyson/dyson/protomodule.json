@@ -211,6 +211,16 @@
 				"HighestFieldNumber": 2
 			},
 			{
+				"Name": "QueryEncodeProtoAnyRequest",
+				"Path": "/go/src/app/proto/dyson/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryEncodeProtoAnyResponse",
+				"Path": "/go/src/app/proto/dyson/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
 				"Name": "ScheduledRun",
 				"Path": "/go/src/app/proto/dyson/scheduled_run.proto",
 				"HighestFieldNumber": 9
@@ -485,6 +495,18 @@
 								"HasBody": false
 							}
 						]
+					},
+					{
+						"Name": "EncodeProtoAny",
+						"RequestType": "QueryEncodeProtoAnyRequest",
+						"ReturnsType": "QueryEncodeProtoAnyResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
 					}
 				]
 			},
@@ -551,9 +573,29 @@
 	},
 	"Msgs": [
 		{
+			"Name": "MsgCreateScript",
+			"URI": "dyson.MsgCreateScript",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgDeleteStorage",
+			"URI": "dyson.MsgDeleteStorage",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
 			"Name": "MsgRun",
 			"URI": "dyson.MsgRun",
 			"FilePath": "/go/src/app/proto/dyson/msgrun.proto"
+		},
+		{
+			"Name": "MsgUpdateScript",
+			"URI": "dyson.MsgUpdateScript",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgDeleteScript",
+			"URI": "dyson.MsgDeleteScript",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
 			"Name": "MsgUpdateStorage",
@@ -561,8 +603,8 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgDeleteStorage",
-			"URI": "dyson.MsgDeleteStorage",
+			"Name": "MsgDeleteScheduledRun",
+			"URI": "dyson.MsgDeleteScheduledRun",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
@@ -576,33 +618,13 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgDeleteScript",
-			"URI": "dyson.MsgDeleteScript",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgDeleteScheduledRun",
-			"URI": "dyson.MsgDeleteScheduledRun",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgBetterSubmitProposal",
-			"URI": "dyson.MsgBetterSubmitProposal",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateScript",
-			"URI": "dyson.MsgUpdateScript",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
 			"Name": "MsgCreateScheduledRun",
 			"URI": "dyson.MsgCreateScheduledRun",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgCreateScript",
-			"URI": "dyson.MsgCreateScript",
+			"Name": "MsgBetterSubmitProposal",
+			"URI": "dyson.MsgBetterSubmitProposal",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		}
 	],
@@ -742,6 +764,17 @@
 		{
 			"Name": "CronAll",
 			"FullName": "QueryCronAll",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "EncodeProtoAny",
+			"FullName": "QueryEncodeProtoAny",
 			"Rules": [
 				{
 					"Params": null,

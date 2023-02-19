@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/QueryEncodeProtoAnyResponse",
+    "definitions": {
+        "QueryEncodeProtoAnyResponse": {
+            "properties": {
+                "type_url": {
+                    "type": "string"
+                },
+                "base64_value": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Query Encode Proto Any Response"
+        }
+    }
+}

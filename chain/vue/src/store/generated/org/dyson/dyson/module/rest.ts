@@ -113,6 +113,11 @@ export interface DysonQueryAllStorageResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface DysonQueryEncodeProtoAnyResponse {
+  type_url?: string;
+  base64_value?: string;
+}
+
 export interface DysonQueryGetCronResponse {
   cron?: DysonCron;
 }
@@ -784,6 +789,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryWsgi = (query?: { index?: string; httprequest?: string; gaslimit?: string }, params: RequestParams = {}) =>
     this.request<DysonQueryWsgiResponse, RpcStatus>({
       path: `/dyson/wsgi`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryEncodeProtoAny
+   * @summary Queries a list of EncodeProtoAny items.
+   * @request GET:/org/dyson/dyson/encode_proto_any
+   */
+  queryEncodeProtoAny = (query?: { type_url?: string; json_value?: string }, params: RequestParams = {}) =>
+    this.request<DysonQueryEncodeProtoAnyResponse, RpcStatus>({
+      path: `/org/dyson/dyson/encode_proto_any`,
       method: "GET",
       query: query,
       format: "json",

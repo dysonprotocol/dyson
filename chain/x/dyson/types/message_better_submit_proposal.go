@@ -11,10 +11,10 @@ var _ sdk.Msg = &MsgBetterSubmitProposal{}
 
 func NewMsgBetterSubmitProposal(proposer string, messages []string, metadata string, initialDeposit sdk.Coins) *MsgBetterSubmitProposal {
 	return &MsgBetterSubmitProposal{
-		Proposer: proposer,
-		Messages: messages,
-		Metadata: metadata,
-		InitialDeposit:  initialDeposit,
+		Proposer:       proposer,
+		Messages:       messages,
+		Metadata:       metadata,
+		InitialDeposit: initialDeposit,
 	}
 }
 
