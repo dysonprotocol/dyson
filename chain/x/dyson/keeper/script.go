@@ -60,7 +60,6 @@ func (k Keeper) SetScript(ctx sdk.Context, script types.Script) {
 
 // GetScript returns a script from its index
 func (k Keeper) GetScript(ctx sdk.Context, index string) (val types.Script, found bool) {
-
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ScriptKeyPrefix))
 
 	b := store.Get(types.ScriptKey(
@@ -263,7 +262,8 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 			k.SetScript(ctx, types.Script{
 				Index:   scriptCtx.Sender,
 				Creator: scriptCtx.Sender,
-				Code:    ""})
+				Code:    "",
+			})
 			valFound, isFound = k.GetScript(ctx, scriptCtx.Index)
 			if !isFound {
 				// This shouldn't happen
@@ -277,10 +277,8 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 	}
 	if scriptCtx.Sender != valFound.Index {
 		if scriptCtx.ExtraLines != "" {
-			fmt.Println(fmt.Sprintf("Only if Script.Index==Sender can use ExtraLines %v", scriptCtx))
-			return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, fmt.Sprintf("Only if Script.Index==Sender can use ExtraLines %v, %v", valFound, scriptCtx))
+			return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, fmt.Sprintf("ExtraLines forbidden: Script.Index %v != Sender %v", valFound.Index, scriptCtx.Sender))
 		}
-
 	}
 	port, srv, err := k.NewRPCServer(goCtx, valFound.Index)
 	if err != nil {

@@ -40,10 +40,13 @@ the Github issue reference in the following format:
 ### Bug Fixes
 
 * (frontend) [#55](https://gitlab.com/dysonproject/dyson/-/issues/55) Fix async issue with DysonLoader
-* (dyslang) [#51](https://gitlab.com/dysonproject/dyson/-/issues/51) Fix function annotation for texareas
 * (frontend) [#52](https://gitlab.com/dysonproject/dyson/-/issues/52) Label testnet in keplr conncetion
 * (frontend) [#55](https://gitlab.com/dysonproject/dyson/-/issues/55) Fix race condition with DysonLoader
 * (dyslang) [#59](https://gitlab.com/dysonproject/dyson/-/issues/59) Stop force snake_casing rpc commands internally
+
+### State Machine Breaking
+* (dyslang) [#61](https://gitlab.com/dysonproject/dyson/-/issues/61) Fix error message for ExtraLines permission
+* (dyslang) [#51](https://gitlab.com/dysonproject/dyson/-/issues/51) Fix function annotation for texareas
 
 ### Improvements
 
