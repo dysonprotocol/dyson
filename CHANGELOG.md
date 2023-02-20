@@ -41,4 +41,15 @@ the Github issue reference in the following format:
 
 * (frontend) [#55](https://gitlab.com/dysonproject/dyson/-/issues/55) Fix async issue with DysonLoader
 * (dyslang) [#51](https://gitlab.com/dysonproject/dyson/-/issues/51) Fix function annotation for texareas
+* (frontend) [#52](https://gitlab.com/dysonproject/dyson/-/issues/52) Label testnet in keplr conncetion
+* (frontend) [#55](https://gitlab.com/dysonproject/dyson/-/issues/55) Fix race condition with DysonLoader
+* (dyslang) [#59](https://gitlab.com/dysonproject/dyson/-/issues/59) Stop force snake_casing rpc commands internally
+
+### Improvements
+
+* (frontend) [#53](https://gitlab.com/dysonproject/dyson/-/issues/53) Improve UI for code example in /commands
+* (frontend) [#57](https://gitlab.com/dysonproject/dyson/-/issues/57) Remove unused Starport CSS
+
+### Features
+* (frontend) [#58](https://gitlab.com/dysonproject/dyson/-/issues/58) Enable forms for Protobuf Any in /commands
 

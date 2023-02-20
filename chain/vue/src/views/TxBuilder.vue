@@ -262,7 +262,8 @@ import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-html";
 import { useStore } from "vuex";
-import { debounce, set } from "lodash";
+import { debounce, set, get } from "lodash";
+import  lodash  from "lodash";
 import { JSONEditor } from "@json-editor/json-editor";
 //import dottie from "dottie";
 
@@ -289,7 +290,6 @@ class AnyEditor extends JSONEditor.defaults.editors.object {
   }
   register() {
     super.register();
-    console.log("regisry any", this)
     let path = this.path.split(".").slice(1).join(".");
     pythonScriptTypeReplacements[path] = "protoany";
     dysonLoaderTypeReplacements[path] = "protoany";
@@ -357,13 +357,23 @@ class BetterDatetimeEditor extends JSONEditor.defaults.editors.datetime {
     dysonLoaderTypeReplacements[this.path.split(".").slice(1).join(".")] =
       "date";
   }
+  unregister() {
+    super.unregister();
+    if (this.path) {
+      let path = this.path.split(".").slice(1).join(".");
+      delete pythonScriptTypeReplacements[path];
+      delete dysonLoaderTypeReplacements[path];
+    }
+  }
   getValue() {
     const val = super.getValue();
-    return val;
+    console.log("dat get value", val);
+    if (!val) return val;
+    return new Date(val).toISOString();
   }
 }
 
-JSONEditor.defaults.editors["datetime-local"] = BetterDatetimeEditor;
+JSONEditor.defaults.editors["date-time"] = BetterDatetimeEditor;
 //JSONEditor.defaults.editors["date-time"] = JSONEditor.defaults.editors["datetime-local"];
 
 JSONEditor.defaults.resolvers.unshift((schema) => {
@@ -374,10 +384,8 @@ JSONEditor.defaults.resolvers.unshift((schema) => {
   ) {
     return "any";
   }
-
-  if (schema.format == "date-time") {
-    //schema.format = "datetime-local"
-    return "datetime-local";
+  if (schema.format === "date-time") {
+    return "date-time";
   }
   // If no valid editor is returned, the next resolver function will be used
 });
@@ -909,26 +917,20 @@ _chain(
       this.error = null;
       this.response = "// loading...";
       this.inflight = true;
-
       let data = JSON.parse(JSON.stringify(this.data));
       if (data.value) {
         Object.keys(pythonScriptTypeReplacements)
           .sort()
           .reverse()
           .forEach(function (path) {
-            let replacementEditor = editor.getEditor(path);
-            if (replacementEditor) {
-              let new_value = JSON.parse(
-                JSON.stringify(replacementEditor.getValue)
-              );
-              if (dysonLoaderTypeReplacements[path] == "protoany") {
-                delete new_value.object_value;
-                delete new_value.json_value;
-              } else if (dysonLoaderTypeReplacements[path] == "date") {
-                new_value = new Date(new_value);
-              }
-              set(data, path, placeholder);
+            let new_value = lodash.cloneDeep(lodash.get(data.value, path));
+            if (dysonLoaderTypeReplacements[path] == "protoany") {
+              delete new_value.object_value;
+              delete new_value.json_value;
+            } else if (dysonLoaderTypeReplacements[path] == "date") {
+              new_value = new Date(new_value);
             }
+            set(data.value, path, new_value);
           });
       }
 

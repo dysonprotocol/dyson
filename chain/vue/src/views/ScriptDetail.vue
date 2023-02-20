@@ -23,6 +23,10 @@ pre {
             </div>
           </div>
         </div>
+        <ExtraLines
+          v-if="this.address == this.$route.params.script_address"
+          v-bind:scriptAddress="this.$route.params.script_address"
+        ></ExtraLines>
       </div>
       <div id="code" class="col-md-6">
         <div class="mb-3">
@@ -75,6 +79,7 @@ Raw Log: {{ txResult.rawLog }}</pre
 
 <script>
 import FunctionDetail from "./FunctionDetail.vue";
+import ExtraLines from "./ExtraLines.vue";
 import { VAceEditor } from "vue3-ace-editor";
 import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/mode-python";
@@ -93,6 +98,7 @@ export default {
   },
   components: {
     FunctionDetail,
+    ExtraLines,
     VAceEditor,
   },
   watch: {

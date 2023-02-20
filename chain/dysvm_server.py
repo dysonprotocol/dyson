@@ -273,7 +273,7 @@ def build_sandbox(port, creator, address, amount, block_info):
         def snake(name):
             return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
 
-        params = {snake(k): v for k, v in params.items()}
+        #params = {snake(k): v for k, v in params.items()}
         if method not in ["ConsumeGas", "Gaslimit"]:
             # normal rpc calls are encoded as json strings
             params = {"s": json.dumps(params)}
