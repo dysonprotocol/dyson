@@ -30,7 +30,7 @@ func GetTxCmd() *cobra.Command {
 		RunE:                       client.ValidateCmd,
 	}
 
-	cmd.AddCommand(CmdCreateScript())
+	cmd.AddCommand(CmdDeployAutonomousScript())
 	cmd.AddCommand(CmdUpdateScript())
 	cmd.AddCommand(CmdDeleteScript())
 	cmd.AddCommand(CmdCreateStorage())

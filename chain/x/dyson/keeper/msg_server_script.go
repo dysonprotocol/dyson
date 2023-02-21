@@ -11,9 +11,9 @@ import (
 	"github.com/org/dyson/x/dyson/types"
 )
 
-const CreateScriptGasCost uint64 = 10000000
+const DeployAutonomousScriptGasCost uint64 = 10000000
 
-func (k msgServer) CreateScript(goCtx context.Context, msg *types.MsgCreateScript) (*types.MsgCreateScriptResponse, error) {
+func (k msgServer) DeployAutonomousScript(goCtx context.Context, msg *types.MsgDeployAutonomousScript) (*types.MsgDeployAutonomousScriptResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	hash := sha256.Sum256([]byte(msg.Creator + msg.Code))
@@ -31,18 +31,18 @@ func (k msgServer) CreateScript(goCtx context.Context, msg *types.MsgCreateScrip
 		Code:    msg.Code,
 	}
 
-	fmt.Println("CreateScript", scriptAddress, msg.Creator, msg.Code)
+	fmt.Println("DeployAutonomousScript", scriptAddress, msg.Creator, msg.Code)
 	k.SetScript(
 		ctx,
 		script,
 	)
-	ctx.GasMeter().ConsumeGas(CreateScriptGasCost, "CreateScript") 
+	ctx.GasMeter().ConsumeGas(DeployAutonomousScriptGasCost, "DeployAutonomousScript") 
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent("CreateScript",
+		sdk.NewEvent("DeployAutonomousScript",
 			sdk.NewAttribute("address", scriptAddress),
 		),
 	)
-	return &types.MsgCreateScriptResponse{Address: scriptAddress}, nil
+	return &types.MsgDeployAutonomousScriptResponse{Address: scriptAddress}, nil
 }
 
 func (k msgServer) UpdateScript(goCtx context.Context, msg *types.MsgUpdateScript) (*types.MsgUpdateScriptResponse, error) {

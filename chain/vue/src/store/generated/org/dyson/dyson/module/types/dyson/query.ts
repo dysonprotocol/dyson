@@ -130,7 +130,7 @@ export interface QueryEncodeProtoAnyRequest {
 
 export interface QueryEncodeProtoAnyResponse {
   type_url: string;
-  base64_value: string;
+  value: string;
 }
 
 const baseQueryGetScheduledRunRequest: object = { index: "" };
@@ -2028,10 +2028,7 @@ export const QueryEncodeProtoAnyRequest = {
   },
 };
 
-const baseQueryEncodeProtoAnyResponse: object = {
-  type_url: "",
-  base64_value: "",
-};
+const baseQueryEncodeProtoAnyResponse: object = { type_url: "", value: "" };
 
 export const QueryEncodeProtoAnyResponse = {
   encode(
@@ -2041,8 +2038,8 @@ export const QueryEncodeProtoAnyResponse = {
     if (message.type_url !== "") {
       writer.uint32(10).string(message.type_url);
     }
-    if (message.base64_value !== "") {
-      writer.uint32(18).string(message.base64_value);
+    if (message.value !== "") {
+      writer.uint32(18).string(message.value);
     }
     return writer;
   },
@@ -2063,7 +2060,7 @@ export const QueryEncodeProtoAnyResponse = {
           message.type_url = reader.string();
           break;
         case 2:
-          message.base64_value = reader.string();
+          message.value = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -2082,10 +2079,10 @@ export const QueryEncodeProtoAnyResponse = {
     } else {
       message.type_url = "";
     }
-    if (object.base64_value !== undefined && object.base64_value !== null) {
-      message.base64_value = String(object.base64_value);
+    if (object.value !== undefined && object.value !== null) {
+      message.value = String(object.value);
     } else {
-      message.base64_value = "";
+      message.value = "";
     }
     return message;
   },
@@ -2093,8 +2090,7 @@ export const QueryEncodeProtoAnyResponse = {
   toJSON(message: QueryEncodeProtoAnyResponse): unknown {
     const obj: any = {};
     message.type_url !== undefined && (obj.type_url = message.type_url);
-    message.base64_value !== undefined &&
-      (obj.base64_value = message.base64_value);
+    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
@@ -2109,10 +2105,10 @@ export const QueryEncodeProtoAnyResponse = {
     } else {
       message.type_url = "";
     }
-    if (object.base64_value !== undefined && object.base64_value !== null) {
-      message.base64_value = object.base64_value;
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
     } else {
-      message.base64_value = "";
+      message.value = "";
     }
     return message;
   },

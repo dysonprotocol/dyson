@@ -35172,7 +35172,7 @@ paths:
             properties:
               type_url:
                 type: string
-              base64_value:
+              value:
                 type: string
         default:
           description: An unexpected error response.
@@ -71374,21 +71374,10 @@ definitions:
         type: array
         items:
           type: string
-  dyson.MsgBetterSubmitProposalResponse:
-    type: object
-    properties:
-      proposal_id:
-        type: string
-        format: uint64
   dyson.MsgCreateScheduledRunResponse:
     type: object
     properties:
       index:
-        type: string
-  dyson.MsgCreateScriptResponse:
-    type: object
-    properties:
-      address:
         type: string
   dyson.MsgCreateStorageResponse:
     type: object
@@ -71396,6 +71385,11 @@ definitions:
     type: object
   dyson.MsgDeleteStorageResponse:
     type: object
+  dyson.MsgDeployAutonomousScriptResponse:
+    type: object
+    properties:
+      address:
+        type: string
   dyson.MsgRun:
     type: object
     properties:
@@ -71673,7 +71667,7 @@ definitions:
     properties:
       type_url:
         type: string
-      base64_value:
+      value:
         type: string
   dyson.QueryGetCronResponse:
     type: object

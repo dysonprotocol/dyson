@@ -5,24 +5,24 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-var _ sdk.Msg = &MsgCreateScript{}
+var _ sdk.Msg = &MsgDeployAutonomousScript{}
 
-func NewMsgCreateScript(creator string, code string) *MsgCreateScript {
-	return &MsgCreateScript{
+func NewMsgDeployAutonomousScript(creator string, code string) *MsgDeployAutonomousScript {
+	return &MsgDeployAutonomousScript{
 		Creator: creator,
 		Code:    code,
 	}
 }
 
-func (msg *MsgCreateScript) Route() string {
+func (msg *MsgDeployAutonomousScript) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgCreateScript) Type() string {
-	return "CreateScript"
+func (msg *MsgDeployAutonomousScript) Type() string {
+	return "DeployAutonomousScript"
 }
 
-func (msg *MsgCreateScript) GetSigners() []sdk.AccAddress {
+func (msg *MsgDeployAutonomousScript) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -30,12 +30,12 @@ func (msg *MsgCreateScript) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgCreateScript) GetSignBytes() []byte {
+func (msg *MsgDeployAutonomousScript) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgCreateScript) ValidateBasic() error {
+func (msg *MsgDeployAutonomousScript) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

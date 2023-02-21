@@ -236,16 +236,6 @@
 				"HighestFieldNumber": 3
 			},
 			{
-				"Name": "MsgBetterSubmitProposal",
-				"Path": "/go/src/app/proto/dyson/tx.proto",
-				"HighestFieldNumber": 4
-			},
-			{
-				"Name": "MsgBetterSubmitProposalResponse",
-				"Path": "/go/src/app/proto/dyson/tx.proto",
-				"HighestFieldNumber": 1
-			},
-			{
 				"Name": "MsgCreateScheduledRun",
 				"Path": "/go/src/app/proto/dyson/tx.proto",
 				"HighestFieldNumber": 4
@@ -306,12 +296,12 @@
 				"HighestFieldNumber": 0
 			},
 			{
-				"Name": "MsgCreateScript",
+				"Name": "MsgDeployAutonomousScript",
 				"Path": "/go/src/app/proto/dyson/tx.proto",
 				"HighestFieldNumber": 3
 			},
 			{
-				"Name": "MsgCreateScriptResponse",
+				"Name": "MsgDeployAutonomousScriptResponse",
 				"Path": "/go/src/app/proto/dyson/tx.proto",
 				"HighestFieldNumber": 1
 			},
@@ -520,12 +510,6 @@
 						"HTTPRules": null
 					},
 					{
-						"Name": "BetterSubmitProposal",
-						"RequestType": "MsgBetterSubmitProposal",
-						"ReturnsType": "MsgBetterSubmitProposalResponse",
-						"HTTPRules": null
-					},
-					{
 						"Name": "CreateStorage",
 						"RequestType": "MsgCreateStorage",
 						"ReturnsType": "MsgCreateStorageResponse",
@@ -544,9 +528,9 @@
 						"HTTPRules": null
 					},
 					{
-						"Name": "CreateScript",
-						"RequestType": "MsgCreateScript",
-						"ReturnsType": "MsgCreateScriptResponse",
+						"Name": "DeployAutonomousScript",
+						"RequestType": "MsgDeployAutonomousScript",
+						"ReturnsType": "MsgDeployAutonomousScriptResponse",
 						"HTTPRules": null
 					},
 					{
@@ -573,13 +557,8 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgCreateStorage",
-			"URI": "dyson.MsgCreateStorage",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgCreateScript",
-			"URI": "dyson.MsgCreateScript",
+			"Name": "MsgUpdateScript",
+			"URI": "dyson.MsgUpdateScript",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
@@ -593,9 +572,9 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgDeleteStorage",
-			"URI": "dyson.MsgDeleteStorage",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+			"Name": "MsgRun",
+			"URI": "dyson.MsgRun",
+			"FilePath": "/go/src/app/proto/dyson/msgrun.proto"
 		},
 		{
 			"Name": "MsgCreateScheduledRun",
@@ -603,28 +582,28 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgBetterSubmitProposal",
-			"URI": "dyson.MsgBetterSubmitProposal",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateStorage",
-			"URI": "dyson.MsgUpdateStorage",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgRun",
-			"URI": "dyson.MsgRun",
-			"FilePath": "/go/src/app/proto/dyson/msgrun.proto"
-		},
-		{
-			"Name": "MsgUpdateScript",
-			"URI": "dyson.MsgUpdateScript",
+			"Name": "MsgDeployAutonomousScript",
+			"URI": "dyson.MsgDeployAutonomousScript",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
 			"Name": "MsgDeleteScript",
 			"URI": "dyson.MsgDeleteScript",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgDeleteStorage",
+			"URI": "dyson.MsgDeleteStorage",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgCreateStorage",
+			"URI": "dyson.MsgCreateStorage",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgUpdateStorage",
+			"URI": "dyson.MsgUpdateStorage",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		}
 	],

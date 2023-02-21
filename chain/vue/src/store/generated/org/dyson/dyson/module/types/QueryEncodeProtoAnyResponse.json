@@ -7,7 +7,7 @@
                 "type_url": {
                     "type": "string"
                 },
-                "base64_value": {
+                "value": {
                     "type": "string"
                 }
             },

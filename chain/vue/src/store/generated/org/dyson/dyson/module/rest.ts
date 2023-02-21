@@ -14,17 +14,8 @@ export interface DysonCron {
   indexes?: string[];
 }
 
-export interface DysonMsgBetterSubmitProposalResponse {
-  /** @format uint64 */
-  proposal_id?: string;
-}
-
 export interface DysonMsgCreateScheduledRunResponse {
   index?: string;
-}
-
-export interface DysonMsgCreateScriptResponse {
-  address?: string;
 }
 
 export type DysonMsgCreateStorageResponse = object;
@@ -32,6 +23,10 @@ export type DysonMsgCreateStorageResponse = object;
 export type DysonMsgDeleteScriptResponse = object;
 
 export type DysonMsgDeleteStorageResponse = object;
+
+export interface DysonMsgDeployAutonomousScriptResponse {
+  address?: string;
+}
 
 export interface DysonMsgRun {
   creator?: string;
@@ -115,7 +110,7 @@ export interface DysonQueryAllStorageResponse {
 
 export interface DysonQueryEncodeProtoAnyResponse {
   type_url?: string;
-  base64_value?: string;
+  value?: string;
 }
 
 export interface DysonQueryGetCronResponse {

@@ -154,12 +154,12 @@ def get_module_dict():
 
     mod_dict = {
         "datetime": {
-            "timedelta": datetime.timedelta,
             "date": datetime.date,
-            "time": datetime.time,
             "datetime": datetime.datetime,
-            "tzinfo": datetime.tzinfo,
+            "time": datetime.time,
+            "timedelta": datetime.timedelta,
             "timezone": datetime.timezone,
+            "tzinfo": datetime.tzinfo,
         },
         "pathlib": {"PurePath": pathlib.PurePath},
         "mimetypes": {"guess_type": mimetypes.guess_type},
@@ -586,6 +586,7 @@ def eval_script(
 dyslang.WHITELIST_FUNCTIONS.update(
     [
         "datetime.datetime.isoformat",
+        "datetime.datetime.fromisoformat",
         "freezegun.api.FakeDatetime.now",
         "freezegun.api.FakeDatetime.time",
         "freezegun.api.FakeDatetime.date",

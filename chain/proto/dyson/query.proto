@@ -208,7 +208,7 @@ message QueryEncodeProtoAnyRequest {
 
 message QueryEncodeProtoAnyResponse {
   string type_url = 1;
-  string base64_value = 2;
+  string value = 2;
 }
 
 // this line is used by starport scaffolding # 3

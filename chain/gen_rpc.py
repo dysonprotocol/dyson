@@ -129,6 +129,8 @@ PROTOANY_MAPPING = {
     "cosmos.group.v1/sendMsgCreateGroupPolicy.definitions.MsgCreateGroupPolicy.properties.decision_policy": "cosmos.group.v1.DecisionPolicy",
     "cosmos.group.v1/sendMsgUpdateGroupPolicyDecisionPolicy.definitions.MsgUpdateGroupPolicyDecisionPolicy.properties.decision_policy": "cosmos.group.v1.DecisionPolicy",
     "cosmos.group.v1/sendMsgSubmitProposal.definitions.MsgSubmitProposal.properties.messages.items": "cosmos.base.v1beta1.Msg",
+    "cosmos.gov.v1beta1/sendMsgSubmitProposal.definitions.MsgSubmitProposal.properties.content": "cosmos.gov.v1beta1.Content",
+    "cosmos.gov.v1/sendMsgExecLegacyContent.definitions.MsgExecLegacyContent.properties.content": "cosmos.gov.v1beta1.Content",
 }
 
 
@@ -170,13 +172,13 @@ def better_any(key, node, root):
             if key in PROTOANY_MAPPING:
                 node["oneOf"] = []
                 print(f"Embeding Mapping for better_any: {key}")
-                for ct in exported_interfaces[PROTOANY_MAPPING[key]]:
+                for ct in sorted(exported_interfaces[PROTOANY_MAPPING[key]]):
                     name = ct[1:]
                     ref, defs = fetch_concrete_schema(ct)
 
                     if ref and defs:
-                        if "MsgCreateScript" in defs:
-                            defs["MsgCreateScript"]["properties"]["code"][
+                        if "MsgDeployAutonomousScript" in defs:
+                            defs["MsgDeployAutonomousScript"]["properties"]["code"][
                                 "format"
                             ] = "python"
 
@@ -187,7 +189,7 @@ def better_any(key, node, root):
 
                         node["oneOf"] += [
                             {
-                                "title": name.split(".")[-1],
+                                "title": name,
                                 "type": "object",
                                 "properties": {
                                     "type_url": {
@@ -223,22 +225,23 @@ for file_path in [
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.auth.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.authz.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.bank.v1beta1/protomodule.json",
+    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.base.node.v1beta1/protomodule.json",
     # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.base.tendermint.v1beta1/protomodule.json",
     # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.crisis.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.distribution.v1beta1/protomodule.json",
     # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.evidence.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.feegrant.v1beta1/protomodule.json",
-    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.group.v1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.mint.v1beta1/protomodule.json",
     # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.nft.v1beta1/protomodule.json",
-    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.params.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.params.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.slashing.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.staking.v1beta1/protomodule.json",
     # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.tx.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.upgrade.v1beta1/protomodule.json",
-    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.vesting.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.vesting.v1beta1/protomodule.json",
     # "vue/src/store/generated/ibc-go/v5/ibc.applications.interchain_accounts.controller.v1/protomodule.json",
     # "vue/src/store/generated/ibc-go/v5/ibc.applications.interchain_accounts.host.v1/protomodule.json",
     "vue/src/store/generated/ibc-go/v5/ibc.applications.transfer.v1/protomodule.json",
@@ -337,14 +340,28 @@ for file_path in [
                     )
                 types.add(f'{mod_types} "{data["Pkg"]["GoImportName"]}"')
             else:
+
                 if "gov" in mod_keeper:
-                    keeper_import = data["Pkg"]["GoImportName"].replace(
-                        "/types", "/keeper"
+                    print(
+                        f"mod_keeper: {mod_keeper} service_name: {service_name} keeper_import: {keeper_import}"
                     )
-                    if service_name == "Msg":
-                        keeper_import = data["Pkg"]["GoImportName"].replace(
-                            "/types/v1", "/keeper"
-                        )
+                    if "beta1" in mod_keeper:
+                        keeper_import = None
+                        if service_name == "Msg":
+                            handler_template = Template(
+                                """msgServer := cosmosgovv1keeper.NewMsgServerImpl(rpcservice.k.cosmosgovv1keeper)
+                                handler := cosmosgovv1keeper.NewLegacyMsgServerImpl(rpcservice.k.accountKeeper.GetModuleAddress(\"gov\").String(), msgServer).$keeper_function"""
+                            )
+                        else:
+                            handler_template = Template(
+                                """r, err := cosmosgovv1keeper.NewLegacyQueryServer(rpcservice.k.cosmosgovv1keeper).$keeper_function(rpcservice.ctx, &msg)"""
+                            )
+
+                    else:
+                        if service_name == "Msg":
+                            keeper_import = data["Pkg"]["GoImportName"].replace(
+                                "/types/v1", "/keeper"
+                            )
 
                 elif "vesting" in mod_keeper:
                     keeper_import = data["Pkg"]["GoImportName"].replace("/types", "")
@@ -441,8 +458,8 @@ with open("x/dyson/keeper/rpcserver.go", "w") as f:
     f.write(out)
 
 # override schema to use textareas
-schemas["dyson/sendMsgCreateScript"]["request_schema"]["definitions"][
-    "MsgCreateScript"
+schemas["dyson/sendMsgDeployAutonomousScript"]["request_schema"]["definitions"][
+    "MsgDeployAutonomousScript"
 ]["properties"]["code"]["format"] = "python"
 
 schemas["dyson/sendMsgUpdateScript"]["request_schema"]["definitions"][

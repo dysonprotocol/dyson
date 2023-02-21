@@ -31,5 +31,5 @@ func (k Keeper) EncodeProtoAny(goCtx context.Context, req *types.QueryEncodeProt
 
 	return &types.QueryEncodeProtoAnyResponse{
 		TypeUrl:     req.TypeUrl,
-		Base64Value: b64.StdEncoding.EncodeToString(a.Value)}, nil
+		Value: b64.StdEncoding.EncodeToString(a.Value)}, nil
 }

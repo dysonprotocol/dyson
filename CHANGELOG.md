@@ -47,6 +47,7 @@ the Github issue reference in the following format:
 ### State Machine Breaking
 * (dyslang) [#61](https://gitlab.com/dysonproject/dyson/-/issues/61) Fix error message for ExtraLines permission
 * (dyslang) [#51](https://gitlab.com/dysonproject/dyson/-/issues/51) Fix function annotation for texareas
+* (dyslang) [#54](https://gitlab.com/dysonproject/dyson/-/issues/54) Rename dyson/sendMsgCreateScript to dyson/sendMsgDeployAutonomousScript
 
 ### Improvements
 

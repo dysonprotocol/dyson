@@ -18,8 +18,8 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		ctx = ctx.WithEventManager(sdk.NewEventManager())
 
 		switch msg := msg.(type) {
-		case *types.MsgCreateScript:
-			res, err := msgServer.CreateScript(sdk.WrapSDKContext(ctx), msg)
+		case *types.MsgDeployAutonomousScript:
+			res, err := msgServer.DeployAutonomousScript(sdk.WrapSDKContext(ctx), msg)
 			return sdk.WrapServiceResult(ctx, res, err)
 		case *types.MsgUpdateScript:
 			res, err := msgServer.UpdateScript(sdk.WrapSDKContext(ctx), msg)
@@ -46,9 +46,6 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		//	res, err := msgServer.DeleteScheduledRun(sdk.WrapSDKContext(ctx), msg)
 		//	return sdk.WrapServiceResult(ctx, res, err)
 		// this line is used by starport scaffolding # 1
-		case *types.MsgBetterSubmitProposal:
-			res, err := msgServer.BetterSubmitProposal(sdk.WrapSDKContext(ctx), msg)
-			return sdk.WrapServiceResult(ctx, res, err)
 
 		case *types.MsgRun:
 			res, err := msgServer.Run(sdk.WrapSDKContext(ctx), msg)

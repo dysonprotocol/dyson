@@ -8,7 +8,7 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgCreateScript{}, "dyson/CreateScript", nil)
+	cdc.RegisterConcrete(&MsgDeployAutonomousScript{}, "dyson/DeployAutonomousScript", nil)
 	cdc.RegisterConcrete(&MsgUpdateScript{}, "dyson/UpdateScript", nil)
 	cdc.RegisterConcrete(&MsgDeleteScript{}, "dyson/DeleteScript", nil)
 	cdc.RegisterConcrete(&MsgCreateStorage{}, "dyson/CreateStorage", nil)
@@ -18,13 +18,12 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgCreateScheduledRun{}, "dyson/CreateScheduledRun", nil)
 	cdc.RegisterConcrete(&MsgUpdateScheduledRun{}, "dyson/UpdateScheduledRun", nil)
 	cdc.RegisterConcrete(&MsgDeleteScheduledRun{}, "dyson/DeleteScheduledRun", nil)
-	cdc.RegisterConcrete(&MsgBetterSubmitProposal{}, "dyson/BetterSubmitProposal", nil)
 	// this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgCreateScript{},
+		&MsgDeployAutonomousScript{},
 		&MsgUpdateScript{},
 		&MsgDeleteScript{},
 	)
@@ -39,12 +38,10 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgDeleteScheduledRun{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgBetterSubmitProposal{},
-	)
-	// this line is used by starport scaffolding # 3
-	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgRun{},
 	)
+
+	// this line is used by starport scaffolding # 3
 
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)
 }

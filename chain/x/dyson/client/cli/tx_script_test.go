@@ -18,7 +18,7 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func TestCreateScript(t *testing.T) {
+func TestDeployAutonomousScript(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
@@ -51,7 +51,7 @@ func TestCreateScript(t *testing.T) {
 			}
 			args = append(args, fields...)
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateScript(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeployAutonomousScript(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -81,7 +81,7 @@ func TestUpdateScript(t *testing.T) {
 	}
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateScript(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeployAutonomousScript(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -144,7 +144,7 @@ func TestDeleteScript(t *testing.T) {
 	}
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateScript(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeployAutonomousScript(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {

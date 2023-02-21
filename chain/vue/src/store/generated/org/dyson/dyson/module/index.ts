@@ -4,31 +4,29 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgCreateStorage } from "./types/dyson/tx";
-import { MsgCreateScript } from "./types/dyson/tx";
+import { MsgUpdateScript } from "./types/dyson/tx";
 import { MsgUpdateScheduledRun } from "./types/dyson/tx";
 import { MsgDeleteScheduledRun } from "./types/dyson/tx";
-import { MsgDeleteStorage } from "./types/dyson/tx";
-import { MsgCreateScheduledRun } from "./types/dyson/tx";
-import { MsgBetterSubmitProposal } from "./types/dyson/tx";
-import { MsgUpdateStorage } from "./types/dyson/tx";
 import { MsgRun } from "./types/dyson/msgrun";
-import { MsgUpdateScript } from "./types/dyson/tx";
+import { MsgCreateScheduledRun } from "./types/dyson/tx";
+import { MsgDeployAutonomousScript } from "./types/dyson/tx";
 import { MsgDeleteScript } from "./types/dyson/tx";
+import { MsgDeleteStorage } from "./types/dyson/tx";
+import { MsgCreateStorage } from "./types/dyson/tx";
+import { MsgUpdateStorage } from "./types/dyson/tx";
 
 
 const types = [
-  ["/dyson.MsgCreateStorage", MsgCreateStorage],
-  ["/dyson.MsgCreateScript", MsgCreateScript],
+  ["/dyson.MsgUpdateScript", MsgUpdateScript],
   ["/dyson.MsgUpdateScheduledRun", MsgUpdateScheduledRun],
   ["/dyson.MsgDeleteScheduledRun", MsgDeleteScheduledRun],
-  ["/dyson.MsgDeleteStorage", MsgDeleteStorage],
-  ["/dyson.MsgCreateScheduledRun", MsgCreateScheduledRun],
-  ["/dyson.MsgBetterSubmitProposal", MsgBetterSubmitProposal],
-  ["/dyson.MsgUpdateStorage", MsgUpdateStorage],
   ["/dyson.MsgRun", MsgRun],
-  ["/dyson.MsgUpdateScript", MsgUpdateScript],
+  ["/dyson.MsgCreateScheduledRun", MsgCreateScheduledRun],
+  ["/dyson.MsgDeployAutonomousScript", MsgDeployAutonomousScript],
   ["/dyson.MsgDeleteScript", MsgDeleteScript],
+  ["/dyson.MsgDeleteStorage", MsgDeleteStorage],
+  ["/dyson.MsgCreateStorage", MsgCreateStorage],
+  ["/dyson.MsgUpdateStorage", MsgUpdateStorage],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -61,17 +59,16 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
-    msgCreateStorage: (data: MsgCreateStorage): EncodeObject => ({ typeUrl: "/dyson.MsgCreateStorage", value: MsgCreateStorage.fromPartial( data ) }),
-    msgCreateScript: (data: MsgCreateScript): EncodeObject => ({ typeUrl: "/dyson.MsgCreateScript", value: MsgCreateScript.fromPartial( data ) }),
+    msgUpdateScript: (data: MsgUpdateScript): EncodeObject => ({ typeUrl: "/dyson.MsgUpdateScript", value: MsgUpdateScript.fromPartial( data ) }),
     msgUpdateScheduledRun: (data: MsgUpdateScheduledRun): EncodeObject => ({ typeUrl: "/dyson.MsgUpdateScheduledRun", value: MsgUpdateScheduledRun.fromPartial( data ) }),
     msgDeleteScheduledRun: (data: MsgDeleteScheduledRun): EncodeObject => ({ typeUrl: "/dyson.MsgDeleteScheduledRun", value: MsgDeleteScheduledRun.fromPartial( data ) }),
-    msgDeleteStorage: (data: MsgDeleteStorage): EncodeObject => ({ typeUrl: "/dyson.MsgDeleteStorage", value: MsgDeleteStorage.fromPartial( data ) }),
-    msgCreateScheduledRun: (data: MsgCreateScheduledRun): EncodeObject => ({ typeUrl: "/dyson.MsgCreateScheduledRun", value: MsgCreateScheduledRun.fromPartial( data ) }),
-    msgBetterSubmitProposal: (data: MsgBetterSubmitProposal): EncodeObject => ({ typeUrl: "/dyson.MsgBetterSubmitProposal", value: MsgBetterSubmitProposal.fromPartial( data ) }),
-    msgUpdateStorage: (data: MsgUpdateStorage): EncodeObject => ({ typeUrl: "/dyson.MsgUpdateStorage", value: MsgUpdateStorage.fromPartial( data ) }),
     msgRun: (data: MsgRun): EncodeObject => ({ typeUrl: "/dyson.MsgRun", value: MsgRun.fromPartial( data ) }),
-    msgUpdateScript: (data: MsgUpdateScript): EncodeObject => ({ typeUrl: "/dyson.MsgUpdateScript", value: MsgUpdateScript.fromPartial( data ) }),
+    msgCreateScheduledRun: (data: MsgCreateScheduledRun): EncodeObject => ({ typeUrl: "/dyson.MsgCreateScheduledRun", value: MsgCreateScheduledRun.fromPartial( data ) }),
+    msgDeployAutonomousScript: (data: MsgDeployAutonomousScript): EncodeObject => ({ typeUrl: "/dyson.MsgDeployAutonomousScript", value: MsgDeployAutonomousScript.fromPartial( data ) }),
     msgDeleteScript: (data: MsgDeleteScript): EncodeObject => ({ typeUrl: "/dyson.MsgDeleteScript", value: MsgDeleteScript.fromPartial( data ) }),
+    msgDeleteStorage: (data: MsgDeleteStorage): EncodeObject => ({ typeUrl: "/dyson.MsgDeleteStorage", value: MsgDeleteStorage.fromPartial( data ) }),
+    msgCreateStorage: (data: MsgCreateStorage): EncodeObject => ({ typeUrl: "/dyson.MsgCreateStorage", value: MsgCreateStorage.fromPartial( data ) }),
+    msgUpdateStorage: (data: MsgUpdateStorage): EncodeObject => ({ typeUrl: "/dyson.MsgUpdateStorage", value: MsgUpdateStorage.fromPartial( data ) }),
     
   };
 };

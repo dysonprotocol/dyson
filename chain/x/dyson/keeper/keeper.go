@@ -21,6 +21,7 @@ import (
 	cosmosgovv1keeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
 	cosmosgroupv1keeper "github.com/cosmos/cosmos-sdk/x/group/keeper"
 	cosmosmintv1beta1keeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
+	cosmosparamsv1beta1keeper "github.com/cosmos/cosmos-sdk/x/params/keeper"
 	cosmosslashingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/slashing/keeper"
 	cosmosstakingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	cosmosupgradev1beta1keeper "github.com/cosmos/cosmos-sdk/x/upgrade/keeper"
@@ -56,6 +57,7 @@ type (
 		cosmosmintv1beta1keeper         cosmosmintv1beta1keeper.Keeper
 		cosmosupgradev1beta1keeper      cosmosupgradev1beta1keeper.Keeper
 		cosmoscrisisv1beta1keeper       cosmoscrisisv1beta1keeper.Keeper
+		cosmosparamsv1beta1keeper       cosmosparamsv1beta1keeper.Keeper
 
 		registry cdctypes.InterfaceRegistry
 
@@ -84,11 +86,10 @@ func NewKeeper(
 	cosmosmintv1beta1keeper cosmosmintv1beta1keeper.Keeper,
 	cosmosupgradev1beta1keeper cosmosupgradev1beta1keeper.Keeper,
 	cosmoscrisisv1beta1keeper cosmoscrisisv1beta1keeper.Keeper,
+	cosmosparamsv1beta1keeper cosmosparamsv1beta1keeper.Keeper,
 	registry cdctypes.InterfaceRegistry,
-
 ) *Keeper {
 	return &Keeper{
-
 		cdc:                             cdc,
 		storeKey:                        storeKey,
 		memKey:                          memKey,
@@ -110,6 +111,7 @@ func NewKeeper(
 		cosmosmintv1beta1keeper:         cosmosmintv1beta1keeper,
 		cosmosupgradev1beta1keeper:      cosmosupgradev1beta1keeper,
 		cosmoscrisisv1beta1keeper:       cosmoscrisisv1beta1keeper,
+		cosmosparamsv1beta1keeper:       cosmosparamsv1beta1keeper,
 		registry:                        registry,
 		currentDepth:                    0,
 	}
@@ -120,13 +122,12 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 }
 
 func (k Keeper) GetScheduledGasPriceAndFee(ctx sdk.Context, blockHeight uint64, gasWanted uint64) (count int, gasPrice sdk.DecCoin, gasFee sdk.Coin) {
-
 	prefix := fmt.Sprintf("%012/", blockHeight)
-	//total := 0
+	// total := 0
 	count = 1
 	for _, scheduledRun := range k.GetPrefixScheduledRun(ctx, prefix) {
 		_ = scheduledRun
-		//total += int(scheduledRun.Gas)
+		// total += int(scheduledRun.Gas)
 		count += 1
 	}
 	minGasPrices := sdk.NewDecCoins(sdk.NewDecCoinFromDec("dys", sdk.MustNewDecFromStr("0.01")))
@@ -189,7 +190,6 @@ func (k Keeper) RunScheduledScripts(ctx sdk.Context) {
 			defer func() {
 				if r := recover(); r != nil {
 					scheduledRun.Error = handleRecovery(r, cachedCtx)
-
 				}
 			}()
 
@@ -222,7 +222,6 @@ func (k Keeper) RunScheduledScripts(ctx sdk.Context) {
 		k.SetScheduledRun(ctx, scheduledRun)
 		k.Logger(ctx).Info(fmt.Sprintf("RunScheduledScripts %v: %v %+v", blockHeight, index, scheduledRun))
 	}
-
 }
 
 // DeductFees deducts fees from the given account.

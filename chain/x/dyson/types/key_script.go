@@ -27,6 +27,6 @@ func ScriptKey(
 }
 
 // CreateAccountBalancesPrefix creates the prefix for an account's balances.
-func CreateScriptStoragePrefix(addr []byte) []byte {
+func DeployAutonomousScriptStoragePrefix(addr []byte) []byte {
 	return append([]byte(ScriptKeyPrefix), address.MustLengthPrefix(addr)...)
 }

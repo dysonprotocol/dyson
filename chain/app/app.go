@@ -1,16 +1,15 @@
 package app
 
 import (
-	golog "log"
-	"time"
-
-	"github.com/getsentry/sentry-go"
-
 	"fmt"
 	"io"
+	golog "log"
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
+
+	"github.com/getsentry/sentry-go"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
@@ -260,10 +259,9 @@ func New(
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
 ) cosmoscmd.App {
-
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn: os.Getenv("GO_SENTRY_DSN"),
-		//Dsn: "https://2143a839f64b4bef9cd81e6a559a13e1@o1422051.ingest.sentry.io/6768385",
+		// Dsn: "https://2143a839f64b4bef9cd81e6a559a13e1@o1422051.ingest.sentry.io/6768385",
 		// Set TracesSampleRate to 1.0 to capture 100%
 		// of transactions for performance monitoring.
 		// We recommend adjusting this value in production,
@@ -524,15 +522,16 @@ func New(
 		app.MintKeeper,
 		app.UpgradeKeeper,
 		app.CrisisKeeper,
+		app.ParamsKeeper,
 		app.interfaceRegistry,
 	)
-	dysonModule := dysonmodule.NewAppModule(appCodec, app.DysonKeeper,)
+	dysonModule := dysonmodule.NewAppModule(appCodec, app.DysonKeeper)
 
 	/****  Module Options ****/
 
 	// NOTE: we may consider parsing `appOpts` inside module constructors. For the moment
 	// we prefer to be more strict in what arguments the modules expect.
-	var skipGenesisInvariants = cast.ToBool(appOpts.Get(crisis.FlagSkipGenesisInvariants))
+	skipGenesisInvariants := cast.ToBool(appOpts.Get(crisis.FlagSkipGenesisInvariants))
 
 	// NOTE: Any module instantiated in the module manager that is later modified
 	// must be passed by reference here.

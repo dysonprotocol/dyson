@@ -263,7 +263,7 @@ import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-html";
 import { useStore } from "vuex";
 import { debounce, set, get } from "lodash";
-import  lodash  from "lodash";
+import lodash from "lodash";
 import { JSONEditor } from "@json-editor/json-editor";
 //import dottie from "dottie";
 
@@ -307,7 +307,7 @@ class AnyEditor extends JSONEditor.defaults.editors.object {
       };
       $store.dispatch(command, data).then(
         (data) => {
-          this.editors.value.setValue(data.base64_value);
+          this.editors.value.setValue(data.value);
         },
         (er) => {
           editor.validation_results = [
@@ -609,15 +609,12 @@ result = await response.json()`;
                 //delete new_value.object_value;
                 //delete new_value.json_value;
                 processedTypes += `// See command: dyson/QueryEncodeProtoAny
-var {type_url, base64_value} = await dysonVueStore.dispatch("dyson/QueryEncodeProtoAny", {"query": {"type_url": ${JSON.stringify(
+                var ${new_var_name} = await dysonVueStore.dispatch("dyson/QueryEncodeProtoAny", {"query": {"type_url": ${JSON.stringify(
                   new_value?.type_url
                 )},"json_value": JSON.stringify(${
                   new_value?.json_value ||
                   JSON.stringify(new_value?.object_value)
-                })}})
-var ${new_var_name} = {type_url: type_url, value: base64_value}
-
-`;
+                })}})`;
               } else if (dysonLoaderTypeReplacements[path] == "date") {
                 processedTypes += `let ${new_var_name}=new Date(${JSON.stringify(
                   new_value,
@@ -636,8 +633,7 @@ var ${new_var_name} = {type_url: type_url, value: base64_value}
           });
       }
 
-      return prettier.format(
-        `/*
+      const code = `/*
 This is Experimental!
 
 Place this in the head tag
@@ -657,14 +653,18 @@ account = await dysonUseKeplr()
 ${processedTypes}
 const command = "${this.command || ""}"
 const data = ${JSON.stringify(data, null, 2)
-          .replaceAll('"XXX___', "")
-          .replaceAll('___XXX"', "")}
-await dysonVueStore.dispatch(command, data)`,
-        {
+        .replaceAll('"XXX___', "")
+        .replaceAll('___XXX"', "")}
+await dysonVueStore.dispatch(command, data)`;
+      try {
+        return prettier.format(code, {
           parser: "babel",
           plugins: [parserBabel],
-        }
-      );
+        });
+      } catch (e) {
+        console.error(e);
+        return code;
+      }
     },
     example: function () {
       let processedTypes = "";

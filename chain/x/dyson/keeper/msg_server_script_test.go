@@ -22,10 +22,10 @@ func TestScriptMsgServerCreate(t *testing.T) {
 	wctx := sdk.WrapSDKContext(ctx)
 	creator := "A"
 	for i := 0; i < 5; i++ {
-		expected := &types.MsgCreateScript{Creator: creator,
+		expected := &types.MsgDeployAutonomousScript{Creator: creator,
 			Index: strconv.Itoa(i),
 		}
-		_, err := srv.CreateScript(wctx, expected)
+		_, err := srv.DeployAutonomousScript(wctx, expected)
 		require.NoError(t, err)
 		rst, found := k.GetScript(ctx,
 			expected.Index,
@@ -68,10 +68,10 @@ func TestScriptMsgServerUpdate(t *testing.T) {
 			k, ctx := keepertest.DysonKeeper(t)
 			srv := keeper.NewMsgServerImpl(*k)
 			wctx := sdk.WrapSDKContext(ctx)
-			expected := &types.MsgCreateScript{Creator: creator,
+			expected := &types.MsgDeployAutonomousScript{Creator: creator,
 				Index: strconv.Itoa(0),
 			}
-			_, err := srv.CreateScript(wctx, expected)
+			_, err := srv.DeployAutonomousScript(wctx, expected)
 			require.NoError(t, err)
 
 			_, err = srv.UpdateScript(wctx, tc.request)
@@ -123,7 +123,7 @@ func TestScriptMsgServerDelete(t *testing.T) {
 			srv := keeper.NewMsgServerImpl(*k)
 			wctx := sdk.WrapSDKContext(ctx)
 
-			_, err := srv.CreateScript(wctx, &types.MsgCreateScript{Creator: creator,
+			_, err := srv.DeployAutonomousScript(wctx, &types.MsgDeployAutonomousScript{Creator: creator,
 				Index: strconv.Itoa(0),
 			})
 			require.NoError(t, err)

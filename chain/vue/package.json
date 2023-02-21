@@ -17,6 +17,8 @@
     "vue": "^3.2.6",
     "vue-router": "^4.0.3",
     "vue3-ace-editor": "^2.2.1",
+    "@babel/parser": "^7.12.7",
+    "prettier": "2.7.1",
     "vuex": "^4.0.2"
   },
   "description": "A Vue 3 boilerplate project utilizing @starport/vue and @starport/vuex",
@@ -37,7 +39,6 @@
     "eslint-plugin-vue": "^9.4.0",
     "jquery": "^3.6.1",
     "popper.js": "^1.16.1",
-    "prettier": "2.7.1",
     "sass": "^1.47.0",
     "typescript": "^4.7.4",
     "vite": "^2.7.6",

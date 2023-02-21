@@ -11,7 +11,7 @@ import (
 	"github.com/org/dyson/x/dyson/types"
 )
 
-func CmdCreateScript() *cobra.Command {
+func CmdDeployAutonomousScript() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "create-script [code]",
 		Short: "Create a new script",
@@ -27,7 +27,7 @@ func CmdCreateScript() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgCreateScript(clientCtx.GetFromAddress().String(), argsCode)
+			msg := types.NewMsgDeployAutonomousScript(clientCtx.GetFromAddress().String(), argsCode)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}

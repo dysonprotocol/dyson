@@ -8,21 +8,21 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMsgCreateScript_ValidateBasic(t *testing.T) {
+func TestMsgDeployAutonomousScript_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgCreateScript
+		msg  MsgDeployAutonomousScript
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgCreateScript{
+			msg: MsgDeployAutonomousScript{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgCreateScript{
+			msg: MsgDeployAutonomousScript{
 				Creator: sample.AccAddress(),
 			},
 		},
