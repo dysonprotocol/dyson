@@ -207,6 +207,10 @@
     "definition": "(self)",
     "docstring": "Return the date part."
   },
+  "datetime.datetime.fromisoformat": {
+    "definition": "(date_string)",
+    "docstring": "Construct a datetime from the output of datetime.isoformat()."
+  },
   "datetime.datetime.isoformat": {
     "definition": "(self, sep='T', timespec='auto')",
     "docstring": "Return the time formatted according to ISO.\n\nThe full format looks like 'YYYY-MM-DD HH:MM:SS.mmmmmm'.\nBy default, the fractional part is omitted if self.microsecond == 0.\n\nIf self.tzinfo is not None, the UTC offset is also attached, giving\ngiving a full format of 'YYYY-MM-DD HH:MM:SS.mmmmmm+HH:MM'.\n\nOptional argument sep specifies the separator between date and\ntime, default 'T'.\n\nThe optional argument timespec specifies the number of additional\nterms of the time to include. Valid options are 'auto', 'hours',\n'minutes', 'seconds', 'milliseconds' and 'microseconds'."
