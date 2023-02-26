@@ -11,9 +11,9 @@ h3 {
 </style>
 <template>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <div class="card mb-4 mt-3">
+    <div class="row mb-3">
+      <div class="col-lg">
+        <div class="card">
           <h4 class="card-header">Step 1: Select a command</h4>
           <div class="card-body">
             <p class="">
@@ -71,7 +71,7 @@ h3 {
     </div>
 
     <div class="row">
-      <div class="col-lg">
+      <div class="col-lg-6">
         <div class="card mb-4">
           <h4 class="card-header">Step 2: Run the command</h4>
           <div class="card-body">
@@ -80,7 +80,7 @@ h3 {
               response.
             </p>
             <div id="editor"></div>
-            <form v-on:submit="submit" class="">
+            <form v-on:submit="submit" class="mb-3">
               <div class="form-group">
                 <div class="row mb-3" v-if="showFee">
                   <div class="col">
@@ -102,32 +102,33 @@ h3 {
                   </div>
                 </div>
                 <a class="btn btn-link" :href="link">Link</a>
-                <button
-                  v-if="inflight"
-                  class="btn btn-primary btn-lg btn-block"
-                  type="button"
-                  disabled
-                >
-                  <span
-                    class="spinner-border spinner-border-sm"
-                    role="status"
-                    aria-hidden="true"
-                  ></span>
-                  Loading...
-                </button>
-                <button
-                  v-else
-                  name="action"
-                  :disabled="disabled"
-                  type="submit"
-                  value="run"
-                  class="btn btn-primary btn-lg btn-block"
-                >
-                  {{ buttontxt }}
-                </button>
+                <div class="d-grid gap-2">
+                  <button
+                    v-if="inflight"
+                    class="btn btn-primary btn-lg d-grid gap-2"
+                    type="button"
+                    disabled
+                  >
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Loading...
+                  </button>
+                  <button
+                    v-else
+                    name="action"
+                    :disabled="disabled"
+                    type="submit"
+                    value="run"
+                    class="btn btn-primary btn-lg btn-block"
+                  >
+                    {{ buttontxt }}
+                  </button>
+                </div>
               </div>
             </form>
-
             <div v-if="error" class="alert alert-warning">{{ error }}</div>
             <div id="responseEditor"></div>
           </div>
@@ -146,80 +147,35 @@ h3 {
                 automatically by the chain. It is not downloadable or
                 installable by pip.
               </p>
-
+              <p>
+                Copy this code to the REPL section of your script to query or
+                make a transaction.
+              </p>
               <VAceEditor
                 v-model:value="example"
                 lang="python"
-                theme="chrome"
+                :theme="aceTheme"
+                :key="aceTheme"
                 :min-lines="10"
                 :max-lines="200"
                 :readonly="true"
               />
-              <p>
-                Clicking "Query Script" here will make a read-only query in the
-                context of the script specified, and return the output of the
-                <code>_chain</code> function.
-              </p>
-              <div class="mt-2">
-                <div
-                  v-if="queryExampleScriptError"
-                  class="alert alert-danger"
-                  role="alert"
-                >
-                  {{ queryExampleScriptError }}
-                </div>
-                <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Script Address"
-                    aria-label="Script Address"
-                    v-model="queryExampleAddress"
-                  />
-                  <div class="input-group-append" id="button-addon4">
-                    <button
-                      @click="queryExampleScript"
-                      class="btn btn-primary"
-                      :disabled="inFlight"
-                    >
-                      Query Script
-                    </button>
-                  </div>
-                </div>
-
-                <pre v-if="queryExampleScriptResult" class="m-2">{{
-                  queryExampleScriptResult
-                }}</pre>
-                <pre v-if="queryExampleScriptException" class="m-2">{{
-                  queryExampleScriptException
-                }}</pre>
-              </div>
             </div>
             <div class="list-group-item">
               <h5>Plain Javascript Usage</h5>
               <p class="">
                 This is the simplest way to read from the REST API.
+                <a target="blank" :href="fetchUrl">API Link ↗</a>
               </p>
               <VAceEditor
                 v-model:value="fetchExample"
                 lang="javascript"
-                theme="chrome"
+                :theme="aceTheme"
+                :key="aceTheme"
                 :min-lines="5"
                 :max-lines="200"
                 :readonly="true"
               />
-              <div class="mt-2">
-                <div class="btn-group" role="group">
-                  <button
-                    @click="queryFetchExample"
-                    class="btn btn-primary"
-                    :disabled="inFlight || !fetchUrl"
-                  >
-                    Run Javascript
-                  </button>
-                </div>
-                <pre class="m-2">{{ queryFetchExampleResult }}</pre>
-              </div>
             </div>
             <div class="list-group-item">
               <h5>DysonLoader Usage</h5>
@@ -235,14 +191,12 @@ h3 {
               <VAceEditor
                 v-model:value="vueExample"
                 lang="javascript"
-                theme="chrome"
+                :theme="aceTheme"
+                :key="aceTheme"
                 :min-lines="10"
                 :max-lines="200"
                 :readonly="true"
               />
-              <p class="mt-2">
-                To test <code>DysonLoader</code>, run the form in Step 2.
-              </p>
             </div>
           </div>
         </div>
@@ -256,11 +210,11 @@ import { VAceEditor } from "vue3-ace-editor";
 import parserBabel from "prettier/parser-babel";
 import prettier from "prettier/standalone";
 
+import "ace-builds/src-noconflict/theme-vibrant_ink";
 import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/mode-python";
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-html";
+
 import { useStore } from "vuex";
 import { debounce, set, get } from "lodash";
 import lodash from "lodash";
@@ -457,6 +411,11 @@ const pythonify = (obj) => {
 };
 
 window.pythonify = pythonify;
+window.ace.config.set("basePath", ".");
+import workerJsonUrl from 'ace-builds/src-noconflict/worker-json?url'; // For vite
+
+ace.config.setModuleUrl('ace/mode/json_worker', workerJsonUrl);
+
 
 function deepen(obj) {
   const result = {};
@@ -484,7 +443,7 @@ export default {
   data: function () {
     return {
       tx: [],
-
+      colorMode: localStorage.getItem("colorMode"),
       query: [],
       rest_path: "",
       inflight: false,
@@ -510,6 +469,7 @@ export default {
     };
   },
   watch: {
+    colorMode: function (newVal, oldVal) {},
     data: function (val, oldVal) {},
     address: function (val, oldVal) {
       this.queryExampleAddress = val;
@@ -517,6 +477,7 @@ export default {
     "$route.query": {
       handler: function (val, oldVal) {
         //console.log("watch command:", val, oldVal);
+        this.queryExampleAddress = this.queryExampleAddress || this.address;
         this.command = "";
         if (command_schema[val.command]) {
           this.command = val.command;
@@ -548,6 +509,13 @@ export default {
     },
   },
   computed: {
+    aceTheme: function () {
+      if (this.colorMode == "dark") {
+        return "vibrant_ink";
+      } else {
+        return "chrome";
+      }
+    },
     fetchExample: function () {
       const path = command_schema[this.command]?.rest_path || "";
       if (!path) {
@@ -634,7 +602,6 @@ result = await response.json()`;
       }
 
       const code = `/*
-This is Experimental!
 
 Place this in the head tag
 <script src=\"\/_\/dyson.js\"><\/script>
@@ -648,14 +615,14 @@ if the frontend is read only.
 await DysonLoader()
 
 // Connect to Keplr to sign transactions
-account = await dysonUseKeplr()
+const account = await dysonUseKeplr()
 
 ${processedTypes}
 const command = "${this.command || ""}"
 const data = ${JSON.stringify(data, null, 2)
         .replaceAll('"XXX___', "")
         .replaceAll('___XXX"', "")}
-await dysonVueStore.dispatch(command, data)`;
+let result = await dysonVueStore.dispatch(command, data)`;
       try {
         return prettier.format(code, {
           parser: "babel",
@@ -774,6 +741,23 @@ _chain(
     },
   },
   methods: {
+    colorModeChangeCallback(event) {
+      console.log("colorModeChanged ExtraLines", event);
+      if (event) {
+        this.colorMode = event.detail.colorMode;
+      }
+      for (let ed in this.editor?.editors) {
+        this.editor.editors[ed].ace_editor_instance?.setTheme(
+          "ace/theme/" + this.aceTheme
+        );
+      }
+      for (let ed in this.responseEditor?.editors) {
+        this.responseEditor.editors[ed].ace_editor_instance?.setTheme(
+          "ace/theme/" + this.aceTheme
+        );
+      }
+      // loop over ace editors and update the theme
+    },
     queryFetchExample: async function () {
       this.inFlight = true;
       this.queryFetchExampleResult = "// loading...";
@@ -900,6 +884,7 @@ _chain(
           show_errors: "always",
           //object_layout: "table",
         });
+        this.editor.theme.options.object_background = "";
         this.editor.on("change", this.editorChanged);
         this.editor.on("ready", () => {
           this.updateEditorFromQuery();
@@ -965,7 +950,7 @@ _chain(
           disable_array_reorder: true,
           no_additional_properties: false,
           show_opt_in: false,
-          theme: "bootstrap4",
+          theme: "bootstrap5",
         });
         this.responseEditor.on("ready", () => {
           this.responseEditor.disable();
@@ -983,7 +968,15 @@ _chain(
     VAceEditor,
   },
 
+  unmounted: function () {
+    window.removeEventListener(
+      "colorModeChanged",
+      this.colorModeChangeCallback
+    );
+  },
   mounted: function () {
+    window.addEventListener("colorModeChanged", this.colorModeChangeCallback);
+    JSONEditor.defaults.options.ace = { theme: "ace/theme/" + this.aceTheme };
     //console.log("mounted");
     this.tx = Object.keys(this.$store["_actions"]).filter((key) =>
       key.match("sendMsg")

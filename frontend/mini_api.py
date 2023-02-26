@@ -33,12 +33,12 @@ INSTALLED_APPS = (
 MIDDLEWARE = (
     "django_hosts.middleware.HostsRequestMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.middleware.http.ConditionalGetMiddleware",
     "django.middleware.common.CommonMiddleware",  # should be after func_urls_middleware so APPEND_SLASH works
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_hosts.middleware.HostsResponseMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
 )
 TEMPLATES = [
     {
@@ -77,6 +77,11 @@ STATICFILES_DIRS = [
     join(BASE_DIR, "vue/static"),
     join(BASE_DIR, "static"),
 ]
+STATICFILES_FINDERS =[
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 CLEAR_DOMAIN = os.environ.get("CLEAR_DOMAIN", "localhost:8000")
 DYS_DOMAIN = os.environ.get("DYS_DOMAIN") or "dys." + CLEAR_DOMAIN
 
@@ -188,7 +193,7 @@ def dys_js_tags(request, js_asset=None):
     return render(
         request,
         "loader.js",
-        {"script_paths": [settings.STATIC_URL + a for a in js_assets]},
+        {"script_paths": [request.build_absolute_uri(settings.STATIC_URL) + a for a in js_assets]},
         content_type="application/javascript",
     )
 

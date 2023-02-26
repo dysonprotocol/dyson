@@ -2,10 +2,35 @@
 pre {
   white-space: pre-wrap;
 }
+.main-content {
+  padding-bottom: 10rem;
+}
 </style>
 
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid main-content">
+    <div class="row mb-3">
+      <div id="" class="col">
+        <div class="">
+          Script address:
+
+          <router-link
+            :to="{
+              name: 'script-detail',
+              params: { scriptAddress: scriptAddress },
+            }"
+            >{{ scriptAddress }}
+          </router-link>
+          <a
+            target="blank"
+            class="btn btn-link btn-sm"
+            :href="'https://' + scriptAddress + '.' + clearDomain"
+          >
+            View dwapp ↗
+          </a>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div id="schemas" class="col-md-6">
         <div v-if="schemas && schemas.error">Error: {{ schemas.error }}</div>
@@ -14,7 +39,7 @@ pre {
             v-if="item.schema"
             v-bind:schema="item.schema"
             v-bind:name="item.function"
-            v-bind:scriptAddress="this.$route.params.script_address"
+            v-bind:scriptAddress="this.scriptAddress"
           />
           <div v-if="item.error" class="card mb-5">
             <div class="card-body">
@@ -24,54 +49,117 @@ pre {
           </div>
         </div>
         <ExtraLines
-          v-if="this.address == this.$route.params.script_address"
-          v-bind:scriptAddress="this.$route.params.script_address"
+          v-if="this.address && this.address === this.scriptAddress"
+          v-bind:scriptAddress="this.scriptAddress"
         ></ExtraLines>
       </div>
       <div id="code" class="col-md-6">
         <div class="mb-3">
           <VAceEditor
             v-model:value="code"
-            lang="python"
-            theme="chrome"
+            :lang="lang"
+            :theme="aceTheme"
             :min-lines="30"
             :max-lines="500"
             :readonly="disabled"
+            :key="aceTheme"
+            :options="options"
           />
+        </div>
+        <div>
+          Edit Mode:
+          <input
+            :id="scriptAddress + 'pythonLang'"
+            type="radio"
+            class="btn-check"
+            v-model="lang"
+            value="python"
+          />
+          <label
+            class="btn btn-outline-secondary btn-sm"
+            :for="scriptAddress + 'pythonLang'"
+          >
+            Python
+          </label>
 
-          <button
-            @click="save"
-            :disabled="disabled"
-            class="btn-primary btn btn-lg"
-          >
-            save
-            <span
-              v-if="inFlight"
-              class="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-            ></span>
-          </button>
-          <span v-if="unsavedChanges" class="m-5" role="alert"
-            >unsaved changes</span
+          <input
+            :id="scriptAddress + 'htmlLang'"
+            type="radio"
+            class="btn-check"
+            v-model="lang"
+            value="html"
+          />
+          <label
+            class="btn btn-outline-secondary btn-sm"
+            :for="scriptAddress + 'htmlLang'"
+            >HTML</label
           >
         </div>
-        <div v-if="error" class="alert alert-warning">
-          {{ error }}
-        </div>
-        <div
-          v-if="txResult"
-          class="alert"
-          :class="{ 'alert-primary': txSuccess, 'alert-warning': !txSuccess }"
+      </div>
+    </div>
+  </div>
+
+  <div v-if="unsavedChanges" class="row fixed-bottom">
+    <div class="col-6">
+      <div class="alert alert-light" role="alert">
+        Attention: you have unsaved changes to your script!
+        <button
+          @click="save"
+          :disabled="disabled"
+          class="btn-primary btn btn-sm float-right"
         >
-          <pre>
-TX hash: {{ txResult.transactionHash }}
-Height: {{ txResult.height }}
-Gas Used: {{ txResult.gasUsed }}
-Gas Wanted: {{ txResult.gasWanted }}
-Raw Log: {{ txResult.rawLog }}</pre
-          >
-        </div>
+          Save now...
+          <span
+            v-if="inFlight"
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 3000">
+    <div
+      v-if="error"
+      class="toast show"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="toast-header">
+        <strong class="me-auto">Error</strong>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="toast"
+          aria-label="Close"
+          @click="error = null"
+        ></button>
+      </div>
+      <div class="toast-body text-danger">
+        {{ error }}
+      </div>
+    </div>
+    <div
+      v-if="txResult"
+      class="toast show"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="toast-header">
+        <strong class="me-auto">Success</strong>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="toast"
+          aria-label="Close"
+          @click="txResult = null"
+        ></button>
+      </div>
+      <div class="toast-body text-success">
+        TX Hash: {{ txResult.transactionHash }}
       </div>
     </div>
   </div>
@@ -82,18 +170,46 @@ import FunctionDetail from "./FunctionDetail.vue";
 import ExtraLines from "./ExtraLines.vue";
 import { VAceEditor } from "vue3-ace-editor";
 import "ace-builds/src-noconflict/theme-chrome";
+import "ace-builds/src-noconflict/theme-vibrant_ink";
 import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/mode-html";
 
+/*
+let colorMode = ref(localStorage.getItem("colorMode") || "light");
+let colorModeChangeCallback = (event) => {
+  console.log("colorModeChanged", event);
+  colorMode.value = event.detail.colorMode;
+};
+onMounted(() => {
+  window.addEventListener("colorModeChanged", colorModeChangeCallback);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("colorModeChanged", colorModeChangeCallback);
+});
+*/
 export default {
   name: "ScriptDetail",
+  props: ["scriptAddress"],
+  mounted: function () {
+    window.addEventListener("colorModeChanged", this.colorModeChangeCallback);
+  },
+  unmounted: function () {
+    window.removeEventListener(
+      "colorModeChanged",
+      this.colorModeChangeCallback
+    );
+  },
   data: function () {
     return {
-      scriptAddress: null,
       inFlight: false,
       txResult: null,
       editedCode: null,
       error: null,
       gas: 200000,
+      clearDomain: import.meta.env.VITE_CLEAR_DOMAIN,
+      colorMode: localStorage.getItem("colorMode"),
+      lang: "python",
     };
   },
   components: {
@@ -107,6 +223,10 @@ export default {
     },
   },
   methods: {
+    colorModeChangeCallback(event) {
+      console.log("colorModeChanged", event);
+      this.colorMode = event.detail.colorMode;
+    },
     async save(e) {
       this.inFlight = true;
       this.txResult = null;
@@ -148,22 +268,41 @@ export default {
       }
     },
     async update() {
-      this.scriptAddress = this.$route.params.script_address;
+      console.log("query script", this.scriptAddress);
       this.$store
         .dispatch("dyson/QueryScript", {
-          query: { index: this.$route.params.script_address },
+          query: { index: this.scriptAddress },
           options: { subscribe: false, all: false },
         })
         .then(() => {
           this.editedCode = null;
         });
       this.$store.dispatch("dyson/QuerySchema", {
-        query: { index: this.$route.params.script_address },
+        query: { index: this.scriptAddress },
         options: { subscribe: false, all: false },
       });
     },
   },
   computed: {
+    aceTheme: function () {
+      if (this.colorMode == "dark") {
+        return "vibrant_ink";
+      } else {
+        return "chrome";
+      }
+    },
+    options: function () {
+      if (this.lang == "python") {
+        console.log("python options");
+        return { useSoftTabs: true, tabSize: 4, navigateWithinSoftTabs: false };
+      } else {
+        console.log("html options");
+        return { useSoftTabs: true, tabSize: 2, navigateWithinSoftTabs: true };
+      }
+    },
+    scriptWSGILink: function () {
+      let chainId = this.$store.getters["common/env/chainId"];
+    },
     txSuccess: function () {
       return this.txResult.rawLog.includes("UpdateScript");
     },
@@ -171,10 +310,12 @@ export default {
       return this.$store.getters["common/wallet/address"];
     },
     disabled: function () {
-      return this.inFlight || this.address != this.$route.params.script_address;
+      return (
+        this.inFlight || !this.address || this.address != this.scriptAddress
+      );
     },
     unsavedChanges: function () {
-      return this.script?.code != this.code;
+      return this.address && (this.script?.code || "") != this.code;
     },
     code: {
       get() {
@@ -191,7 +332,7 @@ export default {
     schemas: function () {
       const result = this.$store.getters["dyson/getSchema"]({
         params: {},
-        query: { index: this.$route.params.script_address },
+        query: { index: this.scriptAddress },
       });
 
       const schemas = result.schema ? JSON.parse(result.schema) : [];
@@ -205,7 +346,7 @@ export default {
     script: function () {
       const result = this.$store.getters["dyson/getScript"]({
         params: {},
-        query: { index: this.$route.params.script_address },
+        query: { index: this.scriptAddress },
       });
       return result ? result.script : {};
     },

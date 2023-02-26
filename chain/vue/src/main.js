@@ -19,26 +19,35 @@ import "./app.scss";
 
 window.dysonVueStore = store;
 
-const app = createApp(App);
+window.setupApp = () => {
+  if (!localStorage.getItem("colorMode")) {
+    localStorage.setItem("colorMode", "light");
+  }
+  document
+    .getElementsByTagName("body")[0]
+    .setAttribute("data-bs-theme", localStorage.getItem("colorMode"));
 
-Sentry.init({
-  app,
-  dsn: import.meta.env.VITE_SENTRY_DSN,
-  //dsn: "https://cfb6942ed4c54513a8af3bbec366acb8@o1422051.ingest.sentry.io/6768386",
-  integrations: [
-    new BrowserTracing({
-      routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-      tracingOrigins: ["localhost", /^\//],
-    }),
-  ],
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
-  logErrors: true,
-});
+  const app = createApp(App);
 
-app.use(store).use(router).use(starportLibrary).mount("#dysapp");
+  app.use(store).use(router).use(starportLibrary).mount("#dysapp");
+
+  Sentry.init({
+    app,
+    dsn: import.meta.env.VITE_SENTRY_DSN,
+    //dsn: "https://cfb6942ed4c54513a8af3bbec366acb8@o1422051.ingest.sentry.io/6768386",
+    integrations: [
+      new BrowserTracing({
+        routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+        tracingOrigins: ["localhost", /^\//],
+      }),
+    ],
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0,
+    logErrors: true,
+  });
+};
 
 window.dysonUseKeplr = (onAccountChange) => {
   return new Promise((resolve, reject) => {
@@ -51,7 +60,10 @@ window.dysonUseKeplr = (onAccountChange) => {
     let chainId = store.getters["common/env/chainId"];
 
     let onKeplrConnect = async () => {
-      await store.dispatch("common/wallet/connectWithKeplr", k.getOfflineSigner(chainId))
+      await store.dispatch(
+        "common/wallet/connectWithKeplr",
+        k.getOfflineSigner(chainId)
+      );
       let keplrParams = await k.getKeplrAccParams(chainId);
       if (onAccountChange) {
         onAccountChange(keplrParams);
@@ -69,4 +81,3 @@ window.dysonUseKeplr = (onAccountChange) => {
     k.connectToKeplr(onKeplrConnect, onKeplrError);
   });
 };
-

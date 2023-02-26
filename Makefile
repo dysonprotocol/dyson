@@ -12,13 +12,14 @@ gen:
 		#docker run --rm -v chain:/workspace --workdir /workspace tendermintdev/sdk-proto-gen:master sh scripts/protocgen.sh
 		docker-compose --env .env run --rm chain make vuex
 		docker-compose --env .env run --rm chain make gen_rpc
-		docker-compose --env .env run --rm vue make build
 
 run:
 		docker-compose --env .env up chain frontend
 
 build: 
 		#docker-compose --env .env build pypy hermes
+		rm -rf ./frontend/vue && mkdir -p ./frontend/vue 
+		docker-compose --env .env run --rm vue make build
 		docker-compose --env .env build chain
 		docker-compose --env .env build frontend
 

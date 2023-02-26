@@ -17,8 +17,12 @@ chain_build:
     - cp .env.sample .env
   script:
     - echo "USER=$USER UID=$UID GID=$GID"
-    - export TAG="$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA" ; make write-commit-info && make build && docker-compose push chain frontend 
-    - export TAG="$CI_COMMIT_REF_NAME" ; make build && docker-compose push chain frontend pypy hermes
+    - export TAG="$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA" ; make write-commit-info && make build && docker compose push chain frontend 
+    - export TAG="$CI_COMMIT_REF_NAME" ; make build && docker compose push chain frontend pypy hermes
+  after_script:
+    - export TAG="$CI_COMMIT_REF_NAME" ; docker rmi -f $(docker image ls registry.gitlab.com/dysonproject/dyson/frontend:$TAG -q)
+    - export TAG="$CI_COMMIT_REF_NAME" ; docker rmi -f $(docker image ls registry.gitlab.com/dysonproject/dyson/chain:$TAG -q)
+    - export TAG="$CI_COMMIT_REF_NAME" ; docker rmi -f $(docker image ls registry.gitlab.com/dysonproject/dyson/vue:$TAG -q)
 
 variables:
       GIT_SUBMODULE_STRATEGY: recursive

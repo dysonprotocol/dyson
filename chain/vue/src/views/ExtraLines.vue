@@ -1,18 +1,22 @@
 <template>
   <div
-    class="card mt-3"
+    class="card"
     :class="{
       'border-danger': queryResponse?.exception || runResponse?.exception,
     }"
   >
     <div class="card-body">
       <form v-on:submit="submit" class="">
-        <h3>Raw Code</h3>
-        <p>This code is run after the script but not saved to the script.</p>
+        <h3>REPL</h3>
+        <p>
+          This code is run after the script but not saved to the script. This is
+          only available to you.
+        </p>
         <VAceEditor
           v-model:value="extra_lines"
           lang="python"
-          theme="chrome"
+          :theme="aceTheme"
+          :key="aceTheme"
           :min-lines="3"
           :max-lines="20"
           :readonly="inflight"
@@ -33,7 +37,7 @@
         <div class="btn-group" role="group" aria-label="">
           <button
             name="action"
-            :disabled="this.inflight"
+            :disabled="!address || this.inflight"
             type="submit"
             value="query"
             class="btn btn-secondary"
@@ -47,7 +51,7 @@
             value="run"
             class="btn btn-primary"
           >
-            Run Extra Lines
+            Run Extra Lines...
             {{ (!address && "[connect wallet]") || "" }}
           </button>
         </div>
@@ -122,6 +126,9 @@
 </template>
 <script>
 import { VAceEditor } from "vue3-ace-editor";
+import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/theme-chrome";
+import "ace-builds/src-noconflict/theme-vibrant_ink";
 
 export default {
   name: "ExtraLines",
@@ -130,6 +137,15 @@ export default {
   },
   components: {
     VAceEditor,
+  },
+  mounted: function () {
+    window.addEventListener("colorModeChanged", this.colorModeChangeCallback);
+  },
+  unmounted: function () {
+    window.removeEventListener(
+      "colorModeChanged",
+      this.colorModeChangeCallback
+    );
   },
   data: function () {
     return {
@@ -144,14 +160,27 @@ export default {
       link: "",
       inflight: false,
       gas: 123000,
+      colorMode: localStorage.getItem("colorMode"),
     };
   },
   computed: {
+    aceTheme: function () {
+      if (this.colorMode == "dark") {
+        return "vibrant_ink";
+      } else {
+        return "chrome";
+      }
+    },
     address: function () {
       return this.$store.getters["common/wallet/address"];
     },
   },
   methods: {
+    colorModeChangeCallback(event) {
+      console.log("colorModeChanged ExtraLines", event);
+      this.colorMode = event.detail.colorMode;
+
+    },
     submit: async function (e) {
       e.preventDefault();
       console.log(e.submitter.value);
@@ -236,8 +265,6 @@ export default {
       }
     },
   },
-  watch: {},
-  mounted: function () {},
 };
 </script>
 

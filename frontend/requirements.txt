@@ -1,4 +1,4 @@
-whitenoise
+whitenoise[brotli]
 dnspython
 uwsgi
 appnope==0.1.2

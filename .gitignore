@@ -5,6 +5,7 @@ swag-conf/dns-conf/*
 
 .env.local
 frontend/static_root/*
+frontend/vue
 
 __pycache__/
 chain_home/**

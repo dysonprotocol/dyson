@@ -257,8 +257,7 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 	valFound, isFound := k.GetScript(ctx, scriptCtx.Index)
 
 	if !isFound {
-		acc, err := sdk.AccAddressFromBech32(scriptCtx.Sender)
-		if err == nil && scriptCtx.Index == scriptCtx.Sender && k.accountKeeper.HasAccount(ctx, acc) {
+		if scriptCtx.Index == scriptCtx.Sender {
 			k.SetScript(ctx, types.Script{
 				Index:   scriptCtx.Sender,
 				Creator: scriptCtx.Sender,
@@ -270,9 +269,6 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 				fmt.Println(fmt.Sprintf("Script at address really %v not set", scriptCtx.Index))
 				return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("Script at address really %v not set", scriptCtx.Index))
 			}
-		} else {
-			fmt.Println(fmt.Sprintf("Script not found: %v", scriptCtx.Index))
-			return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("Script not found: %v", scriptCtx.Index))
 		}
 	}
 	if scriptCtx.Sender != valFound.Index {

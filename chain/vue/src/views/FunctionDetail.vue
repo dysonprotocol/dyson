@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card mt-3"
+    class="card mb-3"
     :class="{
       'border-danger': queryResponse?.exception || runResponse?.exception,
     }"
@@ -41,11 +41,11 @@
             value="run"
             class="btn btn-primary"
           >
-            Run {{ name }}
+            Run {{ name }}...
             {{ (!address && "[connect wallet]") || "" }}
           </button>
         </div>
-          <a class="btn btn-link" :href="link">Link</a>
+        <a class="btn btn-link" :href="link">Link</a>
       </form>
       <div v-if="runResponse">
         <ul class="list-group list-group-flush">
@@ -73,7 +73,7 @@
             }}</pre>
           </li>
           <li class="list-group-item">
-            Stdout:
+            Logs:
             <pre>{{ runResponse.stdout }}</pre>
           </li>
         </ul>
@@ -265,8 +265,9 @@ export default {
         schema: this.schema,
         disable_collapse: true,
         show_opt_in: true,
-        theme: "bootstrap4",
+        theme: "bootstrap5",
       });
+      this.editor.theme.options.object_background = "";
       window[this.name + "editor"] = this.editor;
       window.router = this.$router;
       window.route = this.$route;

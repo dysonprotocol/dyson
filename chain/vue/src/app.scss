@@ -1,4 +1,49 @@
 $font-size-base: 1rem;
-$enable-responsive-font-sizes: true;
+
+@import "../node_modules/bootstrap/scss/functions";
+
+/* You can override the default Infima variables here. */
+/*
+:root {
+  --ifm-color-primary: #008000;
+  --ifm-color-primary-dark: #007300;
+  --ifm-color-primary-darker: #006d00;
+  --ifm-color-primary-darkest: #005a00;
+  --ifm-color-primary-light: #008d00;
+  --ifm-color-primary-lighter: #009300;
+  --ifm-color-primary-lightest: #00a600;
+}*/
+
+$primary: #008000;
+$body-color-dark: #e3e3e3;
+$body-bg-dark: #1b1b1d;
+$enable-shadows: true;
+//$enable-rounded: false;
+//$enable-gradients: true;
+
+@import "./styles/variables";
+@import "./styles/variables-dark";
+
 @import "../node_modules/bootstrap/scss/bootstrap";
 
+.navbar {
+  //--bs-emphasis-color-rgb: #{$primary};
+  --bs-navbar-active-color: #{$primary};
+}
+
+.navbar-nav .sp-button {
+  float: initial;
+}
+.sp-button {
+  @extend .btn;
+}
+.sp-button-primary {
+  @extend .btn-primary;
+}
+.sp-button-secondary {
+  @extend .btn-secondary;
+}
+
+.animate-spin {
+  .animation: 1s linear infinite spinner-border;
+}

@@ -1,10 +1,15 @@
 SHELL := /bin/bash
 
+
 install:
-	npm ci --install-links
+	echo $$UID
+	pwd
+	ls -la .
+	npm ci --install-links 
 
 build: install 
-	npm run build
+	npm run build ; exitCode=$$? ;  chmod -R a+rwX /app/dist ; exit "$$exitCode"
+
 
 dev: install
 	npm run dev

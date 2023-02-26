@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" type="image/png" href="/dys.png" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -27,9 +28,11 @@
       src="https://cdn.ravenjs.com/3.22.2/raven.min.js"
       crossorigin="anonymous"
     ></script>
+    <script>
+    </script>
   </head>
 
-  <body class="bootstrap">
+  <body class="bootstrap" onload="setupApp()">
     <div id="dysapp"></div>
     <script>
       // Fix for global not defined in prod xor dev
