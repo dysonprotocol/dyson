@@ -22,7 +22,6 @@ chain_build:
   after_script:
     - export TAG="$CI_COMMIT_REF_NAME" ; docker rmi -f $(docker image ls registry.gitlab.com/dysonproject/dyson/frontend:$TAG -q)
     - export TAG="$CI_COMMIT_REF_NAME" ; docker rmi -f $(docker image ls registry.gitlab.com/dysonproject/dyson/chain:$TAG -q)
-    - export TAG="$CI_COMMIT_REF_NAME" ; docker rmi -f $(docker image ls registry.gitlab.com/dysonproject/dyson/vue:$TAG -q)
 
 variables:
       GIT_SUBMODULE_STRATEGY: recursive
