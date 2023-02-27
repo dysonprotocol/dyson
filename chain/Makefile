@@ -1,7 +1,7 @@
 SHELL:=/bin/bash
 
 build:
-	ignite chain build -v 
+	ignite chain build -v --skip-proto
 
 start:
 	dysond start 
