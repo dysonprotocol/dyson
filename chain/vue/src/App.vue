@@ -132,8 +132,10 @@ export default {
       let newValue;
       if (colorMode.value == "light") {
         newValue = "dark";
+        document.querySelector("link[rel*='icon']").href = "/static/dys.png";
       } else {
         newValue = "light";
+        document.querySelector("link[rel*='icon']").href = "/static/dys-inverted.png";
       }
       localStorage.setItem("colorMode", newValue);
       document
