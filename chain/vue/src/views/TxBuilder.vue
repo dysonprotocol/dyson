@@ -343,7 +343,6 @@ class BetterDatetimeEditor extends JSONEditor.defaults.editors.datetime {
   }
   getValue() {
     const val = super.getValue()
-    console.log('dat get value', val)
     if (!val) return val
     return new Date(val).toISOString()
   }

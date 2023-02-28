@@ -146,7 +146,6 @@ export default {
   methods: {
     updateEditorFromQuery() {
       var val = this.$route.query;
-      console.log("watch query:", val);
       if (this.editor) {
         this.editor.setValue(JSON.parse(val[this.name] || "{}"));
       }
@@ -165,7 +164,6 @@ export default {
     submit: async function (e) {
       this.updateQuery();
       e.preventDefault();
-      console.log(e.submitter.value);
       this.runResponse = null;
       this.queryResponse = null;
       this.queryResponseErr = null;
@@ -176,7 +174,6 @@ export default {
         kwargs: JSON.stringify(this.editor.getValue()),
         coins: this.coins,
       };
-      console.log(value);
 
       if (e.submitter.value == "run") {
         var txResult = {};
@@ -191,7 +188,6 @@ export default {
             ],
             gas: String(Math.ceil(this.gas)),
           };
-          console.log("opts", opts);
           try {
             txResult = await this.$store.dispatch("dyson/sendMsgRun", opts);
             console.log("txResult", txResult);

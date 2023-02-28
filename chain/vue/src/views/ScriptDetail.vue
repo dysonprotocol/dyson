@@ -247,11 +247,9 @@ export default {
   methods: {
     pretty() {
       let code = this.aceeditor.getSelectedText()
-      console.log('ugly', code)
       let range = this.aceeditor.getSelectionRange()
       try {
         code = html_beautify(code, htmlPrettyOptions)
-        console.log('pretty', code)
         this.aceeditor.session.replace(range, code)
       } catch (e) {
         console.error(e)
@@ -262,7 +260,6 @@ export default {
       this.aceeditor = editor
     },
     colorModeChangeCallback(event) {
-      console.log('colorModeChanged', event)
       this.colorMode = event.detail.colorMode
     },
     async save(e) {
@@ -309,7 +306,6 @@ export default {
       }
     },
     async update() {
-      console.log('query script', this.scriptAddress)
       this.$store
         .dispatch('dyson/QueryScript', {
           query: { index: this.scriptAddress },
@@ -334,14 +330,12 @@ export default {
     },
     options: function () {
       if (this.lang == 'python') {
-        console.log('python options')
         return {
           useSoftTabs: true,
           tabSize: 4,
           navigateWithinSoftTabs: false,
         }
       } else {
-        console.log('html options')
         return {
           useSoftTabs: true,
           tabSize: 2,
