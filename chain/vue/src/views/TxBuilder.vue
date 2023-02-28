@@ -105,16 +105,16 @@ h3 {
                 <div class="d-grid gap-2">
                   <button
                     v-if="inflight"
-                    class="btn btn-primary btn-lg d-grid gap-2"
+                    class="btn btn-primary btn-lg gap-2"
                     type="button"
                     disabled
                   >
+                    Loading...
                     <span
                       class="spinner-border spinner-border-sm"
                       role="status"
                       aria-hidden="true"
                     ></span>
-                    Loading...
                   </button>
                   <button
                     v-else
@@ -190,7 +190,7 @@ h3 {
               </p>
               <VAceEditor
                 v-model:value="vueExample"
-                lang="javascript"
+                lang="html"
                 :theme="aceTheme"
                 :key="aceTheme"
                 :min-lines="10"
@@ -207,7 +207,7 @@ h3 {
 <script>
 import command_schema from "./command_schema.json";
 import { VAceEditor } from "vue3-ace-editor";
-import parserBabel from "prettier/parser-babel";
+import parserHtml from "prettier/parser-html";
 import prettier from "prettier/standalone";
 
 import "ace-builds/src-noconflict/theme-vibrant_ink";
@@ -412,10 +412,9 @@ const pythonify = (obj) => {
 
 window.pythonify = pythonify;
 window.ace.config.set("basePath", ".");
-import workerJsonUrl from 'ace-builds/src-noconflict/worker-json?url'; // For vite
+import workerJsonUrl from "ace-builds/src-noconflict/worker-json?url"; // For vite
 
-ace.config.setModuleUrl('ace/mode/json_worker', workerJsonUrl);
-
+ace.config.setModuleUrl("ace/mode/json_worker", workerJsonUrl);
 
 function deepen(obj) {
   const result = {};
@@ -517,6 +516,9 @@ export default {
       }
     },
     fetchExample: function () {
+      if (!this.command) {
+        return "// Select a command"
+      }
       const path = command_schema[this.command]?.rest_path || "";
       if (!path) {
         this.fetchUrl = "";
@@ -600,33 +602,39 @@ result = await response.json()`;
             }
           });
       }
-
-      const code = `/*
-
-Place this in the head tag
-<script src=\"\/_\/dyson.js\"><\/script>
-
-DysonLoader can save a lot of time if complex integration is needed with the
-chain, however consider making normal Javascript requests with the REST API
-if the frontend is read only.
-*/
-
+      if (!this.command) {
+        return `<!-- Select a command -->`
+      }
+      let code = `
+      <html>
+      <title>Demo ${this.command}</title>
+      <script src="/_/dyson.js"><\/script>
+      <script type="module">
 // initialize Dyson
 await DysonLoader()
 
 // Connect to Keplr to sign transactions
-const account = await dysonUseKeplr()
-
+let account = await dysonUseKeplr()
 ${processedTypes}
-const command = "${this.command || ""}"
-const data = ${JSON.stringify(data, null, 2)
+let command = "${this.command}"
+let data = ${JSON.stringify(data, null, 2)
         .replaceAll('"XXX___', "")
         .replaceAll('___XXX"', "")}
-let result = await dysonVueStore.dispatch(command, data)`;
+try {
+  let result = await dysonVueStore.dispatch(command, data)
+  document.getElementById("output").textContent = JSON.stringify(result, null, 2);
+} catch (e) {
+  alert(e.toString())
+}
+
+<\/script>
+<h1>Demo ${this.command}</h1>
+<pre id="output">
+`;
       try {
         return prettier.format(code, {
-          parser: "babel",
-          plugins: [parserBabel],
+          parser: "html",
+          plugins: [parserHtml],
         });
       } catch (e) {
         console.error(e);
@@ -634,6 +642,9 @@ let result = await dysonVueStore.dispatch(command, data)`;
       }
     },
     example: function () {
+      if (!this.command) {
+        return "# Select a command"
+      }
       let processedTypes = "";
       let command_kwargs = "";
       let data = JSON.parse(
@@ -698,7 +709,7 @@ let result = await dysonVueStore.dispatch(command, data)`;
 
 ${processedTypes}
 _chain(
-    "${this.command || ""}"${command_kwargs}
+    "${this.command || "select a command"}"${command_kwargs}
 )`;
     },
     groupedCommands: function () {
@@ -728,7 +739,7 @@ _chain(
       if (this.query.includes(this.command)) {
         return "Run Query";
       }
-      return "Run Query or Transaction";
+      return "Select a command";
     },
     disabled: function () {
       if (this.inflight || !this.command) {

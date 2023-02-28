@@ -32,7 +32,7 @@ pre {
       </div>
     </div>
     <div class="row">
-      <div id="schemas" class="col-md-6">
+      <div id="schemas" class="col-md-6 mb-3">
         <div v-if="schemas && schemas.error">Error: {{ schemas.error }}</div>
         <div v-for="item in schemas" v-bind:key="item.function">
           <FunctionDetail
@@ -66,8 +66,21 @@ pre {
             :options="options"
           />
         </div>
-        <div>
-          Edit Mode:
+        <div class="alert alert-light sticky-bottom" role="alert">
+          <button
+              v-if="address==scriptAddress"
+            @click="save"
+            :disabled="disabled || !unsavedChanges"
+            class="btn-primary btn btn-sm float-right"
+          >
+            Save now...
+            <span
+              v-if="inFlight"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          </button>
           <input
             :id="scriptAddress + 'pythonLang'"
             type="radio"
@@ -94,32 +107,13 @@ pre {
             :for="scriptAddress + 'htmlLang'"
             >HTML</label
           >
+
         </div>
       </div>
     </div>
   </div>
 
-  <div v-if="unsavedChanges" class="row fixed-bottom">
-    <div class="col-6">
-      <div class="alert alert-light" role="alert">
-        Attention: you have unsaved changes to your script!
-        <button
-          @click="save"
-          :disabled="disabled"
-          class="btn-primary btn btn-sm float-right"
-        >
-          Save now...
-          <span
-            v-if="inFlight"
-            class="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="true"
-          ></span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 3000">
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 3000">
     <div
       v-if="error"
       class="toast show"
