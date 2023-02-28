@@ -56,6 +56,7 @@ pre {
       <div id="code" class="col-md-6">
         <div class="mb-3">
           <VAceEditor
+            @init="initAceEditor"
             v-model:value="code"
             :lang="lang"
             :theme="aceTheme"
@@ -68,7 +69,7 @@ pre {
         </div>
         <div class="alert alert-light sticky-bottom" role="alert">
           <button
-              v-if="address==scriptAddress"
+            v-if="address == scriptAddress"
             @click="save"
             :disabled="disabled || !unsavedChanges"
             class="btn-primary btn btn-sm float-right"
@@ -107,7 +108,14 @@ pre {
             :for="scriptAddress + 'htmlLang'"
             >HTML</label
           >
-
+          <button
+            v-if="lang == 'html' && address == scriptAddress"
+            type="button"
+            class="btn btn-link btn-sm"
+            @click="pretty"
+          >
+            {}
+          </button>
         </div>
       </div>
     </div>
@@ -160,13 +168,14 @@ pre {
 </template>
 
 <script>
-import FunctionDetail from "./FunctionDetail.vue";
-import ExtraLines from "./ExtraLines.vue";
-import { VAceEditor } from "vue3-ace-editor";
-import "ace-builds/src-noconflict/theme-chrome";
-import "ace-builds/src-noconflict/theme-vibrant_ink";
-import "ace-builds/src-noconflict/mode-python";
-import "ace-builds/src-noconflict/mode-html";
+import FunctionDetail from './FunctionDetail.vue'
+import ExtraLines from './ExtraLines.vue'
+import { VAceEditor } from 'vue3-ace-editor'
+import 'ace-builds/src-noconflict/theme-chrome'
+import 'ace-builds/src-noconflict/theme-vibrant_ink'
+import 'ace-builds/src-noconflict/mode-python'
+import 'ace-builds/src-noconflict/mode-html'
+import { html_beautify } from 'js-beautify'
 
 /*
 let colorMode = ref(localStorage.getItem("colorMode") || "light");
@@ -182,17 +191,35 @@ onUnmounted(() => {
   window.removeEventListener("colorModeChanged", colorModeChangeCallback);
 });
 */
+
+const htmlPrettyOptions = {
+  indent_size: '2',
+  indent_char: ' ',
+  max_preserve_newlines: '5',
+  preserve_newlines: true,
+  keep_array_indentation: false,
+  break_chained_methods: true,
+  indent_scripts: 'normal',
+  brace_style: 'collapse',
+  space_before_conditional: false,
+  unescape_strings: false,
+  jslint_happy: true,
+  end_with_newline: false,
+  wrap_line_length: '0',
+  indent_inner_html: true,
+  comma_first: false,
+  e4x: false,
+  indent_empty_lines: false,
+}
+
 export default {
-  name: "ScriptDetail",
-  props: ["scriptAddress"],
+  name: 'ScriptDetail',
+  props: ['scriptAddress'],
   mounted: function () {
-    window.addEventListener("colorModeChanged", this.colorModeChangeCallback);
+    window.addEventListener('colorModeChanged', this.colorModeChangeCallback)
   },
   unmounted: function () {
-    window.removeEventListener(
-      "colorModeChanged",
-      this.colorModeChangeCallback
-    );
+    window.removeEventListener('colorModeChanged', this.colorModeChangeCallback)
   },
   data: function () {
     return {
@@ -202,9 +229,10 @@ export default {
       error: null,
       gas: 200000,
       clearDomain: import.meta.env.VITE_CLEAR_DOMAIN,
-      colorMode: localStorage.getItem("colorMode"),
-      lang: "python",
-    };
+      colorMode: localStorage.getItem('colorMode'),
+      lang: 'python',
+      aceeditor: null,
+    }
   },
   components: {
     FunctionDetail,
@@ -213,140 +241,167 @@ export default {
   },
   watch: {
     $route(to, from) {
-      this.update();
+      this.update()
     },
   },
   methods: {
+    pretty() {
+      let code = this.aceeditor.getSelectedText()
+      console.log('ugly', code)
+      let range = this.aceeditor.getSelectionRange()
+      try {
+        code = html_beautify(code, htmlPrettyOptions)
+        console.log('pretty', code)
+        this.aceeditor.session.replace(range, code)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    initAceEditor(editor) {
+      window.aceeditor = editor
+      this.aceeditor = editor
+    },
     colorModeChangeCallback(event) {
-      console.log("colorModeChanged", event);
-      this.colorMode = event.detail.colorMode;
+      console.log('colorModeChanged', event)
+      this.colorMode = event.detail.colorMode
     },
     async save(e) {
-      this.inFlight = true;
-      this.txResult = null;
-      this.error = null;
+      this.inFlight = true
+      this.txResult = null
+      this.error = null
       const value = {
         creator: this.address,
         code: this.code,
-      };
+      }
       try {
         this.txResult = await this.$store.dispatch(
-          "dyson/sendMsgUpdateScript",
+          'dyson/sendMsgUpdateScript',
           {
             value: value,
             fee: [
-              { amount: String(Math.ceil(this.gas * 0.001)), denom: "dys" },
+              {
+                amount: String(Math.ceil(this.gas * 0.001)),
+                denom: 'dys',
+              },
             ],
             gas: String(Math.ceil(this.gas)),
           }
-        );
-        this.inFlight = false;
-        if (this.txResult.rawLog.endsWith("out of gas")) {
-          this.gas = this.txResult.gasUsed * 2;
-          this.save(e);
-          return;
+        )
+        this.inFlight = false
+        if (this.txResult.rawLog.endsWith('out of gas')) {
+          this.gas = this.txResult.gasUsed * 2
+          this.save(e)
+          return
         } else {
-          this.gas = this.txResult.gasUsed * 1.2;
+          this.gas = this.txResult.gasUsed * 1.2
         }
-        JSON.parse(this.txResult.rawLog);
+        JSON.parse(this.txResult.rawLog)
 
-        this.update();
+        this.update()
       } catch (e) {
         if (e instanceof SyntaxError) {
         } else {
-          this.error = e;
+          this.error = e
         }
-        console.error(e);
+        console.error(e)
       } finally {
-        this.inFlight = false;
+        this.inFlight = false
       }
     },
     async update() {
-      console.log("query script", this.scriptAddress);
+      console.log('query script', this.scriptAddress)
       this.$store
-        .dispatch("dyson/QueryScript", {
+        .dispatch('dyson/QueryScript', {
           query: { index: this.scriptAddress },
           options: { subscribe: false, all: false },
         })
         .then(() => {
-          this.editedCode = null;
-        });
-      this.$store.dispatch("dyson/QuerySchema", {
+          this.editedCode = null
+        })
+      this.$store.dispatch('dyson/QuerySchema', {
         query: { index: this.scriptAddress },
         options: { subscribe: false, all: false },
-      });
+      })
     },
   },
   computed: {
     aceTheme: function () {
-      if (this.colorMode == "dark") {
-        return "vibrant_ink";
+      if (this.colorMode == 'dark') {
+        return 'vibrant_ink'
       } else {
-        return "chrome";
+        return 'chrome'
       }
     },
     options: function () {
-      if (this.lang == "python") {
-        console.log("python options");
-        return { useSoftTabs: true, tabSize: 4, navigateWithinSoftTabs: false };
+      if (this.lang == 'python') {
+        console.log('python options')
+        return {
+          useSoftTabs: true,
+          tabSize: 4,
+          navigateWithinSoftTabs: false,
+        }
       } else {
-        console.log("html options");
-        return { useSoftTabs: true, tabSize: 2, navigateWithinSoftTabs: true };
+        console.log('html options')
+        return {
+          useSoftTabs: true,
+          tabSize: 2,
+          navigateWithinSoftTabs: true,
+        }
       }
     },
     scriptWSGILink: function () {
-      let chainId = this.$store.getters["common/env/chainId"];
+      let chainId = this.$store.getters['common/env/chainId']
     },
     txSuccess: function () {
-      return this.txResult.rawLog.includes("UpdateScript");
+      return this.txResult.rawLog.includes('UpdateScript')
     },
     address: function () {
-      return this.$store.getters["common/wallet/address"];
+      return this.$store.getters['common/wallet/address']
     },
     disabled: function () {
       return (
         this.inFlight || !this.address || this.address != this.scriptAddress
-      );
+      )
     },
     unsavedChanges: function () {
-      return this.address && (this.script?.code || "") != this.code;
+      return this.address && (this.script?.code || '') != this.code
     },
     code: {
       get() {
         if (this.editedCode === null) {
-          return this.script ? this.script.code : "";
+          return this.script ? this.script.code : ''
         } else {
-          return this.editedCode;
+          return this.editedCode
         }
       },
       set(newValue) {
-        this.editedCode = newValue;
+        this.editedCode = newValue
       },
     },
     schemas: function () {
-      const result = this.$store.getters["dyson/getSchema"]({
+      const result = this.$store.getters['dyson/getSchema']({
         params: {},
         query: { index: this.scriptAddress },
-      });
+      })
 
-      const schemas = result.schema ? JSON.parse(result.schema) : [];
+      const schemas = result.schema ? JSON.parse(result.schema) : []
       return schemas.filter((s) => {
         return (
           this.scriptAddress == this.address ||
-          (s.function != "app" && !(s.function || "").startsWith("_"))
-        );
-      });
+          (s.function != 'app' && !(s.function || '').startsWith('_'))
+        )
+      })
     },
     script: function () {
-      const result = this.$store.getters["dyson/getScript"]({
+      const result = this.$store.getters['dyson/getScript']({
         params: {},
         query: { index: this.scriptAddress },
-      });
-      return result ? result.script : {};
+      })
+      return result ? result.script : {}
     },
   },
   created: async function () {
-    this.update();
+    this.update()
   },
-};
+}
 </script>
