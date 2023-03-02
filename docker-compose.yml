@@ -21,6 +21,7 @@ services:
       - ./chain_home:/root/
       - ./chain:/go/src/app
 
+
   frontend:
     build: ./frontend
     image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/frontend:${TAG}
@@ -56,8 +57,7 @@ services:
     volumes:
       - ./chain/vue:/app
       - ./frontend/vue:/app/dist/
+
   hermes:
     build: ./hermes
     image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/hermes:1.2.0
-
-

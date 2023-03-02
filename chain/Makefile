@@ -1,7 +1,13 @@
+BUILDDIR ?= $(CURDIR)/build
+
 SHELL:=/bin/bash
 
-build:
-	ignite chain build -v --skip-proto
+clean:
+	rm -rf release
+
+build: 
+	ignite chain build -v --release -t linux:amd64 -t darwin:amd64 -t darwin:arm64 --check-dependencies --release.prefix "dyson-protocol-$$(cat app/TAG.txt)"
+	cp -r ./release/ /tmp/release/
 
 start:
 	dysond start 
@@ -30,10 +36,5 @@ restore-latest:
 	NEW_GENESIS=~/.dyson/config/genesis.json ; \
 	cat $$ORIG_GENESIS | jq '.consensus_params.block += {"time_iota_ms": "1000"} ' > $$NEW_GENESIS && git -P diff --no-index $$ORIG_GENESIS $$NEW_GENESIS || echo "done"
 
-
 reset:
 	dysond tendermint unsafe-reset-all
-
-
-install-ignite:
-	cd /tmp && rm -rf ignite-cli && mkdir -p ignite-cli && wget -O ignite-cli.tar.gz https://gitlab.com/dysonproject/ignite-cli/-/archive/dyson-1.0.0/ignite-cli-dyson-1.0.0.tar.gz && tar -xf ignite-cli.tar.gz --strip-component=1 --directory=ignite-cli && cd ignite-cli && make && make install

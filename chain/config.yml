@@ -50,9 +50,10 @@ genesis:
               denom: "dys"
 
 build:
+  binary: dysond # AUTOMATICALLY GENERATED binary
   main: "cmd/dysond"
   ldflags:
-   - "-X github.com/cosmos/cosmos-sdk/version.Version=dev8" # AUTOMATICALLY GENERATED LDFLAGS TAG
+   - "-X github.com/cosmos/cosmos-sdk/version.Version=dev11" # AUTOMATICALLY GENERATED LDFLAGS TAG
    - "-X github.com/cosmos/cosmos-sdk/version.Commit=" # AUTOMATICALLY GENERATED LDFLAGS COMMIT
 
 
