@@ -149,11 +149,10 @@ export default {
   },
   data: function () {
     return {
-      extra_lines: "\n\n\n",
+      extra_lines: localStorage.getItem("extraLines") || "\n\n\n",
       runResponse: null,
       queryResponse: null,
       queryResponseErr: null,
-      inflight: false,
       coins: "",
       isHidden: true,
       isModal: false,
@@ -162,6 +161,11 @@ export default {
       gas: 123000,
       colorMode: localStorage.getItem("colorMode"),
     };
+  },
+  watch: {
+    extra_lines: function (val) {
+      localStorage.setItem('extraLines', val)
+    },
   },
   computed: {
     aceTheme: function () {
