@@ -278,7 +278,7 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 	}
 	port, srv, err := k.NewRPCServer(goCtx, valFound.Index)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	now := time.Now()
 	defer func() {
