@@ -7,6 +7,7 @@ clean:
 
 build: 
 	ignite chain build -v --release -t linux:amd64 -t darwin:amd64 -t darwin:arm64 --check-dependencies --release.prefix "dyson-protocol-$$(cat app/TAG.txt)"
+	tar xf ./release/dyson-protocol*_linux_amd64.tar.gz -C /bin/
 	cp -r ./release/ /tmp/release/
 
 start:
