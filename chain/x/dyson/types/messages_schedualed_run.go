@@ -56,6 +56,13 @@ func (msg *MsgCreateScheduledRun) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+	if msg.Msg == nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid msg")
+	}
+	err = msg.Msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -97,6 +104,13 @@ func (msg *MsgUpdateScheduledRun) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
+	}
+	if msg.Msg == nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid msg")
+	}
+	err = msg.Msg.ValidateBasic()
+	if err != nil {
+		return err
 	}
 	return nil
 }

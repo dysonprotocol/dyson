@@ -93,7 +93,7 @@ service Query {
 }
 
 message QueryGetScheduledRunRequest {
-		// inxex is the script address
+		// index is the script address
 		string index = 1;
 }
 

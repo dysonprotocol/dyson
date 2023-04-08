@@ -122,7 +122,7 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 }
 
 func (k Keeper) GetScheduledGasPriceAndFee(ctx sdk.Context, blockHeight uint64, gasWanted uint64) (count int, gasPrice sdk.DecCoin, gasFee sdk.Coin) {
-	prefix := fmt.Sprintf("%012/", blockHeight)
+	prefix := fmt.Sprintf("%012d/", blockHeight)
 	// total := 0
 	count = 1
 	for _, scheduledRun := range k.GetPrefixScheduledRun(ctx, prefix) {
@@ -147,37 +147,14 @@ func (k Keeper) RunScheduledScripts(ctx sdk.Context) {
 		k.Logger(ctx).Info(fmt.Sprintf("no cron at block: %+v", blockHeight))
 		return
 	}
+
 	for _, index := range cron.Indexes {
+
 		scheduledRun, found := k.GetScheduledRun(ctx, index)
 		if !found {
 			continue
 		}
 		msg := scheduledRun.Msg
-		signers := msg.GetSigners()
-
-		if len(signers) != 1 {
-			err := sdkerrors.ErrInvalidRequest.Wrap("Msg must have one signer")
-			k.Logger(ctx).Info(fmt.Sprintf("error: %+v", err))
-			scheduledRun.Error = fmt.Sprintf("%+v", err)
-			k.SetScheduledRun(ctx, scheduledRun)
-			return
-		}
-
-		add, err := sdk.AccAddressFromBech32(scheduledRun.Creator)
-		if err != nil {
-			k.Logger(ctx).Info(fmt.Sprintf("error: %+v", err))
-			scheduledRun.Error = fmt.Sprintf("bad scheduled script address %+v", err)
-			k.SetScheduledRun(ctx, scheduledRun)
-		}
-
-		if !add.Equals(signers[0]) {
-			err = sdkerrors.ErrInvalidRequest.Wrap("Invalid schedul script signer")
-
-			k.Logger(ctx).Info(fmt.Sprintf("error: %+v", err))
-			scheduledRun.Error = fmt.Sprintf("%+v", err)
-			k.SetScheduledRun(ctx, scheduledRun)
-			return
-		}
 
 		cachedCtx, Write := ctx.CacheContext()
 		startingGas := ctx.BlockGasMeter().GasConsumed()
@@ -207,6 +184,32 @@ func (k Keeper) RunScheduledScripts(ctx sdk.Context) {
 					panic(sdk.ErrorGasOverflow{Descriptor: "tx gas summation"})
 				}
 			}()
+
+			signers := msg.GetSigners()
+
+			if len(signers) != 1 {
+				err := sdkerrors.ErrInvalidRequest.Wrap("Msg must have one signer")
+				k.Logger(ctx).Info(fmt.Sprintf("error: %+v", err))
+				scheduledRun.Error = fmt.Sprintf("%+v", err)
+				k.SetScheduledRun(ctx, scheduledRun)
+				return
+			}
+
+			add, err := sdk.AccAddressFromBech32(scheduledRun.Creator)
+			if err != nil {
+				k.Logger(ctx).Info(fmt.Sprintf("error: %+v", err))
+				scheduledRun.Error = fmt.Sprintf("bad scheduled script address %+v", err)
+				k.SetScheduledRun(ctx, scheduledRun)
+			}
+
+			if !add.Equals(signers[0]) {
+				err = sdkerrors.ErrInvalidRequest.Wrap("Invalid scheduled script signer")
+
+				k.Logger(ctx).Info(fmt.Sprintf("error: %+v", err))
+				scheduledRun.Error = fmt.Sprintf("%+v", err)
+				k.SetScheduledRun(ctx, scheduledRun)
+				return
+			}
 
 			r, err := m.Run(sdk.WrapSDKContext(cachedCtx), msg)
 			if err != nil {
@@ -247,7 +250,10 @@ func handleRecovery(r interface{}, cachedCtx sdk.Context) string {
 		)
 
 	default:
-		panic(sdkerrors.ErrPanic.Wrapf(
-			"scheduled script recovered: %v\nstack:\n%v", r, string(debug.Stack())))
+		// log the stack trace
+		fmt.Printf("Unknown scheduled script error: %v\nstack:\n%v", r, string(debug.Stack()))
+
+		return fmt.Sprintf("Unknown scheduled script error")
+
 	}
 }

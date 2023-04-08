@@ -29,7 +29,6 @@ service Msg {
 }
 
 
-// this line is used by starport scaffolding # proto/tx/message
 
 message MsgCreateScheduledRun {
   string creator = 1;
@@ -66,7 +65,7 @@ message MsgCreateStorage {
   string creator = 1;
   // Name of the Storage, must be prefixed with the creators address (for example: "dys..1a3/some_name")
   string index = 2;
-  // data to stor at this index
+  // data to store at this index
   string data = 3;
   // If true, force will always store the data at this address regardless of already existing storage
   bool force = 4;
@@ -75,9 +74,13 @@ message MsgCreateStorageResponse {
 }
 
 message MsgUpdateStorage {
+  // The address signing this transaction
   string creator = 1;
+  // Name of the Storage, must be prefixed with the creators address (for example: "dys..1a3/some_name")
   string index = 2;
+  // data to store at this index
   string data = 3;
+  // If true, force will always store the data at this address regardless of already existing storage
   bool force = 4;
 }
 message MsgUpdateStorageResponse {
@@ -90,6 +93,7 @@ message MsgDeleteStorage {
 message MsgDeleteStorageResponse {
 }
 
+// Deploy an Autonomous Script at a new address
 message MsgDeployAutonomousScript {
   string creator = 1;
   string code = 3;
@@ -113,3 +117,4 @@ message MsgDeleteScriptResponse {
 }
 
 
+// this line is used by starport scaffolding # proto/tx/message

@@ -9,7 +9,8 @@ import (
 	"github.com/org/dyson/x/dyson/types"
 )
 
-const MAX_FUTURE_BLOCKS = 60 * 60 // 5min
+const MAX_FUTURE_BLOCKS = 5000000
+
 func (k msgServer) CreateScheduledRun(goCtx context.Context, msg *types.MsgCreateScheduledRun) (*types.MsgCreateScheduledRunResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
@@ -20,7 +21,7 @@ func (k msgServer) CreateScheduledRun(goCtx context.Context, msg *types.MsgCreat
 	}
 
 	if msg.Height > uint64(ctx.BlockHeight()+MAX_FUTURE_BLOCKS) {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("scheduled block height must be less than %v block in the future", MAX_FUTURE_BLOCKS))
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("scheduled block height must be less than %v blocks in the future", MAX_FUTURE_BLOCKS))
 	}
 
 	index := fmt.Sprintf("%v/%012d/%v", msg.Creator, msg.Height, count)
