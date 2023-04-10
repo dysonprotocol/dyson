@@ -9,7 +9,7 @@ import (
 
 const (
 	// Make sure this matche NameRegex
-	reDnmString = `[^/]*([/][a-z0-9]{1,8}){0,1}`
+	reDnmString = `[^/]*(/[a-z0-9-_]{1,100})*`
 )
 
 var reDnm = regexp.MustCompile(fmt.Sprintf(`^%s$`, reDnmString))
@@ -62,6 +62,10 @@ func (msg *MsgMintCoins) ValidateBasic() error {
 	coin, err := sdk.ParseCoinNormalized(msg.Amount)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidCoins, "invalid coin (%s)", err)
+	}
+	err = coin.Validate()
+	if err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidCoins, "invalid coin %s", err)
 	}
 	err = ValidateDenom(coin.Denom)
 	if err != nil {
