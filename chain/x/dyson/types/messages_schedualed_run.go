@@ -56,6 +56,9 @@ func (msg *MsgCreateScheduledRun) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+	if msg.Gas < 1 {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid gas")
+	}
 	if msg.Msg == nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest, "invalid msg")
 	}

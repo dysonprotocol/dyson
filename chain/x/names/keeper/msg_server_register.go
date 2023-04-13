@@ -19,7 +19,7 @@ func (k msgServer) Register(goCtx context.Context, msg *types.MsgRegister) (*typ
 		namename,
 	)
 	if isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "commit alrady registered")
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "commit already registered")
 	}
 
 	var name = types.Name{

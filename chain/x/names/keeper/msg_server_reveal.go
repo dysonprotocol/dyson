@@ -37,7 +37,7 @@ func (k msgServer) Reveal(goCtx context.Context, msg *types.MsgReveal) (*types.M
 	if isFound {
 		if existingName.RegistrationHeight < name.RegistrationHeight {
 			return nil, sdkerrors.Wrapf(sdkerrors.ErrInvalidRequest,
-				"name (%s) alrady registered to address %s on block %s",
+				"name (%s) already registered to address %s on block %s",
 				msg.Name, existingName.Owner, existingName.RegistrationHeight)
 		}
 

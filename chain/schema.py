@@ -1,28 +1,29 @@
-import sys
 import ast
 import fnmatch
 import logging
 import os
+import sys
 import typing
+
 import simplejson as json
 from pytojsonschema.common import (
-    TypeNamespace,
-    SchemaMap,
     Schema,
-    init_typing_namespace,
+    SchemaMap,
+    TypeNamespace,
     init_schema_map,
-)
-from pytojsonschema.jsonschema import (
-    get_json_schema_from_ast_element,
-    InvalidTypeAnnotation,
-)
-from pytojsonschema.types import (
-    process_import,
-    process_import_from,
-    process_assign,
-    process_class_def,
+    init_typing_namespace,
 )
 from pytojsonschema.functions import process_function_def
+from pytojsonschema.jsonschema import (
+    InvalidTypeAnnotation,
+    get_json_schema_from_ast_element,
+)
+from pytojsonschema.types import (
+    process_assign,
+    process_class_def,
+    process_import,
+    process_import_from,
+)
 
 JSON_SCHEMA_DRAFT = "http://json-schema.org/draft-07/schema#"
 LOGGER = logging.getLogger()
@@ -48,6 +49,11 @@ def process_code(code: str):
             s["schema"] = process_function_def(
                 ast_function_def, type_namespace, schema_map
             )
+            docstring = ast.get_docstring(node)
+            s["title"] = " ".join(
+                word.capitalize() for word in ast_function_def.name.split("_")
+            )
+            s["description"] = docstring
         except Exception as e:
             s["error"] = str(e)
 
@@ -83,7 +89,8 @@ def process_code(code: str):
     return [
         s
         for s in function_schema_dict.values()
-        if (not s["function"].startswith("_")) and (s["function"] not in ["app", "application"])
+        if (not s["function"].startswith("_"))
+        and (s["function"] not in ["app", "application"])
     ]
 
 
