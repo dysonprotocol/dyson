@@ -123,6 +123,10 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 
 func (k Keeper) GetScheduledGasPriceAndFee(ctx sdk.Context, blockHeight uint64, gasWanted uint64) (count int, gasPrice sdk.DecCoin, gasFee sdk.Coin) {
 	prefix := fmt.Sprintf("%012d/", blockHeight)
+	if gasWanted < 1 {
+		gasWanted = 1
+	}
+
 	// total := 0
 	count = 1
 	for _, scheduledRun := range k.GetPrefixScheduledRun(ctx, prefix) {

@@ -13,6 +13,9 @@ func (k Keeper) ScheduledGasPriceAndFeeAtBlock(goCtx context.Context, req *types
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
+	if req.Gaswanted == 0 {
+		return nil, status.Error(codes.InvalidArgument, "gas wanted cannot be 0")
+	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
