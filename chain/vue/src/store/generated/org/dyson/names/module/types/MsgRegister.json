@@ -15,6 +15,10 @@
                 "price": {
                     "type": "string",
                     "description": "The price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price."
+                },
+                "auto_renew": {
+                    "type": "boolean",
+                    "description": "Should the name be automatically renewed"
                 }
             },
             "additionalProperties": true,

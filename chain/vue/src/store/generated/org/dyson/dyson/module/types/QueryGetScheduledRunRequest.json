@@ -6,7 +6,7 @@
             "properties": {
                 "index": {
                     "type": "string",
-                    "description": "inxex is the script address"
+                    "description": "index is the script address"
                 }
             },
             "additionalProperties": true,

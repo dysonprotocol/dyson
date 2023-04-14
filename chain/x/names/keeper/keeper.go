@@ -82,15 +82,39 @@ func (k Keeper) ResolveIndex(ctx sdk.Context, index string) (destination string)
 	return index
 }
 
-func (k Keeper) DeleteExpiredNames(ctx sdk.Context) {
+func (k Keeper) RenewOrDeleteExpiredNames(ctx sdk.Context) {
 	h := uint64(ctx.BlockHeight())
-	ctx.Logger().Info(fmt.Sprintf("DeleteExpiredNames: %+v", h))
+	ctx.Logger().Info(fmt.Sprintf("RenewOrDeleteExpiredNames: %+v", h))
 	experations, _ := k.GetExpirations(ctx, fmt.Sprint(h))
 	for i := range experations.Names {
 		name, found := k.GetName(ctx, experations.Names[i])
 		if found && name.ExpirationHeight <= h {
-			ctx.Logger().Info(fmt.Sprintf("Deleting %+v", name))
-			k.RemoveName(ctx, name.Name)
+			// if name is auto-renewable, renew it
+			if name.AutoRenew {
+				name.ExpirationHeight = h + REGISTER_BLOCKS
+				k.SetName(ctx, name)
+				ctx.Logger().Info(fmt.Sprintf("Renewing %+v", name))
+				from, err := sdk.AccAddressFromBech32(name.Owner)
+				if err != nil {
+					ctx.Logger().Info(fmt.Sprintf("Deleting %+v because: %+v", name, err))
+					k.RemoveName(ctx, name.Name)
+				}
+				coin, err := sdk.ParseCoinNormalized(name.Price)
+				if err != nil {
+					ctx.Logger().Info(fmt.Sprintf("Deleting %+v because: %+v", name, err))
+					k.RemoveName(ctx, name.Name)
+				}
+				coin.Amount = (coin.Amount.QuoRaw(100)) // divide by 100
+				err = k.PayFee(ctx, from, coin)
+				if err != nil {
+					ctx.Logger().Info(fmt.Sprintf("Deleting %+v because: %+v", name, err))
+					k.RemoveName(ctx, name.Name)
+				}
+			} else {
+				// otherwise, delete it
+				ctx.Logger().Info(fmt.Sprintf("Deleting %+v auto renew is false", name))
+				k.RemoveName(ctx, name.Name)
+			}
 		}
 	}
 	k.RemoveExpirations(ctx, fmt.Sprint(h))

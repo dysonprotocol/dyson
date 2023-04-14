@@ -562,23 +562,23 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgDeleteScript",
-			"URI": "dyson.MsgDeleteScript",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateScheduledRun",
-			"URI": "dyson.MsgUpdateScheduledRun",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgRun",
-			"URI": "dyson.MsgRun",
-			"FilePath": "/go/src/app/proto/dyson/msgrun.proto"
-		},
-		{
 			"Name": "MsgUpdateStorage",
 			"URI": "dyson.MsgUpdateStorage",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgDeleteStorage",
+			"URI": "dyson.MsgDeleteStorage",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgDeployAutonomousScript",
+			"URI": "dyson.MsgDeployAutonomousScript",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgDeleteScript",
+			"URI": "dyson.MsgDeleteScript",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
@@ -592,9 +592,9 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgDeployAutonomousScript",
-			"URI": "dyson.MsgDeployAutonomousScript",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+			"Name": "MsgRun",
+			"URI": "dyson.MsgRun",
+			"FilePath": "/go/src/app/proto/dyson/msgrun.proto"
 		},
 		{
 			"Name": "MsgDeleteScheduledRun",
@@ -602,8 +602,8 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgDeleteStorage",
-			"URI": "dyson.MsgDeleteStorage",
+			"Name": "MsgUpdateScheduledRun",
+			"URI": "dyson.MsgUpdateScheduledRun",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		}
 	],

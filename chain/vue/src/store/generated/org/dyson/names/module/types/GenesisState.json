@@ -65,6 +65,9 @@
                 },
                 "registration_height": {
                     "type": "string"
+                },
+                "auto_renew": {
+                    "type": "boolean"
                 }
             },
             "additionalProperties": true,
