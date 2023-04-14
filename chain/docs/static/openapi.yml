@@ -34328,7 +34328,7 @@ paths:
                   additionalProperties: {}
       parameters:
         - name: index
-          description: inxex is the script address
+          description: index is the script address
           in: query
           required: false
           type: string
@@ -46100,6 +46100,8 @@ paths:
                   registration_height:
                     type: string
                     format: uint64
+                  auto_renew:
+                    type: boolean
         default:
           description: An unexpected error response.
           schema:
@@ -46156,6 +46158,8 @@ paths:
                     registration_height:
                       type: string
                       format: uint64
+                    auto_renew:
+                      type: boolean
               pagination:
                 type: object
                 properties:
@@ -76507,6 +76511,8 @@ definitions:
           registration_height:
             type: string
             format: uint64
+          auto_renew:
+            type: boolean
   names.MsgSetPriceAndExtendResponse:
     type: object
   names.MsgUpdateNameResponse:
@@ -76530,6 +76536,8 @@ definitions:
       registration_height:
         type: string
         format: uint64
+      auto_renew:
+        type: boolean
   names.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -76597,6 +76605,8 @@ definitions:
             registration_height:
               type: string
               format: uint64
+            auto_renew:
+              type: boolean
       pagination:
         type: object
         properties:
@@ -76662,6 +76672,8 @@ definitions:
           registration_height:
             type: string
             format: uint64
+          auto_renew:
+            type: boolean
   names.QueryParamsResponse:
     type: object
     properties:

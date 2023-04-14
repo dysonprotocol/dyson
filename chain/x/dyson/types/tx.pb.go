@@ -333,7 +333,7 @@ type MsgCreateStorage struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	// Name of the Storage, must be prefixed with the creators address (for example: "dys..1a3/some_name")
 	Index string `protobuf:"bytes,2,opt,name=index,proto3" json:"index,omitempty"`
-	// data to stor at this index
+	// data to store at this index
 	Data string `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
 	// If true, force will always store the data at this address regardless of already existing storage
 	Force bool `protobuf:"varint,4,opt,name=force,proto3" json:"force,omitempty"`
@@ -409,10 +409,14 @@ func (m *MsgCreateStorageResponse) XXX_DiscardUnknown() {
 var xxx_messageInfo_MsgCreateStorageResponse proto.InternalMessageInfo
 
 type MsgUpdateStorage struct {
+	// The address signing this transaction
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Index   string `protobuf:"bytes,2,opt,name=index,proto3" json:"index,omitempty"`
-	Data    string `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
-	Force   bool   `protobuf:"varint,4,opt,name=force,proto3" json:"force,omitempty"`
+	// Name of the Storage, must be prefixed with the creators address (for example: "dys..1a3/some_name")
+	Index string `protobuf:"bytes,2,opt,name=index,proto3" json:"index,omitempty"`
+	// data to store at this index
+	Data string `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	// If true, force will always store the data at this address regardless of already existing storage
+	Force bool `protobuf:"varint,4,opt,name=force,proto3" json:"force,omitempty"`
 }
 
 func (m *MsgUpdateStorage) Reset()         { *m = MsgUpdateStorage{} }
@@ -600,6 +604,7 @@ func (m *MsgDeleteStorageResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgDeleteStorageResponse proto.InternalMessageInfo
 
+// Deploy an Autonomous Script at a new address
 type MsgDeployAutonomousScript struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Code    string `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`

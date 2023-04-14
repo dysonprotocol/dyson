@@ -15,6 +15,9 @@
                 },
                 "authorized": {
                     "type": "string"
+                },
+                "auto_renew": {
+                    "type": "boolean"
                 }
             },
             "additionalProperties": true,

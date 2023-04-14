@@ -5,16 +5,20 @@
         "MsgUpdateStorage": {
             "properties": {
                 "creator": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The address signing this transaction"
                 },
                 "index": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the Storage, must be prefixed with the creators address (for example: \"dys..1a3/some_name\")"
                 },
                 "data": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "data to store at this index"
                 },
                 "force": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "If true, force will always store the data at this address regardless of already existing storage"
                 }
             },
             "additionalProperties": true,

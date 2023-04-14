@@ -53,6 +53,7 @@ export interface NamesName {
 
   /** @format uint64 */
   registration_height?: string;
+  auto_renew?: boolean;
 }
 
 /**

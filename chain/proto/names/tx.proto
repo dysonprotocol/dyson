@@ -31,6 +31,8 @@ message MsgRegister {
   string owner = 1;
   // The price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price. 
   string price = 4;
+  // Should the name be automatically renewed 
+  bool auto_renew = 5;
 }
 
 message MsgRegisterResponse {
@@ -44,6 +46,7 @@ message MsgUpdateName {
   string owner = 1;
   string destination = 3;
   string authorized = 6;
+  bool auto_renew = 7;
 }
 message MsgUpdateNameResponse {}
 
