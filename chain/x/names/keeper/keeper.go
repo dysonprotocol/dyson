@@ -94,9 +94,25 @@ func (k Keeper) RenewOrDeleteExpiredNames(ctx sdk.Context) {
 				name.ExpirationHeight = h + REGISTER_BLOCKS
 				k.SetName(ctx, name)
 				ctx.Logger().Info(fmt.Sprintf("Renewing %+v", name))
+				from, err := sdk.AccAddressFromBech32(name.Owner)
+				if err != nil {
+					ctx.Logger().Info(fmt.Sprintf("Deleting %+v because: %+v", name, err))
+					k.RemoveName(ctx, name.Name)
+				}
+				coin, err := sdk.ParseCoinNormalized(name.Price)
+				if err != nil {
+					ctx.Logger().Info(fmt.Sprintf("Deleting %+v because: %+v", name, err))
+					k.RemoveName(ctx, name.Name)
+				}
+				coin.Amount = (coin.Amount.QuoRaw(100)) // divide by 100
+				err = k.PayFee(ctx, from, coin)
+				if err != nil {
+					ctx.Logger().Info(fmt.Sprintf("Deleting %+v because: %+v", name, err))
+					k.RemoveName(ctx, name.Name)
+				}
 			} else {
 				// otherwise, delete it
-				ctx.Logger().Info(fmt.Sprintf("Deleting %+v", name))
+				ctx.Logger().Info(fmt.Sprintf("Deleting %+v auto renew is false", name))
 				k.RemoveName(ctx, name.Name)
 			}
 		}
