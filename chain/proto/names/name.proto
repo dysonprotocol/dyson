@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package names;
 
 option go_package = "github.com/org/dyson/x/names/types";
@@ -16,5 +17,6 @@ message Name {
   string owner = 8;
   uint64 expiration_height = 11;
   uint64 registration_height = 12;
+  bool auto_renew = 13;
 }
 

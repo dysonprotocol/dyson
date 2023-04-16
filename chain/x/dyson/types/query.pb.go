@@ -32,7 +32,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type QueryGetScheduledRunRequest struct {
-	// inxex is the script address
+	// index is the script address
 	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
 }
 

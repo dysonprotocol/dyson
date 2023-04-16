@@ -14,7 +14,7 @@
                 },
                 "data": {
                     "type": "string",
-                    "description": "data to stor at this index"
+                    "description": "data to store at this index"
                 },
                 "force": {
                     "type": "boolean",

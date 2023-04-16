@@ -27,6 +27,7 @@ func (k msgServer) UpdateName(goCtx context.Context, msg *types.MsgUpdateName) (
 
 	name.Destination = msg.Destination
 	name.Authorized = msg.Authorized
+	name.AutoRenew = msg.AutoRenew
 
 	k.SetName(ctx, name)
 

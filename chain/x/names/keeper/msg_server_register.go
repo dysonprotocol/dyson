@@ -29,6 +29,7 @@ func (k msgServer) Register(goCtx context.Context, msg *types.MsgRegister) (*typ
 		Price:              msg.Price,
 		ExpirationHeight:   uint64(ctx.BlockHeight() + REGISTER_BLOCKS),
 		RegistrationHeight: uint64(ctx.BlockHeight()),
+		AutoRenew:          msg.AutoRenew,
 	}
 
 	coin, err := sdk.ParseCoinNormalized(msg.Price)
