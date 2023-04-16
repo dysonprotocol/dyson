@@ -41,6 +41,10 @@ import (
 	capabilitykeeper "github.com/cosmos/cosmos-sdk/x/capability/keeper"
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
 	"github.com/cosmos/cosmos-sdk/x/crisis"
+	"github.com/cosmos/cosmos-sdk/x/nft"
+	nftkeeper "github.com/cosmos/cosmos-sdk/x/nft/keeper"
+	nftmodule "github.com/cosmos/cosmos-sdk/x/nft/module"
+
 	crisiskeeper "github.com/cosmos/cosmos-sdk/x/crisis/keeper"
 	crisistypes "github.com/cosmos/cosmos-sdk/x/crisis/types"
 	distr "github.com/cosmos/cosmos-sdk/x/distribution"
@@ -161,6 +165,7 @@ var (
 		evidence.AppModuleBasic{},
 		transfer.AppModuleBasic{},
 		vesting.AppModuleBasic{},
+		nftmodule.AppModuleBasic{},
 		dysonmodule.AppModuleBasic{},
 		namesmodule.AppModuleBasic{},
 
@@ -177,6 +182,8 @@ var (
 		govtypes.ModuleName:            {authtypes.Burner},
 		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
 		namesmoduletypes.ModuleName:    {authtypes.Minter, authtypes.Burner, authtypes.Staking},
+		nft.ModuleName:                 nil,
+
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -235,6 +242,8 @@ type App struct {
 	ScopedIBCKeeper      capabilitykeeper.ScopedKeeper
 	ScopedTransferKeeper capabilitykeeper.ScopedKeeper
 
+	NFTKeeper nftkeeper.Keeper
+
 	DysonKeeper dysonmodulekeeper.Keeper
 
 	NamesKeeper namesmodulekeeper.Keeper
@@ -285,7 +294,7 @@ func New(
 		authtypes.StoreKey, authz.ModuleName, banktypes.StoreKey, stakingtypes.StoreKey,
 		minttypes.StoreKey, distrtypes.StoreKey, slashingtypes.StoreKey, govtypes.StoreKey,
 		paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey, feegrant.StoreKey, evidencetypes.StoreKey,
-		ibctransfertypes.StoreKey, capabilitytypes.StoreKey, group.StoreKey,
+		ibctransfertypes.StoreKey, capabilitytypes.StoreKey, group.StoreKey, nftkeeper.StoreKey,
 		dysonmoduletypes.StoreKey,
 		namesmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
@@ -479,6 +488,8 @@ func New(
 		),
 	)
 
+	app.NFTKeeper = nftkeeper.NewKeeper(keys[nftkeeper.StoreKey], appCodec, app.AccountKeeper, app.BankKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
@@ -523,6 +534,7 @@ func New(
 		app.UpgradeKeeper,
 		app.CrisisKeeper,
 		app.ParamsKeeper,
+		app.NFTKeeper,
 		app.interfaceRegistry,
 	)
 	dysonModule := dysonmodule.NewAppModule(appCodec, app.DysonKeeper)
@@ -558,6 +570,8 @@ func New(
 		evidence.NewAppModule(app.EvidenceKeeper),
 		ibc.NewAppModule(app.IBCKeeper),
 		params.NewAppModule(app.ParamsKeeper),
+		nftmodule.NewAppModule(appCodec, app.NFTKeeper, app.AccountKeeper, app.BankKeeper, app.interfaceRegistry),
+
 		transferModule,
 		dysonModule,
 		namesModule,
@@ -589,6 +603,7 @@ func New(
 		group.ModuleName,
 		paramstypes.ModuleName,
 		vestingtypes.ModuleName,
+		nft.ModuleName,
 
 		dysonmoduletypes.ModuleName,
 		namesmoduletypes.ModuleName,
@@ -614,7 +629,7 @@ func New(
 		paramstypes.ModuleName,
 		upgradetypes.ModuleName,
 		vestingtypes.ModuleName,
-
+		nft.ModuleName,
 		dysonmoduletypes.ModuleName,
 		namesmoduletypes.ModuleName,
 	)
@@ -644,7 +659,7 @@ func New(
 		paramstypes.ModuleName,
 		upgradetypes.ModuleName,
 		vestingtypes.ModuleName,
-
+		nft.ModuleName,
 		dysonmoduletypes.ModuleName,
 		namesmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis

@@ -21,6 +21,7 @@ import (
 	cosmosgovv1keeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
 	cosmosgroupv1keeper "github.com/cosmos/cosmos-sdk/x/group/keeper"
 	cosmosmintv1beta1keeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
+	nftkeeper "github.com/cosmos/cosmos-sdk/x/nft/keeper"
 	cosmosparamsv1beta1keeper "github.com/cosmos/cosmos-sdk/x/params/keeper"
 	cosmosslashingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/slashing/keeper"
 	cosmosstakingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
@@ -58,6 +59,7 @@ type (
 		cosmosupgradev1beta1keeper      cosmosupgradev1beta1keeper.Keeper
 		cosmoscrisisv1beta1keeper       cosmoscrisisv1beta1keeper.Keeper
 		cosmosparamsv1beta1keeper       cosmosparamsv1beta1keeper.Keeper
+		cosmosnftv1beta1keeper          nftkeeper.Keeper
 
 		registry cdctypes.InterfaceRegistry
 
@@ -87,6 +89,8 @@ func NewKeeper(
 	cosmosupgradev1beta1keeper cosmosupgradev1beta1keeper.Keeper,
 	cosmoscrisisv1beta1keeper cosmoscrisisv1beta1keeper.Keeper,
 	cosmosparamsv1beta1keeper cosmosparamsv1beta1keeper.Keeper,
+	cosmosnftv1beta1keeper nftkeeper.Keeper,
+
 	registry cdctypes.InterfaceRegistry,
 ) *Keeper {
 	return &Keeper{
@@ -112,8 +116,10 @@ func NewKeeper(
 		cosmosupgradev1beta1keeper:      cosmosupgradev1beta1keeper,
 		cosmoscrisisv1beta1keeper:       cosmoscrisisv1beta1keeper,
 		cosmosparamsv1beta1keeper:       cosmosparamsv1beta1keeper,
+		cosmosnftv1beta1keeper:          cosmosnftv1beta1keeper,
 		registry:                        registry,
-		currentDepth:                    0,
+
+		currentDepth: 0,
 	}
 }
 
