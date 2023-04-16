@@ -2,8 +2,8 @@ package keeper
 
 import (
 	"context"
-	"fmt"
 	b64 "encoding/base64"
+	"fmt"
 	"github.com/org/dyson/x/dyson/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -30,6 +30,6 @@ func (k Keeper) EncodeProtoAny(goCtx context.Context, req *types.QueryEncodeProt
 	}
 
 	return &types.QueryEncodeProtoAnyResponse{
-		TypeUrl:     req.TypeUrl,
-		Value: b64.StdEncoding.EncodeToString(a.Value)}, nil
+		TypeUrl: req.TypeUrl,
+		Value:   b64.StdEncoding.EncodeToString(a.Value)}, nil
 }

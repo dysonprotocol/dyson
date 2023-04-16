@@ -2,8 +2,8 @@ package cli
 
 import (
 	"context"
-	"encoding/json"
 	"encoding/hex"
+	"encoding/json"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 

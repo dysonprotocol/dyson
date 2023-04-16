@@ -4855,3 +4855,47 @@ func (rpcservice *RpcService) Namessendmsgburncoins(_ *http.Request, req *RpcReq
 	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
 	return nil
 }
+
+// Keeper: nameskeeper
+// Types: namestypes
+// github.com/org/dyson/x/names/keeper
+func (rpcservice *RpcService) Namessendmsgsetnftclass(_ *http.Request, req *RpcReq, response *string) (err error) {
+	//handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).SetNftClass
+	var msg namestypes.MsgSetNftClass
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	handler := nameskeeper.NewMsgServerImpl(rpcservice.k.nameskeeper).SetNftClass
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), &msg)
+	if err != nil {
+		return err
+	}
+	Write()
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}

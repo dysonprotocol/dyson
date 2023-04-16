@@ -36,7 +36,7 @@ func (k msgServer) DeployAutonomousScript(goCtx context.Context, msg *types.MsgD
 		ctx,
 		script,
 	)
-	ctx.GasMeter().ConsumeGas(DeployAutonomousScriptGasCost, "DeployAutonomousScript") 
+	ctx.GasMeter().ConsumeGas(DeployAutonomousScriptGasCost, "DeployAutonomousScript")
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent("DeployAutonomousScript",
 			sdk.NewAttribute("address", scriptAddress),

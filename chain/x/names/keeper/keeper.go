@@ -9,6 +9,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
+	nftkeeper "github.com/cosmos/cosmos-sdk/x/nft/keeper"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/org/dyson/x/names/types"
 	"github.com/tendermint/tendermint/libs/log"
@@ -23,6 +24,7 @@ type (
 
 		accountKeeper types.AccountKeeper
 		bankKeeper    bankkeeper.Keeper
+		nftKeeper     nftkeeper.Keeper
 	}
 )
 
@@ -34,6 +36,8 @@ func NewKeeper(
 
 	accountKeeper types.AccountKeeper,
 	bankKeeper bankkeeper.Keeper,
+	nftKeeper nftkeeper.Keeper,
+
 ) *Keeper {
 	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
@@ -46,7 +50,9 @@ func NewKeeper(
 		storeKey:      storeKey,
 		memKey:        memKey,
 		paramstore:    ps,
-		accountKeeper: accountKeeper, bankKeeper: bankKeeper,
+		accountKeeper: accountKeeper,
+		bankKeeper:    bankKeeper,
+		nftKeeper:     nftKeeper,
 	}
 }
 

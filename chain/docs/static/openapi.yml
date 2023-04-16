@@ -76513,6 +76513,8 @@ definitions:
             format: uint64
           auto_renew:
             type: boolean
+  names.MsgSetNftClassResponse:
+    type: object
   names.MsgSetPriceAndExtendResponse:
     type: object
   names.MsgUpdateNameResponse:

@@ -28830,5 +28830,51 @@
     },
     "rest_path": null,
     "http_rules": null
+  },
+  "names/sendMsgSetNftClass": {
+    "module_name": "names",
+    "name": "SetNftClass",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgSetNftClass",
+      "definitions": {
+        "MsgSetNftClass": {
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "symbol": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "uri": {
+              "type": "string"
+            },
+            "urihash": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Set Nft Class"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
   }
 }

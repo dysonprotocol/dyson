@@ -506,6 +506,7 @@ func New(
 
 		app.AccountKeeper,
 		app.BankKeeper,
+		app.NFTKeeper,
 	)
 	namesModule := namesmodule.NewAppModule(appCodec, app.NamesKeeper, app.AccountKeeper, app.BankKeeper)
 

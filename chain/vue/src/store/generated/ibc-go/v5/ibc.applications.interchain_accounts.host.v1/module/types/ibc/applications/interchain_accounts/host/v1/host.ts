@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { Writer, Reader } from "protobufjs/minimal";
+import { Writer, Reader } from 'protobufjs/minimal'
 
-export const protobufPackage = "ibc.applications.interchain_accounts.host.v1";
+export const protobufPackage = 'ibc.applications.interchain_accounts.host.v1'
 
 /**
  * Params defines the set of on-chain interchain accounts parameters.
@@ -9,92 +9,92 @@ export const protobufPackage = "ibc.applications.interchain_accounts.host.v1";
  */
 export interface Params {
   /** host_enabled enables or disables the host submodule. */
-  host_enabled: boolean;
+  host_enabled: boolean
   /** allow_messages defines a list of sdk message typeURLs allowed to be executed on a host chain. */
-  allow_messages: string[];
+  allow_messages: string[]
 }
 
-const baseParams: object = { host_enabled: false, allow_messages: "" };
+const baseParams: object = { host_enabled: false, allow_messages: '' }
 
 export const Params = {
   encode(message: Params, writer: Writer = Writer.create()): Writer {
     if (message.host_enabled === true) {
-      writer.uint32(8).bool(message.host_enabled);
+      writer.uint32(8).bool(message.host_enabled)
     }
     for (const v of message.allow_messages) {
-      writer.uint32(18).string(v!);
+      writer.uint32(18).string(v!)
     }
-    return writer;
+    return writer
   },
 
   decode(input: Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseParams } as Params;
-    message.allow_messages = [];
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseParams } as Params
+    message.allow_messages = []
     while (reader.pos < end) {
-      const tag = reader.uint32();
+      const tag = reader.uint32()
       switch (tag >>> 3) {
         case 1:
-          message.host_enabled = reader.bool();
-          break;
+          message.host_enabled = reader.bool()
+          break
         case 2:
-          message.allow_messages.push(reader.string());
-          break;
+          message.allow_messages.push(reader.string())
+          break
         default:
-          reader.skipType(tag & 7);
-          break;
+          reader.skipType(tag & 7)
+          break
       }
     }
-    return message;
+    return message
   },
 
   fromJSON(object: any): Params {
-    const message = { ...baseParams } as Params;
-    message.allow_messages = [];
+    const message = { ...baseParams } as Params
+    message.allow_messages = []
     if (object.host_enabled !== undefined && object.host_enabled !== null) {
-      message.host_enabled = Boolean(object.host_enabled);
+      message.host_enabled = Boolean(object.host_enabled)
     } else {
-      message.host_enabled = false;
+      message.host_enabled = false
     }
     if (object.allow_messages !== undefined && object.allow_messages !== null) {
       for (const e of object.allow_messages) {
-        message.allow_messages.push(String(e));
+        message.allow_messages.push(String(e))
       }
     }
-    return message;
+    return message
   },
 
   toJSON(message: Params): unknown {
-    const obj: any = {};
+    const obj: any = {}
     message.host_enabled !== undefined &&
-      (obj.host_enabled = message.host_enabled);
+      (obj.host_enabled = message.host_enabled)
     if (message.allow_messages) {
-      obj.allow_messages = message.allow_messages.map((e) => e);
+      obj.allow_messages = message.allow_messages.map((e) => e)
     } else {
-      obj.allow_messages = [];
+      obj.allow_messages = []
     }
-    return obj;
+    return obj
   },
 
   fromPartial(object: DeepPartial<Params>): Params {
-    const message = { ...baseParams } as Params;
-    message.allow_messages = [];
+    const message = { ...baseParams } as Params
+    message.allow_messages = []
     if (object.host_enabled !== undefined && object.host_enabled !== null) {
-      message.host_enabled = object.host_enabled;
+      message.host_enabled = object.host_enabled
     } else {
-      message.host_enabled = false;
+      message.host_enabled = false
     }
     if (object.allow_messages !== undefined && object.allow_messages !== null) {
       for (const e of object.allow_messages) {
-        message.allow_messages.push(e);
+        message.allow_messages.push(e)
       }
     }
-    return message;
+    return message
   },
-};
+}
 
-type Builtin = Date | Function | Uint8Array | string | number | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | undefined
 export type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
@@ -103,4 +103,4 @@ export type DeepPartial<T> = T extends Builtin
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+  : Partial<T>

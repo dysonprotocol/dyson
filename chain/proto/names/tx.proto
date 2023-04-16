@@ -21,6 +21,7 @@ service Msg {
   rpc Buy(MsgBuy) returns (MsgBuyResponse);
   rpc MintCoins(MsgMintCoins) returns (MsgMintCoinsResponse);
   rpc BurnCoins(MsgBurnCoins) returns (MsgBurnCoinsResponse);
+  rpc SetNftClass(MsgSetNftClass) returns (MsgSetNftClassResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -114,6 +115,19 @@ message MsgBurnCoins {
 }
 
 message MsgBurnCoinsResponse {
+}
+
+message MsgSetNftClass {
+  string owner = 1;
+  string id = 2;
+  string name = 3;
+  string symbol = 4;
+  string description = 5;
+  string uri = 6;
+  string urihash = 7;
+}
+
+message MsgSetNftClassResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

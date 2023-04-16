@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/MsgSetNftClassResponse",
+    "definitions": {
+        "MsgSetNftClassResponse": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Msg Set Nft Class Response"
+        }
+    }
+}

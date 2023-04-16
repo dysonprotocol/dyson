@@ -1,21 +1,21 @@
 /* eslint-disable */
-import { Reader, util, configure, Writer } from "protobufjs/minimal";
-import * as Long from "long";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Period } from "../../../cosmos/vesting/v1beta1/vesting";
+import { Reader, util, configure, Writer } from 'protobufjs/minimal'
+import * as Long from 'long'
+import { Coin } from '../../../cosmos/base/v1beta1/coin'
+import { Period } from '../../../cosmos/vesting/v1beta1/vesting'
 
-export const protobufPackage = "cosmos.vesting.v1beta1";
+export const protobufPackage = 'cosmos.vesting.v1beta1'
 
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
  * account.
  */
 export interface MsgCreateVestingAccount {
-  from_address: string;
-  to_address: string;
-  amount: Coin[];
-  end_time: number;
-  delayed: boolean;
+  from_address: string
+  to_address: string
+  amount: Coin[]
+  end_time: number
+  delayed: boolean
 }
 
 /** MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount response type. */
@@ -28,9 +28,9 @@ export interface MsgCreateVestingAccountResponse {}
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCreatePermanentLockedAccount {
-  from_address: string;
-  to_address: string;
-  amount: Coin[];
+  from_address: string
+  to_address: string
+  amount: Coin[]
 }
 
 /**
@@ -47,10 +47,10 @@ export interface MsgCreatePermanentLockedAccountResponse {}
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCreatePeriodicVestingAccount {
-  from_address: string;
-  to_address: string;
-  start_time: number;
-  vesting_periods: Period[];
+  from_address: string
+  to_address: string
+  start_time: number
+  vesting_periods: Period[]
 }
 
 /**
@@ -62,114 +62,114 @@ export interface MsgCreatePeriodicVestingAccount {
 export interface MsgCreatePeriodicVestingAccountResponse {}
 
 const baseMsgCreateVestingAccount: object = {
-  from_address: "",
-  to_address: "",
+  from_address: '',
+  to_address: '',
   end_time: 0,
   delayed: false,
-};
+}
 
 export const MsgCreateVestingAccount = {
   encode(
     message: MsgCreateVestingAccount,
     writer: Writer = Writer.create()
   ): Writer {
-    if (message.from_address !== "") {
-      writer.uint32(10).string(message.from_address);
+    if (message.from_address !== '') {
+      writer.uint32(10).string(message.from_address)
     }
-    if (message.to_address !== "") {
-      writer.uint32(18).string(message.to_address);
+    if (message.to_address !== '') {
+      writer.uint32(18).string(message.to_address)
     }
     for (const v of message.amount) {
-      Coin.encode(v!, writer.uint32(26).fork()).ldelim();
+      Coin.encode(v!, writer.uint32(26).fork()).ldelim()
     }
     if (message.end_time !== 0) {
-      writer.uint32(32).int64(message.end_time);
+      writer.uint32(32).int64(message.end_time)
     }
     if (message.delayed === true) {
-      writer.uint32(40).bool(message.delayed);
+      writer.uint32(40).bool(message.delayed)
     }
-    return writer;
+    return writer
   },
 
   decode(input: Reader | Uint8Array, length?: number): MsgCreateVestingAccount {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
     const message = {
       ...baseMsgCreateVestingAccount,
-    } as MsgCreateVestingAccount;
-    message.amount = [];
+    } as MsgCreateVestingAccount
+    message.amount = []
     while (reader.pos < end) {
-      const tag = reader.uint32();
+      const tag = reader.uint32()
       switch (tag >>> 3) {
         case 1:
-          message.from_address = reader.string();
-          break;
+          message.from_address = reader.string()
+          break
         case 2:
-          message.to_address = reader.string();
-          break;
+          message.to_address = reader.string()
+          break
         case 3:
-          message.amount.push(Coin.decode(reader, reader.uint32()));
-          break;
+          message.amount.push(Coin.decode(reader, reader.uint32()))
+          break
         case 4:
-          message.end_time = longToNumber(reader.int64() as Long);
-          break;
+          message.end_time = longToNumber(reader.int64() as Long)
+          break
         case 5:
-          message.delayed = reader.bool();
-          break;
+          message.delayed = reader.bool()
+          break
         default:
-          reader.skipType(tag & 7);
-          break;
+          reader.skipType(tag & 7)
+          break
       }
     }
-    return message;
+    return message
   },
 
   fromJSON(object: any): MsgCreateVestingAccount {
     const message = {
       ...baseMsgCreateVestingAccount,
-    } as MsgCreateVestingAccount;
-    message.amount = [];
+    } as MsgCreateVestingAccount
+    message.amount = []
     if (object.from_address !== undefined && object.from_address !== null) {
-      message.from_address = String(object.from_address);
+      message.from_address = String(object.from_address)
     } else {
-      message.from_address = "";
+      message.from_address = ''
     }
     if (object.to_address !== undefined && object.to_address !== null) {
-      message.to_address = String(object.to_address);
+      message.to_address = String(object.to_address)
     } else {
-      message.to_address = "";
+      message.to_address = ''
     }
     if (object.amount !== undefined && object.amount !== null) {
       for (const e of object.amount) {
-        message.amount.push(Coin.fromJSON(e));
+        message.amount.push(Coin.fromJSON(e))
       }
     }
     if (object.end_time !== undefined && object.end_time !== null) {
-      message.end_time = Number(object.end_time);
+      message.end_time = Number(object.end_time)
     } else {
-      message.end_time = 0;
+      message.end_time = 0
     }
     if (object.delayed !== undefined && object.delayed !== null) {
-      message.delayed = Boolean(object.delayed);
+      message.delayed = Boolean(object.delayed)
     } else {
-      message.delayed = false;
+      message.delayed = false
     }
-    return message;
+    return message
   },
 
   toJSON(message: MsgCreateVestingAccount): unknown {
-    const obj: any = {};
+    const obj: any = {}
     message.from_address !== undefined &&
-      (obj.from_address = message.from_address);
-    message.to_address !== undefined && (obj.to_address = message.to_address);
+      (obj.from_address = message.from_address)
+    message.to_address !== undefined && (obj.to_address = message.to_address)
     if (message.amount) {
-      obj.amount = message.amount.map((e) => (e ? Coin.toJSON(e) : undefined));
+      obj.amount = message.amount.map((e) => (e ? Coin.toJSON(e) : undefined))
     } else {
-      obj.amount = [];
+      obj.amount = []
     }
-    message.end_time !== undefined && (obj.end_time = message.end_time);
-    message.delayed !== undefined && (obj.delayed = message.delayed);
-    return obj;
+    message.end_time !== undefined && (obj.end_time = message.end_time)
+    message.delayed !== undefined && (obj.delayed = message.delayed)
+    return obj
   },
 
   fromPartial(
@@ -177,77 +177,77 @@ export const MsgCreateVestingAccount = {
   ): MsgCreateVestingAccount {
     const message = {
       ...baseMsgCreateVestingAccount,
-    } as MsgCreateVestingAccount;
-    message.amount = [];
+    } as MsgCreateVestingAccount
+    message.amount = []
     if (object.from_address !== undefined && object.from_address !== null) {
-      message.from_address = object.from_address;
+      message.from_address = object.from_address
     } else {
-      message.from_address = "";
+      message.from_address = ''
     }
     if (object.to_address !== undefined && object.to_address !== null) {
-      message.to_address = object.to_address;
+      message.to_address = object.to_address
     } else {
-      message.to_address = "";
+      message.to_address = ''
     }
     if (object.amount !== undefined && object.amount !== null) {
       for (const e of object.amount) {
-        message.amount.push(Coin.fromPartial(e));
+        message.amount.push(Coin.fromPartial(e))
       }
     }
     if (object.end_time !== undefined && object.end_time !== null) {
-      message.end_time = object.end_time;
+      message.end_time = object.end_time
     } else {
-      message.end_time = 0;
+      message.end_time = 0
     }
     if (object.delayed !== undefined && object.delayed !== null) {
-      message.delayed = object.delayed;
+      message.delayed = object.delayed
     } else {
-      message.delayed = false;
+      message.delayed = false
     }
-    return message;
+    return message
   },
-};
+}
 
-const baseMsgCreateVestingAccountResponse: object = {};
+const baseMsgCreateVestingAccountResponse: object = {}
 
 export const MsgCreateVestingAccountResponse = {
   encode(
     _: MsgCreateVestingAccountResponse,
     writer: Writer = Writer.create()
   ): Writer {
-    return writer;
+    return writer
   },
 
   decode(
     input: Reader | Uint8Array,
     length?: number
   ): MsgCreateVestingAccountResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
     const message = {
       ...baseMsgCreateVestingAccountResponse,
-    } as MsgCreateVestingAccountResponse;
+    } as MsgCreateVestingAccountResponse
     while (reader.pos < end) {
-      const tag = reader.uint32();
+      const tag = reader.uint32()
       switch (tag >>> 3) {
         default:
-          reader.skipType(tag & 7);
-          break;
+          reader.skipType(tag & 7)
+          break
       }
     }
-    return message;
+    return message
   },
 
   fromJSON(_: any): MsgCreateVestingAccountResponse {
     const message = {
       ...baseMsgCreateVestingAccountResponse,
-    } as MsgCreateVestingAccountResponse;
-    return message;
+    } as MsgCreateVestingAccountResponse
+    return message
   },
 
   toJSON(_: MsgCreateVestingAccountResponse): unknown {
-    const obj: any = {};
-    return obj;
+    const obj: any = {}
+    return obj
   },
 
   fromPartial(
@@ -255,97 +255,97 @@ export const MsgCreateVestingAccountResponse = {
   ): MsgCreateVestingAccountResponse {
     const message = {
       ...baseMsgCreateVestingAccountResponse,
-    } as MsgCreateVestingAccountResponse;
-    return message;
+    } as MsgCreateVestingAccountResponse
+    return message
   },
-};
+}
 
 const baseMsgCreatePermanentLockedAccount: object = {
-  from_address: "",
-  to_address: "",
-};
+  from_address: '',
+  to_address: '',
+}
 
 export const MsgCreatePermanentLockedAccount = {
   encode(
     message: MsgCreatePermanentLockedAccount,
     writer: Writer = Writer.create()
   ): Writer {
-    if (message.from_address !== "") {
-      writer.uint32(10).string(message.from_address);
+    if (message.from_address !== '') {
+      writer.uint32(10).string(message.from_address)
     }
-    if (message.to_address !== "") {
-      writer.uint32(18).string(message.to_address);
+    if (message.to_address !== '') {
+      writer.uint32(18).string(message.to_address)
     }
     for (const v of message.amount) {
-      Coin.encode(v!, writer.uint32(26).fork()).ldelim();
+      Coin.encode(v!, writer.uint32(26).fork()).ldelim()
     }
-    return writer;
+    return writer
   },
 
   decode(
     input: Reader | Uint8Array,
     length?: number
   ): MsgCreatePermanentLockedAccount {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
     const message = {
       ...baseMsgCreatePermanentLockedAccount,
-    } as MsgCreatePermanentLockedAccount;
-    message.amount = [];
+    } as MsgCreatePermanentLockedAccount
+    message.amount = []
     while (reader.pos < end) {
-      const tag = reader.uint32();
+      const tag = reader.uint32()
       switch (tag >>> 3) {
         case 1:
-          message.from_address = reader.string();
-          break;
+          message.from_address = reader.string()
+          break
         case 2:
-          message.to_address = reader.string();
-          break;
+          message.to_address = reader.string()
+          break
         case 3:
-          message.amount.push(Coin.decode(reader, reader.uint32()));
-          break;
+          message.amount.push(Coin.decode(reader, reader.uint32()))
+          break
         default:
-          reader.skipType(tag & 7);
-          break;
+          reader.skipType(tag & 7)
+          break
       }
     }
-    return message;
+    return message
   },
 
   fromJSON(object: any): MsgCreatePermanentLockedAccount {
     const message = {
       ...baseMsgCreatePermanentLockedAccount,
-    } as MsgCreatePermanentLockedAccount;
-    message.amount = [];
+    } as MsgCreatePermanentLockedAccount
+    message.amount = []
     if (object.from_address !== undefined && object.from_address !== null) {
-      message.from_address = String(object.from_address);
+      message.from_address = String(object.from_address)
     } else {
-      message.from_address = "";
+      message.from_address = ''
     }
     if (object.to_address !== undefined && object.to_address !== null) {
-      message.to_address = String(object.to_address);
+      message.to_address = String(object.to_address)
     } else {
-      message.to_address = "";
+      message.to_address = ''
     }
     if (object.amount !== undefined && object.amount !== null) {
       for (const e of object.amount) {
-        message.amount.push(Coin.fromJSON(e));
+        message.amount.push(Coin.fromJSON(e))
       }
     }
-    return message;
+    return message
   },
 
   toJSON(message: MsgCreatePermanentLockedAccount): unknown {
-    const obj: any = {};
+    const obj: any = {}
     message.from_address !== undefined &&
-      (obj.from_address = message.from_address);
-    message.to_address !== undefined && (obj.to_address = message.to_address);
+      (obj.from_address = message.from_address)
+    message.to_address !== undefined && (obj.to_address = message.to_address)
     if (message.amount) {
-      obj.amount = message.amount.map((e) => (e ? Coin.toJSON(e) : undefined));
+      obj.amount = message.amount.map((e) => (e ? Coin.toJSON(e) : undefined))
     } else {
-      obj.amount = [];
+      obj.amount = []
     }
-    return obj;
+    return obj
   },
 
   fromPartial(
@@ -353,67 +353,67 @@ export const MsgCreatePermanentLockedAccount = {
   ): MsgCreatePermanentLockedAccount {
     const message = {
       ...baseMsgCreatePermanentLockedAccount,
-    } as MsgCreatePermanentLockedAccount;
-    message.amount = [];
+    } as MsgCreatePermanentLockedAccount
+    message.amount = []
     if (object.from_address !== undefined && object.from_address !== null) {
-      message.from_address = object.from_address;
+      message.from_address = object.from_address
     } else {
-      message.from_address = "";
+      message.from_address = ''
     }
     if (object.to_address !== undefined && object.to_address !== null) {
-      message.to_address = object.to_address;
+      message.to_address = object.to_address
     } else {
-      message.to_address = "";
+      message.to_address = ''
     }
     if (object.amount !== undefined && object.amount !== null) {
       for (const e of object.amount) {
-        message.amount.push(Coin.fromPartial(e));
+        message.amount.push(Coin.fromPartial(e))
       }
     }
-    return message;
+    return message
   },
-};
+}
 
-const baseMsgCreatePermanentLockedAccountResponse: object = {};
+const baseMsgCreatePermanentLockedAccountResponse: object = {}
 
 export const MsgCreatePermanentLockedAccountResponse = {
   encode(
     _: MsgCreatePermanentLockedAccountResponse,
     writer: Writer = Writer.create()
   ): Writer {
-    return writer;
+    return writer
   },
 
   decode(
     input: Reader | Uint8Array,
     length?: number
   ): MsgCreatePermanentLockedAccountResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
     const message = {
       ...baseMsgCreatePermanentLockedAccountResponse,
-    } as MsgCreatePermanentLockedAccountResponse;
+    } as MsgCreatePermanentLockedAccountResponse
     while (reader.pos < end) {
-      const tag = reader.uint32();
+      const tag = reader.uint32()
       switch (tag >>> 3) {
         default:
-          reader.skipType(tag & 7);
-          break;
+          reader.skipType(tag & 7)
+          break
       }
     }
-    return message;
+    return message
   },
 
   fromJSON(_: any): MsgCreatePermanentLockedAccountResponse {
     const message = {
       ...baseMsgCreatePermanentLockedAccountResponse,
-    } as MsgCreatePermanentLockedAccountResponse;
-    return message;
+    } as MsgCreatePermanentLockedAccountResponse
+    return message
   },
 
   toJSON(_: MsgCreatePermanentLockedAccountResponse): unknown {
-    const obj: any = {};
-    return obj;
+    const obj: any = {}
+    return obj
   },
 
   fromPartial(
@@ -421,115 +421,115 @@ export const MsgCreatePermanentLockedAccountResponse = {
   ): MsgCreatePermanentLockedAccountResponse {
     const message = {
       ...baseMsgCreatePermanentLockedAccountResponse,
-    } as MsgCreatePermanentLockedAccountResponse;
-    return message;
+    } as MsgCreatePermanentLockedAccountResponse
+    return message
   },
-};
+}
 
 const baseMsgCreatePeriodicVestingAccount: object = {
-  from_address: "",
-  to_address: "",
+  from_address: '',
+  to_address: '',
   start_time: 0,
-};
+}
 
 export const MsgCreatePeriodicVestingAccount = {
   encode(
     message: MsgCreatePeriodicVestingAccount,
     writer: Writer = Writer.create()
   ): Writer {
-    if (message.from_address !== "") {
-      writer.uint32(10).string(message.from_address);
+    if (message.from_address !== '') {
+      writer.uint32(10).string(message.from_address)
     }
-    if (message.to_address !== "") {
-      writer.uint32(18).string(message.to_address);
+    if (message.to_address !== '') {
+      writer.uint32(18).string(message.to_address)
     }
     if (message.start_time !== 0) {
-      writer.uint32(24).int64(message.start_time);
+      writer.uint32(24).int64(message.start_time)
     }
     for (const v of message.vesting_periods) {
-      Period.encode(v!, writer.uint32(34).fork()).ldelim();
+      Period.encode(v!, writer.uint32(34).fork()).ldelim()
     }
-    return writer;
+    return writer
   },
 
   decode(
     input: Reader | Uint8Array,
     length?: number
   ): MsgCreatePeriodicVestingAccount {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
     const message = {
       ...baseMsgCreatePeriodicVestingAccount,
-    } as MsgCreatePeriodicVestingAccount;
-    message.vesting_periods = [];
+    } as MsgCreatePeriodicVestingAccount
+    message.vesting_periods = []
     while (reader.pos < end) {
-      const tag = reader.uint32();
+      const tag = reader.uint32()
       switch (tag >>> 3) {
         case 1:
-          message.from_address = reader.string();
-          break;
+          message.from_address = reader.string()
+          break
         case 2:
-          message.to_address = reader.string();
-          break;
+          message.to_address = reader.string()
+          break
         case 3:
-          message.start_time = longToNumber(reader.int64() as Long);
-          break;
+          message.start_time = longToNumber(reader.int64() as Long)
+          break
         case 4:
-          message.vesting_periods.push(Period.decode(reader, reader.uint32()));
-          break;
+          message.vesting_periods.push(Period.decode(reader, reader.uint32()))
+          break
         default:
-          reader.skipType(tag & 7);
-          break;
+          reader.skipType(tag & 7)
+          break
       }
     }
-    return message;
+    return message
   },
 
   fromJSON(object: any): MsgCreatePeriodicVestingAccount {
     const message = {
       ...baseMsgCreatePeriodicVestingAccount,
-    } as MsgCreatePeriodicVestingAccount;
-    message.vesting_periods = [];
+    } as MsgCreatePeriodicVestingAccount
+    message.vesting_periods = []
     if (object.from_address !== undefined && object.from_address !== null) {
-      message.from_address = String(object.from_address);
+      message.from_address = String(object.from_address)
     } else {
-      message.from_address = "";
+      message.from_address = ''
     }
     if (object.to_address !== undefined && object.to_address !== null) {
-      message.to_address = String(object.to_address);
+      message.to_address = String(object.to_address)
     } else {
-      message.to_address = "";
+      message.to_address = ''
     }
     if (object.start_time !== undefined && object.start_time !== null) {
-      message.start_time = Number(object.start_time);
+      message.start_time = Number(object.start_time)
     } else {
-      message.start_time = 0;
+      message.start_time = 0
     }
     if (
       object.vesting_periods !== undefined &&
       object.vesting_periods !== null
     ) {
       for (const e of object.vesting_periods) {
-        message.vesting_periods.push(Period.fromJSON(e));
+        message.vesting_periods.push(Period.fromJSON(e))
       }
     }
-    return message;
+    return message
   },
 
   toJSON(message: MsgCreatePeriodicVestingAccount): unknown {
-    const obj: any = {};
+    const obj: any = {}
     message.from_address !== undefined &&
-      (obj.from_address = message.from_address);
-    message.to_address !== undefined && (obj.to_address = message.to_address);
-    message.start_time !== undefined && (obj.start_time = message.start_time);
+      (obj.from_address = message.from_address)
+    message.to_address !== undefined && (obj.to_address = message.to_address)
+    message.start_time !== undefined && (obj.start_time = message.start_time)
     if (message.vesting_periods) {
       obj.vesting_periods = message.vesting_periods.map((e) =>
         e ? Period.toJSON(e) : undefined
-      );
+      )
     } else {
-      obj.vesting_periods = [];
+      obj.vesting_periods = []
     }
-    return obj;
+    return obj
   },
 
   fromPartial(
@@ -537,75 +537,75 @@ export const MsgCreatePeriodicVestingAccount = {
   ): MsgCreatePeriodicVestingAccount {
     const message = {
       ...baseMsgCreatePeriodicVestingAccount,
-    } as MsgCreatePeriodicVestingAccount;
-    message.vesting_periods = [];
+    } as MsgCreatePeriodicVestingAccount
+    message.vesting_periods = []
     if (object.from_address !== undefined && object.from_address !== null) {
-      message.from_address = object.from_address;
+      message.from_address = object.from_address
     } else {
-      message.from_address = "";
+      message.from_address = ''
     }
     if (object.to_address !== undefined && object.to_address !== null) {
-      message.to_address = object.to_address;
+      message.to_address = object.to_address
     } else {
-      message.to_address = "";
+      message.to_address = ''
     }
     if (object.start_time !== undefined && object.start_time !== null) {
-      message.start_time = object.start_time;
+      message.start_time = object.start_time
     } else {
-      message.start_time = 0;
+      message.start_time = 0
     }
     if (
       object.vesting_periods !== undefined &&
       object.vesting_periods !== null
     ) {
       for (const e of object.vesting_periods) {
-        message.vesting_periods.push(Period.fromPartial(e));
+        message.vesting_periods.push(Period.fromPartial(e))
       }
     }
-    return message;
+    return message
   },
-};
+}
 
-const baseMsgCreatePeriodicVestingAccountResponse: object = {};
+const baseMsgCreatePeriodicVestingAccountResponse: object = {}
 
 export const MsgCreatePeriodicVestingAccountResponse = {
   encode(
     _: MsgCreatePeriodicVestingAccountResponse,
     writer: Writer = Writer.create()
   ): Writer {
-    return writer;
+    return writer
   },
 
   decode(
     input: Reader | Uint8Array,
     length?: number
   ): MsgCreatePeriodicVestingAccountResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
     const message = {
       ...baseMsgCreatePeriodicVestingAccountResponse,
-    } as MsgCreatePeriodicVestingAccountResponse;
+    } as MsgCreatePeriodicVestingAccountResponse
     while (reader.pos < end) {
-      const tag = reader.uint32();
+      const tag = reader.uint32()
       switch (tag >>> 3) {
         default:
-          reader.skipType(tag & 7);
-          break;
+          reader.skipType(tag & 7)
+          break
       }
     }
-    return message;
+    return message
   },
 
   fromJSON(_: any): MsgCreatePeriodicVestingAccountResponse {
     const message = {
       ...baseMsgCreatePeriodicVestingAccountResponse,
-    } as MsgCreatePeriodicVestingAccountResponse;
-    return message;
+    } as MsgCreatePeriodicVestingAccountResponse
+    return message
   },
 
   toJSON(_: MsgCreatePeriodicVestingAccountResponse): unknown {
-    const obj: any = {};
-    return obj;
+    const obj: any = {}
+    return obj
   },
 
   fromPartial(
@@ -613,10 +613,10 @@ export const MsgCreatePeriodicVestingAccountResponse = {
   ): MsgCreatePeriodicVestingAccountResponse {
     const message = {
       ...baseMsgCreatePeriodicVestingAccountResponse,
-    } as MsgCreatePeriodicVestingAccountResponse;
-    return message;
+    } as MsgCreatePeriodicVestingAccountResponse
+    return message
   },
-};
+}
 
 /** Msg defines the bank Msg service. */
 export interface Msg {
@@ -626,7 +626,7 @@ export interface Msg {
    */
   CreateVestingAccount(
     request: MsgCreateVestingAccount
-  ): Promise<MsgCreateVestingAccountResponse>;
+  ): Promise<MsgCreateVestingAccountResponse>
   /**
    * CreatePermanentLockedAccount defines a method that enables creating a permanent
    * locked account.
@@ -635,7 +635,7 @@ export interface Msg {
    */
   CreatePermanentLockedAccount(
     request: MsgCreatePermanentLockedAccount
-  ): Promise<MsgCreatePermanentLockedAccountResponse>;
+  ): Promise<MsgCreatePermanentLockedAccountResponse>
   /**
    * CreatePeriodicVestingAccount defines a method that enables creating a
    * periodic vesting account.
@@ -644,54 +644,54 @@ export interface Msg {
    */
   CreatePeriodicVestingAccount(
     request: MsgCreatePeriodicVestingAccount
-  ): Promise<MsgCreatePeriodicVestingAccountResponse>;
+  ): Promise<MsgCreatePeriodicVestingAccountResponse>
 }
 
 export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
+  private readonly rpc: Rpc
   constructor(rpc: Rpc) {
-    this.rpc = rpc;
+    this.rpc = rpc
   }
   CreateVestingAccount(
     request: MsgCreateVestingAccount
   ): Promise<MsgCreateVestingAccountResponse> {
-    const data = MsgCreateVestingAccount.encode(request).finish();
+    const data = MsgCreateVestingAccount.encode(request).finish()
     const promise = this.rpc.request(
-      "cosmos.vesting.v1beta1.Msg",
-      "CreateVestingAccount",
+      'cosmos.vesting.v1beta1.Msg',
+      'CreateVestingAccount',
       data
-    );
+    )
     return promise.then((data) =>
       MsgCreateVestingAccountResponse.decode(new Reader(data))
-    );
+    )
   }
 
   CreatePermanentLockedAccount(
     request: MsgCreatePermanentLockedAccount
   ): Promise<MsgCreatePermanentLockedAccountResponse> {
-    const data = MsgCreatePermanentLockedAccount.encode(request).finish();
+    const data = MsgCreatePermanentLockedAccount.encode(request).finish()
     const promise = this.rpc.request(
-      "cosmos.vesting.v1beta1.Msg",
-      "CreatePermanentLockedAccount",
+      'cosmos.vesting.v1beta1.Msg',
+      'CreatePermanentLockedAccount',
       data
-    );
+    )
     return promise.then((data) =>
       MsgCreatePermanentLockedAccountResponse.decode(new Reader(data))
-    );
+    )
   }
 
   CreatePeriodicVestingAccount(
     request: MsgCreatePeriodicVestingAccount
   ): Promise<MsgCreatePeriodicVestingAccountResponse> {
-    const data = MsgCreatePeriodicVestingAccount.encode(request).finish();
+    const data = MsgCreatePeriodicVestingAccount.encode(request).finish()
     const promise = this.rpc.request(
-      "cosmos.vesting.v1beta1.Msg",
-      "CreatePeriodicVestingAccount",
+      'cosmos.vesting.v1beta1.Msg',
+      'CreatePeriodicVestingAccount',
       data
-    );
+    )
     return promise.then((data) =>
       MsgCreatePeriodicVestingAccountResponse.decode(new Reader(data))
-    );
+    )
   }
 }
 
@@ -700,20 +700,20 @@ interface Rpc {
     service: string,
     method: string,
     data: Uint8Array
-  ): Promise<Uint8Array>;
+  ): Promise<Uint8Array>
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
+declare var self: any | undefined
+declare var window: any | undefined
 var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
-  throw "Unable to locate global object";
-})();
+  if (typeof globalThis !== 'undefined') return globalThis
+  if (typeof self !== 'undefined') return self
+  if (typeof window !== 'undefined') return window
+  if (typeof global !== 'undefined') return global
+  throw 'Unable to locate global object'
+})()
 
-type Builtin = Date | Function | Uint8Array | string | number | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | undefined
 export type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
@@ -722,16 +722,16 @@ export type DeepPartial<T> = T extends Builtin
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+  : Partial<T>
 
 function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+    throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER')
   }
-  return long.toNumber();
+  return long.toNumber()
 }
 
 if (util.Long !== Long) {
-  util.Long = Long as any;
-  configure();
+  util.Long = Long as any
+  configure()
 }

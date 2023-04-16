@@ -37,6 +37,8 @@ export interface NamesMsgRevealResponse {
   name?: NamesName;
 }
 
+export type NamesMsgSetNftClassResponse = object;
+
 export type NamesMsgSetPriceAndExtendResponse = object;
 
 export type NamesMsgUpdateNameResponse = object;
