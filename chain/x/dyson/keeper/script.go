@@ -226,9 +226,6 @@ func (k Keeper) EvalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 		}
 
 		if err == nil {
-			events := cachedCtx.EventManager().Events()
-			// TODO remove, not needed
-			ctx.EventManager().EmitEvents(events)
 			Write()
 		} else {
 			if raiseRunErr == true {
