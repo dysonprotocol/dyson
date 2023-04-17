@@ -1,25 +1,18 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "$ref": "#/definitions/MsgSetNftClass",
+    "$ref": "#/definitions/MsgMintNft",
     "definitions": {
-        "MsgSetNftClass": {
+        "MsgMintNft": {
             "properties": {
-                "owner": {
+                "classOwner": {
                     "type": "string",
                     "description": "The owner of the Dys name"
                 },
+                "classId": {
+                    "type": "string",
+                    "description": "the ClassID must equal yythe Dys name"
+                },
                 "id": {
-                    "type": "string",
-                    "description": "the Id must equal the Dys name"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "More descriptive name"
-                },
-                "symbol": {
-                    "type": "string"
-                },
-                "description": {
                     "type": "string"
                 },
                 "uri": {
@@ -31,7 +24,7 @@
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Set Nft Class"
+            "title": "Msg Mint Nft"
         }
     }
 }

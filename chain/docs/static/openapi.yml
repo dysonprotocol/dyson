@@ -76472,11 +76472,15 @@ definitions:
     type: object
   names.MsgBurnCoinsResponse:
     type: object
+  names.MsgBurnNftResponse:
+    type: object
   names.MsgBuyResponse:
     type: object
   names.MsgDeleteNameResponse:
     type: object
   names.MsgMintCoinsResponse:
+    type: object
+  names.MsgMintNftResponse:
     type: object
   names.MsgOfferToResponse:
     type: object
@@ -76518,6 +76522,8 @@ definitions:
   names.MsgSetPriceAndExtendResponse:
     type: object
   names.MsgUpdateNameResponse:
+    type: object
+  names.MsgUpdateNftResponse:
     type: object
   names.Name:
     type: object

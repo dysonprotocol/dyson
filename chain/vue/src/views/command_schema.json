@@ -28842,13 +28842,16 @@
         "MsgSetNftClass": {
           "properties": {
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner of the Dys name"
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "the Id must equal the Dys name"
             },
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "More descriptive name"
             },
             "symbol": {
               "type": "string"
@@ -28866,6 +28869,125 @@
           "additionalProperties": false,
           "type": "object",
           "title": "Msg Set Nft Class"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "names/sendMsgMintNft": {
+    "module_name": "names",
+    "name": "MintNft",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgMintNft",
+      "definitions": {
+        "MsgMintNft": {
+          "properties": {
+            "classOwner": {
+              "type": "string",
+              "description": "The owner of the Dys name"
+            },
+            "classId": {
+              "type": "string",
+              "description": "the ClassID must equal yythe Dys name"
+            },
+            "id": {
+              "type": "string"
+            },
+            "uri": {
+              "type": "string"
+            },
+            "urihash": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Mint Nft"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "names/sendMsgUpdateNft": {
+    "module_name": "names",
+    "name": "UpdateNft",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgUpdateNft",
+      "definitions": {
+        "MsgUpdateNft": {
+          "properties": {
+            "classOwner": {
+              "type": "string",
+              "description": "The owner of the Dys name"
+            },
+            "classId": {
+              "type": "string",
+              "description": "The dys name that the NFT was create with"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT"
+            },
+            "uri": {
+              "type": "string"
+            },
+            "urihash": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Update Nft"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "names/sendMsgBurnNft": {
+    "module_name": "names",
+    "name": "BurnNft",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgBurnNft",
+      "definitions": {
+        "MsgBurnNft": {
+          "properties": {
+            "classOwner": {
+              "type": "string"
+            },
+            "classId": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Burn Nft"
         }
       }
     },

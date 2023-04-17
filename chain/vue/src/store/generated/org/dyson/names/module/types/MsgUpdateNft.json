@@ -1,26 +1,20 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "$ref": "#/definitions/MsgSetNftClass",
+    "$ref": "#/definitions/MsgUpdateNft",
     "definitions": {
-        "MsgSetNftClass": {
+        "MsgUpdateNft": {
             "properties": {
-                "owner": {
+                "classOwner": {
                     "type": "string",
                     "description": "The owner of the Dys name"
                 },
+                "classId": {
+                    "type": "string",
+                    "description": "The dys name that the NFT was create with"
+                },
                 "id": {
                     "type": "string",
-                    "description": "the Id must equal the Dys name"
-                },
-                "name": {
-                    "type": "string",
-                    "description": "More descriptive name"
-                },
-                "symbol": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
+                    "description": "The ID of this NFT"
                 },
                 "uri": {
                     "type": "string"
@@ -31,7 +25,7 @@
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Set Nft Class"
+            "title": "Msg Update Nft"
         }
     }
 }

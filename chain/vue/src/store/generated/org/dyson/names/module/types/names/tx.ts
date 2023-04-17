@@ -94,8 +94,11 @@ export interface MsgBurnCoins {
 export interface MsgBurnCoinsResponse {}
 
 export interface MsgSetNftClass {
+  /** The owner of the Dys name */
   owner: string
+  /** the Id must equal the Dys name */
   id: string
+  /** More descriptive name */
   name: string
   symbol: string
   description: string
@@ -104,6 +107,39 @@ export interface MsgSetNftClass {
 }
 
 export interface MsgSetNftClassResponse {}
+
+export interface MsgMintNft {
+  /** The owner of the Dys name */
+  classOwner: string
+  /** the ClassID must equal yythe Dys name */
+  classId: string
+  id: string
+  uri: string
+  urihash: string
+}
+
+export interface MsgMintNftResponse {}
+
+export interface MsgUpdateNft {
+  /** The owner of the Dys name */
+  classOwner: string
+  /** The dys name that the NFT was create with */
+  classId: string
+  /** The ID of this NFT */
+  id: string
+  uri: string
+  urihash: string
+}
+
+export interface MsgUpdateNftResponse {}
+
+export interface MsgBurnNft {
+  classOwner: string
+  classId: string
+  id: string
+}
+
+export interface MsgBurnNftResponse {}
 
 const baseMsgRegister: object = {
   commit: '',
@@ -1634,6 +1670,467 @@ export const MsgSetNftClassResponse = {
   },
 }
 
+const baseMsgMintNft: object = {
+  classOwner: '',
+  classId: '',
+  id: '',
+  uri: '',
+  urihash: '',
+}
+
+export const MsgMintNft = {
+  encode(message: MsgMintNft, writer: Writer = Writer.create()): Writer {
+    if (message.classOwner !== '') {
+      writer.uint32(10).string(message.classOwner)
+    }
+    if (message.classId !== '') {
+      writer.uint32(18).string(message.classId)
+    }
+    if (message.id !== '') {
+      writer.uint32(26).string(message.id)
+    }
+    if (message.uri !== '') {
+      writer.uint32(34).string(message.uri)
+    }
+    if (message.urihash !== '') {
+      writer.uint32(42).string(message.urihash)
+    }
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgMintNft {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgMintNft } as MsgMintNft
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        case 1:
+          message.classOwner = reader.string()
+          break
+        case 2:
+          message.classId = reader.string()
+          break
+        case 3:
+          message.id = reader.string()
+          break
+        case 4:
+          message.uri = reader.string()
+          break
+        case 5:
+          message.urihash = reader.string()
+          break
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(object: any): MsgMintNft {
+    const message = { ...baseMsgMintNft } as MsgMintNft
+    if (object.classOwner !== undefined && object.classOwner !== null) {
+      message.classOwner = String(object.classOwner)
+    } else {
+      message.classOwner = ''
+    }
+    if (object.classId !== undefined && object.classId !== null) {
+      message.classId = String(object.classId)
+    } else {
+      message.classId = ''
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = String(object.id)
+    } else {
+      message.id = ''
+    }
+    if (object.uri !== undefined && object.uri !== null) {
+      message.uri = String(object.uri)
+    } else {
+      message.uri = ''
+    }
+    if (object.urihash !== undefined && object.urihash !== null) {
+      message.urihash = String(object.urihash)
+    } else {
+      message.urihash = ''
+    }
+    return message
+  },
+
+  toJSON(message: MsgMintNft): unknown {
+    const obj: any = {}
+    message.classOwner !== undefined && (obj.classOwner = message.classOwner)
+    message.classId !== undefined && (obj.classId = message.classId)
+    message.id !== undefined && (obj.id = message.id)
+    message.uri !== undefined && (obj.uri = message.uri)
+    message.urihash !== undefined && (obj.urihash = message.urihash)
+    return obj
+  },
+
+  fromPartial(object: DeepPartial<MsgMintNft>): MsgMintNft {
+    const message = { ...baseMsgMintNft } as MsgMintNft
+    if (object.classOwner !== undefined && object.classOwner !== null) {
+      message.classOwner = object.classOwner
+    } else {
+      message.classOwner = ''
+    }
+    if (object.classId !== undefined && object.classId !== null) {
+      message.classId = object.classId
+    } else {
+      message.classId = ''
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id
+    } else {
+      message.id = ''
+    }
+    if (object.uri !== undefined && object.uri !== null) {
+      message.uri = object.uri
+    } else {
+      message.uri = ''
+    }
+    if (object.urihash !== undefined && object.urihash !== null) {
+      message.urihash = object.urihash
+    } else {
+      message.urihash = ''
+    }
+    return message
+  },
+}
+
+const baseMsgMintNftResponse: object = {}
+
+export const MsgMintNftResponse = {
+  encode(_: MsgMintNftResponse, writer: Writer = Writer.create()): Writer {
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgMintNftResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgMintNftResponse } as MsgMintNftResponse
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(_: any): MsgMintNftResponse {
+    const message = { ...baseMsgMintNftResponse } as MsgMintNftResponse
+    return message
+  },
+
+  toJSON(_: MsgMintNftResponse): unknown {
+    const obj: any = {}
+    return obj
+  },
+
+  fromPartial(_: DeepPartial<MsgMintNftResponse>): MsgMintNftResponse {
+    const message = { ...baseMsgMintNftResponse } as MsgMintNftResponse
+    return message
+  },
+}
+
+const baseMsgUpdateNft: object = {
+  classOwner: '',
+  classId: '',
+  id: '',
+  uri: '',
+  urihash: '',
+}
+
+export const MsgUpdateNft = {
+  encode(message: MsgUpdateNft, writer: Writer = Writer.create()): Writer {
+    if (message.classOwner !== '') {
+      writer.uint32(10).string(message.classOwner)
+    }
+    if (message.classId !== '') {
+      writer.uint32(18).string(message.classId)
+    }
+    if (message.id !== '') {
+      writer.uint32(26).string(message.id)
+    }
+    if (message.uri !== '') {
+      writer.uint32(34).string(message.uri)
+    }
+    if (message.urihash !== '') {
+      writer.uint32(42).string(message.urihash)
+    }
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgUpdateNft {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgUpdateNft } as MsgUpdateNft
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        case 1:
+          message.classOwner = reader.string()
+          break
+        case 2:
+          message.classId = reader.string()
+          break
+        case 3:
+          message.id = reader.string()
+          break
+        case 4:
+          message.uri = reader.string()
+          break
+        case 5:
+          message.urihash = reader.string()
+          break
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(object: any): MsgUpdateNft {
+    const message = { ...baseMsgUpdateNft } as MsgUpdateNft
+    if (object.classOwner !== undefined && object.classOwner !== null) {
+      message.classOwner = String(object.classOwner)
+    } else {
+      message.classOwner = ''
+    }
+    if (object.classId !== undefined && object.classId !== null) {
+      message.classId = String(object.classId)
+    } else {
+      message.classId = ''
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = String(object.id)
+    } else {
+      message.id = ''
+    }
+    if (object.uri !== undefined && object.uri !== null) {
+      message.uri = String(object.uri)
+    } else {
+      message.uri = ''
+    }
+    if (object.urihash !== undefined && object.urihash !== null) {
+      message.urihash = String(object.urihash)
+    } else {
+      message.urihash = ''
+    }
+    return message
+  },
+
+  toJSON(message: MsgUpdateNft): unknown {
+    const obj: any = {}
+    message.classOwner !== undefined && (obj.classOwner = message.classOwner)
+    message.classId !== undefined && (obj.classId = message.classId)
+    message.id !== undefined && (obj.id = message.id)
+    message.uri !== undefined && (obj.uri = message.uri)
+    message.urihash !== undefined && (obj.urihash = message.urihash)
+    return obj
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateNft>): MsgUpdateNft {
+    const message = { ...baseMsgUpdateNft } as MsgUpdateNft
+    if (object.classOwner !== undefined && object.classOwner !== null) {
+      message.classOwner = object.classOwner
+    } else {
+      message.classOwner = ''
+    }
+    if (object.classId !== undefined && object.classId !== null) {
+      message.classId = object.classId
+    } else {
+      message.classId = ''
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id
+    } else {
+      message.id = ''
+    }
+    if (object.uri !== undefined && object.uri !== null) {
+      message.uri = object.uri
+    } else {
+      message.uri = ''
+    }
+    if (object.urihash !== undefined && object.urihash !== null) {
+      message.urihash = object.urihash
+    } else {
+      message.urihash = ''
+    }
+    return message
+  },
+}
+
+const baseMsgUpdateNftResponse: object = {}
+
+export const MsgUpdateNftResponse = {
+  encode(_: MsgUpdateNftResponse, writer: Writer = Writer.create()): Writer {
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgUpdateNftResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgUpdateNftResponse } as MsgUpdateNftResponse
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(_: any): MsgUpdateNftResponse {
+    const message = { ...baseMsgUpdateNftResponse } as MsgUpdateNftResponse
+    return message
+  },
+
+  toJSON(_: MsgUpdateNftResponse): unknown {
+    const obj: any = {}
+    return obj
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateNftResponse>): MsgUpdateNftResponse {
+    const message = { ...baseMsgUpdateNftResponse } as MsgUpdateNftResponse
+    return message
+  },
+}
+
+const baseMsgBurnNft: object = { classOwner: '', classId: '', id: '' }
+
+export const MsgBurnNft = {
+  encode(message: MsgBurnNft, writer: Writer = Writer.create()): Writer {
+    if (message.classOwner !== '') {
+      writer.uint32(10).string(message.classOwner)
+    }
+    if (message.classId !== '') {
+      writer.uint32(18).string(message.classId)
+    }
+    if (message.id !== '') {
+      writer.uint32(26).string(message.id)
+    }
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgBurnNft {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgBurnNft } as MsgBurnNft
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        case 1:
+          message.classOwner = reader.string()
+          break
+        case 2:
+          message.classId = reader.string()
+          break
+        case 3:
+          message.id = reader.string()
+          break
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(object: any): MsgBurnNft {
+    const message = { ...baseMsgBurnNft } as MsgBurnNft
+    if (object.classOwner !== undefined && object.classOwner !== null) {
+      message.classOwner = String(object.classOwner)
+    } else {
+      message.classOwner = ''
+    }
+    if (object.classId !== undefined && object.classId !== null) {
+      message.classId = String(object.classId)
+    } else {
+      message.classId = ''
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = String(object.id)
+    } else {
+      message.id = ''
+    }
+    return message
+  },
+
+  toJSON(message: MsgBurnNft): unknown {
+    const obj: any = {}
+    message.classOwner !== undefined && (obj.classOwner = message.classOwner)
+    message.classId !== undefined && (obj.classId = message.classId)
+    message.id !== undefined && (obj.id = message.id)
+    return obj
+  },
+
+  fromPartial(object: DeepPartial<MsgBurnNft>): MsgBurnNft {
+    const message = { ...baseMsgBurnNft } as MsgBurnNft
+    if (object.classOwner !== undefined && object.classOwner !== null) {
+      message.classOwner = object.classOwner
+    } else {
+      message.classOwner = ''
+    }
+    if (object.classId !== undefined && object.classId !== null) {
+      message.classId = object.classId
+    } else {
+      message.classId = ''
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id
+    } else {
+      message.id = ''
+    }
+    return message
+  },
+}
+
+const baseMsgBurnNftResponse: object = {}
+
+export const MsgBurnNftResponse = {
+  encode(_: MsgBurnNftResponse, writer: Writer = Writer.create()): Writer {
+    return writer
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgBurnNftResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input
+    let end = length === undefined ? reader.len : reader.pos + length
+    const message = { ...baseMsgBurnNftResponse } as MsgBurnNftResponse
+    while (reader.pos < end) {
+      const tag = reader.uint32()
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7)
+          break
+      }
+    }
+    return message
+  },
+
+  fromJSON(_: any): MsgBurnNftResponse {
+    const message = { ...baseMsgBurnNftResponse } as MsgBurnNftResponse
+    return message
+  },
+
+  toJSON(_: MsgBurnNftResponse): unknown {
+    const obj: any = {}
+    return obj
+  },
+
+  fromPartial(_: DeepPartial<MsgBurnNftResponse>): MsgBurnNftResponse {
+    const message = { ...baseMsgBurnNftResponse } as MsgBurnNftResponse
+    return message
+  },
+}
+
 /** Msg defines the Msg service. */
 export interface Msg {
   Register(request: MsgRegister): Promise<MsgRegisterResponse>
@@ -1648,8 +2145,11 @@ export interface Msg {
   Buy(request: MsgBuy): Promise<MsgBuyResponse>
   MintCoins(request: MsgMintCoins): Promise<MsgMintCoinsResponse>
   BurnCoins(request: MsgBurnCoins): Promise<MsgBurnCoinsResponse>
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   SetNftClass(request: MsgSetNftClass): Promise<MsgSetNftClassResponse>
+  MintNft(request: MsgMintNft): Promise<MsgMintNftResponse>
+  UpdateNft(request: MsgUpdateNft): Promise<MsgUpdateNftResponse>
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  BurnNft(request: MsgBurnNft): Promise<MsgBurnNftResponse>
 }
 
 export class MsgClientImpl implements Msg {
@@ -1731,6 +2231,24 @@ export class MsgClientImpl implements Msg {
     return promise.then((data) =>
       MsgSetNftClassResponse.decode(new Reader(data))
     )
+  }
+
+  MintNft(request: MsgMintNft): Promise<MsgMintNftResponse> {
+    const data = MsgMintNft.encode(request).finish()
+    const promise = this.rpc.request('names.Msg', 'MintNft', data)
+    return promise.then((data) => MsgMintNftResponse.decode(new Reader(data)))
+  }
+
+  UpdateNft(request: MsgUpdateNft): Promise<MsgUpdateNftResponse> {
+    const data = MsgUpdateNft.encode(request).finish()
+    const promise = this.rpc.request('names.Msg', 'UpdateNft', data)
+    return promise.then((data) => MsgUpdateNftResponse.decode(new Reader(data)))
+  }
+
+  BurnNft(request: MsgBurnNft): Promise<MsgBurnNftResponse> {
+    const data = MsgBurnNft.encode(request).finish()
+    const promise = this.rpc.request('names.Msg', 'BurnNft', data)
+    return promise.then((data) => MsgBurnNftResponse.decode(new Reader(data)))
   }
 }
 

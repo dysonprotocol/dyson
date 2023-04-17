@@ -18,11 +18,15 @@ export type NamesMsgAcceptResponse = object;
 
 export type NamesMsgBurnCoinsResponse = object;
 
+export type NamesMsgBurnNftResponse = object;
+
 export type NamesMsgBuyResponse = object;
 
 export type NamesMsgDeleteNameResponse = object;
 
 export type NamesMsgMintCoinsResponse = object;
+
+export type NamesMsgMintNftResponse = object;
 
 export type NamesMsgOfferToResponse = object;
 
@@ -42,6 +46,8 @@ export type NamesMsgSetNftClassResponse = object;
 export type NamesMsgSetPriceAndExtendResponse = object;
 
 export type NamesMsgUpdateNameResponse = object;
+
+export type NamesMsgUpdateNftResponse = object;
 
 export interface NamesName {
   name?: string;

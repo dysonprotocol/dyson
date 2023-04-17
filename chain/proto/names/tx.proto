@@ -22,6 +22,9 @@ service Msg {
   rpc MintCoins(MsgMintCoins) returns (MsgMintCoinsResponse);
   rpc BurnCoins(MsgBurnCoins) returns (MsgBurnCoinsResponse);
   rpc SetNftClass(MsgSetNftClass) returns (MsgSetNftClassResponse);
+  rpc MintNft(MsgMintNft) returns (MsgMintNftResponse);
+  rpc UpdateNft(MsgUpdateNft) returns (MsgUpdateNftResponse);
+  rpc BurnNft(MsgBurnNft) returns (MsgBurnNftResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -79,7 +82,7 @@ message MsgSetPriceAndExtendResponse {
 message MsgOfferTo {
   string name = 2;
   string owner = 1;
-  string newOwner = 3;
+  string new_owner = 3;
 }
 
 message MsgOfferToResponse {
@@ -87,7 +90,7 @@ message MsgOfferToResponse {
 
 message MsgAccept {
   string name = 2;
-  string newOwner = 1;
+  string new_owner = 1;
 }
 
 message MsgAcceptResponse {
@@ -103,6 +106,7 @@ message MsgBuyResponse {
 
 message MsgMintCoins {
   string owner = 1;
+  // The amount of coins to mint, each coin costs 1 gas
   string amount = 2;
 }
 
@@ -118,8 +122,11 @@ message MsgBurnCoinsResponse {
 }
 
 message MsgSetNftClass {
+  // The owner of the Dys name
   string owner = 1;
+  // the ID is the Dys name
   string id = 2;
+  // More descriptive name
   string name = 3;
   string symbol = 4;
   string description = 5;
@@ -128,6 +135,47 @@ message MsgSetNftClass {
 }
 
 message MsgSetNftClassResponse {
+}
+
+message MsgMintNft {
+  // The owner of the Dys name
+  string class_owner = 1;
+  // the ClassID the  Dys name
+  string class_id = 2;
+  string id = 3;
+  string uri = 4;
+  string urihash = 5;
+  string data = 6;
+}
+
+message MsgMintNftResponse {
+}
+
+message MsgUpdateNft {
+  // The owner of the Dys name
+  string class_owner = 1;
+  // The dys name that the NFT was create with
+  string class_id = 2;
+  // The ID of this NFT
+  string id = 3;
+  string uri = 4;
+  string urihash = 5;
+  string data = 6;
+}
+
+message MsgUpdateNftResponse {
+}
+
+message MsgBurnNft {
+  // The owner of the Dys name
+  string class_owner = 1;
+  // The dys name that the NFT was create with
+  string class_id = 2;
+  // The ID of this NFT
+  string id = 3;
+}
+
+message MsgBurnNftResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message
