@@ -11,10 +11,11 @@ import (
 func (k msgServer) BurnNft(goCtx context.Context, msg *types.MsgBurnNft) (*types.MsgBurnNftResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	dysName := getDysName(msg.Id)
 	// Check if the value exists
 	name, isFound := k.GetName(
 		ctx,
-		msg.ClassId, // the class Id is the dyson name
+		dysName,
 	)
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "Name not found")
@@ -22,7 +23,16 @@ func (k msgServer) BurnNft(goCtx context.Context, msg *types.MsgBurnNft) (*types
 
 	// Checks if the the msg owner is the same as the current owner
 	if msg.ClassOwner != name.Owner {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
+		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect nft class owner")
+	}
+
+	ownerAddr, err := sdk.AccAddressFromBech32(msg.ClassOwner)
+	if err != nil {
+		return nil, err
+	}
+	// check if the NFT is owned by the sender
+	if !k.nftKeeper.GetOwner(ctx, msg.ClassId, msg.Id).Equals(ownerAddr) {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect nft owner")
 	}
 
 	// get the NFT
@@ -31,7 +41,7 @@ func (k msgServer) BurnNft(goCtx context.Context, msg *types.MsgBurnNft) (*types
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "NFT not found")
 	}
 
-	err := k.nftKeeper.Burn(ctx, nft.ClassId, nft.Id)
+	err = k.nftKeeper.Burn(ctx, nft.ClassId, nft.Id)
 	if err != nil {
 		return nil, err
 	}

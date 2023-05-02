@@ -7,7 +7,7 @@ import (
 
 var _ sdk.Msg = &MsgRun{}
 
-func NewMsgRun(creator string, address string, functionName string, args string, kwargs string, extraLines string, coins string) *MsgRun {
+func NewMsgRun(creator string, address string, functionName string, args string, kwargs string, extraLines string, coins string, nfts string) *MsgRun {
 	return &MsgRun{
 		Creator:      creator,
 		Address:      address,
@@ -16,6 +16,7 @@ func NewMsgRun(creator string, address string, functionName string, args string,
 		Kwargs:       kwargs,
 		ExtraLines:   extraLines,
 		Coins:        coins,
+		Nfts:         nfts,
 	}
 }
 

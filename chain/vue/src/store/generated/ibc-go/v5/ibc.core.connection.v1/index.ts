@@ -169,8 +169,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryConnection', payload: { options: { all }, params: {...key},query }})
 				return getters['getConnection']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryConnection API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryConnection API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -195,8 +194,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryConnections', payload: { options: { all }, params: {...key},query }})
 				return getters['getConnections']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryConnections API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryConnections API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -217,8 +215,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryClientConnections', payload: { options: { all }, params: {...key},query }})
 				return getters['getClientConnections']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryClientConnections API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryClientConnections API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -239,8 +236,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryConnectionClientState', payload: { options: { all }, params: {...key},query }})
 				return getters['getConnectionClientState']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryConnectionClientState API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryConnectionClientState API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -261,8 +257,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryConnectionConsensusState', payload: { options: { all }, params: {...key},query }})
 				return getters['getConnectionConsensusState']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryConnectionConsensusState API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryConnectionConsensusState API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		

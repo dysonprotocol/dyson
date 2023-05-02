@@ -5,15 +5,18 @@
         "MsgAccept": {
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name to accept"
                 },
-                "newOwner": {
-                    "type": "string"
+                "new_owner": {
+                    "type": "string",
+                    "description": "The owner address of the name"
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Accept"
+            "title": "Msg Accept",
+            "description": "Accept the name that was offered to you"
         }
     }
 }

@@ -11,10 +11,11 @@ import (
 func (k msgServer) UpdateNft(goCtx context.Context, msg *types.MsgUpdateNft) (*types.MsgUpdateNftResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	dysName := getDysName(msg.ClassId)
 	// Check if the value exists
 	name, isFound := k.GetName(
 		ctx,
-		msg.ClassId, // the class Id is the dyson name
+		dysName,
 	)
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "Name not found")
@@ -33,7 +34,7 @@ func (k msgServer) UpdateNft(goCtx context.Context, msg *types.MsgUpdateNft) (*t
 
 	// update the NFT
 	nft.Uri = msg.Uri
-	nft.UriHash = msg.Urihash
+	nft.UriHash = msg.UriHash
 
 	k.nftKeeper.Update(ctx, nft)
 

@@ -212,4 +212,6 @@ replace github.com/ignite/cli => gitlab.com/dysonproject/ignite-cli v0.0.0-night
 
 replace github.com/confio/ics23/go => github.com/cosmos/cosmos-sdk/ics23/go v0.8.0
 
-//replace github.com/cosmos/cosmos-sdk v0.46.7 => ./cosmos-sdk
+// replace github.com/cosmos/cosmos-sdk v0.46.7 => ./cosmos-sdk
+
+replace github.com/cosmos/cosmos-sdk v0.46.7 => gitlab.com/dysonproject/cosmos-sdk v0.46.7-fixnft2

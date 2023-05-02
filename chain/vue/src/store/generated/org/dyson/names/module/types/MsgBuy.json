@@ -5,15 +5,22 @@
         "MsgBuy": {
             "properties": {
                 "buyer": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The address of the buyer"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name to buy"
+                },
+                "price": {
+                    "type": "string",
+                    "description": "Confirm the  price of the name is the same as the listed price."
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Buy"
+            "title": "Msg Buy",
+            "description": "All names have a listed price, this message allows you to buy the name at the listed price."
         }
     }
 }

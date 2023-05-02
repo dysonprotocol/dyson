@@ -268,8 +268,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryValidators', payload: { options: { all }, params: {...key},query }})
 				return getters['getValidators']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryValidators API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryValidators API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -290,8 +289,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryValidator', payload: { options: { all }, params: {...key},query }})
 				return getters['getValidator']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryValidator API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryValidator API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -316,8 +314,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryValidatorDelegations', payload: { options: { all }, params: {...key},query }})
 				return getters['getValidatorDelegations']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryValidatorDelegations API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryValidatorDelegations API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -342,8 +339,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryValidatorUnbondingDelegations', payload: { options: { all }, params: {...key},query }})
 				return getters['getValidatorUnbondingDelegations']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryValidatorUnbondingDelegations API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryValidatorUnbondingDelegations API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -364,8 +360,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryDelegation', payload: { options: { all }, params: {...key},query }})
 				return getters['getDelegation']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryDelegation API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryDelegation API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -386,8 +381,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryUnbondingDelegation', payload: { options: { all }, params: {...key},query }})
 				return getters['getUnbondingDelegation']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryUnbondingDelegation API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryUnbondingDelegation API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -412,8 +406,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryDelegatorDelegations', payload: { options: { all }, params: {...key},query }})
 				return getters['getDelegatorDelegations']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryDelegatorDelegations API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryDelegatorDelegations API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -438,8 +431,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryDelegatorUnbondingDelegations', payload: { options: { all }, params: {...key},query }})
 				return getters['getDelegatorUnbondingDelegations']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryDelegatorUnbondingDelegations API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryDelegatorUnbondingDelegations API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -464,8 +456,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryRedelegations', payload: { options: { all }, params: {...key},query }})
 				return getters['getRedelegations']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryRedelegations API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryRedelegations API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -490,8 +481,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryDelegatorValidators', payload: { options: { all }, params: {...key},query }})
 				return getters['getDelegatorValidators']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryDelegatorValidators API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryDelegatorValidators API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -512,8 +502,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryDelegatorValidator', payload: { options: { all }, params: {...key},query }})
 				return getters['getDelegatorValidator']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryDelegatorValidator API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryDelegatorValidator API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -534,8 +523,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHistoricalInfo', payload: { options: { all }, params: {...key},query }})
 				return getters['getHistoricalInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryHistoricalInfo API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryHistoricalInfo API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -556,8 +544,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryPool', payload: { options: { all }, params: {...key},query }})
 				return getters['getPool']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryPool API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryPool API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -578,42 +565,11 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryParams', payload: { options: { all }, params: {...key},query }})
 				return getters['getParams']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryParams API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryParams API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
 		
-		async sendMsgEditValidator({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgEditValidator(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: gas}, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgEditValidator:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgEditValidator:Send Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgCreateValidator({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreateValidator(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: gas}, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgCreateValidator:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgCreateValidator:Send Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
 		async sendMsgDelegate({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -659,6 +615,21 @@ export default {
 				}
 			}
 		},
+		async sendMsgCreateValidator({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgCreateValidator(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateValidator:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgCreateValidator:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
 		async sendMsgBeginRedelegate({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -674,33 +645,22 @@ export default {
 				}
 			}
 		},
-		
-		async MsgEditValidator({ rootGetters }, { value }) {
+		async sendMsgEditValidator({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
 				const msg = await txClient.msgEditValidator(value)
-				return msg
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
 					throw new Error('TxClient:MsgEditValidator:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgEditValidator:Create Could not create message: ' + e.message)
+				}else{
+					throw new Error('TxClient:MsgEditValidator:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
-		async MsgCreateValidator({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreateValidator(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgCreateValidator:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgCreateValidator:Create Could not create message: ' + e.message)
-				}
-			}
-		},
+		
 		async MsgDelegate({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -740,6 +700,19 @@ export default {
 				}
 			}
 		},
+		async MsgCreateValidator({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgCreateValidator(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateValidator:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgCreateValidator:Create Could not create message: ' + e.message)
+				}
+			}
+		},
 		async MsgBeginRedelegate({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -750,6 +723,19 @@ export default {
 					throw new Error('TxClient:MsgBeginRedelegate:Init Could not initialize signing client. Wallet is required.')
 				} else{
 					throw new Error('TxClient:MsgBeginRedelegate:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgEditValidator({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgEditValidator(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgEditValidator:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgEditValidator:Create Could not create message: ' + e.message)
 				}
 			}
 		},

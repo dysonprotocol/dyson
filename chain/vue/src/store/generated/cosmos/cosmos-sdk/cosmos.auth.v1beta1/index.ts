@@ -193,8 +193,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAccounts', payload: { options: { all }, params: {...key},query }})
 				return getters['getAccounts']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryAccounts API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryAccounts API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -215,8 +214,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAccount', payload: { options: { all }, params: {...key},query }})
 				return getters['getAccount']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryAccount API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryAccount API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -237,8 +235,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAccountAddressByID', payload: { options: { all }, params: {...key},query }})
 				return getters['getAccountAddressByID']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryAccountAddressByID API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryAccountAddressByID API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -259,8 +256,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryParams', payload: { options: { all }, params: {...key},query }})
 				return getters['getParams']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryParams API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryParams API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -281,8 +277,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryModuleAccounts', payload: { options: { all }, params: {...key},query }})
 				return getters['getModuleAccounts']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryModuleAccounts API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryModuleAccounts API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -303,8 +298,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryModuleAccountByName', payload: { options: { all }, params: {...key},query }})
 				return getters['getModuleAccountByName']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryModuleAccountByName API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryModuleAccountByName API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -325,8 +319,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryBech32Prefix', payload: { options: { all }, params: {...key},query }})
 				return getters['getBech32Prefix']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryBech32Prefix API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryBech32Prefix API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -347,8 +340,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAddressBytesToString', payload: { options: { all }, params: {...key},query }})
 				return getters['getAddressBytesToString']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryAddressBytesToString API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryAddressBytesToString API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -369,8 +361,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAddressStringToBytes', payload: { options: { all }, params: {...key},query }})
 				return getters['getAddressStringToBytes']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryAddressStringToBytes API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryAddressStringToBytes API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		

@@ -5,18 +5,22 @@
         "MsgSetPriceAndExtend": {
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name to set the price for"
                 },
                 "owner": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The owner address of the name"
                 },
                 "price": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month."
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Set Price And Extend"
+            "title": "Msg Set Price And Extend",
+            "description": "Set the price of the name and extend the expiration height"
         }
     }
 }

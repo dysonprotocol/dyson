@@ -5,10 +5,12 @@
         "MsgBurnCoins": {
             "properties": {
                 "owner": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The owner of the Dys name"
                 },
                 "amount": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The amount of coins to burn, the owner must have enough coins to burn"
                 }
             },
             "additionalProperties": true,

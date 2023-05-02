@@ -163,8 +163,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryCurrentPlan', payload: { options: { all }, params: {...key},query }})
 				return getters['getCurrentPlan']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryCurrentPlan API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryCurrentPlan API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -185,8 +184,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAppliedPlan', payload: { options: { all }, params: {...key},query }})
 				return getters['getAppliedPlan']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryAppliedPlan API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryAppliedPlan API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -207,8 +205,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryUpgradedConsensusState', payload: { options: { all }, params: {...key},query }})
 				return getters['getUpgradedConsensusState']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryUpgradedConsensusState API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryUpgradedConsensusState API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -233,8 +230,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryModuleVersions', payload: { options: { all }, params: {...key},query }})
 				return getters['getModuleVersions']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryModuleVersions API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryModuleVersions API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -255,8 +251,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryAuthority', payload: { options: { all }, params: {...key},query }})
 				return getters['getAuthority']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryAuthority API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryAuthority API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		

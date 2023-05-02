@@ -159,8 +159,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryDenomTrace', payload: { options: { all }, params: {...key},query }})
 				return getters['getDenomTrace']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryDenomTrace API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryDenomTrace API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -185,8 +184,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryDenomTraces', payload: { options: { all }, params: {...key},query }})
 				return getters['getDenomTraces']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryDenomTraces API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryDenomTraces API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -207,8 +205,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryParams', payload: { options: { all }, params: {...key},query }})
 				return getters['getParams']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryParams API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryParams API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -229,8 +226,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryDenomHash', payload: { options: { all }, params: {...key},query }})
 				return getters['getDenomHash']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryDenomHash API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryDenomHash API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -251,8 +247,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryEscrowAddress', payload: { options: { all }, params: {...key},query }})
 				return getters['getEscrowAddress']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryEscrowAddress API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryEscrowAddress API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		

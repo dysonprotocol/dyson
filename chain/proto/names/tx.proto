@@ -45,24 +45,37 @@ message MsgRegisterResponse {
   uint64 expiration_height = 3;
 }
 
+// Update the details of the Dyson Protocol name
 message MsgUpdateName {
+  // The name to update
   string name = 2;
+  // The owner address of the name
   string owner = 1;
+  // The new destination address for the name
   string destination = 3;
+  // The address that this name is OfferedTo, they can take ownership of the name with the Accept message
   string authorized = 6;
+  // Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal.
   bool auto_renew = 7;
 }
 message MsgUpdateNameResponse {}
 
+// Delete the Dyson Protocol name
 message MsgDeleteName {
+  // The name to delete
   string name = 2;
+  // The owner address of the name
   string owner = 1;
 }
 message MsgDeleteNameResponse {}
 
+// Reveal the name that was committed to with the Register message
 message MsgReveal {
+  // The name to reveal
   string name = 2;
+  // The owner address of the name
   string owner = 1;
+  // The salt that was used to commit to the name
   string salt = 3;
 }
 
@@ -70,43 +83,61 @@ message MsgRevealResponse {
   Name name = 1;
 }
 
+// Set the price of the name and extend the expiration height
 message MsgSetPriceAndExtend {
+  // The name to set the price for
   string name = 2;
+  // The owner address of the name
   string owner = 1;
+  // The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month.
   string price = 3;
 }
 
 message MsgSetPriceAndExtendResponse {
 }
 
+// Offer the name to a new owner
 message MsgOfferTo {
+  // The name to offer
   string name = 2;
+  // The owner address of the name
   string owner = 1;
+  // The address to offer the name to. They can take ownership of the name with the Accept message
   string new_owner = 3;
 }
 
 message MsgOfferToResponse {
 }
 
+// Accept the name that was offered to you
 message MsgAccept {
+  // The name to accept
   string name = 2;
+  // The owner address of the name
   string new_owner = 1;
 }
 
 message MsgAcceptResponse {
 }
 
+// All names have a listed price, this message allows you to buy the name at the listed price.
 message MsgBuy {
+  // The address of the buyer
   string buyer = 1;
+  // The name to buy
   string name = 2;
+  // Confirm the  price of the name is the same as the listed price.
+  string price = 3;
 }
 
 message MsgBuyResponse {
 }
 
+// Mint coins with a denom of a name or subname. For example if you own the name "example.dys" you can mint coins with the denom "example.dys" or "subname.example.dys"
 message MsgMintCoins {
+  // The owner of the Dys name
   string owner = 1;
-  // The amount of coins to mint, each coin costs 1 gas
+  // The amount of coins to mint in the format "[amount] [denom]".   Each coin costs 1 gas.
   string amount = 2;
 }
 
@@ -114,64 +145,77 @@ message MsgMintCoinsResponse {
 }
 
 message MsgBurnCoins {
+  // The owner of the Dys name
   string owner = 1;
+  // The amount of coins to burn, the owner must have enough coins to burn
   string amount = 2;
 }
 
 message MsgBurnCoinsResponse {
 }
 
+// Create or update an NFT class. The NFT class is identified by the Dys name of the class ID.
 message MsgSetNftClass {
-  // The owner of the Dys name
+  // The owner of the Dys name of the NFT class ID
   string owner = 1;
-  // the ID is the Dys name
+  // the ID is the Dys name or subname of the NFT class. For example if you own the name "example.dys" you can create an NFT class with the ID "example.dys" or "subname.example.dys"
   string id = 2;
-  // More descriptive name
+  // More descriptive name of the NFT class (optional)
   string name = 3;
+  // The symbol of the NFT class (optional)
   string symbol = 4;
+  // The  description of the NFT class (optional)
   string description = 5;
+  // The URI of the NFT class (optional)
   string uri = 6;
-  string urihash = 7;
+  // The URI hash of the NFT class (optional)
+  string uri_hash = 7;
 }
 
 message MsgSetNftClassResponse {
 }
 
+// Mint an NFT with the given class ID and NFT ID. The NFT ID is unique to the class ID.
 message MsgMintNft {
   // The owner of the Dys name
   string class_owner = 1;
-  // the ClassID the  Dys name
+  // the NFT Class ID
   string class_id = 2;
+  // The ID of this NFT, must be unique to the class ID
   string id = 3;
+  // The URI of the NFT (optional)
   string uri = 4;
-  string urihash = 5;
-  string data = 6;
+  // The URI hash of the NFT (optional)
+  string uri_hash = 5;
 }
 
 message MsgMintNftResponse {
 }
 
+// Update the details of an NFT
 message MsgUpdateNft {
-  // The owner of the Dys name
+  // The owner of the NFT Class
   string class_owner = 1;
-  // The dys name that the NFT was create with
+  // the NFT Class ID
   string class_id = 2;
-  // The ID of this NFT
+  // The ID of this NFT to update
   string id = 3;
+  // The URI of the NFT (optional)
   string uri = 4;
-  string urihash = 5;
-  string data = 6;
+  // The URI hash of the NFT (optional)
+  string uri_hash = 5;
 }
 
 message MsgUpdateNftResponse {
 }
 
+// Burn an NFT of the given class ID and NFT ID.
 message MsgBurnNft {
-  // The owner of the Dys name
+  // The owner of the NFT Class
   string class_owner = 1;
-  // The dys name that the NFT was create with
+  // the NFT Class ID
   string class_id = 2;
-  // The ID of this NFT
+  // The ID of this NFT to burn. The owner must currently own this NFT to burn it.
   string id = 3;
 }
 

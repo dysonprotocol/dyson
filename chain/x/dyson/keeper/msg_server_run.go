@@ -27,6 +27,7 @@ func (k msgServer) Run(goCtx context.Context, msg *types.MsgRun) (*types.MsgRunR
 		Args:         msg.Args,
 		Kwargs:       msg.Kwargs,
 		Coins:        msg.Coins,
+		Nfts:         msg.Nfts,
 	}, true)
 	if err != nil {
 		return nil, err

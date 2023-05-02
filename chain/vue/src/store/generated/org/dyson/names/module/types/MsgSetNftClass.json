@@ -6,32 +6,37 @@
             "properties": {
                 "owner": {
                     "type": "string",
-                    "description": "The owner of the Dys name"
+                    "description": "The owner of the Dys name of the NFT class ID"
                 },
                 "id": {
                     "type": "string",
-                    "description": "the Id must equal the Dys name"
+                    "description": "the ID is the Dys name or subname of the NFT class. For example if you own the name \"example.dys\" you can create an NFT class with the ID \"example.dys\" or \"subname.example.dys\""
                 },
                 "name": {
                     "type": "string",
-                    "description": "More descriptive name"
+                    "description": "More descriptive name of the NFT class (optional)"
                 },
                 "symbol": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The symbol of the NFT class (optional)"
                 },
                 "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The  description of the NFT class (optional)"
                 },
                 "uri": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URI of the NFT class (optional)"
                 },
-                "urihash": {
-                    "type": "string"
+                "uri_hash": {
+                    "type": "string",
+                    "description": "The URI hash of the NFT class (optional)"
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Set Nft Class"
+            "title": "Msg Set Nft Class",
+            "description": "Create or update an NFT class. The NFT class is identified by the Dys name of the class ID."
         }
     }
 }

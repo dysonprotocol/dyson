@@ -9,10 +9,11 @@ const TypeMsgBuy = "buy"
 
 var _ sdk.Msg = &MsgBuy{}
 
-func NewMsgBuy(buyer string, name string) *MsgBuy {
+func NewMsgBuy(buyer string, name string, price string) *MsgBuy {
 	return &MsgBuy{
 		Buyer: buyer,
 		Name:  name,
+		Price: price,
 	}
 }
 

@@ -1730,6 +1730,31 @@
                     }
                   },
                   {
+                    "title": "cosmos.nft.v1beta1.MsgSend",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/cosmos.nft.v1beta1.MsgSend",
+                        "enum": [
+                          "/cosmos.nft.v1beta1.MsgSend"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgSend"
+                      }
+                    }
+                  },
+                  {
                     "title": "cosmos.slashing.v1beta1.MsgUnjail",
                     "type": "object",
                     "properties": {
@@ -2805,6 +2830,31 @@
                     }
                   },
                   {
+                    "title": "names.MsgBurnNft",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgBurnNft",
+                        "enum": [
+                          "/names.MsgBurnNft"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgBurnNft"
+                      }
+                    }
+                  },
+                  {
                     "title": "names.MsgBuy",
                     "type": "object",
                     "properties": {
@@ -2876,6 +2926,31 @@
                       },
                       "object_value": {
                         "$ref": "#/definitions/MsgMintCoins"
+                      }
+                    }
+                  },
+                  {
+                    "title": "names.MsgMintNft",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgMintNft",
+                        "enum": [
+                          "/names.MsgMintNft"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgMintNft"
                       }
                     }
                   },
@@ -2955,6 +3030,31 @@
                     }
                   },
                   {
+                    "title": "names.MsgSetNftClass",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgSetNftClass",
+                        "enum": [
+                          "/names.MsgSetNftClass"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgSetNftClass"
+                      }
+                    }
+                  },
+                  {
                     "title": "names.MsgSetPriceAndExtend",
                     "type": "object",
                     "properties": {
@@ -3001,6 +3101,31 @@
                       },
                       "object_value": {
                         "$ref": "#/definitions/MsgUpdateName"
+                      }
+                    }
+                  },
+                  {
+                    "title": "names.MsgUpdateNft",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgUpdateNft",
+                        "enum": [
+                          "/names.MsgUpdateNft"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgUpdateNft"
                       }
                     }
                   }
@@ -3149,23 +3274,27 @@
         },
         "MsgSend": {
           "properties": {
-            "from_address": {
-              "type": "string"
+            "class_id": {
+              "type": "string",
+              "description": "class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721"
             },
-            "to_address": {
-              "type": "string"
+            "id": {
+              "type": "string",
+              "description": "id defines the unique identification of nft"
             },
-            "amount": {
-              "items": {
-                "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
-              },
-              "type": "array"
+            "sender": {
+              "type": "string",
+              "description": "sender is the address of the owner of nft"
+            },
+            "receiver": {
+              "type": "string",
+              "description": "receiver is the receiver address of nft"
             }
           },
           "additionalProperties": false,
           "type": "object",
           "title": "Msg Send",
-          "description": "MsgSend represents a message to send coins from one account to another."
+          "description": "MsgSend represents a message to send a nft from one account to another account."
         },
         "MsgVerifyInvariant": {
           "properties": {
@@ -4263,31 +4392,35 @@
           "properties": {
             "creator": {
               "type": "string",
-              "description": "The account sending the transaction"
+              "description": "The account sending this transaction"
             },
             "address": {
               "type": "string",
-              "description": "dys address of the scrit to call"
+              "description": "Dys address of the script to call"
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
+              "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself."
             },
             "function_name": {
               "type": "string",
-              "description": "optional function to call"
+              "description": "Optional function to call"
             },
             "args": {
               "type": "string",
-              "description": "optional args to call the function with"
+              "description": "Optional args to call the function with"
             },
             "kwargs": {
               "type": "string",
-              "description": "optional kwargs to run"
+              "description": "Optional kwargs to run"
             },
             "coins": {
               "type": "string",
-              "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+              "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+            },
+            "nfts": {
+              "type": "string",
+              "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
             }
           },
           "additionalProperties": false,
@@ -4374,31 +4507,35 @@
           "properties": {
             "creator": {
               "type": "string",
-              "description": "The account sending the transaction"
+              "description": "The account sending this transaction"
             },
             "address": {
               "type": "string",
-              "description": "dys address of the scrit to call"
+              "description": "Dys address of the script to call"
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
+              "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself."
             },
             "function_name": {
               "type": "string",
-              "description": "optional function to call"
+              "description": "Optional function to call"
             },
             "args": {
               "type": "string",
-              "description": "optional args to call the function with"
+              "description": "Optional args to call the function with"
             },
             "kwargs": {
               "type": "string",
-              "description": "optional kwargs to run"
+              "description": "Optional kwargs to run"
             },
             "coins": {
               "type": "string",
-              "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+              "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+            },
+            "nfts": {
+              "type": "string",
+              "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
             }
           },
           "additionalProperties": false,
@@ -5326,83 +5463,153 @@
         "MsgAccept": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to accept"
             },
-            "newOwner": {
-              "type": "string"
+            "new_owner": {
+              "type": "string",
+              "description": "The owner address of the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Accept"
+          "title": "Msg Accept",
+          "description": "Accept the name that was offered to you"
         },
         "MsgBurnCoins": {
           "properties": {
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner of the Dys name"
             },
             "amount": {
-              "type": "string"
+              "type": "string",
+              "description": "The amount of coins to burn, the owner must have enough coins to burn"
             }
           },
           "additionalProperties": false,
           "type": "object",
           "title": "Msg Burn Coins"
         },
-        "MsgBuy": {
+        "MsgBurnNft": {
           "properties": {
-            "buyer": {
-              "type": "string"
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the NFT Class"
             },
-            "name": {
-              "type": "string"
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT to burn. The owner must currently own this NFT to burn it."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Buy"
+          "title": "Msg Burn Nft",
+          "description": "Burn an NFT of the given class ID and NFT ID."
+        },
+        "MsgBuy": {
+          "properties": {
+            "buyer": {
+              "type": "string",
+              "description": "The address of the buyer"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name to buy"
+            },
+            "price": {
+              "type": "string",
+              "description": "Confirm the  price of the name is the same as the listed price."
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Buy",
+          "description": "All names have a listed price, this message allows you to buy the name at the listed price."
         },
         "MsgDeleteName": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to delete"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Delete Name"
+          "title": "Msg Delete Name",
+          "description": "Delete the Dyson Protocol name"
         },
         "MsgMintCoins": {
           "properties": {
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner of the Dys name"
             },
             "amount": {
-              "type": "string"
+              "type": "string",
+              "description": "The amount of coins to mint in the format \"[amount] [denom]\".   Each coin costs 1 gas."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Mint Coins"
+          "title": "Msg Mint Coins",
+          "description": "Mint coins with a denom of a name or subname. For example if you own the name \"example.dys\" you can mint coins with the denom \"example.dys\" or \"subname.example.dys\""
+        },
+        "MsgMintNft": {
+          "properties": {
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the Dys name"
+            },
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT, must be unique to the class ID"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Mint Nft",
+          "description": "Mint an NFT with the given class ID and NFT ID. The NFT ID is unique to the class ID."
         },
         "MsgOfferTo": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to offer"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
-            "newOwner": {
-              "type": "string"
+            "new_owner": {
+              "type": "string",
+              "description": "The address to offer the name to. They can take ownership of the name with the Accept message"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Offer To"
+          "title": "Msg Offer To",
+          "description": "Offer the name to a new owner"
         },
         "MsgRegister": {
           "properties": {
@@ -5430,56 +5637,134 @@
         "MsgReveal": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to reveal"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "salt": {
-              "type": "string"
+              "type": "string",
+              "description": "The salt that was used to commit to the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Reveal"
+          "title": "Msg Reveal",
+          "description": "Reveal the name that was committed to with the Register message"
+        },
+        "MsgSetNftClass": {
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "The owner of the Dys name of the NFT class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "the ID is the Dys name or subname of the NFT class. For example if you own the name \"example.dys\" you can create an NFT class with the ID \"example.dys\" or \"subname.example.dys\""
+            },
+            "name": {
+              "type": "string",
+              "description": "More descriptive name of the NFT class (optional)"
+            },
+            "symbol": {
+              "type": "string",
+              "description": "The symbol of the NFT class (optional)"
+            },
+            "description": {
+              "type": "string",
+              "description": "The  description of the NFT class (optional)"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT class (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT class (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Set Nft Class",
+          "description": "Create or update an NFT class. The NFT class is identified by the Dys name of the class ID."
         },
         "MsgSetPriceAndExtend": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to set the price for"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "price": {
-              "type": "string"
+              "type": "string",
+              "description": "The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Set Price And Extend"
+          "title": "Msg Set Price And Extend",
+          "description": "Set the price of the name and extend the expiration height"
         },
         "MsgUpdateName": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to update"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "destination": {
-              "type": "string"
+              "type": "string",
+              "description": "The new destination address for the name"
             },
             "authorized": {
-              "type": "string"
+              "type": "string",
+              "description": "The address that this name is OfferedTo, they can take ownership of the name with the Accept message"
             },
             "auto_renew": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Update Name"
+          "title": "Msg Update Name",
+          "description": "Update the details of the Dyson Protocol name"
+        },
+        "MsgUpdateNft": {
+          "properties": {
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the NFT Class"
+            },
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT to update"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Update Nft",
+          "description": "Update the details of an NFT"
         }
       }
     },
@@ -7827,6 +8112,31 @@
                   }
                 },
                 {
+                  "title": "cosmos.nft.v1beta1.MsgSend",
+                  "type": "object",
+                  "properties": {
+                    "type_url": {
+                      "type": "string",
+                      "description": "Registered fully-qualified proto name for a message type valid for this request",
+                      "readOnly": true,
+                      "default": "/cosmos.nft.v1beta1.MsgSend",
+                      "enum": [
+                        "/cosmos.nft.v1beta1.MsgSend"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                      "format": "binary",
+                      "readOnly": true,
+                      "binaryEncoding": "base64"
+                    },
+                    "object_value": {
+                      "$ref": "#/definitions/MsgSend"
+                    }
+                  }
+                },
+                {
                   "title": "cosmos.slashing.v1beta1.MsgUnjail",
                   "type": "object",
                   "properties": {
@@ -8902,6 +9212,31 @@
                   }
                 },
                 {
+                  "title": "names.MsgBurnNft",
+                  "type": "object",
+                  "properties": {
+                    "type_url": {
+                      "type": "string",
+                      "description": "Registered fully-qualified proto name for a message type valid for this request",
+                      "readOnly": true,
+                      "default": "/names.MsgBurnNft",
+                      "enum": [
+                        "/names.MsgBurnNft"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                      "format": "binary",
+                      "readOnly": true,
+                      "binaryEncoding": "base64"
+                    },
+                    "object_value": {
+                      "$ref": "#/definitions/MsgBurnNft"
+                    }
+                  }
+                },
+                {
                   "title": "names.MsgBuy",
                   "type": "object",
                   "properties": {
@@ -8973,6 +9308,31 @@
                     },
                     "object_value": {
                       "$ref": "#/definitions/MsgMintCoins"
+                    }
+                  }
+                },
+                {
+                  "title": "names.MsgMintNft",
+                  "type": "object",
+                  "properties": {
+                    "type_url": {
+                      "type": "string",
+                      "description": "Registered fully-qualified proto name for a message type valid for this request",
+                      "readOnly": true,
+                      "default": "/names.MsgMintNft",
+                      "enum": [
+                        "/names.MsgMintNft"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                      "format": "binary",
+                      "readOnly": true,
+                      "binaryEncoding": "base64"
+                    },
+                    "object_value": {
+                      "$ref": "#/definitions/MsgMintNft"
                     }
                   }
                 },
@@ -9052,6 +9412,31 @@
                   }
                 },
                 {
+                  "title": "names.MsgSetNftClass",
+                  "type": "object",
+                  "properties": {
+                    "type_url": {
+                      "type": "string",
+                      "description": "Registered fully-qualified proto name for a message type valid for this request",
+                      "readOnly": true,
+                      "default": "/names.MsgSetNftClass",
+                      "enum": [
+                        "/names.MsgSetNftClass"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                      "format": "binary",
+                      "readOnly": true,
+                      "binaryEncoding": "base64"
+                    },
+                    "object_value": {
+                      "$ref": "#/definitions/MsgSetNftClass"
+                    }
+                  }
+                },
+                {
                   "title": "names.MsgSetPriceAndExtend",
                   "type": "object",
                   "properties": {
@@ -9098,6 +9483,31 @@
                     },
                     "object_value": {
                       "$ref": "#/definitions/MsgUpdateName"
+                    }
+                  }
+                },
+                {
+                  "title": "names.MsgUpdateNft",
+                  "type": "object",
+                  "properties": {
+                    "type_url": {
+                      "type": "string",
+                      "description": "Registered fully-qualified proto name for a message type valid for this request",
+                      "readOnly": true,
+                      "default": "/names.MsgUpdateNft",
+                      "enum": [
+                        "/names.MsgUpdateNft"
+                      ]
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                      "format": "binary",
+                      "readOnly": true,
+                      "binaryEncoding": "base64"
+                    },
+                    "object_value": {
+                      "$ref": "#/definitions/MsgUpdateNft"
                     }
                   }
                 }
@@ -9259,23 +9669,27 @@
         },
         "MsgSend": {
           "properties": {
-            "from_address": {
-              "type": "string"
+            "class_id": {
+              "type": "string",
+              "description": "class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721"
             },
-            "to_address": {
-              "type": "string"
+            "id": {
+              "type": "string",
+              "description": "id defines the unique identification of nft"
             },
-            "amount": {
-              "items": {
-                "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
-              },
-              "type": "array"
+            "sender": {
+              "type": "string",
+              "description": "sender is the address of the owner of nft"
+            },
+            "receiver": {
+              "type": "string",
+              "description": "receiver is the receiver address of nft"
             }
           },
           "additionalProperties": false,
           "type": "object",
           "title": "Msg Send",
-          "description": "MsgSend represents a message to send coins from one account to another."
+          "description": "MsgSend represents a message to send a nft from one account to another account."
         },
         "MsgVerifyInvariant": {
           "properties": {
@@ -10340,31 +10754,35 @@
           "properties": {
             "creator": {
               "type": "string",
-              "description": "The account sending the transaction"
+              "description": "The account sending this transaction"
             },
             "address": {
               "type": "string",
-              "description": "dys address of the scrit to call"
+              "description": "Dys address of the script to call"
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
+              "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself."
             },
             "function_name": {
               "type": "string",
-              "description": "optional function to call"
+              "description": "Optional function to call"
             },
             "args": {
               "type": "string",
-              "description": "optional args to call the function with"
+              "description": "Optional args to call the function with"
             },
             "kwargs": {
               "type": "string",
-              "description": "optional kwargs to run"
+              "description": "Optional kwargs to run"
             },
             "coins": {
               "type": "string",
-              "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+              "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+            },
+            "nfts": {
+              "type": "string",
+              "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
             }
           },
           "additionalProperties": false,
@@ -10451,31 +10869,35 @@
           "properties": {
             "creator": {
               "type": "string",
-              "description": "The account sending the transaction"
+              "description": "The account sending this transaction"
             },
             "address": {
               "type": "string",
-              "description": "dys address of the scrit to call"
+              "description": "Dys address of the script to call"
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
+              "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself."
             },
             "function_name": {
               "type": "string",
-              "description": "optional function to call"
+              "description": "Optional function to call"
             },
             "args": {
               "type": "string",
-              "description": "optional args to call the function with"
+              "description": "Optional args to call the function with"
             },
             "kwargs": {
               "type": "string",
-              "description": "optional kwargs to run"
+              "description": "Optional kwargs to run"
             },
             "coins": {
               "type": "string",
-              "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+              "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+            },
+            "nfts": {
+              "type": "string",
+              "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
             }
           },
           "additionalProperties": false,
@@ -11403,83 +11825,153 @@
         "MsgAccept": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to accept"
             },
-            "newOwner": {
-              "type": "string"
+            "new_owner": {
+              "type": "string",
+              "description": "The owner address of the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Accept"
+          "title": "Msg Accept",
+          "description": "Accept the name that was offered to you"
         },
         "MsgBurnCoins": {
           "properties": {
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner of the Dys name"
             },
             "amount": {
-              "type": "string"
+              "type": "string",
+              "description": "The amount of coins to burn, the owner must have enough coins to burn"
             }
           },
           "additionalProperties": false,
           "type": "object",
           "title": "Msg Burn Coins"
         },
-        "MsgBuy": {
+        "MsgBurnNft": {
           "properties": {
-            "buyer": {
-              "type": "string"
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the NFT Class"
             },
-            "name": {
-              "type": "string"
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT to burn. The owner must currently own this NFT to burn it."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Buy"
+          "title": "Msg Burn Nft",
+          "description": "Burn an NFT of the given class ID and NFT ID."
+        },
+        "MsgBuy": {
+          "properties": {
+            "buyer": {
+              "type": "string",
+              "description": "The address of the buyer"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name to buy"
+            },
+            "price": {
+              "type": "string",
+              "description": "Confirm the  price of the name is the same as the listed price."
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Buy",
+          "description": "All names have a listed price, this message allows you to buy the name at the listed price."
         },
         "MsgDeleteName": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to delete"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Delete Name"
+          "title": "Msg Delete Name",
+          "description": "Delete the Dyson Protocol name"
         },
         "MsgMintCoins": {
           "properties": {
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner of the Dys name"
             },
             "amount": {
-              "type": "string"
+              "type": "string",
+              "description": "The amount of coins to mint in the format \"[amount] [denom]\".   Each coin costs 1 gas."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Mint Coins"
+          "title": "Msg Mint Coins",
+          "description": "Mint coins with a denom of a name or subname. For example if you own the name \"example.dys\" you can mint coins with the denom \"example.dys\" or \"subname.example.dys\""
+        },
+        "MsgMintNft": {
+          "properties": {
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the Dys name"
+            },
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT, must be unique to the class ID"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Mint Nft",
+          "description": "Mint an NFT with the given class ID and NFT ID. The NFT ID is unique to the class ID."
         },
         "MsgOfferTo": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to offer"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
-            "newOwner": {
-              "type": "string"
+            "new_owner": {
+              "type": "string",
+              "description": "The address to offer the name to. They can take ownership of the name with the Accept message"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Offer To"
+          "title": "Msg Offer To",
+          "description": "Offer the name to a new owner"
         },
         "MsgRegister": {
           "properties": {
@@ -11507,56 +11999,134 @@
         "MsgReveal": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to reveal"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "salt": {
-              "type": "string"
+              "type": "string",
+              "description": "The salt that was used to commit to the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Reveal"
+          "title": "Msg Reveal",
+          "description": "Reveal the name that was committed to with the Register message"
+        },
+        "MsgSetNftClass": {
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "The owner of the Dys name of the NFT class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "the ID is the Dys name or subname of the NFT class. For example if you own the name \"example.dys\" you can create an NFT class with the ID \"example.dys\" or \"subname.example.dys\""
+            },
+            "name": {
+              "type": "string",
+              "description": "More descriptive name of the NFT class (optional)"
+            },
+            "symbol": {
+              "type": "string",
+              "description": "The symbol of the NFT class (optional)"
+            },
+            "description": {
+              "type": "string",
+              "description": "The  description of the NFT class (optional)"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT class (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT class (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Set Nft Class",
+          "description": "Create or update an NFT class. The NFT class is identified by the Dys name of the class ID."
         },
         "MsgSetPriceAndExtend": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to set the price for"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "price": {
-              "type": "string"
+              "type": "string",
+              "description": "The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Set Price And Extend"
+          "title": "Msg Set Price And Extend",
+          "description": "Set the price of the name and extend the expiration height"
         },
         "MsgUpdateName": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to update"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "destination": {
-              "type": "string"
+              "type": "string",
+              "description": "The new destination address for the name"
             },
             "authorized": {
-              "type": "string"
+              "type": "string",
+              "description": "The address that this name is OfferedTo, they can take ownership of the name with the Accept message"
             },
             "auto_renew": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Update Name"
+          "title": "Msg Update Name",
+          "description": "Update the details of the Dyson Protocol name"
+        },
+        "MsgUpdateNft": {
+          "properties": {
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the NFT Class"
+            },
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT to update"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Update Nft",
+          "description": "Update the details of an NFT"
         }
       }
     },
@@ -14056,6 +14626,31 @@
                     }
                   },
                   {
+                    "title": "cosmos.nft.v1beta1.MsgSend",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/cosmos.nft.v1beta1.MsgSend",
+                        "enum": [
+                          "/cosmos.nft.v1beta1.MsgSend"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgSend"
+                      }
+                    }
+                  },
+                  {
                     "title": "cosmos.slashing.v1beta1.MsgUnjail",
                     "type": "object",
                     "properties": {
@@ -15131,6 +15726,31 @@
                     }
                   },
                   {
+                    "title": "names.MsgBurnNft",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgBurnNft",
+                        "enum": [
+                          "/names.MsgBurnNft"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgBurnNft"
+                      }
+                    }
+                  },
+                  {
                     "title": "names.MsgBuy",
                     "type": "object",
                     "properties": {
@@ -15202,6 +15822,31 @@
                       },
                       "object_value": {
                         "$ref": "#/definitions/MsgMintCoins"
+                      }
+                    }
+                  },
+                  {
+                    "title": "names.MsgMintNft",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgMintNft",
+                        "enum": [
+                          "/names.MsgMintNft"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgMintNft"
                       }
                     }
                   },
@@ -15281,6 +15926,31 @@
                     }
                   },
                   {
+                    "title": "names.MsgSetNftClass",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgSetNftClass",
+                        "enum": [
+                          "/names.MsgSetNftClass"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgSetNftClass"
+                      }
+                    }
+                  },
+                  {
                     "title": "names.MsgSetPriceAndExtend",
                     "type": "object",
                     "properties": {
@@ -15327,6 +15997,31 @@
                       },
                       "object_value": {
                         "$ref": "#/definitions/MsgUpdateName"
+                      }
+                    }
+                  },
+                  {
+                    "title": "names.MsgUpdateNft",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgUpdateNft",
+                        "enum": [
+                          "/names.MsgUpdateNft"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgUpdateNft"
                       }
                     }
                   }
@@ -15503,23 +16198,27 @@
         },
         "MsgSend": {
           "properties": {
-            "from_address": {
-              "type": "string"
+            "class_id": {
+              "type": "string",
+              "description": "class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721"
             },
-            "to_address": {
-              "type": "string"
+            "id": {
+              "type": "string",
+              "description": "id defines the unique identification of nft"
             },
-            "amount": {
-              "items": {
-                "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
-              },
-              "type": "array"
+            "sender": {
+              "type": "string",
+              "description": "sender is the address of the owner of nft"
+            },
+            "receiver": {
+              "type": "string",
+              "description": "receiver is the receiver address of nft"
             }
           },
           "additionalProperties": false,
           "type": "object",
           "title": "Msg Send",
-          "description": "MsgSend represents a message to send coins from one account to another."
+          "description": "MsgSend represents a message to send a nft from one account to another account."
         },
         "MsgVerifyInvariant": {
           "properties": {
@@ -16554,31 +17253,35 @@
           "properties": {
             "creator": {
               "type": "string",
-              "description": "The account sending the transaction"
+              "description": "The account sending this transaction"
             },
             "address": {
               "type": "string",
-              "description": "dys address of the scrit to call"
+              "description": "Dys address of the script to call"
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
+              "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself."
             },
             "function_name": {
               "type": "string",
-              "description": "optional function to call"
+              "description": "Optional function to call"
             },
             "args": {
               "type": "string",
-              "description": "optional args to call the function with"
+              "description": "Optional args to call the function with"
             },
             "kwargs": {
               "type": "string",
-              "description": "optional kwargs to run"
+              "description": "Optional kwargs to run"
             },
             "coins": {
               "type": "string",
-              "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+              "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+            },
+            "nfts": {
+              "type": "string",
+              "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
             }
           },
           "additionalProperties": false,
@@ -16665,31 +17368,35 @@
           "properties": {
             "creator": {
               "type": "string",
-              "description": "The account sending the transaction"
+              "description": "The account sending this transaction"
             },
             "address": {
               "type": "string",
-              "description": "dys address of the scrit to call"
+              "description": "Dys address of the script to call"
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
+              "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself."
             },
             "function_name": {
               "type": "string",
-              "description": "optional function to call"
+              "description": "Optional function to call"
             },
             "args": {
               "type": "string",
-              "description": "optional args to call the function with"
+              "description": "Optional args to call the function with"
             },
             "kwargs": {
               "type": "string",
-              "description": "optional kwargs to run"
+              "description": "Optional kwargs to run"
             },
             "coins": {
               "type": "string",
-              "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+              "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+            },
+            "nfts": {
+              "type": "string",
+              "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
             }
           },
           "additionalProperties": false,
@@ -17617,83 +18324,153 @@
         "MsgAccept": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to accept"
             },
-            "newOwner": {
-              "type": "string"
+            "new_owner": {
+              "type": "string",
+              "description": "The owner address of the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Accept"
+          "title": "Msg Accept",
+          "description": "Accept the name that was offered to you"
         },
         "MsgBurnCoins": {
           "properties": {
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner of the Dys name"
             },
             "amount": {
-              "type": "string"
+              "type": "string",
+              "description": "The amount of coins to burn, the owner must have enough coins to burn"
             }
           },
           "additionalProperties": false,
           "type": "object",
           "title": "Msg Burn Coins"
         },
-        "MsgBuy": {
+        "MsgBurnNft": {
           "properties": {
-            "buyer": {
-              "type": "string"
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the NFT Class"
             },
-            "name": {
-              "type": "string"
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT to burn. The owner must currently own this NFT to burn it."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Buy"
+          "title": "Msg Burn Nft",
+          "description": "Burn an NFT of the given class ID and NFT ID."
+        },
+        "MsgBuy": {
+          "properties": {
+            "buyer": {
+              "type": "string",
+              "description": "The address of the buyer"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name to buy"
+            },
+            "price": {
+              "type": "string",
+              "description": "Confirm the  price of the name is the same as the listed price."
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Buy",
+          "description": "All names have a listed price, this message allows you to buy the name at the listed price."
         },
         "MsgDeleteName": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to delete"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Delete Name"
+          "title": "Msg Delete Name",
+          "description": "Delete the Dyson Protocol name"
         },
         "MsgMintCoins": {
           "properties": {
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner of the Dys name"
             },
             "amount": {
-              "type": "string"
+              "type": "string",
+              "description": "The amount of coins to mint in the format \"[amount] [denom]\".   Each coin costs 1 gas."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Mint Coins"
+          "title": "Msg Mint Coins",
+          "description": "Mint coins with a denom of a name or subname. For example if you own the name \"example.dys\" you can mint coins with the denom \"example.dys\" or \"subname.example.dys\""
+        },
+        "MsgMintNft": {
+          "properties": {
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the Dys name"
+            },
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT, must be unique to the class ID"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Mint Nft",
+          "description": "Mint an NFT with the given class ID and NFT ID. The NFT ID is unique to the class ID."
         },
         "MsgOfferTo": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to offer"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
-            "newOwner": {
-              "type": "string"
+            "new_owner": {
+              "type": "string",
+              "description": "The address to offer the name to. They can take ownership of the name with the Accept message"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Offer To"
+          "title": "Msg Offer To",
+          "description": "Offer the name to a new owner"
         },
         "MsgRegister": {
           "properties": {
@@ -17721,56 +18498,134 @@
         "MsgReveal": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to reveal"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "salt": {
-              "type": "string"
+              "type": "string",
+              "description": "The salt that was used to commit to the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Reveal"
+          "title": "Msg Reveal",
+          "description": "Reveal the name that was committed to with the Register message"
+        },
+        "MsgSetNftClass": {
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "The owner of the Dys name of the NFT class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "the ID is the Dys name or subname of the NFT class. For example if you own the name \"example.dys\" you can create an NFT class with the ID \"example.dys\" or \"subname.example.dys\""
+            },
+            "name": {
+              "type": "string",
+              "description": "More descriptive name of the NFT class (optional)"
+            },
+            "symbol": {
+              "type": "string",
+              "description": "The symbol of the NFT class (optional)"
+            },
+            "description": {
+              "type": "string",
+              "description": "The  description of the NFT class (optional)"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT class (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT class (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Set Nft Class",
+          "description": "Create or update an NFT class. The NFT class is identified by the Dys name of the class ID."
         },
         "MsgSetPriceAndExtend": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to set the price for"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "price": {
-              "type": "string"
+              "type": "string",
+              "description": "The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Set Price And Extend"
+          "title": "Msg Set Price And Extend",
+          "description": "Set the price of the name and extend the expiration height"
         },
         "MsgUpdateName": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to update"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "destination": {
-              "type": "string"
+              "type": "string",
+              "description": "The new destination address for the name"
             },
             "authorized": {
-              "type": "string"
+              "type": "string",
+              "description": "The address that this name is OfferedTo, they can take ownership of the name with the Accept message"
             },
             "auto_renew": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Update Name"
+          "title": "Msg Update Name",
+          "description": "Update the details of the Dyson Protocol name"
+        },
+        "MsgUpdateNft": {
+          "properties": {
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the NFT Class"
+            },
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT to update"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Update Nft",
+          "description": "Update the details of an NFT"
         }
       }
     },
@@ -20886,6 +21741,31 @@
                     }
                   },
                   {
+                    "title": "cosmos.nft.v1beta1.MsgSend",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/cosmos.nft.v1beta1.MsgSend",
+                        "enum": [
+                          "/cosmos.nft.v1beta1.MsgSend"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgSend"
+                      }
+                    }
+                  },
+                  {
                     "title": "cosmos.slashing.v1beta1.MsgUnjail",
                     "type": "object",
                     "properties": {
@@ -21961,6 +22841,31 @@
                     }
                   },
                   {
+                    "title": "names.MsgBurnNft",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgBurnNft",
+                        "enum": [
+                          "/names.MsgBurnNft"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgBurnNft"
+                      }
+                    }
+                  },
+                  {
                     "title": "names.MsgBuy",
                     "type": "object",
                     "properties": {
@@ -22032,6 +22937,31 @@
                       },
                       "object_value": {
                         "$ref": "#/definitions/MsgMintCoins"
+                      }
+                    }
+                  },
+                  {
+                    "title": "names.MsgMintNft",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgMintNft",
+                        "enum": [
+                          "/names.MsgMintNft"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgMintNft"
                       }
                     }
                   },
@@ -22111,6 +23041,31 @@
                     }
                   },
                   {
+                    "title": "names.MsgSetNftClass",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgSetNftClass",
+                        "enum": [
+                          "/names.MsgSetNftClass"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgSetNftClass"
+                      }
+                    }
+                  },
+                  {
                     "title": "names.MsgSetPriceAndExtend",
                     "type": "object",
                     "properties": {
@@ -22157,6 +23112,31 @@
                       },
                       "object_value": {
                         "$ref": "#/definitions/MsgUpdateName"
+                      }
+                    }
+                  },
+                  {
+                    "title": "names.MsgUpdateNft",
+                    "type": "object",
+                    "properties": {
+                      "type_url": {
+                        "type": "string",
+                        "description": "Registered fully-qualified proto name for a message type valid for this request",
+                        "readOnly": true,
+                        "default": "/names.MsgUpdateNft",
+                        "enum": [
+                          "/names.MsgUpdateNft"
+                        ]
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Must be a valid serialized protocol buffer of the above specified type.",
+                        "format": "binary",
+                        "readOnly": true,
+                        "binaryEncoding": "base64"
+                      },
+                      "object_value": {
+                        "$ref": "#/definitions/MsgUpdateNft"
                       }
                     }
                   }
@@ -22339,23 +23319,27 @@
         },
         "MsgSend": {
           "properties": {
-            "from_address": {
-              "type": "string"
+            "class_id": {
+              "type": "string",
+              "description": "class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721"
             },
-            "to_address": {
-              "type": "string"
+            "id": {
+              "type": "string",
+              "description": "id defines the unique identification of nft"
             },
-            "amount": {
-              "items": {
-                "$ref": "#/definitions/cosmos.base.v1beta1.Coin"
-              },
-              "type": "array"
+            "sender": {
+              "type": "string",
+              "description": "sender is the address of the owner of nft"
+            },
+            "receiver": {
+              "type": "string",
+              "description": "receiver is the receiver address of nft"
             }
           },
           "additionalProperties": false,
           "type": "object",
           "title": "Msg Send",
-          "description": "MsgSend represents a message to send coins from one account to another."
+          "description": "MsgSend represents a message to send a nft from one account to another account."
         },
         "MsgVerifyInvariant": {
           "properties": {
@@ -23390,31 +24374,35 @@
           "properties": {
             "creator": {
               "type": "string",
-              "description": "The account sending the transaction"
+              "description": "The account sending this transaction"
             },
             "address": {
               "type": "string",
-              "description": "dys address of the scrit to call"
+              "description": "Dys address of the script to call"
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
+              "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself."
             },
             "function_name": {
               "type": "string",
-              "description": "optional function to call"
+              "description": "Optional function to call"
             },
             "args": {
               "type": "string",
-              "description": "optional args to call the function with"
+              "description": "Optional args to call the function with"
             },
             "kwargs": {
               "type": "string",
-              "description": "optional kwargs to run"
+              "description": "Optional kwargs to run"
             },
             "coins": {
               "type": "string",
-              "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+              "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+            },
+            "nfts": {
+              "type": "string",
+              "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
             }
           },
           "additionalProperties": false,
@@ -23501,31 +24489,35 @@
           "properties": {
             "creator": {
               "type": "string",
-              "description": "The account sending the transaction"
+              "description": "The account sending this transaction"
             },
             "address": {
               "type": "string",
-              "description": "dys address of the scrit to call"
+              "description": "Dys address of the script to call"
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
+              "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself."
             },
             "function_name": {
               "type": "string",
-              "description": "optional function to call"
+              "description": "Optional function to call"
             },
             "args": {
               "type": "string",
-              "description": "optional args to call the function with"
+              "description": "Optional args to call the function with"
             },
             "kwargs": {
               "type": "string",
-              "description": "optional kwargs to run"
+              "description": "Optional kwargs to run"
             },
             "coins": {
               "type": "string",
-              "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+              "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+            },
+            "nfts": {
+              "type": "string",
+              "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
             }
           },
           "additionalProperties": false,
@@ -24453,83 +25445,153 @@
         "MsgAccept": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to accept"
             },
-            "newOwner": {
-              "type": "string"
+            "new_owner": {
+              "type": "string",
+              "description": "The owner address of the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Accept"
+          "title": "Msg Accept",
+          "description": "Accept the name that was offered to you"
         },
         "MsgBurnCoins": {
           "properties": {
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner of the Dys name"
             },
             "amount": {
-              "type": "string"
+              "type": "string",
+              "description": "The amount of coins to burn, the owner must have enough coins to burn"
             }
           },
           "additionalProperties": false,
           "type": "object",
           "title": "Msg Burn Coins"
         },
-        "MsgBuy": {
+        "MsgBurnNft": {
           "properties": {
-            "buyer": {
-              "type": "string"
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the NFT Class"
             },
-            "name": {
-              "type": "string"
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT to burn. The owner must currently own this NFT to burn it."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Buy"
+          "title": "Msg Burn Nft",
+          "description": "Burn an NFT of the given class ID and NFT ID."
+        },
+        "MsgBuy": {
+          "properties": {
+            "buyer": {
+              "type": "string",
+              "description": "The address of the buyer"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name to buy"
+            },
+            "price": {
+              "type": "string",
+              "description": "Confirm the  price of the name is the same as the listed price."
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Buy",
+          "description": "All names have a listed price, this message allows you to buy the name at the listed price."
         },
         "MsgDeleteName": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to delete"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Delete Name"
+          "title": "Msg Delete Name",
+          "description": "Delete the Dyson Protocol name"
         },
         "MsgMintCoins": {
           "properties": {
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner of the Dys name"
             },
             "amount": {
-              "type": "string"
+              "type": "string",
+              "description": "The amount of coins to mint in the format \"[amount] [denom]\".   Each coin costs 1 gas."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Mint Coins"
+          "title": "Msg Mint Coins",
+          "description": "Mint coins with a denom of a name or subname. For example if you own the name \"example.dys\" you can mint coins with the denom \"example.dys\" or \"subname.example.dys\""
+        },
+        "MsgMintNft": {
+          "properties": {
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the Dys name"
+            },
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT, must be unique to the class ID"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Mint Nft",
+          "description": "Mint an NFT with the given class ID and NFT ID. The NFT ID is unique to the class ID."
         },
         "MsgOfferTo": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to offer"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
-            "newOwner": {
-              "type": "string"
+            "new_owner": {
+              "type": "string",
+              "description": "The address to offer the name to. They can take ownership of the name with the Accept message"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Offer To"
+          "title": "Msg Offer To",
+          "description": "Offer the name to a new owner"
         },
         "MsgRegister": {
           "properties": {
@@ -24557,56 +25619,134 @@
         "MsgReveal": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to reveal"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "salt": {
-              "type": "string"
+              "type": "string",
+              "description": "The salt that was used to commit to the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Reveal"
+          "title": "Msg Reveal",
+          "description": "Reveal the name that was committed to with the Register message"
+        },
+        "MsgSetNftClass": {
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "The owner of the Dys name of the NFT class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "the ID is the Dys name or subname of the NFT class. For example if you own the name \"example.dys\" you can create an NFT class with the ID \"example.dys\" or \"subname.example.dys\""
+            },
+            "name": {
+              "type": "string",
+              "description": "More descriptive name of the NFT class (optional)"
+            },
+            "symbol": {
+              "type": "string",
+              "description": "The symbol of the NFT class (optional)"
+            },
+            "description": {
+              "type": "string",
+              "description": "The  description of the NFT class (optional)"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT class (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT class (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Set Nft Class",
+          "description": "Create or update an NFT class. The NFT class is identified by the Dys name of the class ID."
         },
         "MsgSetPriceAndExtend": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to set the price for"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "price": {
-              "type": "string"
+              "type": "string",
+              "description": "The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Set Price And Extend"
+          "title": "Msg Set Price And Extend",
+          "description": "Set the price of the name and extend the expiration height"
         },
         "MsgUpdateName": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to update"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "destination": {
-              "type": "string"
+              "type": "string",
+              "description": "The new destination address for the name"
             },
             "authorized": {
-              "type": "string"
+              "type": "string",
+              "description": "The address that this name is OfferedTo, they can take ownership of the name with the Accept message"
             },
             "auto_renew": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Update Name"
+          "title": "Msg Update Name",
+          "description": "Update the details of the Dyson Protocol name"
+        },
+        "MsgUpdateNft": {
+          "properties": {
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the NFT Class"
+            },
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of this NFT to update"
+            },
+            "uri": {
+              "type": "string",
+              "description": "The URI of the NFT (optional)"
+            },
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT (optional)"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Update Nft",
+          "description": "Update the details of an NFT"
         }
       }
     },
@@ -24889,6 +26029,394 @@
         "HasBody": false
       }
     ]
+  },
+  "cosmos.nft.v1beta1/QueryBalance": {
+    "module_name": "cosmos.nft.v1beta1",
+    "name": "Balance",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryBalanceRequest",
+      "definitions": {
+        "QueryBalanceRequest": {
+          "properties": {
+            "class_id": {
+              "type": "string"
+            },
+            "owner": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Balance Request",
+          "description": "QueryBalanceRequest is the request type for the Query/Balance RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/cosmos/nft/v1beta1/balance/{owner}/{class_id}",
+    "http_rules": [
+      {
+        "Params": [
+          "owner",
+          "class_id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "cosmos.nft.v1beta1/QueryOwner": {
+    "module_name": "cosmos.nft.v1beta1",
+    "name": "Owner",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryOwnerRequest",
+      "definitions": {
+        "QueryOwnerRequest": {
+          "properties": {
+            "class_id": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Owner Request",
+          "description": "QueryOwnerRequest is the request type for the Query/Owner RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/cosmos/nft/v1beta1/owner/{class_id}/{id}",
+    "http_rules": [
+      {
+        "Params": [
+          "class_id",
+          "id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "cosmos.nft.v1beta1/QuerySupply": {
+    "module_name": "cosmos.nft.v1beta1",
+    "name": "Supply",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QuerySupplyRequest",
+      "definitions": {
+        "QuerySupplyRequest": {
+          "properties": {
+            "class_id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Supply Request",
+          "description": "QuerySupplyRequest is the request type for the Query/Supply RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/cosmos/nft/v1beta1/supply/{class_id}",
+    "http_rules": [
+      {
+        "Params": [
+          "class_id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "cosmos.nft.v1beta1/QueryNFTs": {
+    "module_name": "cosmos.nft.v1beta1",
+    "name": "NFTs",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryNFTsRequest",
+      "definitions": {
+        "QueryNFTsRequest": {
+          "properties": {
+            "class_id": {
+              "type": "string"
+            },
+            "owner": {
+              "type": "string"
+            },
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query NF Ts Request",
+          "description": "QueryNFTstRequest is the request type for the Query/NFTs RPC method"
+        },
+        "cosmos.base.query.v1beta1.PageRequest": {
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "offset": {
+              "type": "string",
+              "description": "offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set."
+            },
+            "limit": {
+              "type": "string",
+              "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
+            },
+            "count_total": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "reverse is set to true if results are to be returned in the descending order. Since: cosmos-sdk 0.43"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Page Request",
+          "description": "PageRequest is to be embedded in gRPC request messages for efficient pagination. Ex:  message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }",
+          "options": {
+            "show_opt_in": true,
+            "required_by_default": false
+          },
+          "required": []
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/cosmos/nft/v1beta1/nfts",
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "cosmos.nft.v1beta1/QueryNFT": {
+    "module_name": "cosmos.nft.v1beta1",
+    "name": "NFT",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryNFTRequest",
+      "definitions": {
+        "QueryNFTRequest": {
+          "properties": {
+            "class_id": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query NFT Request",
+          "description": "QueryNFTRequest is the request type for the Query/NFT RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/cosmos/nft/v1beta1/nfts/{class_id}/{id}",
+    "http_rules": [
+      {
+        "Params": [
+          "class_id",
+          "id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "cosmos.nft.v1beta1/QueryClass": {
+    "module_name": "cosmos.nft.v1beta1",
+    "name": "Class",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryClassRequest",
+      "definitions": {
+        "QueryClassRequest": {
+          "properties": {
+            "class_id": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Class Request",
+          "description": "QueryClassRequest is the request type for the Query/Class RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/cosmos/nft/v1beta1/classes/{class_id}",
+    "http_rules": [
+      {
+        "Params": [
+          "class_id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "cosmos.nft.v1beta1/QueryClasses": {
+    "module_name": "cosmos.nft.v1beta1",
+    "name": "Classes",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryClassesRequest",
+      "definitions": {
+        "QueryClassesRequest": {
+          "properties": {
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": false,
+              "description": "pagination defines an optional pagination for the request."
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Classes Request",
+          "description": "QueryClassesRequest is the request type for the Query/Classes RPC method"
+        },
+        "cosmos.base.query.v1beta1.PageRequest": {
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "offset": {
+              "type": "string",
+              "description": "offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set."
+            },
+            "limit": {
+              "type": "string",
+              "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
+            },
+            "count_total": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "reverse is set to true if results are to be returned in the descending order. Since: cosmos-sdk 0.43"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Page Request",
+          "description": "PageRequest is to be embedded in gRPC request messages for efficient pagination. Ex:  message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }",
+          "options": {
+            "show_opt_in": true,
+            "required_by_default": false
+          },
+          "required": []
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/cosmos/nft/v1beta1/classes",
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "cosmos.nft.v1beta1/sendMsgSend": {
+    "module_name": "cosmos.nft.v1beta1",
+    "name": "Send",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgSend",
+      "definitions": {
+        "MsgSend": {
+          "properties": {
+            "class_id": {
+              "type": "string",
+              "description": "class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721"
+            },
+            "id": {
+              "type": "string",
+              "description": "id defines the unique identification of nft"
+            },
+            "sender": {
+              "type": "string",
+              "description": "sender is the address of the owner of nft"
+            },
+            "receiver": {
+              "type": "string",
+              "description": "receiver is the receiver address of nft"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Send",
+          "description": "MsgSend represents a message to send a nft from one account to another account."
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
   },
   "cosmos.params.v1beta1/QueryParams": {
     "module_name": "cosmos.params.v1beta1",
@@ -27471,32 +28999,36 @@
           "properties": {
             "creator": {
               "type": "string",
-              "description": "The account sending the transaction"
+              "description": "The account sending this transaction"
             },
             "address": {
               "type": "string",
-              "description": "dys address of the scrit to call"
+              "description": "Dys address of the script to call"
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running",
+              "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself.",
               "format": "python"
             },
             "function_name": {
               "type": "string",
-              "description": "optional function to call"
+              "description": "Optional function to call"
             },
             "args": {
               "type": "string",
-              "description": "optional args to call the function with"
+              "description": "Optional args to call the function with"
             },
             "kwargs": {
               "type": "string",
-              "description": "optional kwargs to run"
+              "description": "Optional kwargs to run"
             },
             "coins": {
               "type": "string",
-              "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+              "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+            },
+            "nfts": {
+              "type": "string",
+              "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
             }
           },
           "additionalProperties": false,
@@ -27873,31 +29405,35 @@
           "properties": {
             "creator": {
               "type": "string",
-              "description": "The account sending the transaction"
+              "description": "The account sending this transaction"
             },
             "address": {
               "type": "string",
-              "description": "dys address of the scrit to call"
+              "description": "Dys address of the script to call"
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running"
+              "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself."
             },
             "function_name": {
               "type": "string",
-              "description": "optional function to call"
+              "description": "Optional function to call"
             },
             "args": {
               "type": "string",
-              "description": "optional args to call the function with"
+              "description": "Optional args to call the function with"
             },
             "kwargs": {
               "type": "string",
-              "description": "optional kwargs to run"
+              "description": "Optional kwargs to run"
             },
             "coins": {
               "type": "string",
-              "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+              "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+            },
+            "nfts": {
+              "type": "string",
+              "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
             }
           },
           "additionalProperties": false,
@@ -28136,32 +29672,36 @@
           "properties": {
             "creator": {
               "type": "string",
-              "description": "The account sending the transaction"
+              "description": "The account sending this transaction"
             },
             "address": {
               "type": "string",
-              "description": "dys address of the scrit to call"
+              "description": "Dys address of the script to call"
             },
             "extra_lines": {
               "type": "string",
-              "description": "optional extra source code to append to the end of the script before running",
+              "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself.",
               "format": "python"
             },
             "function_name": {
               "type": "string",
-              "description": "optional function to call"
+              "description": "Optional function to call"
             },
             "args": {
               "type": "string",
-              "description": "optional args to call the function with"
+              "description": "Optional args to call the function with"
             },
             "kwargs": {
               "type": "string",
-              "description": "optional kwargs to run"
+              "description": "Optional kwargs to run"
             },
             "coins": {
               "type": "string",
-              "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+              "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+            },
+            "nfts": {
+              "type": "string",
+              "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
             }
           },
           "additionalProperties": false,
@@ -28545,24 +30085,30 @@
         "MsgUpdateName": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to update"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "destination": {
-              "type": "string"
+              "type": "string",
+              "description": "The new destination address for the name"
             },
             "authorized": {
-              "type": "string"
+              "type": "string",
+              "description": "The address that this name is OfferedTo, they can take ownership of the name with the Accept message"
             },
             "auto_renew": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Update Name"
+          "title": "Msg Update Name",
+          "description": "Update the details of the Dyson Protocol name"
         }
       }
     },
@@ -28585,15 +30131,18 @@
         "MsgDeleteName": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to delete"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Delete Name"
+          "title": "Msg Delete Name",
+          "description": "Delete the Dyson Protocol name"
         }
       }
     },
@@ -28616,18 +30165,22 @@
         "MsgReveal": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to reveal"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "salt": {
-              "type": "string"
+              "type": "string",
+              "description": "The salt that was used to commit to the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Reveal"
+          "title": "Msg Reveal",
+          "description": "Reveal the name that was committed to with the Register message"
         }
       }
     },
@@ -28650,18 +30203,22 @@
         "MsgSetPriceAndExtend": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to set the price for"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
             "price": {
-              "type": "string"
+              "type": "string",
+              "description": "The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Set Price And Extend"
+          "title": "Msg Set Price And Extend",
+          "description": "Set the price of the name and extend the expiration height"
         }
       }
     },
@@ -28684,18 +30241,22 @@
         "MsgOfferTo": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to offer"
             },
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner address of the name"
             },
-            "newOwner": {
-              "type": "string"
+            "new_owner": {
+              "type": "string",
+              "description": "The address to offer the name to. They can take ownership of the name with the Accept message"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Offer To"
+          "title": "Msg Offer To",
+          "description": "Offer the name to a new owner"
         }
       }
     },
@@ -28718,15 +30279,18 @@
         "MsgAccept": {
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to accept"
             },
-            "newOwner": {
-              "type": "string"
+            "new_owner": {
+              "type": "string",
+              "description": "The owner address of the name"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Accept"
+          "title": "Msg Accept",
+          "description": "Accept the name that was offered to you"
         }
       }
     },
@@ -28749,15 +30313,22 @@
         "MsgBuy": {
           "properties": {
             "buyer": {
-              "type": "string"
+              "type": "string",
+              "description": "The address of the buyer"
             },
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "The name to buy"
+            },
+            "price": {
+              "type": "string",
+              "description": "Confirm the  price of the name is the same as the listed price."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Buy"
+          "title": "Msg Buy",
+          "description": "All names have a listed price, this message allows you to buy the name at the listed price."
         }
       }
     },
@@ -28780,15 +30351,18 @@
         "MsgMintCoins": {
           "properties": {
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner of the Dys name"
             },
             "amount": {
-              "type": "string"
+              "type": "string",
+              "description": "The amount of coins to mint in the format \"[amount] [denom]\".   Each coin costs 1 gas."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Mint Coins"
+          "title": "Msg Mint Coins",
+          "description": "Mint coins with a denom of a name or subname. For example if you own the name \"example.dys\" you can mint coins with the denom \"example.dys\" or \"subname.example.dys\""
         }
       }
     },
@@ -28811,10 +30385,12 @@
         "MsgBurnCoins": {
           "properties": {
             "owner": {
-              "type": "string"
+              "type": "string",
+              "description": "The owner of the Dys name"
             },
             "amount": {
-              "type": "string"
+              "type": "string",
+              "description": "The amount of coins to burn, the owner must have enough coins to burn"
             }
           },
           "additionalProperties": false,
@@ -28843,32 +30419,37 @@
           "properties": {
             "owner": {
               "type": "string",
-              "description": "The owner of the Dys name"
+              "description": "The owner of the Dys name of the NFT class ID"
             },
             "id": {
               "type": "string",
-              "description": "the Id must equal the Dys name"
+              "description": "the ID is the Dys name or subname of the NFT class. For example if you own the name \"example.dys\" you can create an NFT class with the ID \"example.dys\" or \"subname.example.dys\""
             },
             "name": {
               "type": "string",
-              "description": "More descriptive name"
+              "description": "More descriptive name of the NFT class (optional)"
             },
             "symbol": {
-              "type": "string"
+              "type": "string",
+              "description": "The symbol of the NFT class (optional)"
             },
             "description": {
-              "type": "string"
+              "type": "string",
+              "description": "The  description of the NFT class (optional)"
             },
             "uri": {
-              "type": "string"
+              "type": "string",
+              "description": "The URI of the NFT class (optional)"
             },
-            "urihash": {
-              "type": "string"
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT class (optional)"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Set Nft Class"
+          "title": "Msg Set Nft Class",
+          "description": "Create or update an NFT class. The NFT class is identified by the Dys name of the class ID."
         }
       }
     },
@@ -28890,27 +30471,31 @@
       "definitions": {
         "MsgMintNft": {
           "properties": {
-            "classOwner": {
+            "class_owner": {
               "type": "string",
               "description": "The owner of the Dys name"
             },
-            "classId": {
+            "class_id": {
               "type": "string",
-              "description": "the ClassID must equal yythe Dys name"
+              "description": "the NFT Class ID"
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "The ID of this NFT, must be unique to the class ID"
             },
             "uri": {
-              "type": "string"
+              "type": "string",
+              "description": "The URI of the NFT (optional)"
             },
-            "urihash": {
-              "type": "string"
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT (optional)"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Mint Nft"
+          "title": "Msg Mint Nft",
+          "description": "Mint an NFT with the given class ID and NFT ID. The NFT ID is unique to the class ID."
         }
       }
     },
@@ -28932,28 +30517,31 @@
       "definitions": {
         "MsgUpdateNft": {
           "properties": {
-            "classOwner": {
+            "class_owner": {
               "type": "string",
-              "description": "The owner of the Dys name"
+              "description": "The owner of the NFT Class"
             },
-            "classId": {
+            "class_id": {
               "type": "string",
-              "description": "The dys name that the NFT was create with"
+              "description": "the NFT Class ID"
             },
             "id": {
               "type": "string",
-              "description": "The ID of this NFT"
+              "description": "The ID of this NFT to update"
             },
             "uri": {
-              "type": "string"
+              "type": "string",
+              "description": "The URI of the NFT (optional)"
             },
-            "urihash": {
-              "type": "string"
+            "uri_hash": {
+              "type": "string",
+              "description": "The URI hash of the NFT (optional)"
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Update Nft"
+          "title": "Msg Update Nft",
+          "description": "Update the details of an NFT"
         }
       }
     },
@@ -28975,19 +30563,23 @@
       "definitions": {
         "MsgBurnNft": {
           "properties": {
-            "classOwner": {
-              "type": "string"
+            "class_owner": {
+              "type": "string",
+              "description": "The owner of the NFT Class"
             },
-            "classId": {
-              "type": "string"
+            "class_id": {
+              "type": "string",
+              "description": "the NFT Class ID"
             },
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "The ID of this NFT to burn. The owner must currently own this NFT to burn it."
             }
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Msg Burn Nft"
+          "title": "Msg Burn Nft",
+          "description": "Burn an NFT of the given class ID and NFT ID."
         }
       }
     },

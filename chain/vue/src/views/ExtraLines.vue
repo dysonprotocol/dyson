@@ -21,41 +21,68 @@
           :max-lines="20"
           :readonly="inflight"
         />
-        <div class="form-group">
-          <label for="coinsInput">Coins</label>
-          <input
-            id="coinsInput"
-            class="form-control"
-            aria-describedby="coinsHelp"
-            v-model="coins"
-          />
-          <small id="coinsHelp" class="form-text text-muted"
-            >Coins to pay to the function, For example "123dys, 456token" The
-            script will recieve this entire amount.</small
-          >
-        </div>
-        <div class="btn-group" role="group" aria-label="">
+        <div class="mb-3">
           <button
-            name="action"
-            :disabled="!address || this.inflight"
-            type="submit"
-            value="query"
-            class="btn btn-secondary"
+            type="button"
+            class="btn btn-secondary btn-sm"
+            @click="this.showAssets = !this.showAssets"
+            :disabled="nfts.length || coins.length"
           >
-            Query Extra Lines
+            Attach Assets
+            {{ this.showAssets ? '▲' : '▼' }}
           </button>
-          <button
-            name="action"
-            :disabled="!address || this.inflight"
-            type="submit"
-            value="run"
-            class="btn btn-primary"
-          >
-            Run Extra Lines...
-            {{ (!address && "[connect wallet]") || "" }}
-          </button>
+          <div v-if="showAssets || nfts.length || coins.length">
+            <label :for="name + 'coinsInput'">Attach Coins</label>
+            <input
+              :id="name + 'coinsInput'"
+              class="form-control"
+              aria-describedby="coinsHelp"
+              v-model="coins"
+            />
+            <small id="coinsHelp" class="form-text text-muted"
+              >Optional comma seperated list of coins to send the script (for
+              example "123dys,456token") this entire amount will be sent to the
+              script
+            </small>
+            <div class="form-group">
+              <label for="nftInput">Attach NFTs</label>
+              <input
+                id="nftInput"
+                class="form-control"
+                aria-describedby="nftHelp"
+                v-model="nfts"
+              />
+              <small id="nftHelp" class="form-text text-muted"
+                >Optional NFTs to send the script, formatted [class_id]/[id],
+                [class_id]/[id] (for example "example.dys/123, example.dys/456")
+              </small>
+            </div>
+          </div>
         </div>
-        <a class="btn btn-link" :href="link">Link</a>
+        <div class="mb-3">
+          <div class="btn-group" role="group" aria-label="">
+            <button
+              name="action"
+              :disabled="!address || this.inflight"
+              type="submit"
+              value="query"
+              class="btn btn-secondary"
+            >
+              Query Extra Lines
+            </button>
+            <button
+              name="action"
+              :disabled="!address || this.inflight"
+              type="submit"
+              value="run"
+              class="btn btn-primary"
+            >
+              Run Extra Lines...
+              {{ (!address && '[connect wallet]') || '' }}
+            </button>
+          </div>
+          <a class="btn btn-link" :href="link">Link</a>
+        </div>
       </form>
       <div v-if="runResponse">
         <ul class="list-group list-group-flush">
@@ -125,13 +152,13 @@
   </div>
 </template>
 <script>
-import { VAceEditor } from "vue3-ace-editor";
-import "ace-builds/src-noconflict/mode-python";
-import "ace-builds/src-noconflict/theme-chrome";
-import "ace-builds/src-noconflict/theme-vibrant_ink";
+import { VAceEditor } from 'vue3-ace-editor'
+import 'ace-builds/src-noconflict/mode-python'
+import 'ace-builds/src-noconflict/theme-chrome'
+import 'ace-builds/src-noconflict/theme-vibrant_ink'
 
 export default {
-  name: "ExtraLines",
+  name: 'ExtraLines',
   props: {
     scriptAddress: String,
   },
@@ -139,28 +166,27 @@ export default {
     VAceEditor,
   },
   mounted: function () {
-    window.addEventListener("colorModeChanged", this.colorModeChangeCallback);
+    window.addEventListener('colorModeChanged', this.colorModeChangeCallback)
   },
   unmounted: function () {
-    window.removeEventListener(
-      "colorModeChanged",
-      this.colorModeChangeCallback
-    );
+    window.removeEventListener('colorModeChanged', this.colorModeChangeCallback)
   },
   data: function () {
     return {
-      extra_lines: localStorage.getItem("extraLines") || "\n\n\n",
+      extra_lines: localStorage.getItem('extraLines') || '\n\n\n',
       runResponse: null,
       queryResponse: null,
       queryResponseErr: null,
-      coins: "",
+      coins: '',
+      nfts: '',
       isHidden: true,
       isModal: false,
-      link: "",
+      link: '',
       inflight: false,
       gas: 123000,
-      colorMode: localStorage.getItem("colorMode"),
-    };
+      colorMode: localStorage.getItem('colorMode'),
+      showAssets: false,
+    }
   },
   watch: {
     extra_lines: function (val) {
@@ -169,107 +195,108 @@ export default {
   },
   computed: {
     aceTheme: function () {
-      if (this.colorMode == "dark") {
-        return "vibrant_ink";
+      if (this.colorMode == 'dark') {
+        return 'vibrant_ink'
       } else {
-        return "chrome";
+        return 'chrome'
       }
     },
     address: function () {
-      return this.$store.getters["common/wallet/address"];
+      return this.$store.getters['common/wallet/address']
     },
   },
   methods: {
     colorModeChangeCallback(event) {
-      console.log("colorModeChanged ExtraLines", event);
-      this.colorMode = event.detail.colorMode;
-
+      console.log('colorModeChanged ExtraLines', event)
+      this.colorMode = event.detail.colorMode
     },
     submit: async function (e) {
-      e.preventDefault();
-      console.log(e.submitter.value);
-      this.runResponse = null;
-      this.queryResponse = null;
-      this.queryResponseErr = null;
+      e.preventDefault()
+      console.log(e.submitter.value)
+      this.runResponse = null
+      this.queryResponse = null
+      this.queryResponseErr = null
       const value = {
         creator: this.address,
         address: this.scriptAddress,
         extra_lines: this.extra_lines,
-      };
+        coins: this.coins,
+        nfts: this.nfts,
+      }
 
-      if (e.submitter.value == "run") {
-        var txResult = {};
+      if (e.submitter.value == 'run') {
+        var txResult = {}
         try {
-          this.inflight = true;
-          var runResponse = {};
+          this.inflight = true
+          var runResponse = {}
           var opts = {
             value: value,
             fee: [
-              { amount: String(Math.ceil(this.gas * 0.001)), denom: "dys" },
+              { amount: String(Math.ceil(this.gas * 0.001)), denom: 'dys' },
             ],
             gas: String(Math.ceil(this.gas)),
-          };
+          }
           try {
-            txResult = await this.$store.dispatch("dyson/sendMsgRun", opts);
-            console.log("txResult", txResult);
-            this.gas = txResult.gasUsed * 2;
+            txResult = await this.$store.dispatch('dyson/sendMsgRun', opts)
+            console.log('txResult', txResult)
+            this.gas = txResult.gasUsed * 2
             runResponse = JSON.parse(
-              JSON.parse(txResult["rawLog"])[0]
-                ["events"].filter((i) => i.type == "run")[0]
-                ["attributes"].slice(-1)[0]["value"]
-            );
+              JSON.parse(txResult['rawLog'])[0]
+                ['events'].filter((i) => i.type == 'run')[0]
+                ['attributes'].slice(-1)[0]['value']
+            )
           } catch (objError) {
-            console.info("objError", objError);
+            console.info('objError', objError)
             if (objError instanceof SyntaxError) {
               let match = txResult.rawLog.match(
                 /Output:\n(.*): Exception in Script$/s
-              );
+              )
               if (match) {
-                runResponse = JSON.parse(match[1]);
+                runResponse = JSON.parse(match[1])
               } else {
-                runResponse.exception = txResult.rawLog;
+                runResponse.exception = txResult.rawLog
               }
             } else {
-              runResponse.exception = objError.message;
+              runResponse.exception = objError.message
             }
           }
-          runResponse.gasUsed = txResult.gasUsed;
-          runResponse.gasWanted = txResult.gasWanted;
+          runResponse.gasUsed = txResult.gasUsed
+          runResponse.gasWanted = txResult.gasWanted
 
-          console.log("runResponse", runResponse);
-          this.runResponse = runResponse;
-          this.runResponse.tx = txResult.transactionHash;
+          console.log('runResponse', runResponse)
+          this.runResponse = runResponse
+          this.runResponse.tx = txResult.transactionHash
         } catch (e) {
-          console.log("uncaught error", e);
+          console.log('uncaught error', e)
         } finally {
-          this.inflight = false;
+          this.inflight = false
         }
-      } else if (e.submitter.value == "query") {
+      } else if (e.submitter.value == 'query') {
         try {
-          this.inflight = true;
-          const resp = await this.$store.dispatch("dyson/QueryQueryScript", {
+          this.inflight = true
+          const resp = await this.$store.dispatch('dyson/QueryQueryScript', {
             params: {},
             query: value,
             options: { subscribe: false },
-          });
-          console.log("queryResponse", resp);
+          })
+          console.log('queryResponse', resp)
           try {
-            this.queryResponse = JSON.parse(resp.response);
+            this.queryResponse = JSON.parse(resp.response)
           } catch (e) {
             if (e instanceof SyntaxError) {
-              this.queryResponseErr = resp.response;
+              this.queryResponseErr = resp.response
             }
           }
         } catch (e) {
-          this.queryResponseErr = e;
-          console.error(e);
+          this.queryResponseErr = e
+          console.error(e)
         } finally {
-          this.inflight = false;
+          this.inflight = false
         }
       }
     },
   },
-};
+}
 </script>
 
 <style scoped>

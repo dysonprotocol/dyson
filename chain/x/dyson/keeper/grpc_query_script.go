@@ -77,17 +77,21 @@ func (k Keeper) Wsgi(goCtx context.Context, req *types.QueryWsgiRequest) (*types
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	ctx, _ = ctx.CacheContext()
+	address, err := sdk.AccAddressFromBech32(k.nameskeeper.ResolveIndex(ctx, req.Index))
+	if err != nil {
+		return nil, sdkerrors.Wrapf(sdkerrors.ErrUnknownAddress, "Could not resolve: %s", req.Index)
+	}
 	if ctx.GasMeter().Limit() < 1 || ctx.GasMeter().Limit() > MAX_QUERY_GAS {
 		ctx = ctx.WithGasMeter(sdk.NewGasMeter(MAX_QUERY_GAS))
 	}
 	goCtx = sdk.WrapSDKContext(ctx)
-	_, isFound := k.GetScript(ctx, req.Index)
+	_, isFound := k.GetScript(ctx, address.String())
 	if !isFound {
-		fmt.Println(fmt.Sprintf("Script at address %v not found", req.Index))
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("Script at address %v not set", req.Index))
+		fmt.Println(fmt.Sprintf("Script at address %v not found", address))
+		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("Script at address %v not set", address))
 	}
 
-	val, found := k.RunWsgi(goCtx, req.Index, req.Httprequest)
+	val, found := k.RunWsgi(goCtx, address.String(), req.Httprequest)
 	if !found {
 		return nil, status.Error(codes.InvalidArgument, "not found")
 	}
@@ -116,6 +120,7 @@ func (k Keeper) QueryScript(goCtx context.Context, msg *types.MsgRun) (*types.Ms
 		Args:         msg.Args,
 		Kwargs:       msg.Kwargs,
 		Coins:        msg.Coins,
+		Nfts:         msg.Nfts,
 	}, k.currentDepth != 0)
 	if err != nil {
 		return nil, err

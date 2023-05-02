@@ -195,7 +195,7 @@ func CmdExportInterfaces() *cobra.Command {
 
 func CmdEval() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "eval [script address] --function=foo --args=[1,2,3] --kwargs={\"bar\": \"baz\"} --extralines=\"print('hello world')\" --coins=1000dys,1000token",
+		Use:   "eval [script address] --function=foo --args=[1,2,3] --kwargs={\"bar\": \"baz\"} --extralines=\"print('hello world')\" --coins=1000dys,1000token --nfts=example.dys/1,example.dys/2",
 		Short: "Runs script on this account",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -230,7 +230,12 @@ func CmdEval() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgRun(clientCtx.GetFromAddress().String(), string(address), string(argsFunctionName), string(argsArgs), string(argsKwargs), string(argsExtraLines), string(coins))
+			nfts, err := cmd.Flags().GetString("nfts")
+			if err != nil {
+				return err
+			}
+
+			msg := types.NewMsgRun(clientCtx.GetFromAddress().String(), string(address), string(argsFunctionName), string(argsArgs), string(argsKwargs), string(argsExtraLines), string(coins), string(nfts))
 			res, err := queryClient.QueryScript(context.Background(), msg)
 			if err != nil {
 				return err
@@ -245,7 +250,8 @@ func CmdEval() *cobra.Command {
 	cmd.PersistentFlags().String("args", "", "json list of the positional argument to the function")
 	cmd.PersistentFlags().String("kwargs", "", "json object of the keyword argument to the function")
 	cmd.PersistentFlags().String("extralines", "", "Extra line to run (only for running the script that is signing the transaction)")
-	cmd.PersistentFlags().String("coins", "", "Amount of coins to send (ignored if running the script that is signing the transaction)")
+	cmd.PersistentFlags().String("coins", "", "Amount of coins to send to the script")
+	cmd.PersistentFlags().String("nfts", "", "Amount of nfts to send to the script")
 
 	return cmd
 }

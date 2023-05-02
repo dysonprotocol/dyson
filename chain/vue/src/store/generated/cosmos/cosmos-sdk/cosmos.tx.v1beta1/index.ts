@@ -181,8 +181,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceSimulate', payload: { options: { all }, params: {...key},query }})
 				return getters['getSimulate']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceSimulate API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceSimulate API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -203,8 +202,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceGetTx', payload: { options: { all }, params: {...key},query }})
 				return getters['getGetTx']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceGetTx API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceGetTx API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -225,8 +223,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceBroadcastTx', payload: { options: { all }, params: {...key},query }})
 				return getters['getBroadcastTx']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceBroadcastTx API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceBroadcastTx API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -251,8 +248,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceGetTxsEvent', payload: { options: { all }, params: {...key},query }})
 				return getters['getGetTxsEvent']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceGetTxsEvent API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceGetTxsEvent API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -277,8 +273,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceGetBlockWithTxs', payload: { options: { all }, params: {...key},query }})
 				return getters['getGetBlockWithTxs']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceGetBlockWithTxs API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceGetBlockWithTxs API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		

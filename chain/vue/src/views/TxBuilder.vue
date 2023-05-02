@@ -865,7 +865,6 @@ _chain(
           if (rules) {
             const rule = rules[0]
             for (let i in rule.Params) {
-              // Needed because starport g vuex is using json_fieldnames
               const param = rule.Params[i]
               params[rule.Params[i]] = query[param]
               delete query[param]

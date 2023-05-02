@@ -1,4 +1,5 @@
 import base64
+import logging
 import http.client
 import os
 import re
@@ -163,11 +164,14 @@ def dys_view(request, script_address=None):
         try:
             if dys_req.json().get("code", None) == 2:
                 # Script not found
-                return HttpResponse(f"Script not found: {address}", status=404)
-        except:
+                return HttpResponse(dys_req.json().get("message"), status=404)
+        except Exception as e:
+            # log error
+            logging.exception(e)
             pass
+        if dys_req.text.startswith(b"None\n\nstdout:"):
+            return HttpResponse("No WSGI app found", status=404)
         return HttpResponse(dys_req.text, status=dys_req.status_code)
-    raw_rep = dys_req.content
     http_response_str = base64.b64decode(dys_req.json()["httpresponse"])
 
     dys_response = http.client.HTTPResponse(FakeSocket(http_response_str))
@@ -202,7 +206,6 @@ def node_info(request):
     info = {
         "VITE_API_COSMOS": os.environ.get("VITE_API_COSMOS"),
         "VITE_WS_TENDERMINT": os.environ.get("VITE_WS_TENDERMINT"),
-        "VITE_API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
         "VITE_API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
         "CLEAR_DOMAIN": os.environ.get("CLEAR_DOMAIN"),
         "DYS_DOMAIN": DYS_DOMAIN,

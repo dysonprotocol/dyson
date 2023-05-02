@@ -5,20 +5,22 @@ export const protobufPackage = 'dyson'
 
 /** MsgRun runs a script at a specific address */
 export interface MsgRun {
-  /** The account sending the transaction */
+  /** The account sending this transaction */
   creator: string
-  /** dys address of the scrit to call */
+  /** Dys address of the script to call */
   address: string
-  /** optional extra source code to append to the end of the script before running */
+  /** Optional extra source code to append to the end of the script before running. Only available to the script address itself. */
   extra_lines: string
-  /** optional function to call */
+  /** Optional function to call */
   function_name: string
-  /** optional args to call the function with */
+  /** Optional args to call the function with */
   args: string
-  /** optional kwargs to run */
+  /** Optional kwargs to run */
   kwargs: string
-  /** optional comma seperated list of coins to send the script (for example "123dys,456token") */
+  /** Optional comma seperated list of coins to send the script (for example "123dys,456token") this entire amout will be sent to the script */
   coins: string
+  /** Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example "example.dys/123, example.dys/456") */
+  nfts: string
 }
 
 export interface MsgRunResponse {
@@ -33,6 +35,7 @@ const baseMsgRun: object = {
   args: '',
   kwargs: '',
   coins: '',
+  nfts: '',
 }
 
 export const MsgRun = {
@@ -57,6 +60,9 @@ export const MsgRun = {
     }
     if (message.coins !== '') {
       writer.uint32(58).string(message.coins)
+    }
+    if (message.nfts !== '') {
+      writer.uint32(74).string(message.nfts)
     }
     return writer
   },
@@ -88,6 +94,9 @@ export const MsgRun = {
           break
         case 7:
           message.coins = reader.string()
+          break
+        case 9:
+          message.nfts = reader.string()
           break
         default:
           reader.skipType(tag & 7)
@@ -134,6 +143,11 @@ export const MsgRun = {
     } else {
       message.coins = ''
     }
+    if (object.nfts !== undefined && object.nfts !== null) {
+      message.nfts = String(object.nfts)
+    } else {
+      message.nfts = ''
+    }
     return message
   },
 
@@ -147,6 +161,7 @@ export const MsgRun = {
     message.args !== undefined && (obj.args = message.args)
     message.kwargs !== undefined && (obj.kwargs = message.kwargs)
     message.coins !== undefined && (obj.coins = message.coins)
+    message.nfts !== undefined && (obj.nfts = message.nfts)
     return obj
   },
 
@@ -186,6 +201,11 @@ export const MsgRun = {
       message.coins = object.coins
     } else {
       message.coins = ''
+    }
+    if (object.nfts !== undefined && object.nfts !== null) {
+      message.nfts = object.nfts
+    } else {
+      message.nfts = ''
     }
     return message
   },

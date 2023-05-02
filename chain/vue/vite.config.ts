@@ -5,6 +5,8 @@ import { defineConfig } from "vite";
 import { dynamicImport } from "vite-plugin-dynamic-import";
 import envCompatible from "vite-plugin-env-compatible";
 import commonjs from "@rollup/plugin-commonjs";
+import pluginRewriteAll from 'vite-plugin-rewrite-all';
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,6 +29,7 @@ export default defineConfig({
     },
   },
   plugins: [
+pluginRewriteAll(),
     vue({
       template: {
         compilerOptions: {

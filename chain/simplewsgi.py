@@ -91,6 +91,7 @@ if __name__ == "__main__":
                 creator=None,
                 address=address,
                 amount=None,
+                nfts=None,
                 block_info=block_info,
                 funcname=None,
                 json_args=None,
@@ -99,13 +100,15 @@ if __name__ == "__main__":
                 extra_line="",
             )
             if sandbox and (
-                app := sandbox.scope.get("app", sandbox.scope.get("application", None))
+                app := sandbox.scope.get("wsgi", sandbox.scope.get("app", sandbox.scope.get("application", None)))
             ):
                 s = SimpleWSGIServer("x.x.x.x", SimpleWSGIRequestHandler)
                 s.set_app(app)
                 output = BytesIO()
                 s.handle_request(http_request, output)
                 wsgiout = output.getvalue()
+            elif app is None:
+                wsgiout = f"""HTTP/1.1 404\ncontent-type: text/plain\n\nOops! No WSGI Application defined on this Dyson Protocol script.\nCheck out the documentation to learn how to host your website on-chain.""".encode() 
             else:
                 wsgiout = f"""HTTP/1.1 500\ncontent-type: text/plain\n\n{ret['exception']}\n\nstdout:\n{ret['stdout']}""".encode()
         except Exception as e:

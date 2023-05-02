@@ -5,18 +5,22 @@
         "MsgOfferTo": {
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name to offer"
                 },
                 "owner": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The owner address of the name"
                 },
-                "newOwner": {
-                    "type": "string"
+                "new_owner": {
+                    "type": "string",
+                    "description": "The address to offer the name to. They can take ownership of the name with the Accept message"
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Offer To"
+            "title": "Msg Offer To",
+            "description": "Offer the name to a new owner"
         }
     }
 }

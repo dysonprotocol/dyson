@@ -5,18 +5,22 @@
         "MsgReveal": {
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name to reveal"
                 },
                 "owner": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The owner address of the name"
                 },
                 "salt": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The salt that was used to commit to the name"
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Reveal"
+            "title": "Msg Reveal",
+            "description": "Reveal the name that was committed to with the Register message"
         }
     }
 }

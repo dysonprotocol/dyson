@@ -31,11 +31,14 @@ export interface DysonMsgDeployAutonomousScriptResponse {
 export interface DysonMsgRun {
   creator?: string;
   address?: string;
+
+  /** Optional extra source code to append to the end of the script before running. Only available to the script address itself. */
   extra_lines?: string;
   function_name?: string;
   args?: string;
   kwargs?: string;
   coins?: string;
+  nfts?: string;
 }
 
 export interface DysonMsgRunResponse {
@@ -569,6 +572,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       args?: string;
       kwargs?: string;
       coins?: string;
+      nfts?: string;
     },
     params: RequestParams = {},
   ) =>

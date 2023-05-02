@@ -22,26 +22,39 @@ export interface MsgRegisterResponse {
   expiration_height: number
 }
 
+/** Update the details of the Dyson Protocol name */
 export interface MsgUpdateName {
+  /** The name to update */
   name: string
+  /** The owner address of the name */
   owner: string
+  /** The new destination address for the name */
   destination: string
+  /** The address that this name is OfferedTo, they can take ownership of the name with the Accept message */
   authorized: string
+  /** Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal. */
   auto_renew: boolean
 }
 
 export interface MsgUpdateNameResponse {}
 
+/** Delete the Dyson Protocol name */
 export interface MsgDeleteName {
+  /** The name to delete */
   name: string
+  /** The owner address of the name */
   owner: string
 }
 
 export interface MsgDeleteNameResponse {}
 
+/** Reveal the name that was committed to with the Register message */
 export interface MsgReveal {
+  /** The name to reveal */
   name: string
+  /** The owner address of the name */
   owner: string
+  /** The salt that was used to commit to the name */
   salt: string
 }
 
@@ -49,93 +62,130 @@ export interface MsgRevealResponse {
   name: Name | undefined
 }
 
+/** Set the price of the name and extend the expiration height */
 export interface MsgSetPriceAndExtend {
+  /** The name to set the price for */
   name: string
+  /** The owner address of the name */
   owner: string
+  /** The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month. */
   price: string
 }
 
 export interface MsgSetPriceAndExtendResponse {}
 
+/** Offer the name to a new owner */
 export interface MsgOfferTo {
+  /** The name to offer */
   name: string
+  /** The owner address of the name */
   owner: string
-  newOwner: string
+  /** The address to offer the name to. They can take ownership of the name with the Accept message */
+  new_owner: string
 }
 
 export interface MsgOfferToResponse {}
 
+/** Accept the name that was offered to you */
 export interface MsgAccept {
+  /** The name to accept */
   name: string
-  newOwner: string
+  /** The owner address of the name */
+  new_owner: string
 }
 
 export interface MsgAcceptResponse {}
 
+/** All names have a listed price, this message allows you to buy the name at the listed price. */
 export interface MsgBuy {
+  /** The address of the buyer */
   buyer: string
+  /** The name to buy */
   name: string
+  /** Confirm the  price of the name is the same as the listed price. */
+  price: string
 }
 
 export interface MsgBuyResponse {}
 
+/** Mint coins with a denom of a name or subname. For example if you own the name "example.dys" you can mint coins with the denom "example.dys" or "subname.example.dys" */
 export interface MsgMintCoins {
+  /** The owner of the Dys name */
   owner: string
+  /** The amount of coins to mint in the format "[amount] [denom]".   Each coin costs 1 gas. */
   amount: string
 }
 
 export interface MsgMintCoinsResponse {}
 
 export interface MsgBurnCoins {
+  /** The owner of the Dys name */
   owner: string
+  /** The amount of coins to burn, the owner must have enough coins to burn */
   amount: string
 }
 
 export interface MsgBurnCoinsResponse {}
 
+/** Create or update an NFT class. The NFT class is identified by the Dys name of the class ID. */
 export interface MsgSetNftClass {
-  /** The owner of the Dys name */
+  /** The owner of the Dys name of the NFT class ID */
   owner: string
-  /** the Id must equal the Dys name */
+  /** the ID is the Dys name or subname of the NFT class. For example if you own the name "example.dys" you can create an NFT class with the ID "example.dys" or "subname.example.dys" */
   id: string
-  /** More descriptive name */
+  /** More descriptive name of the NFT class (optional) */
   name: string
+  /** The symbol of the NFT class (optional) */
   symbol: string
+  /** The  description of the NFT class (optional) */
   description: string
+  /** The URI of the NFT class (optional) */
   uri: string
-  urihash: string
+  /** The URI hash of the NFT class (optional) */
+  uri_hash: string
 }
 
 export interface MsgSetNftClassResponse {}
 
+/** Mint an NFT with the given class ID and NFT ID. The NFT ID is unique to the class ID. */
 export interface MsgMintNft {
   /** The owner of the Dys name */
-  classOwner: string
-  /** the ClassID must equal yythe Dys name */
-  classId: string
+  class_owner: string
+  /** the NFT Class ID */
+  class_id: string
+  /** The ID of this NFT, must be unique to the class ID */
   id: string
+  /** The URI of the NFT (optional) */
   uri: string
-  urihash: string
+  /** The URI hash of the NFT (optional) */
+  uri_hash: string
 }
 
 export interface MsgMintNftResponse {}
 
+/** Update the details of an NFT */
 export interface MsgUpdateNft {
-  /** The owner of the Dys name */
-  classOwner: string
-  /** The dys name that the NFT was create with */
-  classId: string
-  /** The ID of this NFT */
+  /** The owner of the NFT Class */
+  class_owner: string
+  /** the NFT Class ID */
+  class_id: string
+  /** The ID of this NFT to update */
   id: string
+  /** The URI of the NFT (optional) */
   uri: string
-  urihash: string
+  /** The URI hash of the NFT (optional) */
+  uri_hash: string
 }
 
 export interface MsgUpdateNftResponse {}
 
+/** Burn an NFT of the given class ID and NFT ID. */
 export interface MsgBurnNft {
-  classOwner: string
-  classId: string
+  /** The owner of the NFT Class */
+  class_owner: string
+  /** the NFT Class ID */
+  class_id: string
+  /** The ID of this NFT to burn. The owner must currently own this NFT to burn it. */
   id: string
 }
 
@@ -900,7 +950,7 @@ export const MsgSetPriceAndExtendResponse = {
   },
 }
 
-const baseMsgOfferTo: object = { name: '', owner: '', newOwner: '' }
+const baseMsgOfferTo: object = { name: '', owner: '', new_owner: '' }
 
 export const MsgOfferTo = {
   encode(message: MsgOfferTo, writer: Writer = Writer.create()): Writer {
@@ -910,8 +960,8 @@ export const MsgOfferTo = {
     if (message.owner !== '') {
       writer.uint32(10).string(message.owner)
     }
-    if (message.newOwner !== '') {
-      writer.uint32(26).string(message.newOwner)
+    if (message.new_owner !== '') {
+      writer.uint32(26).string(message.new_owner)
     }
     return writer
   },
@@ -930,7 +980,7 @@ export const MsgOfferTo = {
           message.owner = reader.string()
           break
         case 3:
-          message.newOwner = reader.string()
+          message.new_owner = reader.string()
           break
         default:
           reader.skipType(tag & 7)
@@ -952,10 +1002,10 @@ export const MsgOfferTo = {
     } else {
       message.owner = ''
     }
-    if (object.newOwner !== undefined && object.newOwner !== null) {
-      message.newOwner = String(object.newOwner)
+    if (object.new_owner !== undefined && object.new_owner !== null) {
+      message.new_owner = String(object.new_owner)
     } else {
-      message.newOwner = ''
+      message.new_owner = ''
     }
     return message
   },
@@ -964,7 +1014,7 @@ export const MsgOfferTo = {
     const obj: any = {}
     message.name !== undefined && (obj.name = message.name)
     message.owner !== undefined && (obj.owner = message.owner)
-    message.newOwner !== undefined && (obj.newOwner = message.newOwner)
+    message.new_owner !== undefined && (obj.new_owner = message.new_owner)
     return obj
   },
 
@@ -980,10 +1030,10 @@ export const MsgOfferTo = {
     } else {
       message.owner = ''
     }
-    if (object.newOwner !== undefined && object.newOwner !== null) {
-      message.newOwner = object.newOwner
+    if (object.new_owner !== undefined && object.new_owner !== null) {
+      message.new_owner = object.new_owner
     } else {
-      message.newOwner = ''
+      message.new_owner = ''
     }
     return message
   },
@@ -1027,15 +1077,15 @@ export const MsgOfferToResponse = {
   },
 }
 
-const baseMsgAccept: object = { name: '', newOwner: '' }
+const baseMsgAccept: object = { name: '', new_owner: '' }
 
 export const MsgAccept = {
   encode(message: MsgAccept, writer: Writer = Writer.create()): Writer {
     if (message.name !== '') {
       writer.uint32(18).string(message.name)
     }
-    if (message.newOwner !== '') {
-      writer.uint32(10).string(message.newOwner)
+    if (message.new_owner !== '') {
+      writer.uint32(10).string(message.new_owner)
     }
     return writer
   },
@@ -1051,7 +1101,7 @@ export const MsgAccept = {
           message.name = reader.string()
           break
         case 1:
-          message.newOwner = reader.string()
+          message.new_owner = reader.string()
           break
         default:
           reader.skipType(tag & 7)
@@ -1068,10 +1118,10 @@ export const MsgAccept = {
     } else {
       message.name = ''
     }
-    if (object.newOwner !== undefined && object.newOwner !== null) {
-      message.newOwner = String(object.newOwner)
+    if (object.new_owner !== undefined && object.new_owner !== null) {
+      message.new_owner = String(object.new_owner)
     } else {
-      message.newOwner = ''
+      message.new_owner = ''
     }
     return message
   },
@@ -1079,7 +1129,7 @@ export const MsgAccept = {
   toJSON(message: MsgAccept): unknown {
     const obj: any = {}
     message.name !== undefined && (obj.name = message.name)
-    message.newOwner !== undefined && (obj.newOwner = message.newOwner)
+    message.new_owner !== undefined && (obj.new_owner = message.new_owner)
     return obj
   },
 
@@ -1090,10 +1140,10 @@ export const MsgAccept = {
     } else {
       message.name = ''
     }
-    if (object.newOwner !== undefined && object.newOwner !== null) {
-      message.newOwner = object.newOwner
+    if (object.new_owner !== undefined && object.new_owner !== null) {
+      message.new_owner = object.new_owner
     } else {
-      message.newOwner = ''
+      message.new_owner = ''
     }
     return message
   },
@@ -1137,7 +1187,7 @@ export const MsgAcceptResponse = {
   },
 }
 
-const baseMsgBuy: object = { buyer: '', name: '' }
+const baseMsgBuy: object = { buyer: '', name: '', price: '' }
 
 export const MsgBuy = {
   encode(message: MsgBuy, writer: Writer = Writer.create()): Writer {
@@ -1146,6 +1196,9 @@ export const MsgBuy = {
     }
     if (message.name !== '') {
       writer.uint32(18).string(message.name)
+    }
+    if (message.price !== '') {
+      writer.uint32(26).string(message.price)
     }
     return writer
   },
@@ -1162,6 +1215,9 @@ export const MsgBuy = {
           break
         case 2:
           message.name = reader.string()
+          break
+        case 3:
+          message.price = reader.string()
           break
         default:
           reader.skipType(tag & 7)
@@ -1183,6 +1239,11 @@ export const MsgBuy = {
     } else {
       message.name = ''
     }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = String(object.price)
+    } else {
+      message.price = ''
+    }
     return message
   },
 
@@ -1190,6 +1251,7 @@ export const MsgBuy = {
     const obj: any = {}
     message.buyer !== undefined && (obj.buyer = message.buyer)
     message.name !== undefined && (obj.name = message.name)
+    message.price !== undefined && (obj.price = message.price)
     return obj
   },
 
@@ -1204,6 +1266,11 @@ export const MsgBuy = {
       message.name = object.name
     } else {
       message.name = ''
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = object.price
+    } else {
+      message.price = ''
     }
     return message
   },
@@ -1474,7 +1541,7 @@ const baseMsgSetNftClass: object = {
   symbol: '',
   description: '',
   uri: '',
-  urihash: '',
+  uri_hash: '',
 }
 
 export const MsgSetNftClass = {
@@ -1497,8 +1564,8 @@ export const MsgSetNftClass = {
     if (message.uri !== '') {
       writer.uint32(50).string(message.uri)
     }
-    if (message.urihash !== '') {
-      writer.uint32(58).string(message.urihash)
+    if (message.uri_hash !== '') {
+      writer.uint32(58).string(message.uri_hash)
     }
     return writer
   },
@@ -1529,7 +1596,7 @@ export const MsgSetNftClass = {
           message.uri = reader.string()
           break
         case 7:
-          message.urihash = reader.string()
+          message.uri_hash = reader.string()
           break
         default:
           reader.skipType(tag & 7)
@@ -1571,10 +1638,10 @@ export const MsgSetNftClass = {
     } else {
       message.uri = ''
     }
-    if (object.urihash !== undefined && object.urihash !== null) {
-      message.urihash = String(object.urihash)
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uri_hash = String(object.uri_hash)
     } else {
-      message.urihash = ''
+      message.uri_hash = ''
     }
     return message
   },
@@ -1587,7 +1654,7 @@ export const MsgSetNftClass = {
     message.symbol !== undefined && (obj.symbol = message.symbol)
     message.description !== undefined && (obj.description = message.description)
     message.uri !== undefined && (obj.uri = message.uri)
-    message.urihash !== undefined && (obj.urihash = message.urihash)
+    message.uri_hash !== undefined && (obj.uri_hash = message.uri_hash)
     return obj
   },
 
@@ -1623,10 +1690,10 @@ export const MsgSetNftClass = {
     } else {
       message.uri = ''
     }
-    if (object.urihash !== undefined && object.urihash !== null) {
-      message.urihash = object.urihash
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uri_hash = object.uri_hash
     } else {
-      message.urihash = ''
+      message.uri_hash = ''
     }
     return message
   },
@@ -1671,20 +1738,20 @@ export const MsgSetNftClassResponse = {
 }
 
 const baseMsgMintNft: object = {
-  classOwner: '',
-  classId: '',
+  class_owner: '',
+  class_id: '',
   id: '',
   uri: '',
-  urihash: '',
+  uri_hash: '',
 }
 
 export const MsgMintNft = {
   encode(message: MsgMintNft, writer: Writer = Writer.create()): Writer {
-    if (message.classOwner !== '') {
-      writer.uint32(10).string(message.classOwner)
+    if (message.class_owner !== '') {
+      writer.uint32(10).string(message.class_owner)
     }
-    if (message.classId !== '') {
-      writer.uint32(18).string(message.classId)
+    if (message.class_id !== '') {
+      writer.uint32(18).string(message.class_id)
     }
     if (message.id !== '') {
       writer.uint32(26).string(message.id)
@@ -1692,8 +1759,8 @@ export const MsgMintNft = {
     if (message.uri !== '') {
       writer.uint32(34).string(message.uri)
     }
-    if (message.urihash !== '') {
-      writer.uint32(42).string(message.urihash)
+    if (message.uri_hash !== '') {
+      writer.uint32(42).string(message.uri_hash)
     }
     return writer
   },
@@ -1706,10 +1773,10 @@ export const MsgMintNft = {
       const tag = reader.uint32()
       switch (tag >>> 3) {
         case 1:
-          message.classOwner = reader.string()
+          message.class_owner = reader.string()
           break
         case 2:
-          message.classId = reader.string()
+          message.class_id = reader.string()
           break
         case 3:
           message.id = reader.string()
@@ -1718,7 +1785,7 @@ export const MsgMintNft = {
           message.uri = reader.string()
           break
         case 5:
-          message.urihash = reader.string()
+          message.uri_hash = reader.string()
           break
         default:
           reader.skipType(tag & 7)
@@ -1730,15 +1797,15 @@ export const MsgMintNft = {
 
   fromJSON(object: any): MsgMintNft {
     const message = { ...baseMsgMintNft } as MsgMintNft
-    if (object.classOwner !== undefined && object.classOwner !== null) {
-      message.classOwner = String(object.classOwner)
+    if (object.class_owner !== undefined && object.class_owner !== null) {
+      message.class_owner = String(object.class_owner)
     } else {
-      message.classOwner = ''
+      message.class_owner = ''
     }
-    if (object.classId !== undefined && object.classId !== null) {
-      message.classId = String(object.classId)
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.class_id = String(object.class_id)
     } else {
-      message.classId = ''
+      message.class_id = ''
     }
     if (object.id !== undefined && object.id !== null) {
       message.id = String(object.id)
@@ -1750,35 +1817,35 @@ export const MsgMintNft = {
     } else {
       message.uri = ''
     }
-    if (object.urihash !== undefined && object.urihash !== null) {
-      message.urihash = String(object.urihash)
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uri_hash = String(object.uri_hash)
     } else {
-      message.urihash = ''
+      message.uri_hash = ''
     }
     return message
   },
 
   toJSON(message: MsgMintNft): unknown {
     const obj: any = {}
-    message.classOwner !== undefined && (obj.classOwner = message.classOwner)
-    message.classId !== undefined && (obj.classId = message.classId)
+    message.class_owner !== undefined && (obj.class_owner = message.class_owner)
+    message.class_id !== undefined && (obj.class_id = message.class_id)
     message.id !== undefined && (obj.id = message.id)
     message.uri !== undefined && (obj.uri = message.uri)
-    message.urihash !== undefined && (obj.urihash = message.urihash)
+    message.uri_hash !== undefined && (obj.uri_hash = message.uri_hash)
     return obj
   },
 
   fromPartial(object: DeepPartial<MsgMintNft>): MsgMintNft {
     const message = { ...baseMsgMintNft } as MsgMintNft
-    if (object.classOwner !== undefined && object.classOwner !== null) {
-      message.classOwner = object.classOwner
+    if (object.class_owner !== undefined && object.class_owner !== null) {
+      message.class_owner = object.class_owner
     } else {
-      message.classOwner = ''
+      message.class_owner = ''
     }
-    if (object.classId !== undefined && object.classId !== null) {
-      message.classId = object.classId
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.class_id = object.class_id
     } else {
-      message.classId = ''
+      message.class_id = ''
     }
     if (object.id !== undefined && object.id !== null) {
       message.id = object.id
@@ -1790,10 +1857,10 @@ export const MsgMintNft = {
     } else {
       message.uri = ''
     }
-    if (object.urihash !== undefined && object.urihash !== null) {
-      message.urihash = object.urihash
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uri_hash = object.uri_hash
     } else {
-      message.urihash = ''
+      message.uri_hash = ''
     }
     return message
   },
@@ -1838,20 +1905,20 @@ export const MsgMintNftResponse = {
 }
 
 const baseMsgUpdateNft: object = {
-  classOwner: '',
-  classId: '',
+  class_owner: '',
+  class_id: '',
   id: '',
   uri: '',
-  urihash: '',
+  uri_hash: '',
 }
 
 export const MsgUpdateNft = {
   encode(message: MsgUpdateNft, writer: Writer = Writer.create()): Writer {
-    if (message.classOwner !== '') {
-      writer.uint32(10).string(message.classOwner)
+    if (message.class_owner !== '') {
+      writer.uint32(10).string(message.class_owner)
     }
-    if (message.classId !== '') {
-      writer.uint32(18).string(message.classId)
+    if (message.class_id !== '') {
+      writer.uint32(18).string(message.class_id)
     }
     if (message.id !== '') {
       writer.uint32(26).string(message.id)
@@ -1859,8 +1926,8 @@ export const MsgUpdateNft = {
     if (message.uri !== '') {
       writer.uint32(34).string(message.uri)
     }
-    if (message.urihash !== '') {
-      writer.uint32(42).string(message.urihash)
+    if (message.uri_hash !== '') {
+      writer.uint32(42).string(message.uri_hash)
     }
     return writer
   },
@@ -1873,10 +1940,10 @@ export const MsgUpdateNft = {
       const tag = reader.uint32()
       switch (tag >>> 3) {
         case 1:
-          message.classOwner = reader.string()
+          message.class_owner = reader.string()
           break
         case 2:
-          message.classId = reader.string()
+          message.class_id = reader.string()
           break
         case 3:
           message.id = reader.string()
@@ -1885,7 +1952,7 @@ export const MsgUpdateNft = {
           message.uri = reader.string()
           break
         case 5:
-          message.urihash = reader.string()
+          message.uri_hash = reader.string()
           break
         default:
           reader.skipType(tag & 7)
@@ -1897,15 +1964,15 @@ export const MsgUpdateNft = {
 
   fromJSON(object: any): MsgUpdateNft {
     const message = { ...baseMsgUpdateNft } as MsgUpdateNft
-    if (object.classOwner !== undefined && object.classOwner !== null) {
-      message.classOwner = String(object.classOwner)
+    if (object.class_owner !== undefined && object.class_owner !== null) {
+      message.class_owner = String(object.class_owner)
     } else {
-      message.classOwner = ''
+      message.class_owner = ''
     }
-    if (object.classId !== undefined && object.classId !== null) {
-      message.classId = String(object.classId)
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.class_id = String(object.class_id)
     } else {
-      message.classId = ''
+      message.class_id = ''
     }
     if (object.id !== undefined && object.id !== null) {
       message.id = String(object.id)
@@ -1917,35 +1984,35 @@ export const MsgUpdateNft = {
     } else {
       message.uri = ''
     }
-    if (object.urihash !== undefined && object.urihash !== null) {
-      message.urihash = String(object.urihash)
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uri_hash = String(object.uri_hash)
     } else {
-      message.urihash = ''
+      message.uri_hash = ''
     }
     return message
   },
 
   toJSON(message: MsgUpdateNft): unknown {
     const obj: any = {}
-    message.classOwner !== undefined && (obj.classOwner = message.classOwner)
-    message.classId !== undefined && (obj.classId = message.classId)
+    message.class_owner !== undefined && (obj.class_owner = message.class_owner)
+    message.class_id !== undefined && (obj.class_id = message.class_id)
     message.id !== undefined && (obj.id = message.id)
     message.uri !== undefined && (obj.uri = message.uri)
-    message.urihash !== undefined && (obj.urihash = message.urihash)
+    message.uri_hash !== undefined && (obj.uri_hash = message.uri_hash)
     return obj
   },
 
   fromPartial(object: DeepPartial<MsgUpdateNft>): MsgUpdateNft {
     const message = { ...baseMsgUpdateNft } as MsgUpdateNft
-    if (object.classOwner !== undefined && object.classOwner !== null) {
-      message.classOwner = object.classOwner
+    if (object.class_owner !== undefined && object.class_owner !== null) {
+      message.class_owner = object.class_owner
     } else {
-      message.classOwner = ''
+      message.class_owner = ''
     }
-    if (object.classId !== undefined && object.classId !== null) {
-      message.classId = object.classId
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.class_id = object.class_id
     } else {
-      message.classId = ''
+      message.class_id = ''
     }
     if (object.id !== undefined && object.id !== null) {
       message.id = object.id
@@ -1957,10 +2024,10 @@ export const MsgUpdateNft = {
     } else {
       message.uri = ''
     }
-    if (object.urihash !== undefined && object.urihash !== null) {
-      message.urihash = object.urihash
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uri_hash = object.uri_hash
     } else {
-      message.urihash = ''
+      message.uri_hash = ''
     }
     return message
   },
@@ -2004,15 +2071,15 @@ export const MsgUpdateNftResponse = {
   },
 }
 
-const baseMsgBurnNft: object = { classOwner: '', classId: '', id: '' }
+const baseMsgBurnNft: object = { class_owner: '', class_id: '', id: '' }
 
 export const MsgBurnNft = {
   encode(message: MsgBurnNft, writer: Writer = Writer.create()): Writer {
-    if (message.classOwner !== '') {
-      writer.uint32(10).string(message.classOwner)
+    if (message.class_owner !== '') {
+      writer.uint32(10).string(message.class_owner)
     }
-    if (message.classId !== '') {
-      writer.uint32(18).string(message.classId)
+    if (message.class_id !== '') {
+      writer.uint32(18).string(message.class_id)
     }
     if (message.id !== '') {
       writer.uint32(26).string(message.id)
@@ -2028,10 +2095,10 @@ export const MsgBurnNft = {
       const tag = reader.uint32()
       switch (tag >>> 3) {
         case 1:
-          message.classOwner = reader.string()
+          message.class_owner = reader.string()
           break
         case 2:
-          message.classId = reader.string()
+          message.class_id = reader.string()
           break
         case 3:
           message.id = reader.string()
@@ -2046,15 +2113,15 @@ export const MsgBurnNft = {
 
   fromJSON(object: any): MsgBurnNft {
     const message = { ...baseMsgBurnNft } as MsgBurnNft
-    if (object.classOwner !== undefined && object.classOwner !== null) {
-      message.classOwner = String(object.classOwner)
+    if (object.class_owner !== undefined && object.class_owner !== null) {
+      message.class_owner = String(object.class_owner)
     } else {
-      message.classOwner = ''
+      message.class_owner = ''
     }
-    if (object.classId !== undefined && object.classId !== null) {
-      message.classId = String(object.classId)
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.class_id = String(object.class_id)
     } else {
-      message.classId = ''
+      message.class_id = ''
     }
     if (object.id !== undefined && object.id !== null) {
       message.id = String(object.id)
@@ -2066,23 +2133,23 @@ export const MsgBurnNft = {
 
   toJSON(message: MsgBurnNft): unknown {
     const obj: any = {}
-    message.classOwner !== undefined && (obj.classOwner = message.classOwner)
-    message.classId !== undefined && (obj.classId = message.classId)
+    message.class_owner !== undefined && (obj.class_owner = message.class_owner)
+    message.class_id !== undefined && (obj.class_id = message.class_id)
     message.id !== undefined && (obj.id = message.id)
     return obj
   },
 
   fromPartial(object: DeepPartial<MsgBurnNft>): MsgBurnNft {
     const message = { ...baseMsgBurnNft } as MsgBurnNft
-    if (object.classOwner !== undefined && object.classOwner !== null) {
-      message.classOwner = object.classOwner
+    if (object.class_owner !== undefined && object.class_owner !== null) {
+      message.class_owner = object.class_owner
     } else {
-      message.classOwner = ''
+      message.class_owner = ''
     }
-    if (object.classId !== undefined && object.classId !== null) {
-      message.classId = object.classId
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.class_id = object.class_id
     } else {
-      message.classId = ''
+      message.class_id = ''
     }
     if (object.id !== undefined && object.id !== null) {
       message.id = object.id

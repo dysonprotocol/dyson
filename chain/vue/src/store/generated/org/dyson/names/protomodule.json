@@ -216,7 +216,7 @@
 			{
 				"Name": "MsgBuy",
 				"Path": "/go/src/app/proto/names/tx.proto",
-				"HighestFieldNumber": 2
+				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "MsgBuyResponse",
@@ -469,13 +469,8 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgBuy",
-			"URI": "names.MsgBuy",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgDeleteName",
-			"URI": "names.MsgDeleteName",
+			"Name": "MsgOfferTo",
+			"URI": "names.MsgOfferTo",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -484,23 +479,23 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgSetPriceAndExtend",
-			"URI": "names.MsgSetPriceAndExtend",
+			"Name": "MsgBuy",
+			"URI": "names.MsgBuy",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgSetNftClass",
-			"URI": "names.MsgSetNftClass",
-			"FilePath": "/go/src/app/proto/names/tx.proto"
-		},
-		{
-			"Name": "MsgOfferTo",
-			"URI": "names.MsgOfferTo",
+			"Name": "MsgMintNft",
+			"URI": "names.MsgMintNft",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
 			"Name": "MsgMintCoins",
 			"URI": "names.MsgMintCoins",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgBurnNft",
+			"URI": "names.MsgBurnNft",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -514,13 +509,13 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgBurnCoins",
-			"URI": "names.MsgBurnCoins",
+			"Name": "MsgDeleteName",
+			"URI": "names.MsgDeleteName",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgRegister",
-			"URI": "names.MsgRegister",
+			"Name": "MsgSetPriceAndExtend",
+			"URI": "names.MsgSetPriceAndExtend",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
@@ -529,13 +524,18 @@
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgMintNft",
-			"URI": "names.MsgMintNft",
+			"Name": "MsgSetNftClass",
+			"URI": "names.MsgSetNftClass",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		},
 		{
-			"Name": "MsgBurnNft",
-			"URI": "names.MsgBurnNft",
+			"Name": "MsgBurnCoins",
+			"URI": "names.MsgBurnCoins",
+			"FilePath": "/go/src/app/proto/names/tx.proto"
+		},
+		{
+			"Name": "MsgRegister",
+			"URI": "names.MsgRegister",
 			"FilePath": "/go/src/app/proto/names/tx.proto"
 		}
 	],

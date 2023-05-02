@@ -9,6 +9,7 @@ import (
 	"net"
 	"net/http"
 	"os/exec"
+	"regexp"
 	"runtime/debug"
 	"strconv"
 	"strings"
@@ -25,6 +26,8 @@ import (
 	"github.com/gorilla/rpc"
 	rpcjson "github.com/gorilla/rpc/json"
 	"github.com/org/dyson/x/dyson/types"
+
+	nftmodule "github.com/cosmos/cosmos-sdk/x/nft"
 )
 
 type RpcService struct {
@@ -37,6 +40,7 @@ type RpcService struct {
 type EvalScriptContext struct {
 	Sender       string
 	Coins        string
+	Nfts         string
 	Index        string
 	FunctionName string
 	Args         string
@@ -47,6 +51,47 @@ type EvalScriptContext struct {
 
 type EvalScriptResponse struct {
 	Response string
+}
+
+type NFT struct {
+	ClassId string `json:"class_id,omitempty"`
+	Id      string `json:"id,omitempty"`
+}
+
+// parseNFTs takes a string with comma-separated NFT class_id/id pairs
+// and returns a slice of NFT structs. It returns an error immediately
+// if an invalid entry is encountered.
+func parseNFTs(s string) ([]NFT, error) {
+	nftStrings := strings.Split(s, ",")
+	nfts := make([]NFT, 0, len(nftStrings))
+
+	// Regular expression to validate the class_id/id format
+	re := regexp.MustCompile(`^[a-zA-Z0-9-.]+/[a-zA-Z0-9-]+$`)
+
+	for _, nftString := range nftStrings {
+		trimmedNFTString := strings.TrimSpace(nftString)
+
+		// Ignore empty entries
+		if len(trimmedNFTString) == 0 {
+			continue
+		}
+
+		// Validate the input format before parsing
+		if !re.MatchString(trimmedNFTString) {
+			return nil, fmt.Errorf("invalid NFT string: %s", nftString)
+		}
+
+		parts := strings.Split(trimmedNFTString, "/")
+
+		nft := NFT{
+			ClassId: parts[0],
+			Id:      parts[1],
+		}
+
+		nfts = append(nfts, nft)
+	}
+
+	return nfts, nil
 }
 
 // SetScript set a specific script in the store from its index
@@ -62,11 +107,19 @@ func (k Keeper) SetScript(ctx sdk.Context, script types.Script) {
 func (k Keeper) GetScript(ctx sdk.Context, index string) (val types.Script, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ScriptKeyPrefix))
 
-	b := store.Get(types.ScriptKey(
-		k.nameskeeper.ResolveIndex(ctx, index),
-	))
-	if b == nil {
+	destination := k.nameskeeper.ResolveIndex(ctx, index)
+	if destination == "" {
 		return val, false
+	}
+	b := store.Get(types.ScriptKey(destination))
+	if b == nil {
+		val = types.Script{
+			Creator: destination,
+			Index:   destination,
+			Code:    "",
+		}
+		k.SetScript(ctx, val)
+		return val, true
 	}
 
 	k.cdc.MustUnmarshal(b, &val)
@@ -129,7 +182,8 @@ func (k Keeper) RunWsgi(goCtx context.Context, index string, httpreq string) (va
 	}
 	port, srv, err := k.NewRPCServer(goCtx, valFound.Index)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Printf("NewRPCServer error: %s\n", err)
+		return "", false
 	}
 
 	blockInfoJson, err := json.Marshal(ctx.BlockHeader())
@@ -189,9 +243,9 @@ func (k Keeper) NewRPCServer(goCtx context.Context, index string) (string, *http
 	rpcservice.k = &k
 	rpcservice.m = &msgServer{Keeper: k}
 	rpcservice.ctx = goCtx
-	add, err := sdk.AccAddressFromBech32(index)
+	add, err := sdk.AccAddressFromBech32(k.nameskeeper.ResolveIndex(sdk.UnwrapSDKContext(goCtx), index))
 	if err != nil {
-		return "", nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, fmt.Sprintf("Invalid script address: %+v", add))
+		return "", nil, sdkerrors.Wrap(sdkerrors.ErrUnknownAddress, fmt.Sprintf("Could not resolve: %+v", index))
 	}
 	rpcservice.ScriptAddress = add
 
@@ -289,10 +343,10 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 	}
 
 	coinsJson, err := coins.MarshalJSON()
-	fmt.Println(fmt.Sprintf("coins to send: %+v", coins))
-
+	if err != nil {
+		return nil, err
+	}
 	if len(coins) > 0 {
-		fmt.Printf("%v => %v, '%v'\n", scriptCtx.Coins, coinsJson, string(coinsJson))
 		toAddr, err := sdk.AccAddressFromBech32(scriptCtx.Index)
 		if err != nil {
 			return nil, err
@@ -303,11 +357,44 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 		}
 
 		sendmsg := banktypes.NewMsgSend(fromAddr, toAddr, coins)
+		err = sendmsg.ValidateBasic()
+		if err != nil {
+			return nil, err
+		}
+
 		_, err = bankkeeper.NewMsgServerImpl(k.bankkeeper).Send(goCtx, sendmsg)
 
 		if err != nil {
 			return nil, err
 		}
+	}
+	nfts, err := parseNFTs(scriptCtx.Nfts)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, nft := range nfts {
+
+		msgSend := &nftmodule.MsgSend{
+			Sender:   scriptCtx.Sender,
+			Receiver: scriptCtx.Index,
+			ClassId:  nft.ClassId,
+			Id:       nft.Id,
+		}
+		err = msgSend.ValidateBasic()
+		if err != nil {
+			return nil, err
+		}
+
+		_, err = k.cosmosnftv1beta1keeper.Send(goCtx, msgSend)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	nftsJson, err := json.Marshal(nfts)
+	if err != nil {
+		return nil, err
 	}
 	blockInfoJson, err := json.Marshal(ctx.BlockHeader())
 	if err != nil {
@@ -322,6 +409,7 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 		scriptCtx.Sender,
 		scriptCtx.Index,
 		string(coinsJson),
+		string(nftsJson),
 		string(blockInfoJson),
 		scriptCtx.FunctionName,
 		scriptCtx.Args,

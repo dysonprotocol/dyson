@@ -23,8 +23,7 @@ chain_build:
     paths:
         - ./chain/release
   after_script:
-    - export TAG="$CI_COMMIT_REF_NAME" ; docker rmi -f $(docker image ls registry.gitlab.com/dysonproject/dyson/frontend:$TAG -q)
-    - export TAG="$CI_COMMIT_REF_NAME" ; docker rmi -f $(docker image ls registry.gitlab.com/dysonproject/dyson/chain:$TAG -q)
+    - docker image prune -f
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive

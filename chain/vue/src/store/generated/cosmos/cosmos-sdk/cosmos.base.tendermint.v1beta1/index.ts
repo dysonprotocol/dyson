@@ -183,8 +183,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceGetNodeInfo', payload: { options: { all }, params: {...key},query }})
 				return getters['getGetNodeInfo']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceGetNodeInfo API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceGetNodeInfo API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -205,8 +204,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceGetSyncing', payload: { options: { all }, params: {...key},query }})
 				return getters['getGetSyncing']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceGetSyncing API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceGetSyncing API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -227,8 +225,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceGetLatestBlock', payload: { options: { all }, params: {...key},query }})
 				return getters['getGetLatestBlock']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceGetLatestBlock API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceGetLatestBlock API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -249,8 +246,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceGetBlockByHeight', payload: { options: { all }, params: {...key},query }})
 				return getters['getGetBlockByHeight']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceGetBlockByHeight API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceGetBlockByHeight API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -275,8 +271,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceGetLatestValidatorSet', payload: { options: { all }, params: {...key},query }})
 				return getters['getGetLatestValidatorSet']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceGetLatestValidatorSet API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceGetLatestValidatorSet API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -301,8 +296,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceGetValidatorSetByHeight', payload: { options: { all }, params: {...key},query }})
 				return getters['getGetValidatorSetByHeight']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceGetValidatorSetByHeight API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceGetValidatorSetByHeight API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -327,8 +321,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'ServiceABCIQuery', payload: { options: { all }, params: {...key},query }})
 				return getters['getABCIQuery']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:ServiceABCIQuery API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:ServiceABCIQuery API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		

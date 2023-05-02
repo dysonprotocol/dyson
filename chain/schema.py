@@ -49,11 +49,11 @@ def process_code(code: str):
             s["schema"] = process_function_def(
                 ast_function_def, type_namespace, schema_map
             )
-            docstring = ast.get_docstring(node)
-            s["title"] = " ".join(
+            s["schema"]["title"] = " ".join(
                 word.capitalize() for word in ast_function_def.name.split("_")
             )
-            s["description"] = docstring
+            docstring = ast.get_docstring(node)
+            s["schema"]["description"] = docstring
         except Exception as e:
             s["error"] = str(e)
 

@@ -18,6 +18,8 @@ import (
 	cosmosgovv1beta1types "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
 	cosmosgroupv1types "github.com/cosmos/cosmos-sdk/x/group"
 	cosmosmintv1beta1types "github.com/cosmos/cosmos-sdk/x/mint/types"
+	cosmosnftv1beta1keeper "github.com/cosmos/cosmos-sdk/x/nft"
+	cosmosnftv1beta1types "github.com/cosmos/cosmos-sdk/x/nft"
 	cosmosparamsv1beta1types "github.com/cosmos/cosmos-sdk/x/params/types/proposal"
 	cosmosslashingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/slashing/keeper"
 	cosmosslashingv1beta1types "github.com/cosmos/cosmos-sdk/x/slashing/types"
@@ -2638,6 +2640,172 @@ func (rpcservice *RpcService) Cosmosmintv1beta1queryannualprovisions(_ *http.Req
 	if err != nil {
 		return err
 	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: cosmosnftv1beta1keeper
+// Types: cosmosnftv1beta1types
+// github.com/cosmos/cosmos-sdk/x/nft
+func (rpcservice *RpcService) Cosmosnftv1beta1querybalance(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg cosmosnftv1beta1types.QueryBalanceRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.cosmosnftv1beta1keeper.Balance(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: cosmosnftv1beta1keeper
+// Types: cosmosnftv1beta1types
+// github.com/cosmos/cosmos-sdk/x/nft
+func (rpcservice *RpcService) Cosmosnftv1beta1queryowner(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg cosmosnftv1beta1types.QueryOwnerRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.cosmosnftv1beta1keeper.Owner(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: cosmosnftv1beta1keeper
+// Types: cosmosnftv1beta1types
+// github.com/cosmos/cosmos-sdk/x/nft
+func (rpcservice *RpcService) Cosmosnftv1beta1querysupply(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg cosmosnftv1beta1types.QuerySupplyRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.cosmosnftv1beta1keeper.Supply(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: cosmosnftv1beta1keeper
+// Types: cosmosnftv1beta1types
+// github.com/cosmos/cosmos-sdk/x/nft
+func (rpcservice *RpcService) Cosmosnftv1beta1querynfts(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg cosmosnftv1beta1types.QueryNFTsRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.cosmosnftv1beta1keeper.NFTs(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: cosmosnftv1beta1keeper
+// Types: cosmosnftv1beta1types
+// github.com/cosmos/cosmos-sdk/x/nft
+func (rpcservice *RpcService) Cosmosnftv1beta1querynft(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg cosmosnftv1beta1types.QueryNFTRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.cosmosnftv1beta1keeper.NFT(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: cosmosnftv1beta1keeper
+// Types: cosmosnftv1beta1types
+// github.com/cosmos/cosmos-sdk/x/nft
+func (rpcservice *RpcService) Cosmosnftv1beta1queryclass(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg cosmosnftv1beta1types.QueryClassRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.cosmosnftv1beta1keeper.Class(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: cosmosnftv1beta1keeper
+// Types: cosmosnftv1beta1types
+// github.com/cosmos/cosmos-sdk/x/nft
+func (rpcservice *RpcService) Cosmosnftv1beta1queryclasses(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg cosmosnftv1beta1types.QueryClassesRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.cosmosnftv1beta1keeper.Classes(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: cosmosnftv1beta1keeper
+// Types: cosmosnftv1beta1types
+// github.com/cosmos/cosmos-sdk/x/nft
+func (rpcservice *RpcService) Cosmosnftv1beta1sendmsgsend(_ *http.Request, req *RpcReq, response *string) (err error) {
+	//handler := cosmosnftv1beta1keeper.NewMsgServerImpl(rpcservice.k.cosmosnftv1beta1keeper).Send
+	var msg cosmosnftv1beta1types.MsgSend
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+
+	_ = cosmosnftv1beta1keeper.ModuleName // dummy to fix import error
+	handler := rpcservice.m.cosmosnftv1beta1keeper.Send
+
+	//
+	defer func() {
+		if r := recover(); r != nil {
+
+			err = sdkerrors.Wrapf(types.RpcError, "CHAIN ERROR: %T %+v", r, r)
+		}
+	}()
+	err = msg.ValidateBasic()
+	if err != nil {
+		return err
+	}
+
+	if len(msg.GetSigners()) != 1 {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "this requires more than one signer and cannot be run from a script")
+	}
+
+	if !msg.GetSigners()[0].Equals(rpcservice.ScriptAddress) {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid signer address (%s)", rpcservice.ScriptAddress)
+	}
+
+	sdkCtx := sdk.UnwrapSDKContext(rpcservice.ctx)
+
+	cachedCtx, Write := sdkCtx.CacheContext()
+
+	r, err := handler(sdk.WrapSDKContext(cachedCtx), &msg)
+	if err != nil {
+		return err
+	}
+	Write()
 	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
 	return nil
 }

@@ -4,28 +4,31 @@
     "definitions": {
         "MsgUpdateNft": {
             "properties": {
-                "classOwner": {
+                "class_owner": {
                     "type": "string",
-                    "description": "The owner of the Dys name"
+                    "description": "The owner of the NFT Class"
                 },
-                "classId": {
+                "class_id": {
                     "type": "string",
-                    "description": "The dys name that the NFT was create with"
+                    "description": "the NFT Class ID"
                 },
                 "id": {
                     "type": "string",
-                    "description": "The ID of this NFT"
+                    "description": "The ID of this NFT to update"
                 },
                 "uri": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URI of the NFT (optional)"
                 },
-                "urihash": {
-                    "type": "string"
+                "uri_hash": {
+                    "type": "string",
+                    "description": "The URI hash of the NFT (optional)"
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Update Nft"
+            "title": "Msg Update Nft",
+            "description": "Update the details of an NFT"
         }
     }
 }

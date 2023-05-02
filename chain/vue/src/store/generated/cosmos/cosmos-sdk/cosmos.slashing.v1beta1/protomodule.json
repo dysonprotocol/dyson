@@ -3,10 +3,10 @@
 	"GoModulePath": "github.com/cosmos/cosmos-sdk",
 	"Pkg": {
 		"Name": "cosmos.slashing.v1beta1",
-		"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1",
+		"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1",
 		"Files": [
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/genesis.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos/slashing/v1beta1/slashing.proto",
@@ -14,7 +14,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/query.proto",
 				"Dependencies": [
 					"cosmos/base/query/v1beta1/pagination.proto",
 					"gogoproto/gogo.proto",
@@ -24,7 +24,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/slashing.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/slashing.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"google/protobuf/duration.proto",
@@ -33,7 +33,7 @@
 				]
 			},
 			{
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/tx.proto",
 				"Dependencies": [
 					"gogoproto/gogo.proto",
 					"cosmos_proto/cosmos.proto",
@@ -45,72 +45,72 @@
 		"Messages": [
 			{
 				"Name": "GenesisState",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/genesis.proto",
 				"HighestFieldNumber": 3
 			},
 			{
 				"Name": "SigningInfo",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/genesis.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ValidatorMissedBlocks",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/genesis.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "MissedBlock",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/genesis.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/genesis.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "QueryParamsRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/query.proto",
 				"HighestFieldNumber": 0
 			},
 			{
 				"Name": "QueryParamsResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QuerySigningInfoRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QuerySigningInfoResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QuerySigningInfosRequest",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/query.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "QuerySigningInfosResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/query.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/query.proto",
 				"HighestFieldNumber": 2
 			},
 			{
 				"Name": "ValidatorSigningInfo",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/slashing.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/slashing.proto",
 				"HighestFieldNumber": 6
 			},
 			{
 				"Name": "Params",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/slashing.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/slashing.proto",
 				"HighestFieldNumber": 5
 			},
 			{
 				"Name": "MsgUnjail",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/tx.proto",
 				"HighestFieldNumber": 1
 			},
 			{
 				"Name": "MsgUnjailResponse",
-				"Path": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/tx.proto",
+				"Path": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/tx.proto",
 				"HighestFieldNumber": 0
 			}
 		],
@@ -175,7 +175,7 @@
 		{
 			"Name": "MsgUnjail",
 			"URI": "cosmos.slashing.v1beta1.MsgUnjail",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/tx.proto"
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/tx.proto"
 		}
 	],
 	"HTTPQueries": [
@@ -218,23 +218,23 @@
 	"Types": [
 		{
 			"Name": "SigningInfo",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/genesis.proto"
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/genesis.proto"
 		},
 		{
 			"Name": "ValidatorMissedBlocks",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/genesis.proto"
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/genesis.proto"
 		},
 		{
 			"Name": "MissedBlock",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/genesis.proto"
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/genesis.proto"
 		},
 		{
 			"Name": "ValidatorSigningInfo",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/slashing.proto"
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/slashing.proto"
 		},
 		{
 			"Name": "Params",
-			"FilePath": "/go/pkg/mod/github.com/cosmos/cosmos-sdk@v0.46.7/proto/cosmos/slashing/v1beta1/slashing.proto"
+			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/slashing/v1beta1/slashing.proto"
 		}
 	]
 }

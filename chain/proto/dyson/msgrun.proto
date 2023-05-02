@@ -1,25 +1,29 @@
 syntax = "proto3";
 package dyson;
 
+import "gogoproto/gogo.proto";
+
 
 option go_package = "github.com/org/dyson/x/dyson/types";
 
 // MsgRun runs a script at a specific address
 message MsgRun {
-    // The account sending the transaction
+    // The account sending this transaction
     string creator = 1;
-    // dys address of the scrit to call
+    // Dys address of the script to call
     string address = 2;
-    // optional extra source code to append to the end of the script before running
+    // Optional extra source code to append to the end of the script before running. Only available to the script address itself.
     string extra_lines = 3; 
-    // optional function to call
+    // Optional function to call
     string function_name = 4;
-    // optional args to call the function with 
+    // Optional args to call the function with 
     string args = 5;
-    // optional kwargs to run 
+    // Optional kwargs to run 
     string kwargs = 6;
-    // optional comma seperated list of coins to send the script (for example "123dys,456token")
+    //Optional comma seperated list of coins to send the script (for example "123dys,456token") this entire amount will be sent to the script
     string coins = 7;
+    // Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example "example.dys/123, example.dys/456")
+    string nfts = 9;
 }
 
 message MsgRunResponse {

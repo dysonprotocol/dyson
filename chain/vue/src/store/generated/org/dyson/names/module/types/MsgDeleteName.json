@@ -5,15 +5,18 @@
         "MsgDeleteName": {
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name to delete"
                 },
                 "owner": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The owner address of the name"
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Delete Name"
+            "title": "Msg Delete Name",
+            "description": "Delete the Dyson Protocol name"
         }
     }
 }

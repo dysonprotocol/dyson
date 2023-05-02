@@ -235,7 +235,7 @@ for file_path in [
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.group.v1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.mint.v1beta1/protomodule.json",
-    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.nft.v1beta1/protomodule.json",
+    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.nft.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.params.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.slashing.v1beta1/protomodule.json",
     "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.staking.v1beta1/protomodule.json",
@@ -341,6 +341,19 @@ for file_path in [
                 types.add(f'{mod_types} "{data["Pkg"]["GoImportName"]}"')
             else:
 
+                if "nft" in mod_keeper:
+                    keeper_import = None
+                    if service_name == "Msg":
+                        handler_template = Template(
+                            """
+                            _ = cosmosnftv1beta1keeper.ModuleName // dummy to fix import error
+                            handler := rpcservice.m.$mod_keeper.$keeper_function
+                            """
+                        )
+                    elif service_name == "Query":
+                        handler_template = Template(
+                            """r, err := rpcservice.k.$mod_keeper.$keeper_function(rpcservice.ctx, &msg)"""
+                        )
                 if "gov" in mod_keeper:
                     print(
                         f"mod_keeper: {mod_keeper} service_name: {service_name} keeper_import: {keeper_import}"
@@ -500,7 +513,7 @@ from IPython.core.oinspect import Inspector
 from dyslang import WHITELIST_FUNCTIONS, dys_eval
 from dysvm_server import build_sandbox, get_module_dict
 
-sandbox = build_sandbox("", "", "", "", "")
+sandbox = build_sandbox("", "", "", "", "", "")
 inspector = Inspector()
 
 locals().update(sandbox.modules.__dict__)

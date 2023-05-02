@@ -16,13 +16,12 @@ func CmdMintNft() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "mint-nft [class-id] [id] [uri] [urihash]",
 		Short: "Allows the owner of the Dys Name to mint an NFT",
-		Args:  cobra.ExactArgs(5),
+		Args:  cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			argClassId := args[0]
 			argId := args[1]
 			argUri := args[2]
 			argUrihash := args[3]
-			argData := args[4]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -35,7 +34,6 @@ func CmdMintNft() *cobra.Command {
 				argId,
 				argUri,
 				argUrihash,
-				argData,
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err

@@ -5,24 +5,30 @@
         "MsgUpdateName": {
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name to update"
                 },
                 "owner": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The owner address of the name"
                 },
                 "destination": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The new destination address for the name"
                 },
                 "authorized": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The address that this name is OfferedTo, they can take ownership of the name with the Accept message"
                 },
                 "auto_renew": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal."
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Update Name"
+            "title": "Msg Update Name",
+            "description": "Update the details of the Dyson Protocol name"
         }
     }
 }

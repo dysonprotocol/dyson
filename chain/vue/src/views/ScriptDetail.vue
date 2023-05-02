@@ -24,7 +24,7 @@ pre {
           <a
             target="blank"
             class="btn btn-link btn-sm"
-            :href="'https://' + scriptAddress + '.' + clearDomain"
+            :href="'https://' + scriptAddress.split('.')[0] + '.' + clearDomain"
           >
             View dwapp ↗
           </a>

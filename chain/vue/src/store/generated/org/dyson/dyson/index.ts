@@ -234,8 +234,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScheduledRun', payload: { options: { all }, params: {...key},query }})
 				return getters['getScheduledRun']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryScheduledRun API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryScheduledRun API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -260,8 +259,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScheduledRunAll', payload: { options: { all }, params: {...key},query }})
 				return getters['getScheduledRunAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryScheduledRunAll API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryScheduledRunAll API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -286,8 +284,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStorage', payload: { options: { all }, params: {...key},query }})
 				return getters['getStorage']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryStorage API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryStorage API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -312,8 +309,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStorageAll', payload: { options: { all }, params: {...key},query }})
 				return getters['getStorageAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryStorageAll API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryStorageAll API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -338,8 +334,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScript', payload: { options: { all }, params: {...key},query }})
 				return getters['getScript']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryScript API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryScript API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -364,8 +359,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QuerySchema', payload: { options: { all }, params: {...key},query }})
 				return getters['getSchema']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QuerySchema API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QuerySchema API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -390,8 +384,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryWsgi', payload: { options: { all }, params: {...key},query }})
 				return getters['getWsgi']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryWsgi API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryWsgi API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -416,8 +409,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryQueryScript', payload: { options: { all }, params: {...key},query }})
 				return getters['getQueryScript']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryQueryScript API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryQueryScript API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -442,8 +434,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScriptAll', payload: { options: { all }, params: {...key},query }})
 				return getters['getScriptAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryScriptAll API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryScriptAll API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -468,8 +459,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryPrefixStorage', payload: { options: { all }, params: {...key},query }})
 				return getters['getPrefixStorage']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryPrefixStorage API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryPrefixStorage API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -494,8 +484,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScheduledGasPriceAndFeeAtBlock', payload: { options: { all }, params: {...key},query }})
 				return getters['getScheduledGasPriceAndFeeAtBlock']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryScheduledGasPriceAndFeeAtBlock API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryScheduledGasPriceAndFeeAtBlock API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -520,8 +509,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryCron', payload: { options: { all }, params: {...key},query }})
 				return getters['getCron']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryCron API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryCron API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -546,8 +534,7 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryCronAll', payload: { options: { all }, params: {...key},query }})
 				return getters['getCronAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryCronAll API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryCronAll API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
@@ -572,42 +559,11 @@ export default {
 				if (subscribe) commit('SUBSCRIBE', { action: 'QueryEncodeProtoAny', payload: { options: { all }, params: {...key},query }})
 				return getters['getEncodeProtoAny']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				throw new Error('QueryClient:QueryEncodeProtoAny API Node Unavailable. Could not perform query: ' + e.error.message)
-				
+				throw new Error('QueryClient:QueryEncodeProtoAny API Node Unavailable. Could not perform query: ' +  (e.error?.message || e.message))
 			}
 		},
 		
 		
-		async sendMsgUpdateScheduledRun({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateScheduledRun(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: gas}, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateScheduledRun:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgUpdateScheduledRun:Send Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgDeployAutonomousScript({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeployAutonomousScript(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: gas}, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgDeployAutonomousScript:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgDeployAutonomousScript:Send Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
 		async sendMsgCreateScheduledRun({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -623,18 +579,18 @@ export default {
 				}
 			}
 		},
-		async sendMsgDeleteScheduledRun({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+		async sendMsgUpdateStorage({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeleteScheduledRun(value)
+				const msg = await txClient.msgUpdateStorage(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: gas}, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgDeleteScheduledRun:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgUpdateStorage:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgDeleteScheduledRun:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgUpdateStorage:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -653,6 +609,21 @@ export default {
 				}
 			}
 		},
+		async sendMsgDeleteScript({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgDeleteScript(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeleteScript:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgDeleteScript:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
 		async sendMsgCreateStorage({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -665,6 +636,36 @@ export default {
 					throw new Error('TxClient:MsgCreateStorage:Init Could not initialize signing client. Wallet is required.')
 				}else{
 					throw new Error('TxClient:MsgCreateStorage:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgDeployAutonomousScript({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgDeployAutonomousScript(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeployAutonomousScript:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgDeployAutonomousScript:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgUpdateScheduledRun({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateScheduledRun(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateScheduledRun:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgUpdateScheduledRun:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -698,63 +699,22 @@ export default {
 				}
 			}
 		},
-		async sendMsgDeleteScript({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+		async sendMsgDeleteScheduledRun({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeleteScript(value)
+				const msg = await txClient.msgDeleteScheduledRun(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: gas}, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgDeleteScript:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgDeleteScheduledRun:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgDeleteScript:Send Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgUpdateStorage({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateStorage(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: gas}, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateStorage:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgUpdateStorage:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgDeleteScheduledRun:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
 		
-		async MsgUpdateScheduledRun({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateScheduledRun(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateScheduledRun:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgUpdateScheduledRun:Create Could not create message: ' + e.message)
-				}
-			}
-		},
-		async MsgDeployAutonomousScript({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeployAutonomousScript(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgDeployAutonomousScript:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgDeployAutonomousScript:Create Could not create message: ' + e.message)
-				}
-			}
-		},
 		async MsgCreateScheduledRun({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -768,16 +728,16 @@ export default {
 				}
 			}
 		},
-		async MsgDeleteScheduledRun({ rootGetters }, { value }) {
+		async MsgUpdateStorage({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeleteScheduledRun(value)
+				const msg = await txClient.msgUpdateStorage(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgDeleteScheduledRun:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgUpdateStorage:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgDeleteScheduledRun:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgUpdateStorage:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -794,6 +754,19 @@ export default {
 				}
 			}
 		},
+		async MsgDeleteScript({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgDeleteScript(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeleteScript:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgDeleteScript:Create Could not create message: ' + e.message)
+				}
+			}
+		},
 		async MsgCreateStorage({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -804,6 +777,32 @@ export default {
 					throw new Error('TxClient:MsgCreateStorage:Init Could not initialize signing client. Wallet is required.')
 				} else{
 					throw new Error('TxClient:MsgCreateStorage:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgDeployAutonomousScript({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgDeployAutonomousScript(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeployAutonomousScript:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgDeployAutonomousScript:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgUpdateScheduledRun({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateScheduledRun(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateScheduledRun:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgUpdateScheduledRun:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -833,29 +832,16 @@ export default {
 				}
 			}
 		},
-		async MsgDeleteScript({ rootGetters }, { value }) {
+		async MsgDeleteScheduledRun({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeleteScript(value)
+				const msg = await txClient.msgDeleteScheduledRun(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgDeleteScript:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgDeleteScheduledRun:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgDeleteScript:Create Could not create message: ' + e.message)
-				}
-			}
-		},
-		async MsgUpdateStorage({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateStorage(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateStorage:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgUpdateStorage:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgDeleteScheduledRun:Create Could not create message: ' + e.message)
 				}
 			}
 		},

@@ -2,15 +2,16 @@ package types
 
 import (
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"regexp"
 	"strings"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 const (
 	TypeMsgReveal = "reveal"
-	NameRegex     = `^[a-z0-9][a-z0-9-]{0,15}[.]dys$`
+	NameRegex     = `^[a-z0-9][a-z0-9-]{0,31}[.]dys$`
 )
 
 var _ sdk.Msg = &MsgReveal{}

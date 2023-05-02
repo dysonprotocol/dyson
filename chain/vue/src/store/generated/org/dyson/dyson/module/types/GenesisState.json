@@ -83,31 +83,35 @@
             "properties": {
                 "creator": {
                     "type": "string",
-                    "description": "The account sending the transaction"
+                    "description": "The account sending this transaction"
                 },
                 "address": {
                     "type": "string",
-                    "description": "dys address of the scrit to call"
+                    "description": "Dys address of the script to call"
                 },
                 "extra_lines": {
                     "type": "string",
-                    "description": "optional extra source code to append to the end of the script before running"
+                    "description": "Optional extra source code to append to the end of the script before running. Only available to the script address itself."
                 },
                 "function_name": {
                     "type": "string",
-                    "description": "optional function to call"
+                    "description": "Optional function to call"
                 },
                 "args": {
                     "type": "string",
-                    "description": "optional args to call the function with"
+                    "description": "Optional args to call the function with"
                 },
                 "kwargs": {
                     "type": "string",
-                    "description": "optional kwargs to run"
+                    "description": "Optional kwargs to run"
                 },
                 "coins": {
                     "type": "string",
-                    "description": "optional comma seperated list of coins to send the script (for example \"123dys,456token\")"
+                    "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+                },
+                "nfts": {
+                    "type": "string",
+                    "description": "Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example \"example.dys/123, example.dys/456\")"
                 }
             },
             "additionalProperties": true,

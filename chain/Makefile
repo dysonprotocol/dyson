@@ -23,6 +23,9 @@ vuex:
 	rm -rf ./vue/src/store/generated/*
 	ignite generate vuex 
 	chown 1000:1000 -R ./vue/src/store/generated
+	find vue/src/store/generated/cosmos/cosmos-sdk/cosmos.nft.v1beta1/ -type f -exec sed -i 's/ueryNfT/ueryNFT/g' {} +
+	find vue/src/store/generated/cosmos/cosmos-sdk/cosmos.nft.v1beta1/ -type f -exec sed -i 's/ueryNft/ueryNFT/g' {} +
+
 
 gen_rpc:
 	dysond q dyson export-interfaces | jq > ./vue/src/views/exported-interfaces.json

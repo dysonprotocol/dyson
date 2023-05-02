@@ -2,14 +2,15 @@ package types
 
 import (
 	"fmt"
+	"regexp"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"regexp"
 )
 
 const (
 	// Make sure this matche NameRegex
-	reDnmString = `[^/]*(/[a-z0-9-_]{1,100})*`
+	reDnmString = `([a-z0-9-_]{1,100}\.)?([a-z0-9-_]{1,100})\.dys`
 )
 
 var reDnm = regexp.MustCompile(fmt.Sprintf(`^%s$`, reDnmString))

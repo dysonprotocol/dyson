@@ -10,7 +10,7 @@ import (
 
 func CmdRun() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "run [script address] --function=foo --args=[1,2,3] --kwargs={\"bar\": \"baz\"} --extralines=\"print('hello world')\" --coins=10000dys,500token",
+		Use:   "run [script address] --function=foo --args=[1,2,3] --kwargs={\"bar\": \"baz\"} --extralines=\"print('hello world')\" --coins=10000dys,500token --nfts=example.dys/1,example.dys/2",
 		Short: "Runs script on this account",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -43,7 +43,12 @@ func CmdRun() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgRun(clientCtx.GetFromAddress().String(), string(address), string(argsFunctionName), string(argsArgs), string(argsKwargs), string(argsExtraLines), string(coins))
+			nfts, err := cmd.Flags().GetString("nfts")
+			if err != nil {
+				return err
+			}
+
+			msg := types.NewMsgRun(clientCtx.GetFromAddress().String(), string(address), string(argsFunctionName), string(argsArgs), string(argsKwargs), string(argsExtraLines), string(coins), string(nfts))
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
@@ -57,6 +62,7 @@ func CmdRun() *cobra.Command {
 	cmd.PersistentFlags().String("kwargs", "", "json object of the keyword argument to the function")
 	cmd.PersistentFlags().String("extralines", "", "Extra line to run (only for running the script that is signing the transaction)")
 	cmd.PersistentFlags().String("coins", "", "Amount of coins to send (ignored if running the script that is signing the transaction)")
+	cmd.PersistentFlags().String("nfts", "", "Amount of nfts to send to the script")
 
 	return cmd
 }

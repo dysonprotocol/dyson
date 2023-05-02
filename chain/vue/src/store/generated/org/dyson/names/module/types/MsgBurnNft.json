@@ -4,19 +4,23 @@
     "definitions": {
         "MsgBurnNft": {
             "properties": {
-                "classOwner": {
-                    "type": "string"
+                "class_owner": {
+                    "type": "string",
+                    "description": "The owner of the NFT Class"
                 },
-                "classId": {
-                    "type": "string"
+                "class_id": {
+                    "type": "string",
+                    "description": "the NFT Class ID"
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The ID of this NFT to burn. The owner must currently own this NFT to burn it."
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Burn Nft"
+            "title": "Msg Burn Nft",
+            "description": "Burn an NFT of the given class ID and NFT ID."
         }
     }
 }

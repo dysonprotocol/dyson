@@ -81,6 +81,7 @@ def main():
         creator,
         address,
         amount,
+        nfts,
         block_info,
         funcname,
         json_args,
@@ -94,6 +95,7 @@ def main():
         creator,
         address,
         amount,
+        nfts,
         block_info,
         funcname,
         json_args,
@@ -253,8 +255,9 @@ def get_module_dict():
     return mod_dict
 
 
-def build_sandbox(port, creator, address, amount, block_info):
+def build_sandbox(port, creator, address, amount, nfts, block_info):
     amount = json.loads(amount or "{}")
+    nfts = json.loads(nfts or "{}")
     url = f"http://localhost:{port}/rpc"
 
     def _chain(method, **params):
@@ -447,6 +450,13 @@ def build_sandbox(port, creator, address, amount, block_info):
         """
         return amount
 
+    @allow_dys_func
+    def get_nfts_sent():
+        """
+        Returns the nfts sent to this function.
+        """
+        return nfts
+
     module_dict = get_module_dict()
 
     module_dict["dys"] = {
@@ -455,6 +465,8 @@ def build_sandbox(port, creator, address, amount, block_info):
         "SCRIPT_ADDRESS": address,
         "CALLER": creator,
         "AMOUNT": amount,
+        "NFTS_SENT": nfts,
+        "COINS_SENT": amount,
         "BLOCK_INFO": block_info,
         "get_gas_consumed": get_gas_consumed,
         "get_gas_limit": get_gas_limit,
@@ -462,6 +474,7 @@ def build_sandbox(port, creator, address, amount, block_info):
         "get_caller": get_caller,
         "get_block_info": get_block_info,
         "get_coins_sent": get_coins_sent,
+        "get_nfts_sent": get_nfts_sent,
         "get_nodes_called": get_nodes_called,
         "get_cumulative_size": get_cumulative_size,
     }
@@ -475,6 +488,7 @@ def eval_script(
     creator,
     address,
     amount,
+    nfts,
     block_info,
     funcname,
     json_args,
@@ -499,6 +513,7 @@ def eval_script(
                     creator,
                     address,
                     amount,
+                    nfts,
                     block_info,
                 )
                 sandbox.consume_gas()
@@ -512,6 +527,7 @@ def eval_script(
                     + (json_kwargs or "")
                     + (extra_line or "")
                     + (amount or "")
+                    + (nfts or "")
                     + str(sandbox.gas_state() or "")
                 )
                 result = (

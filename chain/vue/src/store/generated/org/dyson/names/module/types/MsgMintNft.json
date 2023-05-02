@@ -4,27 +4,31 @@
     "definitions": {
         "MsgMintNft": {
             "properties": {
-                "classOwner": {
+                "class_owner": {
                     "type": "string",
                     "description": "The owner of the Dys name"
                 },
-                "classId": {
+                "class_id": {
                     "type": "string",
-                    "description": "the ClassID must equal yythe Dys name"
+                    "description": "the NFT Class ID"
                 },
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The ID of this NFT, must be unique to the class ID"
                 },
                 "uri": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The URI of the NFT (optional)"
                 },
-                "urihash": {
-                    "type": "string"
+                "uri_hash": {
+                    "type": "string",
+                    "description": "The URI hash of the NFT (optional)"
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Mint Nft"
+            "title": "Msg Mint Nft",
+            "description": "Mint an NFT with the given class ID and NFT ID. The NFT ID is unique to the class ID."
         }
     }
 }

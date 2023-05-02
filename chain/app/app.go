@@ -268,6 +268,7 @@ func New(
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
 ) cosmoscmd.App {
+
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn: os.Getenv("GO_SENTRY_DSN"),
 		// Dsn: "https://2143a839f64b4bef9cd81e6a559a13e1@o1422051.ingest.sentry.io/6768385",

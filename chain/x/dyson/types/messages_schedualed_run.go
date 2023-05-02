@@ -16,7 +16,8 @@ func NewMsgCreateScheduledRun(
 	args string,
 	kwargs string,
 	extraLines string,
-	coins string) *MsgCreateScheduledRun {
+	coins string,
+	nfts string) *MsgCreateScheduledRun {
 	return &MsgCreateScheduledRun{
 		Creator: creator,
 		Height:  height,
@@ -26,7 +27,8 @@ func NewMsgCreateScheduledRun(
 			functionName,
 			args, kwargs,
 			extraLines,
-			coins),
+			coins,
+			nfts),
 	}
 }
 

@@ -12,10 +12,11 @@ import (
 func (k msgServer) MintNft(goCtx context.Context, msg *types.MsgMintNft) (*types.MsgMintNftResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	dysName := getDysName(msg.ClassId)
 	// Check if the value exists
 	name, isFound := k.GetName(
 		ctx,
-		msg.ClassId, // the class Id is the dyson name
+		dysName,
 	)
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "Name not found")
@@ -31,7 +32,7 @@ func (k msgServer) MintNft(goCtx context.Context, msg *types.MsgMintNft) (*types
 		ClassId: msg.ClassId,
 		Id:      msg.Id,
 		Uri:     msg.Uri,
-		UriHash: msg.Urihash,
+		UriHash: msg.UriHash,
 	}
 
 	toAddr, err := sdk.AccAddressFromBech32(msg.ClassOwner)

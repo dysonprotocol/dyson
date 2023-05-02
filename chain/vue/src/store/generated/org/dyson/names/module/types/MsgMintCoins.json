@@ -5,15 +5,18 @@
         "MsgMintCoins": {
             "properties": {
                 "owner": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The owner of the Dys name"
                 },
                 "amount": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The amount of coins to mint in the format \"[amount] [denom]\".   Each coin costs 1 gas."
                 }
             },
             "additionalProperties": true,
             "type": "object",
-            "title": "Msg Mint Coins"
+            "title": "Msg Mint Coins",
+            "description": "Mint coins with a denom of a name or subname. For example if you own the name \"example.dys\" you can mint coins with the denom \"example.dys\" or \"subname.example.dys\""
         }
     }
 }

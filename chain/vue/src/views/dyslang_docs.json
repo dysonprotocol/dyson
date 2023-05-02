@@ -333,6 +333,10 @@
     "definition": "()",
     "docstring": "The maximum amount of gas that can be used in this query or transaction"
   },
+  "dys.get_nfts_sent": {
+    "definition": "()",
+    "docstring": "Returns the nfts sent to this function."
+  },
   "dys.get_nodes_called": {
     "definition": "()",
     "docstring": "The number of Python AST nodes evaluated in this query or transaction"

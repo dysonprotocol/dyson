@@ -48,6 +48,10 @@ func CmdCreateScheduledRun() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			nft, err := cmd.Flags().GetString("nft")
+			if err != nil {
+				return err
+			}
 			gas, err := cmd.Flags().GetUint64("scheduledgaslimit")
 			if err != nil {
 				return err
@@ -63,6 +67,7 @@ func CmdCreateScheduledRun() *cobra.Command {
 				string(argsKwargs),
 				string(argsExtraLines),
 				string(coins),
+				string(nft),
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
@@ -79,6 +84,7 @@ func CmdCreateScheduledRun() *cobra.Command {
 	cmd.PersistentFlags().String("kwargs", "", "json object of the keyword argument to the function")
 	cmd.PersistentFlags().String("extralines", "", "Extra line to run (only for running the script that is signing the transaction)")
 	cmd.PersistentFlags().String("coins", "", "Amount of coins to send (ignored if running the script that is signing the transaction)")
+	cmd.PersistentFlags().String("nfts", "", "Amount of nfts to send to the script")
 
 	return cmd
 }

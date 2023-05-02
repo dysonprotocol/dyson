@@ -21,7 +21,9 @@
 			},
 			{
 				"Path": "/go/src/app/proto/dyson/msgrun.proto",
-				"Dependencies": null
+				"Dependencies": [
+					"gogoproto/gogo.proto"
+				]
 			},
 			{
 				"Path": "/go/src/app/proto/dyson/query.proto",
@@ -83,7 +85,7 @@
 			{
 				"Name": "MsgRun",
 				"Path": "/go/src/app/proto/dyson/msgrun.proto",
-				"HighestFieldNumber": 7
+				"HighestFieldNumber": 9
 			},
 			{
 				"Name": "MsgRunResponse",
@@ -557,23 +559,13 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgUpdateScheduledRun",
-			"URI": "dyson.MsgUpdateScheduledRun",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgDeployAutonomousScript",
-			"URI": "dyson.MsgDeployAutonomousScript",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
 			"Name": "MsgCreateScheduledRun",
 			"URI": "dyson.MsgCreateScheduledRun",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgDeleteScheduledRun",
-			"URI": "dyson.MsgDeleteScheduledRun",
+			"Name": "MsgUpdateStorage",
+			"URI": "dyson.MsgUpdateStorage",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
@@ -582,8 +574,23 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
+			"Name": "MsgDeleteScript",
+			"URI": "dyson.MsgDeleteScript",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
 			"Name": "MsgCreateStorage",
 			"URI": "dyson.MsgCreateStorage",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgDeployAutonomousScript",
+			"URI": "dyson.MsgDeployAutonomousScript",
+			"FilePath": "/go/src/app/proto/dyson/tx.proto"
+		},
+		{
+			"Name": "MsgUpdateScheduledRun",
+			"URI": "dyson.MsgUpdateScheduledRun",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
@@ -597,13 +604,8 @@
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		},
 		{
-			"Name": "MsgDeleteScript",
-			"URI": "dyson.MsgDeleteScript",
-			"FilePath": "/go/src/app/proto/dyson/tx.proto"
-		},
-		{
-			"Name": "MsgUpdateStorage",
-			"URI": "dyson.MsgUpdateStorage",
+			"Name": "MsgDeleteScheduledRun",
+			"URI": "dyson.MsgDeleteScheduledRun",
 			"FilePath": "/go/src/app/proto/dyson/tx.proto"
 		}
 	],

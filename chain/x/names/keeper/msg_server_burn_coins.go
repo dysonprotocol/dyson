@@ -6,7 +6,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/org/dyson/x/names/types"
-	"strings"
 )
 
 func (k msgServer) BurnCoins(goCtx context.Context, msg *types.MsgBurnCoins) (*types.MsgBurnCoinsResponse, error) {
@@ -17,15 +16,13 @@ func (k msgServer) BurnCoins(goCtx context.Context, msg *types.MsgBurnCoins) (*t
 		return nil, err
 	}
 
-	denomParts := strings.Split(coin.Denom, "/")
-	baseName := denomParts[0]
-
+	dysName := getDysName(coin.Denom)
 	name, isFound := k.GetName(
 		ctx,
-		baseName,
+		dysName,
 	)
 	if !isFound {
-		return nil, sdkerrors.Wrapf(sdkerrors.ErrKeyNotFound, "name not found: %s", baseName)
+		return nil, sdkerrors.Wrapf(sdkerrors.ErrKeyNotFound, "name not found: %s", dysName)
 	}
 
 	// Checks if the the msg owner is the same as the current owner
