@@ -3,6 +3,8 @@ package types
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+
+	"regexp"
 )
 
 const TypeMsgUpdateNft = "update_nft"
@@ -41,10 +43,26 @@ func (msg *MsgUpdateNft) GetSignBytes() []byte {
 }
 
 func (msg *MsgUpdateNft) ValidateBasic() error {
+
 	_, err := sdk.AccAddressFromBech32(msg.ClassOwner)
 	if err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid classOwner address (%s)", err)
+		return err
 	}
+
+	// assert the id is less than 64 characters
+	if len(msg.Id) > 64 {
+		return sdkerrors.Wrapf(ErrInvalidNftId, "id too long (max 64)")
+	}
+
+	pattern := "^[a-zA-Z0-9-]+$"
+	match, err := regexp.MatchString(pattern, msg.Id)
+	if err != nil {
+		return sdkerrors.Wrapf(ErrInvalidNftId, "id must match regex %s", pattern)
+	}
+	if !match {
+		return sdkerrors.Wrapf(ErrInvalidNftId, "id must match regex %s", pattern)
+	}
+
 	// assert the uri is not too long
 	if len(msg.Uri) > MAX_URI_SIZE {
 		return sdkerrors.Wrapf(ErrInvalidNftUri, "uri too long (max %d)", MAX_URI_SIZE)

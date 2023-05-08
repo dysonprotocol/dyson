@@ -48,7 +48,7 @@ func (msg *MsgMintNft) GetSignBytes() []byte {
 func (msg *MsgMintNft) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.ClassOwner)
 	if err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid owner address (%s)", err)
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid classOwner address (%s)", err)
 	}
 
 	// assert the id is less than 64 characters
@@ -57,8 +57,11 @@ func (msg *MsgMintNft) ValidateBasic() error {
 	}
 
 	pattern := "^[a-zA-Z0-9-]+$"
-	_, err = regexp.MatchString(pattern, msg.Id)
+	match, err := regexp.MatchString(pattern, msg.Id)
 	if err != nil {
+		return err
+	}
+	if !match {
 		return sdkerrors.Wrapf(ErrInvalidNftId, "id must match regex %s", pattern)
 	}
 
