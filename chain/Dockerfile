@@ -16,7 +16,7 @@ RUN pypy -m pip install https://gitlab.com/sybil.singleton/pyre2/-/archive/maste
 
 RUN go install github.com/chrusty/protoc-gen-jsonschema/cmd/protoc-gen-jsonschema@latest
 
-RUN cd /tmp && rm -rf ignite-cli && mkdir -p ignite-cli && wget -O ignite-cli.tar.gz https://gitlab.com/dysonproject/ignite-cli/-/archive/better-errors/ignite-cli-better-errors.tar.gz && tar -xf ignite-cli.tar.gz --strip-component=1 --directory=ignite-cli && cd ignite-cli && make && make install
+RUN cd /tmp && rm -rf ignite-cli && mkdir -p ignite-cli && wget -O ignite-cli.tar.gz https://gitlab.com/dysonproject/ignite-cli/-/archive/0a0b8efeefd03dcf49978dd703bcacb667133200/ignite-cli-0a0b8efeefd03dcf49978dd703bcacb667133200.tar.gz && tar -xf ignite-cli.tar.gz --strip-component=1 --directory=ignite-cli && cd ignite-cli && make && make install
 
 COPY requirements.txt .
 RUN pypy -m pip install -r requirements.txt
