@@ -14,10 +14,13 @@ var _ sdk.Msg = &MsgSetNftClass{}
 
 func ValidateNftClassId(id string) error {
 	pattern := `^([a-z0-9-]{1,100}\.)?([a-z0-9-]+)\.dys$`
-	_, err := regexp.MatchString(pattern, id)
-
+	m, err := regexp.MatchString(pattern, id)
 	if err != nil {
+		return err
+	}
+	if !m {
 		return fmt.Errorf("invalid class id (%s) must match regex: %s", id, pattern)
+
 	}
 
 	return nil
