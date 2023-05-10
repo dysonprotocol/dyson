@@ -21,7 +21,7 @@ bash:
 
 vuex:
 	rm -rf ./vue/src/store/generated/*
-	ignite generate vuex 
+	ignite generate vuex  --clear-cache --proto-all-modules
 	chown 1000:1000 -R ./vue/src/store/generated
 	find vue/src/store/generated/cosmos/cosmos-sdk/cosmos.nft.v1beta1/ -type f -exec sed -i 's/ueryNfT/ueryNFT/g' {} +
 	find vue/src/store/generated/cosmos/cosmos-sdk/cosmos.nft.v1beta1/ -type f -exec sed -i 's/ueryNft/ueryNFT/g' {} +

@@ -222,36 +222,36 @@ keepers = set()
 code = []
 schemas = {}
 for file_path in [
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.auth.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.authz.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.bank.v1beta1/protomodule.json",
-    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.base.node.v1beta1/protomodule.json",
-    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.base.tendermint.v1beta1/protomodule.json",
-    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.crisis.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.distribution.v1beta1/protomodule.json",
-    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.evidence.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.feegrant.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.group.v1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.mint.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.nft.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.params.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.slashing.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.staking.v1beta1/protomodule.json",
-    # "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.tx.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.upgrade.v1beta1/protomodule.json",
-    "vue/src/store/generated/cosmos/cosmos-sdk/cosmos.vesting.v1beta1/protomodule.json",
-    "vue/src/store/generated/ibc-go/v5/ibc.applications.interchain_accounts.controller.v1/protomodule.json",
-    "vue/src/store/generated/ibc-go/v5/ibc.applications.interchain_accounts.host.v1/protomodule.json",
-    "vue/src/store/generated/ibc-go/v5/ibc.applications.transfer.v1/protomodule.json",
-    "vue/src/store/generated/ibc-go/v5/ibc.core.channel.v1/protomodule.json",
-    "vue/src/store/generated/ibc-go/v5/ibc.core.client.v1/protomodule.json",
-    "vue/src/store/generated/ibc-go/v5/ibc.core.connection.v1/protomodule.json",
-    "vue/src/store/generated/org/dyson/dyson/protomodule.json",
-    "vue/src/store/generated/org/dyson/names/protomodule.json",
+    #"./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.base.tendermint.v1beta1/protomodule.json",
+    #"./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.crisis.v1beta1/protomodule.json",
+    #"./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.evidence.v1beta1/protomodule.json",
+    #"./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.base.node.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.distribution.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.auth.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.feegrant.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.nft.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.mint.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.tx.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.upgrade.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.gov.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.staking.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.group.v1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.params.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.slashing.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.vesting.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.bank.v1beta1/protomodule.json",
+    "./vue/src/store/generated/cosmos/cosmos-sdk/cosmos.authz.v1beta1/protomodule.json",
+    "./vue/src/store/generated/org/dyson/names/protomodule.json",
+    "./vue/src/store/generated/org/dyson/dyson/protomodule.json",
+    "./vue/src/store/generated/ibc-go/v6/ibc.applications.transfer.v1/protomodule.json",
+    "./vue/src/store/generated/ibc-go/v6/ibc.applications.interchain_accounts.controller.v1/protomodule.json",
+    #"./vue/src/store/generated/ibc-go/v6/ibc.core.channel.v1/protomodule.json",
+    #"./vue/src/store/generated/ibc-go/v6/ibc.applications.interchain_accounts.host.v1/protomodule.json",
+    #"./vue/src/store/generated/ibc-go/v6/ibc.core.client.v1/protomodule.json",
+    #"./vue/src/store/generated/ibc-go/v6/ibc.core.connection.v1/protomodule.json",
 ]:
-
+    file_path = file_path.strip()
     data = json.load(open(file_path))
     for services in data["Pkg"]["Services"]:
         if services["Name"] == "Service":
@@ -311,7 +311,7 @@ for file_path in [
                 template = msg_template
                 function_name = f"{data['Pkg']['Name']}sendMsg{d['Name']}".replace(
                     ".", ""
-                ).capitalize()
+                ).replace("_","").capitalize()
                 handler_template = Template(
                     "handler := $mod_keeper.NewMsgServerImpl(rpcservice.k.$mod_keeper).$keeper_function"
                 )
@@ -322,7 +322,7 @@ for file_path in [
                 )
                 function_name = f"{data['Pkg']['Name']}Query{d['Name']}".replace(
                     ".", ""
-                ).capitalize()
+                ).replace("_","").capitalize()
             else:
                 raise Exception(f"oh no: {service_name}\n{services} ")
             mod_types = f"{data['Pkg']['Name']}types".lower().replace(".", "")
@@ -389,7 +389,7 @@ for file_path in [
                         handler_template = Template(
                             "handler := rpcservice.k.$mod_keeper.$keeper_function"
                         )
-                elif "ibcapplication" in mod_keeper:
+                elif "ibcapplicationstransfer" in mod_keeper:
                     # none because it uses the one on the keeper
                     keeper_import = None
                     if service_name == "Msg":

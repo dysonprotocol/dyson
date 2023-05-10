@@ -17,7 +17,7 @@ export interface MsgRun {
   args: string
   /** Optional kwargs to run */
   kwargs: string
-  /** Optional comma seperated list of coins to send the script (for example "123dys,456token") this entire amout will be sent to the script */
+  /** Optional comma seperated list of coins to send the script (for example "123dys,456token") this entire amount will be sent to the script */
   coins: string
   /** Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example "example.dys/123, example.dys/456") */
   nfts: string

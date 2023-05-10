@@ -26,7 +26,8 @@ import (
 	cosmosslashingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/slashing/keeper"
 	cosmosstakingv1beta1keeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	cosmosupgradev1beta1keeper "github.com/cosmos/cosmos-sdk/x/upgrade/keeper"
-	ibcapplicationstransferv1keeper "github.com/cosmos/ibc-go/v5/modules/apps/transfer/keeper"
+	ibcapplicationsinterchain_accountscontrollerv1keeper "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/controller/keeper"
+	ibcapplicationstransferv1keeper "github.com/cosmos/ibc-go/v6/modules/apps/transfer/keeper"
 
 	"github.com/org/dyson/x/dyson/types"
 	nameskeeper "github.com/org/dyson/x/names/keeper"
@@ -48,18 +49,19 @@ type (
 		cosmosgovv1keeper               cosmosgovv1keeper.Keeper
 		cosmosgroupv1keeper             cosmosgroupv1keeper.Keeper
 
-		cosmosslashingv1beta1keeper     cosmosslashingv1beta1keeper.Keeper
-		cosmosstakingv1beta1keeper      cosmosstakingv1beta1keeper.Keeper
-		cosmosstakingv1beta1querier     cosmosstakingv1beta1keeper.Querier
-		cosmosbankv1beta1keeper         bankkeeper.Keeper
-		cosmosauthzv1beta1keeper        cosmosauthzv1beta1keeper.Keeper
-		ibcapplicationstransferv1keeper ibcapplicationstransferv1keeper.Keeper
-		nameskeeper                     nameskeeper.Keeper
-		cosmosmintv1beta1keeper         cosmosmintv1beta1keeper.Keeper
-		cosmosupgradev1beta1keeper      cosmosupgradev1beta1keeper.Keeper
-		cosmoscrisisv1beta1keeper       cosmoscrisisv1beta1keeper.Keeper
-		cosmosparamsv1beta1keeper       cosmosparamsv1beta1keeper.Keeper
-		cosmosnftv1beta1keeper          nftkeeper.Keeper
+		cosmosslashingv1beta1keeper                          cosmosslashingv1beta1keeper.Keeper
+		cosmosstakingv1beta1keeper                           cosmosstakingv1beta1keeper.Keeper
+		cosmosstakingv1beta1querier                          cosmosstakingv1beta1keeper.Querier
+		cosmosbankv1beta1keeper                              bankkeeper.Keeper
+		cosmosauthzv1beta1keeper                             cosmosauthzv1beta1keeper.Keeper
+		ibcapplicationstransferv1keeper                      ibcapplicationstransferv1keeper.Keeper
+		nameskeeper                                          nameskeeper.Keeper
+		cosmosmintv1beta1keeper                              cosmosmintv1beta1keeper.Keeper
+		cosmosupgradev1beta1keeper                           cosmosupgradev1beta1keeper.Keeper
+		cosmoscrisisv1beta1keeper                            cosmoscrisisv1beta1keeper.Keeper
+		cosmosparamsv1beta1keeper                            cosmosparamsv1beta1keeper.Keeper
+		cosmosnftv1beta1keeper                               nftkeeper.Keeper
+		ibcapplicationsinterchain_accountscontrollerv1keeper *ibcapplicationsinterchain_accountscontrollerv1keeper.Keeper
 
 		registry cdctypes.InterfaceRegistry
 
@@ -90,6 +92,7 @@ func NewKeeper(
 	cosmoscrisisv1beta1keeper cosmoscrisisv1beta1keeper.Keeper,
 	cosmosparamsv1beta1keeper cosmosparamsv1beta1keeper.Keeper,
 	cosmosnftv1beta1keeper nftkeeper.Keeper,
+	ibcapplicationsinterchain_accountscontrollerv1keeper *ibcapplicationsinterchain_accountscontrollerv1keeper.Keeper,
 
 	registry cdctypes.InterfaceRegistry,
 ) *Keeper {
@@ -117,7 +120,8 @@ func NewKeeper(
 		cosmoscrisisv1beta1keeper:       cosmoscrisisv1beta1keeper,
 		cosmosparamsv1beta1keeper:       cosmosparamsv1beta1keeper,
 		cosmosnftv1beta1keeper:          cosmosnftv1beta1keeper,
-		registry:                        registry,
+		ibcapplicationsinterchain_accountscontrollerv1keeper: ibcapplicationsinterchain_accountscontrollerv1keeper,
+		registry: registry,
 
 		currentDepth: 0,
 	}

@@ -20,11 +20,12 @@ import CosmosCosmosSdkCosmosStakingV1Beta1 from './cosmos/cosmos-sdk/cosmos.stak
 import CosmosCosmosSdkCosmosTxV1Beta1 from './cosmos/cosmos-sdk/cosmos.tx.v1beta1'
 import CosmosCosmosSdkCosmosUpgradeV1Beta1 from './cosmos/cosmos-sdk/cosmos.upgrade.v1beta1'
 import CosmosCosmosSdkCosmosVestingV1Beta1 from './cosmos/cosmos-sdk/cosmos.vesting.v1beta1'
-import IbcGoV5IbcApplicationsInterchainAccountsHostV1 from './ibc-go/v5/ibc.applications.interchain_accounts.host.v1'
-import IbcGoV5IbcApplicationsTransferV1 from './ibc-go/v5/ibc.applications.transfer.v1'
-import IbcGoV5IbcCoreChannelV1 from './ibc-go/v5/ibc.core.channel.v1'
-import IbcGoV5IbcCoreClientV1 from './ibc-go/v5/ibc.core.client.v1'
-import IbcGoV5IbcCoreConnectionV1 from './ibc-go/v5/ibc.core.connection.v1'
+import IbcGoV6IbcApplicationsInterchainAccountsControllerV1 from './ibc-go/v6/ibc.applications.interchain_accounts.controller.v1'
+import IbcGoV6IbcApplicationsInterchainAccountsHostV1 from './ibc-go/v6/ibc.applications.interchain_accounts.host.v1'
+import IbcGoV6IbcApplicationsTransferV1 from './ibc-go/v6/ibc.applications.transfer.v1'
+import IbcGoV6IbcCoreChannelV1 from './ibc-go/v6/ibc.core.channel.v1'
+import IbcGoV6IbcCoreClientV1 from './ibc-go/v6/ibc.core.client.v1'
+import IbcGoV6IbcCoreConnectionV1 from './ibc-go/v6/ibc.core.connection.v1'
 import OrgDysonDyson from './org/dyson/dyson'
 import OrgDysonNames from './org/dyson/names'
 
@@ -50,11 +51,12 @@ export default {
   CosmosCosmosSdkCosmosTxV1Beta1: load(CosmosCosmosSdkCosmosTxV1Beta1, 'cosmos.tx.v1beta1'),
   CosmosCosmosSdkCosmosUpgradeV1Beta1: load(CosmosCosmosSdkCosmosUpgradeV1Beta1, 'cosmos.upgrade.v1beta1'),
   CosmosCosmosSdkCosmosVestingV1Beta1: load(CosmosCosmosSdkCosmosVestingV1Beta1, 'cosmos.vesting.v1beta1'),
-  IbcGoV5IbcApplicationsInterchainAccountsHostV1: load(IbcGoV5IbcApplicationsInterchainAccountsHostV1, 'ibc.applications.interchain_accounts.host.v1'),
-  IbcGoV5IbcApplicationsTransferV1: load(IbcGoV5IbcApplicationsTransferV1, 'ibc.applications.transfer.v1'),
-  IbcGoV5IbcCoreChannelV1: load(IbcGoV5IbcCoreChannelV1, 'ibc.core.channel.v1'),
-  IbcGoV5IbcCoreClientV1: load(IbcGoV5IbcCoreClientV1, 'ibc.core.client.v1'),
-  IbcGoV5IbcCoreConnectionV1: load(IbcGoV5IbcCoreConnectionV1, 'ibc.core.connection.v1'),
+  IbcGoV6IbcApplicationsInterchainAccountsControllerV1: load(IbcGoV6IbcApplicationsInterchainAccountsControllerV1, 'ibc.applications.interchain_accounts.controller.v1'),
+  IbcGoV6IbcApplicationsInterchainAccountsHostV1: load(IbcGoV6IbcApplicationsInterchainAccountsHostV1, 'ibc.applications.interchain_accounts.host.v1'),
+  IbcGoV6IbcApplicationsTransferV1: load(IbcGoV6IbcApplicationsTransferV1, 'ibc.applications.transfer.v1'),
+  IbcGoV6IbcCoreChannelV1: load(IbcGoV6IbcCoreChannelV1, 'ibc.core.channel.v1'),
+  IbcGoV6IbcCoreClientV1: load(IbcGoV6IbcCoreClientV1, 'ibc.core.client.v1'),
+  IbcGoV6IbcCoreConnectionV1: load(IbcGoV6IbcCoreConnectionV1, 'ibc.core.connection.v1'),
   OrgDysonDyson: load(OrgDysonDyson, 'dyson'),
   OrgDysonNames: load(OrgDysonNames, 'names'),
   

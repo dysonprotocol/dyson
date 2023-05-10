@@ -93,7 +93,7 @@
                 },
                 "coins": {
                     "type": "string",
-                    "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amout will be sent to the script"
+                    "description": "Optional comma seperated list of coins to send the script (for example \"123dys,456token\") this entire amount will be sent to the script"
                 },
                 "nfts": {
                     "type": "string",

@@ -1,0 +1,414 @@
+{
+	"Name": "v1",
+	"GoModulePath": "github.com/cosmos/ibc-go/v6",
+	"Pkg": {
+		"Name": "ibc.core.connection.v1",
+		"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"ibc/core/commitment/v1/commitment.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/genesis.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"ibc/core/connection/v1/connection.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"cosmos/base/query/v1beta1/pagination.proto",
+					"ibc/core/client/v1/client.proto",
+					"ibc/core/connection/v1/connection.proto",
+					"google/api/annotations.proto",
+					"google/protobuf/any.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/tx.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"google/protobuf/any.proto",
+					"ibc/core/client/v1/client.proto",
+					"ibc/core/connection/v1/connection.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/ibc-go/v6/modules/core/03-connection/types",
+		"Messages": [
+			{
+				"Name": "ConnectionEnd",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto",
+				"HighestFieldNumber": 5
+			},
+			{
+				"Name": "IdentifiedConnection",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto",
+				"HighestFieldNumber": 6
+			},
+			{
+				"Name": "Counterparty",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "ClientPaths",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "ConnectionPaths",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "Version",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "Params",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "GenesisState",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/genesis.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "QueryConnectionRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryConnectionResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "QueryConnectionsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryConnectionsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "QueryClientConnectionsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryClientConnectionsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "QueryConnectionClientStateRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryConnectionClientStateResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "QueryConnectionConsensusStateRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "QueryConnectionConsensusStateResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "QueryConnectionParamsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryConnectionParamsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgConnectionOpenInit",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/tx.proto",
+				"HighestFieldNumber": 5
+			},
+			{
+				"Name": "MsgConnectionOpenInitResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgConnectionOpenTry",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/tx.proto",
+				"HighestFieldNumber": 12
+			},
+			{
+				"Name": "MsgConnectionOpenTryResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgConnectionOpenAck",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/tx.proto",
+				"HighestFieldNumber": 10
+			},
+			{
+				"Name": "MsgConnectionOpenAckResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/tx.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "MsgConnectionOpenConfirm",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/tx.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "MsgConnectionOpenConfirmResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/tx.proto",
+				"HighestFieldNumber": 0
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "Connection",
+						"RequestType": "QueryConnectionRequest",
+						"ReturnsType": "QueryConnectionResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"connection_id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Connections",
+						"RequestType": "QueryConnectionsRequest",
+						"ReturnsType": "QueryConnectionsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": true,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "ClientConnections",
+						"RequestType": "QueryClientConnectionsRequest",
+						"ReturnsType": "QueryClientConnectionsResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"client_id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "ConnectionClientState",
+						"RequestType": "QueryConnectionClientStateRequest",
+						"ReturnsType": "QueryConnectionClientStateResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"connection_id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "ConnectionConsensusState",
+						"RequestType": "QueryConnectionConsensusStateRequest",
+						"ReturnsType": "QueryConnectionConsensusStateResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"connection_id",
+									"revision_number",
+									"revision_height"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "ConnectionParams",
+						"RequestType": "QueryConnectionParamsRequest",
+						"ReturnsType": "QueryConnectionParamsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Msg",
+				"RPCFuncs": [
+					{
+						"Name": "ConnectionOpenInit",
+						"RequestType": "MsgConnectionOpenInit",
+						"ReturnsType": "MsgConnectionOpenInitResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "ConnectionOpenTry",
+						"RequestType": "MsgConnectionOpenTry",
+						"ReturnsType": "MsgConnectionOpenTryResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "ConnectionOpenAck",
+						"RequestType": "MsgConnectionOpenAck",
+						"ReturnsType": "MsgConnectionOpenAckResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "ConnectionOpenConfirm",
+						"RequestType": "MsgConnectionOpenConfirm",
+						"ReturnsType": "MsgConnectionOpenConfirmResponse",
+						"HTTPRules": null
+					}
+				]
+			}
+		]
+	},
+	"Msgs": null,
+	"HTTPQueries": [
+		{
+			"Name": "Connection",
+			"FullName": "QueryConnection",
+			"Rules": [
+				{
+					"Params": [
+						"connection_id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Connections",
+			"FullName": "QueryConnections",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": true,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "ClientConnections",
+			"FullName": "QueryClientConnections",
+			"Rules": [
+				{
+					"Params": [
+						"client_id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "ConnectionClientState",
+			"FullName": "QueryConnectionClientState",
+			"Rules": [
+				{
+					"Params": [
+						"connection_id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "ConnectionConsensusState",
+			"FullName": "QueryConnectionConsensusState",
+			"Rules": [
+				{
+					"Params": [
+						"connection_id",
+						"revision_number",
+						"revision_height"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "ConnectionParams",
+			"FullName": "QueryConnectionParams",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "ConnectionEnd",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto"
+		},
+		{
+			"Name": "IdentifiedConnection",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto"
+		},
+		{
+			"Name": "Counterparty",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto"
+		},
+		{
+			"Name": "ClientPaths",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto"
+		},
+		{
+			"Name": "ConnectionPaths",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto"
+		},
+		{
+			"Name": "Version",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto"
+		},
+		{
+			"Name": "Params",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/core/connection/v1/connection.proto"
+		}
+	]
+}

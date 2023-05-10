@@ -438,8 +438,8 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgSetWithdrawAddress",
-			"URI": "cosmos.distribution.v1beta1.MsgSetWithdrawAddress",
+			"Name": "MsgWithdrawDelegatorReward",
+			"URI": "cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/distribution/v1beta1/tx.proto"
 		},
 		{
@@ -448,8 +448,8 @@
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/distribution/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgWithdrawDelegatorReward",
-			"URI": "cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
+			"Name": "MsgSetWithdrawAddress",
+			"URI": "cosmos.distribution.v1beta1.MsgSetWithdrawAddress",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/distribution/v1beta1/tx.proto"
 		},
 		{

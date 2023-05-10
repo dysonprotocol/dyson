@@ -218,8 +218,8 @@
 	},
 	"Msgs": [
 		{
-			"Name": "MsgGrant",
-			"URI": "cosmos.authz.v1beta1.MsgGrant",
+			"Name": "MsgRevoke",
+			"URI": "cosmos.authz.v1beta1.MsgRevoke",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/authz/v1beta1/tx.proto"
 		},
 		{
@@ -228,8 +228,8 @@
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/authz/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgRevoke",
-			"URI": "cosmos.authz.v1beta1.MsgRevoke",
+			"Name": "MsgGrant",
+			"URI": "cosmos.authz.v1beta1.MsgGrant",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/authz/v1beta1/tx.proto"
 		}
 	],

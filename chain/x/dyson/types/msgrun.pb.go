@@ -37,7 +37,7 @@ type MsgRun struct {
 	Args string `protobuf:"bytes,5,opt,name=args,proto3" json:"args,omitempty"`
 	// Optional kwargs to run
 	Kwargs string `protobuf:"bytes,6,opt,name=kwargs,proto3" json:"kwargs,omitempty"`
-	//Optional comma seperated list of coins to send the script (for example "123dys,456token") this entire amout will be sent to the script
+	//Optional comma seperated list of coins to send the script (for example "123dys,456token") this entire amount will be sent to the script
 	Coins string `protobuf:"bytes,7,opt,name=coins,proto3" json:"coins,omitempty"`
 	// Optional NFTs to send the script, formatted [class_id]/[id], [class_id]/[id] (for example "example.dys/123, example.dys/456")
 	Nfts string `protobuf:"bytes,9,opt,name=nfts,proto3" json:"nfts,omitempty"`

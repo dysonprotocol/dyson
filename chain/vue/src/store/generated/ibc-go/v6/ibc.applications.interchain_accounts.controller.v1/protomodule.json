@@ -1,0 +1,164 @@
+{
+	"Name": "v1",
+	"GoModulePath": "github.com/cosmos/ibc-go/v6",
+	"Pkg": {
+		"Name": "ibc.applications.interchain_accounts.controller.v1",
+		"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1",
+		"Files": [
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/controller.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/query.proto",
+				"Dependencies": [
+					"ibc/applications/interchain_accounts/controller/v1/controller.proto",
+					"gogoproto/gogo.proto",
+					"google/api/annotations.proto"
+				]
+			},
+			{
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/tx.proto",
+				"Dependencies": [
+					"gogoproto/gogo.proto",
+					"ibc/applications/interchain_accounts/v1/packet.proto"
+				]
+			}
+		],
+		"GoImportName": "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/controller/types",
+		"Messages": [
+			{
+				"Name": "Params",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/controller.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryInterchainAccountRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/query.proto",
+				"HighestFieldNumber": 2
+			},
+			{
+				"Name": "QueryInterchainAccountResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "QueryParamsRequest",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/query.proto",
+				"HighestFieldNumber": 0
+			},
+			{
+				"Name": "QueryParamsResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/query.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgRegisterInterchainAccount",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/tx.proto",
+				"HighestFieldNumber": 3
+			},
+			{
+				"Name": "MsgRegisterInterchainAccountResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/tx.proto",
+				"HighestFieldNumber": 1
+			},
+			{
+				"Name": "MsgSendTx",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/tx.proto",
+				"HighestFieldNumber": 4
+			},
+			{
+				"Name": "MsgSendTxResponse",
+				"Path": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/tx.proto",
+				"HighestFieldNumber": 1
+			}
+		],
+		"Services": [
+			{
+				"Name": "Query",
+				"RPCFuncs": [
+					{
+						"Name": "InterchainAccount",
+						"RequestType": "QueryInterchainAccountRequest",
+						"ReturnsType": "QueryInterchainAccountResponse",
+						"HTTPRules": [
+							{
+								"Params": [
+									"owner",
+									"connection_id"
+								],
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					},
+					{
+						"Name": "Params",
+						"RequestType": "QueryParamsRequest",
+						"ReturnsType": "QueryParamsResponse",
+						"HTTPRules": [
+							{
+								"Params": null,
+								"HasQuery": false,
+								"HasBody": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Msg",
+				"RPCFuncs": [
+					{
+						"Name": "RegisterInterchainAccount",
+						"RequestType": "MsgRegisterInterchainAccount",
+						"ReturnsType": "MsgRegisterInterchainAccountResponse",
+						"HTTPRules": null
+					},
+					{
+						"Name": "SendTx",
+						"RequestType": "MsgSendTx",
+						"ReturnsType": "MsgSendTxResponse",
+						"HTTPRules": null
+					}
+				]
+			}
+		]
+	},
+	"Msgs": null,
+	"HTTPQueries": [
+		{
+			"Name": "InterchainAccount",
+			"FullName": "QueryInterchainAccount",
+			"Rules": [
+				{
+					"Params": [
+						"owner",
+						"connection_id"
+					],
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		},
+		{
+			"Name": "Params",
+			"FullName": "QueryParams",
+			"Rules": [
+				{
+					"Params": null,
+					"HasQuery": false,
+					"HasBody": false
+				}
+			]
+		}
+	],
+	"Types": [
+		{
+			"Name": "Params",
+			"FilePath": "/go/pkg/mod/github.com/cosmos/ibc-go/v6@v6.1.0/proto/ibc/applications/interchain_accounts/controller/v1/controller.proto"
+		}
+	]
+}
