@@ -60,4 +60,4 @@ services:
 
   hermes:
     build: ./hermes
-    image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/hermes:1.2.0
+    image: ${REGISTRY-registry.gitlab.com/dysonproject}/dyson/hermes:1.4.0

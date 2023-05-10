@@ -20,7 +20,7 @@ collectstatic:
 		sed -i'' "s|REPLACE_VITE_CLEAR_DOMAIN|$${VITE_CLEAR_DOMAIN}|g" $$f ; \
 	done
 	rm -rf /static_root/*
-	python ./mini_api.py collectstatic --no-input
+	python ./mini_api.py collectstatic --no-input 
 
 bash:
 	exec bash
