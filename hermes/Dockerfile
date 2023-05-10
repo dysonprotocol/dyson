@@ -5,7 +5,7 @@
 #   docker build . dyson/hermes:test 
 
 
-FROM informalsystems/hermes:1.2.0
+FROM informalsystems/hermes:1.4.0
 
 USER root
 WORKDIR /root
