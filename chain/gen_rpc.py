@@ -246,10 +246,10 @@ for file_path in [
     "./vue/src/store/generated/org/dyson/dyson/protomodule.json",
     "./vue/src/store/generated/ibc-go/v6/ibc.applications.transfer.v1/protomodule.json",
     "./vue/src/store/generated/ibc-go/v6/ibc.applications.interchain_accounts.controller.v1/protomodule.json",
-    #"./vue/src/store/generated/ibc-go/v6/ibc.core.channel.v1/protomodule.json",
+    "./vue/src/store/generated/ibc-go/v6/ibc.core.channel.v1/protomodule.json",
     #"./vue/src/store/generated/ibc-go/v6/ibc.applications.interchain_accounts.host.v1/protomodule.json",
-    #"./vue/src/store/generated/ibc-go/v6/ibc.core.client.v1/protomodule.json",
-    #"./vue/src/store/generated/ibc-go/v6/ibc.core.connection.v1/protomodule.json",
+    "./vue/src/store/generated/ibc-go/v6/ibc.core.client.v1/protomodule.json",
+    "./vue/src/store/generated/ibc-go/v6/ibc.core.connection.v1/protomodule.json",
 ]:
     file_path = file_path.strip()
     data = json.load(open(file_path))
@@ -389,6 +389,27 @@ for file_path in [
                         handler_template = Template(
                             "handler := rpcservice.k.$mod_keeper.$keeper_function"
                         )
+                elif "ibccoreconnectionv1" in mod_keeper:
+                    # none because it uses the one on the keeper
+                    mod_keeper = "ibckeeper"
+                    keeper_import = None
+                    if service_name == "Msg":
+                        del schemas[command]
+                        continue
+                elif "ibccoreclientv1" in mod_keeper:
+                    # none because it uses the one on the keeper
+                    mod_keeper = "ibckeeper"
+                    keeper_import = None
+                    if service_name == "Msg":
+                        del schemas[command]
+                        continue
+                elif "ibccorechannelv1" in mod_keeper:
+                    # none because it uses the one on the keeper
+                    mod_keeper = "ibckeeper"
+                    keeper_import = None
+                    if service_name == "Msg":
+                        del schemas[command]
+                        continue
                 elif "ibcapplicationstransfer" in mod_keeper:
                     # none because it uses the one on the keeper
                     keeper_import = None

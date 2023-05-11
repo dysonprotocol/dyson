@@ -2,6 +2,9 @@ BUILDDIR ?= $(CURDIR)/build
 
 SHELL:=/bin/bash
 
+protobuf:
+	cd proto && rm -rf ./gen && buf generate &&  buf generate buf.build/osmosis-labs/osmosis && buf generate buf.build/gogo/protobuf && buf generate buf.build/cosmos/cosmos-sdk && buf generate buf.build/cosmos/cosmos-proto
+
 clean:
 	rm -rf release
 

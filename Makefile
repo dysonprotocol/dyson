@@ -17,7 +17,7 @@ run:
 		docker compose up chain frontend
 
 build: 
-		#docker-compose --env .env build pypy hermes
+		docker-compose build hermes
 		rm -rf ./frontend/vue && mkdir -p ./frontend/vue 
 		docker compose run --rm vue make build
 		docker compose build chain

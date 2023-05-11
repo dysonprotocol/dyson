@@ -28,6 +28,7 @@ import (
 	cosmosupgradev1beta1keeper "github.com/cosmos/cosmos-sdk/x/upgrade/keeper"
 	ibcapplicationsinterchain_accountscontrollerv1keeper "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/controller/keeper"
 	ibcapplicationstransferv1keeper "github.com/cosmos/ibc-go/v6/modules/apps/transfer/keeper"
+	ibckeeper "github.com/cosmos/ibc-go/v6/modules/core/keeper"
 
 	"github.com/org/dyson/x/dyson/types"
 	nameskeeper "github.com/org/dyson/x/names/keeper"
@@ -62,6 +63,7 @@ type (
 		cosmosparamsv1beta1keeper                            cosmosparamsv1beta1keeper.Keeper
 		cosmosnftv1beta1keeper                               nftkeeper.Keeper
 		ibcapplicationsinterchain_accountscontrollerv1keeper *ibcapplicationsinterchain_accountscontrollerv1keeper.Keeper
+		ibckeeper                                            *ibckeeper.Keeper
 
 		registry cdctypes.InterfaceRegistry
 
@@ -93,6 +95,7 @@ func NewKeeper(
 	cosmosparamsv1beta1keeper cosmosparamsv1beta1keeper.Keeper,
 	cosmosnftv1beta1keeper nftkeeper.Keeper,
 	ibcapplicationsinterchain_accountscontrollerv1keeper *ibcapplicationsinterchain_accountscontrollerv1keeper.Keeper,
+	ibckeeper *ibckeeper.Keeper,
 
 	registry cdctypes.InterfaceRegistry,
 ) *Keeper {
@@ -121,6 +124,8 @@ func NewKeeper(
 		cosmosparamsv1beta1keeper:       cosmosparamsv1beta1keeper,
 		cosmosnftv1beta1keeper:          cosmosnftv1beta1keeper,
 		ibcapplicationsinterchain_accountscontrollerv1keeper: ibcapplicationsinterchain_accountscontrollerv1keeper,
+		ibckeeper: ibckeeper,
+
 		registry: registry,
 
 		currentDepth: 0,

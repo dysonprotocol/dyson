@@ -583,6 +583,7 @@ func New(
 		app.ParamsKeeper,
 		app.NFTKeeper,
 		&app.ICAControllerKeeper,
+		app.IBCKeeper,
 		app.interfaceRegistry,
 	)
 	dysonModule := dysonmodule.NewAppModule(appCodec, app.DysonKeeper)

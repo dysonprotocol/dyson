@@ -31262,5 +31262,1463 @@
     },
     "rest_path": null,
     "http_rules": null
+  },
+  "ibc.core.channel.v1/QueryChannel": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "Channel",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryChannelRequest",
+      "definitions": {
+        "QueryChannelRequest": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port unique identifier"
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel unique identifier"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Channel Request",
+          "description": "QueryChannelRequest is the request type for the Query/Channel RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}",
+    "http_rules": [
+      {
+        "Params": [
+          "channel_id",
+          "port_id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryChannels": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "Channels",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryChannelsRequest",
+      "definitions": {
+        "QueryChannelsRequest": {
+          "properties": {
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": false,
+              "description": "pagination request"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Channels Request",
+          "description": "QueryChannelsRequest is the request type for the Query/Channels RPC method"
+        },
+        "cosmos.base.query.v1beta1.PageRequest": {
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "offset": {
+              "type": "string",
+              "description": "offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set."
+            },
+            "limit": {
+              "type": "string",
+              "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
+            },
+            "count_total": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "reverse is set to true if results are to be returned in the descending order. Since: cosmos-sdk 0.43"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Page Request",
+          "description": "PageRequest is to be embedded in gRPC request messages for efficient pagination. Ex:  message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }",
+          "options": {
+            "show_opt_in": true,
+            "required_by_default": false
+          },
+          "required": []
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels",
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryConnectionChannels": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "ConnectionChannels",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryConnectionChannelsRequest",
+      "definitions": {
+        "QueryConnectionChannelsRequest": {
+          "properties": {
+            "connection": {
+              "type": "string",
+              "description": "connection unique identifier"
+            },
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": false,
+              "description": "pagination request"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Connection Channels Request",
+          "description": "QueryConnectionChannelsRequest is the request type for the Query/QueryConnectionChannels RPC method"
+        },
+        "cosmos.base.query.v1beta1.PageRequest": {
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "offset": {
+              "type": "string",
+              "description": "offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set."
+            },
+            "limit": {
+              "type": "string",
+              "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
+            },
+            "count_total": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "reverse is set to true if results are to be returned in the descending order. Since: cosmos-sdk 0.43"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Page Request",
+          "description": "PageRequest is to be embedded in gRPC request messages for efficient pagination. Ex:  message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }",
+          "options": {
+            "show_opt_in": true,
+            "required_by_default": false
+          },
+          "required": []
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/connections/{connection}/channels",
+    "http_rules": [
+      {
+        "Params": [
+          "connection"
+        ],
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryChannelClientState": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "ChannelClientState",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryChannelClientStateRequest",
+      "definitions": {
+        "QueryChannelClientStateRequest": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port unique identifier"
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel unique identifier"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Channel Client State Request",
+          "description": "QueryChannelClientStateRequest is the request type for the Query/ClientState RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/client_state",
+    "http_rules": [
+      {
+        "Params": [
+          "channel_id",
+          "port_id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryChannelConsensusState": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "ChannelConsensusState",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryChannelConsensusStateRequest",
+      "definitions": {
+        "QueryChannelConsensusStateRequest": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port unique identifier"
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel unique identifier"
+            },
+            "revision_number": {
+              "type": "string",
+              "description": "revision number of the consensus state"
+            },
+            "revision_height": {
+              "type": "string",
+              "description": "revision height of the consensus state"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Channel Consensus State Request",
+          "description": "QueryChannelConsensusStateRequest is the request type for the Query/ConsensusState RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/consensus_state/revision/{revision_number}/height/{revision_height}",
+    "http_rules": [
+      {
+        "Params": [
+          "channel_id",
+          "port_id",
+          "revision_number",
+          "revision_height"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryPacketCommitment": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "PacketCommitment",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryPacketCommitmentRequest",
+      "definitions": {
+        "QueryPacketCommitmentRequest": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port unique identifier"
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel unique identifier"
+            },
+            "sequence": {
+              "type": "string",
+              "description": "packet sequence"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Packet Commitment Request",
+          "description": "QueryPacketCommitmentRequest is the request type for the Query/PacketCommitment RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{sequence}",
+    "http_rules": [
+      {
+        "Params": [
+          "channel_id",
+          "port_id",
+          "sequence"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryPacketCommitments": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "PacketCommitments",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryPacketCommitmentsRequest",
+      "definitions": {
+        "QueryPacketCommitmentsRequest": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port unique identifier"
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel unique identifier"
+            },
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": false,
+              "description": "pagination request"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Packet Commitments Request",
+          "description": "QueryPacketCommitmentsRequest is the request type for the Query/QueryPacketCommitments RPC method"
+        },
+        "cosmos.base.query.v1beta1.PageRequest": {
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "offset": {
+              "type": "string",
+              "description": "offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set."
+            },
+            "limit": {
+              "type": "string",
+              "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
+            },
+            "count_total": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "reverse is set to true if results are to be returned in the descending order. Since: cosmos-sdk 0.43"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Page Request",
+          "description": "PageRequest is to be embedded in gRPC request messages for efficient pagination. Ex:  message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }",
+          "options": {
+            "show_opt_in": true,
+            "required_by_default": false
+          },
+          "required": []
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments",
+    "http_rules": [
+      {
+        "Params": [
+          "channel_id",
+          "port_id"
+        ],
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryPacketReceipt": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "PacketReceipt",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryPacketReceiptRequest",
+      "definitions": {
+        "QueryPacketReceiptRequest": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port unique identifier"
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel unique identifier"
+            },
+            "sequence": {
+              "type": "string",
+              "description": "packet sequence"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Packet Receipt Request",
+          "description": "QueryPacketReceiptRequest is the request type for the Query/PacketReceipt RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_receipts/{sequence}",
+    "http_rules": [
+      {
+        "Params": [
+          "channel_id",
+          "port_id",
+          "sequence"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryPacketAcknowledgement": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "PacketAcknowledgement",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryPacketAcknowledgementRequest",
+      "definitions": {
+        "QueryPacketAcknowledgementRequest": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port unique identifier"
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel unique identifier"
+            },
+            "sequence": {
+              "type": "string",
+              "description": "packet sequence"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Packet Acknowledgement Request",
+          "description": "QueryPacketAcknowledgementRequest is the request type for the Query/PacketAcknowledgement RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acks/{sequence}",
+    "http_rules": [
+      {
+        "Params": [
+          "channel_id",
+          "port_id",
+          "sequence"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryPacketAcknowledgements": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "PacketAcknowledgements",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryPacketAcknowledgementsRequest",
+      "definitions": {
+        "QueryPacketAcknowledgementsRequest": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port unique identifier"
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel unique identifier"
+            },
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": false,
+              "description": "pagination request"
+            },
+            "packet_commitment_sequences": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "description": "list of packet sequences"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Packet Acknowledgements Request",
+          "description": "QueryPacketAcknowledgementsRequest is the request type for the Query/QueryPacketCommitments RPC method"
+        },
+        "cosmos.base.query.v1beta1.PageRequest": {
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "offset": {
+              "type": "string",
+              "description": "offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set."
+            },
+            "limit": {
+              "type": "string",
+              "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
+            },
+            "count_total": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "reverse is set to true if results are to be returned in the descending order. Since: cosmos-sdk 0.43"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Page Request",
+          "description": "PageRequest is to be embedded in gRPC request messages for efficient pagination. Ex:  message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }",
+          "options": {
+            "show_opt_in": true,
+            "required_by_default": false
+          },
+          "required": []
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_acknowledgements",
+    "http_rules": [
+      {
+        "Params": [
+          "channel_id",
+          "port_id"
+        ],
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryUnreceivedPackets": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "UnreceivedPackets",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryUnreceivedPacketsRequest",
+      "definitions": {
+        "QueryUnreceivedPacketsRequest": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port unique identifier"
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel unique identifier"
+            },
+            "packet_commitment_sequences": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "description": "list of packet sequences"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Unreceived Packets Request",
+          "description": "QueryUnreceivedPacketsRequest is the request type for the Query/UnreceivedPackets RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_commitment_sequences}/unreceived_packets",
+    "http_rules": [
+      {
+        "Params": [
+          "channel_id",
+          "port_id",
+          "packet_commitment_sequences"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryUnreceivedAcks": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "UnreceivedAcks",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryUnreceivedAcksRequest",
+      "definitions": {
+        "QueryUnreceivedAcksRequest": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port unique identifier"
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel unique identifier"
+            },
+            "packet_ack_sequences": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "description": "list of acknowledgement sequences"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Unreceived Acks Request",
+          "description": "QueryUnreceivedAcks is the request type for the Query/UnreceivedAcks RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_ack_sequences}/unreceived_acks",
+    "http_rules": [
+      {
+        "Params": [
+          "channel_id",
+          "port_id",
+          "packet_ack_sequences"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.channel.v1/QueryNextSequenceReceive": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "NextSequenceReceive",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryNextSequenceReceiveRequest",
+      "definitions": {
+        "QueryNextSequenceReceiveRequest": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port unique identifier"
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel unique identifier"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Next Sequence Receive Request",
+          "description": "QueryNextSequenceReceiveRequest is the request type for the Query/QueryNextSequenceReceiveRequest RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/channel/v1/channels/{channel_id}/ports/{port_id}/next_sequence",
+    "http_rules": [
+      {
+        "Params": [
+          "channel_id",
+          "port_id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.client.v1/QueryClientState": {
+    "module_name": "ibc.core.client.v1",
+    "name": "ClientState",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryClientStateRequest",
+      "definitions": {
+        "QueryClientStateRequest": {
+          "properties": {
+            "client_id": {
+              "type": "string",
+              "description": "client state unique identifier"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Client State Request",
+          "description": "QueryClientStateRequest is the request type for the Query/ClientState RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/client/v1/client_states/{client_id}",
+    "http_rules": [
+      {
+        "Params": [
+          "client_id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.client.v1/QueryClientStates": {
+    "module_name": "ibc.core.client.v1",
+    "name": "ClientStates",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryClientStatesRequest",
+      "definitions": {
+        "QueryClientStatesRequest": {
+          "properties": {
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": false,
+              "description": "pagination request"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Client States Request",
+          "description": "QueryClientStatesRequest is the request type for the Query/ClientStates RPC method"
+        },
+        "cosmos.base.query.v1beta1.PageRequest": {
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "offset": {
+              "type": "string",
+              "description": "offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set."
+            },
+            "limit": {
+              "type": "string",
+              "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
+            },
+            "count_total": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "reverse is set to true if results are to be returned in the descending order. Since: cosmos-sdk 0.43"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Page Request",
+          "description": "PageRequest is to be embedded in gRPC request messages for efficient pagination. Ex:  message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }",
+          "options": {
+            "show_opt_in": true,
+            "required_by_default": false
+          },
+          "required": []
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/client/v1/client_states",
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.client.v1/QueryConsensusState": {
+    "module_name": "ibc.core.client.v1",
+    "name": "ConsensusState",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryConsensusStateRequest",
+      "definitions": {
+        "QueryConsensusStateRequest": {
+          "properties": {
+            "client_id": {
+              "type": "string",
+              "description": "client identifier"
+            },
+            "revision_number": {
+              "type": "string",
+              "description": "consensus state revision number"
+            },
+            "revision_height": {
+              "type": "string",
+              "description": "consensus state revision height"
+            },
+            "latest_height": {
+              "type": "boolean",
+              "description": "latest_height overrrides the height field and queries the latest stored ConsensusState"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Consensus State Request",
+          "description": "QueryConsensusStateRequest is the request type for the Query/ConsensusState RPC method. Besides the consensus state, it includes a proof and the height from which the proof was retrieved."
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/client/v1/consensus_states/{client_id}/revision/{revision_number}/height/{revision_height}",
+    "http_rules": [
+      {
+        "Params": [
+          "client_id",
+          "revision_number",
+          "revision_height"
+        ],
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.client.v1/QueryConsensusStates": {
+    "module_name": "ibc.core.client.v1",
+    "name": "ConsensusStates",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryConsensusStatesRequest",
+      "definitions": {
+        "QueryConsensusStatesRequest": {
+          "properties": {
+            "client_id": {
+              "type": "string",
+              "description": "client identifier"
+            },
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": false,
+              "description": "pagination request"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Consensus States Request",
+          "description": "QueryConsensusStatesRequest is the request type for the Query/ConsensusStates RPC method."
+        },
+        "cosmos.base.query.v1beta1.PageRequest": {
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "offset": {
+              "type": "string",
+              "description": "offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set."
+            },
+            "limit": {
+              "type": "string",
+              "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
+            },
+            "count_total": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "reverse is set to true if results are to be returned in the descending order. Since: cosmos-sdk 0.43"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Page Request",
+          "description": "PageRequest is to be embedded in gRPC request messages for efficient pagination. Ex:  message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }",
+          "options": {
+            "show_opt_in": true,
+            "required_by_default": false
+          },
+          "required": []
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/client/v1/consensus_states/{client_id}",
+    "http_rules": [
+      {
+        "Params": [
+          "client_id"
+        ],
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.client.v1/QueryConsensusStateHeights": {
+    "module_name": "ibc.core.client.v1",
+    "name": "ConsensusStateHeights",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryConsensusStateHeightsRequest",
+      "definitions": {
+        "QueryConsensusStateHeightsRequest": {
+          "properties": {
+            "client_id": {
+              "type": "string",
+              "description": "client identifier"
+            },
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": false,
+              "description": "pagination request"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Consensus State Heights Request",
+          "description": "QueryConsensusStateHeightsRequest is the request type for Query/ConsensusStateHeights RPC method."
+        },
+        "cosmos.base.query.v1beta1.PageRequest": {
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "offset": {
+              "type": "string",
+              "description": "offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set."
+            },
+            "limit": {
+              "type": "string",
+              "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
+            },
+            "count_total": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "reverse is set to true if results are to be returned in the descending order. Since: cosmos-sdk 0.43"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Page Request",
+          "description": "PageRequest is to be embedded in gRPC request messages for efficient pagination. Ex:  message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }",
+          "options": {
+            "show_opt_in": true,
+            "required_by_default": false
+          },
+          "required": []
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/client/v1/consensus_states/{client_id}/heights",
+    "http_rules": [
+      {
+        "Params": [
+          "client_id"
+        ],
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.client.v1/QueryClientStatus": {
+    "module_name": "ibc.core.client.v1",
+    "name": "ClientStatus",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryClientStatusRequest",
+      "definitions": {
+        "QueryClientStatusRequest": {
+          "properties": {
+            "client_id": {
+              "type": "string",
+              "description": "client unique identifier"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Client Status Request",
+          "description": "QueryClientStatusRequest is the request type for the Query/ClientStatus RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/client/v1/client_status/{client_id}",
+    "http_rules": [
+      {
+        "Params": [
+          "client_id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.client.v1/QueryClientParams": {
+    "module_name": "ibc.core.client.v1",
+    "name": "ClientParams",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryClientParamsRequest",
+      "definitions": {
+        "QueryClientParamsRequest": {
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Client Params Request",
+          "description": "QueryClientParamsRequest is the request type for the Query/ClientParams RPC method."
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/client/v1/params",
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.client.v1/QueryUpgradedClientState": {
+    "module_name": "ibc.core.client.v1",
+    "name": "UpgradedClientState",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryUpgradedClientStateRequest",
+      "definitions": {
+        "QueryUpgradedClientStateRequest": {
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Upgraded Client State Request",
+          "description": "QueryUpgradedClientStateRequest is the request type for the Query/UpgradedClientState RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/client/v1/upgraded_client_states",
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.client.v1/QueryUpgradedConsensusState": {
+    "module_name": "ibc.core.client.v1",
+    "name": "UpgradedConsensusState",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryUpgradedConsensusStateRequest",
+      "definitions": {
+        "QueryUpgradedConsensusStateRequest": {
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Upgraded Consensus State Request",
+          "description": "QueryUpgradedConsensusStateRequest is the request type for the Query/UpgradedConsensusState RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/client/v1/upgraded_consensus_states",
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.connection.v1/QueryConnection": {
+    "module_name": "ibc.core.connection.v1",
+    "name": "Connection",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryConnectionRequest",
+      "definitions": {
+        "QueryConnectionRequest": {
+          "properties": {
+            "connection_id": {
+              "type": "string",
+              "description": "connection unique identifier"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Connection Request",
+          "description": "QueryConnectionRequest is the request type for the Query/Connection RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/connection/v1/connections/{connection_id}",
+    "http_rules": [
+      {
+        "Params": [
+          "connection_id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.connection.v1/QueryConnections": {
+    "module_name": "ibc.core.connection.v1",
+    "name": "Connections",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryConnectionsRequest",
+      "definitions": {
+        "QueryConnectionsRequest": {
+          "properties": {
+            "pagination": {
+              "$ref": "#/definitions/cosmos.base.query.v1beta1.PageRequest",
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Connections Request",
+          "description": "QueryConnectionsRequest is the request type for the Query/Connections RPC method"
+        },
+        "cosmos.base.query.v1beta1.PageRequest": {
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "key is a value returned in PageResponse.next_key to begin querying the next page most efficiently. Only one of offset or key should be set.",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "offset": {
+              "type": "string",
+              "description": "offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set."
+            },
+            "limit": {
+              "type": "string",
+              "description": "limit is the total number of results to be returned in the result page. If left empty it will default to a value to be set by each app."
+            },
+            "count_total": {
+              "type": "boolean",
+              "description": "count_total is set to true  to indicate that the result set should include a count of the total number of items available for pagination in UIs. count_total is only respected when offset is used. It is ignored when key is set."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "reverse is set to true if results are to be returned in the descending order. Since: cosmos-sdk 0.43"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Page Request",
+          "description": "PageRequest is to be embedded in gRPC request messages for efficient pagination. Ex:  message SomeRequest {          Foo some_parameter = 1;          PageRequest pagination = 2;  }",
+          "options": {
+            "show_opt_in": true,
+            "required_by_default": false
+          },
+          "required": []
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/connection/v1/connections",
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": true,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.connection.v1/QueryClientConnections": {
+    "module_name": "ibc.core.connection.v1",
+    "name": "ClientConnections",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryClientConnectionsRequest",
+      "definitions": {
+        "QueryClientConnectionsRequest": {
+          "properties": {
+            "client_id": {
+              "type": "string",
+              "description": "client identifier associated with a connection"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Client Connections Request",
+          "description": "QueryClientConnectionsRequest is the request type for the Query/ClientConnections RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/connection/v1/client_connections/{client_id}",
+    "http_rules": [
+      {
+        "Params": [
+          "client_id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.connection.v1/QueryConnectionClientState": {
+    "module_name": "ibc.core.connection.v1",
+    "name": "ConnectionClientState",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryConnectionClientStateRequest",
+      "definitions": {
+        "QueryConnectionClientStateRequest": {
+          "properties": {
+            "connection_id": {
+              "type": "string",
+              "description": "connection identifier"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Connection Client State Request",
+          "description": "QueryConnectionClientStateRequest is the request type for the Query/ConnectionClientState RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/connection/v1/connections/{connection_id}/client_state",
+    "http_rules": [
+      {
+        "Params": [
+          "connection_id"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.connection.v1/QueryConnectionConsensusState": {
+    "module_name": "ibc.core.connection.v1",
+    "name": "ConnectionConsensusState",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryConnectionConsensusStateRequest",
+      "definitions": {
+        "QueryConnectionConsensusStateRequest": {
+          "properties": {
+            "connection_id": {
+              "type": "string",
+              "description": "connection identifier"
+            },
+            "revision_number": {
+              "type": "string"
+            },
+            "revision_height": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Connection Consensus State Request",
+          "description": "QueryConnectionConsensusStateRequest is the request type for the Query/ConnectionConsensusState RPC method"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/connection/v1/connections/{connection_id}/consensus_state/revision/{revision_number}/height/{revision_height}",
+    "http_rules": [
+      {
+        "Params": [
+          "connection_id",
+          "revision_number",
+          "revision_height"
+        ],
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
+  "ibc.core.connection.v1/QueryConnectionParams": {
+    "module_name": "ibc.core.connection.v1",
+    "name": "ConnectionParams",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryConnectionParamsRequest",
+      "definitions": {
+        "QueryConnectionParamsRequest": {
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Connection Params Request",
+          "description": "QueryConnectionParamsRequest is the request type for the Query/ConnectionParams RPC method."
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": "/ibc/core/connection/v1/params",
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
   }
 }

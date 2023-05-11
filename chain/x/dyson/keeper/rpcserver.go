@@ -30,6 +30,9 @@ import (
 	ibcapplicationsinterchain_accountscontrollerv1keeper "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/controller/keeper"
 	ibcapplicationsinterchain_accountscontrollerv1types "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/controller/types"
 	ibcapplicationstransferv1types "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
+	ibccoreclientv1types "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
+	ibccoreconnectionv1types "github.com/cosmos/ibc-go/v6/modules/core/03-connection/types"
+	ibccorechannelv1types "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	"github.com/org/dyson/x/dyson/types"
 	dysontypes "github.com/org/dyson/x/dyson/types"
 	nameskeeper "github.com/org/dyson/x/names/keeper"
@@ -5320,6 +5323,482 @@ func (rpcservice *RpcService) Ibcapplicationsinterchainaccountscontrollerv1sendm
 		return err
 	}
 	Write()
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1querychannel(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryChannelRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.Channel(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1querychannels(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryChannelsRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.Channels(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1queryconnectionchannels(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryConnectionChannelsRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ConnectionChannels(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1querychannelclientstate(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryChannelClientStateRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ChannelClientState(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1querychannelconsensusstate(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryChannelConsensusStateRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ChannelConsensusState(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1querypacketcommitment(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryPacketCommitmentRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.PacketCommitment(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1querypacketcommitments(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryPacketCommitmentsRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.PacketCommitments(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1querypacketreceipt(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryPacketReceiptRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.PacketReceipt(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1querypacketacknowledgement(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryPacketAcknowledgementRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.PacketAcknowledgement(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1querypacketacknowledgements(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryPacketAcknowledgementsRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.PacketAcknowledgements(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1queryunreceivedpackets(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryUnreceivedPacketsRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.UnreceivedPackets(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1queryunreceivedacks(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryUnreceivedAcksRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.UnreceivedAcks(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccorechannelv1types
+// None
+func (rpcservice *RpcService) Ibccorechannelv1querynextsequencereceive(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccorechannelv1types.QueryNextSequenceReceiveRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.NextSequenceReceive(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreclientv1types
+// None
+func (rpcservice *RpcService) Ibccoreclientv1queryclientstate(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreclientv1types.QueryClientStateRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ClientState(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreclientv1types
+// None
+func (rpcservice *RpcService) Ibccoreclientv1queryclientstates(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreclientv1types.QueryClientStatesRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ClientStates(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreclientv1types
+// None
+func (rpcservice *RpcService) Ibccoreclientv1queryconsensusstate(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreclientv1types.QueryConsensusStateRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ConsensusState(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreclientv1types
+// None
+func (rpcservice *RpcService) Ibccoreclientv1queryconsensusstates(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreclientv1types.QueryConsensusStatesRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ConsensusStates(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreclientv1types
+// None
+func (rpcservice *RpcService) Ibccoreclientv1queryconsensusstateheights(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreclientv1types.QueryConsensusStateHeightsRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ConsensusStateHeights(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreclientv1types
+// None
+func (rpcservice *RpcService) Ibccoreclientv1queryclientstatus(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreclientv1types.QueryClientStatusRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ClientStatus(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreclientv1types
+// None
+func (rpcservice *RpcService) Ibccoreclientv1queryclientparams(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreclientv1types.QueryClientParamsRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ClientParams(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreclientv1types
+// None
+func (rpcservice *RpcService) Ibccoreclientv1queryupgradedclientstate(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreclientv1types.QueryUpgradedClientStateRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.UpgradedClientState(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreclientv1types
+// None
+func (rpcservice *RpcService) Ibccoreclientv1queryupgradedconsensusstate(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreclientv1types.QueryUpgradedConsensusStateRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.UpgradedConsensusState(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreconnectionv1types
+// None
+func (rpcservice *RpcService) Ibccoreconnectionv1queryconnection(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreconnectionv1types.QueryConnectionRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.Connection(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreconnectionv1types
+// None
+func (rpcservice *RpcService) Ibccoreconnectionv1queryconnections(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreconnectionv1types.QueryConnectionsRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.Connections(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreconnectionv1types
+// None
+func (rpcservice *RpcService) Ibccoreconnectionv1queryclientconnections(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreconnectionv1types.QueryClientConnectionsRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ClientConnections(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreconnectionv1types
+// None
+func (rpcservice *RpcService) Ibccoreconnectionv1queryconnectionclientstate(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreconnectionv1types.QueryConnectionClientStateRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ConnectionClientState(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreconnectionv1types
+// None
+func (rpcservice *RpcService) Ibccoreconnectionv1queryconnectionconsensusstate(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreconnectionv1types.QueryConnectionConsensusStateRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ConnectionConsensusState(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
+	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
+	return nil
+}
+
+// Keeper: ibckeeper
+// Types: ibccoreconnectionv1types
+// None
+func (rpcservice *RpcService) Ibccoreconnectionv1queryconnectionparams(_ *http.Request, req *RpcReq, response *string) (err error) {
+	var msg ibccoreconnectionv1types.QueryConnectionParamsRequest
+	err = rpcservice.k.cdc.UnmarshalJSON([]byte(req.S), &msg)
+	if err != nil {
+		return err
+	}
+	r, err := rpcservice.k.ibckeeper.ConnectionParams(rpcservice.ctx, &msg)
+	if err != nil {
+		return err
+	}
 	*response = string(rpcservice.k.cdc.MustMarshalJSON(r))
 	return nil
 }
