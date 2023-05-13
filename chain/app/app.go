@@ -583,6 +583,7 @@ func New(
 		app.ParamsKeeper,
 		app.NFTKeeper,
 		&app.ICAControllerKeeper,
+		&app.ICAHostKeeper,
 		app.IBCKeeper,
 		app.interfaceRegistry,
 	)

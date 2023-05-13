@@ -32014,6 +32014,950 @@
       }
     ]
   },
+  "ibc.core.channel.v1/sendMsgChannelOpenInit": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "ChannelOpenInit",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgChannelOpenInit",
+      "definitions": {
+        "MsgChannelOpenInit": {
+          "properties": {
+            "port_id": {
+              "type": "string"
+            },
+            "channel": {
+              "$ref": "#/definitions/ibc.core.channel.v1.Channel",
+              "additionalProperties": false
+            },
+            "signer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Channel Open Init",
+          "description": "MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It is called by a relayer on Chain A."
+        },
+        "ibc.core.channel.v1.Channel": {
+          "properties": {
+            "state": {
+              "enum": [
+                "STATE_UNINITIALIZED_UNSPECIFIED",
+                0,
+                "STATE_INIT",
+                1,
+                "STATE_TRYOPEN",
+                2,
+                "STATE_OPEN",
+                3,
+                "STATE_CLOSED",
+                4
+              ],
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "title": "State",
+              "description": "State defines if a channel is in one of the following states: CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED."
+            },
+            "ordering": {
+              "enum": [
+                "ORDER_NONE_UNSPECIFIED",
+                0,
+                "ORDER_UNORDERED",
+                1,
+                "ORDER_ORDERED",
+                2
+              ],
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "title": "Order",
+              "description": "Order defines if a channel is ORDERED or UNORDERED"
+            },
+            "counterparty": {
+              "$ref": "#/definitions/ibc.core.channel.v1.Counterparty",
+              "additionalProperties": false,
+              "description": "counterparty channel end"
+            },
+            "connection_hops": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "description": "list of connection identifiers, in order, along which packets sent on this channel will travel"
+            },
+            "version": {
+              "type": "string",
+              "description": "opaque channel version, which is agreed upon during the handshake"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Channel",
+          "description": "Channel defines pipeline for exactly-once packet delivery between specific modules on separate blockchains, which has at least one end capable of sending packets and one end capable of receiving packets."
+        },
+        "ibc.core.channel.v1.Counterparty": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port on the counterparty chain which owns the other end of the channel."
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel end on the counterparty chain"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Counterparty",
+          "description": "Counterparty defines a channel end counterparty"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "ibc.core.channel.v1/sendMsgChannelOpenTry": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "ChannelOpenTry",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgChannelOpenTry",
+      "definitions": {
+        "MsgChannelOpenTry": {
+          "properties": {
+            "port_id": {
+              "type": "string"
+            },
+            "previous_channel_id": {
+              "type": "string",
+              "description": "Deprecated: this field is unused. Crossing hello's are no longer supported in core IBC."
+            },
+            "channel": {
+              "$ref": "#/definitions/ibc.core.channel.v1.Channel",
+              "additionalProperties": false,
+              "description": "NOTE: the version field within the channel has been deprecated. Its value will be ignored by core IBC."
+            },
+            "counterparty_version": {
+              "type": "string"
+            },
+            "proof_init": {
+              "type": "string",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "proof_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false
+            },
+            "signer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Channel Open Try",
+          "description": "MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel on Chain B. The version field within the Channel field has been deprecated. Its value will be ignored by core IBC."
+        },
+        "ibc.core.channel.v1.Channel": {
+          "properties": {
+            "state": {
+              "enum": [
+                "STATE_UNINITIALIZED_UNSPECIFIED",
+                0,
+                "STATE_INIT",
+                1,
+                "STATE_TRYOPEN",
+                2,
+                "STATE_OPEN",
+                3,
+                "STATE_CLOSED",
+                4
+              ],
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "title": "State",
+              "description": "State defines if a channel is in one of the following states: CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED."
+            },
+            "ordering": {
+              "enum": [
+                "ORDER_NONE_UNSPECIFIED",
+                0,
+                "ORDER_UNORDERED",
+                1,
+                "ORDER_ORDERED",
+                2
+              ],
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "title": "Order",
+              "description": "Order defines if a channel is ORDERED or UNORDERED"
+            },
+            "counterparty": {
+              "$ref": "#/definitions/ibc.core.channel.v1.Counterparty",
+              "additionalProperties": false,
+              "description": "counterparty channel end"
+            },
+            "connection_hops": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "description": "list of connection identifiers, in order, along which packets sent on this channel will travel"
+            },
+            "version": {
+              "type": "string",
+              "description": "opaque channel version, which is agreed upon during the handshake"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Channel",
+          "description": "Channel defines pipeline for exactly-once packet delivery between specific modules on separate blockchains, which has at least one end capable of sending packets and one end capable of receiving packets."
+        },
+        "ibc.core.channel.v1.Counterparty": {
+          "properties": {
+            "port_id": {
+              "type": "string",
+              "description": "port on the counterparty chain which owns the other end of the channel."
+            },
+            "channel_id": {
+              "type": "string",
+              "description": "channel end on the counterparty chain"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Counterparty",
+          "description": "Counterparty defines a channel end counterparty"
+        },
+        "ibc.core.client.v1.Height": {
+          "properties": {
+            "revision_number": {
+              "type": "string",
+              "description": "the revision that the client is currently on"
+            },
+            "revision_height": {
+              "type": "string",
+              "description": "the height within the given revision"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Height",
+          "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "ibc.core.channel.v1/sendMsgChannelOpenAck": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "ChannelOpenAck",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgChannelOpenAck",
+      "definitions": {
+        "MsgChannelOpenAck": {
+          "properties": {
+            "port_id": {
+              "type": "string"
+            },
+            "channel_id": {
+              "type": "string"
+            },
+            "counterparty_channel_id": {
+              "type": "string"
+            },
+            "counterparty_version": {
+              "type": "string"
+            },
+            "proof_try": {
+              "type": "string",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "proof_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false
+            },
+            "signer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Channel Open Ack",
+          "description": "MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge the change of channel state to TRYOPEN on Chain B."
+        },
+        "ibc.core.client.v1.Height": {
+          "properties": {
+            "revision_number": {
+              "type": "string",
+              "description": "the revision that the client is currently on"
+            },
+            "revision_height": {
+              "type": "string",
+              "description": "the height within the given revision"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Height",
+          "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "ibc.core.channel.v1/sendMsgChannelOpenConfirm": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "ChannelOpenConfirm",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgChannelOpenConfirm",
+      "definitions": {
+        "MsgChannelOpenConfirm": {
+          "properties": {
+            "port_id": {
+              "type": "string"
+            },
+            "channel_id": {
+              "type": "string"
+            },
+            "proof_ack": {
+              "type": "string",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "proof_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false
+            },
+            "signer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Channel Open Confirm",
+          "description": "MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to acknowledge the change of channel state to OPEN on Chain A."
+        },
+        "ibc.core.client.v1.Height": {
+          "properties": {
+            "revision_number": {
+              "type": "string",
+              "description": "the revision that the client is currently on"
+            },
+            "revision_height": {
+              "type": "string",
+              "description": "the height within the given revision"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Height",
+          "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "ibc.core.channel.v1/sendMsgChannelCloseInit": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "ChannelCloseInit",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgChannelCloseInit",
+      "definitions": {
+        "MsgChannelCloseInit": {
+          "properties": {
+            "port_id": {
+              "type": "string"
+            },
+            "channel_id": {
+              "type": "string"
+            },
+            "signer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Channel Close Init",
+          "description": "MsgChannelCloseInit defines a msg sent by a Relayer to Chain A to close a channel with Chain B."
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "ibc.core.channel.v1/sendMsgChannelCloseConfirm": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "ChannelCloseConfirm",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgChannelCloseConfirm",
+      "definitions": {
+        "MsgChannelCloseConfirm": {
+          "properties": {
+            "port_id": {
+              "type": "string"
+            },
+            "channel_id": {
+              "type": "string"
+            },
+            "proof_init": {
+              "type": "string",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "proof_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false
+            },
+            "signer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Channel Close Confirm",
+          "description": "MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B to acknowledge the change of channel state to CLOSED on Chain A."
+        },
+        "ibc.core.client.v1.Height": {
+          "properties": {
+            "revision_number": {
+              "type": "string",
+              "description": "the revision that the client is currently on"
+            },
+            "revision_height": {
+              "type": "string",
+              "description": "the height within the given revision"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Height",
+          "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "ibc.core.channel.v1/sendMsgRecvPacket": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "RecvPacket",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgRecvPacket",
+      "definitions": {
+        "MsgRecvPacket": {
+          "properties": {
+            "packet": {
+              "$ref": "#/definitions/ibc.core.channel.v1.Packet",
+              "additionalProperties": false
+            },
+            "proof_commitment": {
+              "type": "string",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "proof_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false
+            },
+            "signer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Recv Packet",
+          "description": "MsgRecvPacket receives incoming IBC packet"
+        },
+        "ibc.core.channel.v1.Packet": {
+          "properties": {
+            "sequence": {
+              "type": "string",
+              "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+            },
+            "source_port": {
+              "type": "string",
+              "description": "identifies the port on the sending chain."
+            },
+            "source_channel": {
+              "type": "string",
+              "description": "identifies the channel end on the sending chain."
+            },
+            "destination_port": {
+              "type": "string",
+              "description": "identifies the port on the receiving chain."
+            },
+            "destination_channel": {
+              "type": "string",
+              "description": "identifies the channel end on the receiving chain."
+            },
+            "data": {
+              "type": "string",
+              "description": "actual opaque bytes transferred directly to the application module",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "timeout_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false,
+              "description": "block height after which the packet times out"
+            },
+            "timeout_timestamp": {
+              "type": "string",
+              "description": "block timestamp (in nanoseconds) after which the packet times out"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Packet",
+          "description": "Packet defines a type that carries data across different chains through IBC"
+        },
+        "ibc.core.client.v1.Height": {
+          "properties": {
+            "revision_number": {
+              "type": "string",
+              "description": "the revision that the client is currently on"
+            },
+            "revision_height": {
+              "type": "string",
+              "description": "the height within the given revision"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Height",
+          "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "ibc.core.channel.v1/sendMsgTimeout": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "Timeout",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgTimeout",
+      "definitions": {
+        "MsgTimeout": {
+          "properties": {
+            "packet": {
+              "$ref": "#/definitions/ibc.core.channel.v1.Packet",
+              "additionalProperties": false
+            },
+            "proof_unreceived": {
+              "type": "string",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "proof_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false
+            },
+            "next_sequence_recv": {
+              "type": "string"
+            },
+            "signer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Timeout",
+          "description": "MsgTimeout receives timed-out packet"
+        },
+        "ibc.core.channel.v1.Packet": {
+          "properties": {
+            "sequence": {
+              "type": "string",
+              "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+            },
+            "source_port": {
+              "type": "string",
+              "description": "identifies the port on the sending chain."
+            },
+            "source_channel": {
+              "type": "string",
+              "description": "identifies the channel end on the sending chain."
+            },
+            "destination_port": {
+              "type": "string",
+              "description": "identifies the port on the receiving chain."
+            },
+            "destination_channel": {
+              "type": "string",
+              "description": "identifies the channel end on the receiving chain."
+            },
+            "data": {
+              "type": "string",
+              "description": "actual opaque bytes transferred directly to the application module",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "timeout_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false,
+              "description": "block height after which the packet times out"
+            },
+            "timeout_timestamp": {
+              "type": "string",
+              "description": "block timestamp (in nanoseconds) after which the packet times out"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Packet",
+          "description": "Packet defines a type that carries data across different chains through IBC"
+        },
+        "ibc.core.client.v1.Height": {
+          "properties": {
+            "revision_number": {
+              "type": "string",
+              "description": "the revision that the client is currently on"
+            },
+            "revision_height": {
+              "type": "string",
+              "description": "the height within the given revision"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Height",
+          "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "ibc.core.channel.v1/sendMsgTimeoutOnClose": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "TimeoutOnClose",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgTimeoutOnClose",
+      "definitions": {
+        "MsgTimeoutOnClose": {
+          "properties": {
+            "packet": {
+              "$ref": "#/definitions/ibc.core.channel.v1.Packet",
+              "additionalProperties": false
+            },
+            "proof_unreceived": {
+              "type": "string",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "proof_close": {
+              "type": "string",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "proof_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false
+            },
+            "next_sequence_recv": {
+              "type": "string"
+            },
+            "signer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Timeout On Close",
+          "description": "MsgTimeoutOnClose timed-out packet upon counterparty channel closure."
+        },
+        "ibc.core.channel.v1.Packet": {
+          "properties": {
+            "sequence": {
+              "type": "string",
+              "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+            },
+            "source_port": {
+              "type": "string",
+              "description": "identifies the port on the sending chain."
+            },
+            "source_channel": {
+              "type": "string",
+              "description": "identifies the channel end on the sending chain."
+            },
+            "destination_port": {
+              "type": "string",
+              "description": "identifies the port on the receiving chain."
+            },
+            "destination_channel": {
+              "type": "string",
+              "description": "identifies the channel end on the receiving chain."
+            },
+            "data": {
+              "type": "string",
+              "description": "actual opaque bytes transferred directly to the application module",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "timeout_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false,
+              "description": "block height after which the packet times out"
+            },
+            "timeout_timestamp": {
+              "type": "string",
+              "description": "block timestamp (in nanoseconds) after which the packet times out"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Packet",
+          "description": "Packet defines a type that carries data across different chains through IBC"
+        },
+        "ibc.core.client.v1.Height": {
+          "properties": {
+            "revision_number": {
+              "type": "string",
+              "description": "the revision that the client is currently on"
+            },
+            "revision_height": {
+              "type": "string",
+              "description": "the height within the given revision"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Height",
+          "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "ibc.core.channel.v1/sendMsgAcknowledgement": {
+    "module_name": "ibc.core.channel.v1",
+    "name": "Acknowledgement",
+    "service_name": "Msg",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/MsgAcknowledgement",
+      "definitions": {
+        "MsgAcknowledgement": {
+          "properties": {
+            "packet": {
+              "$ref": "#/definitions/ibc.core.channel.v1.Packet",
+              "additionalProperties": false
+            },
+            "acknowledgement": {
+              "type": "string",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "proof_acked": {
+              "type": "string",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "proof_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false
+            },
+            "signer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Msg Acknowledgement",
+          "description": "MsgAcknowledgement receives incoming IBC acknowledgement"
+        },
+        "ibc.core.channel.v1.Packet": {
+          "properties": {
+            "sequence": {
+              "type": "string",
+              "description": "number corresponds to the order of sends and receives, where a Packet with an earlier sequence number must be sent and received before a Packet with a later sequence number."
+            },
+            "source_port": {
+              "type": "string",
+              "description": "identifies the port on the sending chain."
+            },
+            "source_channel": {
+              "type": "string",
+              "description": "identifies the channel end on the sending chain."
+            },
+            "destination_port": {
+              "type": "string",
+              "description": "identifies the port on the receiving chain."
+            },
+            "destination_channel": {
+              "type": "string",
+              "description": "identifies the channel end on the receiving chain."
+            },
+            "data": {
+              "type": "string",
+              "description": "actual opaque bytes transferred directly to the application module",
+              "format": "binary",
+              "binaryEncoding": "base64"
+            },
+            "timeout_height": {
+              "$ref": "#/definitions/ibc.core.client.v1.Height",
+              "additionalProperties": false,
+              "description": "block height after which the packet times out"
+            },
+            "timeout_timestamp": {
+              "type": "string",
+              "description": "block timestamp (in nanoseconds) after which the packet times out"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Packet",
+          "description": "Packet defines a type that carries data across different chains through IBC"
+        },
+        "ibc.core.client.v1.Height": {
+          "properties": {
+            "revision_number": {
+              "type": "string",
+              "description": "the revision that the client is currently on"
+            },
+            "revision_height": {
+              "type": "string",
+              "description": "the height within the given revision"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Height",
+          "description": "Height is a monotonically increasing data type that can be compared against another Height for the purposes of updating and freezing clients Normally the RevisionHeight is incremented at each height while keeping RevisionNumber the same. However some consensus algorithms may choose to reset the height in certain conditions e.g. hard forks, state-machine breaking changes In these cases, the RevisionNumber is incremented so that height continues to be monitonically increasing even as the RevisionHeight gets reset"
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": null
+  },
+  "ibc.applications.interchain_accounts.host.v1/QueryParams": {
+    "module_name": "ibc.applications.interchain_accounts.host.v1",
+    "name": "Params",
+    "service_name": "Query",
+    "request_schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$ref": "#/definitions/QueryParamsRequest",
+      "definitions": {
+        "QueryParamsRequest": {
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Query Params Request",
+          "description": "QueryParamsRequest is the request type for the Query/Params RPC method."
+        }
+      }
+    },
+    "resp_schema": {
+      "type": "string",
+      "format": "json",
+      "title": "Response"
+    },
+    "rest_path": null,
+    "http_rules": [
+      {
+        "Params": null,
+        "HasQuery": false,
+        "HasBody": false
+      }
+    ]
+  },
   "ibc.core.client.v1/QueryClientState": {
     "module_name": "ibc.core.client.v1",
     "name": "ClientState",

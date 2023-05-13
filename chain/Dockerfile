@@ -7,6 +7,7 @@ WORKDIR /go/src/app
 COPY --from=dyson-pypy /usr/pypy-nightly /usr/pypy-nightly
 
 ENV PATH="/usr/pypy-nightly/bin:$PATH"
+ENV PYTHONPATH="$PYTHONPATH:/go/src/app/proto/gen-py"
 
 RUN pypy -m ensurepip
 

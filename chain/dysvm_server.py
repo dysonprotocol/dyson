@@ -1,7 +1,8 @@
 import ast
+import os
+import types
+import importlib
 import json
-import http.client as http_client
-import logging
 import random
 import re
 from functools import wraps
@@ -119,15 +120,18 @@ def get_module_dict():
     import typing
     import urllib
 
+    # protobuf stuff
+    from google.protobuf.any_pb2 import Any
+
     @forge.copy(random.seed)
     def safe_random_seed(a=None, version=2):
         assert a is not None, "in Dyson seed must not be None"
         return random.seed(a, version)
+
     safe_random_seed.__doc__ = random.Random.seed.__doc__
     safe_random_seed.__module__ = random.Random.seed.__module__
     safe_random_seed.__qualname__ = random.Random.seed.__qualname__
     allow_func(safe_random_seed)
-
 
     @forge.copy(json.dumps)
     def safe_json_dumps(**kwargs):
@@ -242,6 +246,7 @@ def get_module_dict():
             "uniform": random.uniform,
         },
         "re2": re2_dict,
+        "google": {"protobuf": {"any_pb2": {"Any": Any}}},
     }
 
     def walk(node):
@@ -276,7 +281,7 @@ def build_sandbox(port, creator, address, amount, nfts, block_info):
         def snake(name):
             return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
 
-        #params = {snake(k): v for k, v in params.items()}
+        # params = {snake(k): v for k, v in params.items()}
         if method not in ["ConsumeGas", "Gaslimit"]:
             # normal rpc calls are encoded as json strings
             params = {"s": json.dumps(params)}
@@ -315,7 +320,6 @@ def build_sandbox(port, creator, address, amount, nfts, block_info):
     }
 
     class ScopedDysonEval(dyslang.DysEval):
-
         last_node = None
         cumsize = 0
 
@@ -359,6 +363,42 @@ def build_sandbox(port, creator, address, amount, nfts, block_info):
                         raise MemoryError("Cumsize too large")
                 if gas_state["unconsumed_size"] > 10000 or isinstance(node, ast.Module):
                     sandbox.consume_gas()
+
+        def _import_protobufs(self, name):
+            if name.split(".")[0] in [
+                "amino",
+                "capability",
+                "cosmos",
+                "cosmos_proto",
+                "dyson",
+                "gogoproto",
+                "ibc",
+                "names",
+                "osmosis",
+                "tendermint",
+            ]:
+                # assert file exists
+                file_name = name.replace(".", "/") + ".py"
+                if not os.path.exists("proto/gen-py/" + file_name):
+                    raise ImportError(f"No module named {name}")
+                modules = self.modules
+                for module_name in name.split("."):
+                    new_module = types.ModuleType(module_name)
+                    modules.__dict__.setdefault(module_name, new_module)
+                    modules = modules.__dict__[module_name]
+                    print(module_name)
+
+                for k, v in importlib.import_module(name).__dict__.items():
+                    new_module.__dict__[k] = _allow_func(v)
+
+        def _eval_import(self, node):
+            for alias in node.names:
+                self._import_protobufs(alias.name)
+            super()._eval_import(node)
+
+        def _eval_importfrom(self, node):
+            self._import_protobufs(node.module)
+            super()._eval_importfrom(node)
 
     scope = {}
     sandbox = ScopedDysonEval(
@@ -507,7 +547,6 @@ def eval_script(
     with freeze_time(block_info["time"]):
         with io.StringIO() as buf, redirect_stdout(buf):
             try:
-
                 sandbox = build_sandbox(
                     port,
                     creator,
@@ -694,6 +733,9 @@ dyslang.WHITELIST_FUNCTIONS.update(
         # wsgi
         "wsgiref.handlers.BaseHandler.start_response",
         "wsgiref.handlers.BaseHandler.write",
+        # protobuf
+        "google.protobuf.internal.well_known_types.Any.Pack",
+        "google.protobuf.internal.python_message._AddSerializeToStringMethod.<locals>.SerializeToString",
     ]
 )
 

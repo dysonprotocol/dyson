@@ -247,7 +247,7 @@ for file_path in [
     "./vue/src/store/generated/ibc-go/v6/ibc.applications.transfer.v1/protomodule.json",
     "./vue/src/store/generated/ibc-go/v6/ibc.applications.interchain_accounts.controller.v1/protomodule.json",
     "./vue/src/store/generated/ibc-go/v6/ibc.core.channel.v1/protomodule.json",
-    #"./vue/src/store/generated/ibc-go/v6/ibc.applications.interchain_accounts.host.v1/protomodule.json",
+    "./vue/src/store/generated/ibc-go/v6/ibc.applications.interchain_accounts.host.v1/protomodule.json",
     "./vue/src/store/generated/ibc-go/v6/ibc.core.client.v1/protomodule.json",
     "./vue/src/store/generated/ibc-go/v6/ibc.core.connection.v1/protomodule.json",
 ]:
