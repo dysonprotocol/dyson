@@ -17,7 +17,7 @@ chain_build:
     - cp .env.sample .env
   script:
     - echo "USER=$USER UID=$UID GID=$GID"
-    - export TAG="$CI_COMMIT_REF_NAME" ; make write-commit-info && make build && docker compose push chain frontend hermes
+    - export TAG="$CI_COMMIT_REF_NAME" ; make write-commit-info && make build && docker compose push -q chain frontend hermes
     - export TAG="$CI_COMMIT_REF_NAME" ; docker compose run --rm chain bash -c "cp -r /tmp/release ./release && chmod -R a+wrX ./release"
   artifacts:
     paths:
