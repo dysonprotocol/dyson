@@ -168,8 +168,8 @@ h3 {
             <div class="list-group-item">
               <h5>Plain Javascript Usage</h5>
               <p class="">
-                This is the simplest way to read from the REST API.
-                <a target="blank" :href="fetchUrl">API Link ↗</a>
+                This is the simplest way to read from the REST API.<br />
+				API Link: <a target="blank" :href="fetchUrl">{{ fetchUrl }}</a>
               </p>
               <VAceEditor
                 v-model:value="fetchExample"

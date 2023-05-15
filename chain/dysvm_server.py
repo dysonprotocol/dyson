@@ -386,7 +386,6 @@ def build_sandbox(port, creator, address, amount, nfts, block_info):
                     new_module = types.ModuleType(module_name)
                     modules.__dict__.setdefault(module_name, new_module)
                     modules = modules.__dict__[module_name]
-                    print(module_name)
 
                 for k, v in importlib.import_module(name).__dict__.items():
                     new_module.__dict__[k] = _allow_func(v)
