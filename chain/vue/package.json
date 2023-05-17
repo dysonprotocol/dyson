@@ -12,6 +12,7 @@
     "@starport/vuex": "file:ignite-web/packages/vuex",
     "bootstrap": "^5.3.0-alpha1",
     "buffer": "^6.0.3",
+    "chrono-node": "^2.6.3",
     "core-js": "^3.18.2",
     "dottie": "^2.0.3",
     "js-beautify": "^1.14.7",

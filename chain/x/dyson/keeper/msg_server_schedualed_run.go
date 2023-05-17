@@ -62,6 +62,12 @@ func (k msgServer) CreateScheduledRun(goCtx context.Context, msg *types.MsgCreat
 		ctx,
 		scheduledRun,
 	)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent("scheduled_run",
+			sdk.NewAttribute("index", index),
+		),
+	)
 	return &types.MsgCreateScheduledRunResponse{Index: index}, nil
 }
 

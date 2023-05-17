@@ -1,3 +1,5 @@
+import * as chrono from 'chrono-node'
+
 // nameUrlUtils.js
 export const commandLink = function (command, data, gas = 100000) {
   const fee = 0.0001 * gas
@@ -89,8 +91,6 @@ export const sendNftUrl = function (sender, receiver, class_id, id) {
   return commandLink(command, data)
 }
 
-
-
 export const sortNfts = function (nfts) {
   return nfts.sort((a, b) => {
     // Convert name names to lowercase for case-insensitive comparison
@@ -128,4 +128,108 @@ export function sortDenoms(coins) {
       return 0
     }
   })
+}
+
+export function estimateBlockHeight(s, currentHeight, blocksPerSecond) {
+  // Check and sanitize input types
+  if (typeof s !== 'string') {
+    throw new Error(
+      `Invalid input type for s: Expected string, got ${typeof s}`
+    )
+  }
+  if (typeof currentHeight !== 'number') {
+    throw new Error(
+      `Invalid input type for currentHeight: Expected number, got ${typeof currentHeight}`
+    )
+  }
+  if (typeof blocksPerSecond !== 'number') {
+    throw new Error(
+      `Invalid input type for blocksPerSecond: Expected number, got ${typeof blocksPerSecond}`
+    )
+  }
+
+  // Check for negative or non-integer currentHeight and blocksPerSecond
+  if (currentHeight < 0 || currentHeight % 1 !== 0) {
+    throw new Error(
+      `Invalid currentHeight: Value must be a non-negative integer, got ${currentHeight}`
+    )
+  }
+  if (blocksPerSecond < 0) {
+    throw new Error(
+      `Invalid blocksPerSecond: Value must be a non-negative number, got ${blocksPerSecond}`
+    )
+  }
+
+  let result
+
+  // if s is a number prefxed with "+", add the current height to it and return it
+  if (s.startsWith('+')) {
+    const relativeHeight = parseInt(s.substring(1))
+    if (!isNaN(relativeHeight) && relativeHeight >= 0) {
+      result = currentHeight + relativeHeight
+    } else {
+      throw new Error(
+        `Invalid relative block height: Expected non-negative number, got ${s.substring(
+          1
+        )}`
+      )
+    }
+  }
+
+  // if s is a string of an absolute blockheight, return it
+  else if (!isNaN(s)) {
+    const absoluteHeight = parseInt(s)
+    if (absoluteHeight >= 0) {
+      result = absoluteHeight
+    } else {
+      throw new Error(
+        `Invalid absolute block height: Expected non-negative number, got ${s}`
+      )
+    }
+  }
+
+  // if s is a future datetime, return the estimated block height
+  else {
+    const parsedDate = chrono.parseDate(s)
+    if (parsedDate) {
+      const now = new Date()
+      if (parsedDate > now) {
+        const secondsInFuture = (parsedDate - now) / 1000 // convert milliseconds to seconds
+        result = currentHeight + Math.ceil(secondsInFuture * blocksPerSecond)
+      } else {
+        throw new Error(`Provided date is not in the future: ${s}`)
+      }
+    } else {
+      throw new Error(`Invalid input string: ${s}`)
+    }
+  }
+
+  // Ensure result is greater than the current block height
+  if (result <= currentHeight) {
+    throw new Error(
+      `Scheduled block height (${result}) is not greater than the current block height (${currentHeight})`
+    )
+  }
+
+  return result
+}
+
+export const secondsToDdHhMmSs = (totalSeconds) => {
+  let result = ''
+  if (totalSeconds < 0) {
+    result = " ago"
+    totalSeconds = Math.abs(totalSeconds)
+  }
+  const days = Math.trunc(totalSeconds / 86400)
+  const hours = Math.trunc((totalSeconds % 86400) / 3600)
+  const minutes = Math.trunc((totalSeconds % 3600) / 60)
+  const seconds = Math.round(totalSeconds % 60)
+
+  if (seconds != 0) result = `${seconds} seconds ` + result
+  if (minutes != 0) result = `${minutes} minutes ` + result
+  if (hours != 0) result = `${hours} hours ` + result
+  if (days != 0)  result = `${days} days ` + result
+
+
+  return result.trim()
 }

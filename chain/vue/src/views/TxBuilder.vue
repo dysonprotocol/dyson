@@ -11,8 +11,8 @@ h3 {
 </style>
 <template>
   <div class="container-fluid">
-    <div class="row mb-3">
-      <div class="col-lg">
+    <div class="row">
+      <div class="col-12 mb-3">
         <div class="card">
           <h4 class="card-header">Step 1: Select a command</h4>
           <div class="card-body">
@@ -70,10 +70,7 @@ h3 {
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-6">
+      <div class="col">
         <div class="card mb-4">
           <h4 class="card-header">Step 2: Run the command</h4>
           <div class="card-body">
@@ -138,7 +135,7 @@ h3 {
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col">
         <div class="card mb-4">
           <h4 class="card-header">
             Step 3: Integrate the command in your project
@@ -169,7 +166,7 @@ h3 {
               <h5>Plain Javascript Usage</h5>
               <p class="">
                 This is the simplest way to read from the REST API.<br />
-				API Link: <a target="blank" :href="fetchUrl">{{ fetchUrl }}</a>
+                API Link: <a target="blank" :href="fetchUrl">{{ fetchUrl }}</a>
               </p>
               <VAceEditor
                 v-model:value="fetchExample"
@@ -228,23 +225,23 @@ import { JSONEditor } from '@json-editor/json-editor'
 window.JSONEditor = JSONEditor
 
 const htmlPrettyOptions = {
-  "indent_size": "2",
-  "indent_char": " ",
-  "max_preserve_newlines": "5",
-  "preserve_newlines": true,
-  "keep_array_indentation": false,
-  "break_chained_methods": true,
-  "indent_scripts": "normal",
-  "brace_style": "collapse",
-  "space_before_conditional": false,
-  "unescape_strings": false,
-  "jslint_happy": true,
-  "end_with_newline": false,
-  "wrap_line_length": "0",
-  "indent_inner_html": false,
-  "comma_first": false,
-  "e4x": false,
-  "indent_empty_lines": false
+  indent_size: '2',
+  indent_char: ' ',
+  max_preserve_newlines: '5',
+  preserve_newlines: true,
+  keep_array_indentation: false,
+  break_chained_methods: true,
+  indent_scripts: 'normal',
+  brace_style: 'collapse',
+  space_before_conditional: false,
+  unescape_strings: false,
+  jslint_happy: true,
+  end_with_newline: false,
+  wrap_line_length: '0',
+  indent_inner_html: false,
+  comma_first: false,
+  e4x: false,
+  indent_empty_lines: false,
 }
 // Dyson Python scripts need different struction than the Dyson Loader for some types
 // This is a regisry of types, paths
@@ -386,6 +383,8 @@ const groupBy = (keys) => (array) =>
 for (var key in command_schema) {
   command_schema[key].full_command = key
 }
+
+
 window.command_schema = command_schema
 
 //window.groupedCommands = window.command_schema = command_schema;
@@ -729,14 +728,34 @@ _chain(
 )`
     },
     groupedCommands: function () {
-      return groupBy(['module_name', 'service_name'])(
+      let groups = groupBy(['module_name', 'service_name'])(
         Object.values(this.filted_command_schema)
       )
+      groups = Object.fromEntries(Object.entries(groups).sort((a, b) => {
+        a = a[0]
+        b = b[0]
+
+        console.log(a,b)
+        if (a == 'dyson') {
+          a = 'a'
+        }
+        if (a == 'names') {
+          a = 'b'
+        }
+        if (b == 'dyson') {
+          b = 'a'
+        }
+        if (b == 'names') {
+          b = 'b'
+        }
+        console.log(a,b)
+        return a.localeCompare(b)
+      }))
+      return groups
     },
     filted_command_schema: function () {
-      return Object.keys(window.command_schema)
-        .filter((c) => c.toLowerCase().includes(this.search.toLowerCase()))
-        .reduce((obj, key) => {
+      let keys = Object.keys(window.command_schema).filter((c) => c.toLowerCase().includes(this.search.toLowerCase())).sort()
+      return keys.reduce((obj, key) => {
           obj[key] = window.command_schema[key]
           return obj
         }, {})

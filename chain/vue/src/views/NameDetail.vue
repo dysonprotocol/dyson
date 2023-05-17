@@ -316,21 +316,10 @@ import {
   mintCoinsUrl,
   burnCoinsUrl,
   updateNFTClassUrl,
-  sortDenoms
+  sortDenoms,
+  secondsToDdHhMmSs
 } from './utils.js'
 
-const secondsToDdHhMmSs = (totalSeconds) => {
-  const days = Math.floor(totalSeconds / 86400)
-  const hours = Math.floor((totalSeconds % 86400) / 3600)
-  const minutes = Math.floor((totalSeconds % 3600) / 60)
-  const seconds = Math.round(totalSeconds % 60)
-
-  return `${days.toString().padStart(2, '0')}days ${hours
-    .toString()
-    .padStart(2, '0')}hours ${minutes.toString().padStart(2, '0')}minutes ${seconds
-    .toString()
-    .padStart(2, '0')}seconds`
-}
 
 export default {
   name: 'NameDetail',

@@ -16,7 +16,7 @@
             <button
               type="button"
               class="btn btn-secondary btn-sm"
-              @click="this.showAssets = !this.showAssets"
+              @click.prevent="this.showAssets = !this.showAssets"
               :disabled="nfts.length || coins.length"
             >
               Attach Assets
@@ -31,9 +31,9 @@
                 v-model="coins"
               />
               <small id="coinsHelp" class="form-text text-muted"
-                >Optional comma seperated list of coins to send the script (for
-                example "123dys,456token") this entire amount will be sent to the
-                script
+                >Optional comma separated list of coins to send the script (for
+                example "123dys,456token") this entire amount will be sent to
+                the script
               </small>
               <div class="form-group">
                 <label for="nftInput">Attach NFTs</label>
@@ -50,12 +50,73 @@
                 </small>
               </div>
             </div>
+
+            <button
+              :disabled="!address || this.inflight"
+              class="btn btn-secondary btn-sm"
+              @click.prevent="this.showSchedule = !this.showSchedule"
+            >
+              Schedule
+              {{ this.showSchedule ? '▲' : '▼' }}
+              {{ (!address && '[connect wallet]') || '' }}
+            </button>
+
+            <div v-if="showSchedule">
+              <div class="form-group">
+                <label for="scheduleInput">When should it run</label>
+                <input
+                  :id="name + 'scheduleInput'"
+                  class="form-control"
+                  aria-describedby="scheduleHelp"
+                  v-model="scheduleText"
+                />
+                <small id="scheduleHelp" class="form-text text-muted"
+                  >Use an absolute future block height (eg "1234"), a relative
+                  block height prefixed with + (eg "+100"), or a time in English
+                  (eg "Jan 01 1970" or "in 30 min")
+                </small>
+              </div>
+
+              <div class="form-group">
+                <label for="scheduleInput">ScheduledRun Gas</label>
+                <div class="input-group mb-3">
+                  <input
+                    :id="name + 'scheduleGas'"
+                    class="form-control"
+                    aria-describedby="scheduleHelp"
+                    v-model="scheduleGas"
+                  />
+                  <span class="input-group-text"
+                        >Gas Price at block  {{ scheduledBlockHeight || "X" }}: {{ scheduledGasPrice }} dys</span
+                  >
+                  <span class="input-group-text"
+                    >Gas Fee: {{ scheduledGasFee }} dys</span
+                  >
+                </div>
+
+                <small id="scheduleGasHelp" class="form-text text-muted"
+                  >The "ScheduledRun Gas" is the amount of gas to allocated to
+                  the function to run on the future block. This is the maximum
+                  amount of gas that can be used by the function. This is
+                  separate from the gas specified in Keplr. The "Gas Price" is
+                  the amount of dys to pay per unit of gas at that block height.
+                  The "Gas Fee" is the total amount of dys to pay for the gas at
+                  that block height. It will immediately be deducted from the
+                  account that schedules the function.
+                </small>
+              </div>
+              <div
+                v-if="scheduleText && scheduleError"
+                class="alert alert-warning mt-3"
+              >
+                {{ scheduleError }}
+              </div>
+            </div>
           </div>
         </div>
         <div class="mb-3">
           <div class="btn-group" role="group" aria-label="">
             <button
-              name="action"
               :disabled="this.inflight"
               type="submit"
               value="query"
@@ -64,7 +125,17 @@
               Query {{ name }}
             </button>
             <button
-              name="action"
+              v-if="showSchedule"
+              :disabled="!address || this.inflight || scheduleError"
+              type="submit"
+              value="schedule"
+              class="btn btn-primary"
+            >
+              Schedule {{ name }} at block {{ scheduledBlockHeight }}...
+              {{ (!address && '[connect wallet]') || '' }}
+            </button>
+            <button
+              v-else
               :disabled="!address || this.inflight"
               type="submit"
               value="run"
@@ -77,6 +148,28 @@
           <a class="btn btn-link" :href="link">Link</a>
         </div>
       </form>
+      <div v-if="scheduleResponse">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">TX hash: {{ scheduleResponse.tx }}</li>
+          <li class="list-group-item">
+            Gas consumed: {{ scheduleResponse.gasUsed }}
+          </li>
+          <li class="list-group-item">
+            Gas Limit: {{ scheduleResponse.gasWanted }}
+          </li>
+          <li class="list-group-item">
+            ScheduledRun Index:
+            <pre>{{ scheduleResponse.index }}</pre>
+            <router-link
+		      class="btn btn-primary btn-sm"
+              :to="{ name: 'scheduled', params: { index:
+              scheduleResponse.index } }"
+              >View ScheduledRun details ↗︎</router-link
+            >
+
+          </li>
+        </ul>
+      </div>
       <div v-if="runResponse">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">TX hash: {{ runResponse.tx }}</li>
@@ -101,6 +194,15 @@
             <pre v-show="runResponse.exception">{{
               runResponse.exception
             }}</pre>
+            <div v-show="runResponse.exception &&  runResponse.exception.endsWith('out of gas')" >
+              <button
+                :disabled="!address || this.inflight"
+                type="submit"
+                value="run"
+                class="btn btn-primary"
+                @click="run"
+                >Try Again with {{gas}} gas</button>
+            </div>
           </li>
           <li class="list-group-item">
             Logs:
@@ -146,6 +248,7 @@
 </template>
 <script>
 import { JSONEditor } from '@json-editor/json-editor'
+import { estimateBlockHeight } from './utils.js'
 
 export default {
   name: 'FunctionDetail',
@@ -157,6 +260,7 @@ export default {
   data: function () {
     return {
       runResponse: null,
+      scheduleResponse: null,
       queryResponse: null,
       queryResponseErr: null,
       inflight: false,
@@ -168,11 +272,63 @@ export default {
       inflight: false,
       gas: 123000,
       showAssets: false,
+      showSchedule: false,
+      showGasWarning: false,
+      scheduleGas: 123000,
+      scheduleText: '',
+      scheduleError: null,
+      scheduledGasPrice: null,
+      scheduledGasFee: null,
     }
   },
+  watch: {},
   computed: {
     address: function () {
       return this.$store.getters['common/wallet/address']
+    },
+    blockHeight: function () {
+      let h = this.$store.getters['common/blocks/getBlocks'](1)[0].height
+
+      let command = 'dyson/QueryScheduledGasPriceAndFeeAtBlock'
+      if (this.scheduledBlockHeight) {
+        let data = {
+          query: {
+            blockheight: this.scheduledBlockHeight,
+            gaswanted: this.scheduleGas,
+          },
+          params: {},
+        }
+        this.$store
+          .dispatch(command, data)
+          .then((result) => {
+            this.scheduledGasPrice = parseFloat(result.gasprice.amount)
+            this.scheduledGasFee = parseFloat(result.gasfee.amount)
+          })
+          .catch((err) => {
+            console.log(err)
+
+            this.scheduledGasPrice = null
+            this.scheduledGasFee = null
+          })
+      } else {
+        this.scheduledGasPrice = null
+        this.scheduledGasFee = null
+      }
+      return h
+    },
+    scheduledBlockHeight: function () {
+      this.scheduleError = null
+      try {
+        return estimateBlockHeight(
+          this.scheduleText,
+          Number(this.blockHeight),
+          1
+        )
+      } catch (e) {
+        console.log(e)
+        this.scheduleError = e.message
+        return null
+      }
     },
   },
   methods: {
@@ -195,9 +351,107 @@ export default {
     },
     submit: async function (e) {
       this.updateQuery()
-      e.preventDefault()
+
+      this.scheduleResponse = null
       this.runResponse = null
       this.queryResponse = null
+      this.queryResponseErr = null
+      e.preventDefault()
+      console.log(e, e.submitter.value)
+      if (e.submitter.value == 'run') {
+        await this.run(e)
+      } else if (e.submitter.value == 'query') {
+        await this.query(e)
+      } else if (e.submitter.value == 'schedule') {
+        await this.schedule(e)
+      }
+    },
+    schedule: async function (e) {
+      const value = {
+        creator: this.address,
+        height: this.scheduledBlockHeight,
+        gas: String(this.scheduleGas),
+        msg: {
+          creator: this.address,
+          address: this.scriptAddress,
+          function_name: this.name,
+          kwargs: JSON.stringify(this.editor.getValue()),
+          coins: this.coins,
+          nfts: this.nfts,
+        },
+      }
+
+      var scheduleResult = {}
+      try {
+        this.editor.disable()
+        this.inflight = true
+        var scheduleResponse = {}
+        var opts = {
+          value: value,
+          fee: [{ amount: String(Math.ceil(this.gas * 0.001)), denom: 'dys' }],
+          gas: String(Math.ceil(this.gas)),
+        }
+        try {
+          scheduleResult = await this.$store.dispatch(
+            'dyson/sendMsgCreateScheduledRun',
+            opts
+          )
+          console.log('scheduleResult', scheduleResult)
+          this.gas = scheduleResult.gasUsed * 2
+          scheduleResponse.index = JSON.parse(scheduleResult['rawLog'])[0]
+              ['events'].filter((i) => i.type == 'scheduled_run')[0]
+              ['attributes'][0]['value']
+        } catch (objError) {
+          console.info('objError', objError)
+        }
+        scheduleResponse.gasUsed = scheduleResult.gasUsed
+        scheduleResponse.gasWanted = scheduleResult.gasWanted
+
+        console.log('scheduleResponse', scheduleResponse)
+        this.scheduleResponse = scheduleResponse
+        this.scheduleResponse.tx = scheduleResult.transactionHash
+      } catch (e) {
+        console.log('uncaught error', e)
+      } finally {
+        this.editor.enable()
+        this.inflight = false
+      }
+    },
+    query: async function (e) {
+      const value = {
+        creator: this.address,
+        address: this.scriptAddress,
+        function_name: this.name,
+        kwargs: JSON.stringify(this.editor.getValue()),
+        coins: this.coins,
+        nfts: this.nfts,
+      }
+
+      try {
+        this.editor.disable()
+        this.inflight = true
+        const resp = await this.$store.dispatch('dyson/QueryQueryScript', {
+          params: {},
+          query: value,
+          options: { subscribe: false },
+        })
+        console.log('queryResponse', resp)
+        try {
+          this.queryResponse = JSON.parse(resp.response)
+        } catch (e) {
+          if (e instanceof SyntaxError) {
+            this.queryResponseErr = resp.response
+          }
+        }
+      } catch (e) {
+        this.queryResponseErr = e
+        console.error(e)
+      } finally {
+        this.editor.enable()
+        this.inflight = false
+      }
+    },
+    run: async function (e) {
       this.queryResponseErr = null
       const value = {
         creator: this.address,
@@ -208,79 +462,55 @@ export default {
         nfts: this.nfts,
       }
 
-      if (e.submitter.value == 'run') {
-        var txResult = {}
+      var txResult = {}
+      try {
+        this.editor.disable()
+        this.inflight = true
+        var runResponse = {}
+        var opts = {
+          value: value,
+          fee: [{ amount: String(Math.ceil(this.gas * 0.001)), denom: 'dys' }],
+          gas: String(Math.ceil(this.gas)),
+        }
         try {
-          this.editor.disable()
-          this.inflight = true
-          var runResponse = {}
-          var opts = {
-            value: value,
-            fee: [
-              { amount: String(Math.ceil(this.gas * 0.001)), denom: 'dys' },
-            ],
-            gas: String(Math.ceil(this.gas)),
-          }
-          try {
-            txResult = await this.$store.dispatch('dyson/sendMsgRun', opts)
-            console.log('txResult', txResult)
-            this.gas = txResult.gasUsed * 2
-            runResponse = JSON.parse(
-              JSON.parse(txResult['rawLog'])[0]
-                ['events'].filter((i) => i.type == 'run')[0]
-                ['attributes'].slice(-1)[0]['value']
+          txResult = await this.$store.dispatch('dyson/sendMsgRun', opts)
+          console.log('txResult', txResult)
+          this.gas = txResult.gasUsed * 2
+          runResponse = JSON.parse(
+            JSON.parse(txResult['rawLog'])[0]
+              ['events'].filter((i) => i.type == 'run')[0]
+              ['attributes'].slice(-1)[0]['value']
+          )
+        } catch (objError) {
+          console.info('objError', objError)
+          if (objError instanceof SyntaxError) {
+            let match = txResult.rawLog.match(
+              /Output:\n(.*): Exception in Script$/s
             )
-          } catch (objError) {
-            console.info('objError', objError)
-            if (objError instanceof SyntaxError) {
-              let match = txResult.rawLog.match(
-                /Output:\n(.*): Exception in Script$/s
-              )
-              if (match) {
-                runResponse = JSON.parse(match[1])
-              } else {
-                runResponse.exception = txResult.rawLog
-              }
+            if (match) {
+              runResponse = JSON.parse(match[1])
             } else {
-              runResponse.exception = objError.message
-            }
-          }
-          runResponse.gasUsed = txResult.gasUsed
-          runResponse.gasWanted = txResult.gasWanted
+              runResponse.exception = txResult.rawLog
+              if (txResult.rawLog.match(/out of gas$/)) {
+                this.showGasWarning = true
+              }
 
-          console.log('runResponse', runResponse)
-          this.runResponse = runResponse
-          this.runResponse.tx = txResult.transactionHash
-        } catch (e) {
-          console.log('uncaught error', e)
-        } finally {
-          this.editor.enable()
-          this.inflight = false
-        }
-      } else if (e.submitter.value == 'query') {
-        try {
-          this.editor.disable()
-          this.inflight = true
-          const resp = await this.$store.dispatch('dyson/QueryQueryScript', {
-            params: {},
-            query: value,
-            options: { subscribe: false },
-          })
-          console.log('queryResponse', resp)
-          try {
-            this.queryResponse = JSON.parse(resp.response)
-          } catch (e) {
-            if (e instanceof SyntaxError) {
-              this.queryResponseErr = resp.response
             }
+          } else {
+            runResponse.exception = objError.message
           }
-        } catch (e) {
-          this.queryResponseErr = e
-          console.error(e)
-        } finally {
-          this.editor.enable()
-          this.inflight = false
         }
+        runResponse.gasUsed = txResult.gasUsed
+        runResponse.gasWanted = txResult.gasWanted
+
+        console.log('runResponse', runResponse)
+        this.runResponse = runResponse
+        this.runResponse.tx = txResult.transactionHash
+      } catch (e) {
+        console.log('uncaught error', e)
+      } finally {
+        this.editor.enable()
+        this.inflight = false
       }
     },
     setupEditor() {

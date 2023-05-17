@@ -30,9 +30,37 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link class="nav-link" active-class="active" to="/assets"
+            <router-link
+              v-if="address"
+              class="nav-link"
+              active-class="active"
+              :to="{
+                name: 'script-detail',
+                params: { scriptAddress: address },
+              }"
+              >My Script</router-link
+            >
+            <a v-else class="nav-link">My Script</a>
+          </li>
+          <li class="nav-item">
+            <router-link
+              v-if="address"
+              class="nav-link"
+              active-class="active"
+              to="/assets"
               >My Assets</router-link
             >
+            <a v-else class="nav-link">My Assets</a>
+          </li>
+          <li class="nav-item">
+            <router-link
+              v-if="address"
+              class="nav-link"
+              active-class="active"
+              :to="{ name: 'scheduled', params: { index: address } }"
+              >My Scheduled Runs</router-link
+            >
+			<a v-else class="nav-link">My Scheduled Runs</a>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" active-class="active" to="/names"
