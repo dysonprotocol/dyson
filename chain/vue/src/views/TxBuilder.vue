@@ -70,7 +70,7 @@ h3 {
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-lg-6">
         <div class="card mb-4">
           <h4 class="card-header">Step 2: Run the command</h4>
           <div class="card-body">
@@ -165,7 +165,12 @@ h3 {
             <div class="list-group-item">
               <h5>Plain Javascript Usage</h5>
               <p class="">
-                This is the simplest way to read from the REST API.<br />
+                This is the simplest way to read from the
+                <a class="" :href="apiCosmos" target="_blank">
+                  Rest API ↗
+                </a>
+                .<br />
+
                 API Link: <a target="blank" :href="fetchUrl">{{ fetchUrl }}</a>
               </p>
               <VAceEditor
@@ -384,7 +389,6 @@ for (var key in command_schema) {
   command_schema[key].full_command = key
 }
 
-
 window.command_schema = command_schema
 
 //window.groupedCommands = window.command_schema = command_schema;
@@ -528,6 +532,9 @@ export default {
     },
   },
   computed: {
+    apiCosmos: function () {
+      this.$store.getters['common/env/apiCosmos']
+    },
     aceTheme: function () {
       if (this.colorMode == 'dark') {
         return 'vibrant_ink'
@@ -731,34 +738,38 @@ _chain(
       let groups = groupBy(['module_name', 'service_name'])(
         Object.values(this.filted_command_schema)
       )
-      groups = Object.fromEntries(Object.entries(groups).sort((a, b) => {
-        a = a[0]
-        b = b[0]
+      groups = Object.fromEntries(
+        Object.entries(groups).sort((a, b) => {
+          a = a[0]
+          b = b[0]
 
-        console.log(a,b)
-        if (a == 'dyson') {
-          a = 'a'
-        }
-        if (a == 'names') {
-          a = 'b'
-        }
-        if (b == 'dyson') {
-          b = 'a'
-        }
-        if (b == 'names') {
-          b = 'b'
-        }
-        console.log(a,b)
-        return a.localeCompare(b)
-      }))
+          console.log(a, b)
+          if (a == 'dyson') {
+            a = 'a'
+          }
+          if (a == 'names') {
+            a = 'b'
+          }
+          if (b == 'dyson') {
+            b = 'a'
+          }
+          if (b == 'names') {
+            b = 'b'
+          }
+          console.log(a, b)
+          return a.localeCompare(b)
+        })
+      )
       return groups
     },
     filted_command_schema: function () {
-      let keys = Object.keys(window.command_schema).filter((c) => c.toLowerCase().includes(this.search.toLowerCase())).sort()
+      let keys = Object.keys(window.command_schema)
+        .filter((c) => c.toLowerCase().includes(this.search.toLowerCase()))
+        .sort()
       return keys.reduce((obj, key) => {
-          obj[key] = window.command_schema[key]
-          return obj
-        }, {})
+        obj[key] = window.command_schema[key]
+        return obj
+      }, {})
     },
     address: function () {
       return this.$store.getters['common/wallet/address']

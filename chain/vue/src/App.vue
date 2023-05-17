@@ -5,7 +5,8 @@
   >
     You are using Chain ID: {{ chainId }}
   </div>
-  <nav class="navbar navbar-expand-lg text-center">
+
+  <nav class="navbar navbar-expand-md text-center">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">
         <img
@@ -20,95 +21,20 @@
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
+        data-target="#navbartoggle"
+        aria-controls="navbartoggle"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <router-link
-              v-if="address"
-              class="nav-link"
-              active-class="active"
-              :to="{
-                name: 'script-detail',
-                params: { scriptAddress: address },
-              }"
-              >My Script</router-link
-            >
-            <a v-else class="nav-link">My Script</a>
-          </li>
-          <li class="nav-item">
-            <router-link
-              v-if="address"
-              class="nav-link"
-              active-class="active"
-              to="/assets"
-              >My Assets</router-link
-            >
-            <a v-else class="nav-link">My Assets</a>
-          </li>
-          <li class="nav-item">
-            <router-link
-              v-if="address"
-              class="nav-link"
-              active-class="active"
-              :to="{ name: 'scheduled', params: { index: address } }"
-              >My Scheduled Runs</router-link
-            >
-			<a v-else class="nav-link">My Scheduled Runs</a>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" active-class="active" to="/names"
-              >Names</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" active-class="active" to="/nfts"
-              >NFTs</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" active-class="active" to="/coins"
-              >Coins</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" active-class="active" to="/commands"
-              >Commands</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" active-class="active" to="/docs"
-              >Python Functions</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              href="https://docs.dysonprotocol.com/"
-              target="_blank"
-            >
-              Docs ↗
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              active-class="active"
-              :href="apiCosmos"
-              target="_blank"
-            >
-              Rest API ↗
-            </a>
-          </li>
-          <DysAcc v-if="isLoaded" />
+      <div class="collapse navbar-collapse" id="navbartoggle">
+        <div class="navbar-nav">
+          <div v-if="isLoaded" class="">
+            <DysAcc />
+          </div>
           <li v-else class="navbar-text">Loading Wallet...</li>
-        </ul>
+        </div>
         <div class="navbar-text">Chain ID: {{ chainId }}</div>
         <button
           v-if="colorMode === 'dark'"
@@ -127,20 +53,83 @@
       </div>
     </div>
   </nav>
-  <div class="">
-    <div v-if="loadingRoute || !isLoaded">
-      <div class="progress" style="height: 5px">
-        <div
-          class="progress-bar progress-bar-striped progress-bar-animated"
-          role="progressbar"
-          aria-valuenow="100"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          style="width: 100%"
-        ></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-1" style="min-width: 200px">
+        <nav class="nav flex-column nav-pills">
+          <router-link
+            v-if="address"
+            class="nav-link"
+            active-class="active"
+            :to="{
+              name: 'script-detail',
+              params: { scriptAddress: address },
+            }"
+            >My Script</router-link
+          >
+          <router-link
+            v-if="address"
+            class="nav-link"
+            active-class="active"
+            to="/assets"
+            >My Assets</router-link
+          >
+          <router-link
+            v-if="address"
+            class="nav-link"
+            active-class="active"
+            :to="{ name: 'scheduled', params: { index: address } }"
+            >My Scheduled Runs</router-link
+          >
+
+          <router-link class="nav-link" active-class="active" to="/names"
+            >Names</router-link
+          >
+          <router-link class="nav-link" active-class="active" to="/nfts"
+            >NFTs</router-link
+          >
+          <router-link class="nav-link" active-class="active" to="/coins"
+            >Coins</router-link
+          >
+          <router-link class="nav-link" active-class="active" to="/commands"
+            >Commands</router-link
+          >
+          <router-link class="nav-link" active-class="active" to="/docs"
+            >Python Functions</router-link
+          >
+          <a
+            class="nav-link"
+            href="https://docs.dysonprotocol.com/"
+            target="_blank"
+          >
+            Docs ↗
+          </a>
+          <a
+            class="nav-link"
+            active-class="active"
+            :href="apiCosmos"
+            target="_blank"
+          >
+            Rest API ↗
+          </a>
+        </nav>
+      </div>
+      <div class="col">
+        <div v-if="loadingRoute || !isLoaded">
+          <div class="progress" style="height: 5px">
+            <div
+              class="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar"
+              aria-valuenow="100"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              style="width: 100%"
+            ></div>
+          </div>
+        </div>
+        <router-view v-else></router-view>
       </div>
     </div>
-    <router-view v-else></router-view>
   </div>
 </template>
 

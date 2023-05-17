@@ -32,7 +32,7 @@ pre {
       </div>
     </div>
     <div class="row">
-      <div id="schemas" class="col-md-6 mb-3">
+      <div id="schemas" class="col-lg-6 mb-3">
         <div v-if="schemas && schemas.error">Error: {{ schemas.error }}</div>
         <div v-for="item in schemas" v-bind:key="item.function">
           <FunctionDetail
@@ -53,7 +53,7 @@ pre {
           v-bind:scriptAddress="this.scriptAddress"
         ></ExtraLines>
       </div>
-      <div id="code" class="col-md-6">
+      <div id="code" class="col-lg-6">
         <div class="mb-3">
           <VAceEditor
             @init="initAceEditor"

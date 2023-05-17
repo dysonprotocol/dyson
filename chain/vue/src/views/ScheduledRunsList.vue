@@ -2,7 +2,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col mb-3">
-        <div v-if="scheduledRuns.length === 0">
+        <div v-if="isLoading">
+          <div class="card">
+            <div class="card-body">Loading Scheduled Runs</div>
+          </div>
+        </div>
+        <div v-else-if="scheduledRuns.length === 0">
           <div class="card">
             <div class="card-body">No Scheduled Runs</div>
           </div>
@@ -26,7 +31,7 @@
           <div class="card-body">
             <div class="card-text">
               <strong>Height:</strong> {{ r.height }}<br />
-              <table>
+			  <table v-if="r.height > currentBlockHeight">
                 <tr>
                   <th>Estimated timestamp:</th>
                   <td>
@@ -96,6 +101,7 @@ export default {
     return {
       scheduledRuns: [],
       next_key: null,
+      isLoading: false,
     }
   },
   methods: {
@@ -138,6 +144,7 @@ export default {
     },
 
     fetchScheduledRuns: async function (key) {
+      this.isLoading = true
       let data = {
         query: {
           index: this.index,
@@ -157,10 +164,13 @@ export default {
       this.scheduledRuns = this.scheduledRuns.map((r) => {
         return {
           ...r,
+		  height: parseInt(r.height),
           parsedResult: this.parsedResult(r),
         }
       })
       this.next_key = result.pagination.next_key
+
+      this.isLoading = false
     },
     parsedResult: function (r) {
       try {
@@ -189,8 +199,26 @@ export default {
   created() {
     this.fetchScheduledRuns(this.key)
   },
-  computed: {},
-  watch: {},
+  computed: {
+    currentBlockHeight() {
+      let blocks = this.$store.getters['common/blocks/getBlocks'](1)
+      if (blocks.length === 0) {
+        return 0
+      }
+      return parseInt(blocks[0].height)
+    },
+  },
+  watch: {
+    currentBlockHeight(val) {
+		if (this.scheduledRuns.length == 1) {
+          if (this.scheduledRuns[0].height == val) {
+            console.log("refreshing")
+            this.scheduledRuns = []
+            this.fetchScheduledRuns('')
+          }
+        }
+    },
+  },
   components: {},
 }
 </script>
