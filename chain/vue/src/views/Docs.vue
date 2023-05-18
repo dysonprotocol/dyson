@@ -1,6 +1,6 @@
 <style scoped>
 :target {
-  background-color: #ffa;
+  background-color: #7bff6d33;
 }
 </style>
 <template>
@@ -8,6 +8,10 @@
     <div class="row">
       <div class="col-4 align-top">
         <h2>Index</h2>
+        <p>
+          These are all the avaialble functions in Dyslang to use in your scripts. Search and click on a function
+          to see its documentation.
+        </p>
 
         <div class="input-group mb-3">
           <input
@@ -51,15 +55,15 @@
   </div>
 </template>
 <script>
-import dyslang_docs from "./dyslang_docs.json";
+import dyslang_docs from './dyslang_docs.json'
 
 export default {
-  name: "Docs",
+  name: 'Docs',
   data: function () {
     return {
       dyslang_docs,
-      search: "",
-    };
+      search: '',
+    }
   },
   computed: {},
   watch: {},
@@ -67,13 +71,13 @@ export default {
     scrollToId(id) {
       const el = document.getElementById(id)
       if (el) {
-        scrollIntoView();
+        scrollIntoView()
       }
     },
   },
   mounted() {
-    console.log("scrollto", location.hash);
-    this.scrollToId(location.hash);
+    console.log('scrollto', location.hash)
+    this.scrollToId(location.hash)
   },
-};
+}
 </script>

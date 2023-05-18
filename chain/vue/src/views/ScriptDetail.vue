@@ -6,6 +6,25 @@ pre {
   padding-bottom: 10rem;
 }
 </style>
+<style>
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 10px 1fr;
+}
+
+.gutter-col {
+  grid-row: 1/-1;
+  cursor: col-resize;
+}
+
+.gutter-col:hover {
+  background-color: #7bff6d33;
+}
+
+.gutter-col-1 {
+  grid-column: 2;
+}
+</style>
 
 <template>
   <div class="container-fluid main-content">
@@ -31,8 +50,8 @@ pre {
         </div>
       </div>
     </div>
-    <div class="row">
-      <div id="schemas" class="col-lg-6 mb-3">
+    <div class="grid">
+      <div id="schemas" class="">
         <div v-if="schemas && schemas.error">Error: {{ schemas.error }}</div>
         <div v-for="item in schemas" v-bind:key="item.function">
           <FunctionDetail
@@ -53,7 +72,9 @@ pre {
           v-bind:scriptAddress="this.scriptAddress"
         ></ExtraLines>
       </div>
-      <div id="code" class="col-lg-6">
+      <div class="gutter-col gutter-col-1"></div>
+
+      <div id="code" class="">
         <div class="mb-3">
           <VAceEditor
             @init="initAceEditor"
@@ -176,6 +197,7 @@ import 'ace-builds/src-noconflict/theme-vibrant_ink'
 import 'ace-builds/src-noconflict/mode-python'
 import 'ace-builds/src-noconflict/mode-html'
 import { html_beautify } from 'js-beautify'
+import Split from 'split-grid'
 
 /*
 let colorMode = ref(localStorage.getItem("colorMode") || "light");
@@ -215,12 +237,6 @@ const htmlPrettyOptions = {
 export default {
   name: 'ScriptDetail',
   props: ['scriptAddress'],
-  mounted: function () {
-    window.addEventListener('colorModeChanged', this.colorModeChangeCallback)
-  },
-  unmounted: function () {
-    window.removeEventListener('colorModeChanged', this.colorModeChangeCallback)
-  },
   data: function () {
     return {
       inFlight: false,
@@ -396,6 +412,30 @@ export default {
   },
   created: async function () {
     this.update()
+  },
+  mounted: function () {
+    window.addEventListener('colorModeChanged', this.colorModeChangeCallback)
+    var sizes = localStorage.getItem('split-sizes') || '1fr 10px 1fr'
+    console.log('mounted', sizes)
+    document.querySelector('.grid').style['grid-template-columns'] = sizes
+
+    Split({
+      columnGutters: [
+        {
+          track: 1,
+          element: document.querySelector('.gutter-col-1'),
+        },
+      ],
+      onDragEnd: function () {
+        let newSizes =
+          document.querySelector('.grid').style['grid-template-columns']
+        localStorage.setItem('split-sizes', newSizes)
+        console.log('onDragEnd', newSizes)
+      },
+    })
+  },
+  unmounted: function () {
+    window.removeEventListener('colorModeChanged', this.colorModeChangeCallback)
   },
 }
 </script>

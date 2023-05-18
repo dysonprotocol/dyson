@@ -6,7 +6,7 @@
     You are using Chain ID: {{ chainId }}
   </div>
 
-  <nav class="navbar navbar-expand-md text-center">
+  <nav class="navbar navbar-expand-md ">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">
         <img
@@ -23,33 +23,50 @@
         data-toggle="collapse"
         data-target="#navbartoggle"
         aria-controls="navbartoggle"
-        aria-expanded="false"
+        aria-expanded="true"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbartoggle">
-        <div class="navbar-nav">
+      <div class="navbar-collapse" id="navbartoggle">
+        <div class="navbar-nav me-auto mb-2 mb-lg-0">
+          <a
+            class="nav-link"
+            href="https://docs.dysonprotocol.com/"
+            target="_blank"
+          >
+            Docs ↗
+          </a>
+          <a
+            class="nav-link"
+            active-class="active"
+            :href="apiCosmos"
+            target="_blank"
+          >
+            Rest API ↗
+          </a>
           <div v-if="isLoaded" class="">
             <DysAcc />
           </div>
           <li v-else class="navbar-text">Loading Wallet...</li>
         </div>
-        <div class="navbar-text">Chain ID: {{ chainId }}</div>
-        <button
-          v-if="colorMode === 'dark'"
-          @click="toggleColorMode"
-          class="btn"
-        >
-          ☀️
-        </button>
-        <button
-          v-else="colorMode === 'light'"
-          @click="toggleColorMode"
-          class="btn"
-        >
-          🌙
-        </button>
+        <div class="d-flex">
+          <div class="navbar-text">Chain ID: {{ chainId }}</div>
+          <button
+            v-if="colorMode === 'dark'"
+            @click="toggleColorMode"
+            class="btn"
+          >
+            ☀️
+          </button>
+          <button
+            v-else="colorMode === 'light'"
+            @click="toggleColorMode"
+            class="btn"
+          >
+            🌙
+          </button>
+        </div>
       </div>
     </div>
   </nav>
@@ -97,21 +114,6 @@
           <router-link class="nav-link" active-class="active" to="/docs"
             >Python Functions</router-link
           >
-          <a
-            class="nav-link"
-            href="https://docs.dysonprotocol.com/"
-            target="_blank"
-          >
-            Docs ↗
-          </a>
-          <a
-            class="nav-link"
-            active-class="active"
-            :href="apiCosmos"
-            target="_blank"
-          >
-            Rest API ↗
-          </a>
         </nav>
       </div>
       <div class="col">

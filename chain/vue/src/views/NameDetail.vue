@@ -6,301 +6,307 @@
 </style>
 
 <template>
-  <div class="container-fluid" v-if="name">
+  <div class="container-fluid">
     <div class="card mb-3">
       <div class="card-header">
         <h2>Name Details</h2>
       </div>
-      <div class="card-body">
-        <div v-if="isLoadingName" class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-        <table class="table table-striped table-sm">
-          <tbody>
-            <tr>
-              <th scope="row">Name</th>
-              <td>{{ name.name }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Dwapp</th>
-              <td>
-                <a target="blank" class="btn btn-primary btn-sm" :href="'https://' + name.dwappDomain">
-                  {{ name.dwappDomain }} ↗︎
-                </a>
-              </td>
-            </tr>
+      <div v-if="!name" class="card-body">Not found</div>
+      <div v-else>
+        <div class="card-body">
+          <table class="table table-striped table-sm">
+            <tbody>
+              <tr>
+                <th scope="row">Name</th>
+                <td>{{ name.name }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Dwapp</th>
+                <td>
+                  <a
+                    target="blank"
+                    class="btn btn-primary btn-sm"
+                    :href="'https://' + name.dwappDomain"
+                  >
+                    {{ name.dwappDomain }} ↗︎
+                  </a>
+                </td>
+              </tr>
 
-            <tr>
-              <th scope="row">Owner</th>
-              <td>
-                <router-link
-                  :to="{
-                    name: 'script-detail',
-                    params: { scriptAddress: name.owner },
-                  }"
-                >
-                  {{ name.owner }}
-                </router-link>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Destination</th>
-              <td>
-                <router-link
-                  :to="{
-                    name: 'script-detail',
-                    params: { scriptAddress: name.destination },
-                  }"
-                >
-                  {{ name.destination }}
-                </router-link>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Authorized</th>
-              <td>{{ name.authorized }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Registration Height</th>
-              <td>{{ name.registration_height }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Expiration Height</th>
-              <td>{{ name.expiration_height }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Auto Renew</th>
-              <td v-if="name.auto_renew">
-                <table>
-                  <tr>
-                    <th>Renewal Fee (1%)</th>
-                    <td>{{ Math.ceil(parseFloat(name.price) * 0.01) }} dys</td>
-                  </tr>
-                  <tr>
-                    <th>Blocks</th>
-                    <td>+{{ autoRenewDelta() }}</td>
-                  </tr>
-                  <tr>
-                    <th>Estimated timestamp</th>
-                    <td>
-                      {{
-                        estimateFutureTimestamp(name.expiration_height)
-                          .futureTimestamp
-                      }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Estimated time delta</th>
-                    <td>
-                      {{
-                        estimateFutureTimestamp(name.expiration_height)
-                          .futureTimeDifference
-                      }}
-                    </td>
-                  </tr>
-                </table>
-              </td>
-              <td v-else></td>
-            </tr>
-            <tr>
-              <th scope="row">Price</th>
-              <td>{{ name.price }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Actions</th>
-              <td>
-                <router-link
-                  :to="setPriceAndExtendUrl(name)"
-                  class="btn btn-primary"
-                  v-if="address === name.owner"
-                >
-                  Set Price
-                </router-link>
-                <router-link
-                  :to="updateNameUrl(name)"
-                  class="btn btn-primary"
-                  v-if="address === name.owner"
-                >
-                  Edit
-                </router-link>
-                <router-link
-                  :to="buyNameUrl(name, this.address)"
-                  class="btn btn-primary"
-                  v-if="address !== name.owner"
-                >
-                  Buy Now
-                </router-link>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="card mb-3">
-      <div class="card-header">
-        <h2>Coins Denoms</h2>
-      </div>
-      <div class="card-body">
-        <!-- form to min new coins -->
-        <div class="input-group">
-          <input
-            :placeholder="
-              'Amount (ex 1234 ' +
-              name.name +
-              ' or  1234 example.' +
-              name.name +
-              ' )'
-            "
-            type="text"
-            class="form-control"
-            id="amount"
-            v-model="amount"
-          />
-          <router-link
-            class="btn btn-primary"
-            :to="mintCoinsUrl(this.address, amount)"
-            :class="{ disabled: name.owner !== address }"
-            >Mint coins</router-link
-          >
-          <router-link
-            class="btn btn-danger"
-            :to="burnCoinsUrl(this.address, amount)"
-            :class="{ disabled: name.owner !== address }"
-            >Burn Coins</router-link
-          >
+              <tr>
+                <th scope="row">Owner</th>
+                <td>
+                  <router-link
+                    :to="{
+                      name: 'script-detail',
+                      params: { scriptAddress: name.owner },
+                    }"
+                  >
+                    {{ name.owner }}
+                  </router-link>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Destination</th>
+                <td>
+                  <router-link
+                    :to="{
+                      name: 'script-detail',
+                      params: { scriptAddress: name.destination },
+                    }"
+                  >
+                    {{ name.destination }}
+                  </router-link>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Authorized</th>
+                <td>{{ name.authorized }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Registration Height</th>
+                <td>{{ name.registration_height }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Expiration Height</th>
+                <td>{{ name.expiration_height }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Auto Renew</th>
+                <td v-if="name.auto_renew">
+                  <table>
+                    <tr>
+                      <th>Renewal Fee (1%)</th>
+                      <td>
+                        {{ Math.ceil(parseFloat(name.price) * 0.01) }} dys
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Blocks</th>
+                      <td>+{{ autoRenewDelta() }}</td>
+                    </tr>
+                    <tr>
+                      <th>Estimated timestamp</th>
+                      <td>
+                        {{
+                          estimateFutureTimestamp(name.expiration_height)
+                            .futureTimestamp
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Estimated time delta</th>
+                      <td>
+                        {{
+                          estimateFutureTimestamp(name.expiration_height)
+                            .futureTimeDifference
+                        }}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td v-else></td>
+              </tr>
+              <tr>
+                <th scope="row">Price</th>
+                <td>{{ name.price }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Actions</th>
+                <td>
+                  <router-link
+                    :to="setPriceAndExtendUrl(name)"
+                    class="btn btn-primary"
+                    v-if="address === name.owner"
+                  >
+                    Set Price
+                  </router-link>
+                  <router-link
+                    :to="updateNameUrl(name)"
+                    class="btn btn-primary"
+                    v-if="address === name.owner"
+                  >
+                    Edit
+                  </router-link>
+                  <router-link
+                    :to="buyNameUrl(name, this.address)"
+                    class="btn btn-primary"
+                    v-if="address !== name.owner"
+                  >
+                    Buy Now
+                  </router-link>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <!-- end form to mint new coins -->
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">Denom</th>
-              <th scope="col">Total supply</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-if="isLoadingSupply">
-              <td>Loading...</td>
-            </tr>
-            <tr v-else-if="supply.length === 0">
-              <td colspan="2">No Coins</td>
-            </tr>
-            <tr v-for="s in supply" :key="s.denom">
-              <td>{{ s.denom }}</td>
-              <td>{{ s.amount }}</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
-    </div>
-    <div class="card mb-3">
-      <div class="card-header">
-        <h2>NFT Classes</h2>
+      <div class="card mb-3">
+        <div class="card-header">
+          <h2>Coins Denoms</h2>
+        </div>
+        <div class="card-body">
+          <!-- form to min new coins -->
+          <div class="input-group">
+            <input
+              :placeholder="
+                'Amount (ex 1234 ' +
+                name.name +
+                ' or  1234 example.' +
+                name.name +
+                ' )'
+              "
+              type="text"
+              class="form-control"
+              id="amount"
+              v-model="amount"
+            />
+            <router-link
+              class="btn btn-primary"
+              :to="mintCoinsUrl(this.address, amount)"
+              :class="{ disabled: name.owner !== address }"
+              >Mint coins</router-link
+            >
+            <router-link
+              class="btn btn-danger"
+              :to="burnCoinsUrl(this.address, amount)"
+              :class="{ disabled: name.owner !== address }"
+              >Burn Coins</router-link
+            >
+          </div>
+          <!-- end form to mint new coins -->
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Denom</th>
+                <th scope="col">Total supply</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-if="isLoadingSupply">
+                <td>Loading...</td>
+              </tr>
+              <tr v-else-if="supply.length === 0">
+                <td colspan="2">No Coins</td>
+              </tr>
+              <tr v-for="s in supply" :key="s.denom">
+                <td>{{ s.denom }}</td>
+                <td>{{ s.amount }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="card-body">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Name</th>
-              <th scope="col">Symbol</th>
-              <th scope="col">Description</th>
-              <th scope="col">URI</th>
-              <th scope="col">URI Hash</th>
-              <th scope="col">Edit</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="nftClass.id"
-                  :placeholder="'Example ' + name.name"
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="nftClass.name"
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="nftClass.symbol"
-                />
-              </td>
-              <td>
-                <textarea
-                  class="form-control"
-                  v-model="nftClass.description"
-                  rows="1"
-                >
-                </textarea>
-              </td>
-              <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="nftClass.uri"
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="nftClass.uri_hash"
-                />
-              </td>
-              <td>
-                <router-link
-                  class="btn btn-primary"
-                  :to="updateNFTClassUrl(this.address, nftClass)"
-                  :class="{ disabled: name.owner !== address }"
-                  >Create</router-link
-                >
-              </td>
-            </tr>
-            <tr v-if="isLoadingNFTClasses">
-              <td>Loading...</td>
-            </tr>
-            <tr v-else-if="nftClasses.length === 0">
-              <td colspan="7">No NFT Classes</td>
-            </tr>
-            <tr v-for="c in nftClasses" :key="c.id">
-              <td>
-                <router-link
-                  :to="{
-                    name: 'nftclass-detail',
-                    params: { class_id: c.id },
-                  }"
-                  :class="{ disabled: name.owner !== address }"
-                >
-                  {{ c.id }}
-                </router-link>
-              </td>
-              <td>{{ c.name }}</td>
-              <td>{{ c.symbol }}</td>
-              <td>
-                <div class="description">{{ c.description }}</div>
-              </td>
-              <td>{{ c.uri }}</td>
-              <td>{{ c.uri_hash }}</td>
-              <td>
-                <router-link
-                  :to="updateNFTClassUrl(this.address, c)"
-                  class="btn btn-primary"
-                  :class="{ disabled: name.owner !== address }"
-                >
-                  Edit
-                </router-link>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="card mb-3">
+        <div class="card-header">
+          <h2>NFT Classes</h2>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Symbol</th>
+                <th scope="col">Description</th>
+                <th scope="col">URI</th>
+                <th scope="col">URI Hash</th>
+                <th scope="col">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="nftClass.id"
+                    :placeholder="'Example ' + name.name"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="nftClass.name"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="nftClass.symbol"
+                  />
+                </td>
+                <td>
+                  <textarea
+                    class="form-control"
+                    v-model="nftClass.description"
+                    rows="1"
+                  >
+                  </textarea>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="nftClass.uri"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="nftClass.uri_hash"
+                  />
+                </td>
+                <td>
+                  <router-link
+                    class="btn btn-primary"
+                    :to="updateNFTClassUrl(this.address, nftClass)"
+                    :class="{ disabled: name.owner !== address }"
+                    >Create</router-link
+                  >
+                </td>
+              </tr>
+              <tr v-if="isLoadingNFTClasses">
+                <td>Loading...</td>
+              </tr>
+              <tr v-else-if="nftClasses.length === 0">
+                <td colspan="7">No NFT Classes</td>
+              </tr>
+              <tr v-for="c in nftClasses" :key="c.id">
+                <td>
+                  <router-link
+                    :to="{
+                      name: 'nftclass-detail',
+                      params: { class_id: c.id },
+                    }"
+                    :class="{ disabled: name.owner !== address }"
+                  >
+                    {{ c.id }}
+                  </router-link>
+                </td>
+                <td>{{ c.name }}</td>
+                <td>{{ c.symbol }}</td>
+                <td>
+                  <div class="description">{{ c.description }}</div>
+                </td>
+                <td>{{ c.uri }}</td>
+                <td>{{ c.uri_hash }}</td>
+                <td>
+                  <router-link
+                    :to="updateNFTClassUrl(this.address, c)"
+                    class="btn btn-primary"
+                    :class="{ disabled: name.owner !== address }"
+                  >
+                    Edit
+                  </router-link>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -317,9 +323,8 @@ import {
   burnCoinsUrl,
   updateNFTClassUrl,
   sortDenoms,
-  secondsToDdHhMmSs
+  secondsToDdHhMmSs,
 } from './utils.js'
-
 
 export default {
   name: 'NameDetail',
@@ -366,7 +371,15 @@ export default {
         },
         params: {},
       }
-      let result = await this.$store.dispatch('names/QueryName', data)
+      try {
+        let result = await this.$store.dispatch('names/QueryName', data)
+      } catch (err) {
+        if (err.message.includes('not found')) {
+          this.isLoadingName = false
+          this.name = null
+          return
+        }
+      }
       let name = result.name
       this.name = name
 
@@ -388,7 +401,8 @@ export default {
       let supply = result.supply
       // filter each supply the denom starts with this name
       supply = supply.filter(
-        (s) => s.denom === this.name.name || s.denom.endsWith("."+this.name.name)
+        (s) =>
+          s.denom === this.name.name || s.denom.endsWith('.' + this.name.name)
       )
 
       this.supply = sortDenoms(supply)
@@ -456,8 +470,13 @@ export default {
   },
   created: async function () {
     await this.fetchName()
+    if (this.name === null) {
+      return
+    }
     await this.fetchSupply()
     await this.fetchnftClasses()
+  },
+  mounted: function () {
   },
 }
 </script>

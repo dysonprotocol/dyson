@@ -166,12 +166,16 @@ h3 {
               <h5>Plain Javascript Usage</h5>
               <p class="">
                 This is the simplest way to read from the
-                <a class="" :href="apiCosmos" target="_blank">
-                  Rest API ↗
-                </a>
+                <a class="" :href="apiCosmos" target="_blank"> Rest API ↗ </a>
                 .<br />
 
-                API Link: <a target="blank" :href="fetchUrl">{{ fetchUrl }}</a>
+                API Link:
+                <a
+                  target="blank"
+                  :href="fetchUrl"
+                  style="overflow-wrap: anywhere"
+                  >{{ fetchUrl }}</a
+                >
               </p>
               <VAceEditor
                 v-model:value="fetchExample"
@@ -561,14 +565,15 @@ export default {
         data.params || {}
       )
       let searchParams = ''
+      this.fetchUrl = api
       if (Object.keys(data.query || {}).length) {
         searchParams = `+ '?' + new URLSearchParams(${JSON.stringify(
           data.query,
           null,
           2
         )})`
+        this.fetchUrl = +'?' + new URLSearchParams(data.query)
       }
-      this.fetchUrl = api + '?' + new URLSearchParams(data.query)
       return `response = await fetch('${api}'${searchParams})
 result = await response.json()`
     },
