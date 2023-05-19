@@ -90,7 +90,7 @@ def process_code(code: str):
         s
         for s in function_schema_dict.values()
         if (not s["function"].startswith("_"))
-        and (s["function"] not in ["app", "application"])
+        and (s["function"] not in ["app", "application", "wsgi"])
     ]
 
 

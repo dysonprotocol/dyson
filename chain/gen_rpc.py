@@ -526,7 +526,7 @@ schemas["dyson/sendMsgCreateStorage"]["request_schema"]["definitions"][
 
 
 with open("vue/src/views/command_schema.json", "w") as f:
-    json.dump(schemas, f, indent=2)
+    json.dump(schemas, f, indent=2, sort_keys=True)
 
 
 from IPython.core.oinspect import Inspector
@@ -571,6 +571,7 @@ normalized_functions = sorted(
     .replace("openssl_", "")
     for f in WHITELIST_FUNCTIONS
     if not f.startswith("json.")
+    if not f.startswith("google.")
 )
 print(WHITELIST_FUNCTIONS)
 for ff in normalized_functions:
@@ -596,4 +597,4 @@ for ff in normalized_functions:
 import json
 
 with open("vue/src/views/dyslang_docs.json", "w") as f:
-    json.dump(docs, f, indent=2)
+    json.dump(docs, f, indent=2, sort_keys=True)

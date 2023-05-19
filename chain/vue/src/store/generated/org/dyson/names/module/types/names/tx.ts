@@ -10,7 +10,7 @@ export interface MsgRegister {
   commit: string
   /** Address of the owner */
   owner: string
-  /** The price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price. */
+  /** The price that this name is valued at and can be purchased for example 100dys. The yearly fee (31,536,000 blocks) is 1% of this price. */
   price: string
   /** Should the name be automatically renewed */
   auto_renew: boolean
@@ -32,7 +32,7 @@ export interface MsgUpdateName {
   destination: string
   /** The address that this name is OfferedTo, they can take ownership of the name with the Accept message */
   authorized: string
-  /** Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal. */
+  /** Will the name be automatically renewed at the expiration height. The expiration height is extended by 31,536,000 blocks (about 1 year). The fee is 1% of the price and is paid by the owner at the time of the renewal. */
   auto_renew: boolean
 }
 
@@ -68,7 +68,7 @@ export interface MsgSetPriceAndExtend {
   name: string
   /** The owner address of the name */
   owner: string
-  /** The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month. */
+  /** The new price that this name is valued at and can be purchased for example 100dys. The fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 31,536,000 blocks. */
   price: string
 }
 

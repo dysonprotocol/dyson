@@ -6,7 +6,8 @@
       <div class="card-header">
         <h2 v-if="isLoadingNFTClass || isLoadingNFTs">Loading...</h2>
         <h2 v-else>
-          {{ nftClass.id }}<span v-if="nftClass.name">: {{ nftClass.name }}</span>
+          {{ nftClass.id
+          }}<span v-if="nftClass.name">: {{ nftClass.name }}</span>
         </h2>
       </div>
       <div class="card-body">
@@ -22,7 +23,7 @@
         <p>
           {{ nftClass.description }}
         </p>
-        <form class="row g-3 mb-3">
+        <form v-if="name?.owner == address" class="row g-3 mb-3">
           <div class="col">
             <label for="nftId" class="form-label">New NFT ID</label>
             <input
@@ -31,8 +32,16 @@
               id="nftId"
               v-model="nft.id"
               placeholder="The unique ID of the NFT"
+              :class="{
+                'is-invalid': nft.id && !nft.id.match(/^[a-zA-Z0-9-]+$/),
+                'is-valid': nft.id && nft.id.match(/^[a-zA-Z0-9-]+$/),
+              }"
             />
+            <div id="" class="invalid-feedback">
+              NFT ID must be alphanumeric and can contain dashes
+            </div>
           </div>
+
           <div class="col">
             <label for="nftUri" class="form-label">NFT URI (optional)</label>
             <input
@@ -44,7 +53,9 @@
             />
           </div>
           <div class="col">
-            <label for="nftUriHash" class="form-label">NFT URI Hash (optional)</label>
+            <label for="nftUriHash" class="form-label"
+              >NFT URI Hash (optional)</label
+            >
             <input
               type="text"
               class="form-control"

@@ -6,7 +6,7 @@
       <div class="col-lg-4">
         <div class="card mb-3">
           <div class="card-header">
-            <h2>My Coins</h2>
+            <h2>Coins</h2>
           </div>
           <div class="card-body">
             <div class="row mb-3">
@@ -60,7 +60,10 @@
                     show: balancesState[s.denom].show,
                   }"
                 >
-                  <div class="accordion-body">
+                  <div v-if="address != walletAddress" class="accordion-body">
+                    This is not your wallet address. Please connect your wallet with this address to send your coins.
+                  </div>
+                  <div v-else class="accordion-body">
                     <table class="mb-2">
                       <tr v-if="s.balance != s.spendable">
                         <th>Total Balance:</th>
@@ -139,7 +142,7 @@
       <div class="col-lg-4">
         <div class="card mb-3">
           <div class="card-header">
-            <h2>My NFTS</h2>
+            <h2>NFTS</h2>
           </div>
           <div class="card-body">
             <div class="row mb-3">
@@ -217,7 +220,9 @@
                       </p>
                       <button
                         class="btn btn-primary"
-                        :disabled="!nft.sendTo?.startsWith('dys') || nft.isSending"
+                        :disabled="
+                          !nft.sendTo?.startsWith('dys') || nft.isSending
+                        "
                         @click.prevent="sendNft(nft)"
                       >
                         Send
@@ -242,7 +247,7 @@
       <div class="col-lg-4">
         <div class="card mb-3">
           <div class="card-header">
-            <h2>My Names</h2>
+            <h2>Names</h2>
           </div>
           <div class="card-body">
             <div class="row mb-2">
@@ -351,6 +356,7 @@ const combineBalancesAndSpendable = (balances, spendable) => {
 
 export default {
   name: 'Assets',
+  props: ['address'],
   data: function () {
     return {
       clearDomain: import.meta.env.VITE_CLEAR_DOMAIN,
@@ -601,7 +607,7 @@ export default {
       })
     },
 
-    address: function () {
+    walletAddress: function () {
       return this.$store.getters['common/wallet/address']
     },
   },

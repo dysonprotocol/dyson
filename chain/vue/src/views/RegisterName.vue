@@ -28,8 +28,8 @@
                 aria-label="Dys Name"
                 aria-describedby="name-addon"
                 :class="{
-                  'is-invalid': name && !name.match(/^[a-zA-Z0-9]+\.dys$/),
-                  'is-valid': name && name.match(/^[a-zA-Z0-9]+\.dys$/),
+                  'is-invalid': name && !name.match(/^[a-z0-9]+(\.dys)?$/),
+                  'is-valid': name && name.match(/^[a-z0-9]+(\.dys)?$/),
                 }"
               />
               <div class="form-text">
@@ -46,16 +46,16 @@
                 aria-label="Price"
                 aria-describedby="price-addon"
                 :class="{
-                  'is-invalid': price && !price.match(/^[0-9]+ *dys$/),
-                  'is-valid': price && price.match(/^[0-9]+ *dys$/),
+                  'is-invalid': price && !price.match(/^[0-9]+( *dys)?$/),
+                  'is-valid': price && price.match(/^[0-9]+( *dys)?$/),
                 }"
               />
               <div class="form-text">
                 Set the price for this domain name, which can be bought at your
                 specified rate. Upon purchase, you'll receive the full amount. A
-                1% monthly fee is charged based on the domain price. Ensure
-                sufficient funds in your wallet to cover this fee:
-                {{ Math.ceil(parseInt(price) * 0.01 || 0) }}dys
+                1% yearly (31,536,000 blocks) fee is charged based on the price you chose. <br />
+                Ensure sufficient fundsare in your wallet to cover this fee:
+                <strong>{{ Math.ceil(parseInt(price) * 0.01 || 0) }}dys</strong>
               </div>
             </div>
 
@@ -125,11 +125,29 @@ export default {
       commit: '',
       registerTx: null,
       revealTx: null,
-      autoRenew: false,
+      autoRenew: true,
       error: null,
       successMessage: null,
       success: false,
     }
+  },
+  watch: {
+    name: function (val) {
+      this.commit = ''
+      this.registerTx = null
+      this.revealTx = null
+      this.error = null
+      this.successMessage = null
+      this.success = false
+    },
+    price: function (val) {
+      this.commit = ''
+      this.registerTx = null
+      this.revealTx = null
+      this.error = null
+      this.successMessage = null
+      this.success = false
+    },
   },
   computed: {
     address: function () {

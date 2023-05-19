@@ -33,7 +33,7 @@ message MsgRegister {
   string commit = 2;
   // Address of the owner
   string owner = 1;
-  // The price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price. 
+  // The price that this name is valued at and can be purchased for example 100dys. The yearly fee (31,536,000 blocks) is 1% of this price. 
   string price = 4;
   // Should the name be automatically renewed 
   bool auto_renew = 5;
@@ -55,7 +55,7 @@ message MsgUpdateName {
   string destination = 3;
   // The address that this name is OfferedTo, they can take ownership of the name with the Accept message
   string authorized = 6;
-  // Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal.
+  // Will the name be automatically renewed at the expiration height. The expiration height is extended by 31,536,000 blocks (about 1 year). The fee is 1% of the price and is paid by the owner at the time of the renewal.
   bool auto_renew = 7;
 }
 message MsgUpdateNameResponse {}
@@ -89,7 +89,7 @@ message MsgSetPriceAndExtend {
   string name = 2;
   // The owner address of the name
   string owner = 1;
-  // The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month.
+  // The new price that this name is valued at and can be purchased for example 100dys. The fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 31,536,000 blocks.
   string price = 3;
 }
 

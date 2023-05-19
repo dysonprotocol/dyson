@@ -563,52 +563,52 @@
     "isclass": true
   },
   "re2.compile": {
-    "docstring": "<no docstring>",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "<no docstring>"
   },
   "re2.contains": {
-    "docstring": "Scan through string looking for a match to the pattern, returning\nTrue or False.",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "Scan through string looking for a match to the pattern, returning\nTrue or False."
   },
   "re2.count": {
-    "docstring": "Return number of non-overlapping matches in the string.\n\nEmpty matches are included in the count.",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "Return number of non-overlapping matches in the string.\n\nEmpty matches are included in the count."
   },
   "re2.escape": {
-    "docstring": "Escape all non-alphanumeric characters in pattern.",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "Escape all non-alphanumeric characters in pattern."
   },
   "re2.findall": {
-    "docstring": "Return a list of all non-overlapping matches in the string.\n\nEach match is represented as a string or a tuple (when there are two ore\nmore groups). Empty matches are included in the result.",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "Return a list of all non-overlapping matches in the string.\n\nEach match is represented as a string or a tuple (when there are two ore\nmore groups). Empty matches are included in the result."
   },
   "re2.finditer": {
-    "docstring": "Yield all non-overlapping matches in the string.\n\nFor each match, the iterator returns a ``Match`` object.\nEmpty matches are included in the result.",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "Yield all non-overlapping matches in the string.\n\nFor each match, the iterator returns a ``Match`` object.\nEmpty matches are included in the result."
   },
   "re2.fullmatch": {
-    "docstring": "Try to apply the pattern to the entire string, returning\na ``Match`` object, or ``None`` if no match was found.",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "Try to apply the pattern to the entire string, returning\na ``Match`` object, or ``None`` if no match was found."
   },
   "re2.match": {
-    "docstring": "Try to apply the pattern at the start of the string, returning\na ``Match`` object, or ``None`` if no match was found.",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "Try to apply the pattern at the start of the string, returning\na ``Match`` object, or ``None`` if no match was found."
   },
   "re2.search": {
-    "docstring": "Scan through string looking for a match to the pattern, returning\na ``Match`` object or none if no match was found.",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "Scan through string looking for a match to the pattern, returning\na ``Match`` object or none if no match was found."
   },
   "re2.split": {
-    "docstring": "Split the source string by the occurrences of the pattern,\nreturning a list containing the resulting substrings.",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "Split the source string by the occurrences of the pattern,\nreturning a list containing the resulting substrings."
   },
   "re2.sub": {
-    "docstring": "Return the string obtained by replacing the leftmost\nnon-overlapping occurrences of the pattern in string by the\nreplacement ``repl``. ``repl`` can be either a string or a callable;\nif a string, backslash escapes in it are processed. If it is\na callable, it's passed the ``Match`` object and must return\na replacement string to be used.",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "Return the string obtained by replacing the leftmost\nnon-overlapping occurrences of the pattern in string by the\nreplacement ``repl``. ``repl`` can be either a string or a callable;\nif a string, backslash escapes in it are processed. If it is\na callable, it's passed the ``Match`` object and must return\na replacement string to be used."
   },
   "re2.subn": {
-    "docstring": "Return a 2-tuple containing ``(new_string, number)``.\nnew_string is the string obtained by replacing the leftmost\nnon-overlapping occurrences of the pattern in the source\nstring by the replacement ``repl``. ``number`` is the number of\nsubstitutions that were made. ``repl`` can be either a string or a\ncallable; if a string, backslash escapes in it are processed.\nIf it is a callable, it's passed the ``Match`` object and must\nreturn a replacement string to be used.",
-    "call_def": "(*args, **keywords)"
+    "call_def": "(*args, **keywords)",
+    "docstring": "Return a 2-tuple containing ``(new_string, number)``.\nnew_string is the string obtained by replacing the leftmost\nnon-overlapping occurrences of the pattern in the source\nstring by the replacement ``repl``. ``number`` is the number of\nsubstitutions that were made. ``repl`` can be either a string or a\ncallable; if a string, backslash escapes in it are processed.\nIf it is a callable, it's passed the ``Match`` object and must\nreturn a replacement string to be used."
   },
   "reversed": {
     "docstring": "<no docstring>",
@@ -835,9 +835,9 @@
     "docstring": "Special type indicating an unconstrained type.\n\n- Any is compatible with every type.\n- Any assumed to have all methods.\n- All values assumed to be instances of Any.\n\nNote that all the above statements are true from the point of view of\nstatic type checkers. At runtime, Any should not be used with instance\nor class checks."
   },
   "typing.Callable": {
+    "class_docstring": "The central part of internal API.\n\nThis represents a generic version of type 'origin' with type arguments 'params'.\nThere are two kind of these aliases: user defined and special. The special ones\nare wrappers around builtin collections and ABCs in collections.abc. These must\nhave 'name' always set. If 'inst' is False, then the alias can't be instantiated,\nthis is used by e.g. typing.List and typing.Dict.",
     "definition": "(*args, **kwargs)",
-    "docstring": "Callable type; Callable[[int], str] is a function of (int) -> str.\n\nThe subscription syntax must always be used with exactly two\nvalues: the argument list and the return type.  The argument list\nmust be a list of types or ellipsis; the return type must be a single type.\n\nThere is no syntax to indicate optional or keyword arguments,\nsuch function types are rarely used as callback types.",
-    "class_docstring": "The central part of internal API.\n\nThis represents a generic version of type 'origin' with type arguments 'params'.\nThere are two kind of these aliases: user defined and special. The special ones\nare wrappers around builtin collections and ABCs in collections.abc. These must\nhave 'name' always set. If 'inst' is False, then the alias can't be instantiated,\nthis is used by e.g. typing.List and typing.Dict."
+    "docstring": "Callable type; Callable[[int], str] is a function of (int) -> str.\n\nThe subscription syntax must always be used with exactly two\nvalues: the argument list and the return type.  The argument list\nmust be a list of types or ellipsis; the return type must be a single type.\n\nThere is no syntax to indicate optional or keyword arguments,\nsuch function types are rarely used as callback types."
   },
   "typing.Literal": {
     "definition": "(*args, **kwds)",

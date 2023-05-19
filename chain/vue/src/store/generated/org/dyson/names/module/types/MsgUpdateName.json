@@ -22,7 +22,7 @@
                 },
                 "auto_renew": {
                     "type": "boolean",
-                    "description": "Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal."
+                    "description": "Will the name be automatically renewed at the expiration height. The expiration height is extended by 31,536,000 blocks (about 1 year). The fee is 1% of the price and is paid by the owner at the time of the renewal."
                 }
             },
             "additionalProperties": true,

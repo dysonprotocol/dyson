@@ -8,7 +8,7 @@ import (
 	"github.com/org/dyson/x/names/types"
 )
 
-const REGISTER_BLOCKS = 2628288 // seconds in a month
+const REGISTER_BLOCKS = 31536000 // seconds in a year
 
 func (k msgServer) Register(goCtx context.Context, msg *types.MsgRegister) (*types.MsgRegisterResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)

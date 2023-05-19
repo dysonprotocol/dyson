@@ -34,7 +34,7 @@ type MsgRegister struct {
 	Commit string `protobuf:"bytes,2,opt,name=commit,proto3" json:"commit,omitempty"`
 	// Address of the owner
 	Owner string `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"`
-	// The price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price.
+	// The price that this name is valued at and can be purchased for example 100dys. The yearly fee (31,536,000 blocks) is 1% of this price.
 	Price string `protobuf:"bytes,4,opt,name=price,proto3" json:"price,omitempty"`
 	// Should the name be automatically renewed
 	AutoRenew bool `protobuf:"varint,5,opt,name=auto_renew,json=autoRenew,proto3" json:"auto_renew,omitempty"`
@@ -164,7 +164,7 @@ type MsgUpdateName struct {
 	Destination string `protobuf:"bytes,3,opt,name=destination,proto3" json:"destination,omitempty"`
 	// The address that this name is OfferedTo, they can take ownership of the name with the Accept message
 	Authorized string `protobuf:"bytes,6,opt,name=authorized,proto3" json:"authorized,omitempty"`
-	// Will the name be automatically renewed at the expiration height. The expiration height is extended by 1 month. The fee is 1% of the price and is paid by the owner at the time of the renewal.
+	// Will the name be automatically renewed at the expiration height. The expiration height is extended by 31,536,000 blocks (about 1 year). The fee is 1% of the price and is paid by the owner at the time of the renewal.
 	AutoRenew bool `protobuf:"varint,7,opt,name=auto_renew,json=autoRenew,proto3" json:"auto_renew,omitempty"`
 }
 
@@ -477,7 +477,7 @@ type MsgSetPriceAndExtend struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// The owner address of the name
 	Owner string `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"`
-	// The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month.
+	// The new price that this name is valued at and can be purchased for example 100dys. The fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 31,536,000 blocks.
 	Price string `protobuf:"bytes,3,opt,name=price,proto3" json:"price,omitempty"`
 }
 

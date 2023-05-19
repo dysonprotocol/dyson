@@ -44,6 +44,7 @@
                 {{ name.name }} </router-link
               ><br />
               <strong>Class ID:</strong> {{ nft.class_id }}<br />
+              <strong>NFT ID:</strong> {{ nft.id }}<br />
               <strong>Collection Description:</strong> {{ nftClass.description
               }}<br />
               <strong>Collection URI:</strong> {{ nftClass.uri }}<br />

@@ -82,22 +82,28 @@
               name: 'script-detail',
               params: { scriptAddress: address },
             }"
-            >My Script</router-link
+            >Script</router-link
           >
+          <a v-else class="nav-link disabled">Script</a>
           <router-link
             v-if="address"
             class="nav-link"
             active-class="active"
-            to="/assets"
-            >My Assets</router-link
+            :to="{
+              name: 'assets',
+              params: { address: address },
+            }"
+            >Assets</router-link
           >
+          <a v-else class="nav-link disabled">Assets</a> 
           <router-link
             v-if="address"
             class="nav-link"
             active-class="active"
             :to="{ name: 'scheduled', params: { index: address } }"
-            >My Scheduled Runs</router-link
+            >Scheduled Runs</router-link
           >
+          <a v-else class="nav-link disabled">Scheduled Runs</a>
 
           <router-link class="nav-link" active-class="active" to="/names"
             >Names</router-link

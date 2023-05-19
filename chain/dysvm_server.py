@@ -284,7 +284,7 @@ def build_sandbox(port, creator, address, amount, nfts, block_info):
         # params = {snake(k): v for k, v in params.items()}
         if method not in ["ConsumeGas", "Gaslimit"]:
             # normal rpc calls are encoded as json strings
-            params = {"s": json.dumps(params)}
+            params = {"s": json.dumps(params, sort_keys=True)}
         payload = {
             "method": f"RpcService.{method}",
             "params": [params],
@@ -735,6 +735,7 @@ dyslang.WHITELIST_FUNCTIONS.update(
         # protobuf
         "google.protobuf.internal.well_known_types.Any.Pack",
         "google.protobuf.internal.python_message._AddSerializeToStringMethod.<locals>.SerializeToString",
+        "google.protobuf.message.Message.ParseFromString",
     ]
 )
 

@@ -39,7 +39,7 @@ const routes = [
   },
   { path: '/nfts/:class_id/:id', name: 'nft-detail', component: NFTDetail },
   { path: '/coins', name: 'coin-list', component: CoinList },
-  { path: '/assets', name: 'assets', component: Assets },
+  { path: '/assets/:address', name: 'assets', component: Assets , props: true},
   {
     path: '/scheduled-runs',
     component: ScheduledRunsList,

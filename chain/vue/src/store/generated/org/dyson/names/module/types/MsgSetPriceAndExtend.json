@@ -14,7 +14,7 @@
                 },
                 "price": {
                     "type": "string",
-                    "description": "The new price that this name is valued at and can be purchased for example 100dys. The monthly fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 1 month."
+                    "description": "The new price that this name is valued at and can be purchased for example 100dys. The fee is 1% of this price and will be paid by the owner now. The expiration height is extended by 31,536,000 blocks."
                 }
             },
             "additionalProperties": true,
