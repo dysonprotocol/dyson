@@ -120,13 +120,13 @@
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/vesting/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgCreatePermanentLockedAccount",
-			"URI": "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount",
+			"Name": "MsgCreatePeriodicVestingAccount",
+			"URI": "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/vesting/v1beta1/tx.proto"
 		},
 		{
-			"Name": "MsgCreatePeriodicVestingAccount",
-			"URI": "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
+			"Name": "MsgCreatePermanentLockedAccount",
+			"URI": "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount",
 			"FilePath": "/go/pkg/mod/gitlab.com/dysonproject/cosmos-sdk@v0.46.7-fixnft2/proto/cosmos/vesting/v1beta1/tx.proto"
 		}
 	],

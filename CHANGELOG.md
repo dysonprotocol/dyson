@@ -35,7 +35,35 @@ the Github issue reference in the following format:
 
 # Changelog
 
-## [Unreleased]
+## [v0.3.0]
+- New Chain Features
+  - Scheduled Runs can now be registered up to 5,000,000 blocks (~2 months) in the future (previously ~1 hour)
+  - Added NFTS:
+    - Name owners can now create unlimited NFT Classes (collections) of that name or subnames (think subdomain)
+ - Names:
+   - Name are now registered for 1% for 31,536,000 blocks (~1year) 
+   - Names can new be renewed automatically at the expiration height
+ - Added Interchain Accounts!
+   - https://ibc.cosmos.network/main/apps/interchain-accounts/overview.html
+   - Use scripts to register and control addresses on other chains
+     - for ex all from within a Script
+     - use IBC interchain accounts to register an account on Osmosis
+     - IBC transfer funds from Dyson -> Osmosis
+     - use IBC interchain accounts to send a TX (like swap or exit pool)
+     - IBC transfer funds from Osmosis -> Dyson
+     - this is extremely powerful when combined with ScheduledRuns
+- Added UI
+  - Script Code editor can be resized to fit your screen better  
+  - Scheduling running functions directly on the function form
+  - List all ScheduledRuns for an address
+  - Registering a Name
+  - Asset page listing all the Names, Coins, and NFTs for an address
+  - Listing all Names
+  - Form for minting coins
+  - form for minting NFTs
+  - Detail view of Name with related Coin denoms and NFC Classes
+  - Forms for sending coins and NFTs
+
 
 ### Bug Fixes
 

@@ -540,18 +540,18 @@ export default {
 		},
 		
 		
-		async sendMsgLeaveGroup({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+		async sendMsgCreateGroup({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgLeaveGroup(value)
+				const msg = await txClient.msgCreateGroup(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: gas}, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgLeaveGroup:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgCreateGroup:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgLeaveGroup:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgCreateGroup:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -570,33 +570,33 @@ export default {
 				}
 			}
 		},
-		async sendMsgUpdateGroupPolicyAdmin({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+		async sendMsgUpdateGroupPolicyMetadata({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateGroupPolicyAdmin(value)
+				const msg = await txClient.msgUpdateGroupPolicyMetadata(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: gas}, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateGroupPolicyAdmin:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgUpdateGroupPolicyMetadata:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgUpdateGroupPolicyAdmin:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgUpdateGroupPolicyMetadata:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
-		async sendMsgCreateGroup({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+		async sendMsgVote({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreateGroup(value)
+				const msg = await txClient.msgVote(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: gas}, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgCreateGroup:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgVote:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgCreateGroup:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgVote:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -630,6 +630,21 @@ export default {
 				}
 			}
 		},
+		async sendMsgUpdateGroupPolicyDecisionPolicy({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateGroupPolicyDecisionPolicy(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateGroupPolicyDecisionPolicy:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgUpdateGroupPolicyDecisionPolicy:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
 		async sendMsgExec({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -645,33 +660,18 @@ export default {
 				}
 			}
 		},
-		async sendMsgUpdateGroupAdmin({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+		async sendMsgLeaveGroup({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateGroupAdmin(value)
+				const msg = await txClient.msgLeaveGroup(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: gas}, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateGroupAdmin:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgLeaveGroup:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgUpdateGroupAdmin:Send Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgUpdateGroupPolicyMetadata({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateGroupPolicyMetadata(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: gas}, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateGroupPolicyMetadata:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgUpdateGroupPolicyMetadata:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgLeaveGroup:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -690,33 +690,18 @@ export default {
 				}
 			}
 		},
-		async sendMsgUpdateGroupPolicyDecisionPolicy({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+		async sendMsgUpdateGroupPolicyAdmin({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateGroupPolicyDecisionPolicy(value)
+				const msg = await txClient.msgUpdateGroupPolicyAdmin(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: gas}, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateGroupPolicyDecisionPolicy:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgUpdateGroupPolicyAdmin:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgUpdateGroupPolicyDecisionPolicy:Send Could not broadcast Tx: '+ e.message)
-				}
-			}
-		},
-		async sendMsgUpdateGroupMetadata({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateGroupMetadata(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: gas}, memo})
-				return result
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateGroupMetadata:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgUpdateGroupMetadata:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgUpdateGroupPolicyAdmin:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -735,32 +720,47 @@ export default {
 				}
 			}
 		},
-		async sendMsgVote({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+		async sendMsgUpdateGroupMetadata({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgVote(value)
+				const msg = await txClient.msgUpdateGroupMetadata(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: gas}, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgVote:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgUpdateGroupMetadata:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgVote:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgUpdateGroupMetadata:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgUpdateGroupAdmin({ rootGetters }, { value, fee = [], memo = '', gas = "200000"  }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateGroupAdmin(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: gas}, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateGroupAdmin:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgUpdateGroupAdmin:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
 		
-		async MsgLeaveGroup({ rootGetters }, { value }) {
+		async MsgCreateGroup({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgLeaveGroup(value)
+				const msg = await txClient.msgCreateGroup(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgLeaveGroup:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgCreateGroup:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgLeaveGroup:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgCreateGroup:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -777,29 +777,29 @@ export default {
 				}
 			}
 		},
-		async MsgUpdateGroupPolicyAdmin({ rootGetters }, { value }) {
+		async MsgUpdateGroupPolicyMetadata({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateGroupPolicyAdmin(value)
+				const msg = await txClient.msgUpdateGroupPolicyMetadata(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateGroupPolicyAdmin:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgUpdateGroupPolicyMetadata:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgUpdateGroupPolicyAdmin:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgUpdateGroupPolicyMetadata:Create Could not create message: ' + e.message)
 				}
 			}
 		},
-		async MsgCreateGroup({ rootGetters }, { value }) {
+		async MsgVote({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreateGroup(value)
+				const msg = await txClient.msgVote(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgCreateGroup:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgVote:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgCreateGroup:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgVote:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -829,6 +829,19 @@ export default {
 				}
 			}
 		},
+		async MsgUpdateGroupPolicyDecisionPolicy({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateGroupPolicyDecisionPolicy(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateGroupPolicyDecisionPolicy:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgUpdateGroupPolicyDecisionPolicy:Create Could not create message: ' + e.message)
+				}
+			}
+		},
 		async MsgExec({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -842,29 +855,16 @@ export default {
 				}
 			}
 		},
-		async MsgUpdateGroupAdmin({ rootGetters }, { value }) {
+		async MsgLeaveGroup({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateGroupAdmin(value)
+				const msg = await txClient.msgLeaveGroup(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateGroupAdmin:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgLeaveGroup:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgUpdateGroupAdmin:Create Could not create message: ' + e.message)
-				}
-			}
-		},
-		async MsgUpdateGroupPolicyMetadata({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateGroupPolicyMetadata(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateGroupPolicyMetadata:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgUpdateGroupPolicyMetadata:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgLeaveGroup:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -881,29 +881,16 @@ export default {
 				}
 			}
 		},
-		async MsgUpdateGroupPolicyDecisionPolicy({ rootGetters }, { value }) {
+		async MsgUpdateGroupPolicyAdmin({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateGroupPolicyDecisionPolicy(value)
+				const msg = await txClient.msgUpdateGroupPolicyAdmin(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateGroupPolicyDecisionPolicy:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgUpdateGroupPolicyAdmin:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgUpdateGroupPolicyDecisionPolicy:Create Could not create message: ' + e.message)
-				}
-			}
-		},
-		async MsgUpdateGroupMetadata({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgUpdateGroupMetadata(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateGroupMetadata:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgUpdateGroupMetadata:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgUpdateGroupPolicyAdmin:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -920,16 +907,29 @@ export default {
 				}
 			}
 		},
-		async MsgVote({ rootGetters }, { value }) {
+		async MsgUpdateGroupMetadata({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgVote(value)
+				const msg = await txClient.msgUpdateGroupMetadata(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgVote:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgUpdateGroupMetadata:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgVote:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgUpdateGroupMetadata:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgUpdateGroupAdmin({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateGroupAdmin(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateGroupAdmin:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgUpdateGroupAdmin:Create Could not create message: ' + e.message)
 				}
 			}
 		},

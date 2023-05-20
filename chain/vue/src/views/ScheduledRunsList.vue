@@ -45,10 +45,15 @@
                   </td>
                 </tr>
               </table>
-              <strong>Creator:</strong> {{ r.creator }}<br />
-              <strong>Script:</strong> {{ r.msg.address }}<br />
-              <strong>Coins:</strong> {{ r.msg.coins }}<br />
-              <strong>NFTs:</strong> {{ r.msg.nfts }}<br />
+              <strong>ScheduledRun Creator:</strong> {{ r.creator }}<br />
+              <strong>Script:</strong>
+              <router-link
+                :to="{ name: 'script-detail', params: { scriptAddress: r.msg.address } }"
+                >{{ r.msg.address }}</router-link>
+
+              <br />
+              <strong>Coins:</strong> {{ r.msg.coins || "none" }}<br />
+              <strong>NFTs:</strong> {{ r.msg.nfts || "none" }}<br />
               <strong>Function:</strong>
               <pre>{{ r.msg.function_name }}</pre>
               <strong>Args:</strong>

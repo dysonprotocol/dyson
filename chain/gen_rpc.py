@@ -526,7 +526,7 @@ schemas["dyson/sendMsgCreateStorage"]["request_schema"]["definitions"][
 
 
 with open("vue/src/views/command_schema.json", "w") as f:
-    json.dump(schemas, f, indent=2, sort_keys=True)
+    json.dump(schemas, f, indent=2, )
 
 
 from IPython.core.oinspect import Inspector
@@ -597,4 +597,4 @@ for ff in normalized_functions:
 import json
 
 with open("vue/src/views/dyslang_docs.json", "w") as f:
-    json.dump(docs, f, indent=2, sort_keys=True)
+    json.dump(docs, f, indent=2)
