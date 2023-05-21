@@ -21,7 +21,7 @@
           :max-lines="20"
           :readonly="inflight"
         />
-        <div class="mb-3">
+        <div class="mb-3 mt-3">
           <button
             type="button"
             class="btn btn-secondary btn-sm"
