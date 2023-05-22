@@ -76,7 +76,7 @@ pre {
             :lang="lang"
             :theme="aceTheme"
             :min-lines="30"
-            :max-lines="500"
+            :max-lines="10000"
             :readonly="disabled"
             :key="aceTheme"
             :options="options"
