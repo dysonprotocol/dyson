@@ -1,4 +1,10 @@
-<style scoped></style>
+<style scoped>
+.denom {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+</style>
 
 <template>
   <div class="container-fluid">
@@ -46,8 +52,9 @@
                       collapsed: !balancesState[s.denom].show,
                     }"
                   >
-                    <p class="mb-0">
-                      <strong class="">{{ s.denom }}</strong
+                    <p class="mb-0 denom">
+                      <span v-if="s.isIBC"> <strong>{{ s.denomTrace.base_denom }}</strong> <small>{{ s.denomTrace.path }}</small></span>
+                      <strong v-else class="">{{ s.denom }}</strong
                       ><br />
                       {{ s.spendable.toLocaleString() }}
                     </p>
@@ -61,7 +68,8 @@
                   }"
                 >
                   <div v-if="address != walletAddress" class="accordion-body">
-                    This is not your wallet address. Please connect your wallet with this address to send your coins.
+                    This is not your wallet address. Please connect your wallet
+                    with this address to send your coins.
                   </div>
                   <div v-else class="accordion-body">
                     <table class="mb-2">
@@ -87,7 +95,10 @@
                         placeholder="Amount"
                         v-model="s.sendAmount"
                       />
-                      <span class="input-group-text">
+                      <span v-if="s.isIBC" class="input-group-text">
+                        <strong>{{ s.denomTrace.base_denom }}</strong>
+                      </span>
+                      <span v-else class="input-group-text">
                         {{ s.denom }}
                       </span>
                     </div>
@@ -334,6 +345,8 @@ import {
   sendNftUrl,
 } from './utils.js'
 
+import { useAddress, useDenom } from '@starport/vue'
+
 const combineBalancesAndSpendable = (balances, spendable) => {
   const combined = balances.balances.map((balance) => {
     const spendableBalance = spendable.balances.find(
@@ -553,9 +566,18 @@ export default {
         balanceResult,
         spendableResult
       )
+      let { getDenomTrace, _ } = useDenom({ $s: dysonVueStore })
 
       // create an empty object for each denom
       this.balances.forEach((balance) => {
+        let isIBC = balance.denom.indexOf('ibc/') == 0
+        balance.isIBC = isIBC
+        if (isIBC) {
+          getDenomTrace(balance.denom).then((trace) => {
+            balance.denomTrace = trace.denom_trace
+          })
+        }
+
         this.balancesState[balance.denom] =
           this.balancesState[balance.denom] || {}
       })
