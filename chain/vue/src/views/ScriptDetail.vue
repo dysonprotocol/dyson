@@ -30,24 +30,18 @@ pre {
   <div class="container-fluid main-content">
     <div class="row mb-3">
       <div id="" class="col">
-        <div class="">
-          Script address:
-
-          <router-link
-            :to="{
-              name: 'script-detail',
-              params: { scriptAddress: scriptAddress },
-            }"
-            >{{ scriptAddress }}
-          </router-link>
-          <a
-            target="blank"
-            class="btn btn-link btn-sm"
-            :href="'https://' + scriptAddress.split('.')[0] + '.' + clearDomain"
-          >
-            View dwapp ↗
-          </a>
-        </div>
+        <h2 v-if="scriptAddress == address">My Script</h2>
+        <h2 v-else>
+          Script:
+          {{ scriptAddress }}
+        </h2>
+        <a
+          target="blank"
+          class="btn btn-primary btn-lg"
+          :href="'https://' + scriptAddress.split('.')[0] + '.' + clearDomain"
+        >
+          View dwapp ↗
+        </a>
       </div>
     </div>
     <div class="grid">

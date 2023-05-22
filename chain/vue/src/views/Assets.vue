@@ -9,6 +9,12 @@
 <template>
   <div class="container-fluid">
     <div class="row">
+      <div class="col-lg-12">
+        <h2 v-if="walletAddress == address">My Assets</h2>
+		<h2 v-else>Assets: {{ address}}</h2>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-lg-4">
         <div class="card mb-3">
           <div class="card-header">
@@ -53,7 +59,10 @@
                     }"
                   >
                     <p class="mb-0 denom">
-                      <span v-if="s.isIBC"> <strong>{{ s.denomTrace.base_denom }}</strong> <small>{{ s.denomTrace.path }}</small></span>
+                      <span v-if="s.isIBC">
+                        <strong>{{ s.denomTrace.base_denom }}</strong>
+                        <small>{{ s.denomTrace.path }}</small></span
+                      >
                       <strong v-else class="">{{ s.denom }}</strong
                       ><br />
                       {{ s.spendable.toLocaleString() }}

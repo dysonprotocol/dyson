@@ -2,14 +2,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col mb-3">
-        <div v-if="isLoading">
-          <div class="card">
-            <div class="card-body">Loading Scheduled Runs</div>
-          </div>
-        </div>
-        <div v-else-if="scheduledRuns.length === 0">
-          <div class="card">
-            <div class="card-body">No Scheduled Runs</div>
+	    <h2 v-if="walletAddress && index.startsWith(walletAddress)">My Scheduled Runs</h2>
+		<h2 v-else>ScheduledRuns: {{ index }}</h2>
+        <div class="card">
+          <div v-if="isLoading" class="card-body">Loading Scheduled Runs</div>
+          <div v-else-if="scheduledRuns.length === 0" class="card-body">
+            No Scheduled Runs
           </div>
         </div>
         <div
@@ -31,7 +29,7 @@
           <div class="card-body">
             <div class="card-text">
               <strong>Height:</strong> {{ r.height }}<br />
-			  <table v-if="r.height > currentBlockHeight">
+              <table v-if="r.height > currentBlockHeight">
                 <tr>
                   <th>Estimated timestamp:</th>
                   <td>
@@ -48,12 +46,16 @@
               <strong>ScheduledRun Creator:</strong> {{ r.creator }}<br />
               <strong>Script:</strong>
               <router-link
-                :to="{ name: 'script-detail', params: { scriptAddress: r.msg.address } }"
-                >{{ r.msg.address }}</router-link>
+                :to="{
+                  name: 'script-detail',
+                  params: { scriptAddress: r.msg.address },
+                }"
+                >{{ r.msg.address }}</router-link
+              >
 
               <br />
-              <strong>Coins:</strong> {{ r.msg.coins || "none" }}<br />
-              <strong>NFTs:</strong> {{ r.msg.nfts || "none" }}<br />
+              <strong>Coins:</strong> {{ r.msg.coins || 'none' }}<br />
+              <strong>NFTs:</strong> {{ r.msg.nfts || 'none' }}<br />
               <strong>Function:</strong>
               <pre>{{ r.msg.function_name }}</pre>
               <strong>Args:</strong>
@@ -169,7 +171,7 @@ export default {
       this.scheduledRuns = this.scheduledRuns.map((r) => {
         return {
           ...r,
-		  height: parseInt(r.height),
+          height: parseInt(r.height),
           parsedResult: this.parsedResult(r),
         }
       })
@@ -212,16 +214,19 @@ export default {
       }
       return parseInt(blocks[0].height)
     },
+    walletAddress() {
+      return this.$store.getters['common/wallet/address']
+    },
   },
   watch: {
     currentBlockHeight(val) {
-		if (this.scheduledRuns.length == 1) {
-          if (this.scheduledRuns[0].height == val) {
-            console.log("refreshing")
-            this.scheduledRuns = []
-            this.fetchScheduledRuns('')
-          }
+      if (this.scheduledRuns.length == 1) {
+        if (this.scheduledRuns[0].height == val) {
+          console.log('refreshing')
+          this.scheduledRuns = []
+          this.fetchScheduledRuns('')
         }
+      }
     },
   },
   components: {},
