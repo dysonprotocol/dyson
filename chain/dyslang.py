@@ -19,7 +19,7 @@ import forge
 # Module wide 'globals'
 MAX_STRING_LENGTH = 100000
 MAX_POWER = 100 * 100  # highest exponent
-MAX_SCOPE_SIZE = MAX_STRING_LENGTH * 2
+MAX_SCOPE_SIZE = MAX_STRING_LENGTH * 10
 MAX_NODE_CALLS = 10000
 MAX_CALL_DEPTH = 32
 DISALLOW_PREFIXES = ["_"]
@@ -95,11 +95,13 @@ def assert_func_allowed(func):
 
     if fullname not in WHITELIST_FUNCTIONS:
         if type(func) is typing._AnnotatedAlias:
-            # This is not strictly neccasary because __origin__ should have 
+            # This is not strictly neccasary because __origin__ should have
             # already been checked. But it's good to be safe.
             assert_func_allowed(func.__origin__)
         else:
-            raise NotImplementedError("This function is not allowed: {}".format(fullname))
+            raise NotImplementedError(
+                "This function is not allowed: {}".format(fullname)
+            )
 
 
 ########################################
@@ -207,6 +209,7 @@ DEFAULT_SCOPE = {
     "divmod": divmod,
     "enumerate": enumerate,
     "filter": filter,
+    "float": float,
     "frozenset": frozenset,
     "hex": hex,
     "int": int,
@@ -221,7 +224,6 @@ DEFAULT_SCOPE = {
     "oct": oct,
     "ord": ord,
     "pow": safe_power,
-    "range": range,
     "reversed": reversed,
     "round": round,
     "set": set,
@@ -230,7 +232,6 @@ DEFAULT_SCOPE = {
     "str": str,
     "sum": sum,
     "tuple": tuple,
-    "zip": zip,
     **BUILTIN_EXCEPTIONS,
 }
 
@@ -1187,7 +1188,9 @@ class DysEval(object):
         self.nodes_called += 1
         if self.nodes_called > MAX_NODE_CALLS:
             raise TimeoutError("This program has too many evaluations")
+
         size = len(repr(self.scope)) + len(repr(self._last_eval_result))
+
         if size > MAX_SCOPE_SIZE:
             raise MemoryError("Scope has used too much memory")
 
@@ -1321,4 +1324,3 @@ def ascii_format_coverage(coverage, source):
         out += (c * "-") + "^\n"
     out += f"{ int(pct * 100) }% coverage\n"
     return out
-

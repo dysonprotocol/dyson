@@ -359,6 +359,11 @@
     "init_definition": "(obj, *args, **keywords)",
     "isclass": true
   },
+  "float": {
+    "docstring": "float(x) -> floating point number\n\nConvert a string or number to a floating point number, if possible.",
+    "init_definition": "(obj, *args, **keywords)",
+    "isclass": true
+  },
   "frozenset": {
     "docstring": "frozenset(iterable) --> frozenset object\n\nBuild an immutable unordered collection.",
     "init_definition": "(obj, *args, **keywords)",
@@ -470,6 +475,150 @@
     "init_definition": "(obj, *args, **keywords)",
     "isclass": true
   },
+  "math.acos": {
+    "definition": "(x)",
+    "docstring": "acos(x)\n\nReturn the arc cosine (measured in radians) of x."
+  },
+  "math.asin": {
+    "definition": "(x)",
+    "docstring": "asin(x)\n\nReturn the arc sine (measured in radians) of x."
+  },
+  "math.atan": {
+    "definition": "(x)",
+    "docstring": "atan(x)\n\nReturn the arc tangent (measured in radians) of x."
+  },
+  "math.atan2": {
+    "definition": "(y, x)",
+    "docstring": "atan2(y, x)\n\nReturn the arc tangent (measured in radians) of y/x.\nUnlike atan(y/x), the signs of both x and y are considered."
+  },
+  "math.ceil": {
+    "definition": "(x)",
+    "docstring": "ceil(x)\n\nReturn the ceiling of x as an int.\nThis is the smallest integral value >= x."
+  },
+  "math.copysign": {
+    "definition": "(x, y)",
+    "docstring": "Return x with the sign of y."
+  },
+  "math.cos": {
+    "definition": "(x)",
+    "docstring": "cos(x)\n\nReturn the cosine of x (measured in radians)."
+  },
+  "math.degrees": {
+    "definition": "(x)",
+    "docstring": "degrees(x) -> converts angle x from radians to degrees\n    "
+  },
+  "math.dist": {
+    "definition": "(p, q, /)",
+    "docstring": "Return the Euclidean distance between two points p and q.\n\nThe points should be specified as sequences (or iterables) of\ncoordinates.  Both inputs must have the same dimension.\n\nRoughly equivalent to:\n    sqrt(sum((px - qx) ** 2.0 for px, qx in zip(p, q)))"
+  },
+  "math.fabs": {
+    "definition": "(x)",
+    "docstring": "fabs(x)\n\nReturn the absolute value of the float x."
+  },
+  "math.factorial": {
+    "definition": "(x)",
+    "docstring": "factorial(x) -> Integral\n\n\"Find x!. Raise a ValueError if x is negative or non-integral."
+  },
+  "math.floor": {
+    "definition": "(x)",
+    "docstring": "floor(x)\n\nReturn the floor of x as an int.\nThis is the largest integral value <= x."
+  },
+  "math.fmod": {
+    "definition": "(x, y)",
+    "docstring": "fmod(x,y)\n\nReturn fmod(x, y), according to platform C.  x % y may differ."
+  },
+  "math.fsum": {
+    "definition": "(iterable)",
+    "docstring": "Sum an iterable of floats, trying to keep precision."
+  },
+  "math.gamma": {
+    "definition": "(x)",
+    "docstring": "Compute the gamma function for x."
+  },
+  "math.gcd": {
+    "definition": "(*args)",
+    "docstring": "greatest common divisor"
+  },
+  "math.hypot": {
+    "definition": "(*args)",
+    "docstring": "Multidimensional Euclidean distance from the origin to a point.\n\nRoughly equivalent to:\n    sqrt(sum(x**2 for x in args))\n\nFor a two dimensional point (x, y), gives the hypotenuse\nusing the Pythagorean theorem:  sqrt(x*x + y*y).\n\nFor example, the hypotenuse of a 3/4/5 right triangle is:\n\n    >>> hypot(3.0, 4.0)\n    5.0"
+  },
+  "math.isclose": {
+    "definition": "(a, b, *, rel_tol=1e-09, abs_tol=0.0)",
+    "docstring": "isclose(a, b, *, rel_tol=1e-09, abs_tol=0.0) -> bool\n\nDetermine whether two floating point numbers are close in value.\n\n   rel_tol\n       maximum difference for being considered \"close\", relative to the\n       magnitude of the input values\n   abs_tol\n       maximum difference for being considered \"close\", regardless of the\n       magnitude of the input values\n\nReturn True if a is close in value to b, and False otherwise.\n\nFor the values to be considered close, the difference between them\nmust be smaller than at least one of the tolerances.\n\n-inf, inf and NaN behave similarly to the IEEE 754 Standard.  That\nis, NaN is not close to anything, even itself.  inf and -inf are\nonly close to themselves."
+  },
+  "math.isfinite": {
+    "definition": "(x)",
+    "docstring": "isfinite(x) -> bool\n\nReturn True if x is neither an infinity nor a NaN, and False otherwise."
+  },
+  "math.isinf": {
+    "definition": "(x)",
+    "docstring": "Return True if x is infinity."
+  },
+  "math.isnan": {
+    "definition": "(x)",
+    "docstring": "Return True if x is not a number."
+  },
+  "math.isqrt": {
+    "definition": "(n)",
+    "docstring": "Return the integer part of the square root of the input."
+  },
+  "math.lcm": {
+    "definition": "(*integers)",
+    "docstring": "<no docstring>"
+  },
+  "math.lgamma": {
+    "definition": "(x)",
+    "docstring": "Compute the natural logarithm of the gamma function for x."
+  },
+  "math.log": {
+    "definition": "(x, base=<no value>)",
+    "docstring": "log(x[, base]) -> the logarithm of x to the given base.\nIf the base not specified, returns the natural logarithm (base e) of x."
+  },
+  "math.log10": {
+    "definition": "(x)",
+    "docstring": "log10(x) -> the base 10 logarithm of x.\n    "
+  },
+  "math.log1p": {
+    "definition": "(x)",
+    "docstring": "Find log(x + 1)."
+  },
+  "math.log2": {
+    "definition": "(x)",
+    "docstring": "log2(x) -> the base 2 logarithm of x.\n    "
+  },
+  "math.modf": {
+    "definition": "(x)",
+    "docstring": "modf(x)\n\nReturn the fractional and integer parts of x.  Both results carry the sign\nof x.  The integer part is returned as a real."
+  },
+  "math.radians": {
+    "definition": "(x)",
+    "docstring": "radians(x) -> converts angle x from degrees to radians\n    "
+  },
+  "math.remainder": {
+    "definition": "(x, y)",
+    "docstring": "Difference between x and the closest integer multiple of y.\n\nReturn x - n*y where n*y is the closest integer multiple of y.\nIn the case where x is exactly halfway between two multiples of\ny, the nearest even value of n is used. The result is always exact."
+  },
+  "math.sin": {
+    "definition": "(x)",
+    "docstring": "sin(x)\n\nReturn the sine of x (measured in radians)."
+  },
+  "math.sqrt": {
+    "definition": "(x)",
+    "docstring": "sqrt(x)\n\nReturn the square root of x."
+  },
+  "math.tan": {
+    "definition": "(x)",
+    "docstring": "tan(x)\n\nReturn the tangent of x (measured in radians)."
+  },
+  "math.trunc": {
+    "definition": "(x)",
+    "docstring": "Truncate x."
+  },
+  "math.ulp": {
+    "definition": "(x)",
+    "docstring": "Return the value of the least significant bit of the\nfloat x."
+  },
   "max": {
     "definition": "(*args, **keywords)",
     "docstring": "max(iterable, *[, default=obj, key=func]) -> value\nmax(arg1, arg2, *args, *[, key=func]) -> value\n\nWith a single iterable argument, return its biggest item. The\ndefault keyword-only argument specifies an object to return if\nthe provided iterable is empty.\nWith two or more arguments, return the largest argument.\n    "
@@ -511,10 +660,6 @@
     "definition": "(self, seq)",
     "docstring": "Choose a random element from a non-empty sequence."
   },
-  "random.Random.choices": {
-    "definition": "(self, population, weights=None, *, cum_weights=None, k=1)",
-    "docstring": "Return a k sized list of population elements chosen with replacement.\n\nIf the relative weights or cumulative weights are not specified,\nthe selections are made with equal probability."
-  },
   "random.Random.expovariate": {
     "definition": "(self, lambd)",
     "docstring": "Exponential distribution.\n\nlambd is 1.0 divided by the desired mean.  It should be\nnonzero.  (The parameter would be called \"lambda\", but that is\na reserved word in Python.)  Returned values range from 0 to\npositive infinity if lambd is positive, and from negative\ninfinity to 0 if lambd is negative."
@@ -546,11 +691,6 @@
   "random.Random.uniform": {
     "definition": "(self, a, b)",
     "docstring": "Get a random number in the range [a, b) or [a, b] depending on rounding."
-  },
-  "range": {
-    "docstring": "<no docstring>",
-    "init_definition": "(obj, *args, **keywords)",
-    "isclass": true
   },
   "re2.BackreferencesException": {
     "docstring": "Search pattern contains backreferences.",
@@ -645,6 +785,38 @@
   "sorted": {
     "definition": "(iterable, /, *, key=None, reverse=False)",
     "docstring": "sorted(iterable, key=None, reverse=False) --> new sorted list"
+  },
+  "statistics.fmean": {
+    "definition": "(data)",
+    "docstring": "Convert data to floats and compute the arithmetic mean.\n\nThis runs faster than the mean() function and it always returns a float.\nIf the input dataset is empty, it raises a StatisticsError.\n\n>>> fmean([3.5, 4.0, 5.25])\n4.25"
+  },
+  "statistics.geometric_mean": {
+    "definition": "(data)",
+    "docstring": "Convert data to floats and compute the geometric mean.\n\nRaises a StatisticsError if the input dataset is empty,\nif it contains a zero, or if it contains a negative value.\n\nNo special efforts are made to achieve exact results.\n(However, this may change in the future.)\n\n>>> round(geometric_mean([54, 24, 36]), 9)\n36.0"
+  },
+  "statistics.harmonic_mean": {
+    "definition": "(data)",
+    "docstring": "Return the harmonic mean of data.\n\nThe harmonic mean, sometimes called the subcontrary mean, is the\nreciprocal of the arithmetic mean of the reciprocals of the data,\nand is often appropriate when averaging quantities which are rates\nor ratios, for example speeds. Example:\n\nSuppose an investor purchases an equal value of shares in each of\nthree companies, with P/E (price/earning) ratios of 2.5, 3 and 10.\nWhat is the average P/E ratio for the investor's portfolio?\n\n>>> harmonic_mean([2.5, 3, 10])  # For an equal investment portfolio.\n3.6\n\nUsing the arithmetic mean would give an average of about 5.167, which\nis too high.\n\nIf ``data`` is empty, or any element is less than zero,\n``harmonic_mean`` will raise ``StatisticsError``."
+  },
+  "statistics.mean": {
+    "definition": "(data)",
+    "docstring": "Return the sample arithmetic mean of data.\n\n>>> mean([1, 2, 3, 4, 4])\n2.8\n\n>>> from fractions import Fraction as F\n>>> mean([F(3, 7), F(1, 21), F(5, 3), F(1, 3)])\nFraction(13, 21)\n\n>>> from decimal import Decimal as D\n>>> mean([D(\"0.5\"), D(\"0.75\"), D(\"0.625\"), D(\"0.375\")])\nDecimal('0.5625')\n\nIf ``data`` is empty, StatisticsError will be raised."
+  },
+  "statistics.median": {
+    "definition": "(data)",
+    "docstring": "Return the median (middle value) of numeric data.\n\nWhen the number of data points is odd, return the middle data point.\nWhen the number of data points is even, the median is interpolated by\ntaking the average of the two middle values:\n\n>>> median([1, 3, 5])\n3\n>>> median([1, 3, 5, 7])\n4.0"
+  },
+  "statistics.median_high": {
+    "definition": "(data)",
+    "docstring": "Return the high median of data.\n\nWhen the number of data points is odd, the middle value is returned.\nWhen it is even, the larger of the two middle values is returned.\n\n>>> median_high([1, 3, 5])\n3\n>>> median_high([1, 3, 5, 7])\n5"
+  },
+  "statistics.median_low": {
+    "definition": "(data)",
+    "docstring": "Return the low median of numeric data.\n\nWhen the number of data points is odd, the middle value is returned.\nWhen it is even, the smaller of the two middle values is returned.\n\n>>> median_low([1, 3, 5])\n3\n>>> median_low([1, 3, 5, 7])\n3"
+  },
+  "statistics.mode": {
+    "definition": "(data)",
+    "docstring": "Return the most common data point from discrete or nominal data.\n\n``mode`` assumes discrete data, and returns a single value. This is the\nstandard treatment of the mode as commonly taught in schools:\n\n    >>> mode([1, 1, 2, 3, 3, 3, 3, 4])\n    3\n\nThis also works with nominal (non-numeric) data:\n\n    >>> mode([\"red\", \"blue\", \"blue\", \"red\", \"green\", \"red\", \"red\"])\n    'red'\n\nIf there are multiple modes with same frequency, return the first one\nencountered:\n\n    >>> mode(['red', 'red', 'green', 'blue', 'blue'])\n    'red'\n\nIf *data* is empty, ``mode``, raises StatisticsError."
   },
   "str": {
     "docstring": "str(object='') -> str\nstr(bytes_or_buffer[, encoding[, errors]]) -> str\n\nCreate a new string object from the given object. If encoding or\nerrors is specified, then the object must expose a data buffer\nthat will be decoded using the given encoding and error handler.\nOtherwise, returns the result of object.__str__() (if defined)\nor repr(object).\nencoding defaults to sys.getdefaultencoding().\nerrors defaults to 'strict'.",
@@ -906,10 +1078,5 @@
   "wsgiref.handlers.BaseHandler.write": {
     "definition": "(self, data)",
     "docstring": "'write()' callable as specified by PEP 3333"
-  },
-  "zip": {
-    "docstring": "Return a zip object whose .__next__() method returns a tuple where\nthe i-th element comes from the i-th iterable argument.  The .__next__()\nmethod continues until the shortest iterable in the argument sequence\nis exhausted and then it raises StopIteration.",
-    "init_definition": "(obj, *args, **keywords)",
-    "isclass": true
   }
 }

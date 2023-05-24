@@ -119,6 +119,8 @@ def get_module_dict():
     import string
     import typing
     import urllib
+    import math
+    import statistics
 
     # protobuf stuff
     from google.protobuf.any_pb2 import Any
@@ -234,12 +236,10 @@ def get_module_dict():
         "random": {
             "betavariate": random.betavariate,
             "choice": random.choice,
-            "choices": random.choices,
             "expovariate": random.expovariate,
             "gauss": random.gauss,
             "paretovariate": random.paretovariate,
             "random": random.random,
-            "sample": random.sample,
             "shuffle": random.shuffle,
             "triangular": random.triangular,
             "seed": safe_random_seed,
@@ -247,6 +247,59 @@ def get_module_dict():
         },
         "re2": re2_dict,
         "google": {"protobuf": {"any_pb2": {"Any": Any}}},
+        "math": {
+            "ceil": math.ceil,
+            "copysign": math.copysign,
+            "fabs": math.fabs,
+            "factorial": math.factorial,
+            "floor": math.floor,
+            "fmod": math.fmod,
+            "fsum": math.fsum,
+            "gcd": math.gcd,
+            "isclose": math.isclose,
+            "isfinite": math.isfinite,
+            "isinf": math.isinf,
+            "isnan": math.isnan,
+            "isqrt": math.isqrt,
+            "lcm": math.lcm,
+            "modf": math.modf,
+            "remainder": math.remainder,
+            "trunc": math.trunc,
+            "ulp": math.ulp,
+            "log": math.log,
+            "log1p": math.log1p,
+            "log2": math.log2,
+            "log10": math.log10,
+            "sqrt": math.sqrt,
+            "acos": math.acos,
+            "asin": math.asin,
+            "atan": math.atan,
+            "atan2": math.atan2,
+            "cos": math.cos,
+            "dist": math.dist,
+            "hypot": math.hypot,
+            "sin": math.sin,
+            "tan": math.tan,
+            "degrees": math.degrees,
+            "radians": math.radians,
+            "gamma": math.gamma,
+            "lgamma": math.lgamma,
+            "pi": math.pi,
+            "e": math.e,
+            "tau": math.tau,
+            "inf": math.inf,
+            "nan": math.nan,
+        },
+        "statistics": {
+            "mean": statistics.mean,
+            "fmean": statistics.fmean,
+            "geometric_mean": statistics.geometric_mean,
+            "harmonic_mean": statistics.harmonic_mean,
+            "median": statistics.median,
+            "median_low": statistics.median_low,
+            "median_high": statistics.median_high,
+            "mode": statistics.mode,
+        },
     }
 
     def walk(node):

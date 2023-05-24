@@ -87,7 +87,8 @@
                     v-model="scheduleGas"
                   />
                   <span class="input-group-text"
-                        >Gas Price at block  {{ scheduledBlockHeight || "X" }}: {{ scheduledGasPrice }} dys</span
+                    >Gas Price at block {{ scheduledBlockHeight || 'X' }}:
+                    {{ scheduledGasPrice }} dys</span
                   >
                   <span class="input-group-text"
                     >Gas Fee: {{ scheduledGasFee }} dys</span
@@ -161,12 +162,13 @@
             ScheduledRun Index:
             <pre>{{ scheduleResponse.index }}</pre>
             <router-link
-		      class="btn btn-primary btn-sm"
-              :to="{ name: 'scheduled', params: { index:
-              scheduleResponse.index } }"
+              class="btn btn-primary btn-sm"
+              :to="{
+                name: 'scheduled',
+                params: { index: scheduleResponse.index },
+              }"
               >View ScheduledRun details ↗︎</router-link
             >
-
           </li>
         </ul>
       </div>
@@ -194,14 +196,21 @@
             <pre v-show="runResponse.exception">{{
               runResponse.exception
             }}</pre>
-            <div v-show="runResponse.exception &&  runResponse.exception.endsWith('out of gas')" >
+            <div
+              v-show="
+                !runResponse.exception?.msg &&
+                runResponse.exception?.endsWith('out of gas')
+              "
+            >
               <button
                 :disabled="!address || this.inflight"
                 type="submit"
                 value="run"
                 class="btn btn-primary"
                 @click="run"
-                >Try Again with {{gas}} gas</button>
+              >
+                Try Again with {{ gas }} gas
+              </button>
             </div>
           </li>
           <li class="list-group-item">
@@ -398,9 +407,11 @@ export default {
           )
           console.log('scheduleResult', scheduleResult)
           this.gas = scheduleResult.gasUsed * 2
-          scheduleResponse.index = JSON.parse(scheduleResult['rawLog'])[0]
-              ['events'].filter((i) => i.type == 'scheduled_run')[0]
-              ['attributes'][0]['value']
+          scheduleResponse.index = JSON.parse(scheduleResult['rawLog'])[0][
+            'events'
+          ].filter((i) => i.type == 'scheduled_run')[0]['attributes'][0][
+            'value'
+          ]
         } catch (objError) {
           console.info('objError', objError)
         }
@@ -494,7 +505,6 @@ export default {
               if (txResult.rawLog.match(/out of gas$/)) {
                 this.showGasWarning = true
               }
-
             }
           } else {
             runResponse.exception = objError.message
@@ -572,6 +582,9 @@ export default {
 <style scoped>
 pre {
   white-space: pre-wrap;
+}
+.list-group-item {
+  word-break: break-word;
 }
 </style>
 <style>
