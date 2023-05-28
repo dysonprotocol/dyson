@@ -87,11 +87,12 @@
                     v-model="scheduleGas"
                   />
                   <span class="input-group-text"
-                    >Gas Price at block {{ scheduledBlockHeight || 'X' }}:
-                    {{ scheduledGasPrice }} dys</span
+                    >Gas Price at block
+                    {{ scheduledBlockHeight?.toLocaleString() || 'X' }}:
+                    {{ scheduledGasPrice?.toLocaleString() }} dys</span
                   >
                   <span class="input-group-text"
-                    >Gas Fee: {{ scheduledGasFee }} dys</span
+                    >Gas Fee: {{ scheduledGasFee?.toLocaleString() }} dys</span
                   >
                 </div>
 
@@ -132,7 +133,8 @@
               value="schedule"
               class="btn btn-primary"
             >
-              Schedule {{ name }} at block {{ scheduledBlockHeight }}...
+              Schedule {{ name }} at block
+              {{ scheduledBlockHeight?.toLocaleString() }}...
               {{ (!address && '[connect wallet]') || '' }}
             </button>
             <button
@@ -153,10 +155,10 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">TX hash: {{ scheduleResponse.tx }}</li>
           <li class="list-group-item">
-            Gas consumed: {{ scheduleResponse.gasUsed }}
+            Gas consumed: {{ scheduleResponse.gasUsed?.toLocaleString() }}
           </li>
           <li class="list-group-item">
-            Gas Limit: {{ scheduleResponse.gasWanted }}
+            Gas Limit: {{ scheduleResponse.gasWanted?.toLocaleString() }}
           </li>
           <li class="list-group-item">
             ScheduledRun Index:
@@ -176,16 +178,16 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">TX hash: {{ runResponse.tx }}</li>
           <li class="list-group-item">
-            Cumulative Size: {{ runResponse.cumsize }}
+            Cumulative Size: {{ runResponse.cumsize?.toLocaleString() }}
           </li>
           <li class="list-group-item">
-            Nodes Evaluated: {{ runResponse.nodes_called }}
+            Nodes Evaluated: {{ runResponse.nodes_called?.toLocaleString() }}
           </li>
           <li class="list-group-item">
-            Gas consumed: {{ runResponse.gasUsed }}
+            Gas consumed: {{ runResponse.gasUsed?.toLocaleString() }}
           </li>
           <li class="list-group-item">
-            Gas Limit: {{ runResponse.gasWanted }}
+            Gas Limit: {{ runResponse.gasWanted?.toLocaleString() }}
           </li>
           <li class="list-group-item">
             Result:
@@ -201,7 +203,15 @@
                 !runResponse.exception?.msg &&
                 runResponse.exception?.endsWith('out of gas')
               "
+              class="alert alert-info"
             >
+              <h4 class="alert-heading">Oh no, Out of Gas!</h4>
+              <p>
+                This means the function ran out of gas before it was able to
+                finish. While it is not possible to predict exactly how much gas
+                a transaction will use, often trying again with a higher gas
+                limit will work.
+              </p>
               <button
                 :disabled="!address || this.inflight"
                 type="submit"
@@ -209,7 +219,7 @@
                 class="btn btn-primary"
                 @click="run"
               >
-                Try Again with {{ gas }} gas
+                Try Again with {{ gas.toLocaleString() }} gas ...
               </button>
             </div>
           </li>
@@ -279,7 +289,7 @@ export default {
       isModal: false,
       link: '',
       inflight: false,
-      gas: 123000,
+      gas: 1230000,
       showAssets: false,
       showSchedule: false,
       showGasWarning: false,
@@ -336,7 +346,7 @@ export default {
       } catch (e) {
         console.log(e)
         this.scheduleError = e.message
-        return null
+        return 0
       }
     },
   },
@@ -397,7 +407,7 @@ export default {
         var scheduleResponse = {}
         var opts = {
           value: value,
-          fee: [{ amount: String(Math.ceil(this.gas * 0.001)), denom: 'dys' }],
+          fee: [{ amount: String(Math.ceil(this.gas * 0.0001)), denom: 'dys' }],
           gas: String(Math.ceil(this.gas)),
         }
         try {
@@ -480,13 +490,13 @@ export default {
         var runResponse = {}
         var opts = {
           value: value,
-          fee: [{ amount: String(Math.ceil(this.gas * 0.001)), denom: 'dys' }],
+          fee: [{ amount: String(Math.ceil(this.gas * 0.0001)), denom: 'dys' }],
           gas: String(Math.ceil(this.gas)),
         }
         try {
           txResult = await this.$store.dispatch('dyson/sendMsgRun', opts)
           console.log('txResult', txResult)
-          this.gas = txResult.gasUsed * 2
+          this.gas = txResult.gasUsed * 1.2
           runResponse = JSON.parse(
             JSON.parse(txResult['rawLog'])[0]
               ['events'].filter((i) => i.type == 'run')[0]
@@ -503,6 +513,7 @@ export default {
             } else {
               runResponse.exception = txResult.rawLog
               if (txResult.rawLog.match(/out of gas$/)) {
+                this.gas = txResult.gasUsed * 2
                 this.showGasWarning = true
               }
             }

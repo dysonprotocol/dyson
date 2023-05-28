@@ -112,6 +112,7 @@ func (k Keeper) QueryScript(goCtx context.Context, msg *types.MsgRun) (*types.Ms
 	//	return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("Script at address %v not set", msg.Address))
 	//}
 	//fmt.Println(fmt.Sprintf("Script at address %v found", msg.Address))
+
 	res, err := k.EvalScript(goCtx, &EvalScriptContext{
 		Sender:       msg.Creator,
 		Index:        msg.Address,

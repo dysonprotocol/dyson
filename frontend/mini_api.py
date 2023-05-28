@@ -209,6 +209,7 @@ def node_info(request):
         "VITE_API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
         "CLEAR_DOMAIN": os.environ.get("CLEAR_DOMAIN"),
         "DYS_DOMAIN": DYS_DOMAIN,
+        "SCRIPT_ADDRESS": request.script_address or "",
     }
     return JsonResponse(info)
 

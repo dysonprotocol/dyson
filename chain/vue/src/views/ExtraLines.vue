@@ -18,7 +18,7 @@
           :theme="aceTheme"
           :key="aceTheme"
           :min-lines="3"
-          :max-lines="20"
+          :max-lines="2000"
           :readonly="inflight"
         />
         <div class="mb-3 mt-3">
@@ -183,7 +183,7 @@ export default {
       isModal: false,
       link: '',
       inflight: false,
-      gas: 123000,
+      gas: 345000,
       colorMode: localStorage.getItem('colorMode'),
       showAssets: false,
     }

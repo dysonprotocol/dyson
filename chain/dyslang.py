@@ -215,10 +215,8 @@ DEFAULT_SCOPE = {
     "int": int,
     "isinstance": isinstance,
     "issubclass": issubclass,
-    "iter": iter,
     "len": len,
     "list": list,
-    "map": map,
     "max": max,
     "min": min,
     "oct": oct,
@@ -239,7 +237,7 @@ _whitelist_functions_dict = {
     "str": ["join"],
     "builtins": [*list(DEFAULT_SCOPE.keys())],
     "dict": ["get", "items", "keys", "values"],
-    "list": ["sort", "append", "pop", "count", "index", "reverse"],
+    "list": ["sort", "pop", "count", "index", "reverse"],
 }
 
 

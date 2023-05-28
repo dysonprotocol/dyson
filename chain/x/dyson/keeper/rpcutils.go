@@ -18,6 +18,22 @@ type ConsumeGasResponse struct {
 	GasLimit    int64 `protobuf:"bytes,1,opt,name=GasLimit,proto3" json:"GasLimit,omitempty"`
 }
 
+// Emit Event from the script
+type EmitEventRequest struct {
+	Key   string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+type EmitEventResponse struct {
+}
+
+func (rpcservice *RpcService) Emitevent(_ *http.Request, msg *EmitEventRequest, response *EmitEventResponse) (err error) {
+	ctx := sdk.UnwrapSDKContext(rpcservice.ctx)
+	address := rpcservice.ScriptAddress.String()
+	ctx.EventManager().EmitEvent(sdk.NewEvent(address, sdk.NewAttribute(msg.Key, msg.Value)))
+	return nil
+}
+
 func (rpcservice *RpcService) Consumegas(_ *http.Request, msg *ConsumeGasRequest, response *ConsumeGasResponse) (err error) {
 	ctx := sdk.UnwrapSDKContext(rpcservice.ctx)
 	defer func() {

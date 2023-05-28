@@ -1,4 +1,7 @@
 <style scoped>
+#schemas {
+  overflow: hidden;
+}
 pre {
   white-space: pre-wrap;
 }

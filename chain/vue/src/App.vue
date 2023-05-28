@@ -51,7 +51,7 @@
           <li v-else class="navbar-text">Loading Wallet...</li>
         </div>
         <div class="d-flex">
-          <div class="navbar-text">Chain ID: {{ chainId }}</div>
+          <div class="navbar-text mr-2">Chain ID: {{ chainId }} | Height: {{ currentBlockHeight }} </div>
           <button
             v-if="colorMode === 'dark'"
             @click="toggleColorMode"
@@ -220,7 +220,10 @@ export default {
     // lh
     $s.dispatch('common/env/init').then(() => {
       isLoaded.value = true
+      $s.getters['common/env/client'].connectWS()
     })
+
+    let currentBlockHeight = computed<number>(() => $s.getters['common/blocks/getBlocks'](1)[0]?.height)
 
     return {
       isLoaded,
@@ -236,6 +239,7 @@ export default {
       rpcConnected,
       wsConnected,
       apiCosmos,
+      currentBlockHeight,
     }
   },
 }

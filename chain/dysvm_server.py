@@ -318,7 +318,7 @@ def build_sandbox(port, creator, address, amount, nfts, block_info):
     nfts = json.loads(nfts or "{}")
     url = f"http://localhost:{port}/rpc"
 
-    def _chain(method, **params):
+    def _chain(method, raise_on_error=False, **params):
         """
         The main way to interact with the chain from a script.
 
@@ -335,7 +335,7 @@ def build_sandbox(port, creator, address, amount, nfts, block_info):
             return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
 
         # params = {snake(k): v for k, v in params.items()}
-        if method not in ["ConsumeGas", "Gaslimit"]:
+        if method not in ["Consumegas", "Gaslimit", "Emitevent"]:
             # normal rpc calls are encoded as json strings
             params = {"s": json.dumps(params, sort_keys=True)}
         payload = {
@@ -348,15 +348,20 @@ def build_sandbox(port, creator, address, amount, nfts, block_info):
         # print(f"rpc {method}: {res.status_code} response from golang: {res.text}")
         try:
             ret_json = res.json()
-            if ret_json["error"] and ret_json["error"].startswith(
-                "CHAIN ERROR: types.ErrorOutOfGas"
-            ):
-                raise MemoryError("Out of Gas")
             try:
                 # some rpc responses are json encoded
                 ret_json["result"] = json.loads(str(ret_json["result"]).encode())
             except json.JSONDecodeError:
                 pass
+
+            if ret_json["error"]:
+                if ret_json["error"].startswith(
+                "CHAIN ERROR: types.ErrorOutOfGas"
+            ):
+                    raise MemoryError("Out of Gas")
+                if raise_on_error:
+                    raise Exception(ret_json["error"])
+
             return ret_json
         except json.JSONDecodeError:
             return {"exception": res.text}
@@ -486,6 +491,13 @@ def build_sandbox(port, creator, address, amount, nfts, block_info):
     allow_dys_func(rpc)
 
     @allow_dys_func
+    def emit_event(key, value):
+        """
+        Emits an event to the blockchain
+        """
+        return _chain("EmitEvent", key=key, value=value)
+
+    @allow_dys_func
     def get_gas_consumed():
         """
         The total amount of gas consumed so far.
@@ -569,6 +581,7 @@ def build_sandbox(port, creator, address, amount, nfts, block_info):
         "get_nfts_sent": get_nfts_sent,
         "get_nodes_called": get_nodes_called,
         "get_cumulative_size": get_cumulative_size,
+        "emit_event": emit_event,
     }
 
     sandbox.modules = dyslang.make_modules(module_dict)

@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/org/dyson/x/dyson/types"
 )
 
@@ -13,12 +12,6 @@ func (k msgServer) Run(goCtx context.Context, msg *types.MsgRun) (*types.MsgRunR
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	_, isFound := k.GetScript(ctx, msg.Address)
-	if !isFound {
-		fmt.Println(fmt.Sprintf("Script at address %v not found", msg.Address))
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("Script at address %v not set", msg.Address))
-	}
-	fmt.Println(fmt.Sprintf("Script at address %v found", msg.Address))
 	res, err := k.EvalScript(goCtx, &EvalScriptContext{
 		Sender:       msg.Creator,
 		Index:        msg.Address,

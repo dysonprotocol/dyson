@@ -52,6 +52,8 @@ the Github issue reference in the following format:
      - use IBC interchain accounts to send a TX (like swap or exit pool)
      - IBC transfer funds from Osmosis -> Dyson
      - this is extremely powerful when combined with ScheduledRuns
+ - Cosmos SDK Events can be emitted from a script with dys.emit_event(key, value)
+ - Added `raise_on_error` argument to `_chain` to reduce `assert result['error' is None`
 - Added UI
   - Script Code editor can be resized to fit your screen better  
   - Scheduling running functions directly on the function form
@@ -63,6 +65,10 @@ the Github issue reference in the following format:
   - form for minting NFTs
   - Detail view of Name with related Coin denoms and NFC Classes
   - Forms for sending coins and NFTs
+- API
+ - /_/node_info now returns the current script address or name
+ - Improved error UI for Out Of Gas errors
+ - 
 
 
 ### Bug Fixes

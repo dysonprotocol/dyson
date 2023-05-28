@@ -46,16 +46,5 @@ func (msg *MsgRun) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-
-	_, err = sdk.AccAddressFromBech32(msg.Address)
-	if err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid script address (%s)", err)
-	}
-	if msg.Creator != msg.Address {
-		if msg.ExtraLines != "" {
-			return sdkerrors.Wrapf(ErrorExtraLinesOrExternalScript, "Cannot send extraLines when calling different script")
-		}
-	}
-
 	return nil
 }

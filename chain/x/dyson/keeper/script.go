@@ -305,7 +305,13 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Maximum Run recusion depth")
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	valFound, isFound := k.GetScript(ctx, scriptCtx.Index)
+
+	resolvedIndex := k.nameskeeper.ResolveIndex(ctx, scriptCtx.Index)
+	if resolvedIndex == "" {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("Script at address %v not set or expired", scriptCtx.Index))
+	}
+
+	valFound, isFound := k.GetScript(ctx, resolvedIndex)
 
 	if !isFound {
 		if scriptCtx.Index == scriptCtx.Sender {
@@ -314,11 +320,11 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 				Creator: scriptCtx.Sender,
 				Code:    "",
 			})
-			valFound, isFound = k.GetScript(ctx, scriptCtx.Index)
+			valFound, isFound = k.GetScript(ctx, resolvedIndex)
 			if !isFound {
 				// This shouldn't happen
-				fmt.Println(fmt.Sprintf("Script at address really %v not set", scriptCtx.Index))
-				return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("Script at address really %v not set", scriptCtx.Index))
+				fmt.Println(fmt.Sprintf("Script at address really %v not set", resolvedIndex))
+				return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("Script at address really %v not set", resolvedIndex))
 			}
 		}
 	}
@@ -347,7 +353,7 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 		return nil, err
 	}
 	if len(coins) > 0 {
-		toAddr, err := sdk.AccAddressFromBech32(scriptCtx.Index)
+		toAddr, err := sdk.AccAddressFromBech32(valFound.Index)
 		if err != nil {
 			return nil, err
 		}
@@ -377,7 +383,7 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 
 		msgSend := &nftmodule.MsgSend{
 			Sender:   scriptCtx.Sender,
-			Receiver: scriptCtx.Index,
+			Receiver: valFound.Index,
 			ClassId:  nft.ClassId,
 			Id:       nft.Id,
 		}
@@ -402,12 +408,11 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 	}
 
 	out, runErr := exec.Command(
-		// TODO: should specify python binary?
 		"python3",
 		"dysvm_server.py",
 		port,
 		scriptCtx.Sender,
-		scriptCtx.Index,
+		valFound.Index,
 		string(coinsJson),
 		string(nftsJson),
 		string(blockInfoJson),
@@ -442,7 +447,10 @@ func (k Keeper) evalScript(goCtx context.Context, scriptCtx *EvalScriptContext, 
 
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent("run",
-			sdk.NewAttribute("response", string(response)),
+			sdk.NewAttribute("caller", scriptCtx.Sender),
+			sdk.NewAttribute("script", valFound.Index),
+			sdk.NewAttribute("function_name", scriptCtx.FunctionName),
+			sdk.NewAttribute("response", response),
 		),
 	)
 	if (runErr != nil) && (raiseRunErr == true) {
