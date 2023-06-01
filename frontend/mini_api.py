@@ -78,8 +78,8 @@ STATICFILES_DIRS = [
     join(BASE_DIR, "vue/static"),
     join(BASE_DIR, "static"),
 ]
-STATICFILES_FINDERS =[
-    'django.contrib.staticfiles.finders.FileSystemFinder',
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
 ]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -194,22 +194,49 @@ def dys_js_tags(request, js_asset=None):
 
     js_assets = re.findall(r'"/static/(?P<base_asset_name>.*\.js)"', h)
 
+    u = f"{settings.DYSON_RESTHOST}/org/dyson/names/resolve"
+    params = {
+        "name": request.script_address or "",
+    }
+    name_req = requests.get(u, params=params)
+    script_address = name_req.json().get("address", None)
+
     return render(
         request,
         "loader.js",
-        {"script_paths": [request.build_absolute_uri(settings.STATIC_URL) + a for a in js_assets]},
+        {
+            "script_paths": [
+                request.build_absolute_uri(settings.STATIC_URL) + a for a in js_assets
+            ],
+            "API_COSMOS": os.environ.get("VITE_API_COSMOS"),
+            "WS_TENDERMINT": os.environ.get("VITE_WS_TENDERMINT"),
+            "API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
+            "CLEAR_DOMAIN": os.environ.get("CLEAR_DOMAIN"),
+            "DYS_DOMAIN": DYS_DOMAIN,
+            "SCRIPT_ADDRESS": script_address,
+        },
         content_type="application/javascript",
     )
 
 
 def node_info(request):
+
+    u = f"{settings.DYSON_RESTHOST}/org/dyson/names/resolve"
+    params = {
+        "name": request.script_address or "",
+    }
+    name_req = requests.get(u, params=params)
+    script_address = name_req.json().get("address", None)
     info = {
         "VITE_API_COSMOS": os.environ.get("VITE_API_COSMOS"),
         "VITE_WS_TENDERMINT": os.environ.get("VITE_WS_TENDERMINT"),
         "VITE_API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
+        "API_COSMOS": os.environ.get("VITE_API_COSMOS"),
+        "WS_TENDERMINT": os.environ.get("VITE_WS_TENDERMINT"),
+        "API_TENDERMINT": os.environ.get("VITE_API_TENDERMINT"),
         "CLEAR_DOMAIN": os.environ.get("CLEAR_DOMAIN"),
         "DYS_DOMAIN": DYS_DOMAIN,
-        "SCRIPT_ADDRESS": request.script_address or "",
+        "SCRIPT_ADDRESS": script_address,
     }
     return JsonResponse(info)
 

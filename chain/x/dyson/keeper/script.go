@@ -176,6 +176,7 @@ func (k Keeper) GetSchema(ctx sdk.Context, index string) (val string, found bool
 
 func (k Keeper) RunWsgi(goCtx context.Context, index string, httpreq string) (val string, found bool) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
+
 	valFound, found := k.GetScript(ctx, index)
 	if !found {
 		return "", false
@@ -195,7 +196,7 @@ func (k Keeper) RunWsgi(goCtx context.Context, index string, httpreq string) (va
 		"python3",
 		"simplewsgi.py",
 		port,
-		index,
+		valFound.Index,
 		string(blockInfoJson),
 		valFound.Code,
 		httpreq,

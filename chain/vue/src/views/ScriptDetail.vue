@@ -290,7 +290,7 @@ export default {
             value: value,
             fee: [
               {
-                amount: String(Math.ceil(this.gas * 0.001)),
+                amount: String(Math.ceil(this.gas * 0.0001)),
                 denom: 'dys',
               },
             ],
