@@ -11,14 +11,14 @@ import (
 func (k msgServer) BurnNft(goCtx context.Context, msg *types.MsgBurnNft) (*types.MsgBurnNftResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	dysName := getDysName(msg.Id)
+	dysName := getDysName(msg.ClassId)
 	// Check if the value exists
 	name, isFound := k.GetName(
 		ctx,
 		dysName,
 	)
 	if !isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "Name not found")
+		return nil, sdkerrors.Wrapf(sdkerrors.ErrKeyNotFound, "name not found: %s", dysName)
 	}
 
 	// Checks if the the msg owner is the same as the current owner

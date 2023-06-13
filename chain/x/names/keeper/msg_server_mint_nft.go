@@ -19,7 +19,7 @@ func (k msgServer) MintNft(goCtx context.Context, msg *types.MsgMintNft) (*types
 		dysName,
 	)
 	if !isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "Name not found")
+		return nil, sdkerrors.Wrapf(sdkerrors.ErrKeyNotFound, "name not found: %s", dysName)
 	}
 
 	// Checks if the the msg owner is the same as the current owner

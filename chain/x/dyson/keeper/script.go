@@ -10,7 +10,6 @@ import (
 	"net/http"
 	"os/exec"
 	"regexp"
-	"runtime/debug"
 	"strconv"
 	"strings"
 	"time"
@@ -471,7 +470,6 @@ func handleRunRecovery(r interface{}, sdkCtx sdk.Context) error {
 		)
 
 	default:
-		return sdkerrors.ErrPanic.Wrapf(
-			"script recovered: %v\nstack:\n%v", r, string(debug.Stack()))
+		return sdkerrors.ErrPanic.Wrapf("script recovered: %v", r)
 	}
 }
